@@ -1,0 +1,37 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<title>Identity V Survivors' Persona</title>
+		<link rel="stylesheet" href="S.css">
+	</head>
+	<body>
+		<script>
+		var x = 0;
+			function mouseOver(id){
+				if(x == 0){
+					document.getElementById(id).style.opacity=1;
+					document.getElementById(id+"_").style.opacity=1;
+				}else{
+					document.getElementById(id).style.opacity=0.1;
+					document.getElementById(id+"_").style.opacity=0;
+				}
+			}
+			function mouseOut(id){
+				if(x == 0){
+					document.getElementById(id).style.opacity=0.1;
+					document.getElementById(id+"_").style.opacity=0;
+				}else{
+					document.getElementById(id).style.opacity=1;
+					document.getElementById(id+"_").style.opacity=1;
+				}
+			} 
+		</script>
+		<div id="div">
+			<img src="img_S/identity_S.png" id="bgimg">
+			<img src="img_S/spactator.png" id="spactator" onmouseover="mouseOver('spactator')" onmouseout="mouseOut('spactator')">
+			<img src="img_S/spactator_.png" id="spactator_">
+			<img src="img_S/air_walk.png" id="air_walk" onmouseover="mouseOver('air_walk')" onmouseout="mouseOut('air_walk')">
+			<img src="img_S/air_walk_.png" id="air_walk_">
+		</div>
+	</body>
+</html> 

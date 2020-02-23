@@ -1,0 +1,41 @@
+body{
+	background-color:black;
+}
+#bgimg {
+    width: 600px;
+    height: 600px;
+}
+#spactator {    
+    width: auto;
+    height: 43px;
+    position: absolute;  
+    top: 14.5px;   
+    left: 288.5px;  
+    margin: auto;
+	opacity:0.1;
+}
+#spactator_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#air_walk {    
+    width: auto;
+    height: 34px;
+    position: absolute;  
+    top: 102.5px;   
+    left: 228.5px;  
+    margin: auto;
+	opacity:0.1;
+}
+#air_walk_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
