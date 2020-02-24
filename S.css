@@ -24,14 +24,117 @@ body{
 }
 #air_walk {    
     width: auto;
-    height: 34px;
+    height: 35px;
     position: absolute;  
-    top: 102.5px;   
-    left: 228.5px;  
+    top: 101.5px;   
+    left: 228px;  
     margin: auto;
 	opacity:0.1;
 }
 #air_walk_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#survivors_instinct {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 183.5px;   
+    left: 234.3px;  
+    margin: auto;
+	opacity:0.1;
+}
+#survivors_instinct_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#healing {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 130.7px;   
+    left: 173.3px;  
+    margin: auto;
+	opacity:0.1;
+}
+#healing_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#symbiotic_effect {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 91.5px;   
+    left: 292.5px;  
+    margin: auto;
+	opacity:0.1;
+}
+#symbiotic_effect_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#sticker {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 157.5px;   
+    left: 292.5px;  
+    margin: auto;
+	opacity:0.1;
+}
+#sticker_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#mech_elite {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 222.5px;   
+    left: 292.5px;  
+    margin: auto;
+	opacity:0.1;
+}
+#mech_elite_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+
+#obsessive {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 183.5px;   
+    left: 350.5px;  
+    margin: auto;
+	opacity:0.1;
+}
+#obsessive_ {    
     width: 300px;
     height: auto;
     position: absolute;  
