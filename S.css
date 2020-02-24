@@ -7,10 +7,10 @@ body{
 }
 #spactator {    
     width: auto;
-    height: 43px;
+    height: 44px;
     position: absolute;  
     top: 14.5px;   
-    left: 288.5px;  
+    left: 287.7px;  
     margin: auto;
 	opacity:0.1;
 }
@@ -124,7 +124,6 @@ body{
     top: 150px;   
 	opacity:0;
 }
-
 #obsessive {    
     width: auto;
     height: 35px;
@@ -135,6 +134,142 @@ body{
 	opacity:0.1;
 }
 #obsessive_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#snooze {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 170.5px;   
+    left: 451.3px;  
+    margin: auto;
+	opacity:0.1;
+}
+#snooze_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#distriction {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 231px;   
+    left: 398px;  
+    margin: auto;
+	opacity:0.1;
+}
+#distriction_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#self_deception {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 225px;   
+    left: 479.7px;  
+    margin: auto;
+	opacity:0.1;
+}
+#self_deception_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#borrowed_time {    
+    width: auto;
+    height: 44px;
+    position: absolute;  
+    top: 285px;   
+    left: 557.9px;  
+    margin: auto;
+	opacity:0.1;
+}
+#borrowed_time_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#compensate {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 289px;   
+    left: 491px;  
+    margin: auto;
+	opacity:0.1;
+}
+#compensate_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#escape {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 289px;   
+    left: 425.1px;  
+    margin: auto;
+	opacity:0.1;
+}
+#escape_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#curiosity {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 289px;   
+    left: 359px;  
+    margin: auto;
+	opacity:0.1;
+}
+#curiosity_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 600px;  
+    top: 150px;   
+	opacity:0;
+}
+#cold {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 347px;   
+    left: 399px;  
+    margin: auto;
+	opacity:0.1;
+}
+#cold_ {    
     width: 300px;
     height: auto;
     position: absolute;  
