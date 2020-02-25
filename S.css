@@ -551,7 +551,7 @@ body{
 		opacity:0;
 	}
 }
-@media screen and (max-width:480px){
+@media screen and (max-width:600px){
 	#spactator {    
 		width: auto;
 		height: 44px;
