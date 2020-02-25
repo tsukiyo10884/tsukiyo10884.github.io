@@ -413,3 +413,139 @@ body{
     top: 150px;   
 	opacity:0;
 }
+#great_power {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 408px;   
+    left: 134.7px;  
+    margin: auto;
+	opacity:0.1;
+}
+#great_power_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 603px;  
+    top: 150px;   
+	opacity:0;
+}
+#prisoners_dilemma {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 347px;   
+    left: 187px;  
+    margin: auto;
+	opacity:0.1;
+}
+#prisoners_dilemma_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 603px;  
+    top: 150px;   
+	opacity:0;
+}
+#will_to_survive {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 353.5px;   
+    left: 106px;  
+    margin: auto;
+	opacity:0.1;
+}
+#will_to_survive_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 603px;  
+    top: 150px;   
+	opacity:0;
+}
+#broken_windows {    
+    width: auto;
+    height: 44px;
+    position: absolute;  
+    top: 284.8px;   
+    left: 18px;  
+    margin: auto;
+	opacity:0.1;
+}
+#broken_windows_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 603px;  
+    top: 150px;   
+	opacity:0;
+}
+#knee_jerk_reflex {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 289px;   
+    left: 94.3px;  
+    margin: auto;
+	opacity:0.1;
+}
+#knee_jerk_reflex_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 603px;  
+    top: 150px;   
+	opacity:0;
+}
+#bad_example {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 289px;   
+    left: 160.4px;  
+    margin: auto;
+	opacity:0.1;
+}
+#bad_example_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 603px;  
+    top: 150px;   
+	opacity:0;
+}
+#risky_move {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 289px;   
+    left: 226.5px;  
+    margin: auto;
+	opacity:0.1;
+}
+#risky_move_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 603px;  
+    top: 150px;   
+	opacity:0;
+}
+#exit_path {    
+    width: auto;
+    height: 35px;
+    position: absolute;  
+    top: 230.8px;   
+    left: 186.7px;  
+    margin: auto;
+	opacity:0.1;
+}
+#exit_path_ {    
+    width: 300px;
+    height: auto;
+    position: absolute;  
+    left: 603px;  
+    top: 150px;   
+	opacity:0;
+}
