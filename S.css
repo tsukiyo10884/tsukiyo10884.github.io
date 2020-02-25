@@ -5,547 +5,1095 @@ body{
     width: 600px;
     height: 600px;
 }
-#spactator {    
-    width: auto;
-    height: 44px;
-    position: absolute;  
-    top: 14.5px;   
-    left: 287.7px;  
-    margin: auto;
-	opacity:0.1;
+@media screen{
+	#spactator {    
+		width: auto;
+		height: 44px;
+		position: absolute;  
+		top: 14.5px;   
+		left: 287.7px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#spactator_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#air_walk {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 101.5px;   
+		left: 228px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#air_walk_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#survivors_instinct {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 183.5px;   
+		left: 234.3px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#survivors_instinct_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#healing {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 130.7px;   
+		left: 173.3px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#healing_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#symbiotic_effect {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 91.5px;   
+		left: 292.5px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#symbiotic_effect_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#sticker {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 157.5px;   
+		left: 292.5px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#sticker_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#mech_elite {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 222.5px;   
+		left: 292.5px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#mech_elite_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#obsessive {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 183.5px;   
+		left: 350.5px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#obsessive_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#snooze {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 170.5px;   
+		left: 451.3px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#snooze_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#distriction {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 231px;   
+		left: 398px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#distriction_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#self_deception {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 225px;   
+		left: 479.7px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#self_deception_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#borrowed_time {    
+		width: auto;
+		height: 44px;
+		position: absolute;  
+		top: 284.8px;   
+		left: 557.9px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#borrowed_time_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#compensate {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 289px;   
+		left: 491px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#compensate_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#escape {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 289px;   
+		left: 425.1px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#escape_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#curiosity {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 289px;   
+		left: 359px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#curiosity_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#cold {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 347px;   
+		left: 399px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#cold_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#doctor {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 447px;   
+		left: 412.2px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#doctor_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#sneak {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 394.5px;   
+		left: 351.3px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#sneak_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#shelter {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 475.8px;   
+		left: 357.7px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#shelter_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#tide_turner {    
+		width: auto;
+		height: 44px;
+		position: absolute;  
+		top: 554.4px;   
+		left: 288.4px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#tide_turner_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#horsefly_effect {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 487px;   
+		left: 293.2px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#horsefly_effect_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#catfish_effect {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 421px;   
+		left: 293.2px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#catfish_effect_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#drawbridge_effect {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 355px;   
+		left: 293.2px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#drawbridge_effect_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#distress {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 394.5px;   
+		left: 235px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#distress_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#great_power {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 408px;   
+		left: 134.7px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#great_power_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#prisoners_dilemma {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 347px;   
+		left: 187px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#prisoners_dilemma_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#will_to_survive {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 353.5px;   
+		left: 106px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#will_to_survive_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#broken_windows {    
+		width: auto;
+		height: 44px;
+		position: absolute;  
+		top: 284.8px;   
+		left: 18px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#broken_windows_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#knee_jerk_reflex {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 289px;   
+		left: 94.3px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#knee_jerk_reflex_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#bad_example {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 289px;   
+		left: 160.4px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#bad_example_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#risky_move {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 289px;   
+		left: 226.5px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#risky_move_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
+	#exit_path {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 230.8px;   
+		left: 186.7px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#exit_path_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 603px;  
+		top: 150px;   
+		opacity:0;
+	}
 }
-#spactator_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#air_walk {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 101.5px;   
-    left: 228px;  
-    margin: auto;
-	opacity:0.1;
-}
-#air_walk_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#survivors_instinct {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 183.5px;   
-    left: 234.3px;  
-    margin: auto;
-	opacity:0.1;
-}
-#survivors_instinct_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#healing {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 130.7px;   
-    left: 173.3px;  
-    margin: auto;
-	opacity:0.1;
-}
-#healing_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#symbiotic_effect {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 91.5px;   
-    left: 292.5px;  
-    margin: auto;
-	opacity:0.1;
-}
-#symbiotic_effect_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#sticker {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 157.5px;   
-    left: 292.5px;  
-    margin: auto;
-	opacity:0.1;
-}
-#sticker_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#mech_elite {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 222.5px;   
-    left: 292.5px;  
-    margin: auto;
-	opacity:0.1;
-}
-#mech_elite_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#obsessive {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 183.5px;   
-    left: 350.5px;  
-    margin: auto;
-	opacity:0.1;
-}
-#obsessive_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#snooze {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 170.5px;   
-    left: 451.3px;  
-    margin: auto;
-	opacity:0.1;
-}
-#snooze_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#distriction {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 231px;   
-    left: 398px;  
-    margin: auto;
-	opacity:0.1;
-}
-#distriction_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#self_deception {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 225px;   
-    left: 479.7px;  
-    margin: auto;
-	opacity:0.1;
-}
-#self_deception_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#borrowed_time {    
-    width: auto;
-    height: 44px;
-    position: absolute;  
-    top: 284.8px;   
-    left: 557.9px;  
-    margin: auto;
-	opacity:0.1;
-}
-#borrowed_time_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#compensate {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 289px;   
-    left: 491px;  
-    margin: auto;
-	opacity:0.1;
-}
-#compensate_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#escape {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 289px;   
-    left: 425.1px;  
-    margin: auto;
-	opacity:0.1;
-}
-#escape_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#curiosity {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 289px;   
-    left: 359px;  
-    margin: auto;
-	opacity:0.1;
-}
-#curiosity_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#cold {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 347px;   
-    left: 399px;  
-    margin: auto;
-	opacity:0.1;
-}
-#cold_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#doctor {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 447px;   
-    left: 412.2px;  
-    margin: auto;
-	opacity:0.1;
-}
-#doctor_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#sneak {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 394.5px;   
-    left: 351.3px;  
-    margin: auto;
-	opacity:0.1;
-}
-#sneak_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#shelter {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 475.8px;   
-    left: 357.7px;  
-    margin: auto;
-	opacity:0.1;
-}
-#shelter_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#tide_turner {    
-    width: auto;
-    height: 44px;
-    position: absolute;  
-    top: 554.4px;   
-    left: 288.4px;  
-    margin: auto;
-	opacity:0.1;
-}
-#tide_turner_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#horsefly_effect {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 487px;   
-    left: 293.2px;  
-    margin: auto;
-	opacity:0.1;
-}
-#horsefly_effect_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#catfish_effect {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 421px;   
-    left: 293.2px;  
-    margin: auto;
-	opacity:0.1;
-}
-#catfish_effect_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#drawbridge_effect {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 355px;   
-    left: 293.2px;  
-    margin: auto;
-	opacity:0.1;
-}
-#drawbridge_effect_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#distress {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 394.5px;   
-    left: 235px;  
-    margin: auto;
-	opacity:0.1;
-}
-#distress_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#great_power {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 408px;   
-    left: 134.7px;  
-    margin: auto;
-	opacity:0.1;
-}
-#great_power_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#prisoners_dilemma {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 347px;   
-    left: 187px;  
-    margin: auto;
-	opacity:0.1;
-}
-#prisoners_dilemma_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#will_to_survive {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 353.5px;   
-    left: 106px;  
-    margin: auto;
-	opacity:0.1;
-}
-#will_to_survive_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#broken_windows {    
-    width: auto;
-    height: 44px;
-    position: absolute;  
-    top: 284.8px;   
-    left: 18px;  
-    margin: auto;
-	opacity:0.1;
-}
-#broken_windows_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#knee_jerk_reflex {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 289px;   
-    left: 94.3px;  
-    margin: auto;
-	opacity:0.1;
-}
-#knee_jerk_reflex_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#bad_example {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 289px;   
-    left: 160.4px;  
-    margin: auto;
-	opacity:0.1;
-}
-#bad_example_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#risky_move {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 289px;   
-    left: 226.5px;  
-    margin: auto;
-	opacity:0.1;
-}
-#risky_move_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
-}
-#exit_path {    
-    width: auto;
-    height: 35px;
-    position: absolute;  
-    top: 230.8px;   
-    left: 186.7px;  
-    margin: auto;
-	opacity:0.1;
-}
-#exit_path_ {    
-    width: 300px;
-    height: auto;
-    position: absolute;  
-    left: 603px;  
-    top: 150px;   
-	opacity:0;
+@media screen and (max-width:480px){
+	#spactator {    
+		width: auto;
+		height: 44px;
+		position: absolute;  
+		top: 14.5px;   
+		left: 287.7px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#spactator_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#air_walk {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 101.5px;   
+		left: 228px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#air_walk_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#survivors_instinct {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 183.5px;   
+		left: 234.3px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#survivors_instinct_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#healing {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 130.7px;   
+		left: 173.3px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#healing_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#symbiotic_effect {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 91.5px;   
+		left: 292.5px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#symbiotic_effect_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#sticker {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 157.5px;   
+		left: 292.5px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#sticker_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#mech_elite {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 222.5px;   
+		left: 292.5px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#mech_elite_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#obsessive {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 183.5px;   
+		left: 350.5px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#obsessive_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#snooze {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 170.5px;   
+		left: 451.3px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#snooze_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#distriction {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 231px;   
+		left: 398px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#distriction_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#self_deception {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 225px;   
+		left: 479.7px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#self_deception_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#borrowed_time {    
+		width: auto;
+		height: 44px;
+		position: absolute;  
+		top: 284.8px;   
+		left: 557.9px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#borrowed_time_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#compensate {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 289px;   
+		left: 491px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#compensate_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#escape {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 289px;   
+		left: 425.1px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#escape_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#curiosity {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 289px;   
+		left: 359px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#curiosity_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#cold {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 347px;   
+		left: 399px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#cold_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#doctor {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 447px;   
+		left: 412.2px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#doctor_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#sneak {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 394.5px;   
+		left: 351.3px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#sneak_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#shelter {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 475.8px;   
+		left: 357.7px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#shelter_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#tide_turner {    
+		width: auto;
+		height: 44px;
+		position: absolute;  
+		top: 554.4px;   
+		left: 288.4px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#tide_turner_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#horsefly_effect {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 487px;   
+		left: 293.2px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#horsefly_effect_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#catfish_effect {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 421px;   
+		left: 293.2px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#catfish_effect_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#drawbridge_effect {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 355px;   
+		left: 293.2px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#drawbridge_effect_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#distress {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 394.5px;   
+		left: 235px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#distress_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#great_power {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 408px;   
+		left: 134.7px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#great_power_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#prisoners_dilemma {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 347px;   
+		left: 187px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#prisoners_dilemma_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#will_to_survive {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 353.5px;   
+		left: 106px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#will_to_survive_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#broken_windows {    
+		width: auto;
+		height: 44px;
+		position: absolute;  
+		top: 284.8px;   
+		left: 18px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#broken_windows_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#knee_jerk_reflex {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 289px;   
+		left: 94.3px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#knee_jerk_reflex_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#bad_example {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 289px;   
+		left: 160.4px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#bad_example_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#risky_move {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 289px;   
+		left: 226.5px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#risky_move_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
+	#exit_path {    
+		width: auto;
+		height: 35px;
+		position: absolute;  
+		top: 230.8px;   
+		left: 186.7px;  
+		margin: auto;
+		opacity:0.1;
+	}
+	#exit_path_ {    
+		width: 300px;
+		height: auto;
+		position: absolute;  
+		left: 250px;    
+		top: 603px;
+		opacity:0;
+	}
 }
