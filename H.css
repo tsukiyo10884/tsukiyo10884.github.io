@@ -5,76 +5,75 @@ body{
     width: 600px;
     height: 600px;
 }
-
-#spactator {    
-	width: auto;
-	height: 44px;
-	position: absolute;  
-	top: 14.5px;   
-	left: 287.7px;  
-	margin: auto;
-	opacity:0.1;
-}
-#spactator_ {    
-	width: 300px;
-	height: auto;
-	position: absolute;  
-	left: 250px;    
-	top: 603px;
-	opacity:0;
-}
-#air_walk {    
+#rage {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 101.5px;   
-	left: 228px;  
-	margin: auto;
-	opacity:0.1;
-}
-#air_walk_ {    
-	width: 300px;
-	height: auto;
-	position: absolute;  
-	left: 250px;    
-	top: 603px;
-	opacity:0;
-}
-#survivors_instinct {    
-	width: auto;
-	height: 35px;
-	position: absolute;  
-	top: 183.5px;   
-	left: 234.3px;  
-	margin: auto;
-	opacity:0.1;
-}
-#survivors_instinct_ {    
-	width: 300px;
-	height: auto;
-	position: absolute;  
-	left: 250px;    
-	top: 603px;
-	opacity:0;
-}
-#healing {    
-	width: auto;
-	height: 35px;
-	position: absolute;  
-	top: 130.7px;   
+	top: 130.5px;   
 	left: 173.3px;  
 	margin: auto;
 	opacity:0.1;
 }
-#healing_ {    
+#rage_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#symbiotic_effect {    
+#panic {    
+	width: auto;
+	height: 35px;
+	position: absolute;  
+	top: 183.1px;   
+	left: 234.5px;  
+	margin: auto;
+	opacity:0.1;
+}
+#panic_ {    
+	width: 300px;
+	height: auto;
+	position: absolute;  
+	left: 603px;  
+	top: 150px;   
+	opacity:0;
+}
+#berserker {    
+	width: auto;
+	height: 35px;
+	position: absolute;  
+	top: 101.8px;   
+	left: 228.4px;  
+	margin: auto;
+	opacity:0.1;
+}
+#berserker_ {    
+	width: 300px;
+	height: auto;
+	position: absolute;  
+	left: 603px;  
+	top: 150px;   
+	opacity:0;
+}
+#confined_space {    
+	width: auto;
+	height: 44px;
+	position: absolute;  
+	top: 14.5px;   
+	left: 287.9px;  
+	margin: auto;
+	opacity:0.1;
+}
+#confined_space_ {    
+	width: 300px;
+	height: auto;
+	position: absolute;  
+	left: 603px;  
+	top: 150px;   
+	opacity:0;
+}
+#destructiveness {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
@@ -83,15 +82,15 @@ body{
 	margin: auto;
 	opacity:0.1;
 }
-#symbiotic_effect_ {    
+#destructiveness_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#sticker {    
+#wither {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
@@ -100,15 +99,15 @@ body{
 	margin: auto;
 	opacity:0.1;
 }
-#sticker_ {    
+#wither_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#mech_elite {    
+#deteriorate {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
@@ -117,436 +116,436 @@ body{
 	margin: auto;
 	opacity:0.1;
 }
-#mech_elite_ {    
+#deteriorate_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#obsessive {    
+#restrain {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 183.5px;   
-	left: 350.5px;  
+	top: 182.8px;   
+	left: 350.8px;  
 	margin: auto;
 	opacity:0.1;
 }
-#obsessive_ {    
+#restrain_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#snooze {    
+#wanted_order {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 170.5px;   
-	left: 451.3px;  
+	top: 169.8px;   
+	left: 451.2px;  
 	margin: auto;
 	opacity:0.1;
 }
-#snooze_ {    
+#wanted_order_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#distriction {    
+#announcement {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 231px;   
+	top: 230.2px;   
 	left: 398px;  
 	margin: auto;
 	opacity:0.1;
 }
-#distriction_ {    
+#announcement_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#self_deception {    
+#impact {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 225px;   
+	top: 224.2px;   
 	left: 479.7px;  
 	margin: auto;
 	opacity:0.1;
 }
-#self_deception_ {    
+#impact_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#borrowed_time {    
+#trump_card {    
 	width: auto;
 	height: 44px;
 	position: absolute;  
-	top: 284.8px;   
-	left: 557.9px;  
+	top: 283.9px;   
+	left: 557.7px;  
 	margin: auto;
 	opacity:0.1;
 }
-#borrowed_time_ {    
+#trump_card_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#compensate {    
+#hospitable {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 289px;   
-	left: 491px;  
+	top: 288.1px;   
+	left: 490px;  
 	margin: auto;
 	opacity:0.1;
 }
-#compensate_ {    
+#hospitable_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#escape {    
+#hunters_instinct {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 289px;   
-	left: 425.1px;  
+	top: 288.2px;   
+	left: 424.6px;  
 	margin: auto;
 	opacity:0.1;
 }
-#escape_ {    
+#hunters_instinct_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#curiosity {    
+#owl {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 289px;   
-	left: 359px;  
+	top: 288.2px;   
+	left: 358.4px;  
 	margin: auto;
 	opacity:0.1;
 }
-#curiosity_ {    
+#owl_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#cold {    
+#desperate_fight {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 347px;   
-	left: 399px;  
+	top: 346.6px;   
+	left: 398px;  
 	margin: auto;
 	opacity:0.1;
 }
-#cold_ {    
+#desperate_fight_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#doctor {    
+#control_freak {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
 	top: 447px;   
-	left: 412.2px;  
+	left: 411px;  
 	margin: auto;
 	opacity:0.1;
 }
-#doctor_ {    
+#control_freak_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#sneak {    
+#cat_and_mouse {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 394.5px;   
-	left: 351.3px;  
+	top: 394.2px;   
+	left: 350.3px;  
 	margin: auto;
 	opacity:0.1;
 }
-#sneak_ {    
+#cat_and_mouse_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#shelter {    
+#giant_claw {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 475.8px;   
-	left: 357.7px;  
+	top: 475.7px;   
+	left: 356.6px;  
 	margin: auto;
 	opacity:0.1;
 }
-#shelter_ {    
+#giant_claw_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#tide_turner {    
+#detention {    
 	width: auto;
 	height: 44px;
 	position: absolute;  
-	top: 554.4px;   
-	left: 288.4px;  
+	top: 554px;   
+	left: 288.2px;  
 	margin: auto;
 	opacity:0.1;
 }
-#tide_turner_ {    
+#detention_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#horsefly_effect {    
+#carnival {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 487px;   
-	left: 293.2px;  
+	top: 486.6px;   
+	left: 292.6px;  
 	margin: auto;
 	opacity:0.1;
 }
-#horsefly_effect_ {    
+#carnival_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#catfish_effect {    
+#mock {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 421px;   
-	left: 293.2px;  
+	top: 420.6px;   
+	left: 292.6px;  
 	margin: auto;
 	opacity:0.1;
 }
-#catfish_effect_ {    
+#mock_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#drawbridge_effect {    
+#inertia {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 355px;   
-	left: 293.2px;  
+	top: 354.7px;   
+	left: 292.6px;  
 	margin: auto;
 	opacity:0.1;
 }
-#drawbridge_effect_ {    
+#inertia_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#distress {    
+#no_survivors {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 394.5px;   
-	left: 235px;  
+	top: 394.2px;   
+	left: 234.6px;  
 	margin: auto;
 	opacity:0.1;
 }
-#distress_ {    
+#no_survivors_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#great_power {    
+#hunt {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 408px;   
-	left: 134.7px;  
+	top: 407.6px;   
+	left: 134.6px;  
 	margin: auto;
 	opacity:0.1;
 }
-#great_power_ {    
+#hunt_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#prisoners_dilemma {    
+#tinnitus {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 347px;   
-	left: 187px;  
+	top: 346.6px;   
+	left: 187.2px;  
 	margin: auto;
 	opacity:0.1;
 }
-#prisoners_dilemma_ {    
+#tinnitus_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#will_to_survive {    
+#street_sweeper {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 353.5px;   
+	top: 353px;   
 	left: 106px;  
 	margin: auto;
 	opacity:0.1;
 }
-#will_to_survive_ {    
+#street_sweeper_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#broken_windows {    
+#isolence {    
 	width: auto;
 	height: 44px;
 	position: absolute;  
-	top: 284.8px;   
-	left: 18px;  
+	top: 283.8px;   
+	left: 18.2px;  
 	margin: auto;
 	opacity:0.1;
 }
-#broken_windows_ {    
+#isolence_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#knee_jerk_reflex {    
+#after_effect {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 289px;   
-	left: 94.3px;  
+	top: 288.3px;   
+	left: 94.8px;  
 	margin: auto;
 	opacity:0.1;
 }
-#knee_jerk_reflex_ {    
+#after_effect_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#bad_example {    
+#possessive {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 289px;   
-	left: 160.4px;  
+	top: 288.5px;   
+	left: 160.8px;  
 	margin: auto;
 	opacity:0.1;
 }
-#bad_example_ {    
+#possessive_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#risky_move {    
+#deer_hunt {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 289px;   
-	left: 226.5px;  
+	top: 288.5px;   
+	left: 226.8px;  
 	margin: auto;
 	opacity:0.1;
 }
-#risky_move_ {    
+#deer_hunt_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
-#exit_path {    
+#claustrophobia {    
 	width: auto;
 	height: 35px;
 	position: absolute;  
-	top: 230.8px;   
-	left: 186.7px;  
+	top: 230px;   
+	left: 187px;  
 	margin: auto;
 	opacity:0.1;
 }
-#exit_path_ {    
+#claustrophobia_ {    
 	width: 300px;
 	height: auto;
 	position: absolute;  
-	left: 250px;    
-	top: 603px;
+	left: 603px;  
+	top: 150px;   
 	opacity:0;
 }
