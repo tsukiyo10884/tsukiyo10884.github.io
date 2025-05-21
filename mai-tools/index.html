@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <title>maimai小工具</title>
+  <h5>譜面定數來源： <a href="https://arcade-songs.zetaraku.dev/maimai/about/">zetaraku</a></h5>
+</head>
+<body>
+  <div id="output">等待資料中...</div>
+
+  <script>
+    window.addEventListener("message", (event) => {
+      const data = event.data;
+      document.getElementById("output").innerHTML = "取得資料"+"<pre style=\"display:none;\">" + JSON.stringify(data, null, 2) + "</pre>";
+    });
+  </script>
+</body>
+</html>
