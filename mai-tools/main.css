@@ -1,0 +1,33 @@
+.trophy_Normal {
+    background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_normal.png) no-repeat;
+}
+.trophy_inner_block {
+    width: 259px;
+    height: 24px;
+    margin: 0 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #fff;
+    text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0, black 0px 1px 0, black 0 -1px 0, black -1px 0 0, black 1px 0 0;
+}
+.f_13 {
+    font-size: 13px;
+    line-height: 1.2rem;
+}
+.trophy_block {
+    width: 268px;
+    height: 25px;
+    margin: 0 0 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.p_3 {
+    padding: 3px;
+}
+.t_c {
+    text-align: center;
+}
+.f_0 {
+    font-size: 0;
+    line-height: 0;
+}
