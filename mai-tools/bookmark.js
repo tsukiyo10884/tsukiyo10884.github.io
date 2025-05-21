@@ -1,6 +1,6 @@
 javascript: (async () => {
 
-    const childWin = window.open("https://tsukiyo10884.github.io/mai-tools/main.html");
+    const childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
 
     // User Profile
     const homeRes = await fetch('https://maimaidx-eng.com/maimai-mobile/home/', {
