@@ -39,6 +39,7 @@
 
     function createSongCard(song) {
       const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
+      console.log(song);
       return `
         <div class="song-card difficulty-glow ${diffClass}" style="background-image: url('${song.image}')">
           <div class="song-overlay"></div>
