@@ -1,3 +1,159 @@
+.trophy_block {
+	width: 268px;
+	height: 25px;
+	margin: 0 0 5px 0;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.trophy_inner_block{
+	width: 259px;
+	height: 24px;
+	margin: 0 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #fff;
+	text-shadow:
+		black 1px 1px 0, black -1px -1px 0,/*右下、左上*/
+		black -1px 1px 0, black 1px -1px 0,/*右上、左下*/
+		black 0px 1px 0, black  0-1px 0,/*右、左*/
+		black -1px 0 0, black 1px 0 0;
+}
+.trophy_Normal {
+	background: url(../img/trophy_normal.png)no-repeat;
+}
+.trophy_Bronze {
+	background: url(../img/trophy_bronze.png)no-repeat;
+}
+.trophy_Silver {
+	background: url(../img/trophy_silver.png)no-repeat;
+}
+.trophy_Gold {
+	background: url(../img/trophy_gold.png)no-repeat;
+}
+.trophy_Rainbow {
+	background: url(../img/trophy_rainbow.png)no-repeat;
+}
+.name_block {
+	width: 158px;
+	height: 27px;
+	margin: 3px 0;
+	padding: 5px 3px 3px 3px;
+	border: 1px solid #dedede;
+	background-color: #fff;
+	background-size: 34px;
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+	border-radius: 5px;
+}
+.rating_block {
+	position: absolute;
+	top: 7px;
+	right: 9px;
+	width: 73px;
+	height: 21px;
+	line-height: 21px;
+	color: white;
+	text-align: right;
+	font-size: 16px;
+}
+.user_data_block_line {
+	width: 280px;
+	margin: 0 0 4px 0;
+}
+.comment_block {
+	width: 306px;
+	min-height: 120px;
+	margin: 10px 0 0 0;
+	padding: 10px;
+	background: #dcf3ff;
+	border-radius: 10px;
+}
+.f_l {
+    float: left;
+}
+
+.p_l_10 {
+    padding-left: 10px;
+}
+img {
+    border: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-touch-callout: none;
+    -moz-user-select: none;
+    touch-callout: none;
+    user-select: none;
+}
+.p_10 {
+    padding: 10px;
+}
+.f_0 {
+    font-size: 0;
+    line-height: 0;
+}
+.rating_block {
+    position: absolute;
+    top: 7px;
+    right: 9px;
+    width: 73px;
+    height: 21px;
+    line-height: 21px;
+    color: white;
+    text-align: right;
+    font-size: 16px;
+}
+.f_r {
+    float: right;
+}
+.name_block {
+    width: 158px;
+    height: 27px;
+    margin: 3px 0;
+    padding: 5px 3px 3px 3px;
+    border: 1px solid #dedede;
+    background-color: #fff;
+    background-size: 34px;
+    box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+}
+.h_30 {
+    height: 30px;
+}
+.trophy_inner_block {
+    width: 259px;
+    height: 24px;
+    margin: 0 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #fff;
+    text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0, black 0px 1px 0, black 0 -1px 0, black -1px 0 0, black 1px 0 0;
+}
+
+.f_13 {
+    font-size: 13px;
+    line-height: 1.2rem;
+}
+
+.trophy_block {
+    width: 268px;
+    height: 25px;
+    margin: 0 0 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.p_3 {
+    padding: 3px;
+}
+
+.t_c {
+    text-align: center;
+}
+
+.f_0 {
+    font-size: 0;
+    line-height: 0;
+}
+
 body {
     font-family: sans-serif;
     background: #111;
@@ -59,10 +215,11 @@ button {
 .song-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(6px);
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
     z-index: 0;
 }
+
 
 .song-content {
     position: relative;

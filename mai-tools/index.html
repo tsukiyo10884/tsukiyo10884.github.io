@@ -6,7 +6,6 @@
   <title>maimai小工具</title>
   <h5>譜面定數來源： <a href="https://arcade-songs.zetaraku.dev/maimai/about/">zetaraku</a></h5>
   <link rel="stylesheet" href="./main.css" />
-  <link rel="stylesheet" href="https://maimaidx-eng.com/maimai-mobile/css/common.css" />
 </head>
 
 <body>
@@ -35,7 +34,12 @@
 
     function createUserInfo(user) {
       return `
-        <div class="user-info">${user}</div>`;
+        <div class="user-info">
+          <img src="${user.icon}" height="50">
+          <div>${user.name}</div>
+          <div>${user.title}</div>
+          <div>${user.rating}</div>
+        </div>`;
     }
 
     function createSongCard(song) {
