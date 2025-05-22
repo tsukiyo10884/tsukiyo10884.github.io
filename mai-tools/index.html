@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>maimai小工具</title>
   <h5>譜面定數來源： <a href="https://arcade-songs.zetaraku.dev/maimai/about/">zetaraku</a></h5>
   <link rel="stylesheet" href="./main.css" />
 </head>
+
 <body>
   <div id="output"></div>
   <div class="button-group">
@@ -19,12 +21,15 @@
   <script>
     window.addEventListener("message", (event) => {
       const data = event.data;
-      document.getElementById("output").innerHTML = "取得資料"+"<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data, null, 2) + "</textarea>";
+      document.getElementById("output").innerHTML = "取得資料" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data, null, 2) + "</textarea>";
       refreashData();
     });
-    const data = JSON.parse(document.getElementById('json-data')?.textContent);
+    const data = "";
+    if (document.getElementById('json-data') !== null) {
+      refreashData();
+    }
     function refreashData() {
-      data = document.getElementById('json-data')?.textContent;
+      data = JSON.parse(document.getElementById('json-data')?.textContent);
     }
 
     function createUserInfo(user) {
@@ -71,4 +76,5 @@
     }
   </script>
 </body>
+
 </html>
