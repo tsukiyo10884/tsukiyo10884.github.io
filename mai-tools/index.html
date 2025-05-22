@@ -12,7 +12,7 @@
   <script>
     window.addEventListener("message", (event) => {
       const data = event.data;
-      document.getElementById("output").innerHTML = "取得資料"+"<pre style=\"display:none;\">" + JSON.stringify(data, null, 2) + "</pre>";
+      document.getElementById("output").innerHTML = "取得資料"+"<textarea style=\"display:none;\">" + JSON.stringify(data, null, 2) + "</textarea>";
     });
   </script>
 </body>
