@@ -1,18 +1,73 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>maimai小工具</title>
   <h5>譜面定數來源： <a href="https://arcade-songs.zetaraku.dev/maimai/about/">zetaraku</a></h5>
   <link rel="stylesheet" href="./main.css" />
 </head>
 <body>
-  <div id="output">等待資料中...</div>
+  <div id="output"></div>
+  <div class="button-group">
+    <button onclick="showTable('rating')">R值入選曲</button>
+    <button>名牌版進度</button>
+    <button>等級進度</button>
+  </div>
+
+  <div id="rating-table" class="table"></div>
 
   <script>
+    const data = JSON.parse(document.getElementById('json-data').textContent);
+    function refreashData() {
+      data = document.getElementById('json-data').textContent;
+    }
+
+    function createUserInfo(user) {
+      return `
+        <div class="user-info">
+          <img src="${user.icon}" height="50">
+          <div>${user.name}</div>
+          <div>${user.title}</div>
+          <div>${user.rating}</div>
+        </div>`;
+    }
+
+    function createSongCard(song) {
+      const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
+      return `
+        <div class="song-card difficulty-glow ${diffClass}" style="background-image: url('${song.image}')">
+          <div class="song-overlay"></div>
+          <div class="top-left song-content">${song.internalLevel}</div>
+          <div class="top-right song-content">${song.type}</div>
+          <div class="bottom-left song-content">${song.title}</div>
+          <div class="bottom-right song-content">${song.score}</div>
+        </div>`;
+    }
+
+    function createSection(title, songs) {
+      return `
+        <div class="section-title">${title}</div>
+        <div class="song-grid">
+          ${songs.map(createSongCard).join('')}
+        </div>`;
+    }
+
+    function showTable(type) {
+      const container = document.getElementById('rating-table');
+      if (type === 'rating') {
+        container.style.display = 'flex';
+        const html = [
+          createUserInfo(data.user),
+          createSection('new songs', data.ratingSongList.rating_new),
+          createSection('old songs', data.ratingSongList.rating_others)
+        ].join('');
+        container.innerHTML = html;
+      }
+    }
     window.addEventListener("message", (event) => {
       const data = event.data;
-      document.getElementById("output").innerHTML = "取得資料"+"<textarea style=\"display:none;\">" + JSON.stringify(data, null, 2) + "</textarea>";
+      document.getElementById("output").innerHTML = "取得資料"+"<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data, null, 2) + "</textarea>";
+      refreashData();
     });
   </script>
 </body>
