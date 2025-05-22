@@ -17,9 +17,14 @@
   <div id="rating-table" class="table"></div>
 
   <script>
-    const data = JSON.parse(document.getElementById('json-data').textContent);
+    window.addEventListener("message", (event) => {
+      const data = event.data;
+      document.getElementById("output").innerHTML = "取得資料"+"<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data, null, 2) + "</textarea>";
+      refreashData();
+    });
+    const data = JSON.parse(document.getElementById('json-data')?.textContent);
     function refreashData() {
-      data = document.getElementById('json-data').textContent;
+      data = document.getElementById('json-data')?.textContent;
     }
 
     function createUserInfo(user) {
@@ -64,11 +69,6 @@
         container.innerHTML = html;
       }
     }
-    window.addEventListener("message", (event) => {
-      const data = event.data;
-      document.getElementById("output").innerHTML = "取得資料"+"<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data, null, 2) + "</textarea>";
-      refreashData();
-    });
   </script>
 </body>
 </html>
