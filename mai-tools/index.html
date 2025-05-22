@@ -34,12 +34,7 @@
 
     function createUserInfo(user) {
       return `
-        <div class="user-info">
-          <img src="${user.icon}" height="50">
-          <div>${user.name}</div>
-          <div>${user.title}</div>
-          <div>${user.rating}</div>
-        </div>`;
+        <div class="user-info">${user}</div>`;
     }
 
     function createSongCard(song) {

@@ -6,28 +6,7 @@
     const homeText = await homeRes.text();
     const homeDoc = new DOMParser().parseFromString(homeText, 'text/html');
 
-    const userBlock = homeDoc.querySelector('.see_through_block.m_15.m_t_10.p_10.p_r.t_l.f_0');
-
-    const user = {
-        icon: userBlock.querySelector('.w_112.f_l')?.getAttribute('src') ?? '',
-        title: userBlock.querySelector('.trophy_block')?.outerHTML ?? '',
-        name: userBlock.querySelector('.name_block')?.outerHTML ?? '',
-        rating: userBlock.querySelector('.f_r.t_r.f_0')?.outerHTML ?? '',
-        rank: userBlock.querySelector('.h_35.f_l')?.getAttribute('src') ?? '',
-        class: userBlock.querySelector('.p_l_10.h_35.f_l')?.getAttribute('src') ?? '',
-        star: userBlock.querySelector('.p_l_10.f_l.f_14')?.outerHTML ?? ''
-    };
-
-    // 如果稱號文字過長，裁切顯示
-    const titleDiv = userBlock.querySelector('.trophy_block');
-    if (titleDiv) {
-        const textContainer = titleDiv.querySelector('.trophy_inner_block');
-        const text = textContainer?.textContent.trim() ?? '';
-        if (text.length > 20) {
-            textContainer.textContent = text.slice(0, 19) + '…';
-        }
-        user.title = titleDiv.outerHTML;
-    }
+    const user = homeDoc.querySelector('.basic_block.p_10.f_0').outerHTML;
 
     // 取得詳細譜面資料
     const detailData = await fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
