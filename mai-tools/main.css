@@ -35,8 +35,9 @@ img {
 }
 
 .bottom-left {
-	bottom: 0.3em;
-	left: 0.3em;
+    top: 1.3em;
+    left: 0.3em;
+    font-size: 16px;
 }
 
 .bottom-left, .bottom-right, .top-left, .top-right {
@@ -222,6 +223,7 @@ img {
 .top-left {
 	left: 0.3em;
 	top: 0.3em;
+	font-size: 14px;
 }
 
 .top-right {
