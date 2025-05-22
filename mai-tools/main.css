@@ -108,6 +108,10 @@ img {
 	height: 30px;
 }
 
+.h_35 {
+    height: 35px;
+}
+
 .m_b_5 {
 	margin-bottom: 5px;
 }
@@ -122,12 +126,11 @@ img {
 	border-radius: 5px;
 	border: 1px solid #dedede;
 	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
-	height: 27px;
+	height: 22px;
 	margin: 3px 0;
 	padding: 5px 3px 3px 3px;
 	width: 158px;
     color: #000;
-    font-size: 16px;
 }
 
 .p_10 {
@@ -284,4 +287,8 @@ img {
 .user_data_block_line {
 	margin: 0 0 4px 0;
 	width: 280px;
+}
+
+.w_112 {
+    width: 112px;
 }
