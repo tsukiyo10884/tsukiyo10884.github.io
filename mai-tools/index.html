@@ -24,7 +24,7 @@
       document.getElementById("output").innerHTML = "取得資料" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data, null, 2) + "</textarea>";
       refreashData();
     });
-    const data = "";
+    var data = "";
     if (document.getElementById('json-data') !== null) {
       refreashData();
     }
