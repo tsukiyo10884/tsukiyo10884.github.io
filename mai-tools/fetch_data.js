@@ -84,19 +84,20 @@ function parseRatingBlocks(blocks) {
         const difficulty = div.querySelector('img.h_20.f_l')?.src.match(/diff_(\w+)\.png/)?.[1] || '';
         const type = div.querySelector('img.music_kind_icon.f_r')?.src.includes('music_dx.png') ? 'dx' : 'std';
         const title = div.querySelector('.music_name_block')?.textContent.trim() || '';
-        return { difficulty, type, title };
+        const score = div.querySelector('.music_score_block')?.textContent.trim() || '';
+        return { difficulty, type, title, score };
     });
 }
 
 function enrichRatingBlocks(blocks) {
-    return blocks.map(({ difficulty, type, title }) => {
+    return blocks.map(({ difficulty, type, title, score }) => {
         const songEntry = detailData.songs.find(e => e.title === title);
         const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulty);
         const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
         const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
         const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
         const version = songEntry?.version;
-        return { type, title, difficulty, version, internalLevel, image };
+        return { type, title, score, difficulty, version, internalLevel, image };
     });
 }
 
