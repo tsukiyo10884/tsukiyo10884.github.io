@@ -16,7 +16,6 @@ img {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	border: none;
-	touch-callout: none;
 	user-select: none;
 }
 
@@ -31,16 +30,19 @@ img {
 .basic_block {
 	background-color: #fff;
 	border-radius: 5px;
-	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 }
 
 .bottom-left {
-    top: 1.3em;
-    left: 0.3em;
-    font-size: 16px;
+	top: 1.3em;
+	left: 0.3em;
+	font-size: 16px;
 }
 
-.bottom-left, .bottom-right, .top-left, .top-right {
+.bottom-left,
+.bottom-right,
+.top-left,
+.top-right {
 	font-size: 0.8em;
 	padding: 0.2em 0.4em;
 	position: absolute;
@@ -50,6 +52,7 @@ img {
 .bottom-right {
 	bottom: 0.3em;
 	right: 0.3em;
+	font-size: 18px;
 }
 
 .button-group {
@@ -110,7 +113,7 @@ img {
 }
 
 .h_35 {
-    height: 35px;
+	height: 35px;
 }
 
 .m_b_5 {
@@ -126,12 +129,12 @@ img {
 	background-size: 34px;
 	border-radius: 5px;
 	border: 1px solid #dedede;
-	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 	height: 22px;
 	margin: 3px 0;
 	padding: 5px 3px 3px 3px;
 	width: 158px;
-    color: #000;
+	color: #000;
 }
 
 .p_10 {
@@ -195,12 +198,12 @@ img {
 .song-grid {
 	display: grid;
 	gap: 1em;
-	grid-template-columns: repeat(5,1fr);
+	grid-template-columns: repeat(5, 1fr);
 }
 
 .song-overlay {
 	backdrop-filter: blur(5px);
-	background-color: rgba(0,0,0,0.2);
+	background-color: rgba(0, 0, 0, 0.2);
 	inset: 0;
 	position: absolute;
 	z-index: 0;
@@ -291,5 +294,5 @@ img {
 }
 
 .w_112 {
-    width: 112px;
+	width: 112px;
 }
