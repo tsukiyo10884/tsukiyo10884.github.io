@@ -203,7 +203,6 @@ img {
 }
 
 .song-card.completed {
-	filter: brightness(60%);
 	position: relative;
 }
 
@@ -213,8 +212,12 @@ img {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	font-size: 48px;
-	color: green;
+	color: rgb(18 240 18);
 	z-index: 2;
+}
+
+.completed .song-overlay {
+    filter: brightness(30%);
 }
 
 .song-content {

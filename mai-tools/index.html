@@ -59,7 +59,7 @@
         case '極':
           isCompleted = song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp;
         case '将':
-          isCompleted = song.score > 100;
+          isCompleted = parseFloat(song.score) > 100;
           break;
         case '神':
           isCompleted = song.ap || song.app;
@@ -110,8 +110,10 @@
         container.style.display = 'none';
       }
     }
+
     async function showPlateList() {
-      const versionList = await loadVersionJson();
+      const versionList = await fetch('version.json')
+        .then(res => res.json());
       return `
         <div class="plate-list">
           ${versionList.map(version => `
@@ -120,12 +122,6 @@
             </button><br/>
           `).join('')}
         </div>`;
-    }
-
-    async function loadVersionJson() {
-      const res = await fetch('version.json');
-      const jsonData = await res.json();
-      return jsonData;
     }
 
     function showVersionButton(versionName, plateName) {
@@ -148,7 +144,7 @@
       const songs = data.songs.filter(song => song.version === versionName);
       var plateSongs = "";
       container.innerHTML = `
-      <div class="section-title">${title}</div>
+      <div class="section-title">${versionName}進度</div>
         <div class="song-grid">
           ${songs.map(song => createSongCard(song, type)).join('')}
         </div>`;
