@@ -30,7 +30,7 @@
 
       switch (data.type) {
         case "difficulty":
-          output.innerHTML = "取得成績中(" + data.type + ")";
+          output.innerHTML = "取得成績中(" + data.payload + ")";
           break;
         case "result":
           output.innerHTML = "取得資料" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data.payload, null, 2) + "</textarea>";
@@ -127,14 +127,17 @@
     function showVersionButton(versionName, plateName) {
       const container = document.getElementById('song-table');
       container.style.display = 'flex';
-      const html = `
+      const html = [
+        createUserInfo(data.user),
+        `
         <div class="section-title">${versionName} 進度</div>
         <div class="plate-button-group">
           <button class="plate-button" onclick="showPlateProgress('${versionName}', '極')">${plateName}極</button>
           <button class="plate-button" onclick="showPlateProgress('${versionName}', '将')">${plateName}将</button>
           <button class="plate-button" onclick="showPlateProgress('${versionName}', '神')">${plateName}神</button>
           <button class="plate-button" onclick="showPlateProgress('${versionName}', '舞舞')">${plateName}舞舞</button>
-        </div>`;
+        </div>`,
+      ].join('');
       container.innerHTML = html;
     }
 
@@ -143,11 +146,15 @@
       container.style.display = 'flex';
       const songs = data.songs.filter(song => song.version === versionName);
       var plateSongs = "";
-      container.innerHTML = `
+      const html = [
+        createUserInfo(data.user),
+        `
       <div class="section-title">${versionName}進度</div>
         <div class="song-grid">
           ${songs.map(song => createSongCard(song, type)).join('')}
-        </div>`;
+        </div>`,
+      ].join('');
+      container.innerHTML = html;
     }
   </script>
 </body>
