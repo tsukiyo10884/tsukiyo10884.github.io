@@ -73,7 +73,7 @@
     <div class="song-card difficulty-glow ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}')">
       <div class="song-overlay"></div>
       <div class="block-inner-level song-content text-shadow">${song.internalLevel}</div>
-      <div class="block-type song-content text-shadow">${song.type}</div>
+      <div class="block-type song-content text-shadow">${song.type.toUpperCase()}</div>
       <div class="block-song-name song-content text-shadow">${song.title.substring(0, 30)}</div>
       <div class="block-score song-content text-shadow">${song.score}</div>
       ${isCompleted ? '<div class="completion-check">✔</div>' : ''}

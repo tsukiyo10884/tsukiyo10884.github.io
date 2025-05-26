@@ -21,7 +21,7 @@
             type: "difficulty",
             payload: i,
         }, "https://tsukiyo10884.github.io");
-        const res = await fetch(`https://maimaidx-eng.com/maimai-mobile/record/musicGenre/search/?genre=99&diff=${i}`, {
+        const res = await fetch(`https://maimaidx-eng.com/maimai-mobile/record/musicGenre/search/?genre=99&diff=${difficulties[i]}`, {
             credentials: 'include'
         });
         const text = await res.text();
@@ -29,7 +29,7 @@
         const blocks = doc.querySelectorAll('div.w_450.m_15.p_r.f_0');
 
         blocks.forEach(block => {
-            const type = block.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'DX' : 'STD';
+            const type = block.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
             const title = block.querySelector('.music_name_block')?.textContent.trim() || "";
 
             const score = parseFloat(
@@ -40,9 +40,7 @@
             const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulties[i]);
 
             const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
-            console.log('internalLevelRaw=' + internalLevelRaw);
             const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
-            console.log('internalLevel=' + internalLevel);
             const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
             const version = songEntry?.version;
 
@@ -91,7 +89,7 @@
     function parseRatingBlocks(blocks) {
         return blocks.map(div => {
             const difficulty = div.querySelector('img.h_20.f_l')?.src.match(/diff_(\w+)\.png/)?.[1] || '';
-            const type = div.querySelector('img.music_kind_icon.f_r')?.src.includes('music_dx.png') ? 'DX' : 'STD';
+            const type = div.querySelector('img.music_kind_icon.f_r')?.src.includes('music_dx.png') ? 'dx' : 'std';
             const title = div.querySelector('.music_name_block')?.textContent.trim() || '';
             const score = div.querySelector('.music_score_block')?.textContent.trim() || '';
             return { difficulty, type, title, score };
