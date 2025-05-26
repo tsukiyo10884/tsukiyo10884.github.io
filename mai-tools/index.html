@@ -127,25 +127,25 @@
       const jsonData = await res.json();
       return jsonData;
     }
-
-
+    
     function showVersionButton(version) {
       const container = document.getElementById('song-table');
       container.style.display = 'flex';
       const html = `
         <div class="section-title">${version.versionName} 進度</div>
         <div class="plate-button-group">
-          <button class="plate-button" onclick="showPlateProgress('${version}', '極')">${version.plateName}極</button>
-          <button class="plate-button" onclick="showPlateProgress('${version}', '将')">${version.plateName}将</button>
-          <button class="plate-button" onclick="showPlateProgress('${version}', '神')">${version.plateName}神</button>
-          <button class="plate-button" onclick="showPlateProgress('${version}', '舞舞')">${version.plateName}舞舞</button>
+          <button class="plate-button" onclick="showPlateProgress('${version.versionName}', '極')">${version.plateName}極</button>
+          <button class="plate-button" onclick="showPlateProgress('${version.versionName}', '将')">${version.plateName}将</button>
+          <button class="plate-button" onclick="showPlateProgress('${version.versionName}', '神')">${version.plateName}神</button>
+          <button class="plate-button" onclick="showPlateProgress('${version.versionName}', '舞舞')">${version.plateName}舞舞</button>
         </div>`;
+      container.innerHTML = html;
     }
 
-    function showPlateProgress(version, type) {
+    function showPlateProgress(versionName, type) {
       const container = document.getElementById('song-table');
       container.style.display = 'flex';
-      const songs = data.songs.filter(song => song.version === version.versionName);
+      const songs = data.songs.filter(song => song.version === versionName);
       songs.forEach(song => {
         createSongCard(song, type);
       });
