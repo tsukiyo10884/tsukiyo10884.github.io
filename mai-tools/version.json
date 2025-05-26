@@ -1,94 +1,94 @@
 [
     {
-        "vsersion": "maimai",
-        "name": "真"
+        "versionName": "maimai",
+        "plateName": "真"
     },
     {
-        "vsersion": "maimai PLUS",
-        "name": "真"
+        "versionName": "maimai PLUS",
+        "plateName": "真"
     },
     {
-        "vsersion": "GreeN",
-        "name": "超"
+        "versionName": "GreeN",
+        "plateName": "超"
     },
     {
-        "vsersion": "GreeN PLUS",
-        "name": "檄"
+        "versionName": "GreeN PLUS",
+        "plateName": "檄"
     },
     {
-        "vsersion": "ORANGE",
-        "name": "橙"
+        "versionName": "ORANGE",
+        "plateName": "橙"
     },
     {
-        "vsersion": "ORANGE PLUS",
-        "name": "暁"
+        "versionName": "ORANGE PLUS",
+        "plateName": "暁"
     },
     {
-        "vsersion": "PiNK",
-        "name": "桃"
+        "versionName": "PiNK",
+        "plateName": "桃"
     },
     {
-        "vsersion": "PiNK PLUS",
-        "name": "櫻"
+        "versionName": "PiNK PLUS",
+        "plateName": "櫻"
     },
     {
-        "vsersion": "MURASAKi",
-        "name": "紫"
+        "versionName": "MURASAKi",
+        "plateName": "紫"
     },
     {
-        "vsersion": "MURASAKi PLUS",
-        "name": "菫"
+        "versionName": "MURASAKi PLUS",
+        "plateName": "菫"
     },
     {
-        "vsersion": "MiLK",
-        "name": "白"
+        "versionName": "MiLK",
+        "plateName": "白"
     },
     {
-        "vsersion": "MiLK PLUS",
-        "name": "雪"
+        "versionName": "MiLK PLUS",
+        "plateName": "雪"
     },
     {
-        "vsersion": "FiNALE",
-        "name": "輝"
+        "versionName": "FiNALE",
+        "plateName": "輝"
     },
     {
-        "vsersion": "maimaiでらっくす",
-        "name": "熊"
+        "versionName": "maimaiでらっくす",
+        "plateName": "熊"
     },
     {
-        "vsersion": "maimaiでらっくす PLUS",
-        "name": "華"
+        "versionName": "maimaiでらっくす PLUS",
+        "plateName": "華"
     },
     {
-        "vsersion": "スプラッシュ",
-        "name": "爽"
+        "versionName": "スプラッシュ",
+        "plateName": "爽"
     },
     {
-        "vsersion": "スプラッシュ PLUS",
-        "name": "煌"
+        "versionName": "スプラッシュ PLUS",
+        "plateName": "煌"
     },
     {
-        "vsersion": "UNiVERSE",
-        "name": "宙"
+        "versionName": "UNiVERSE",
+        "plateName": "宙"
     },
     {
-        "vsersion": "UNiVERSE PLUS",
-        "name": "星"
+        "versionName": "UNiVERSE PLUS",
+        "plateName": "星"
     },
     {
-        "vsersion": "FESTiVAL",
-        "name": "祭"
+        "versionName": "FESTiVAL",
+        "plateName": "祭"
     },
     {
-        "vsersion": "FESTiVAL PLUS",
-        "name": "祝"
+        "versionName": "FESTiVAL PLUS",
+        "plateName": "祝"
     },
     {
-        "vsersion": "BUDDiES",
-        "name": "双"
+        "versionName": "BUDDiES",
+        "plateName": "双"
     },
     {
-        "vsersion": "BUDDiES PLUS",
-        "name": "宴"
+        "versionName": "BUDDiES PLUS",
+        "plateName": "宴"
     }
 ]

@@ -12,13 +12,11 @@
   <div id="output"></div>
   <div id="button-group" style="display: none;">
     <button onclick="showTable('rating')">R值入選曲</button>
-    <button>名牌版進度</button>
+    <button onclick="showTable('plate')">名牌版進度</button>
     <button>等級進度</button>
   </div>
 
-  <div id="table">
-    <div id="rating-table" class="table" style="display: flex;width: 1000px;"></div>
-  </div>
+  <div id="song-table" class="table" style="width: 1000px;"></div>
 
   <script>
     window.addEventListener("message", (event) => {
@@ -53,20 +51,36 @@
         <div class="user-info">${user}</div>`;
     }
 
-    function createSongCard(song) {
+    function createSongCard(song, type) {
       const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
-      console.log(song);
+      let isCompleted = false;
+
+      switch (type) {
+        case '極':
+          isCompleted = song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp;
+        case '将':
+          isCompleted = song.score > 100;
+          break;
+        case '神':
+          isCompleted = song.ap || song.app;
+          break;
+        case '舞舞':
+          isCompleted = song.fdx;
+          break;
+      }
+
       return `
-        <div class="song-card difficulty-glow ${diffClass}" style="background-image: url('${song.image}')">
-          <div class="song-overlay"></div>
-          <div class="block-inner-level song-content">${song.internalLevel}</div>
-          <div class="block-type song-content">${song.type}</div>
-          <div class="block-song-name song-content">${song.title}</div>
-          <div class="block-score song-content">${song.score}</div>
-        </div>`;
+    <div class="song-card difficulty-glow ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}')">
+      <div class="song-overlay"></div>
+      <div class="block-inner-level song-content">${song.internalLevel}</div>
+      <div class="block-type song-content">${song.type}</div>
+      <div class="block-song-name song-content">${song.title}</div>
+      <div class="block-score song-content">${song.score}</div>
+      ${isCompleted ? '<div class="completion-check">✔</div>' : ''}
+    </div>`;
     }
 
-    function createSection(title, songs) {
+    function createRatingSection(title, songs) {
       return `
         <div class="section-title">${title}</div>
         <div class="song-grid">
@@ -75,16 +89,70 @@
     }
 
     function showTable(type) {
-      const container = document.getElementById('rating-table');
+      const container = document.getElementById('song-table');
       if (type === 'rating') {
         container.style.display = 'flex';
         const html = [
           createUserInfo(data.user),
-          createSection('new songs', data.ratingSongList.rating_new),
-          createSection('old songs', data.ratingSongList.rating_others)
+          createRatingSection('new songs', data.ratingSongList.rating_new),
+          createRatingSection('old songs', data.ratingSongList.rating_others)
         ].join('');
         container.innerHTML = html;
       }
+      else if (type === 'plate') {
+        container.style.display = 'flex';
+        const html = [
+          createUserInfo(data.user),
+          showPlateList(),
+        ].join('');
+        container.innerHTML = html;
+      } else {
+        container.style.display = 'none';
+      }
+    }
+    function showPlateList() {
+      const versionList = require('./version.json');
+      return `
+        <div class="plate-list">
+          ${versionList.map(version => `
+            <button class="plate-button" onclick="version('${version}')">
+              ${version.versionName} (${version.plateName})
+            </button>
+          `).join('')}
+        </div>`;
+    }
+    function showVersionButton(version) {
+      const container = document.getElementById('song-table');
+      container.style.display = 'flex';
+      const html = `
+        <div class="section-title">${version.versionName} 進度</div>
+        <div class="plate-button-group">
+          <button class="plate-button" onclick="showPlateProgress('${version}', '極')">${version.plateName}極</button>
+          <button class="plate-button" onclick="showPlateProgress('${version}', '将')">${version.plateName}将</button>
+          <button class="plate-button" onclick="showPlateProgress('${version}', '神')">${version.plateName}神</button>
+          <button class="plate-button" onclick="showPlateProgress('${version}', '舞舞')">${version.plateName}舞舞</button>
+        </div>`;
+    }
+
+    function showPlateProgress(version, type) {
+      const container = document.getElementById('song-table');
+      container.style.display = 'flex';
+      const songs = data.songs.filter(song => song.version === version);
+      switch (type) {
+        case '極':
+          songs = songs.filter(song => song.plate === '極');
+          break;
+        case '将':
+          songs = songs.filter(song => song.plate === '将');
+          break;
+        case '神':
+          songs = songs.filter(song => song.plate === '神');
+          break;
+        case '舞舞':
+          songs = songs.filter(song => song.plate === '舞舞');
+          break;
+      }
+
     }
   </script>
 </body>

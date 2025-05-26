@@ -30,8 +30,7 @@
 
         blocks.forEach(block => {
             const type = block.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
-            const title = block.querySelector('.music_name_block')?.textContent.trim() || "";
-            title.substring(0, 30); // 確保標題不超過30個字元
+            const title = block.querySelector('.music_name_block')?.textContent.trim().substring(0, 30) || "";
 
             const score = parseFloat(
                 block.querySelector('.music_score_block.w_112')?.textContent.trim().replace('%', '') || "0"
@@ -55,6 +54,7 @@
                 fc: iconSrc.includes('music_icon_fc'),
                 fcp: iconSrc.includes('music_icon_fcp'),
                 fdx: iconSrc.includes('music_icon_fdx'),
+                fdxp: iconSrc.includes('music_icon_fdxp'),
             };
 
             songs.push({
