@@ -34,9 +34,9 @@
         case "result":
           output.innerHTML = "取得資料" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data.payload, null, 2) + "</textarea>";
           $('#button-group').show();
+          refreashData();
           break;
       }
-      refreashData();
     });
     var data = "";
     if (document.getElementById('json-data') !== null) {
