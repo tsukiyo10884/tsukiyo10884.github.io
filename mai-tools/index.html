@@ -88,7 +88,7 @@
         </div>`;
     }
 
-    function showTable(type) {
+    async function showTable(type) {
       const container = document.getElementById('song-table');
       if (type === 'rating') {
         container.style.display = 'flex';
@@ -103,15 +103,15 @@
         container.style.display = 'flex';
         const html = [
           createUserInfo(data.user),
-          showPlateList(),
+          await showPlateList(),
         ].join('');
         container.innerHTML = html;
       } else {
         container.style.display = 'none';
       }
     }
-    function showPlateList() {
-      const versionList = require('./version.json');
+    async function showPlateList() {
+      const versionList = await loadVersionJson();
       return `
         <div class="plate-list">
           ${versionList.map(version => `
@@ -121,6 +121,14 @@
           `).join('')}
         </div>`;
     }
+
+    async function loadVersionJson() {
+      const res = await fetch('vsersion.json');
+      const jsonData = await res.json();
+      return jsonData;
+    }
+
+
     function showVersionButton(version) {
       const container = document.getElementById('song-table');
       container.style.display = 'flex';
