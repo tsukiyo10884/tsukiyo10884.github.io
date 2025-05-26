@@ -115,9 +115,9 @@
       return `
         <div class="plate-list">
           ${versionList.map(version => `
-            <button class="plate-button" onclick="version('${version}')">
-              ${version.versionName} (${version.plateName})
-            </button>
+            <button class="plate-button" onclick="showVersionButton('${version}')">
+              ${version.plateName} (${version.versionName})
+            </button><br/>
           `).join('')}
         </div>`;
     }
@@ -145,22 +145,10 @@
     function showPlateProgress(version, type) {
       const container = document.getElementById('song-table');
       container.style.display = 'flex';
-      const songs = data.songs.filter(song => song.version === version);
-      switch (type) {
-        case '極':
-          songs = songs.filter(song => song.plate === '極');
-          break;
-        case '将':
-          songs = songs.filter(song => song.plate === '将');
-          break;
-        case '神':
-          songs = songs.filter(song => song.plate === '神');
-          break;
-        case '舞舞':
-          songs = songs.filter(song => song.plate === '舞舞');
-          break;
-      }
-
+      const songs = data.songs.filter(song => song.version === version.versionName);
+      songs.forEach(song => {
+        createSongCard(song, type);
+      });
     }
   </script>
 </body>
