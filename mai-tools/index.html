@@ -146,9 +146,12 @@
       const container = document.getElementById('song-table');
       container.style.display = 'flex';
       const songs = data.songs.filter(song => song.version === versionName);
-      songs.forEach(song => {
-        createSongCard(song, type);
-      });
+      var plateSongs = "";
+      container.innerHTML = `
+      <div class="section-title">${title}</div>
+        <div class="song-grid">
+          ${songs.map(song => createSongCard(song, type)).join('')}
+        </div>`;
     }
   </script>
 </body>
