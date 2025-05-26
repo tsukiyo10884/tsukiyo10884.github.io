@@ -31,6 +31,8 @@
         blocks.forEach(block => {
             const type = block.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
             const title = block.querySelector('.music_name_block')?.textContent.trim() || "";
+            title.substring(0, 30); // 確保標題不超過30個字元
+
             const score = parseFloat(
                 block.querySelector('.music_score_block.w_112')?.textContent.trim().replace('%', '') || "0"
             ).toFixed(4) + "%";
