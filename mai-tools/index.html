@@ -28,12 +28,10 @@
       switch (data.type) {
         case "difficulty":
           output.textContent = "";
-          $('#button-group').show();
           break;
         case "result":
-
-        default:
-          output.textContent = "未知的資料類型";
+          $('#button-group').show();
+          break;
       }
       document.getElementById("output").innerHTML = "取得資料" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data, null, 2) + "</textarea>";
       refreashData();
@@ -72,10 +70,10 @@
       return `
     <div class="song-card difficulty-glow ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}')">
       <div class="song-overlay"></div>
-      <div class="block-inner-level song-content">${song.internalLevel}</div>
-      <div class="block-type song-content">${song.type}</div>
-      <div class="block-song-name song-content">${song.title}</div>
-      <div class="block-score song-content">${song.score}</div>
+      <div class="block-inner-level song-content text-shadow">${song.internalLevel}</div>
+      <div class="block-type song-content text-shadow">${song.type}</div>
+      <div class="block-song-name song-content text-shadow">${song.title}</div>
+      <div class="block-score song-content text-shadow">${song.score}</div>
       ${isCompleted ? '<div class="completion-check">✔</div>' : ''}
     </div>`;
     }

@@ -28,7 +28,7 @@ img {
 .basic_block {
 	background-color: #fff;
 	border-radius: 5px;
-	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 }
 
 .block-song-name {
@@ -37,7 +37,10 @@ img {
 	font-size: 16px;
 }
 
-.block-song-name, .block-score, .block-inner-level, .block-type {
+.block-song-name,
+.block-score,
+.block-inner-level,
+.block-type {
 	padding: 0.2em 0.4em;
 	position: absolute;
 	z-index: 2;
@@ -121,7 +124,7 @@ img {
 	background-size: 34px;
 	border-radius: 5px;
 	border: 1px solid #dedede;
-	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 	height: 22px;
 	margin: 3px 0;
 	padding: 5px 3px 3px 3px;
@@ -168,6 +171,14 @@ img {
 	text-align: center;
 }
 
+.text-shadow {
+	text-shadow:
+		2px 2px 1px black,
+		2px -1px 1px black,
+		-1px 1px 1px black,
+		-1px -1px 1px black
+}
+
 .song-card {
 	background-position: center;
 	background-size: cover;
@@ -191,7 +202,7 @@ img {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%,-50%);
+	transform: translate(-50%, -50%);
 	font-size: 48px;
 	color: green;
 	z-index: 2;
@@ -204,12 +215,12 @@ img {
 .song-grid {
 	display: grid;
 	gap: 1em;
-	grid-template-columns: repeat(5,1fr);
+	grid-template-columns: repeat(5, 1fr);
 }
 
 .song-overlay {
 	backdrop-filter: blur(3px);
-	background-color: rgba(0,0,0,0.2);
+	background-color: rgba(0, 0, 0, 0.2);
 	inset: 0;
 	position: absolute;
 	z-index: 0;
