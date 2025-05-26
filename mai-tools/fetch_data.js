@@ -30,7 +30,7 @@
 
         blocks.forEach(block => {
             const type = block.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
-            const title = block.querySelector('.music_name_block')?.textContent.trim().substring(0, 30) || "";
+            const title = block.querySelector('.music_name_block')?.textContent.trim() || "";
 
             const score = parseFloat(
                 block.querySelector('.music_score_block.w_112')?.textContent.trim().replace('%', '') || "0"
