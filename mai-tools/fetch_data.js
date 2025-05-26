@@ -40,7 +40,9 @@
             const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulties[i]);
 
             const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
+            console.log('internalLevelRaw=' + internalLevelRaw);
             const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
+            console.log('internalLevel=' + internalLevel);
             const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
             const version = songEntry?.version;
 
