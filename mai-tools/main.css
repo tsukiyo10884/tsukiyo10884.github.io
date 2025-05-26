@@ -90,6 +90,11 @@ img {
 	line-height: 1.2rem;
 }
 
+.f_14 {
+    font-size: 14px;
+    line-height: 1.2rem;
+}
+
 .f_16 {
 	font-size: 16px;
 	line-height: 1.2rem;
@@ -109,6 +114,10 @@ img {
 
 .h_35 {
 	height: 35px;
+}
+
+.m_3 {
+    margin: 3px;
 }
 
 .m_b_5 {
@@ -289,6 +298,10 @@ img {
 .user_data_block_line {
 	margin: 0 0 4px 0;
 	width: 280px;
+}
+
+.v_m {
+    vertical-align: middle;
 }
 
 .w_112 {

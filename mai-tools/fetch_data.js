@@ -29,14 +29,14 @@
         const blocks = doc.querySelectorAll('div.w_450.m_15.p_r.f_0');
 
         blocks.forEach(block => {
-            const type = block.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
+            const type = block.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'DX' : 'STD';
             const title = block.querySelector('.music_name_block')?.textContent.trim() || "";
 
             const score = parseFloat(
                 block.querySelector('.music_score_block.w_112')?.textContent.trim().replace('%', '') || "0"
             ).toFixed(4) + "%";
 
-            const songEntry = detailData.songs.find(s => s.title === title);
+            const songEntry = detailData.songs.find(s => s.songId === title);
             const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulties[i]);
 
             const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
@@ -89,7 +89,7 @@
     function parseRatingBlocks(blocks) {
         return blocks.map(div => {
             const difficulty = div.querySelector('img.h_20.f_l')?.src.match(/diff_(\w+)\.png/)?.[1] || '';
-            const type = div.querySelector('img.music_kind_icon.f_r')?.src.includes('music_dx.png') ? 'dx' : 'std';
+            const type = div.querySelector('img.music_kind_icon.f_r')?.src.includes('music_dx.png') ? 'DX' : 'STD';
             const title = div.querySelector('.music_name_block')?.textContent.trim() || '';
             const score = div.querySelector('.music_score_block')?.textContent.trim() || '';
             return { difficulty, type, title, score };

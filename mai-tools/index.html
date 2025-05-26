@@ -26,14 +26,14 @@
       if (!data || typeof data !== "object") return;
 
       const output = document.getElementById("output");
+      $('#button-group').show();
 
       switch (data.type) {
         case "difficulty":
-          output.textContent = "";
+          output.innerHTML = "取得成績中(" + data.type + ")";
           break;
         case "result":
           output.innerHTML = "取得資料" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data.payload, null, 2) + "</textarea>";
-          $('#button-group').show();
           refreashData();
           break;
       }
