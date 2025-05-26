@@ -17,6 +17,10 @@
 
     // 依照難度抓取每首歌的成績
     for (let i = 0; i < difficulties.length; i++) {
+        childWin.postMessage({
+            type: "difficulty",
+            payload: i,
+        }, "https://tsukiyo10884.github.io");
         const res = await fetch(`https://maimaidx-eng.com/maimai-mobile/record/musicGenre/search/?genre=99&diff=${i}`, {
             credentials: 'include'
         });
@@ -120,6 +124,10 @@
     };
 
     setTimeout(() => {
+        childWin.postMessage({
+            type: "result",
+            payload: exportData,
+        }, "https://tsukiyo10884.github.io");
         childWin.postMessage(exportData, "https://tsukiyo10884.github.io");
     }, 500);
 })()

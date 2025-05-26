@@ -10,17 +10,33 @@
 
 <body>
   <div id="output"></div>
-  <div class="button-group">
+  <div id="button-group" style="display: none;">
     <button onclick="showTable('rating')">R值入選曲</button>
     <button>名牌版進度</button>
     <button>等級進度</button>
   </div>
 
-  <div id="rating-table" class="table"></div>
+  <div id="table">
+    <div id="rating-table" class="table" style="display: flex;width: 1000px;"></div>
+  </div>
 
   <script>
     window.addEventListener("message", (event) => {
       const data = event.data;
+      if (!data || typeof data !== "object") return;
+
+      const output = document.getElementById("output");
+
+      switch (data.type) {
+        case "difficulty":
+          output.textContent = "";
+          $('#button-group').show();
+          break;
+        case "result":
+
+        default:
+          output.textContent = "未知的資料類型";
+      }
       document.getElementById("output").innerHTML = "取得資料" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data, null, 2) + "</textarea>";
       refreashData();
     });
@@ -43,10 +59,10 @@
       return `
         <div class="song-card difficulty-glow ${diffClass}" style="background-image: url('${song.image}')">
           <div class="song-overlay"></div>
-          <div class="top-left song-content">${song.internalLevel}</div>
-          <div class="top-right song-content">${song.type}</div>
-          <div class="bottom-left song-content">${song.title}</div>
-          <div class="bottom-right song-content">${song.score}</div>
+          <div class="block-inner-level song-content">${song.internalLevel}</div>
+          <div class="block-type song-content">${song.type}</div>
+          <div class="block-song-name song-content">${song.title}</div>
+          <div class="block-score song-content">${song.score}</div>
         </div>`;
     }
 
