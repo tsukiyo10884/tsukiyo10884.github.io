@@ -32,10 +32,10 @@
           output.textContent = "";
           break;
         case "result":
+          output.innerHTML = "取得資料" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data.payload, null, 2) + "</textarea>";
           $('#button-group').show();
           break;
       }
-      document.getElementById("output").innerHTML = "取得資料" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data, null, 2) + "</textarea>";
       refreashData();
     });
     var data = "";
