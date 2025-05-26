@@ -115,7 +115,7 @@
       return `
         <div class="plate-list">
           ${versionList.map(version => `
-            <button class="plate-button" onclick="showVersionButton('${version}')">
+            <button class="plate-button" onclick="showVersionButton('${version.versionName}','${version.plateName}')">
               ${version.plateName} (${version.versionName})
             </button><br/>
           `).join('')}
@@ -127,17 +127,17 @@
       const jsonData = await res.json();
       return jsonData;
     }
-    
-    function showVersionButton(version) {
+
+    function showVersionButton(versionName, plateName) {
       const container = document.getElementById('song-table');
       container.style.display = 'flex';
       const html = `
-        <div class="section-title">${version.versionName} 進度</div>
+        <div class="section-title">${versionName} 進度</div>
         <div class="plate-button-group">
-          <button class="plate-button" onclick="showPlateProgress('${version.versionName}', '極')">${version.plateName}極</button>
-          <button class="plate-button" onclick="showPlateProgress('${version.versionName}', '将')">${version.plateName}将</button>
-          <button class="plate-button" onclick="showPlateProgress('${version.versionName}', '神')">${version.plateName}神</button>
-          <button class="plate-button" onclick="showPlateProgress('${version.versionName}', '舞舞')">${version.plateName}舞舞</button>
+          <button class="plate-button" onclick="showPlateProgress('${versionName}', '極')">${plateName}極</button>
+          <button class="plate-button" onclick="showPlateProgress('${versionName}', '将')">${plateName}将</button>
+          <button class="plate-button" onclick="showPlateProgress('${versionName}', '神')">${plateName}神</button>
+          <button class="plate-button" onclick="showPlateProgress('${versionName}', '舞舞')">${plateName}舞舞</button>
         </div>`;
       container.innerHTML = html;
     }
