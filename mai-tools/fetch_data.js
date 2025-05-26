@@ -19,9 +19,9 @@
     for (let i = 0; i < difficulties.length; i++) {
         childWin.postMessage({
             type: "difficulty",
-            payload: i,
+            payload: difficulties[i],
         }, "https://tsukiyo10884.github.io");
-        const res = await fetch(`https://maimaidx-eng.com/maimai-mobile/record/musicGenre/search/?genre=99&diff=${difficulties[i]}`, {
+        const res = await fetch(`https://maimaidx-eng.com/maimai-mobile/record/musicGenre/search/?genre=99&diff=${i}`, {
             credentials: 'include'
         });
         const text = await res.text();
