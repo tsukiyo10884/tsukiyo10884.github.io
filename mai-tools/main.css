@@ -202,6 +202,21 @@ img {
 	position: relative;
 }
 
+.plate-song-card {
+	background-position: center;
+	background-size: cover;
+	border-radius: 5px;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	height: 100px;
+	width: 100px;
+	justify-content: space-between;
+	overflow: hidden;
+	padding: 0.5em;
+	position: relative;
+}
+
 .song-card.completed {
 	position: relative;
 }
@@ -228,6 +243,12 @@ img {
 	display: grid;
 	gap: 1em;
 	grid-template-columns: repeat(5, 1fr);
+}
+
+.plate-song-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(8, 115px);
 }
 
 .song-overlay {

@@ -8,9 +8,11 @@
   <link rel="stylesheet" href="./main.css" />
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="namePlate.js"></script>
 </head>
 
 <body>
+  <button onclick="LoadLocalJson('testData.json')">測試</button>
   <div id="output"></div>
   <div id="button-group" style="display: none;">
     <button onclick="showTable('rating')">R值入選曲</button>
@@ -21,13 +23,20 @@
   <div id="song-table" class="table" style="width: 1000px;"></div>
 
   <script>
+    function LoadLocalJson(filePath) {
+      $.getJSON(filePath, function (json) {
+        console.log(json);
+        $('#button-group').show();
+        output.innerHTML = "取得資料" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(json, null, 2) + "</textarea>";
+        refreashData();
+      });
+    }
+
     window.addEventListener("message", (event) => {
       const data = event.data;
       if (!data || typeof data !== "object") return;
-
       const output = document.getElementById("output");
       $('#button-group').show();
-
       switch (data.type) {
         case "difficulty":
           output.innerHTML = "取得成績中(" + data.payload + ")";
@@ -49,35 +58,6 @@
     function createUserInfo(user) {
       return `
         <div class="user-info">${user}</div>`;
-    }
-
-    function createSongCard(song, type) {
-      const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
-      let isCompleted = false;
-
-      switch (type) {
-        case '極':
-          isCompleted = song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp;
-        case '将':
-          isCompleted = parseFloat(song.score) > 100;
-          break;
-        case '神':
-          isCompleted = song.ap || song.app;
-          break;
-        case '舞舞':
-          isCompleted = song.fdx;
-          break;
-      }
-
-      return `
-    <div class="song-card difficulty-glow ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}')">
-      <div class="song-overlay"></div>
-      <div class="block-inner-level song-content text-shadow">${song.internalLevel == null ? '' : song.internalLevel}</div>
-      <div class="block-type song-content text-shadow">${song.type.toUpperCase()}</div>
-      <div class="block-song-name song-content text-shadow">${song.title.substring(0, 30)}</div>
-      <div class="block-score song-content text-shadow">${song.score}</div>
-      ${isCompleted ? '<div class="completion-check">✔</div>' : ''}
-    </div>`;
     }
 
     function createRatingSection(title, songs) {
@@ -111,51 +91,35 @@
       }
     }
 
-    async function showPlateList() {
-      const versionList = await fetch('version.json')
-        .then(res => res.json());
-      return `
-        <div class="plate-list">
-          ${versionList.map(version => `
-            <button class="plate-button" onclick="showVersionButton('${version.versionName}','${version.plateName}')">
-              ${version.plateName} (${version.versionName})
-            </button><br/>
-          `).join('')}
-        </div>`;
+    function createSongCard(song, type) {
+    const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
+    let isCompleted = false;
+
+    switch (type) {
+        case '極':
+            isCompleted = song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp;
+        case '将':
+            isCompleted = parseFloat(song.score) > 100;
+            break;
+        case '神':
+            isCompleted = song.ap || song.app;
+            break;
+        case '舞舞':
+            isCompleted = song.fdx;
+            break;
     }
 
-    function showVersionButton(versionName, plateName) {
-      const container = document.getElementById('song-table');
-      container.style.display = 'flex';
-      const html = [
-        createUserInfo(data.user),
-        `
-        <div class="section-title">${versionName} 進度</div>
-        <div class="plate-button-group">
-          <button class="plate-button" onclick="showPlateProgress('${versionName}', '極')">${plateName}極</button>
-          <button class="plate-button" onclick="showPlateProgress('${versionName}', '将')">${plateName}将</button>
-          <button class="plate-button" onclick="showPlateProgress('${versionName}', '神')">${plateName}神</button>
-          <button class="plate-button" onclick="showPlateProgress('${versionName}', '舞舞')">${plateName}舞舞</button>
-        </div>`,
-      ].join('');
-      container.innerHTML = html;
-    }
+    return `
+    <div class="song-card difficulty-glow ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}')">
+        <div class="song-overlay"></div>
+        <div class="block-inner-level song-content text-shadow">${song.internalLevel == null ? '' : song.internalLevel}</div>
+        <div class="block-type song-content text-shadow">${song.type.toUpperCase()}</div>
+        <div class="block-song-name song-content text-shadow">${song.title.substring(0, 30)}</div>
+        <div class="block-score song-content text-shadow">${song.score}</div>
+        ${isCompleted ? '<div class="completion-check">✔</div>' : ''}
+    </div>`;
+}
 
-    function showPlateProgress(versionName, type) {
-      const container = document.getElementById('song-table');
-      container.style.display = 'flex';
-      const songs = data.songs.filter(song => song.version === versionName);
-      var plateSongs = "";
-      const html = [
-        createUserInfo(data.user),
-        `
-      <div class="section-title">${versionName}進度</div>
-        <div class="song-grid">
-          ${songs.map(song => createSongCard(song, type)).join('')}
-        </div>`,
-      ].join('');
-      container.innerHTML = html;
-    }
   </script>
 </body>
 
