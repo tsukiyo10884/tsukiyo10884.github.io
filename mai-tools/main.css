@@ -19,11 +19,11 @@ img {
 }
 
 .advanced {
-	border: 3px solid #ff0;
+	box-shadow: 5px 5px 4px #ff0;
 }
 
 .basic {
-	border: 3px solid #0f0;
+	box-shadow: 5px 5px 4px #0f0;
 }
 
 .basic_block {
@@ -78,7 +78,7 @@ img {
 }
 
 .expert {
-	border: 3px solid #f00;
+	box-shadow: 5px 5px 4px #f00;
 }
 
 .f_0 {
@@ -131,7 +131,7 @@ img {
 }
 
 .master {
-	border: 3px solid #a0f;
+	box-shadow: 5px 5px 4px #a0f;
 }
 
 .name_block {
@@ -176,7 +176,7 @@ img {
 }
 
 .remaster {
-	border: 3px solid #fff;
+	box-shadow: 5px 5px 4px #fff;
 }
 
 .section-title {
@@ -244,6 +244,14 @@ img {
 }
 
 .song-title {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 160px;
+	display: inline-block;
+}
+
+.plate-song-title {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

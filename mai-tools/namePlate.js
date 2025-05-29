@@ -123,7 +123,7 @@ function createNamePlateSongCard(song, type) {
     return `
     <div class="plate-song-card difficulty-glow ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
         <div class="song-overlay"></div>
-        <div class="song-content text-shadow f_10 song-title">${song.title}</div>
+        <div class="song-content text-shadow f_10 plate-song-title">${song.title}</div>
         <div class="song-content text-shadow f_10">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>
         <div class="song-content text-shadow">${song.score}</div>
         ${isCompleted ? '<div class="completion-check">✔</div>' : ''}

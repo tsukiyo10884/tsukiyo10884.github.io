@@ -9,6 +9,7 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="namePlate.js"></script>
+  <script src="html2canvas.min.js"></script>
 </head>
 
 <body>
@@ -27,7 +28,7 @@
       $.getJSON(filePath, function (json) {
         console.log(json);
         $('#button-group').show();
-        output.innerHTML = "取得資料" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(json, null, 2) + "</textarea>";
+        output.innerHTML = "資料擷取完畢" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(json, null, 2) + "</textarea>";
         refreashData();
       });
     }
@@ -42,7 +43,7 @@
           output.innerHTML = "取得成績中(" + data.payload + ")";
           break;
         case "result":
-          output.innerHTML = "取得資料" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data.payload, null, 2) + "</textarea>";
+          output.innerHTML = "資料擷取完畢" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data.payload, null, 2) + "</textarea>";
           refreashData();
           break;
       }
@@ -92,32 +93,16 @@
     }
 
     function createSongCard(song, type) {
-    const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
-    let isCompleted = false;
-
-    switch (type) {
-        case '極':
-            isCompleted = song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp;
-        case '将':
-            isCompleted = parseFloat(song.score) > 100;
-            break;
-        case '神':
-            isCompleted = song.ap || song.app;
-            break;
-        case '舞舞':
-            isCompleted = song.fdx;
-            break;
-    }
-
-    return `
+      const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
+      return `
     <div class="song-card difficulty-glow" style="background-image: url('${song.image}')">
         <div class="song-overlay"></div>
         <div class="block-inner-level song-content text-shadow">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)}</div>
         <div class="block-type song-content text-shadow">${song.type.toUpperCase()}</div>
-        <div class="block-song-name song-content text-shadow">${song.title.substring(0, 30)}</div>
+        <div class="block-song-name song-content text-shadow song-title">${song.title}</div>
         <div class="block-score song-content text-shadow">${song.score}</div>
     </div>`;
-}
+    }
 
   </script>
 </body>
