@@ -103,7 +103,7 @@
             const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
             const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
             const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
-            const version = songEntry?.version;
+            const version = sheet?.version;
             return { type, title, score, difficulty, version, internalLevel, image };
         });
     }
