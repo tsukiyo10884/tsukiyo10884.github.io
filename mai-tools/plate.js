@@ -17,9 +17,7 @@ function showVersionButton(versionName, plateName) {
     const container = document.getElementById('song-table');
     container.style.display = 'flex';
     const html = [
-        createUserInfo(data.user),
         `
-        <div class="section-title">${versionName} 進度</div>
         <div class="plate-button-group">
             <button class="plate-button" onclick="showPlateProgress('${versionName}', '極')">${plateName}極</button>`,
         (versionName == 'maimai ~ maimai PLUS') ? '' : `<button class="plate-button" onclick="showPlateProgress('${versionName}', '将')">${plateName}将</button>`,
@@ -82,7 +80,6 @@ async function showPlateProgress(versionName, type) {
     masterCompleted = filteredSongs.filter(song => song.difficulty === 'master').length;
 
     const html = [
-        createUserInfo(data.user),
         `
         <div class="section-title">
             <b>${versionName}進度</b>
@@ -121,7 +118,7 @@ function createNamePlateSongCard(song, type) {
     }
 
     return `
-    <div class="plate-song-card difficulty-glow ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
+    <div class="plate-song-card ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
         <div class="song-overlay"></div>
         <div class="song-content text-shadow f_10 plate-song-title">${song.title}</div>
         <div class="song-content text-shadow f_10">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>

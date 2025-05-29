@@ -4,21 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <title>maimai小工具</title>
-  <h5>譜面定數來源： <a href="https://arcade-songs.zetaraku.dev/maimai/about/">zetaraku</a></h5>
   <link rel="stylesheet" href="./main.css" />
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <script src="namePlate.js"></script>
-  <script src="html2canvas.min.js"></script>
+  <script src="plate.js"></script>
+  <script src="rating.js"></script>
+  <script src="level.js"></script>
 </head>
 
 <body>
-  <button onclick="LoadLocalJson('testData.json')">測試</button>
+  <h5>譜面定數來源： <a href="https://arcade-songs.zetaraku.dev/maimai/about/" target="_blank">zetaraku</a> | 刪除曲來源： <a
+      href="https://maimai.fandom.com/zh/wiki/%E5%88%AA%E9%99%A4%E6%9B%B2%E4%B8%80%E8%A6%BD"
+      target="_blank">maimai中文維基</a></h5>
+  <button id="test" onclick="LoadLocalJson('testData.json')">測試</button>
   <div id="output"></div>
   <div id="button-group" style="display: none;">
     <button onclick="showTable('rating')">R值入選曲</button>
     <button onclick="showTable('plate')">名牌版進度</button>
-    <button>等級進度</button>
+    <button onclick="showTable('level')">等級進度</button>
+    <div id="user-info"></div>
   </div>
 
   <div id="song-table" class="table" style="width: 1000px;"></div>
@@ -28,12 +32,14 @@
       $.getJSON(filePath, function (json) {
         console.log(json);
         $('#button-group').show();
+        $('#test').hide();
         output.innerHTML = "資料擷取完畢" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(json, null, 2) + "</textarea>";
         refreashData();
       });
     }
 
     window.addEventListener("message", (event) => {
+      $('#test').hide();
       const data = event.data;
       if (!data || typeof data !== "object") return;
       const output = document.getElementById("output");
@@ -54,6 +60,7 @@
     }
     function refreashData() {
       data = JSON.parse(document.getElementById('json-data')?.textContent);
+      $('#user-info').html(createUserInfo(data.user));
     }
 
     function createUserInfo(user) {
@@ -61,49 +68,33 @@
         <div class="user-info">${user}</div>`;
     }
 
-    function createRatingSection(title, songs) {
-      return `
-        <div class="section-title">${title}</div>
-        <div class="song-grid">
-          ${songs.map(createSongCard).join('')}
-        </div>`;
-    }
-
     async function showTable(type) {
-      const container = document.getElementById('song-table');
-      if (type === 'rating') {
+    const container = document.getElementById('song-table');
+    if (type === 'rating') {
         container.style.display = 'flex';
         const html = [
-          createUserInfo(data.user),
-          createRatingSection('new songs', data.ratingSongList.rating_new),
-          createRatingSection('old songs', data.ratingSongList.rating_others)
+            createRatingSection('new songs', data.ratingSongList.rating_new),
+            createRatingSection('others', data.ratingSongList.rating_others)
         ].join('');
         container.innerHTML = html;
-      }
-      else if (type === 'plate') {
+    }
+    else if (type === 'plate') {
         container.style.display = 'flex';
         const html = [
-          createUserInfo(data.user),
-          await showPlateList(),
+            await showPlateList(),
         ].join('');
         container.innerHTML = html;
-      } else {
+    } else if (type === 'level') {
+        container.style.display = 'flex';
+        const html = [
+            await showLevelList(),
+        ].join('');
+        container.innerHTML = html;
+    } else {
         container.style.display = 'none';
-      }
+        container.innerHTML = '';
     }
-
-    function createSongCard(song, type) {
-      const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
-      return `
-    <div class="song-card difficulty-glow" style="background-image: url('${song.image}')">
-        <div class="song-overlay"></div>
-        <div class="block-inner-level song-content text-shadow">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)}</div>
-        <div class="block-type song-content text-shadow">${song.type.toUpperCase()}</div>
-        <div class="block-song-name song-content text-shadow song-title">${song.title}</div>
-        <div class="block-score song-content text-shadow">${song.score}</div>
-    </div>`;
-    }
-
+}
   </script>
 </body>
 
