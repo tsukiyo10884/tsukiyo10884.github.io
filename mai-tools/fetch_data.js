@@ -42,7 +42,7 @@
             const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
             const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
             const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
-            const version = songEntry?.version;
+            const version = sheet?.version;
 
             const iconSrc = block.querySelector('.h_30.f_r')?.src ?? '';
             const flags = {
@@ -98,7 +98,7 @@
 
     function enrichRatingBlocks(blocks) {
         return blocks.map(({ difficulty, type, title, score }) => {
-            const songEntry = detailData.songs.find(e => e.title === title);
+            const songEntry = detailData.songs.find(e => e.songId === title);
             const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulty);
             const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
             const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
