@@ -11,7 +11,7 @@ function showLevelList() {
 
 function showLevelListByRange() {
     const container = document.getElementById('song-table');
-    container.style.display = 'flex';
+    
     const startLevel = parseFloat(document.getElementById('level-start').value);
     const endLevel = parseFloat(document.getElementById('level-end').value);
 
@@ -29,8 +29,8 @@ function showLevelListByRange() {
         <div class="section-title">
             <b>${startLevel} ~ ${endLevel}進度</b>
         </div>
-        <div class="plate-song-grid">
-            ${songs.sort((a, b) => a.internalLevel - b.internalLevel)
+        <div class="plate-song-grid col-12 row" style="margin-left:0">
+            ${songs.sort((a, b) => b.internalLevel - a.internalLevel)
             .map(song => createNamePlateSongCard(song)).join('')}
         </div>`,
     ].join('');
@@ -42,7 +42,7 @@ function createLevelSongCard(song) {
     let isCompleted = false;
 
     return `
-    <div class="plate-song-card ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
+    <div class="col-1 plate-song-card ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
         <div class="song-overlay"></div>
         <div class="song-content text-shadow f_10 plate-song-title">${song.title}</div>
         <div class="song-content text-shadow f_10">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>

@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <title>maimai小工具</title>
   <link rel="stylesheet" href="./main.css" />
+  <link rel="stylesheet" href="../bootstrap-5.3.6-dist/css/bootstrap.min.css">
+  <script src="../bootstrap-5.3.6-dist/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="plate.js"></script>
@@ -25,7 +27,7 @@
     <div id="user-info"></div>
   </div>
 
-  <div id="song-table" class="table" style="width: 1000px;"></div>
+  <div id="song-table" class="ms-1"></div>
 
   <script>
     function LoadLocalJson(filePath) {
@@ -71,7 +73,7 @@
     async function showTable(type) {
     const container = document.getElementById('song-table');
     if (type === 'rating') {
-        container.style.display = 'flex';
+        
         const html = [
             createRatingSection('new songs', data.ratingSongList.rating_new),
             createRatingSection('others', data.ratingSongList.rating_others)
@@ -79,13 +81,13 @@
         container.innerHTML = html;
     }
     else if (type === 'plate') {
-        container.style.display = 'flex';
+        
         const html = [
             await showPlateList(),
         ].join('');
         container.innerHTML = html;
     } else if (type === 'level') {
-        container.style.display = 'flex';
+        
         const html = [
             await showLevelList(),
         ].join('');

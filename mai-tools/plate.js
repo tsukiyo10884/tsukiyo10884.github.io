@@ -15,7 +15,7 @@ async function showPlateList() {
 
 function showVersionButton(versionName, plateName) {
     const container = document.getElementById('song-table');
-    container.style.display = 'flex';
+    
     const html = [
         `
         <div class="plate-button-group">
@@ -31,7 +31,7 @@ function showVersionButton(versionName, plateName) {
 
 async function showPlateProgress(versionName, type) {
     const container = document.getElementById('song-table');
-    container.style.display = 'flex';
+    
     var songs = data.songs;
     const today = new Date();
 
@@ -90,8 +90,9 @@ async function showPlateProgress(versionName, type) {
                 <span class="difficulty-count"><b style="color:#a0f">MAS</b>: ${masterCompleted}/${masterTotal}</span>
             </div>
         </div>
-        <div class="plate-song-grid">
-            ${songs.reverse()
+        <div class="plate-song-grid col-12 row" style="margin-left:0">
+            ${songs
+            .sort((a, b) => b.internalLevel - a.internalLevel)
             .filter(song => song.difficulty !== "remaster")
             .map(song => createNamePlateSongCard(song, type)).join('')}
         </div>`,
@@ -118,7 +119,7 @@ function createNamePlateSongCard(song, type) {
     }
 
     return `
-    <div class="plate-song-card ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
+    <div class="col-6 col-sm-3 col-md-1 plate-song-card ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
         <div class="song-overlay"></div>
         <div class="song-content text-shadow f_10 plate-song-title">${song.title}</div>
         <div class="song-content text-shadow f_10">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>
