@@ -266,7 +266,7 @@ img {
 .plate-song-grid {
 	display: grid;
 	gap: 10px;
-	grid-template-columns: repeat(8, 115px);
+	grid-template-columns: repeat(auto-fit, 115px);
 }
 
 .song-overlay {
@@ -365,22 +365,4 @@ img {
 .col-xs-15 {
     width: 18% !important;
     float: left;
-}
-@media (min-width: 768px) {
-.col-sm-15 {
-        width: 18% !important;
-        float: left;
-    }
-}
-@media (min-width: 992px) {
-    .col-md-15 {
-        width: 18% !important;
-        float: left;
-    }
-}
-@media (min-width: 1200px) {
-    .col-lg-15 {
-        width: 18% !important;
-        float: left;
-    }
 }
