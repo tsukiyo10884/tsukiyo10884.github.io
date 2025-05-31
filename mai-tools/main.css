@@ -37,9 +37,9 @@ img {
 }
 
 .block-inner-level {
-	bottom: 22.5px;
-	font-size: 14px;
-	left: 3.5px;
+    bottom: 19.5px;
+    font-size: 12px;
+    left: 3.5px;
 }
 
 .block-inner-level,
@@ -58,15 +58,15 @@ img {
 }
 
 .block-score {
-	bottom: 0;
-	font-size: 20px;
-	left: 0;
+    bottom: 0;
+    font-size: 16px;
+    left: 1px;
 }
 
 .block-song-name {
-	bottom: 35px;
-	font-size: 16px;
-	left: 2px;
+    bottom: 33px;
+    font-size: 14px;
+    left: 3px;
 }
 
 .button-group {
@@ -253,6 +253,7 @@ img {
 
 .song-content {
 	z-index: 1;
+    line-height: 1rem;
 }
 
 .song-grid {
