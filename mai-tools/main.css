@@ -1,12 +1,16 @@
 body {
-	font-family: sans-serif;
 	background-color: #51bcf3 !important;
+	font-family: sans-serif;
 }
 
 button {
 	cursor: pointer;
 	margin-right: 1em;
 	padding: 0.5em 1em;
+}
+
+div#song-table {
+	width: calc(100% - 16px);
 }
 
 img {
@@ -32,34 +36,37 @@ img {
 	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 }
 
-.block-song-name {
-	bottom: 38px;
-	left: 10px;
+.block-inner-level {
+	bottom: 22.5px;
+	font-size: 14px;
+	left: 3.5px;
 }
 
-.block-song-name,
-.block-score,
 .block-inner-level,
-.block-type {
+.block-score,
+.block-song-name,
+.block-rating {
 	padding: 0.2em 0.4em;
 	position: absolute;
 	z-index: 2;
 }
 
-.block-inner-level {
-	left: 10px;
-	bottom: 25px;
-}
-
-.block-type {
-	right: 0.3em;
-	top: 0.3em;
+.block-rating {
+	right: 0px;
+	top: 0px;
+	font-size: 25px;
 }
 
 .block-score {
-	bottom: 2px;
-	font-size: 18px;
-	left: 5px;
+	bottom: 0;
+	font-size: 20px;
+	left: 0;
+}
+
+.block-song-name {
+	bottom: 35px;
+	font-size: 16px;
+	left: 2px;
 }
 
 .button-group {
@@ -73,6 +80,19 @@ img {
 	min-height: 100px;
 	padding: 10px;
 	width: 306px;
+}
+
+.completed .song-overlay {
+	filter: brightness(30%);
+}
+
+.completion-check {
+	color: #0f0;
+	font-size: 26px;
+	position: absolute;
+	right: 3px;
+	top: -4px;
+	z-index: 2;
 }
 
 .expert {
@@ -138,11 +158,11 @@ img {
 	border-radius: 5px;
 	border: 1px solid #dedede;
 	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+	color: #000;
 	height: 22px;
 	margin: 3px 0;
 	padding: 5px 3px 3px 3px;
 	width: 158px;
-	color: #000;
 }
 
 .p_10 {
@@ -159,6 +179,35 @@ img {
 
 .p_r {
 	position: relative;
+}
+
+.plate-song-card {
+	background-position: center;
+	background-size: cover;
+	border-radius: 5px;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	height: 100px;
+	justify-content: flex-end;
+	overflow: hidden;
+	padding: 0.5em;
+	position: relative;
+	width: 100px !important;
+}
+
+.plate-song-grid {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: repeat(auto-fit, 115px);
+}
+
+.plate-song-title {
+	display: inline-block;
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .rating_block {
@@ -183,14 +232,6 @@ img {
 	text-align: center;
 }
 
-.text-shadow {
-	text-shadow:
-		1px 1px 1px black,
-		1px -1px 1px black,
-		-1px 1px 1px black,
-		-1px -1px 1px black
-}
-
 .song-card {
 	background-position: center;
 	background-size: cover;
@@ -198,76 +239,26 @@ img {
 	color: #fff;
 	display: flex;
 	flex-direction: column;
-	height: 100px;
-	width: 19% !important;
+	height: 101px;
 	justify-content: space-between;
 	overflow: hidden;
 	padding: 0.5em;
 	position: relative;
-}
-
-.plate-song-card {
-	background-position: center;
-	background-size: cover;
-	border-radius: 5px;
-	color: #fff;
-	display: flex;
-	flex-direction: column;
-	height: 100px;
-	width: 100px !important;
-	justify-content: flex-end;
-	overflow: hidden;
-	padding: 0.5em;
-	position: relative;
+	width: 163px !important;
 }
 
 .song-card.completed {
 	position: relative;
 }
 
-.completion-check {
-	position: absolute;
-	top: -4px;
-	right: 3px;
-	font-size: 26px;
-	color: #0f0;
-	z-index: 2;
-}
-
-.completed .song-overlay {
-	filter: brightness(30%);
-}
-
 .song-content {
 	z-index: 1;
-}
-
-.song-title {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	max-width: 160px;
-	display: inline-block;
-}
-
-.plate-song-title {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	max-width: 160px;
-	display: inline-block;
 }
 
 .song-grid {
 	display: grid;
 	gap: 1em;
-	grid-template-columns: repeat(5, 1fr);
-}
-
-.plate-song-grid {
-	display: grid;
-	gap: 10px;
-	grid-template-columns: repeat(auto-fit, 115px);
+	grid-template-columns: repeat(auto-fit, 176px);
 }
 
 .song-overlay {
@@ -275,6 +266,14 @@ img {
 	background-color: rgba(0, 0, 0, 0.2);
 	inset: 0;
 	position: absolute;
+}
+
+.song-title {
+	display: inline-block;
+	max-width: 162px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .t_c {
@@ -289,6 +288,10 @@ img {
 	display: none;
 	flex-direction: column;
 	margin-top: 1em;
+}
+
+.text-shadow {
+	text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
 }
 
 .trophy_block {

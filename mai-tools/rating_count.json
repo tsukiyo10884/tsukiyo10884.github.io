@@ -1,0 +1,21 @@
+[
+  {"Rank": "SSS+", "score": "100.5000%", "coefficient": 22.4, "innerLevel": "14"},
+  {"Rank": "SSS", "score": "100.4999%", "coefficient": 22.2, "innerLevel": "13.9"},
+  {"Rank": "SSS", "score": "100.0000%", "coefficient": 21.6, "innerLevel": "13.5"},
+  {"Rank": "SS+", "score": "99.9999%", "coefficient": 21.4, "innerLevel": "13.4"},
+  {"Rank": "SS+", "score": "99.5000%", "coefficient": 21.1, "innerLevel": "13.2"},
+  {"Rank": "SS", "score": "99.0000%", "coefficient": 20.8, "innerLevel": "13.0"},
+  {"Rank": "S+", "score": "98.9999%", "coefficient": 20.6, "innerLevel": "12.9"},
+  {"Rank": "S+", "score": "98.0000%", "coefficient": 20.3, "innerLevel": "12.7"},
+  {"Rank": "S", "score": "97.0000%", "coefficient": 20.0, "innerLevel": "12.5"},
+  {"Rank": "AAA", "score": "96.9999%", "coefficient": 17.6, "innerLevel": "11.0"},
+  {"Rank": "AAA", "score": "94.0000%", "coefficient": 16.8, "innerLevel": "10.5"},
+  {"Rank": "AA", "score": "93.9999%", "coefficient": 16.0, "innerLevel": "10.0"},
+  {"Rank": "AA", "score": "90.0000%", "coefficient": 15.2, "innerLevel": "9.5"},
+  {"Rank": "A", "score": "89.9999%", "coefficient": 14.4, "innerLevel": "9.0"},
+  {"Rank": "A", "score": "80.0000%", "coefficient": 13.6, "innerLevel": "8.5"},
+  {"Rank": "BBB", "score": "75.0000%", "coefficient": 12.0, "innerLevel": "7.5"},
+  {"Rank": "BB", "score": "70.0000%", "coefficient": 11.2, "innerLevel": "7"},
+  {"Rank": "B", "score": "60.0000%", "coefficient": 9.6, "innerLevel": "6"},
+  {"Rank": "C", "score": "50.0000%", "coefficient": 8.0, "innerLevel": "5"}
+]
