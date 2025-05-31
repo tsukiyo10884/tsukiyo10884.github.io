@@ -33,8 +33,8 @@ img {
 }
 
 .block-song-name {
-    bottom: 38px;
-    left: 10px;
+	bottom: 38px;
+	left: 10px;
 }
 
 .block-song-name,
@@ -47,8 +47,8 @@ img {
 }
 
 .block-inner-level {
-    left: 10px;
-    bottom: 25px;
+	left: 10px;
+	bottom: 25px;
 }
 
 .block-type {
@@ -57,9 +57,9 @@ img {
 }
 
 .block-score {
-    bottom: 2px;
-    font-size: 18px;
-    left: 5px;
+	bottom: 2px;
+	font-size: 18px;
+	left: 5px;
 }
 
 .button-group {
@@ -199,6 +199,7 @@ img {
 	display: flex;
 	flex-direction: column;
 	height: 100px;
+	width: 19% !important;
 	justify-content: space-between;
 	overflow: hidden;
 	padding: 0.5em;
@@ -213,7 +214,7 @@ img {
 	display: flex;
 	flex-direction: column;
 	height: 100px;
-	width: 100px;
+	width: 100px !important;
 	justify-content: flex-end;
 	overflow: hidden;
 	padding: 0.5em;
@@ -347,22 +348,4 @@ img {
 
 .w_112 {
 	width: 112px;
-}
-
-.col-xs-15,
-.col-sm-15,
-.col-md-15,
-.col-lg-15 {
-    position: relative;
-    min-height: 1px;
-    padding-right: 10px;
-    padding-left: 10px;
-}
-.col-xs-15 {
-    width: 18% !important;
-    float: left;
-}
-.col-xs-15 {
-    width: 18% !important;
-    float: left;
 }
