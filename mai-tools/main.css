@@ -259,7 +259,7 @@ img {
 
 .song-image {
     object-fit: cover;
-    width: calc(100% + 1em);
+    width: calc(100% + 2em);
 }
 
 .song-grid {
@@ -382,4 +382,18 @@ button:hover {
 a {
 	color: #0056b3 !important;
 	text-decoration: underline;
+}
+
+.main{
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 915px;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.plate-version-button{
+	font-size: 14px;
 }

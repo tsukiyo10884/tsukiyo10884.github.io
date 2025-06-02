@@ -1,16 +1,18 @@
 function showLevelList() {
     return `
-        <div class="level-list row d-flex align-items-center">
-            <div class="col-3">
+        <div class="level-list row d-flex align-items-center justify-content-center">
+            <div class="col-2">
                 <input type="number" id="level-start" class="form-control" placeholder="最低等級" />
             </div>
             <div class="col-1">
                 <span style="line-height: 37.6px;">　～　</span>
             </div>
-            <div class="col-3">
+            <div class="col-2">
                 <input type="number" id="level-end" class="form-control" placeholder="最高等級" />
             </div>
-            <div class="col-3">
+        </div>
+        <div class="level-list row d-flex align-items-center justify-content-center">
+            <div class="col-2" align="center">
                 <button onclick="showLevelListByRange()">查詢</button>
             </div>
         </div>
@@ -24,7 +26,7 @@ function showLevelListByRange() {
     const endLevel = parseFloat(document.getElementById('level-end').value);
 
     if (isNaN(startLevel) || isNaN(endLevel) || startLevel > endLevel || startLevel < 1 || endLevel > 15) {
-        alert("等級範圍必須在 1 到 15 之間");
+        alert("等級範圍必須在 1 到 15 之間，並 由低到高");
         return;
     }
 
@@ -35,7 +37,7 @@ function showLevelListByRange() {
     const html = [
         `
         <div class="section-title">
-            <b>${startLevel} ~ ${endLevel}進度</b>
+            <b>等級${startLevel} ~ ${endLevel}進度</b>
         </div>
         <div class="plate-song-grid col-12 row" style="margin-left:0">
             ${songs.sort((a, b) => b.internalLevel - a.internalLevel)

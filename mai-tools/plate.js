@@ -10,8 +10,11 @@ async function showPlateList() {
 
         return `
                         <div class="${colClass}">
-                            <button class="w-100" onclick="showVersionButton('${version.versionName}','${version.plateName}')">
-                                ${version.plateName} (${version.versionName})
+                            <button class="w-100 plate-version-button" onclick="showVersionButton('${version.versionName}','${version.plateName}')">
+                                
+  <span style="font-size: 16px;">${version.plateName}</span>  <br/>
+  <span style="font-size: 14px;">${version.versionName.replace('でらっくす',' DX')}</span>
+
                             </button>
                         </div>
                     `;
