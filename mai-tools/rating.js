@@ -23,7 +23,8 @@ function calcRatings(songs, rankTable) {
 function createSongCard(song) {
     const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
     return `
-    <div class="song-card difficulty-${diffClass}" style="background-image: url('${song.image}');background-image-crossorigin: anonymous;">
+    <div class="song-card difficulty-${diffClass}">
+        <img src="${song.image}" class="song-image" alt="${song.title}" crossorigin="anonymous" />
         <div class="song-overlay"></div>
         <div class="block-song-name song-content text-shadow song-title">${song.title}</div>
         <div class="block-inner-level song-content text-shadow">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>

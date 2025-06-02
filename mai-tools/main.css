@@ -233,6 +233,7 @@ img {
 }
 
 .song-card {
+    align-items: center;
 	background-position: center;
 	background-size: cover;
 	border-radius: 5px;
@@ -240,7 +241,7 @@ img {
 	display: flex;
 	flex-direction: column;
 	height: 101px;
-	justify-content: space-between;
+	justify-content: center;
 	overflow: hidden;
 	padding: 0.5em;
 	position: relative;
@@ -254,6 +255,11 @@ img {
 .song-content {
 	z-index: 1;
 	line-height: 1rem;
+}
+
+.song-image {
+    object-fit: cover;
+    width: calc(100% + 1em);
 }
 
 .song-grid {
