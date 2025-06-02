@@ -68,7 +68,7 @@ function getRowWidth(container) {
     const containerStyle = window.getComputedStyle(container);
     const gap = parseFloat(containerStyle.columnGap || containerStyle.gap || 0);
 
-    const gapTotal = gap * (sameRowItems.length - 2);
+    const gapTotal = gap * (sameRowItems.length - 1);
 
     return totalWidth + gapTotal;
 }

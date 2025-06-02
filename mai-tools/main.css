@@ -37,9 +37,9 @@ img {
 }
 
 .block-inner-level {
-    bottom: 19.5px;
-    font-size: 12px;
-    left: 3.5px;
+	bottom: 19.5px;
+	font-size: 12px;
+	left: 3.5px;
 }
 
 .block-inner-level,
@@ -52,21 +52,21 @@ img {
 }
 
 .block-rating {
-	right: 0px;
-	top: 0px;
-	font-size: 25px;
+	right: -3px;
+	top: 3px;
+	font-size: 22px;
 }
 
 .block-score {
-    bottom: 0;
-    font-size: 16px;
-    left: 1px;
+	bottom: 3px;
+	font-size: 16px;
+	left: 1px;
 }
 
 .block-song-name {
-    bottom: 33px;
-    font-size: 14px;
-    left: 3px;
+	bottom: 33px;
+	font-size: 12px;
+	left: 4px;
 }
 
 .button-group {
@@ -227,9 +227,12 @@ img {
 }
 
 .section-title {
+	color: #fff;
+	font-size: 25px;
 	grid-column: span 5;
-	margin: 1em 0;
+	margin: 9px 0;
 	text-align: center;
+	text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
 }
 
 .song-card {
@@ -253,7 +256,7 @@ img {
 
 .song-content {
 	z-index: 1;
-    line-height: 1rem;
+	line-height: 1rem;
 }
 
 .song-grid {
