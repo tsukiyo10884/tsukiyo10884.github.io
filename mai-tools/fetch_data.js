@@ -1,9 +1,9 @@
 (async () => {
     const childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
     childWin.postMessage({
-            type: null,
-            payload: null,
-        }, "https://tsukiyo10884.github.io");
+        type: null,
+        payload: null,
+    }, "https://tsukiyo10884.github.io");
 
     // 取得玩家主頁資料
     const homeRes = await fetch('https://maimaidx-eng.com/maimai-mobile/home/', { credentials: 'include' });

@@ -4,31 +4,41 @@
 <head>
   <meta charset="UTF-8">
   <title>maimai小工具</title>
-  <link rel="stylesheet" href="./main.css" />
   <link rel="stylesheet" href="../bootstrap-5.3.6-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./main.css" />
   <script src="../bootstrap-5.3.6-dist/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://github.com/niklasvh/html2canvas/releases/download/0.4.1/html2canvas.js"></script>
   <script src="plate.js"></script>
   <script src="rating.js"></script>
   <script src="level.js"></script>
 </head>
 
 <body>
-  <h5>譜面定數來源： <a href="https://arcade-songs.zetaraku.dev/maimai/about/" target="_blank">zetaraku</a> | 刪除曲來源： <a
-      href="https://maimai.fandom.com/zh/wiki/%E5%88%AA%E9%99%A4%E6%9B%B2%E4%B8%80%E8%A6%BD"
-      target="_blank">maimai中文維基</a> | rating計算方法： <a
-      href="https://sgimera.github.io/mai_RatingAnalyzer/maidx_rating.html">sgimera</a></h5>
-  <button id="test" onclick="LoadLocalJson('testData.json')">測試</button>
-  <div id="output"></div>
-  <div id="button-group" style="display: none;">
-    <button onclick="showTable('rating')">R值入選曲</button>
-    <button onclick="showTable('plate')">名牌版進度</button>
-    <button onclick="showTable('level')">等級進度</button>
-    <div id="user-info"></div>
+  <div class="container" style="width: 915px;">
+    <h6>譜面定數： <a href="https://arcade-songs.zetaraku.dev/maimai/about/" target="_blank">zetaraku</a> | 刪除曲： <a
+        href="https://maimai.fandom.com/zh/wiki/%E5%88%AA%E9%99%A4%E6%9B%B2%E4%B8%80%E8%A6%BD"
+        target="_blank">maimai中文維基</a> | rating計算方法： <a
+        href="https://sgimera.github.io/mai_RatingAnalyzer/maidx_rating.html" target="_blank">sgimera</a></h6>
+    <button id="test" onclick="LoadLocalJson('testData.json')">測試</button>
+    <div id="output"></div>
+    <div id="button-group" class="row" style="display: none;">
+      <div class="col-3">
+        <button class="w-100" onclick="showTable('rating')">R值入選曲</button>
+      </div>
+      <div class="col-3">
+        <button class="w-100" onclick="showTable('plate')">名牌版進度</button>
+      </div>
+      <div class="col-3">
+        <button class="w-100" onclick="showTable('level')">等級進度</button>
+      </div>
+      <div class="result-container">
+        <div id="user-info"></div>
+        <div id="song-table" class="ms-1 mt-1"></div>
+      </div>
+    </div>
   </div>
-
-  <div id="song-table" class="ms-1"></div>
 
   <script>
     function LoadLocalJson(filePath) {
@@ -36,7 +46,7 @@
         console.log(json);
         $('#button-group').show();
         $('#test').hide();
-        output.innerHTML = "資料擷取完畢" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(json, null, 2) + "</textarea>";
+        output.innerHTML = "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(json, null, 2) + "</textarea>";
         refreashData();
       });
     }
@@ -51,7 +61,7 @@
           output.innerHTML = "取得成績中(" + data.payload + ")";
           break;
         case "result":
-          output.innerHTML = "資料擷取完畢" + "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data.payload, null, 2) + "</textarea>";
+          output.innerHTML = "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data.payload, null, 2) + "</textarea>";
           $('#button-group').show();
           refreashData();
           break;
@@ -80,8 +90,6 @@
           await createRatingSection('others', data.ratingSongList.rating_others)
         ].join('');
         container.innerHTML = html;
-
-        updateWidth();
       }
       else if (type === 'plate') {
 

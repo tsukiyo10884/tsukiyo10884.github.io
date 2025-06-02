@@ -1,37 +1,54 @@
 async function showPlateList() {
-    const versionList = await fetch('version.json')
-        .then(res => res.json());
+    const versionList = await fetch('version.json').then(res => res.json());
     return `
-        <div class="plate-list">
-            ${versionList.map(version => `
-        <button class="plate-button" onclick="showVersionButton('${version.versionName}','${version.plateName}')">
-            ${version.plateName} (${version.versionName})
-        </button>
-        ${version.versionName.includes('PLUS') ? '<br/>' : ''}
-        ${version.versionName.includes('FiNALE') ? '<br/>' : ''}
-        `).join('')}
-    </div>`;
+        <div class="container">
+            <div class="row g-2">
+                ${versionList.map(version => {
+        let colClass = 'col-3';
+        if (version.plateName === '真') colClass = 'col-6';
+        if (version.plateName === '輝') colClass = 'col-12';
+
+        return `
+                        <div class="${colClass}">
+                            <button class="w-100" onclick="showVersionButton('${version.versionName}','${version.plateName}')">
+                                ${version.plateName} (${version.versionName})
+                            </button>
+                        </div>
+                    `;
+    }).join('')}
+            </div>
+        </div>`;
 }
+
 
 function showVersionButton(versionName, plateName) {
     const container = document.getElementById('song-table');
-    
+
     const html = [
         `
-        <div class="plate-button-group">
-            <button class="plate-button" onclick="showPlateProgress('${versionName}', '極')">${plateName}極</button>`,
-        (versionName == 'maimai ~ maimai PLUS') ? '' : `<button class="plate-button" onclick="showPlateProgress('${versionName}', '将')">${plateName}将</button>`,
+        <div class="row">
+            <div class="col-3">
+                <button class="w-100" onclick="showPlateProgress('${versionName}', '極', '${plateName}')">${plateName}極</button>
+            </div>`,    
+        (versionName == 'maimai ~ maimai PLUS') ? '' : `
+            <div class="col-3">
+                <button class="w-100" onclick="showPlateProgress('${versionName}', '将', '${plateName}')">${plateName}将</button>
+            </div>`,
         `
-            <button class="plate-button" onclick="showPlateProgress('${versionName}', '神')">${plateName}神</button>
-            <button class="plate-button" onclick="showPlateProgress('${versionName}', '舞舞')">${plateName}舞舞</button>
+            <div class="col-3">
+                <button class="w-100" onclick="showPlateProgress('${versionName}', '神', '${plateName}')">${plateName}神</button>
+            </div>
+            <div class="col-3">
+                <button class="w-100" onclick="showPlateProgress('${versionName}', '舞舞', '${plateName}')">${plateName}舞舞</button>
+            </div>
         </div>`,
     ].join('');
     container.innerHTML = html;
 }
 
-async function showPlateProgress(versionName, type) {
+async function showPlateProgress(versionName, type, plateName) {
     const container = document.getElementById('song-table');
-    
+
     var songs = data.songs;
     const today = new Date();
 
@@ -82,12 +99,12 @@ async function showPlateProgress(versionName, type) {
     const html = [
         `
         <div class="section-title">
-            <b>${versionName}進度</b>
+            <b>${plateName}${type}(${versionName})進度</b>
             <div class="difficulty-counts">
-                <span class="difficulty-count"><b style="color:#0f0">BAS</b>: ${basicCompleted}/${basicTotal}</span>
-                <span class="difficulty-count"><b style="color:#ff0">ADV</b>: ${advancedCompleted}/${advancedTotal}</span>
-                <span class="difficulty-count"><b style="color:#f00">EXP</b>: ${expertCompleted}/${expertTotal}</span>
-                <span class="difficulty-count"><b style="color:#a0f">MAS</b>: ${masterCompleted}/${masterTotal}</span>
+                <span class="difficulty-count"><b style="color:#81d955">BAS</b>: ${basicCompleted}/${basicTotal}</span>
+                <span class="difficulty-count"><b style="color:#f8b709">ADV</b>: ${advancedCompleted}/${advancedTotal}</span>
+                <span class="difficulty-count"><b style="color:#ff818d">EXP</b>: ${expertCompleted}/${expertTotal}</span>
+                <span class="difficulty-count"><b style="color:#c346e7">MAS</b>: ${masterCompleted}/${masterTotal}</span>
             </div>
         </div>
         <div class="plate-song-grid col-12 row" style="margin-left:0">
@@ -119,12 +136,12 @@ function createNamePlateSongCard(song, type) {
     }
 
     return `
-    <div class="plate-song-card ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
+    <div class="plate-song-card difficulty-${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
         <div class="song-overlay"></div>
         <div class="song-content text-shadow f_10 plate-song-title">${song.title}</div>
         <div class="song-content text-shadow f_10">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>
         <div class="song-content text-shadow">${song.score}</div>
-        ${isCompleted ? '<div class="completion-check">✔</div>' : ''}
+        ${isCompleted ? '<div class="completion-check"><b>✓</b></div>' : ''}
     </div>`;
 }
 

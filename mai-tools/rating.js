@@ -23,7 +23,7 @@ function calcRatings(songs, rankTable) {
 function createSongCard(song) {
     const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
     return `
-    <div class="song-card ${diffClass}" style="background-image: url('${song.image}')">
+    <div class="song-card difficulty-${diffClass}" style="background-image: url('${song.image}');background-image-crossorigin: anonymous;">
         <div class="song-overlay"></div>
         <div class="block-song-name song-content text-shadow song-title">${song.title}</div>
         <div class="block-inner-level song-content text-shadow">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>
@@ -32,45 +32,3 @@ function createSongCard(song) {
     </div>`;
 }
 
-function updateWidth() {
-    const grid = document.querySelector('.song-grid');
-    const selectionTitles = document.querySelectorAll('.section-title');
-    const userInfo = document.querySelector('.user-info');
-    const rowWidth = getRowWidth(grid);
-
-    selectionTitles.forEach(el => {
-        el.style.width = rowWidth + 'px';
-    });
-    const style = window.getComputedStyle(userInfo);
-    const paddingLeft = parseFloat(style.paddingLeft);
-    const paddingRight = parseFloat(style.paddingRight);
-    const totalPadding = paddingLeft + paddingRight;
-
-    userInfo.style.width = (rowWidth - totalPadding) + 'px';
-
-}
-
-function getRowWidth(container) {
-    if (!container) return 0;
-    const items = Array.from(container.children);
-    if (items.length === 0) return 0;
-
-    const firstTop = items[0].offsetTop;
-    const sameRowItems = items.filter(item => item.offsetTop === firstTop);
-
-    const totalWidth = sameRowItems.reduce((sum, el) => {
-        const style = window.getComputedStyle(el);
-        const marginLeft = parseFloat(style.marginLeft);
-        const marginRight = parseFloat(style.marginRight);
-        return sum + el.getBoundingClientRect().width + marginLeft + marginRight;
-    }, 0);
-
-    const containerStyle = window.getComputedStyle(container);
-    const gap = parseFloat(containerStyle.columnGap || containerStyle.gap || 0);
-
-    const gapTotal = gap * (sameRowItems.length - 1);
-
-    return totalWidth + gapTotal;
-}
-
-window.addEventListener('resize', updateWidth);

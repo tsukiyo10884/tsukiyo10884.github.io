@@ -9,10 +9,6 @@ button {
 	padding: 0.5em 1em;
 }
 
-div#song-table {
-	width: calc(100% - 16px);
-}
-
 img {
 	-moz-touch-callout: none;
 	-moz-user-select: none;
@@ -22,12 +18,12 @@ img {
 	user-select: none;
 }
 
-.advanced {
-	box-shadow: 5px 5px 4px #ff0;
+.difficulty-advanced {
+	box-shadow: 5px 5px 4px #f8b709;
 }
 
-.basic {
-	box-shadow: 5px 5px 4px #0f0;
+.difficulty-basic {
+	box-shadow: 5px 5px 4px #81d955;
 }
 
 .basic_block {
@@ -95,8 +91,8 @@ img {
 	z-index: 2;
 }
 
-.expert {
-	box-shadow: 5px 5px 4px #f00;
+.difficulty-expert {
+	box-shadow: 5px 5px 4px #ff818d;
 }
 
 .f_0 {
@@ -148,8 +144,8 @@ img {
 	margin-bottom: 5px;
 }
 
-.master {
-	box-shadow: 5px 5px 4px #a0f;
+.difficulty-master {
+	box-shadow: 5px 5px 4px #c346e7;
 }
 
 .name_block {
@@ -159,7 +155,7 @@ img {
 	border: 1px solid #dedede;
 	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 	color: #000;
-	height: 22px;
+	height: 27px;
 	margin: 3px 0;
 	padding: 5px 3px 3px 3px;
 	width: 158px;
@@ -199,11 +195,12 @@ img {
 .plate-song-grid {
 	display: grid;
 	gap: 10px;
-	grid-template-columns: repeat(auto-fit, 115px);
+	grid-template-columns: repeat(auto-fit, 102px);
 }
 
 .plate-song-title {
 	display: inline-block;
+	line-height: 12px !important;
 	max-width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -222,13 +219,13 @@ img {
 	width: 73px;
 }
 
-.remaster {
+.difficulty-remaster {
 	box-shadow: 5px 5px 4px #fff;
 }
 
 .section-title {
 	color: #fff;
-	font-size: 25px;
+	font-size: 20px;
 	grid-column: span 5;
 	margin: 9px 0;
 	text-align: center;
@@ -262,13 +259,13 @@ img {
 .song-grid {
 	display: grid;
 	gap: 1em;
-	grid-template-columns: repeat(auto-fit, 176px);
+	grid-template-columns: repeat(auto-fit, 165px);
 }
 
 .song-overlay {
 	backdrop-filter: blur(2px);
 	background-color: rgba(0, 0, 0, 0.2);
-	inset: 0;
+	inset: -5px;
 	position: absolute;
 }
 
@@ -355,4 +352,28 @@ img {
 
 .w_112 {
 	width: 112px;
+}
+
+button {
+	background-color: #ffffffcc;
+	border: none;
+	border-radius: 12px !important;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	padding: 10px 20px;
+	margin: 8px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+	cursor: pointer;
+	transition: transform 0.1s ease, background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #f0f0f0;
+	transform: scale(1.03);
+}
+
+a {
+	color: #0056b3 !important;
+	text-decoration: underline;
 }

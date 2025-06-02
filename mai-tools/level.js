@@ -1,10 +1,18 @@
 function showLevelList() {
     return `
-        <div class="level-list">
-            <input type="number" id="level-start" placeholder="最低等級" />
-            <span>~</span>
-            <input type="number" id="level-end" placeholder="最高等級" />
-            <button onclick="showLevelListByRange()">查詢</button>
+        <div class="level-list row d-flex align-items-center">
+            <div class="col-3">
+                <input type="number" id="level-start" class="form-control" placeholder="最低等級" />
+            </div>
+            <div class="col-1">
+                <span style="line-height: 37.6px;">　～　</span>
+            </div>
+            <div class="col-3">
+                <input type="number" id="level-end" class="form-control" placeholder="最高等級" />
+            </div>
+            <div class="col-3">
+                <button onclick="showLevelListByRange()">查詢</button>
+            </div>
         </div>
     `;
 }
@@ -42,11 +50,10 @@ function createLevelSongCard(song) {
     let isCompleted = false;
 
     return `
-    <div class="col-1 plate-song-card ${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
+    <div class="col-1 plate-song-card difficulty-${diffClass}" style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
         <div class="song-overlay"></div>
         <div class="song-content text-shadow f_10 plate-song-title">${song.title}</div>
         <div class="song-content text-shadow f_10">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>
         <div class="song-content text-shadow">${song.score}</div>
-        ${isCompleted ? '<div class="completion-check">✔</div>' : ''}
     </div>`;
 }
