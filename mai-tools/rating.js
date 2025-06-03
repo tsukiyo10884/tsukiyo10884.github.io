@@ -1,6 +1,6 @@
 async function initRatingList() {
-    const container = document.getElementById('song-table');
-    container.innerHTML = await showRatingList()
+    $('#song-table').html(await showRatingList());
+
 }
 
 async function showRatingList() {

@@ -36,13 +36,17 @@
       <div class="col-3">
         <button class="w-100" onclick="showTable('level')">等級進度</button>
       </div>
-      <div class="result-container">
-        <div class="row" style="border-bottom: 1px solid #444">
-          <div id="user-info" class="user-info col-6"></div>
-          <div id="stat" class="col-6 d-flex align-items-center" style="font-family: Consolas;"></div>
-        </div>
-        <div id="song-table" class="ms-1 mt-1"></div>
+      <div class="col-3">
+        <input type="checkbox" id="completed-only" class="form-check-input">
+        <label for="completed-only">只顯示達成曲</label>
       </div>
+    </div>
+    <div class="result-container">
+      <div class="row" style="border-bottom: 1px solid #444">
+        <div id="user-info" class="user-info col-6"></div>
+        <div id="stat" class="col-6 d-flex align-items-center" style="font-family: Consolas;"></div>
+      </div>
+      <div id="song-table" class="ms-1 mt-1"></div>
     </div>
   </div>
 
@@ -60,13 +64,13 @@
       $('#test').hide();
       const data = event.data;
       if (!data || typeof data !== "object") return;
-      const output = document.getElementById("output");
+      const output = $('#output');
       switch (data.type) {
         case "difficulty":
-          output.innerHTML = "取得成績中(" + data.payload + ")";
+          output.html("取得成績中(" + data.payload + ")");
           break;
         case "result":
-          output.innerHTML = "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data.payload, null, 2) + "</textarea>";
+          output.html("<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(data.payload, null, 2) + "</textarea>");
           $('#button-group').show();
           refreashData();
           break;
@@ -77,14 +81,13 @@
       refreashData();
     }
     function refreashData() {
-      data = JSON.parse(document.getElementById('json-data')?.textContent);
+      data = JSON.parse($('#json-data').text());
       $('#user-info').html(data.user);
     }
 
     async function showTable(type) {
       $('#level-filter').hide();
       $('#stat').html('');
-      const container = document.getElementById('song-table');
       if (type === 'rating') {
         await initRatingList();
       } else if (type === 'plate') {
@@ -92,8 +95,7 @@
       } else if (type === 'level') {
         initLevelList();
       } else {
-        container.style.display = 'none';
-        container.innerHTML = '';
+        $('#song-table').html('');
       }
     }
   </script>

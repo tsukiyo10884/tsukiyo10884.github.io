@@ -378,6 +378,16 @@ button:hover {
 	transform: scale(1.03);
 }
 
+button:disabled {
+	background-color: #ccc;
+	cursor: not-allowed;
+}
+
+button:disabled:hover {
+	background-color: #ccc;
+	transform: none;
+}
+
 a {
 	color: #0056b3 !important;
 	text-decoration: underline;
@@ -401,4 +411,10 @@ a {
 	white-space: pre;
 	text-align: left;
 	display: block;
+}
+
+.tips {
+    color: #333;
+    text-shadow: none;
+    font-size: 14px;
 }

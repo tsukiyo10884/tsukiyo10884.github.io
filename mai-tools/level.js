@@ -15,16 +15,26 @@ function initLevelList() {
     ].join(''));
     $('#stat').show();
 
-    const container = document.getElementById('song-table');
-    container.innerHTML = `
+    $('#song-table').html(`
         <div id="section-title" class="section-title">
             <b>等級${minLevel} ~ ${maxLevel}進度</b>
         </div>
         <div id="level-song-grid" class="square-song-grid col-12 row" style="margin-left:0">
             ${songs.sort((a, b) => b.internalLevel - a.internalLevel)
             .map(song => createNamePlateSongCard(song)).join('')}
-        </div>`;
+        </div>`);
     showLevelListByRange();
+
+    $('#completed-only').on('change', function () {
+        var input = $('#song-table .section-title').text().trim();
+        console.log('input=', input);
+        const regex = /^等級\s*(\d+(?:\.\d+)?)\s*~\s*(\d+(?:\.\d+)?)進度$/;
+        const match = input.match(regex);
+        console.log('match=', match);
+        if (match) {
+            showLevelListByRange();
+        }
+    });
 }
 
 function showLevelList(startLevel, endLevel) {
@@ -63,17 +73,12 @@ function showLevelListByRange() {
     const percent = ((filteredSongsCount(songs) / songs.length) * 100).toFixed(2);
     document.getElementById('statText').textContent = `達成率：${percent}% (${filteredSongsCount(songs)}/${songs.length})`;
 
-    const container = document.getElementById('level-song-grid');
-    container.innerHTML = songs.sort((a, b) => b.internalLevel - a.internalLevel)
-        .map(song => createLevelSongCard(song)).join('');
-    const sectionTitle = document.getElementById('section-title');
-    sectionTitle.innerHTML = `
-        <b>等級${startLevel} ~ ${endLevel}進度</b>
-    `;
+    $('#level-song-grid').html(songs.sort((a, b) => b.internalLevel - a.internalLevel).map(song => createLevelSongCard(song)).join(''));
+    $('#section-title').html(`<b>等級${startLevel} ~ ${endLevel}進度</b>`);
 }
 
 function filteredSongsCount(songs) {
-    let type = document.querySelector('input[name="filter"]:checked').value;
+    let type = $('input[name="filter"]:checked').val();
 
     let filteredSongs = songs.filter(song => {
         if (type === 'clear') return parseFloat(song.score.replace('%', '')) > 80;
@@ -99,7 +104,7 @@ function createLevelSongCard(song) {
     const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
     let isCompleted = false;
     let score = parseFloat(song.score.replace('%', ''));
-    let type = document.querySelector('input[name="filter"]:checked').value;
+    let type = $('input[name="filter"]:checked').val();
 
     if (type === 'clear') isCompleted = score > 80;
     else if (type === 'S') isCompleted = score > 97;
@@ -117,14 +122,18 @@ function createLevelSongCard(song) {
     else if (type === 'FDX') isCompleted = song.fdx;
     else if (type === 'FDX+') isCompleted = song.fdxp;
 
-    return `
-    <div class="col-1 plate-song-card difficulty-${diffClass} ${isCompleted ? 'completed' : ''} " style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
-        <div class="song-overlay"></div>
-        <div class="song-content text-shadow f_10 plate-song-title">${song.title}</div>
-        <div class="song-content text-shadow f_10">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>
-        <div class="song-content text-shadow">${song.score}</div>
-        ${isCompleted ? '<div class="completion-check"><b>✓</b></div>' : ''}
-    </div>`;
+    if ($('#completed-only').is(':checked') && !isCompleted) {
+        return null;
+    } else{
+        return `
+        <div class="col-1 plate-song-card difficulty-${diffClass} ${isCompleted ? 'completed' : ''} " style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
+            <div class="song-overlay"></div>
+            <div class="song-content text-shadow f_10 plate-song-title">${song.title}</div>
+            <div class="song-content text-shadow f_10">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>
+            <div class="song-content text-shadow">${song.score}</div>
+            ${isCompleted ? '<div class="completion-check"><b>✓</b></div>' : ''}
+        </div>`;
+    }
 }
 
 function createFilterButtons(type) {
@@ -152,8 +161,6 @@ function createFilterButtons(type) {
     return html;
 }
 
-document.addEventListener('change', function (event) {
-    if (event.target.name === 'filter') {
-        showLevelListByRange()
-    }
+$('input[name="filter"]').on('change', function () {
+    showLevelListByRange()
 });
