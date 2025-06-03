@@ -26,7 +26,7 @@
         href="https://sgimera.github.io/mai_RatingAnalyzer/maidx_rating.html" target="_blank">sgimera</a></h6>
     <button id="test" onclick="LoadLocalJson('test_data.json')">測試</button>
     <div id="output"></div>
-    <div id="button-group" class="row" style="display: none;">
+    <div id="button-group" class="row" style="display: none; align-items: center;">
       <div class="col-3">
         <button class="w-100" onclick="showTable('rating')">R值入選曲</button>
       </div>
@@ -44,13 +44,26 @@
     <div class="result-container">
       <div class="row" style="border-bottom: 1px solid #444">
         <div id="user-info" class="user-info col-6"></div>
-        <div id="stat" class="col-6 d-flex align-items-center" style="font-family: Consolas;"></div>
+        <div id="stat" class="col-6 row"></div>
       </div>
       <div id="song-table" class="ms-1 mt-1"></div>
     </div>
   </div>
 
   <script>
+    let versionList = [];
+    let versionOrder = [];
+    let ratingTable = [];
+    $(async function() {
+      versionList = await fetch('version.json').then(res => res.json());
+      versionOrder = [...new Set(
+        versionList
+          .map(v => v.versionName)
+          .filter(name => !name.includes('~'))
+      )];
+      ratingTable = await fetch('rating_count.json')
+        .then(res => res.json());
+    })
     function LoadLocalJson(filePath) {
       $.getJSON(filePath, function (json) {
         $('#button-group').show();
@@ -77,7 +90,7 @@
       }
     });
     var data = "";
-    if (document.getElementById('json-data') !== null) {
+    if ($('#json-data').text()!=='') {
       refreashData();
     }
     function refreashData() {

@@ -8,7 +8,7 @@ function initLevelList() {
     });
 
     $('#stat').html([
-        '<div class="d-flex flex-column align-items-center">',
+        '<div class="d-flex flex-column align-items-center pt-2">',
         showLevelList(minLevel, maxLevel),
         createFilterButtons('S'),
         '</div>'
@@ -71,7 +71,7 @@ function showLevelListByRange() {
     });
 
     const percent = ((filteredSongsCount(songs) / songs.length) * 100).toFixed(2);
-    document.getElementById('statText').textContent = `達成率：${percent}% (${filteredSongsCount(songs)}/${songs.length})`;
+    $('#statText').val(`達成率：${percent}% (${filteredSongsCount(songs)}/${songs.length})`);
 
     $('#level-song-grid').html(songs.sort((a, b) => b.internalLevel - a.internalLevel).map(song => createLevelSongCard(song)).join(''));
     $('#section-title').html(`<b>等級${startLevel} ~ ${endLevel}進度</b>`);

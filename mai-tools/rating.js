@@ -1,6 +1,6 @@
 async function initRatingList() {
     $('#song-table').html(await showRatingList());
-
+    await renderRatingSummaryTable();
 }
 
 async function showRatingList() {
@@ -8,25 +8,50 @@ async function showRatingList() {
         await createRatingSection('new songs', data.ratingSongList.rating_new),
         await createRatingSection('others', data.ratingSongList.rating_others)
     ].join('');
+
     return html;
 }
 
+async function renderRatingSummaryTable() {
+    const allRatingSongs = data.ratingSongList.rating_new.concat(data.ratingSongList.rating_others);
+
+    const newSongs = calcRatings(data.ratingSongList.rating_new);
+    const others = calcRatings(data.ratingSongList.rating_others);
+    const all = calcRatings(allRatingSongs);
+
+    const getAvg = songs => (songs.reduce((sum, item) => sum + item.rating, 0) / songs.length).toFixed(2);
+
+    const rows = [
+        `<tr><td>新譜面平均R值</td><td>:</td><td>${getAvg(newSongs)}</td></tr>`,
+        `<tr><td>舊譜面平均R值</td><td>:</td><td>${getAvg(others)}</td></tr>`,
+        `<tr><td>全譜面平均R值</td><td>:</td><td>${getAvg(all)}</td></tr>`
+    ];
+
+    $('#stat').html(`
+        <div class="section-title d-flex align-items-center justify-content-center">
+            <table>
+                <tbody>${rows.join('')}</tbody>
+            </table>
+        </div>
+    `);
+}
+
+
 async function createRatingSection(title, songs) {
-    const ratingTable = await fetch('rating_count.json')
-        .then(res => res.json());
-    songs = calcRatings(songs, ratingTable);
+    songs = calcRatings(songs);
+
     return `
         <div class="section-title">${title}</div>
-        <div class="song-grid row" style="margin-left:0">
+        <div class="song-grid row ms-0">
             ${songs.map(createSongCard).join('')}
         </div>`;
 }
 
-function calcRatings(songs, rankTable) {
+function calcRatings(songs) {
     return songs.map(song => {
         const scoreFloat = parseFloat(song.score) / 100;
         const isSSSPlus = parseFloat(song.score) >= 100.5;
-        const coefficient = isSSSPlus ? 22.4 : (rankTable.find(rank => parseFloat(rank.score) <= parseFloat(song.score))?.coefficient || 0);
+        const coefficient = isSSSPlus ? 22.4 : (ratingTable.find(rank => parseFloat(rank.score) <= parseFloat(song.score))?.coefficient || 0);
         const rating = Math.floor(song.internalLevel * coefficient * (isSSSPlus ? 1.005 : scoreFloat));
         return { ...song, rating };
     });

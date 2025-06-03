@@ -1,16 +1,5 @@
-let versionList = [];
-let versionOrder = [];
-
 async function initPlateList() {
     $('#song-table').html(showPlateList());
-
-    versionList = await fetch('version.json').then(res => res.json());
-    versionOrder = [...new Set(
-        versionList
-            .map(v => v.versionName)
-            .filter(name => !name.includes('~'))
-    )];
-
     $('#completed-only').on('change', function () {
         var input = $('#plate-progress-title').text().trim();
         console.log('input=', input);
@@ -160,12 +149,14 @@ async function showPlateProgress(versionName, type, plateName) {
     remasterCompleted = filteredSongs.filter(song => song.difficulty === 'remaster').length;
 
     $('#stat').html(`
-        <div class="difficulty-counts section-title">
-            <div class="difficulty-count"><b style="color:#81d955">BAS</b>: ${String(basicCompleted).padStart(3, " ")}/${String(basicTotal).padStart(3, " ")} = ${(basicCompleted / basicTotal * 100).toFixed(2)}%</div>
-            <div class="difficulty-count"><b style="color:#f8b709">ADV</b>: ${String(advancedCompleted).padStart(3, " ")}/${String(advancedTotal).padStart(3, " ")} = ${(advancedCompleted / advancedTotal * 100).toFixed(2)}%</div>
-            <div class="difficulty-count"><b style="color:#ff818d">EXP</b>: ${String(expertCompleted).padStart(3, " ")}/${String(expertTotal).padStart(3, " ")} = ${(expertCompleted / expertTotal * 100).toFixed(2)}%</div>
-            <div class="difficulty-count"><b style="color:#c346e7">MAS</b>: ${String(masterCompleted).padStart(3, " ")}/${String(masterTotal).padStart(3, " ")} = ${(masterCompleted / masterTotal * 100).toFixed(2)}%</div>
-            ${versionName === 'maimai ~ FiNALE' ? `<div class="difficulty-count"><b style="color:#fff">REM</b>: ${String(remasterCompleted).padStart(3, " ")}/${String(remasterTotal).padStart(3, " ")} = ${(remasterCompleted / remasterTotal * 100).toFixed(2)}%</div>` : ''}
+        <div class="difficulty-counts section-title d-flex align-items-center justify-content-center">
+            <table class="difficulty-table">
+                <tr><td style="color:#81d955">BAS</td><td>:</td><td>${String(basicCompleted).padStart(3, " ")}</td><td>/</td><td>${String(basicTotal).padStart(3, " ")}</td><td>=</td><td>${(basicCompleted / basicTotal * 100).toFixed(2)}%</td></tr>
+                <tr><td style="color:#f8b709">ADV</td><td>:</td><td>${String(advancedCompleted).padStart(3, " ")}</td><td>/</td><td>${String(advancedTotal).padStart(3, " ")}</td><td>=</td><td>${(advancedCompleted / advancedTotal * 100).toFixed(2)}%</td></tr>
+                <tr><td style="color:#ff818d">EXP</td><td>:</td><td>${String(expertCompleted).padStart(3, " ")}</td><td>/</td><td>${String(expertTotal).padStart(3, " ")}</td><td>=</td><td>${(expertCompleted / expertTotal * 100).toFixed(2)}%</td></tr>
+                <tr><td style="color:#c346e7">MAS</td><td>:</td><td>${String(masterCompleted).padStart(3, " ")}</td><td>/</td><td>${String(masterTotal).padStart(3, " ")}</td><td>=</td><td>${(masterCompleted / masterTotal * 100).toFixed(2)}%</td></tr>
+                ${versionName === 'maimai ~ FiNALE' ? `<tr><td style="color:#fff">REM</td><td>:</td><td>${String(remasterCompleted).padStart(3, " ")}</td><td>/</td><td>${String(remasterTotal).padStart(3, " ")}</td><td>=</td><td>${(remasterCompleted / remasterTotal * 100).toFixed(2)}%</td></tr>` : ''}
+            </table>
         </div>
     `);
 
@@ -174,7 +165,7 @@ async function showPlateProgress(versionName, type, plateName) {
         <b id="plate-progress-title">${plateName}${type}(${versionName})進度</b>
         <div class="tips">${versionName === 'maimai ~ FiNALE' ? tips.replace('～MASTER/', '～RE:MASTER/') : tips}</div>
     </div>
-    <div class="square-song-grid col-12 row" style="margin-left:0">
+    <div class="square-song-grid col-12 row ms-0">
         ${songs
             .sort((a, b) => b.internalLevel - a.internalLevel)
             .filter(song => {
