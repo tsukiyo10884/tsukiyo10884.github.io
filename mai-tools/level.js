@@ -58,13 +58,31 @@ function showLevelListByRange() {
     const songs = data.songs.filter(song => {
         return song.internalLevel >= startLevel && song.internalLevel <= endLevel;
     });
+
+    document.getElementById('statText').textContent = `統計：${completed}/${songs.length}`;
+
     const container = document.getElementById('level-song-grid');
     container.innerHTML = songs.sort((a, b) => b.internalLevel - a.internalLevel)
         .map(song => createLevelSongCard(song)).join('');
-    const sectionTitle  = document.getElementById('section-title');
+    const sectionTitle = document.getElementById('section-title');
     sectionTitle.innerHTML = `
         <b>等級${startLevel} ~ ${endLevel}進度</b>
     `;
+}
+
+function filteredSongsCount() {
+    let type = document.querySelector('input[name="filter"]:checked').value;
+
+    // 根據type，過濾出符合的歌曲
+    let filteredSongs = data.songs.filter(song => {
+        if (type === 'clear') isCompleted = score > 80;
+        else if (type === 'S') isCompleted = score > 97;
+        else if (type === 'S+') isCompleted = score > 98;
+        else if (type === 'SS') isCompleted = score > 99;
+        else if (type === 'SS+') isCompleted = score > 99.5;
+    })
+
+
 }
 
 function createLevelSongCard(song) {
@@ -80,12 +98,12 @@ function createLevelSongCard(song) {
     else if (type === 'SS+') isCompleted = score > 99.5;
     else if (type === 'SSS') isCompleted = score > 100;
     else if (type === 'SSS+') isCompleted = score > 100.5;
-    else if (type === 'AP+') isCompleted = song.ap || song.app || song.fdxp;
-    else if (type === 'AP') isCompleted = song.app || song.fdxp;
+    else if (type === 'AP+') isCompleted = song.app;
+    else if (type === 'AP') isCompleted = song.ap || song.app || song.fdxp;
     else if (type === 'FC+') isCompleted = song.fcp || song.ap || song.app || song.fdx || song.fdxp;
     else if (type === 'FC') isCompleted = song.fc || song.ap || song.app || song.fcp || song.fs || song.fsp || song.fdx || song.fdxp;
-    else if (type === 'FS+') isCompleted = song.fsp;
-    else if (type === 'FS') isCompleted = song.fs;
+    else if (type === 'FS+') isCompleted = song.fsp || song.fdx || song.fdxp;
+    else if (type === 'FS') isCompleted = song.fs || song.fdx;
     else if (type === 'FDX') isCompleted = song.fdx;
     else if (type === 'FDX+') isCompleted = song.fdxp;
 
