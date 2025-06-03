@@ -22,6 +22,7 @@ function initLevelList() {
         </div>`
     ].join('');
     container.innerHTML = html;
+    showLevelListByRange();
 }
 
 function showLevelList(startLevel, endLevel) {
@@ -59,6 +60,8 @@ function showLevelListByRange() {
         return song.internalLevel >= startLevel && song.internalLevel <= endLevel;
     });
 
+    document.getElementById('statText').textContent = `統計：${filteredSongsCount(songs)}/${songs.length}`;
+
     const container = document.getElementById('level-song-grid');
     container.innerHTML = songs.sort((a, b) => b.internalLevel - a.internalLevel)
         .map(song => createLevelSongCard(song)).join('');
@@ -68,19 +71,30 @@ function showLevelListByRange() {
     `;
 }
 
-function filteredSongsCount() {
+function filteredSongsCount(songs) {
     let type = document.querySelector('input[name="filter"]:checked').value;
 
     // 根據type，過濾出符合的歌曲
-    let filteredSongs = data.songs.filter(song => {
-        if (type === 'clear') isCompleted = score > 80;
-        else if (type === 'S') isCompleted = score > 97;
-        else if (type === 'S+') isCompleted = score > 98;
-        else if (type === 'SS') isCompleted = score > 99;
-        else if (type === 'SS+') isCompleted = score > 99.5;
+    console.log(songs);
+    let filteredSongs = songs.filter(song => {
+        if (type === 'clear') return parseFloat(song.score.replace('%', '')) > 80;
+        else if (type === 'S') return parseFloat(song.score.replace('%', '')) > 97;
+        else if (type === 'S+') return parseFloat(song.score.replace('%', '')) > 98;
+        else if (type === 'SS') return parseFloat(song.score.replace('%', '')) > 99;
+        else if (type === 'SS+') return parseFloat(song.score.replace('%', '')) > 99.5;
+        else if (type === 'SSS') return parseFloat(song.score.replace('%', '')) > 100;
+        else if (type === 'SSS+') return parseFloat(song.score.replace('%', '')) > 100.5;
+        else if (type === 'AP+') return song.app;
+        else if (type === 'AP') return song.ap || song.app || song.fdxp;
+        else if (type === 'FC+') return song.fcp || song.ap || song.app || song.fdx || song.fdxp;
+        else if (type === 'FC') return song.fc || song.ap || song.app || song.fcp || song.fs || song.fsp || song.fdx || song.fdxp;
+        else if (type === 'FS+') return song.fsp || song.fdx || song.fdxp;
+        else if (type === 'FS') return song.fs || song.fdx;
+        else if (type === 'FDX+') return song.fdxp;
+        else if (type === 'FDX') return song.fdx;
     })
-
-
+    console.log(filteredSongs);
+    return filteredSongs.length;
 }
 
 function createLevelSongCard(song) {

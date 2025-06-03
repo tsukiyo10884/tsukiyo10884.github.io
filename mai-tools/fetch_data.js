@@ -48,17 +48,17 @@
             const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
             const version = sheet?.version;
 
-            const iconSrc = block.querySelector('.h_30.f_r')?.src ?? '';
+            const iconSrcList = Array.from(block.querySelectorAll('.h_30.f_r')).map(el => el.src);
             const flags = {
-                sync: iconSrc.includes('music_icon_sync'),
-                ap: iconSrc.includes('music_icon_ap'),
-                app: iconSrc.includes('music_icon_app'),
-                fs: iconSrc.includes('music_icon_fs'),
-                fsp: iconSrc.includes('music_icon_fsp'),
-                fc: iconSrc.includes('music_icon_fc'),
-                fcp: iconSrc.includes('music_icon_fcp'),
-                fdx: iconSrc.includes('music_icon_fdx'),
-                fdxp: iconSrc.includes('music_icon_fdxp'),
+                sync: iconSrcList.some(src => src.includes('music_icon_sync')),
+                ap: iconSrcList.some(src => src.includes('music_icon_ap')),
+                app: iconSrcList.some(src => src.includes('music_icon_app')),
+                fs: iconSrcList.some(src => src.includes('music_icon_fs')),
+                fsp: iconSrcList.some(src => src.includes('music_icon_fsp')),
+                fc: iconSrcList.some(src => src.includes('music_icon_fc')),
+                fcp: iconSrcList.some(src => src.includes('music_icon_fcp')),
+                fdx: iconSrcList.some(src => src.includes('music_icon_fdx')),
+                fdxp: iconSrcList.some(src => src.includes('music_icon_fdxp')),
             };
 
             songs.push({
