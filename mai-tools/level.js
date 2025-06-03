@@ -59,8 +59,6 @@ function showLevelListByRange() {
         return song.internalLevel >= startLevel && song.internalLevel <= endLevel;
     });
 
-    document.getElementById('statText').textContent = `統計：${completed}/${songs.length}`;
-
     const container = document.getElementById('level-song-grid');
     container.innerHTML = songs.sort((a, b) => b.internalLevel - a.internalLevel)
         .map(song => createLevelSongCard(song)).join('');
