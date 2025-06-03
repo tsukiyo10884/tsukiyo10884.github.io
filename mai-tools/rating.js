@@ -1,5 +1,17 @@
-async function createRatingSection(title, songs) {
+async function initRatingList() {
+    const container = document.getElementById('song-table');
+    container.innerHTML = await showRatingList()
+}
 
+async function showRatingList() {
+    const html = [
+        await createRatingSection('new songs', data.ratingSongList.rating_new),
+        await createRatingSection('others', data.ratingSongList.rating_others)
+    ].join('');
+    return html;
+}
+
+async function createRatingSection(title, songs) {
     const ratingTable = await fetch('rating_count.json')
         .then(res => res.json());
     songs = calcRatings(songs, ratingTable);

@@ -1,3 +1,8 @@
+async function initPlateList() {
+    const container = document.getElementById('song-table');
+    container.innerHTML = await showPlateList()
+}
+
 async function showPlateList() {
     const versionList = await fetch('version.json').then(res => res.json());
     return `
@@ -10,11 +15,9 @@ async function showPlateList() {
 
         return `
                         <div class="${colClass}">
-                            <button class="w-100 plate-version-button" onclick="showVersionButton('${version.versionName}','${version.plateName}')">
-                                
-  <span style="font-size: 16px;">${version.plateName}</span>  <br/>
-  <span style="font-size: 14px;">${version.versionName.replace('でらっくす',' DX')}</span>
-
+                            <button class="w-100 plate-version-button" onclick="showVersionButton('${version.versionName}','${version.plateName}')">              
+                                <span style="font-size: 16px;">${version.plateName}</span>  <br/>
+                                <span style="font-size: 14px;">${version.versionName.replace('でらっくす', ' DX')}</span>
                             </button>
                         </div>
                     `;
@@ -32,7 +35,7 @@ function showVersionButton(versionName, plateName) {
         <div class="row">
             <div class="col-3">
                 <button class="w-100" onclick="showPlateProgress('${versionName}', '極', '${plateName}')">${plateName}極</button>
-            </div>`,    
+            </div>`,
         (versionName == 'maimai ~ maimai PLUS') ? '' : `
             <div class="col-3">
                 <button class="w-100" onclick="showPlateProgress('${versionName}', '将', '${plateName}')">${plateName}将</button>
@@ -110,7 +113,7 @@ async function showPlateProgress(versionName, type, plateName) {
                 <span class="difficulty-count"><b style="color:#c346e7">MAS</b>: ${masterCompleted}/${masterTotal}</span>
             </div>
         </div>
-        <div class="plate-song-grid col-12 row" style="margin-left:0">
+        <div class="square-song-grid col-12 row" style="margin-left:0">
             ${songs
             .sort((a, b) => b.internalLevel - a.internalLevel)
             .filter(song => song.difficulty !== "remaster")

@@ -24,7 +24,7 @@
         href="https://maimai.fandom.com/zh/wiki/%E5%88%AA%E9%99%A4%E6%9B%B2%E4%B8%80%E8%A6%BD"
         target="_blank">maimai中文維基</a> | rating計算方法： <a
         href="https://sgimera.github.io/mai_RatingAnalyzer/maidx_rating.html" target="_blank">sgimera</a></h6>
-    <button id="test" onclick="LoadLocalJson('testData.json')">測試</button>
+    <button id="test" onclick="LoadLocalJson('test_data.json')">測試</button>
     <div id="output"></div>
     <div id="button-group" class="row" style="display: none;">
       <div class="col-3">
@@ -46,7 +46,6 @@
   <script>
     function LoadLocalJson(filePath) {
       $.getJSON(filePath, function (json) {
-        console.log(json);
         $('#button-group').show();
         $('#test').hide();
         output.innerHTML = "<textarea id=\"json-data\" style=\"display:none;\">" + JSON.stringify(json, null, 2) + "</textarea>";
@@ -87,25 +86,11 @@
     async function showTable(type) {
       const container = document.getElementById('song-table');
       if (type === 'rating') {
-
-        const html = [
-          await createRatingSection('new songs', data.ratingSongList.rating_new),
-          await createRatingSection('others', data.ratingSongList.rating_others)
-        ].join('');
-        container.innerHTML = html;
-      }
-      else if (type === 'plate') {
-
-        const html = [
-          await showPlateList(),
-        ].join('');
-        container.innerHTML = html;
+        await initRatingList();
+      } else if (type === 'plate') {
+        await initPlateList();
       } else if (type === 'level') {
-
-        const html = [
-          await showLevelList(),
-        ].join('');
-        container.innerHTML = html;
+        initLevelList();
       } else {
         container.style.display = 'none';
         container.innerHTML = '';

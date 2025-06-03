@@ -192,7 +192,7 @@ img {
 	width: 100px !important;
 }
 
-.plate-song-grid {
+.square-song-grid {
 	display: grid;
 	gap: 10px;
 	grid-template-columns: repeat(auto-fit, 102px);
