@@ -37,7 +37,10 @@
         <button class="w-100" onclick="showTable('level')">等級進度</button>
       </div>
       <div class="result-container">
-        <div id="user-info"></div>
+        <div class="row" style="border-bottom: 1px solid #444">
+          <div id="user-info" class="user-info col-6"></div>
+          <div id="stat" class="col-6 d-flex align-items-center" style="font-family: Consolas;"></div>
+        </div>
         <div id="song-table" class="ms-1 mt-1"></div>
       </div>
     </div>
@@ -75,15 +78,12 @@
     }
     function refreashData() {
       data = JSON.parse(document.getElementById('json-data')?.textContent);
-      $('#user-info').html(createUserInfo(data.user));
-    }
-
-    function createUserInfo(user) {
-      return `
-        <div class="user-info">${user}</div>`;
+      $('#user-info').html(data.user);
     }
 
     async function showTable(type) {
+      $('#level-filter').hide();
+      $('#stat').html('');
       const container = document.getElementById('song-table');
       if (type === 'rating') {
         await initRatingList();

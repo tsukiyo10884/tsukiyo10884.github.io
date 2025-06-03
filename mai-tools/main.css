@@ -233,7 +233,7 @@ img {
 }
 
 .song-card {
-    align-items: center;
+	align-items: center;
 	background-position: center;
 	background-size: cover;
 	border-radius: 5px;
@@ -258,8 +258,8 @@ img {
 }
 
 .song-image {
-    object-fit: cover;
-    width: calc(100% + 2em);
+	object-fit: cover;
+	width: calc(100% + 2em);
 }
 
 .song-grid {
@@ -341,7 +341,6 @@ img {
 
 .user-info {
 	align-items: center;
-	border-bottom: 1px solid #444;
 	display: flex;
 	gap: 1em;
 	padding: 1em;
@@ -384,16 +383,22 @@ a {
 	text-decoration: underline;
 }
 
-.main{
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    width: 915px;
-    padding-right: calc(var(--bs-gutter-x) * .5);
-    padding-left: calc(var(--bs-gutter-x) * .5);
-    margin-right: auto;
-    margin-left: auto;
+.main {
+	--bs-gutter-x: 1.5rem;
+	--bs-gutter-y: 0;
+	width: 915px;
+	padding-right: calc(var(--bs-gutter-x) * .5);
+	padding-left: calc(var(--bs-gutter-x) * .5);
+	margin-right: auto;
+	margin-left: auto;
 }
 
-.plate-version-button{
+.plate-version-button {
 	font-size: 14px;
+}
+
+.difficulty-count {
+	white-space: pre;
+	text-align: left;
+	display: block;
 }

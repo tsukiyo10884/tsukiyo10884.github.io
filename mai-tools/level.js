@@ -7,39 +7,39 @@ function initLevelList() {
         return song.internalLevel >= minLevel && song.internalLevel <= maxLevel;
     });
 
-    const container = document.getElementById('song-table');
-
-    const html = [
-        createFilterButtons('S'),
+    $('#stat').html([
+        '<div class="d-flex flex-column align-items-center">',
         showLevelList(minLevel, maxLevel),
-        `
+        createFilterButtons('S'),
+        '</div>'
+    ].join(''));
+    $('#stat').show();
+
+    const container = document.getElementById('song-table');
+    container.innerHTML = `
         <div id="section-title" class="section-title">
             <b>等級${minLevel} ~ ${maxLevel}進度</b>
         </div>
         <div id="level-song-grid" class="square-song-grid col-12 row" style="margin-left:0">
             ${songs.sort((a, b) => b.internalLevel - a.internalLevel)
             .map(song => createNamePlateSongCard(song)).join('')}
-        </div>`
-    ].join('');
-    container.innerHTML = html;
+        </div>`;
     showLevelListByRange();
 }
 
 function showLevelList(startLevel, endLevel) {
     return `
         <div class="level-list row d-flex align-items-center justify-content-center">
-            <div class="col-2">
+            <div class="col-3">
                 <input type="number" id="level-start" class="form-control" placeholder="最低等級" value="${startLevel}" />
             </div>
             <div class="col-1">
-                <span style="line-height: 37.6px;">　～　</span>
+                <span class="align-middle">～</span>
             </div>
-            <div class="col-2">
+            <div class="col-3">
                 <input type="number" id="level-end" class="form-control" placeholder="最高等級" value="${endLevel}" />
             </div>
-        </div>
-        <div class="level-list row d-flex align-items-center justify-content-center">
-            <div class="col-2" align="center">
+            <div class="col-3" align="center">
                 <button onclick="showLevelListByRange()">查詢</button>
             </div>
         </div>
@@ -60,7 +60,8 @@ function showLevelListByRange() {
         return song.internalLevel >= startLevel && song.internalLevel <= endLevel;
     });
 
-    document.getElementById('statText').textContent = `統計：${filteredSongsCount(songs)}/${songs.length}`;
+    const percent = ((filteredSongsCount(songs) / songs.length) * 100).toFixed(2);
+    document.getElementById('statText').textContent = `達成率：${percent}% (${filteredSongsCount(songs)}/${songs.length})`;
 
     const container = document.getElementById('level-song-grid');
     container.innerHTML = songs.sort((a, b) => b.internalLevel - a.internalLevel)
@@ -74,8 +75,6 @@ function showLevelListByRange() {
 function filteredSongsCount(songs) {
     let type = document.querySelector('input[name="filter"]:checked').value;
 
-    // 根據type，過濾出符合的歌曲
-    console.log(songs);
     let filteredSongs = songs.filter(song => {
         if (type === 'clear') return parseFloat(song.score.replace('%', '')) > 80;
         else if (type === 'S') return parseFloat(song.score.replace('%', '')) > 97;
@@ -93,7 +92,6 @@ function filteredSongsCount(songs) {
         else if (type === 'FDX+') return song.fdxp;
         else if (type === 'FDX') return song.fdx;
     })
-    console.log(filteredSongs);
     return filteredSongs.length;
 }
 
@@ -135,7 +133,7 @@ function createFilterButtons(type) {
         ['AP+', 'AP', 'FC+', 'FC', 'FS+', 'FS', 'FDX+', 'FDX']
     ];
 
-    let html = '<div style="justify-content: center;display: flex;">';
+    let html = '';
 
     filters.forEach(group => {
         html += '<div class="mb-2 btn-group" role="group">';
@@ -149,9 +147,8 @@ function createFilterButtons(type) {
         });
         html += '</div>';
     });
-    html += '</div>';
+    html += '<div id="statText" class="ms-2 section-title">達成率：0/0</div>';
 
-    html += `<div id="statText" class="mt-2">統計：0/0</div>`;
     return html;
 }
 

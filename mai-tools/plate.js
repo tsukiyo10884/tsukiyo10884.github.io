@@ -102,25 +102,26 @@ async function showPlateProgress(versionName, type, plateName) {
     expertCompleted = filteredSongs.filter(song => song.difficulty === 'expert').length;
     masterCompleted = filteredSongs.filter(song => song.difficulty === 'master').length;
 
-    const html = [
-        `
-        <div class="section-title">
-            <b>${plateName}${type}(${versionName})進度</b>
-            <div class="difficulty-counts">
-                <span class="difficulty-count"><b style="color:#81d955">BAS</b>: ${basicCompleted}/${basicTotal}</span>
-                <span class="difficulty-count"><b style="color:#f8b709">ADV</b>: ${advancedCompleted}/${advancedTotal}</span>
-                <span class="difficulty-count"><b style="color:#ff818d">EXP</b>: ${expertCompleted}/${expertTotal}</span>
-                <span class="difficulty-count"><b style="color:#c346e7">MAS</b>: ${masterCompleted}/${masterTotal}</span>
-            </div>
+    $('#stat').html(`
+        <div class="difficulty-counts section-title">
+            <div class="difficulty-count"><b style="color:#81d955">BAS</b>: ${String(basicCompleted).padStart(2, " ")}/${basicTotal} = ${(basicCompleted / basicTotal * 100).toFixed(2)}%</div>
+            <div class="difficulty-count"><b style="color:#f8b709">ADV</b>: ${String(advancedCompleted).padStart(2, " ")}/${advancedTotal} = ${(advancedCompleted / advancedTotal * 100).toFixed(2)}%</div>
+            <div class="difficulty-count"><b style="color:#ff818d">EXP</b>: ${String(expertCompleted).padStart(2, " ")}/${expertTotal} = ${(expertCompleted / expertTotal * 100).toFixed(2)}%</div>
+            <div class="difficulty-count"><b style="color:#c346e7">MAS</b>: ${String(masterCompleted).padStart(2, " ")}/${masterTotal} = ${(masterCompleted / masterTotal * 100).toFixed(2)}%</div>
         </div>
-        <div class="square-song-grid col-12 row" style="margin-left:0">
-            ${songs
-            .sort((a, b) => b.internalLevel - a.internalLevel)
-            .filter(song => song.difficulty !== "remaster")
-            .map(song => createNamePlateSongCard(song, type)).join('')}
-        </div>`,
-    ].join('');
-    container.innerHTML = html;
+    `);
+
+    container.innerHTML = 
+    `
+    <div class="section-title">
+        <b>${plateName}${type}(${versionName})進度</b>
+    </div>
+    <div class="square-song-grid col-12 row" style="margin-left:0">
+        ${songs
+        .sort((a, b) => b.internalLevel - a.internalLevel)
+        .filter(song => song.difficulty !== "remaster")
+        .map(song => createNamePlateSongCard(song, type)).join('')}
+    </div>`;
 }
 
 function createNamePlateSongCard(song, type) {
