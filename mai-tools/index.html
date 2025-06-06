@@ -20,11 +20,11 @@
 
 <body>
   <div class="main mt-3 mb-5">
-    <h6>譜面定數： <a href="https://arcade-songs.zetaraku.dev/maimai/about/" target="_blank">zetaraku</a> | 刪除曲： <a
+    <h6>以國際版為準<br/>譜面定數： <a href="https://arcade-songs.zetaraku.dev/maimai/about/" target="_blank">zetaraku</a> | 刪除曲： <a
         href="https://maimai.fandom.com/zh/wiki/%E5%88%AA%E9%99%A4%E6%9B%B2%E4%B8%80%E8%A6%BD"
         target="_blank">maimai中文維基</a> | rating計算方法： <a
         href="https://sgimera.github.io/mai_RatingAnalyzer/maidx_rating.html" target="_blank">sgimera</a></h6>
-    <button id="test" onclick="LoadLocalJson('test_data.json')">測試</button>
+    <button id="test" onclick="LoadLocalJson('test_data.json')" style="display: none;">測試</button>
     <div id="output"></div>
     <div id="button-group" class="row" style="display: none; align-items: center;">
       <div class="col-3">
@@ -37,8 +37,14 @@
         <button class="w-100" onclick="showTable('level')">等級進度</button>
       </div>
       <div class="col-3">
-        <input type="checkbox" id="completed-only" class="form-check-input">
-        <label for="completed-only">只顯示達成曲</label>
+        <div class="checkbox-group">
+          <input type="checkbox" id="completed-only" class="form-check-input">
+          <label for="completed-only">只顯示達成曲</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="non-completed-only" class="form-check-input">
+          <label for="non-completed-only">只顯示未達成曲</label>
+        </div>
       </div>
     </div>
     <div class="result-container">
@@ -51,10 +57,23 @@
   </div>
 
   <script>
+    $(window).on('load', function () {
+      $('#completed-only, #non-completed-only').on('change', function () {
+        if ($('#completed-only').is(':checked')) {
+          $('#non-completed-only').prop('checked', false);
+        }
+        if ($('#non-completed-only').is(':checked')) {
+          $('#completed-only').prop('checked', false);
+        }
+      });
+      setTimeout(function () {
+        $('#test').show();
+      }, 3000);
+    });
     let versionList = [];
     let versionOrder = [];
     let ratingTable = [];
-    $(async function() {
+    $(async function () {
       versionList = await fetch('version.json').then(res => res.json());
       versionOrder = [...new Set(
         versionList
@@ -90,7 +109,7 @@
       }
     });
     var data = "";
-    if ($('#json-data').text()!=='') {
+    if ($('#json-data').text() !== '') {
       refreashData();
     }
     function refreashData() {
@@ -111,6 +130,19 @@
         $('#song-table').html('');
       }
     }
+
+    //completed-only跟non-completed-only的checkbox最多只能有一個被選中
+    $('#completed-only').on('change', function () {
+      if ($('#completed-only').is(':checked')) {
+        $('#non-completed-only').prop('checked', false);
+      }
+    });
+    $('#non-completed-only').on('change', function () {
+      if ($('#non-completed-only').is(':checked')) {
+        $('#completed-only').prop('checked', false);
+      }
+    });
+
   </script>
 </body>
 

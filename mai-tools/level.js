@@ -25,7 +25,7 @@ function initLevelList() {
         </div>`);
     showLevelListByRange();
 
-    $('#completed-only').on('change', function () {
+    $('#completed-only, #non-completed-only').on('change', function () {
         var input = $('#song-table .section-title').text().trim();
         console.log('input=', input);
         const regex = /^等級\s*(\d+(?:\.\d+)?)\s*~\s*(\d+(?:\.\d+)?)進度$/;
@@ -124,7 +124,9 @@ function createLevelSongCard(song) {
 
     if ($('#completed-only').is(':checked') && !isCompleted) {
         return null;
-    } else{
+    } else if ($('#non-completed-only').is(':checked') && isCompleted) {
+        return null;
+    } else {
         return `
         <div class="col-1 plate-song-card difficulty-${diffClass} ${isCompleted ? 'completed' : ''} " style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
             <div class="song-overlay"></div>

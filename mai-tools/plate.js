@@ -1,6 +1,6 @@
 async function initPlateList() {
     $('#song-table').html(showPlateList());
-    $('#completed-only').on('change', function () {
+    $('#completed-only, #non-completed-only').on('change', function () {
         var input = $('#plate-progress-title').text().trim();
         console.log('input=', input);
         const regex = /^([\u4e00-\u9fa5]+)([\u4e00-\u9fa5])(?:\(([^()]+)\))?進度$/;
@@ -98,16 +98,16 @@ async function showPlateProgress(versionName, type, plateName) {
 
     if (versionName === 'maimai ~ maimai PLUS') {
         songs = songs
-            .filter(song => song.version === 'maimai' || song.version === 'maimai PLUS');
+            .filter(song => song.version_international === 'maimai' || song.version_international === 'maimai PLUS');
     } else if (versionName === 'maimai ~ FiNALE') {
         const finaleIndex = versionOrder.indexOf('FiNALE');
         songs = songs.filter(song =>
-            versionOrder.indexOf(song.version) !== -1 &&
-            versionOrder.indexOf(song.version) <= finaleIndex
+            versionOrder.indexOf(song.version_international) !== -1 &&
+            versionOrder.indexOf(song.version_international) <= finaleIndex
         );
     } else {
         songs = songs
-            .filter(song => song.version === versionName);
+            .filter(song => song.version_international === versionName);
     }
     const basicTotal = songs.filter(song => song.difficulty === 'basic').length;
     const advancedTotal = songs.filter(song => song.difficulty === 'advanced').length;
@@ -200,6 +200,8 @@ function createNamePlateSongCard(song, type) {
     }
 
     if ($('#completed-only').is(':checked') && !isCompleted) {
+        return null;
+    } else if($('#non-completed-only').is(':checked') && isCompleted) {
         return null;
     } else {
         return `
