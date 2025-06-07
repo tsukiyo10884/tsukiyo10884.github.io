@@ -1,11 +1,9 @@
 async function initRatingList() {
-    if (!data.ratingSongList) {
-        const topSongs = getTop50Songs();
-        data.ratingSongList = {
-            rating_new: topSongs.filter(s => s.version_international === currentVersion),
-            rating_others: topSongs.filter(s => s.version_international !== currentVersion)
-        };
-    }
+    const topSongs = getTop50Songs();
+    data.ratingSongList = {
+        rating_new: topSongs.filter(s => s.version_international === currentVersion),
+        rating_others: topSongs.filter(s => s.version_international !== currentVersion)
+    };
 
     const { rating_new, rating_others } = data.ratingSongList;
     const allRatingSongs = [...rating_new, ...rating_others];
