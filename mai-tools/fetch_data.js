@@ -142,7 +142,7 @@
                 };
 
                 songs.push({
-                    type, title, score, difficulty: difficulties[i], version,
+                    type, title, score, difficulty: difficulties[i], version_international, version_japan,
                     internalLevel, image, ...flags
                 });
             });
