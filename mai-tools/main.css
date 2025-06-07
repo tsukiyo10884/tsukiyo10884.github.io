@@ -1,6 +1,7 @@
 body {
 	background-color: #51bcf3 !important;
 	font-family: sans-serif;
+	overflow-y: scroll;
 }
 
 button {
@@ -223,13 +224,16 @@ img {
 	box-shadow: 5px 5px 4px #fff;
 }
 
+.text-shadow-black {
+	text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
+}
+
 .section-title {
 	color: #fff;
 	font-size: 20px;
 	grid-column: span 5;
 	margin: 9px 0;
 	text-align: center;
-	text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
 }
 
 .song-card {
@@ -295,10 +299,6 @@ img {
 	display: none;
 	flex-direction: column;
 	margin-top: 1em;
-}
-
-.text-shadow {
-	text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
 }
 
 .trophy_block {
@@ -413,7 +413,7 @@ a {
 }
 
 .tips {
-    color: #333;
-    text-shadow: none;
-    font-size: 14px;
+	color: #333;
+	text-shadow: none;
+	font-size: 14px;
 }

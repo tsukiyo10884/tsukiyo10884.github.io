@@ -1,218 +1,197 @@
 async function initPlateList() {
     $('#song-table').html(showPlateList());
-    $('#completed-only, #non-completed-only').on('change', function () {
-        var input = $('#plate-progress-title').text().trim();
-        console.log('input=', input);
-        const regex = /^([\u4e00-\u9fa5]+)([\u4e00-\u9fa5])(?:\(([^()]+)\))?進度$/;
-        const match = input.match(regex);
-        console.log('match=', match);
+    bindPlateEventListeners();
+}
 
+function bindPlateEventListeners() {
+    
+    $('#completed-only, #non-completed-only').on('change', () => {
+        const $input = $('#plate-progress-title').text().trim();
+        const match = $input.match(/^([\u4e00-\u9fa5]+)([\u4e00-\u9fa5])(?:\(([^()]+)\))?進度$/);
+        
         if (match) {
-            var plateName = match[1];
-            var type = match[2];
-            var versionName = match[3];
-            if (plateName === '覇') {
-                showPlateProgress(versionName, '覇者', '');
-            } else {
-                showPlateProgress(versionName, type, plateName);
-            }
+            const [_, plateName, type, versionName] = match;
+            showPlateProgress(versionName, plateName === '覇' ? '覇者' : type, plateName === '覇' ? '' : plateName);
         }
     });
 }
 
 function showPlateList() {
-    return `
-        <div class="container">
-            <div class="row g-2">
-                ${versionList.map(version => {
-        let colClass = 'col-3';
-        if (version.plateName === '真') colClass = 'col-6';
-        else if (version.plateName === '舞') colClass = 'col-6';
-        else if (version.plateName === '覇者') {
-            return `
-                            <div class="col-6">
-                                <button class="w-100 plate-version-button" onclick="showPlateProgress('${version.versionName}', '覇者', '')">              
-                                    <span style="font-size: 16px;">${version.plateName}</span>  <br/>
-                                    <span style="font-size: 14px;">${version.versionName}</span>
-                                </button>
-                            </div>
-                        `;
+    return `<div class="container"><div class="row g-2">${versionList.map(version => {
+        const colClass = version.plateName === '真' || version.plateName === '舞' ? 'col-6' :
+                        version.plateName === '輝' ? 'col-12' :
+                        version.plateName === '覇者' ? null : 'col-3';
+        
+        if (version.plateName === '覇者') {
+            return `<div class="col-6">
+                <button class="w-100 plate-version-button" onclick="showPlateProgress('${version.versionName}', '覇者', '')">              
+                    <span style="font-size: 16px;">${version.plateName}</span><br/>
+                    <span style="font-size: 14px;">${version.versionName}</span>
+                </button>
+            </div>`;
         }
-        else if (version.plateName === '輝') colClass = 'col-12';
-
-        return `
-                        <div class="${colClass}">
-                            <button class="w-100 plate-version-button" onclick="showVersionButton('${version.versionName}','${version.plateName}')">              
-                                <span style="font-size: 16px;">${version.plateName}</span>  <br/>
-                                <span style="font-size: 14px;">${version.versionName.replace('でらっくす', ' DX')}</span>
-                            </button>
-                        </div>
-                        `;
-    }).join('')}
-            </div>
+        
+        return `<div class="${colClass}">
+            <button class="w-100 plate-version-button" onclick="showVersionButton('${version.versionName}','${version.plateName}')">              
+                <span style="font-size: 16px;">${version.plateName}</span><br/>
+                <span style="font-size: 14px;">${version.versionName.replace('でらっくす', ' DX')}</span>
+            </button>
         </div>`;
+    }).join('')}</div></div>`;
 }
 
-
 function showVersionButton(versionName, plateName) {
-    $('#song-table').html([
-        `
-        <div class="row">
-            <div class="col-3">
-                <button class="w-100" onclick="showPlateProgress('${versionName}', '極', '${plateName}')">${plateName}極</button>
-            </div>`,
-        (versionName == 'maimai ~ maimai PLUS') ?
-            `
-            <div class="col-3">
-                <button class="w-100" disabled>※初代100%就AP，沒有真将</button>
-            </div>`: `
-            <div class="col-3">
-                <button class="w-100" onclick="showPlateProgress('${versionName}', '将', '${plateName}')">${plateName}将</button>
-            </div>`,
-        `
-            <div class="col-3">
-                <button class="w-100" onclick="showPlateProgress('${versionName}', '神', '${plateName}')">${plateName}神</button>
-            </div>
-            <div class="col-3">
-                <button class="w-100" onclick="showPlateProgress('${versionName}', '舞舞', '${plateName}')">${plateName}舞舞</button>
-            </div>
-        </div>`,
-    ].join(''));
+    const buttons = [
+        `<div class="col-3"><button class="w-100" onclick="showPlateProgress('${versionName}', '極', '${plateName}')">${plateName}極</button></div>`,
+        versionName === 'maimai ~ maimai PLUS' 
+            ? `<div class="col-3"><button class="w-100" disabled>※初代100%就AP，沒有真将</button></div>`
+            : `<div class="col-3"><button class="w-100" onclick="showPlateProgress('${versionName}', '将', '${plateName}')">${plateName}将</button></div>`,
+        `<div class="col-3"><button class="w-100" onclick="showPlateProgress('${versionName}', '神', '${plateName}')">${plateName}神</button></div>`,
+        `<div class="col-3"><button class="w-100" onclick="showPlateProgress('${versionName}', '舞舞', '${plateName}')">${plateName}舞舞</button></div>`
+    ];
+    $('#song-table').html(`<div class="row">${buttons.join('')}</div>`);
 }
 
 async function showPlateProgress(versionName, type, plateName) {
-
-    var songs = data.songs;
+    let songs = data.songs.filter(song => song.title !== '全世界共通リズム感テスト');
     const today = new Date();
-
-    var removeList = await fetch('removed_song.json')
-        .then(res => res.json());
+    
+    const removeList = await fetch('removed_song.json').then(res => res.json());
     removeList.forEach(entry => {
-        const removeDate = new Date(entry.remove_date);
-        if (today > removeDate) {
+        if (today > new Date(entry.remove_date)) {
             const removeTitles = entry.remove_songs.map(s => s.title);
             songs = songs.filter(song => !removeTitles.includes(song.title));
         }
     });
-    songs = songs.filter(song => song.title !== '全世界共通リズム感テスト');
 
     if (versionName === 'maimai ~ maimai PLUS') {
-        songs = songs
-            .filter(song => song.version_international === 'maimai' || song.version_international === 'maimai PLUS');
+        songs = songs.filter(song => ['maimai', 'maimai PLUS'].includes(song.version_international));
     } else if (versionName === 'maimai ~ FiNALE') {
         const finaleIndex = versionOrder.indexOf('FiNALE');
-        songs = songs.filter(song =>
-            versionOrder.indexOf(song.version_international) !== -1 &&
-            versionOrder.indexOf(song.version_international) <= finaleIndex
-        );
+        songs = songs.filter(song => versionOrder.indexOf(song.version_international) !== -1 && 
+                                   versionOrder.indexOf(song.version_international) <= finaleIndex);
     } else {
-        songs = songs
-            .filter(song => song.version_international === versionName);
+        songs = songs.filter(song => song.version_international === versionName);
     }
-    const basicTotal = songs.filter(song => song.difficulty === 'basic').length;
-    const advancedTotal = songs.filter(song => song.difficulty === 'advanced').length;
-    const expertTotal = songs.filter(song => song.difficulty === 'expert').length;
-    const masterTotal = songs.filter(song => song.difficulty === 'master').length;
-    const remasterTotal = songs.filter(song => song.difficulty === 'remaster').length;
-    var basicCompleted = 0;
-    var advancedCompleted = 0;
-    var expertCompleted = 0;
-    var masterCompleted = 0;
-    var remasterCompleted = 0;
-    filteredSongs = [];
-    var tips = '';
-    switch (type) {
-        case '極':
-            filteredSongs = songs.filter(song => song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp);
-            tips = '全曲/BASIC～MASTER/FULL COMBO';
-        case '将':
-            filteredSongs = songs.filter(song => parseFloat(song.score) > 100);
-            tips = '全曲/BASIC～MASTER/RANK SSS';
-            break;
-        case '神':
-            filteredSongs = songs.filter(song => song.ap || song.app);
-            tips = '全曲/BASIC～MASTER/ALL PERFECT';
-            break;
-        case '舞舞':
-            filteredSongs = songs.filter(song => song.fdx);
-            tips = '全曲/BASIC～MASTER/FULL SYNC DX';
-            break;
-        case '覇者':
-            filteredSongs = songs.filter(song => parseFloat(song.score.replace('%', '')) >= 80);
-            tips = '全曲/BASIC～RE:MASTER/clear';
-            break;
-    }
-    basicCompleted = filteredSongs.filter(song => song.difficulty === 'basic').length;
-    advancedCompleted = filteredSongs.filter(song => song.difficulty === 'advanced').length;
-    expertCompleted = filteredSongs.filter(song => song.difficulty === 'expert').length;
-    masterCompleted = filteredSongs.filter(song => song.difficulty === 'master').length;
-    remasterCompleted = filteredSongs.filter(song => song.difficulty === 'remaster').length;
+
+    const difficultyCounts = {
+        basic: { total: 0, completed: 0 },
+        advanced: { total: 0, completed: 0 },
+        expert: { total: 0, completed: 0 },
+        master: { total: 0, completed: 0 },
+        remaster: { total: 0, completed: 0 }
+    };
+
+    songs.forEach(song => {
+        if (song.difficulty in difficultyCounts) {
+            difficultyCounts[song.difficulty].total++;
+        }
+    });
+
+    const tips = {
+        '極': '全曲/BASIC～MASTER/FULL COMBO',
+        '将': '全曲/BASIC～MASTER/RANK SSS',
+        '神': '全曲/BASIC～MASTER/ALL PERFECT',
+        '舞舞': '全曲/BASIC～MASTER/FULL SYNC DX',
+        '覇者': '全曲/BASIC～RE:MASTER/clear'
+    }[type];
+
+    const filteredSongs = songs.filter(song => {
+        switch (type) {
+            case '極': return song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp;
+            case '将': return parseFloat(song.score) > 100;
+            case '神': return song.ap || song.app;
+            case '舞舞': return song.fdx;
+            case '覇者': return parseFloat(song.score.replace('%', '')) >= 80;
+            default: return false;
+        }
+    });
+
+    filteredSongs.forEach(song => {
+        if (song.difficulty in difficultyCounts) {
+            difficultyCounts[song.difficulty].completed++;
+        }
+    });
+
+    const difficultyTable = Object.entries(difficultyCounts)
+        .filter(([diff, counts]) => {
+            if (diff === 'remaster') {
+                return versionName === 'maimai ~ FiNALE';
+            }
+            return counts.total > 0;
+        })
+        .map(([diff, counts]) => {
+            const colors = {
+                basic: '#81d955',
+                advanced: '#f8b709',
+                expert: '#ff818d',
+                master: '#c346e7',
+                remaster: '#fff'
+            };
+            const percentage = (counts.completed / counts.total * 100).toFixed(2);
+            return `<tr>
+                <td class="text-shadow-black" style="color:${colors[diff]}">${diff.toUpperCase().slice(0, 3)}</td>
+                <td class="ps-2">${String(counts.completed).padStart(3, " ")}</td>
+                <td>/</td>
+                <td>${String(counts.total).padStart(3, " ")}</td>
+                <td class="ps-2">=</td>
+                <td class="ps-2">${percentage}%</td>
+            </tr>`;
+        }).join('');
 
     $('#stat').html(`
-        <div class="difficulty-counts section-title d-flex align-items-center justify-content-center">
-            <table class="difficulty-table">
-                <tr><td style="color:#81d955">BAS</td><td>:</td><td>${String(basicCompleted).padStart(3, " ")}</td><td>/</td><td>${String(basicTotal).padStart(3, " ")}</td><td>=</td><td>${(basicCompleted / basicTotal * 100).toFixed(2)}%</td></tr>
-                <tr><td style="color:#f8b709">ADV</td><td>:</td><td>${String(advancedCompleted).padStart(3, " ")}</td><td>/</td><td>${String(advancedTotal).padStart(3, " ")}</td><td>=</td><td>${(advancedCompleted / advancedTotal * 100).toFixed(2)}%</td></tr>
-                <tr><td style="color:#ff818d">EXP</td><td>:</td><td>${String(expertCompleted).padStart(3, " ")}</td><td>/</td><td>${String(expertTotal).padStart(3, " ")}</td><td>=</td><td>${(expertCompleted / expertTotal * 100).toFixed(2)}%</td></tr>
-                <tr><td style="color:#c346e7">MAS</td><td>:</td><td>${String(masterCompleted).padStart(3, " ")}</td><td>/</td><td>${String(masterTotal).padStart(3, " ")}</td><td>=</td><td>${(masterCompleted / masterTotal * 100).toFixed(2)}%</td></tr>
-                ${versionName === 'maimai ~ FiNALE' ? `<tr><td style="color:#fff">REM</td><td>:</td><td>${String(remasterCompleted).padStart(3, " ")}</td><td>/</td><td>${String(remasterTotal).padStart(3, " ")}</td><td>=</td><td>${(remasterCompleted / remasterTotal * 100).toFixed(2)}%</td></tr>` : ''}
-            </table>
+        <div class="difficulty-counts d-flex align-items-center">
+            <table class="difficulty-table text-center">${difficultyTable}</table>
         </div>
     `);
 
+    const displayTips = versionName === 'maimai ~ FiNALE' ? tips.replace('～MASTER/', '～RE:MASTER/') : tips;
+    
     $('#song-table').html(`
-    <div class="section-title">
-        <b id="plate-progress-title">${plateName}${type}(${versionName})進度</b>
-        <div class="tips">${versionName === 'maimai ~ FiNALE' ? tips.replace('～MASTER/', '～RE:MASTER/') : tips}</div>
-    </div>
-    <div class="square-song-grid col-12 row ms-0">
-        ${songs
-            .sort((a, b) => b.internalLevel - a.internalLevel)
-            .filter(song => {
-                if (versionName === 'maimai ~ FiNALE') {
+        <div class="section-title text-shadow-black">
+            <b id="plate-progress-title">${plateName}${type}(${versionName})進度</b>
+            <div class="tips">${displayTips}</div>
+        </div>
+        <div class="square-song-grid col-12 row ms-0">
+            ${songs
+                .sort((a, b) => b.internalLevel - a.internalLevel)
+                .filter(song => {
+                    if (song.difficulty === "remaster") {
+                        return versionName === 'maimai ~ FiNALE';
+                    }
                     return true;
-                }
-                return song.difficulty !== "remaster";
-            })
-            .map(song => createNamePlateSongCard(song, type)).join('')}
-    </div>`);
+                })
+                .map(song => createNamePlateSongCard(song, type))
+                .filter(Boolean)
+                .join('')}
+        </div>
+    `);
 }
 
 function createNamePlateSongCard(song, type) {
-    const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
-    let isCompleted = false;
+    const isCompleted = {
+        '極': () => song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp,
+        '将': () => parseFloat(song.score) > 100,
+        '神': () => song.ap || song.app,
+        '舞舞': () => song.fdx,
+        '覇者': () => parseFloat(song.score.replace('%', '')) >= 80
+    }[type]();
 
-    switch (type) {
-        case '極':
-            isCompleted = song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp;
-        case '将':
-            isCompleted = parseFloat(song.score) > 100;
-            break;
-        case '神':
-            isCompleted = song.ap || song.app;
-            break;
-        case '舞舞':
-            isCompleted = song.fdx;
-            break;
-        case '覇者':
-            isCompleted = parseFloat(song.score.replace('%', '')) >= 80;
-            break;
+    if (($('#completed-only').is(':checked') && !isCompleted) || 
+        ($('#non-completed-only').is(':checked') && isCompleted)) {
+        return null;
     }
 
-    if ($('#completed-only').is(':checked') && !isCompleted) {
-        return null;
-    } else if($('#non-completed-only').is(':checked') && isCompleted) {
-        return null;
-    } else {
-        return `
-        <div class="plate-song-card difficulty-${diffClass} ${isCompleted ? 'completed' : ''}" style="background-image: url('${song.image}');" onclick="showSongDetail('${song.title}', '${song.type}')">
+    return `
+        <div class="plate-song-card difficulty-${song.difficulty.replace(" ", "-").toLowerCase()} ${isCompleted ? 'completed' : ''}" 
+             style="background-image: url('${song.image}');" 
+             onclick="showSongDetail('${song.title}', '${song.type}')">
             <div class="song-overlay"></div>
-            <div class="song-content text-shadow f_10 plate-song-title">${song.title}</div>
-            <div class="song-content text-shadow f_10">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>
-            <div class="song-content text-shadow">${song.score}</div>
+            <div class="song-content text-shadow-black f_10 plate-song-title">${song.title}</div>
+            <div class="song-content text-shadow-black f_10">${song.internalLevel ? Number.parseFloat(song.internalLevel).toFixed(1) : ''} | ${song.type.toUpperCase()}</div>
+            <div class="song-content text-shadow-black">${song.score}</div>
             ${isCompleted ? '<div class="completion-check"><b>✓</b></div>' : ''}
         </div>`;
-    }
 }
 
 function showSongDetail(title, type) {

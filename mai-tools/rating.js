@@ -1,72 +1,90 @@
 async function initRatingList() {
+    if (!data.ratingSongList) {
+        const topSongs = getTop50Songs();
+        data.ratingSongList = {
+            rating_new: topSongs.filter(s => s.version_international === currentVersion),
+            rating_others: topSongs.filter(s => s.version_international !== currentVersion)
+        };
+    }
+
+    const { rating_new, rating_others } = data.ratingSongList;
+    const allRatingSongs = [...rating_new, ...rating_others];
+    
+    const [newSongs, others, all] = [rating_new, rating_others, allRatingSongs].map(calcRatings);
+    await renderRatingSummaryTable(newSongs, others, all);
     $('#song-table').html(await showRatingList());
-    await renderRatingSummaryTable();
 }
 
 async function showRatingList() {
-    const html = [
-        await createRatingSection('new songs', data.ratingSongList.rating_new),
-        await createRatingSection('others', data.ratingSongList.rating_others)
+    const { rating_new, rating_others } = data.ratingSongList;
+    return [
+        await createRatingSection('new songs', rating_new),
+        await createRatingSection('others', rating_others)
     ].join('');
-
-    return html;
 }
 
-async function renderRatingSummaryTable() {
-    const allRatingSongs = data.ratingSongList.rating_new.concat(data.ratingSongList.rating_others);
+function getTop50Songs() {
+    const [oldSongs, newSongs] = [
+        data.songs.filter(s => s.version_international !== currentVersion),
+        data.songs.filter(s => s.version_international === currentVersion)
+    ].map(songs => songs.map(s => ({ ...s, rating: calculateSongRating(s) })));
 
-    const newSongs = calcRatings(data.ratingSongList.rating_new);
-    const others = calcRatings(data.ratingSongList.rating_others);
-    const all = calcRatings(allRatingSongs);
+    const sortByRating = (a, b) => b.rating - a.rating || parseFloat(b.score) - parseFloat(a.score);
+    return [
+        ...oldSongs.sort(sortByRating).slice(0, 35),
+        ...newSongs.sort(sortByRating).slice(0, 15)
+    ];
+}
 
+async function renderRatingSummaryTable(newSongs, others, all) {
     const getAvg = songs => (songs.reduce((sum, item) => sum + item.rating, 0) / songs.length).toFixed(2);
-
-    const rows = [
-        `<tr><td>新譜面平均R值</td><td>:</td><td>${getAvg(newSongs)}</td></tr>`,
-        `<tr><td>舊譜面平均R值</td><td>:</td><td>${getAvg(others)}</td></tr>`,
-        `<tr><td>全譜面平均R值</td><td>:</td><td>${getAvg(all)}</td></tr>`
+    
+    const stats = [
+        ['新譜面平均R值', getAvg(newSongs)],
+        ['舊譜面平均R值', getAvg(others)],
+        ['全譜面平均R值', getAvg(all)]
     ];
 
+    const tableHtml = stats.map(([label, value]) => 
+        `<tr><td>${label}</td><td class="ps-2">${value}</td></tr>`
+    ).join('');
+
     $('#stat').html(`
-        <div class="section-title d-flex align-items-center justify-content-center">
-            <table>
-                <tbody>${rows.join('')}</tbody>
-            </table>
+        <div class="d-flex align-items-center">
+            <table><tbody>${tableHtml}</tbody></table>
         </div>
     `);
 }
 
-
 async function createRatingSection(title, songs) {
-    songs = calcRatings(songs);
-
+    const ratedSongs = calcRatings(songs);
     return `
-        <div class="section-title">${title}</div>
+        <div class="section-title text-shadow-black">${title}</div>
         <div class="song-grid row ms-0">
-            ${songs.map(createSongCard).join('')}
+            ${ratedSongs.map(createSongCard).join('')}
         </div>`;
 }
 
-function calcRatings(songs) {
-    return songs.map(song => {
-        const scoreFloat = parseFloat(song.score) / 100;
-        const isSSSPlus = parseFloat(song.score) >= 100.5;
-        const coefficient = isSSSPlus ? 22.4 : (ratingTable.find(rank => parseFloat(rank.score) <= parseFloat(song.score))?.coefficient || 0);
-        const rating = Math.floor(song.internalLevel * coefficient * (isSSSPlus ? 1.005 : scoreFloat));
-        return { ...song, rating };
-    });
-}
+const calcRatings = songs => songs.map(song => ({
+    ...song,
+    rating: calculateSongRating(song)
+}));
+
+const calculateSongRating = song => 
+    achi2rating_splashplus(song.internalLevel * 10, parseFloat(song.score) * 10000);
 
 function createSongCard(song) {
     const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
+    const { title, image, internalLevel, type, score, rating } = song;
+    
     return `
     <div class="song-card difficulty-${diffClass}">
-        <img src="${song.image}" class="song-image" alt="${song.title}" crossorigin="anonymous" />
+        <img src="${image}" class="song-image" alt="${title}" crossorigin="anonymous" />
         <div class="song-overlay"></div>
-        <div class="block-song-name song-content text-shadow song-title">${song.title}</div>
-        <div class="block-inner-level song-content text-shadow">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>
-        <div class="block-score song-content text-shadow">${song.score}</div>
-        <div class="block-rating song-content text-shadow">${song.rating}</div>
+        <div class="block-song-name song-content text-shadow-black song-title">${title}</div>
+        <div class="block-inner-level song-content text-shadow-black">${internalLevel ? Number.parseFloat(internalLevel).toFixed(1) : ''} | ${type.toUpperCase()}</div>
+        <div class="block-score song-content text-shadow-black">${score}</div>
+        <div class="block-rating song-content text-shadow-black">${rating}</div>
     </div>`;
 }
 
