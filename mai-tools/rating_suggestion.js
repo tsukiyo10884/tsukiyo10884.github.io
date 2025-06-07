@@ -148,13 +148,10 @@ async function initRatingSuggestionList() {
     $('#song-table').empty().append($newSongsSection, $oldSongsSection);
     $('#stat').empty();
     bindSuggestionEventListeners();
-    console.log('test1');
 }
 
 function bindSuggestionEventListeners() {
-    console.log('test2');
     $('#completed-only, #non-completed-only').on('change', function() {
-        console.log('test3');
         const $input = $('#song-table .section-title').text().trim();
         const match = $input.match(/^等級\s*(\d+(?:\.\d+)?)\s*推薦曲$/);
         if (match) {

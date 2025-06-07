@@ -123,7 +123,9 @@
                 const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
                 const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
                 const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
-                const version = sheet?.version;
+                
+                const version_international = songVersionData[title + "__" + type];
+                const version_japan = sheet?.version;
 
                 const tdIcon = block.querySelector('.t_r.f_0');
                 const iconSrcList = Array.from(tdIcon).map(el => el.src);
