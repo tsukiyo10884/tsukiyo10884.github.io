@@ -18,8 +18,7 @@
     const difficulties = ["basic", "advanced", "expert", "master", "remaster"];
     const detailData = await fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
         .then(res => res.json());
-    // 取得同資料夾的song_version.json
-    const songVersionData = await fetch('./song_version.json')
+    const songVersionData = await fetch('https://tsukiyo10884.github.io/mai-tools/song_version.json')
         .then(res => res.json());
 
     if (idx === '') {
