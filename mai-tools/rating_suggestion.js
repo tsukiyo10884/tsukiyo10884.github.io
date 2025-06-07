@@ -67,7 +67,7 @@ function calculateSuggestions(songs, minRating, thresholds, version) {
 function createLevelButton(suggestion) {
     return $('<button>')
         .addClass('me-2 col-1 mb-2')
-        .text(`${suggestion.level}`)
+        .text(`${suggestion.level.toFixed(1)}`)
         .on('click', () => showLevelDetails(suggestion));
 }
 
@@ -75,7 +75,7 @@ function showLevelDetails(suggestion) {
     const $contentContainer = $('<div class="d-flex align-items-center">');
     const $table = createUpgradesTable(suggestion);
     const $songGrid = createSuggestionSongCard(suggestion);
-    const $title = createElement('div', 'section-title text-shadow-black', `等級${suggestion.level}推薦曲`);
+    const $title = createElement('div', 'section-title text-shadow-black', `等級${suggestion.level.toFixed(1)}推薦曲`);
 
     $contentContainer.append($table);
     $('#stat').empty().append($contentContainer);
