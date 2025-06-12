@@ -5,7 +5,6 @@
         payload: null,
     }, "https://tsukiyo10884.github.io");
 
-    // 看是不是好友的資料
     let idx = '';
     const url = new URL(window.location.href);
     if (
@@ -18,7 +17,7 @@
     const difficulties = ["basic", "advanced", "expert", "master", "remaster"];
     const detailData = await fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
         .then(res => res.json());
-    const songVersionData = await fetch('https://tsukiyo10884.github.io/mai-tools/song_version.json')
+    const songVersionData = await fetch('https://tsukiyo10884.github.io/mai-tools/international_song_version.json')
         .then(res => res.json());
 
     if (idx === '') {
@@ -42,7 +41,10 @@
 
             blocks.forEach(block => {
                 const type = block.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
-                const title = block.querySelector('.music_name_block')?.textContent.trim() || "";
+                let title = block.querySelector('.music_name_block')?.textContent.trim() || "　";
+                if (title === "Bad Apple!! feat nomico") {
+                    title = "Bad Apple!! feat.nomico";
+                }
 
                 const score = parseFloat(
                     block.querySelector('.music_score_block.w_112')?.textContent.trim().replace('%', '') || "0"
@@ -55,7 +57,13 @@
                 const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
                 const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
 
-                const version_international = songVersionData[title + "__" + type];
+                let version_international = songVersionData[title + "__" + type];
+                if (version_international.includes('でらっくす')) {
+                    version_international = version_international.replace('maimaiでらっくす', 'でらっくす');
+                }
+                if (version_international.includes('Splash')) {
+                    version_international = version_international.replace('Splash', 'スプラッシュ');
+                }
                 const version_japan = sheet?.version;
 
                 const iconSrcList = Array.from(block.querySelectorAll('.h_30.f_r')).map(el => el.src);
@@ -123,7 +131,7 @@
                 const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
                 const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
                 const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
-                
+
                 const version_international = songVersionData[title + "__" + type];
                 const version_japan = sheet?.version;
 

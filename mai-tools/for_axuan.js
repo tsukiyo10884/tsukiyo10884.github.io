@@ -214,11 +214,6 @@ function createSuggestionSongCardXuan(suggestion) {
 
         const selectedThreshold = $('input[name="rating-threshold"]:checked').val();
         const matchingSuggestion = suggestions.find(s => s.level === song.internalLevel && (song.version_international === currentVersion ? s.version_international === currentVersion : s.version_international === 'others'));
-        console.log(song.title);
-        console.log(song.internalLevel);
-        console.log(song.version_international);
-        console.log(currentVersion);
-        console.log(matchingSuggestion);
         if (!matchingSuggestion) {
             return null;
         }

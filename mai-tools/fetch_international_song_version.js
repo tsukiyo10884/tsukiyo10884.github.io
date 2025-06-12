@@ -19,14 +19,13 @@
         const doc = new DOMParser().parseFromString(text, 'text/html');
 
         if (versions[i] !== doc.querySelector('.screw_block.m_15.f_15.p_s').textContent) {
-            console.log(`version名稱不一致: ${versions[i]} !== ${doc.querySelector('.screw_block.m_15.f_15.p_s').textContent}`);
             continue;
         }
 
         const blocks = doc.querySelectorAll('.music_master_score_back.pointer.w_450.m_15.p_3.f_0');
 
         blocks.forEach(block => {
-            const title = block.querySelector('.music_name_block.t_l.f_13.break')?.textContent.trim();
+            const title = block.querySelector('.music_name_block.t_l.f_13.break')?.textContent.trim() || "　";
             const kindImg = block.querySelector('.music_kind_icon.f_r')?.getAttribute('src') || "";
             const type = kindImg.includes('music_dx') ? 'dx' : 'std';
 
@@ -37,15 +36,13 @@
                 }
             }
         });
-
-        console.log(`Fetched version ${i}: ${versions[i]}, songs: ${blocks.length}`);
     }
 
     const blob = new Blob([JSON.stringify(titleTypeToVersion, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'maimai_title_type_to_version.json';
+    a.download = 'international_song_version.json';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

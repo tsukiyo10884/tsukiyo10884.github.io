@@ -35,7 +35,7 @@ function showPlateList() {
         return `<div class="${colClass}">
             <button class="w-100 plate-version-button" onclick="showVersionButton('${version.versionName}','${version.plateName}')">              
                 <span style="font-size: 16px;">${version.plateName}</span><br/>
-                <span style="font-size: 14px;">${version.versionName.replace('でらっくす', ' DX')}</span>
+                <span style="font-size: 14px;">${version.versionName}</span>
             </button>
         </div>`;
     }).join('')}</div>`;
@@ -154,7 +154,6 @@ async function showPlateProgress(versionName, type, plateName) {
         }
     });
     diffGroup.sort((a, b) => difficulties.indexOf(b) - difficulties.indexOf(a));
-    console.log(diffGroup);
 
     $('#song-table').html(`
         <div class="section-title text-shadow-black">
