@@ -41,7 +41,7 @@
 
             blocks.forEach(block => {
                 const type = block.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
-                let title = block.querySelector('.music_name_block')?.textContent.trim() || "　";
+                let title = block.querySelector('.music_name_block')?.textContent || "　";
                 if (title === "Bad Apple!! feat nomico") {
                     title = "Bad Apple!! feat.nomico";
                 }
