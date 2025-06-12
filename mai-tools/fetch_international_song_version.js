@@ -30,7 +30,10 @@
             const type = kindImg.includes('music_dx') ? 'dx' : 'std';
 
             if (title) {
-                const key = `${title}__${type}`;
+                let key = `${title}__${type}`;
+                if (title === "Bad Apple!! feat nomico") {
+                    key = "Bad Apple!! feat.nomico__std";
+                }
                 if (!(key in titleTypeToVersion)) {
                     titleTypeToVersion[key] = versions[i];
                 }
