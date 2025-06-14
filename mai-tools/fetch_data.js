@@ -58,6 +58,10 @@
                 const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
 
                 let version_international = songVersionData[title + "__" + type];
+                if (version_international === undefined) {
+                    console.log(title + "__" + type);
+                    version_international = "Unknown";
+                }
                 if (version_international.includes('でらっくす')) {
                     version_international = version_international.replace('maimaiでらっくす', 'でらっくす');
                 }
