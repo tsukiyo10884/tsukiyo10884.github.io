@@ -19,6 +19,8 @@
         .then(res => res.json());
     const songVersionData = await fetch('https://tsukiyo10884.github.io/mai-tools/international_song_version.json')
         .then(res => res.json());
+    const versionData = await fetch('https://tsukiyo10884.github.io/mai-tools/version.json')
+        .then(res => res.json());
 
     if (idx === '') {
         const homeRes = await fetch('https://maimaidx-eng.com/maimai-mobile/home/', { credentials: 'include' });
@@ -59,8 +61,7 @@
 
                 let version_international = songVersionData[title + "__" + type];
                 if (version_international === undefined) {
-                    console.log(title + "__" + type);
-                    version_international = "Unknown";
+                    version_international = versionData[versionData.length - 1].versionName;
                 }
                 if (version_international.includes('でらっくす')) {
                     version_international = version_international.replace('maimaiでらっくす', 'でらっくす');
