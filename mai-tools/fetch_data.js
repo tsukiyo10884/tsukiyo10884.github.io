@@ -26,7 +26,7 @@
         const homeRes = await fetch('https://maimaidx-eng.com/maimai-mobile/home/', { credentials: 'include' });
         const homeText = await homeRes.text();
         const homeDoc = new DOMParser().parseFromString(homeText, 'text/html');
-        const user_info = [];
+        const user_info = {};
         user_info.icon = homeDoc.querySelector('.w_112.f_l').src;
         user_info.name = homeDoc.querySelector('.name_block.f_l.f_16').textContent;
         user_info.rating = homeDoc.querySelector('.rating_block').textContent;
@@ -116,7 +116,7 @@
         const homeRes = await fetch('https://maimaidx-eng.com/maimai-mobile/friend/friendDetail/?idx=' + idx, { credentials: 'include' });
         const homeText = await homeRes.text();
         const homeDoc = new DOMParser().parseFromString(homeText, 'text/html');
-        const user_info = [];
+        const user_info = {};
         user_info.icon = homeDoc.querySelector('.w_112.f_l').src;
         user_info.name = homeDoc.querySelector('.name_block.f_l.f_16').textContent;
         user_info.rating = homeDoc.querySelector('.rating_block').textContent;
