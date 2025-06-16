@@ -17,27 +17,30 @@
     const difficulties = ["basic", "advanced", "expert", "master", "remaster"];
     const detailData = await fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
         .then(res => res.json());
-    const songVersionData = await fetch('https://tsukiyo10884.github.io/mai-tools/international_song_version.json')
+    const songVersionData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/international_song_version.json')
         .then(res => res.json());
-    const versionData = await fetch('https://tsukiyo10884.github.io/mai-tools/version.json')
+    const versionData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/version.json')
         .then(res => res.json());
+
+    const homeRes = await fetch('https://maimaidx-eng.com/maimai-mobile/home/', { credentials: 'include' });
+    const homeText = await homeRes.text();
+    const homeDoc = new DOMParser().parseFromString(homeText, 'text/html');
+    const user_info = {};
+    user_info.icon = homeDoc.querySelector('.w_112.f_l').src;
+    user_info.name = homeDoc.querySelector('.name_block.f_l.f_16').textContent;
+    user_info.rating = homeDoc.querySelector('.rating_block').textContent;
+    user_info.rating_base = homeDoc.querySelector('.h_30.f_r').src;
+    user_info.course_rank = homeDoc.querySelector('.h_35.f_l').src;
+    user_info.course_rank_text = homeDoc.querySelector('.h_35.f_l').src.match(/course_rank_(\d{2})/)[1];
+    user_info.class_rank = homeDoc.querySelector('.p_l_10.h_35.f_l').src;
+    user_info.class_rank_text = homeDoc.querySelector('.p_l_10.h_35.f_l').src.match(/class_rank_s_(\d{2})/)[1];
+    user_info.star = homeDoc.querySelector('.p_l_10.f_l.f_14').textContent;
+    user_info.user_trophy_block = homeDoc.querySelector('.trophy_block.p_3.t_c.f_0').className;
+    user_info.trophy = homeDoc.querySelector('.trophy_inner_block.f_13').textContent;
+
+    const songs = [];
 
     if (idx === '') {
-        const homeRes = await fetch('https://maimaidx-eng.com/maimai-mobile/home/', { credentials: 'include' });
-        const homeText = await homeRes.text();
-        const homeDoc = new DOMParser().parseFromString(homeText, 'text/html');
-        const user_info = {};
-        user_info.icon = homeDoc.querySelector('.w_112.f_l').src;
-        user_info.name = homeDoc.querySelector('.name_block.f_l.f_16').textContent;
-        user_info.rating = homeDoc.querySelector('.rating_block').textContent;
-        user_info.rating_base = homeDoc.querySelector('.h_30.f_r').src;
-        user_info.course_rank = homeDoc.querySelector('.h_35.f_l').src;
-        user_info.class_rank = homeDoc.querySelector('.p_l_10.h_35.f_l').src;
-        user_info.star = homeDoc.querySelector('.p_l_10.f_l.f_14').textContent;
-        user_info.user_trophy_block = homeDoc.querySelector('.trophy_block.p_3.t_c.f_0').className;
-        user_info.trophy = homeDoc.querySelector('.trophy_inner_block.f_13').textContent;
-
-        const songs = [];
         for (let i = 0; i < difficulties.length; i++) {
             childWin.postMessage({
                 type: "difficulty",
@@ -99,35 +102,7 @@
                 });
             });
         }
-
-        const exportData = {
-            user_info,
-            songs
-        };
-
-        setTimeout(() => {
-            childWin.postMessage({
-                type: "result",
-                payload: exportData,
-            }, "https://tsukiyo10884.github.io");
-            childWin.postMessage(exportData, "https://tsukiyo10884.github.io");
-        }, 500);
     } else {
-        const homeRes = await fetch('https://maimaidx-eng.com/maimai-mobile/friend/friendDetail/?idx=' + idx, { credentials: 'include' });
-        const homeText = await homeRes.text();
-        const homeDoc = new DOMParser().parseFromString(homeText, 'text/html');
-        const user_info = {};
-        user_info.icon = homeDoc.querySelector('.w_112.f_l').src;
-        user_info.name = homeDoc.querySelector('.name_block.f_l.f_16').textContent;
-        user_info.rating = homeDoc.querySelector('.rating_block').textContent;
-        user_info.rating_base = homeDoc.querySelector('.h_30.f_r').src;
-        user_info.course_rank = homeDoc.querySelector('.h_35.f_l').src;
-        user_info.class_rank = homeDoc.querySelector('.p_l_10.h_35.f_l').src;
-        user_info.star = homeDoc.querySelector('.p_l_10.f_l.f_14').textContent;
-        user_info.user_trophy_block = homeDoc.querySelector('.trophy_block.p_3.t_c.f_0').className;
-        user_info.trophy = homeDoc.querySelector('.trophy_inner_block.f_13').textContent;
-
-        const songs = [];
         for (let i = 0; i < difficulties.length; i++) {
             childWin.postMessage({
                 type: "difficulty",
@@ -178,18 +153,28 @@
                 });
             });
         }
-        const exportData = {
-            user_info,
-            songs
-        };
-
-        setTimeout(() => {
-            childWin.postMessage({
-                type: "result",
-                payload: exportData,
-            }, "https://tsukiyo10884.github.io");
-            childWin.postMessage(exportData, "https://tsukiyo10884.github.io");
-        }, 500);
     }
+
+    const exportData = {
+        user_info,
+        songs
+    };
+
+    //匯出JSON
+    const jsonData = JSON.stringify(exportData, null, 2);
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const u = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = u;
+    a.download = 'export.json';
+    a.click();
+
+    setTimeout(() => {
+        childWin.postMessage({
+            type: "result",
+            payload: exportData,
+        }, "https://tsukiyo10884.github.io");
+        childWin.postMessage(exportData, "https://tsukiyo10884.github.io");
+    }, 500);
 
 })()
