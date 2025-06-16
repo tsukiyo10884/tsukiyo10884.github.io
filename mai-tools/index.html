@@ -64,34 +64,6 @@
     <div class="result-container">
       <div class="row border-bottom border-secondary">
         <div id="user-info" class="user-info col-6 d-none">
-          <div class="basic_block p_10 f_0">
-            <img id="user-icon" loading="lazy" class="w_112 f_l">
-            <div class="p_l_10 f_l">
-              <div id="user-trophy-block" class="trophy_block p_3 t_c f_0">
-                <div class="trophy_inner_block f_13">
-                  <span id="user-trophy"></span>
-                </div>
-              </div>
-              <div class="m_b_5">
-                <div id="user-name" class="name_block f_l f_16"></div>
-                <div class="f_r t_r f_0">
-                  <div class="p_r p_3">
-                    <img id="user-rating-base" class="h_30 f_r">
-                    <div id="user-rating" class="rating_block"></div>
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-              <img src="https://maimaidx-eng.com/maimai-mobile/img/line_01.png" class="user_data_block_line">
-              <div class="clearfix"></div>
-              <img id="user-course-rank" class="h_35 f_l">
-              <img id="user-class-rank" class="p_l_10 h_35 f_l">
-              <div class="p_l_10 f_l f_14">
-                <img class="h_30 m_3 v_m" src="https://maimaidx-eng.com/maimai-mobile/img/icon_star.png"><span id="user-star"></span>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-          </div>
         </div>
         <div id="stat" class="col-6 row"></div>
       </div>
@@ -165,6 +137,40 @@
 
     const refreshData = () => {
       data = JSON.parse($('#json-data').text());
+      initUserInfo();
+    };
+
+    function initUserInfo() {
+      $('#user-info').html(`
+        <div class="basic_block p_10 f_0">
+          <img id="user-icon" loading="lazy" class="w_112 f_l">
+          <div class="p_l_10 f_l">
+            <div id="user-trophy-block" class="trophy_block p_3 t_c f_0">
+              <div class="trophy_inner_block f_13">
+                <span id="user-trophy"></span>
+              </div>
+            </div>
+            <div class="m_b_5">
+              <div id="user-name" class="name_block f_l f_16"></div>
+              <div class="f_r t_r f_0">
+                <div class="p_r p_3">
+                  <img id="user-rating-base" class="h_30 f_r">
+                  <div id="user-rating" class="rating_block"></div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <img src="https://maimaidx-eng.com/maimai-mobile/img/line_01.png" class="user_data_block_line">
+            <div class="clearfix"></div>
+            <img id="user-course-rank" class="h_35 f_l">
+            <img id="user-class-rank" class="p_l_10 h_35 f_l">
+            <div class="p_l_10 f_l f_14">
+              <img class="h_30 m_3 v_m" src="https://maimaidx-eng.com/maimai-mobile/img/icon_star.png"><span id="user-star"></span>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      `);
       $('#user-trophy-block').attr('class', data.user_info.user_trophy_block + ' trophy_block p_3 t_c f_0');
       $('#user-trophy').text(data.user_info.trophy);
       $('#user-name').text(data.user_info.name);
@@ -175,7 +181,7 @@
       $('#user-star').text('×' + data.user_info.star);
       $('#user-icon').attr('src', data.user_info.icon);
       $('#user-info').removeClass('d-none');
-    };
+    }
 
     const showTable = async (type) => {
       $('#level-filter').hide();

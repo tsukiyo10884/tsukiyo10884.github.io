@@ -429,17 +429,17 @@ a {
 }
 
 .axuan {
-    background-image: url(img/axuan.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position-x: right;
+	background-image: url(../img/axuan.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position-x: right;
 }
 
 .ayo {
-    background-image: url(img/ayo.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position-x: right;
+	background-image: url(../img/ayo.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position-x: right;
 }
 
 .fly {
@@ -450,5 +450,4 @@ a {
 	z-index: 1000;
 	padding: 50px;
 	box-sizing: content-box;
-  }
-  
+}
