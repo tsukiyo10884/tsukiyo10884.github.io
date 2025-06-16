@@ -1,5 +1,17 @@
 {
   "user": "<div class=\"basic_block p_10 f_0\">\n\t\t\t\t<img loading=\"lazy\" src=\"https://maimaidx-eng.com/maimai-mobile/img/Icon/63145430a5501fbe.png\" class=\"w_112 f_l\">\n\t\t<div class=\"p_l_10 f_l\">\n\t\t\t<div class=\"trophy_block trophy_Normal p_3 t_c f_0\">\n\t\t\t\t<div class=\"trophy_inner_block f_13\">\n\t\t\t\t\t<span>息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる</span>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"m_b_5\">\n\t\t\t\t<div class=\"name_block f_l f_16\">Ｔｓｕｋｉｙｏ</div>\n\t\t\t\t<div class=\"f_r t_r f_0\">\n\t\t\t\t\t<div class=\"p_r p_3\">\n\t\t\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/rating_base_platinum.png?ver=1.50\" class=\"h_30 f_r\">\n\t\t\t\t\t\t<div class=\"rating_block\">14857</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"clearfix\"></div>\n\t\t\t</div>\n\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/line_01.png\" class=\"user_data_block_line\">\n\t\t\t<div class=\"clearfix\"></div>\n\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/course/course_rank_09eKhcbFNK.png\" class=\"h_35 f_l\">\n\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/class/class_rank_s_14brd4ch6F.png\" class=\"p_l_10 h_35 f_l\">\n\t\t\t<div class=\"p_l_10 f_l f_14\"><img src=\"https://maimaidx-eng.com/maimai-mobile/img/icon_star.png\" class=\"h_30 m_3 v_m\">×134</div>\n\t\t</div>\n\t\t<div class=\"clearfix\"></div>\n\t</div>",
+  
+  "user_info": {
+    "user_trophy_block":"trophy_Normal",
+    "icon": "https://maimaidx-eng.com/maimai-mobile/img/Icon/63145430a5501fbe.png",
+    "trophy" : "\n\t\t\t\t\t息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる\n\t\t\t\t\t",
+    "name": "Ｔｓｕｋｉｙｏ",
+    "rating_base": "https://maimaidx-eng.com/maimai-mobile/img/rating_base_platinum.png?ver=1.50",
+    "rating": 14857,
+    "course_rank": "https://maimaidx-eng.com/maimai-mobile/img/course/course_rank_09eKhcbFNK.png",
+    "class_rank": "https://maimaidx-eng.com/maimai-mobile/img/class/class_rank_s_14brd4ch6F.png",
+    "star": 134
+  },
   "songs": [
     {
       "type": "dx",
