@@ -35,7 +35,7 @@
           href="https://sgimera.github.io/mai_RatingAnalyzer/maidx_calc.html" target="_blank">sgimera</a>
       </h6>
     </div>
-    <button id="test" onclick="LoadLocalJson('test_data.json')">測試</button>
+    <button id="test" onclick="LoadLocalJson('json/test_data.json')">測試</button>
     <div id="output"></div>
     <div id="button-group" class="row d-none align-items-center">
       <div class="col-2">
@@ -79,7 +79,7 @@
     let currentVersion = "PRiSM";
 
     const init = async () => {
-      versionList = await $.getJSON('version.json');
+      versionList = await $.getJSON('json/version.json');
       versionOrder = [...new Set(
         versionList
           .map(v => v.versionName)
@@ -178,7 +178,7 @@
       $('#user-rating-base').attr('src', data.user_info.rating_base);
       $('#user-course-rank').attr('src', data.user_info.course_rank);
       $('#user-class-rank').attr('src', data.user_info.class_rank);
-      $('#user-star').text('×' + data.user_info.star);
+      $('#user-star').text(data.user_info.star);
       $('#user-icon').attr('src', data.user_info.icon);
       $('#user-info').removeClass('d-none');
     }

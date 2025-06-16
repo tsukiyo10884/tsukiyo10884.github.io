@@ -57,7 +57,7 @@ async function showPlateProgress(versionName, type, plateName) {
     let songs = data.songs.filter(song => song.title !== '全世界共通リズム感テスト');
     const today = new Date();
 
-    const removeList = await fetch('removed_song.json').then(res => res.json());
+    const removeList = await fetch('./json/removed_song.json').then(res => res.json());
     removeList.forEach(entry => {
         if (today > new Date(entry.remove_date)) {
             const removeTitles = entry.remove_songs.map(s => s.title);
