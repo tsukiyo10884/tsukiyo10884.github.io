@@ -143,11 +143,11 @@ function createLevelSongCard(song) {
     }
 
     return `
-        <div class="col-1 plate-song-card difficulty-${diffClass} ${isCompleted ? 'completed' : ''}" 
+        <div class="col-1 square-song-card difficulty-${diffClass} ${isCompleted ? 'completed' : ''}" 
              style="background-image: url('${song.image}');" 
              onclick="showSongDetail('${song.title}', '${song.type}')">
             <div class="song-overlay"></div>
-            <div class="song-content text-shadow-black f_10 plate-song-title">${song.title}</div>
+            <div class="song-content text-shadow-black f_10 square-song-title">${song.title}</div>
             <div class="song-content text-shadow-black f_10">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>
             <div class="song-content text-shadow-black">${song.score}</div>
             ${isCompleted ? '<div class="completion-check"><b>✓</b></div>' : ''}

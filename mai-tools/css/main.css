@@ -1,13 +1,42 @@
+a {
+	color: #0056b3 !important;
+	text-decoration: underline;
+}
+
 body {
 	background-color: #51bcf3 !important;
 	font-family: sans-serif;
-	overflow-y: scroll;
 }
 
 button {
+	background-color: #ffffffcc;
+	border-radius: 12px !important;
+	border: none;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+	color: #333;
 	cursor: pointer;
+	font-size: 16px;
+	font-weight: bold;
 	margin-right: 1em;
+	margin: 8px;
 	padding: 0.5em 1em;
+	padding: 10px 20px;
+	transition: transform 0.1s ease, background-color 0.3s ease;
+}
+
+button:disabled {
+	background-color: #ccc;
+	cursor: not-allowed;
+}
+
+button:disabled:hover {
+	background-color: #ccc;
+	transform: none;
+}
+
+button:hover {
+	background-color: #f0f0f0;
+	transform: scale(1.03);
 }
 
 img {
@@ -19,6 +48,10 @@ img {
 	user-select: none;
 }
 
+.button-group {
+	margin: 1em 0;
+}
+
 .difficulty-advanced {
 	box-shadow: 5px 5px 4px #f8b709;
 }
@@ -27,58 +60,70 @@ img {
 	box-shadow: 5px 5px 4px #81d955;
 }
 
-.basic_block {
-	background-color: #fff;
-	border-radius: 5px;
-	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+.difficulty-count {
+	display: block;
+	text-align: left;
 }
 
-.block-inner-level {
-	bottom: 19.5px;
+.difficulty-expert {
+	box-shadow: 5px 5px 4px #ff818d;
+}
+
+.difficulty-master {
+	box-shadow: 5px 5px 4px #c346e7;
+}
+
+.difficulty-remaster {
+	box-shadow: 5px 5px 4px #fff;
+}
+
+.plate-version-button {
+	font-size: 14px;
+}
+
+.rating-gain-info {
 	font-size: 12px;
-	left: 3.5px;
-}
-
-.block-inner-level,
-.block-score,
-.block-song-name,
-.block-rating {
-	padding: 0.2em 0.4em;
+	font-weight: bold;
 	position: absolute;
-	z-index: 2;
+	right: 5px;
+	text-align: right;
+	top: 5px;
+	z-index: 1;
 }
 
-.block-rating {
-	right: -3px;
-	top: 3px;
-	font-size: 22px;
+.section-title {
+	color: #fff;
+	font-size: 20px;
+	grid-column: span 5;
+	margin: 9px 0;
+	text-align: center;
 }
 
-.block-score {
-	bottom: 3px;
-	font-size: 16px;
-	left: 1px;
+.song-content {
+	line-height: 1rem;
+	z-index: 1;
 }
 
-.block-song-name {
-	bottom: 33px;
-	font-size: 12px;
-	left: 4px;
+.song-overlay {
+	backdrop-filter: blur(2px);
+	background-color: rgba(0,0,0,0.2);
+	inset: -5px;
+	position: absolute;
 }
 
-.button-group {
-	margin: 1em 0;
+.table {
+	display: none;
+	flex-direction: column;
+	margin-top: 1em;
 }
 
-.comment_block {
-	background: #dcf3ff;
-	border-radius: 10px;
-	margin: 10px 0 0 0;
-	min-height: 100px;
-	padding: 10px;
-	width: 306px;
+.text-shadow-black {
+	text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
 }
 
+/**************/
+/*square cards*/
+/**************/
 .completed .song-overlay {
 	filter: brightness(30%);
 }
@@ -92,8 +137,115 @@ img {
 	z-index: 2;
 }
 
-.difficulty-expert {
-	box-shadow: 5px 5px 4px #ff818d;
+.square-song-card {
+	background-position: center;
+	background-size: cover;
+	border-radius: 5px;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	height: 100px;
+	justify-content: flex-end;
+	overflow: hidden;
+	padding: 0.5em;
+	position: relative;
+	width: 100px !important;
+}
+
+.square-song-grid {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: repeat(auto-fit,102px);
+}
+
+.square-song-title {
+	display: inline-block;
+	line-height: 12px !important;
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/**************/
+/*rating cards*/
+/**************/
+
+.rating-block-inner-level {
+	bottom: 19.5px;
+	font-size: 12px;
+	left: 3.5px;
+}
+
+.rating-block-inner-level,
+.rating-block-rating,
+.rating-block-score,
+.rating-block-song-title {
+	padding: 0.2em 0.4em;
+	position: absolute;
+	z-index: 2;
+}
+
+.rating-block-rating {
+	font-size: 22px;
+	right: -3px;
+	top: 3px;
+}
+
+.rating-block-score {
+	bottom: 3px;
+	font-size: 16px;
+	left: 1px;
+}
+
+.rating-block-song-title {
+	display: inline-block;
+    max-width: 162px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+	bottom: 33px;
+	font-size: 12px;
+	left: 4px;
+}
+
+.song-card {
+	align-items: center;
+	background-position: center;
+	background-size: cover;
+	border-radius: 5px;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	height: 101px;
+	justify-content: center;
+	overflow: hidden;
+	padding: 0.5em;
+	position: relative;
+	width: 163px !important;
+}
+
+.song-card.completed {
+	position: relative;
+}
+
+.song-grid {
+	display: grid;
+	gap: 1em;
+	grid-template-columns: repeat(auto-fit, 165px);
+}
+
+.song-image {
+	object-fit: cover;
+	width: calc(100% + 2em);
+}
+
+/**************/
+/*user profile*/
+/**************/.basic_block {
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
 }
 
 .f_0 {
@@ -145,16 +297,12 @@ img {
 	margin-bottom: 5px;
 }
 
-.difficulty-master {
-	box-shadow: 5px 5px 4px #c346e7;
-}
-
 .name_block {
 	background-color: #fff;
 	background-size: 34px;
 	border-radius: 5px;
 	border: 1px solid #dedede;
-	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
 	color: #000;
 	height: 27px;
 	margin: 3px 0;
@@ -178,36 +326,6 @@ img {
 	position: relative;
 }
 
-.plate-song-card {
-	background-position: center;
-	background-size: cover;
-	border-radius: 5px;
-	color: #fff;
-	display: flex;
-	flex-direction: column;
-	height: 100px;
-	justify-content: flex-end;
-	overflow: hidden;
-	padding: 0.5em;
-	position: relative;
-	width: 100px !important;
-}
-
-.square-song-grid {
-	display: grid;
-	gap: 10px;
-	grid-template-columns: repeat(auto-fit, 102px);
-}
-
-.plate-song-title {
-	display: inline-block;
-	line-height: 12px !important;
-	max-width: 100%;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
 .rating_block {
 	color: white;
 	font-size: 16px;
@@ -220,85 +338,12 @@ img {
 	width: 73px;
 }
 
-.difficulty-remaster {
-	box-shadow: 5px 5px 4px #fff;
-}
-
-.text-shadow-black {
-	text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
-}
-
-.section-title {
-	color: #fff;
-	font-size: 20px;
-	grid-column: span 5;
-	margin: 9px 0;
-	text-align: center;
-}
-
-.song-card {
-	align-items: center;
-	background-position: center;
-	background-size: cover;
-	border-radius: 5px;
-	color: #fff;
-	display: flex;
-	flex-direction: column;
-	height: 101px;
-	justify-content: center;
-	overflow: hidden;
-	padding: 0.5em;
-	position: relative;
-	width: 163px !important;
-}
-
-.song-card.completed {
-	position: relative;
-}
-
-.song-content {
-	z-index: 1;
-	line-height: 1rem;
-}
-
-.song-image {
-	object-fit: cover;
-	width: calc(100% + 2em);
-}
-
-.song-grid {
-	display: grid;
-	gap: 1em;
-	grid-template-columns: repeat(auto-fit, 165px);
-}
-
-.song-overlay {
-	backdrop-filter: blur(2px);
-	background-color: rgba(0, 0, 0, 0.2);
-	inset: -5px;
-	position: absolute;
-}
-
-.song-title {
-	display: inline-block;
-	max-width: 162px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
 .t_c {
 	text-align: center;
 }
 
 .t_r {
 	text-align: right;
-}
-
-.table {
-	display: none;
-	flex-direction: column;
-	margin-top: 1em;
 }
 
 .trophy_block {
@@ -359,95 +404,30 @@ img {
 	width: 112px;
 }
 
-button {
-	background-color: #ffffffcc;
-	border: none;
-	border-radius: 12px !important;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-	padding: 10px 20px;
-	margin: 8px;
-	font-size: 16px;
-	font-weight: bold;
-	color: #333;
-	cursor: pointer;
-	transition: transform 0.1s ease, background-color 0.3s ease;
-}
-
-button:hover {
-	background-color: #f0f0f0;
-	transform: scale(1.03);
-}
-
-button:disabled {
-	background-color: #ccc;
-	cursor: not-allowed;
-}
-
-button:disabled:hover {
-	background-color: #ccc;
-	transform: none;
-}
-
-a {
-	color: #0056b3 !important;
-	text-decoration: underline;
-}
-
-.main {
-	--bs-gutter-x: 1.5rem;
-	--bs-gutter-y: 0;
-	width: 915px;
-	padding-right: calc(var(--bs-gutter-x) * .5);
-	padding-left: calc(var(--bs-gutter-x) * .5);
-	margin-right: auto;
-	margin-left: auto;
-}
-
-.plate-version-button {
-	font-size: 14px;
-}
-
-.difficulty-count {
-	text-align: left;
-	display: block;
-}
-
-.tips {
-	color: #333;
-	text-shadow: none;
-	font-size: 14px;
-}
-
-.rating-gain-info {
-	position: absolute;
-	top: 5px;
-	right: 5px;
-	text-align: right;
-	font-size: 12px;
-	font-weight: bold;
-	z-index: 1;
-}
+/*********/
+/*For fun*/
+/*********/
 
 .axuan {
 	background-image: url(../img/axuan.png);
+	background-position-x: right;
 	background-repeat: no-repeat;
 	background-size: contain;
-	background-position-x: right;
 }
 
 .ayo {
 	background-image: url(../img/ayo.png);
+	background-position-x: right;
 	background-repeat: no-repeat;
 	background-size: contain;
-	background-position-x: right;
 }
 
 .fly {
+	box-sizing: content-box;
+	cursor: pointer;
+	height: auto;
+	padding: 50px;
 	position: absolute;
 	width: 50px;
-	height: auto;
-	cursor: pointer;
 	z-index: 1000;
-	padding: 50px;
-	box-sizing: content-box;
 }
