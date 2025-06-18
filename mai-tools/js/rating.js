@@ -40,7 +40,7 @@ async function renderRatingSummaryTable(newSongs, others, all) {
     const stats = [
         ['新曲平均', getAvg(newSongs)],
         ['舊曲平均', getAvg(others)],
-        ['總平均R值', getAvg(all)]
+        ['總平均R値', getAvg(all)]
     ];
 
     const tableHtml = stats.map(([label, value]) => 
@@ -87,7 +87,7 @@ function createSongCard(song) {
         <div class="rating-block-inner-level song-content text-shadow-black">${internalLevel ? Number.parseFloat(internalLevel).toFixed(1) : ''} | ${type.toUpperCase()}</div>
         <div class="rating-block-score song-content text-shadow-black">${score}</div>
         <div class="rating-block-rating song-content text-shadow-black">${rating}</div>
-        <div class="triangle-corner"></div>
+        <div class="card-decoration"></div>
     </div>`;
 }
 

@@ -1,6 +1,12 @@
+@font-face {
+    font-family: 'modern-font';
+    src: url('../../font/FGMediumHankaku.ttf'); 
+}
+
 body {
-    background: #ACB5EB;
-    background: linear-gradient(90deg, rgba(172, 181, 235, 1) 0%, rgba(146, 213, 233, 1) 50%, rgba(214, 250, 235, 1) 100%);
+    background: #232228 !important;
+    font-family: modern-font !important;
+    color: #fff !important;
 }
 
 .text-shadow-black {
@@ -11,7 +17,7 @@ body {
 /*user profile*/
 /**************/
 .basic_block {
-    background-color: #fff;
+    background-color: #413f4a;
     border-radius: 5px;
     box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 }
@@ -184,13 +190,18 @@ body {
 
 .song-image {
     object-fit: cover;
-    width: calc(100% + 2em);
+    height: 95px;
+    border-radius: 65px;
+    margin-top: 2px;
+    margin-left: 2px;
 }
 
 .song-card .song-overlay {
-    inset: -5px;
     position: absolute;
     background: linear-gradient(to top, #222222, #0000 60%);
+    border-radius: 500px;
+    height: 100px;
+    width: 95px;
 }
 
 .rating-block-inner-level,
@@ -218,10 +229,9 @@ body {
     color: #fff;
     display: flex;
     flex-direction: column;
-    height: 101px;
+    height: 136px;
     justify-content: center;
     overflow: hidden;
-    padding: 0.5em;
     position: relative;
     width: 163px !important;
     filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.7));
@@ -233,35 +243,37 @@ body {
 }
 
 .rating-block-inner-level {
-    bottom: 18.5px;
-    font-size: 12px;
-    left: 4px;
+    bottom: 21px;
+    font-size: 10px;
+    width: 165px;
+    text-align: center;
 }
 
 .rating-block-rating {
     font-size: 18px;
-    right: 2px;
-    bottom: 4px;
+    top: -3px;
 }
 
 .rating-block-score {
-    bottom: 3px;
-    font-size: 12px;
-    left: 4px;
+    bottom: 5px;
+    font-size: 16px;
+    width: 165px;
+    text-align: center;
 }
 
 .rating-block-song-title {
     display: inline-block;
-    max-width: 162px;
+    max-width: 87px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     bottom: 33px;
-    font-size: 12px;
-    left: 4px;
+    font-size: 9px;
+    width: 165px;
+    text-align: center;
 }
 
-.triangle-corner {
+.card-decoration {
     position: absolute;
     top: 0;
     right: 0;
@@ -271,56 +283,92 @@ body {
     z-index: 3;
 }
 
-.difficulty-advanced .triangle-corner {
-    border-top: 25px solid #f8b709;
+.song-card.difficulty-advanced::before {
+    background: linear-gradient(45deg, #232228, #232228, #f8b709) border-box;
 }
 
-.difficulty-basic .triangle-corner {
-    border-top: 25px solid #81d955;
+.song-card.difficulty-basic::before {
+    background: linear-gradient(45deg, #232228, #232228, #81d955) border-box;
 }
 
-.difficulty-expert .triangle-corner {
-    border-top: 25px solid #ff818d;
+.song-card.difficulty-expert::before {
+    background: linear-gradient(45deg, #232228, #232228, #ff818d) border-box;
 }
 
-.difficulty-master .triangle-corner {
-    border-top: 25px solid #c346e7;
+.song-card.difficulty-master::before {
+    background: linear-gradient(45deg, #232228, #232228, #c346e7) border-box;
 }
 
-.difficulty-remaster .triangle-corner {
-    border-top: 25px solid #fff;
+.song-card.difficulty-remaster::before {
+    background: linear-gradient(45deg, #232228, #232228, #fff) border-box;
 }
 
-.song-card.difficulty-advanced {
-    border: solid 5px #f8b709;
-}
-
-.song-card.difficulty-basic {
-    border: solid 5px #81d955;
-}
-
-.song-card.difficulty-expert {
-    border: solid 5px #ff818d;
-}
-
-.song-card.difficulty-master {
-    border: solid 5px #c346e7;
-}
-
-.song-card.difficulty-remaster {
-    border: solid 5px #fff;
+.song-card::before {
+    position: absolute;
+    content: "";
+    top: 19px;
+    width: 100px;
+    height: 100px;
+    border-radius: 500px;
+    z-index: 0;
+    border: 3px solid transparent;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
 }
 
 /*************/
-/*square card*/  
+/*square card*/
 /*************/
 
 
 .square-song-grid {
-	display: grid;
-	gap: 10px;
-	grid-template-columns: repeat(auto-fit,102px);
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, 102px);
 }
+
+.square-song-title {
+    display: inline-block;
+    line-height: 12px !important;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.square-song-card {
+    background-position: center;
+    background-size: cover;
+    border-radius: 5px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    justify-content: flex-end;
+    overflow: hidden;
+    padding: 5px !important;
+    position: relative;
+    width: 100px !important;
+    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.7));
+}
+
+.rating-gain-info {
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    right: 5px;
+    text-align: right;
+    top: 5px;
+    z-index: 1;
+}
+
+.square-song-card .song-overlay {
+    inset: -5px;
+    position: absolute;
+    background: linear-gradient(to top, #222222, #0000);
+}
+
 .square-song-title {
 	display: inline-block;
 	line-height: 12px !important;
@@ -328,34 +376,15 @@ body {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	font-size: 10px;
 }
-.square-song-card{
-	background-position: center;
-	background-size: cover;
-	border-radius: 5px;
-	color: #fff;
-	display: flex;
-	flex-direction: column;
-	height: 100px;
-	justify-content: flex-end;
-	overflow: hidden;
-	padding: 0.5em;
-	position: relative;
-	width: 100px !important;
-    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.7));
+.square-song-inner-level {
+	line-height: 12px !important;
+	font-size: 10px;
 }
-
-.rating-gain-info {
-	font-size: 12px;
-	font-weight: bold;
-	position: absolute;
-	right: 5px;
-	text-align: right;
-	top: 5px;
-	z-index: 1;
+.square-song-score {
+    font-size: 14px;
 }
-.square-song-card .song-overlay {
-    inset: -5px;
-    position: absolute;
-    background: linear-gradient(to top, #222222, #0000 70%);
+.rating-gain-info{
+    font-size: 10px;;
 }

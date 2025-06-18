@@ -37,14 +37,15 @@
           href="https://sgimera.github.io/mai_RatingAnalyzer/maidx_calc.html" target="_blank">sgimera</a>
       </h6>
     </div>
-    <button id="test" onclick="LoadLocalJson('json/test_data.json')">測試</button>
+    <button id="test" onclick="LoadLocalJson('json/test_data.json')">測試資料1</button>
+    <button id="test2" onclick="LoadLocalJson('json/test_data_2.json')">測試資料2</button>
     <div id="output"></div>
     <div id="button-group" class="row d-none align-items-center">
       <div class="col-2">
-        <button class="w-100" onclick="showTable('rating')">R值入選曲</button>
+        <button class="w-100" onclick="showTable('rating')">R値入選曲</button>
       </div>
       <div class="col-2">
-        <button class="w-100" onclick="showTable('rating_suggestion')">R值建議曲</button>
+        <button class="w-100" onclick="showTable('rating_suggestion')">R値建議曲</button>
       </div>
       <div class="col-2">
         <button class="w-100" onclick="showTable('plate')">名牌版進度</button>
@@ -91,8 +92,8 @@
       setupEventListeners();
       $('#palette').on('click', () => {
         const cssFiles = [
-          'css/main.css',
           'css/modern.css',
+          'css/main.css',
         ];
         const currentIndex = cssFiles.indexOf($('#theme').attr('href'));
         const nextIndex = (currentIndex + 1) % cssFiles.length;
@@ -123,6 +124,7 @@
       $.getJSON(filePath, (json) => {
         $('#button-group').removeClass('d-none');
         $('#test').addClass('d-none');
+        $('#test2').addClass('d-none');
         $('#output').html(`<textarea id="json-data" class="d-none">${JSON.stringify(json, null, 2)}</textarea>`);
         refreshData();
       });
@@ -130,6 +132,7 @@
 
     $(window).on('message', (event) => {
       $('#test').addClass('d-none');
+      $('#test2').addClass('d-none');
       const data = event.originalEvent.data;
       if (!data || typeof data !== "object") return;
 
@@ -222,6 +225,7 @@
       top: 20px;
       width: 30px;
       z-index: 1000;
+      filter: drop-shadow(0px 0px 1px rgba(255, 234, 0, 1));
     }
 
     .main {

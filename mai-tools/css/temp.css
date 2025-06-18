@@ -1,0 +1,50 @@
+
+.triangle-corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    z-index: 3;
+}
+
+.difficulty-advanced .triangle-corner {
+    border-top: 25px solid #f8b709;
+}
+
+.difficulty-basic .triangle-corner {
+    border-top: 25px solid #81d955;
+}
+
+.difficulty-expert .triangle-corner {
+    border-top: 25px solid #ff818d;
+}
+
+.difficulty-master .triangle-corner {
+    border-top: 25px solid #c346e7;
+}
+
+.difficulty-remaster .triangle-corner {
+    border-top: 25px solid #fff;
+}
+
+.song-card.difficulty-advanced {
+    border: solid 5px #f8b709;
+}
+
+.song-card.difficulty-basic {
+    border: solid 5px #81d955;
+}
+
+.song-card.difficulty-expert {
+    border: solid 5px #ff818d;
+}
+
+.song-card.difficulty-master {
+    border: solid 5px #c346e7;
+}
+
+.song-card.difficulty-remaster {
+    border: solid 5px #fff;
+}

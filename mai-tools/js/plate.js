@@ -197,9 +197,9 @@ function createNamePlateSongCard(song, type) {
              style="background-image: url('${song.image}');" 
              onclick="showSongDetail('${song.title}', '${song.type}')">
             <div class="song-overlay"></div>
-            <div class="song-content text-shadow-black f_10 square-song-title">${song.title}</div>
-            <div class="song-content text-shadow-black f_10">${song.internalLevel ? Number.parseFloat(song.internalLevel).toFixed(1) : ''} | ${song.type.toUpperCase()}</div>
-            <div class="song-content text-shadow-black">${song.score}</div>
+            <div class="song-content text-shadow-black square-song-title">${song.title}</div>
+            <div class="song-content text-shadow-black square-song-inner-level">${song.internalLevel ? Number.parseFloat(song.internalLevel).toFixed(1) : ''} | ${song.type.toUpperCase()}</div>
+            <div class="song-content text-shadow-black square-song-score">${song.score}</div>
             ${isCompleted ? '<div class="completion-check"><b>✓</b></div>' : ''}
         </div>`;
 }
