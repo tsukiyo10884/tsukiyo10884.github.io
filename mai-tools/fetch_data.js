@@ -160,15 +160,6 @@
         songs
     };
 
-    //匯出JSON
-    const jsonData = JSON.stringify(exportData, null, 2);
-    const blob = new Blob([jsonData], { type: 'application/json' });
-    const u = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = u;
-    a.download = 'export.json';
-    a.click();
-
     setTimeout(() => {
         childWin.postMessage({
             type: "result",
