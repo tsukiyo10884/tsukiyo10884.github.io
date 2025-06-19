@@ -1,16 +1,283 @@
+/*
+square cards
+rating cards
+user profile
+for fun
+*/
 @font-face {
     font-family: 'modern-font';
-    src: url('../../font/FGMediumHankaku.ttf'); 
+    src: url('../../font/FGMediumHankaku.ttf');
+}
+
+button {
+    border-radius: 5px !important;
+    padding: 10px;
+    background-color: #d1cde1;
+    box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 }
 
 body {
     background: #232228 !important;
-    font-family: modern-font !important;
+    font-family: modern-font, sans-serif !important;
     color: #fff !important;
 }
 
 .text-shadow-black {
     text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
+}
+
+
+/**************/
+/*square cards*/
+/**************/
+.completed .song-overlay {
+    background: #222222bb !important;
+}
+
+.completion-check {
+    color: #ffffff;
+    font-size: 26px;
+    position: absolute;
+    right: -12px;
+    top: -21px;
+    z-index: 2;
+    transform: rotate(75deg);
+}
+
+.completion-check::after {
+    content: "ゝ";
+    text-shadow: 1px 1px 2px black, 1px -1px 2px black, -1px 1px 2px black, -1px -1px 2px black;
+}
+
+.square-song-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, 102px);
+}
+
+.square-song-title {
+    display: inline-block;
+    line-height: 12px !important;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.square-song-card {
+    background-position: center;
+    background-size: cover;
+    border-radius: 5px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    justify-content: flex-end;
+    overflow: hidden;
+    padding: 5px !important;
+    position: relative;
+    width: 100px !important;
+    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.7));
+    border-radius: 30px;
+    overflow: visible;
+}
+
+.rating-gain-info {
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    right: 5px;
+    text-align: right;
+    top: 5px;
+    z-index: 1;
+}
+
+.square-song-card .song-overlay {
+    position: absolute;
+    background: linear-gradient(to top, #222222, #0000);
+    border-radius: 26px;
+    height: 100px;
+    width: 100px;
+    top: 0px;
+    left: 0px;
+}
+
+.square-song-title {
+    display: inline-block;
+    line-height: 12px !important;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 10px;
+}
+
+.square-song-inner-level {
+    line-height: 12px !important;
+    font-size: 10px;
+}
+
+.square-song-score {
+    font-size: 14px;
+}
+
+.rating-gain-info {
+    font-size: 10px;
+    ;
+}
+
+.square-song-card::before {
+    position: absolute;
+    content: "";
+    top: 0px;
+    left: 0px;
+    width: 100px;
+    height: 100px;
+    border-radius: 26px;
+    z-index: 0;
+    border: 3px solid transparent;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+}
+
+/**************/
+/*rating cards*/
+/**************/
+
+.song-grid {
+    display: grid !important;
+    gap: 1em;
+    grid-template-columns: repeat(auto-fit, 165px);
+}
+
+.song-image {
+    object-fit: cover;
+    height: 95px;
+    border-radius: 65px;
+    margin-top: 2px;
+    margin-left: 2px;
+}
+
+.song-card .song-overlay {
+    position: absolute;
+    background: linear-gradient(to top, #222222, #0000 60%);
+    border-radius: 500px;
+    height: 100px;
+    width: 95px;
+}
+
+.rating-block-inner-level,
+.rating-block-rating,
+.rating-block-score,
+.rating-block-song-title {
+    padding: 0.2em 0.4em;
+    position: absolute;
+    z-index: 2;
+}
+
+.section-title {
+    color: #fff;
+    font-size: 20px;
+    grid-column: span 5;
+    margin: 9px 0;
+    text-align: center;
+}
+
+.song-card {
+    align-items: center;
+    background-position: center;
+    background-size: cover;
+    border-radius: 5px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 136px;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    width: 163px !important;
+    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.7));
+}
+
+.song-content {
+    line-height: 1rem;
+    z-index: 1;
+}
+
+.rating-block-inner-level {
+    bottom: 21px;
+    font-size: 10px;
+    width: 165px;
+    text-align: center;
+}
+
+.rating-block-rating {
+    font-size: 18px;
+    top: -3px;
+}
+
+.rating-block-score {
+    bottom: 5px;
+    font-size: 16px;
+    width: 165px;
+    text-align: center;
+}
+
+.rating-block-song-title {
+    display: inline-block;
+    max-width: 87px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    bottom: 33px;
+    font-size: 9px;
+    width: 165px;
+    text-align: center;
+}
+
+.card-decoration {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    z-index: 3;
+}
+
+.difficulty-advanced::before {
+    background: linear-gradient(45deg, #232228, #232228, #f8b709) border-box;
+}
+
+.difficulty-basic::before {
+    background: linear-gradient(45deg, #232228, #232228, #81d955) border-box;
+}
+
+.difficulty-expert::before {
+    background: linear-gradient(45deg, #232228, #232228, #ff818d) border-box;
+}
+
+.difficulty-master::before {
+    background: linear-gradient(45deg, #232228, #232228, #c346e7) border-box;
+}
+
+.difficulty-remaster::before {
+    background: linear-gradient(45deg, #232228, #232228, #fff) border-box;
+}
+
+.song-card::before {
+    position: absolute;
+    content: "";
+    top: 19px;
+    width: 100px;
+    height: 100px;
+    border-radius: 500px;
+    z-index: 0;
+    border: 3px solid transparent;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
 }
 
 /**************/
@@ -178,213 +445,30 @@ body {
     width: 112px;
 }
 
-/**************/
-/*rating cards*/
-/**************/
+/*********/
+/*for fun*/
+/*********/
 
-.song-grid {
-    display: grid !important;
-    gap: 1em;
-    grid-template-columns: repeat(auto-fit, 165px);
+.axuan {
+    background-image: url(../img/axuan.png);
+    background-position-x: right;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
-.song-image {
-    object-fit: cover;
-    height: 95px;
-    border-radius: 65px;
-    margin-top: 2px;
-    margin-left: 2px;
+.ayo {
+    background-image: url(../img/ayo.png);
+    background-position-x: right;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
-.song-card .song-overlay {
+.fly {
+    box-sizing: content-box;
+    cursor: pointer;
+    height: auto;
+    padding: 50px;
     position: absolute;
-    background: linear-gradient(to top, #222222, #0000 60%);
-    border-radius: 500px;
-    height: 100px;
-    width: 95px;
-}
-
-.rating-block-inner-level,
-.rating-block-rating,
-.rating-block-score,
-.rating-block-song-title {
-    padding: 0.2em 0.4em;
-    position: absolute;
-    z-index: 2;
-}
-
-.section-title {
-    color: #fff;
-    font-size: 20px;
-    grid-column: span 5;
-    margin: 9px 0;
-    text-align: center;
-}
-
-.song-card {
-    align-items: center;
-    background-position: center;
-    background-size: cover;
-    border-radius: 5px;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    height: 136px;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-    width: 163px !important;
-    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.7));
-}
-
-.song-content {
-    line-height: 1rem;
-    z-index: 1;
-}
-
-.rating-block-inner-level {
-    bottom: 21px;
-    font-size: 10px;
-    width: 165px;
-    text-align: center;
-}
-
-.rating-block-rating {
-    font-size: 18px;
-    top: -3px;
-}
-
-.rating-block-score {
-    bottom: 5px;
-    font-size: 16px;
-    width: 165px;
-    text-align: center;
-}
-
-.rating-block-song-title {
-    display: inline-block;
-    max-width: 87px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    bottom: 33px;
-    font-size: 9px;
-    width: 165px;
-    text-align: center;
-}
-
-.card-decoration {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    border-left: 25px solid transparent;
-    z-index: 3;
-}
-
-.song-card.difficulty-advanced::before {
-    background: linear-gradient(45deg, #232228, #232228, #f8b709) border-box;
-}
-
-.song-card.difficulty-basic::before {
-    background: linear-gradient(45deg, #232228, #232228, #81d955) border-box;
-}
-
-.song-card.difficulty-expert::before {
-    background: linear-gradient(45deg, #232228, #232228, #ff818d) border-box;
-}
-
-.song-card.difficulty-master::before {
-    background: linear-gradient(45deg, #232228, #232228, #c346e7) border-box;
-}
-
-.song-card.difficulty-remaster::before {
-    background: linear-gradient(45deg, #232228, #232228, #fff) border-box;
-}
-
-.song-card::before {
-    position: absolute;
-    content: "";
-    top: 19px;
-    width: 100px;
-    height: 100px;
-    border-radius: 500px;
-    z-index: 0;
-    border: 3px solid transparent;
-    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out;
-    mask-composite: exclude;
-}
-
-/*************/
-/*square card*/
-/*************/
-
-
-.square-song-grid {
-    display: grid;
-    gap: 10px;
-    grid-template-columns: repeat(auto-fit, 102px);
-}
-
-.square-song-title {
-    display: inline-block;
-    line-height: 12px !important;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.square-song-card {
-    background-position: center;
-    background-size: cover;
-    border-radius: 5px;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    height: 100px;
-    justify-content: flex-end;
-    overflow: hidden;
-    padding: 5px !important;
-    position: relative;
-    width: 100px !important;
-    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.7));
-}
-
-.rating-gain-info {
-    font-size: 12px;
-    font-weight: bold;
-    position: absolute;
-    right: 5px;
-    text-align: right;
-    top: 5px;
-    z-index: 1;
-}
-
-.square-song-card .song-overlay {
-    inset: -5px;
-    position: absolute;
-    background: linear-gradient(to top, #222222, #0000);
-}
-
-.square-song-title {
-	display: inline-block;
-	line-height: 12px !important;
-	max-width: 100%;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	font-size: 10px;
-}
-.square-song-inner-level {
-	line-height: 12px !important;
-	font-size: 10px;
-}
-.square-song-score {
-    font-size: 14px;
-}
-.rating-gain-info{
-    font-size: 10px;;
+    width: 50px;
+    z-index: 1000;
 }

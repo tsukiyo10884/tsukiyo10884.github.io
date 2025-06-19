@@ -144,13 +144,14 @@ function createLevelSongCard(song) {
 
     return `
         <div class="col-1 square-song-card difficulty-${diffClass} ${isCompleted ? 'completed' : ''}" 
-             style="background-image: url('${song.image}');" 
-             onclick="showSongDetail('${song.title}', '${song.type}')">
+                style="background-image: url('${song.image}');" 
+                onclick="showSongDetail('${song.title}', '${song.type}')">
             <div class="song-overlay"></div>
             <div class="song-content text-shadow-black square-song-title">${song.title}</div>
             <div class="song-content text-shadow-black square-song-inner-level">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>
             <div class="song-content text-shadow-black square-song-score">${song.score}</div>
             ${isCompleted ? '<div class="completion-check"><b>✓</b></div>' : ''}
+            <div class="card-decoration"></div>
         </div>`;
 }
 
@@ -159,7 +160,7 @@ function createFilterButtons(defaultType) {
         <div class="mb-2 btn-group" role="group">
             ${group.map(value => `
                 <input type="radio" class="form-check-input" name="filter" id="radio-${value}" 
-                       value="${value}" autocomplete="off" ${value === defaultType ? 'checked' : ''}>
+                    value="${value}" autocomplete="off" ${value === defaultType ? 'checked' : ''}>
                 <label class="form-check-label" for="radio-${value}">${value}</label>
             `).join('')}
         </div>

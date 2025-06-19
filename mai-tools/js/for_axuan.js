@@ -233,13 +233,14 @@ function createSuggestionSongCardXuan(suggestion) {
 
         return `
         <div class="col-1 square-song-card difficulty-${diffClass}" 
-             style="background-image: url('${song.image}');" 
-             onclick="showSongDetail('${song.title}', '${song.type}')">
+                style="background-image: url('${song.image}');" 
+                onclick="showSongDetail('${song.title}', '${song.type}')">
             <div class="song-overlay"></div>
             <div class="song-content text-shadow-black square-song-title">${song.title}</div>
             <div class="song-content text-shadow-black square-song-inner-level">${song.internalLevel ? Number.parseFloat(song.internalLevel).toFixed(1) : ''} | ${song.type.toUpperCase()}</div>
             <div class="song-content text-shadow-black square-song-score">${song.score}</div>
             <div class="rating-gain-info text-shadow-black" >${song.targetRating ? `${song.targetRating}(${song.ratingGain})` : ''}</div>
+            <div class="card-decoration"></div>
         </div>`;
     }).filter(card => card !== null).join('');
 

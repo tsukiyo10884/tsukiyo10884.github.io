@@ -16,8 +16,8 @@ async function initRatingList() {
 async function showRatingList() {
     const { rating_new, rating_others } = data.ratingSongList;
     return [
-        await createRatingSection('new songs', rating_new),
-        await createRatingSection('others', rating_others)
+        await createRatingSection('───── new songs ─────', rating_new),
+        await createRatingSection('───── others ─────', rating_others)
     ].join('');
 }
 
