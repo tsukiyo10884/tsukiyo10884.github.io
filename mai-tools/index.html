@@ -17,10 +17,12 @@
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://sgimera.github.io/mai_RatingAnalyzer/scripts_maimai/maidx_calc_sub.js"></script>
   <script src="https://sgimera.github.io/mai_RatingAnalyzer/scripts_maimai/maidx_calc_rating.js"></script>
+  <script src="js/common.js"></script>
   <script src="js/rating.js"></script>
   <script src="js/rating_suggestion.js"></script>
   <script src="js/plate.js"></script>
   <script src="js/level.js"></script>
+  <script src="js/special.js"></script>
   <script src="js/for_axuan.js"></script>
   <script src="js/for_ayo.js"></script>
 </head>
@@ -63,6 +65,16 @@
           <label for="non-completed-only">只顯示未達成曲</label>
         </div>
       </div>
+      <div id="play-filters" class="col-3 d-none">
+        <div class="checkbox-group">
+          <input type="checkbox" id="played-only" name="play-filter" class="form-check-input">
+          <label for="completed-only">只顯示已玩過</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="non-played-only" name="play-filter" class="form-check-input">
+          <label for="non-completed-only">只顯示未玩過</label>
+        </div>
+      </div>
     </div>
     <div class="result-container">
       <div class="row border-bottom border-secondary">
@@ -101,32 +113,11 @@
       });
     };
 
-    const handleCompletionFilters = () => {
-      $('#completed-only, #non-completed-only').off('change').on('change', function () {
-        const $this = $(this);
-        const $other = $this.attr('id') === 'completed-only' ? $('#non-completed-only') : $('#completed-only');
-
-        if ($this.is(':checked')) {
-          $other.prop('checked', false);
-        }
-      });
-    };
-
     const setupEventListeners = () => {
       handleCompletionFilters();
 
       $(window).on('load', () => {
         $('#json-data').text() && refreshData();
-      });
-    };
-
-    const LoadLocalJson = (filePath) => {
-      $.getJSON(filePath, (json) => {
-        $('#button-group').removeClass('d-none');
-        $('#test').addClass('d-none');
-        $('#test2').addClass('d-none');
-        $('#output').html(`<textarea id="json-data" class="d-none">${JSON.stringify(json, null, 2)}</textarea>`);
-        refreshData();
       });
     };
 
@@ -149,12 +140,22 @@
       }
     });
 
+    const LoadLocalJson = (filePath) => {
+      $.getJSON(filePath, (json) => {
+        $('#button-group').removeClass('d-none');
+        $('#test').addClass('d-none');
+        $('#test2').addClass('d-none');
+        $('#output').html(`<textarea id="json-data" class="d-none">${JSON.stringify(json, null, 2)}</textarea>`);
+        refreshData();
+      });
+    };
+
     const refreshData = () => {
       data = JSON.parse($('#json-data').text());
       initUserInfo();
     };
 
-    function initUserInfo() {
+    const initUserInfo = () => {
       $('#user-info').html(`
         <div class="basic_block p_10 f_0">
           <img id="user-icon" loading="lazy" class="w_112 f_l">
@@ -209,6 +210,7 @@
       };
 
       $('#completion-filters').toggleClass('d-none', !['plate', 'level'].includes(type));
+      $('#play-filters').toggleClass('d-none', !['rating_suggestion'].includes(type));
 
       const handler = tableHandlers[type];
       handler ? await handler() : $('#song-table').empty();

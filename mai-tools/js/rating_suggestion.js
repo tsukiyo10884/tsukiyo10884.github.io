@@ -8,6 +8,8 @@ const RATING_THRESHOLDS = [
 ];
 let suggestions = [];
 let selectedRatingThreshold = null;
+let groupedNewSongs = {};
+let groupedOldSongs = {};
 
 const createElement = (tag, className, text) =>
     $(`<${tag}>`).addClass(className).text(text);
@@ -15,19 +17,39 @@ const createElement = (tag, className, text) =>
 
 async function initRatingSuggestionList() {
     suggestions = suggestPotentialUpgrades(data.songs, getTop50Songs());
-    const newSongs = suggestions.filter(s => s.version_international === currentVersion);
-    const oldSongs = suggestions.filter(s => s.version_international !== currentVersion);
-
-    const $newSongsSection = createSection('new songs', newSongs);
-    const $oldSongsSection = createSection('others', oldSongs);
+    groupedNewSongs = groupSongs(suggestions, true);
+    groupedOldSongs = groupSongs(suggestions, false);
+    const $newSongsSection = createSection('new songs');
+    const $oldSongsSection = createSection('others');
 
     $('#song-table').empty().append($newSongsSection, $oldSongsSection);
     $('#stat').empty();
     bindSuggestionThresholdEventListeners();
+    $('#played-only, #non-played-only').off('change').on('change', function () {
+        const $this = $(this);
+        const $other = $this.attr('id') === 'played-only' ? $('#non-played-only') : $('#played-only');
+
+        if ($this.is(':checked')) {
+            $other.prop('checked', false);
+        }
+    });
+    bindPlayedEventListeners();
 }
 
-const filterByVersion = (songs, isNewVersion) =>
-    songs.filter(s => (s.version_international === currentVersion) === isNewVersion);
+const groupSongs = (songs, isNewVersion) => {
+    return songFilter(songs, { is_new_version: isNewVersion }).reduce((acc, song) => {
+        const level = song.level;
+        const baseLevel = Math.floor(level);
+        const decimal = level - baseLevel;
+        const groupKey = decimal < 0.6 ? baseLevel : `${baseLevel}+`;
+
+        if (!acc[groupKey]) {
+            acc[groupKey] = [];
+        }
+        acc[groupKey].push(song);
+        return acc;
+    }, {});
+}
 
 const calculateLevelRange = (level) => {
     const baseLevel = Math.floor(level);
@@ -37,11 +59,11 @@ const calculateLevelRange = (level) => {
     return { minLevel, maxLevel };
 };
 
-function suggestPotentialUpgrades(allSongs, top50Songs) {
-    const newSongs = filterByVersion(allSongs, true);
-    const oldSongs = filterByVersion(allSongs, false);
-    const newTopSongs = filterByVersion(top50Songs, true);
-    const oldTopSongs = filterByVersion(top50Songs, false);
+const suggestPotentialUpgrades = (allSongs, top50Songs) => {
+    const newSongs = songFilter(allSongs, { is_new_version: true });
+    const oldSongs = songFilter(allSongs, { is_new_version: false });
+    const newTopSongs = songFilter(top50Songs, { is_new_version: true });
+    const oldTopSongs = songFilter(top50Songs, { is_new_version: false });
 
     const newMinRating = Math.min(...newTopSongs.map(s => calculateSongRating(s)));
     const oldMinRating = Math.min(...oldTopSongs.map(s => calculateSongRating(s)));
@@ -52,7 +74,7 @@ function suggestPotentialUpgrades(allSongs, top50Songs) {
     return [...newSuggestions, ...oldSuggestions].sort((a, b) => parseFloat(a.level) - parseFloat(b.level));
 }
 
-function calculateSuggestions(songs, minRating, thresholds, version) {
+const calculateSuggestions = (songs, minRating, thresholds, version) => {
     const groupedByLevel = songs.reduce((acc, song) => {
         if (!acc[song.internalLevel]) acc[song.internalLevel] = [];
         acc[song.internalLevel].push(song);
@@ -79,23 +101,12 @@ function calculateSuggestions(songs, minRating, thresholds, version) {
     }).filter(item => item.upgrades.some(upg => upg.gain !== '+0'));
 }
 
-const createSection = (title, songs) => {
+const createSection = (title) => {
     const $section = $('<div>');
     const $title = createElement('div', 'section-title text-shadow-black', title);
     const $buttonsContainer = $('<div>').addClass('level-buttons-container mb-3 text-center row');
 
-    const groupedSongs = songs.reduce((acc, song) => {
-        const level = song.level;
-        const baseLevel = Math.floor(level);
-        const decimal = level - baseLevel;
-        const groupKey = decimal < 0.6 ? baseLevel : `${baseLevel}+`;
-
-        if (!acc[groupKey]) {
-            acc[groupKey] = [];
-        }
-        acc[groupKey].push(song);
-        return acc;
-    }, {});
+    const groupedSongs = title === 'new songs' ? groupedNewSongs : groupedOldSongs;
 
     Object.entries(groupedSongs)
         .sort(([a], [b]) => {
@@ -110,14 +121,14 @@ const createSection = (title, songs) => {
     return $section.append($title, $buttonsContainer);
 };
 
-function createLevelButton(suggestion, displayLevel) {
+const createLevelButton = (suggestion, displayLevel) => {
     return $('<button>')
         .addClass('me-2 col-1 mb-2')
         .text(displayLevel)
         .on('click', () => showLevelDetails(suggestion));
 }
 
-function showLevelDetails(suggestion) {
+const showLevelDetails = (suggestion) => {
     const $songGrid = createSuggestionSongCard(suggestion);
 
     const level = suggestion.level;
@@ -174,13 +185,13 @@ function showLevelDetails(suggestion) {
     $('#song-table').empty().append($title, $songGrid);
     $('#stat').empty().append($('<div class="d-flex align-items-center h-100">').append($radioContainer));
     bindSuggestionThresholdEventListeners();
-    
+
     if (selectedRatingThreshold) {
         handleSuggestionUpdate();
     }
 }
 
-function createSuggestionSongCard(suggestion) {
+const createSuggestionSongCard = (suggestion) => {
     const { minLevel, maxLevel } = calculateLevelRange(suggestion.level);
     const isNewVersion = suggestion.version_international === currentVersion;
 
@@ -188,8 +199,7 @@ function createSuggestionSongCard(suggestion) {
         const songLevel = song.internalLevel;
         return songLevel >= minLevel && songLevel <= maxLevel;
     });
-
-    songs = filterByVersion(songs, isNewVersion);
+    songs = songFilter(songs, { is_new_version: isNewVersion });
     songs.sort((a, b) => b.internalLevel - a.internalLevel);
 
     const songCards = songs.map(song => {
@@ -197,21 +207,25 @@ function createSuggestionSongCard(suggestion) {
         const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
 
         const selectedThreshold = $('input[name="rating-threshold"]:checked').val();
-            const matchingSuggestion = suggestions.find(s => s.level === song.internalLevel && (isNewVersion ? s.version_international === currentVersion : s.version_international === 'others'));
-            if (!matchingSuggestion) {
-                return null;
-            }
-            const matchingUpgrade = matchingSuggestion.upgrades.find(upg => upg.rank === selectedThreshold);
-            if (!matchingUpgrade) {
-                return null;
-            }
-            const targetRating = matchingUpgrade.rating;
-            const gain = matchingUpgrade.gain;
-            
-            song.targetRating = targetRating;
-            song.ratingGain = gain;
+        const matchingSuggestion = suggestions.find(s => s.level === song.internalLevel && (isNewVersion ? s.version_international === currentVersion : s.version_international === 'others'));
+        if (!matchingSuggestion) {
+            return null;
+        }
+        const matchingUpgrade = matchingSuggestion.upgrades.find(upg => upg.rank === selectedThreshold);
+        if (!matchingUpgrade) {
+            return null;
+        }
+        const targetRating = matchingUpgrade.rating;
+        const gain = matchingUpgrade.gain;
+
+        song.targetRating = targetRating;
+        song.ratingGain = gain;
 
         if (gain === '+0' || currentRating >= targetRating) {
+            return null;
+        }
+        if ($('#played-only').is(':checked') && song.score === '0.0000%'
+            || $('#non-played-only').is(':checked') && song.score !== '0.0000%') {
             return null;
         }
 
@@ -235,7 +249,7 @@ function createSuggestionSongCard(suggestion) {
     return $('<div>').addClass('square-song-grid col-12 row ms-0').html(songCards);
 }
 
-function findMatchingSuggestion(displayLevel, isNewVersion) {
+const findMatchingSuggestion = (displayLevel, isNewVersion) => {
     return suggestions.find(s => {
         const baseLevel = Math.floor(s.level);
         const decimal = s.level - baseLevel;
@@ -244,7 +258,7 @@ function findMatchingSuggestion(displayLevel, isNewVersion) {
     });
 }
 
-function handleSuggestionUpdate() {
+const handleSuggestionUpdate = () => {
     const $input = $('#song-table .section-title').text().trim();
     const match = $input.match(/^等級\s*(\d+(?:\+)?)\s*推薦曲\s*\((新曲|舊曲)\)$/);
     if (match) {
@@ -258,10 +272,21 @@ function handleSuggestionUpdate() {
     }
 }
 
-function bindSuggestionThresholdEventListeners() {
+const bindSuggestionThresholdEventListeners = () => {
     $('input[name="rating-threshold"]').off('change');
     $('input[name="rating-threshold"]').on('change', function () {
         selectedRatingThreshold = $(this).val();
         handleSuggestionUpdate();
+    });
+}
+
+const bindPlayedEventListeners = () => {
+    $('#played-only, #non-played-only').on('change', function () {
+        const $input = $('#song-table .section-title').text().trim();
+        const match = $input.match(/等級(\d+\+?)推薦曲\((新曲|舊曲)\)/);
+        if (match) {
+            const level = match[1];
+            const type = match[2] === "新曲" ? "new" : "old";
+        }
     });
 }

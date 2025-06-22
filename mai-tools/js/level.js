@@ -41,7 +41,7 @@ function initLevelList() {
         </div>
         <div id="level-song-grid" class="square-song-grid col-12 row" style="margin-left:0">
             ${songs.sort((a, b) => b.internalLevel - a.internalLevel)
-                .map(song => createLevelSongCard(song)).join('')}
+            .map(song => createLevelSongCard(song)).join('')}
         </div>
     `);
 
@@ -49,7 +49,7 @@ function initLevelList() {
     bindLevelEventListeners();
 }
 
-function showLevelList(startLevel, endLevel) {
+const showLevelList = (startLevel, endLevel) => {
     return `
         <div class="level-list row d-flex align-items-center justify-content-center">
             <div class="col-3">
@@ -68,7 +68,7 @@ function showLevelList(startLevel, endLevel) {
     `;
 }
 
-function showLevelListByRange() {
+const showLevelListByRange = () => {
     const startLevel = parseFloat($('#level-start').val());
     const endLevel = parseFloat($('#level-end').val());
 
@@ -77,7 +77,7 @@ function showLevelListByRange() {
         return;
     }
 
-    const songs = data.songs.filter(song => 
+    const songs = data.songs.filter(song =>
         song.internalLevel >= startLevel && song.internalLevel <= endLevel
     );
 
@@ -86,9 +86,9 @@ function showLevelListByRange() {
 }
 
 function isValidLevelRange(startLevel, endLevel) {
-    return !isNaN(startLevel) && !isNaN(endLevel) && 
-           startLevel <= endLevel && 
-           startLevel >= 1 && endLevel <= 15;
+    return !isNaN(startLevel) && !isNaN(endLevel) &&
+        startLevel <= endLevel &&
+        startLevel >= 1 && endLevel <= 15;
 }
 
 function updateStatistics(songs) {
@@ -114,12 +114,12 @@ function filteredSongsCount(songs) {
 
 function isSongCompleted(song, filterType) {
     const score = parseFloat(song.score.replace('%', ''));
-    
+
     if (SCORE_THRESHOLDS[filterType]) {
         return score > SCORE_THRESHOLDS[filterType];
     }
 
-    switch(filterType) {
+    switch (filterType) {
         case 'AP': return song.ap || song.app || song.fdxp;
         case 'AP+': return song.app;
         case 'FC': return song.fc || song.ap || song.app || song.fcp || song.fs || song.fsp || song.fdx || song.fdxp;
@@ -173,9 +173,9 @@ function createFilterButtons(defaultType) {
 function bindLevelEventListeners() {
     $('input[name="filter"]').off('change');
     handleCompletionFilters();
-    
+
     $('input[name="filter"]').on('change', showLevelListByRange);
-    $('#completed-only, #non-completed-only').on('change', function() {
+    $('#completed-only, #non-completed-only').on('change', function () {
         const $input = $('#song-table .section-title').text().trim();
         if (/^等級\s*(\d+(?:\.\d+)?)\s*~\s*(\d+(?:\.\d+)?)進度$/.test($input)) {
             showLevelListByRange();

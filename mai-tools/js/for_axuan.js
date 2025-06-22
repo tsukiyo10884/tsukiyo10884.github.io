@@ -1,50 +1,3 @@
-$(document).ready(function () {
-    let clickCount = 0;
-
-    $('.user-info').on('click', function () {
-        clickCount++;
-
-        if (clickCount === 3) {
-            createSpecialButtons();
-        }
-    });
-});
-
-function createSpecialButtons() {
-    const $col0 = $('<div>').addClass('col-1');
-    const $col1 = $('<div>').addClass('col-1');
-    const $col2 = $('<div>').addClass('col-1');
-
-    const $button1 = $('<button>')
-        .html('<img src="img/axuan_icon.png" alt="阿瑄專屬" style="height: 50px;">')
-        .css({
-            'padding': '0px'
-        })
-        .attr('data-bs-toggle', 'tooltip')
-        .attr('data-bs-placement', 'bottom')
-        .attr('title', '阿瑄專屬')
-        .on('click', aXuan);
-
-    const $button2 = $('<button>')
-        .html('<img src="img/ayo_icon.png" alt="阿幽專屬" style="height: 50px;">')
-        .css({
-            'padding': '0px'
-        })
-        .attr('data-bs-toggle', 'tooltip')
-        .attr('data-bs-placement', 'bottom')
-        .attr('title', '阿幽專屬')
-        .on('click', aYo);
-
-    $col1.append($button1);
-    $col2.append($button2);
-    $('#info').append($col0, $col1, $col2);
-
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-}
-
 function aXuan() {
     suggestions = suggestPotentialUpgrades(data.songs, getTop50Songs());
     const $songsSection = createSectionXuan(suggestions);
@@ -58,13 +11,15 @@ function aXuan() {
     $('#axuan_profile')?.remove();
     $('#ayo_profile')?.remove();
     const $profile = $('<img id="axuan_profile">')
-    .attr('src', 'img/axuan_profile.png')
-    .attr('style', 'position: relative;z-index:99;width: 422px;')
-    .on('click', function () {
-        $('.basic_block').show();
-        $profile.remove();
-    });
+        .attr('src', 'img/axuan_profile.png')
+        .attr('style', 'position: relative;z-index:99;width: 422px;')
+        .on('click', function () {
+            $('.basic_block').show();
+            $profile.remove();
+        });
     $('#user-info').append($profile);
+      $('#completion-filters').addClass('d-none');
+      $('#play-filters').addClass('d-none');
 
 }
 
