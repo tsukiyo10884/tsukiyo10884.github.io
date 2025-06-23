@@ -66,13 +66,13 @@ async function showPlateProgress(versionName, type, plateName) {
     });
 
     if (versionName === 'maimai ~ maimai PLUS') {
-        songs = songs.filter(song => ['maimai', 'maimai PLUS'].includes(song.version_international));
+        songs = songFilter(songs, { version_international: 'maimai' }).concat(songFilter(songs, { version_international: 'maimai PLUS' }));
     } else if (versionName === 'maimai ~ FiNALE') {
         const finaleIndex = versionOrder.indexOf('FiNALE');
         songs = songs.filter(song => versionOrder.indexOf(song.version_international) !== -1 &&
             versionOrder.indexOf(song.version_international) <= finaleIndex);
     } else {
-        songs = songs.filter(song => song.version_international === versionName);
+        songs = songFilter(songs, { version_international: versionName });
     }
 
     const difficultyCounts = {
@@ -97,16 +97,7 @@ async function showPlateProgress(versionName, type, plateName) {
         '覇者': '全曲/BASIC～RE:MASTER/clear'
     }[type];
 
-    const filteredSongs = songs.filter(song => {
-        switch (type) {
-            case '極': return song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp;
-            case '将': return parseFloat(song.score) > 100;
-            case '神': return song.ap || song.app;
-            case '舞舞': return song.fdx;
-            case '覇者': return parseFloat(song.score.replace('%', '')) >= 80;
-            default: return false;
-        }
-    });
+    const filteredSongs = songFilter(songs, { plate: type });
 
     filteredSongs.forEach(song => {
         if (song.difficulty in difficultyCounts) {
@@ -167,11 +158,11 @@ async function showPlateProgress(versionName, type, plateName) {
                 </div>
                 <div class="square-song-grid col-12 row ms-0 mb-3">
                     ${songs
-                    .sort((a, b) => b.internalLevel - a.internalLevel)
-                    .filter(song => song.difficulty === diff)
-                    .map(song => createNamePlateSongCard(song, type))
-                    .filter(Boolean)
-                    .join('')}
+                .sort((a, b) => b.internalLevel - a.internalLevel)
+                .filter(song => song.difficulty === diff)
+                .map(song => createNamePlateSongCard(song, type))
+                .filter(Boolean)
+                .join('')}
                 </div>
             `}
         `).join('')}
