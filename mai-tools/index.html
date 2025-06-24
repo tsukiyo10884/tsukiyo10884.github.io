@@ -41,13 +41,14 @@
     </div>
     <button id="test" onclick="LoadLocalJson('json/test_data.json')">測試資料1</button>
     <button id="test2" onclick="LoadLocalJson('json/test_data_2.json')">測試資料2</button>
-    <div id="output"></div>
+    <div id="output" ></div>
+    <textarea id="now-title" class="d-none"></textarea>
     <div id="button-group" class="row d-none align-items-center">
       <div class="col-2">
         <button class="w-100" onclick="showTable('rating')">R値入選曲</button>
       </div>
       <div class="col-2">
-        <button class="w-100" onclick="showTable('rating_suggestion')">R値建議曲</button>
+        <button class="w-100" onclick="showTable('rating_suggestion')">R値候選曲</button>
       </div>
       <div class="col-2">
         <button class="w-100" onclick="showTable('plate')">名牌版進度</button>
@@ -129,6 +130,8 @@
 
       const $output = $('#output');
       switch (data.type) {
+        case "init":
+          $output.html(`取得成績中，請勿關閉maimai-net`);
         case "difficulty":
           $output.html(`取得成績中(${data.payload})`);
           break;
@@ -198,21 +201,24 @@
       $('#user-info').removeClass('d-none');
     }
 
-    const showTable = async (type) => {
+    const showTable = async (mode) => {
       $('#level-filter').hide();
       $('#stat').empty();
+      $('#now-title').text('');
 
       const tableHandlers = {
         'rating': initRatingList,
         'plate': initPlateList,
         'level': initLevelList,
-        'rating_suggestion': initRatingSuggestionList
+        'rating_suggestion': initRatingSuggestionList,
+        'a_xuan' : initForAXuanList,
+        'a_yo' : initForAyoList,
       };
 
-      $('#completion-filters').toggleClass('d-none', !['plate', 'level'].includes(type));
-      $('#play-filters').toggleClass('d-none', !['rating_suggestion'].includes(type));
+      $('#completion-filters').toggleClass('d-none', !['plate', 'level'].includes(mode));
+      $('#play-filters').toggleClass('d-none', !['rating_suggestion','a_xuan'].includes(mode));
 
-      const handler = tableHandlers[type];
+      const handler = tableHandlers[mode];
       handler ? await handler() : $('#song-table').empty();
     };
 

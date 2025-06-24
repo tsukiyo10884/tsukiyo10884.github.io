@@ -56,3 +56,35 @@ const songFilter = (songs, {
 
   return result;
 };
+
+const createSquareSongCard = (song, {
+  isCompleted = null,
+  isPlayed: isPlayed = null
+} = {}) => {
+  if (isCompleted !== null) {
+    if (($('#completed-only').is(':checked') && !isCompleted) ||
+      ($('#non-completed-only').is(':checked') && isCompleted)) {
+      return null;
+    }
+  }
+  if (isPlayed !== null) {
+    if (($('#played-only').is(':checked') && !isPlayed) ||
+      ($('#non-played-only').is(':checked') && isPlayed)) {
+      return null;
+    }
+  }
+
+  return `
+        <div class="square-song-card difficulty-${song.difficulty.replace(" ", "-").toLowerCase()} ${isCompleted === true ? 'completed' : ''}" 
+                style="background-image: url('${song.image}');" 
+                onclick="showSongDetail('${song.title}', '${song.type}')">
+            <div class="song-overlay"></div>
+            <div class="song-content text-shadow-black square-song-title">${song.title}</div>
+            <div class="song-content text-shadow-black square-song-inner-level">${song.internalLevel ? Number.parseFloat(song.internalLevel).toFixed(1) : ''} | ${song.type.toUpperCase()}</div>
+            <div class="song-content text-shadow-black square-song-score">${song.score}</div>
+            ${isCompleted === true ? '<div class="completion-check"><b>✓</b></div>' : ''}
+            ${isPlayed !== null ? `<div class="rating-gain-info text-shadow-black" >${song.targetRating ? `${song.targetRating}(${song.ratingGain})` : ''}</div>` : ''}
+            <div class="card-decoration"></div>
+        </div>`;
+
+}

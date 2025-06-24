@@ -13,12 +13,12 @@ const FILTER_GROUPS = [
     ['AP', 'AP+', 'FC', 'FC+', 'FS', 'FS+', 'FDX', 'FDX+']
 ];
 
-function initLevelList() {
+const initLevelList = () => {
     if (!data.ratingSongList) {
         const topSongs = getTop50Songs();
         data.ratingSongList = {
-            rating_new: topSongs.filter(s => s.version_international === currentVersion),
-            rating_others: topSongs.filter(s => s.version_international !== currentVersion)
+            rating_new: songFilter(topSongs, { is_new_version: true }),
+            rating_others: songFilter(topSongs, { is_new_version: false })
         };
     }
 
@@ -85,19 +85,19 @@ const showLevelListByRange = () => {
     updateSongGrid(songs, startLevel, endLevel);
 }
 
-function isValidLevelRange(startLevel, endLevel) {
+const isValidLevelRange = (startLevel, endLevel) => {
     return !isNaN(startLevel) && !isNaN(endLevel) &&
         startLevel <= endLevel &&
         startLevel >= 1 && endLevel <= 15;
 }
 
-function updateStatistics(songs) {
+const updateStatistics = (songs) => {
     const completedCount = filteredSongsCount(songs);
     const percent = ((completedCount / songs.length) * 100).toFixed(2);
     $('#statText').html(`達成率：${percent}% (${completedCount}/${songs.length})`);
 }
 
-function updateSongGrid(songs, startLevel, endLevel) {
+const updateSongGrid = (songs, startLevel, endLevel) => {
     $('#level-song-grid').html(
         songs.sort((a, b) => b.internalLevel - a.internalLevel)
             .map(song => createLevelSongCard(song))
@@ -105,14 +105,15 @@ function updateSongGrid(songs, startLevel, endLevel) {
             .join('')
     );
     $('#section-title').html(`<b>等級${startLevel} ~ ${endLevel}進度</b>`);
+    $('#now-title').text(`level|${startLevel}|${endLevel}`);
 }
 
-function filteredSongsCount(songs) {
+const filteredSongsCount = (songs) => {
     const filterType = $('input[name="filter"]:checked').val();
     return songs.filter(song => isSongCompleted(song, filterType)).length;
 }
 
-function isSongCompleted(song, filterType) {
+const isSongCompleted = (song, filterType) => {
     const score = parseFloat(song.score.replace('%', ''));
 
     if (SCORE_THRESHOLDS[filterType]) {
@@ -132,30 +133,16 @@ function isSongCompleted(song, filterType) {
     }
 }
 
-function createLevelSongCard(song) {
-    const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
+const createLevelSongCard = (song) => {
     const filterType = $('input[name="filter"]:checked').val();
     const isCompleted = isSongCompleted(song, filterType);
 
-    if (($('#completed-only').is(':checked') && !isCompleted) ||
-        ($('#non-completed-only').is(':checked') && isCompleted)) {
-        return null;
-    }
-
-    return `
-        <div class="col-1 square-song-card difficulty-${diffClass} ${isCompleted ? 'completed' : ''}" 
-                style="background-image: url('${song.image}');" 
-                onclick="showSongDetail('${song.title}', '${song.type}')">
-            <div class="song-overlay"></div>
-            <div class="song-content text-shadow-black square-song-title">${song.title}</div>
-            <div class="song-content text-shadow-black square-song-inner-level">${song.internalLevel == null ? '' : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.type.toUpperCase()}</div>
-            <div class="song-content text-shadow-black square-song-score">${song.score}</div>
-            ${isCompleted ? '<div class="completion-check"><b>✓</b></div>' : ''}
-            <div class="card-decoration"></div>
-        </div>`;
+    return createSquareSongCard(song, {
+        isCompleted: isCompleted,
+    });
 }
 
-function createFilterButtons(defaultType) {
+const createFilterButtons = (defaultType) => {
     let html = FILTER_GROUPS.map(group => `
         <div class="mb-2 btn-group" role="group">
             ${group.map(value => `
@@ -170,14 +157,17 @@ function createFilterButtons(defaultType) {
     return html;
 }
 
-function bindLevelEventListeners() {
+const bindLevelEventListeners = () => {
     $('input[name="filter"]').off('change');
     handleCompletionFilters();
 
     $('input[name="filter"]').on('change', showLevelListByRange);
     $('#completed-only, #non-completed-only').on('change', function () {
-        const $input = $('#song-table .section-title').text().trim();
-        if (/^等級\s*(\d+(?:\.\d+)?)\s*~\s*(\d+(?:\.\d+)?)進度$/.test($input)) {
+        const now = $('#now-title').text().trim();
+        const mode = now.split('|')[0];
+        if(mode ==='level'){
+            $('#level-start').val(now.split('|')[1]);
+            $('#level-end').val(now.split('|')[2]);
             showLevelListByRange();
         }
     });

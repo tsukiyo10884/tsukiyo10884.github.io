@@ -1,4 +1,4 @@
-function aYo() {
+const initForAyoList = () => {
     $('#stat').removeClass('axuan');
     $('#stat').addClass('ayo');
     flys();
@@ -15,8 +15,8 @@ function aYo() {
     $('#user-info').append($profile);
 }
 
-function flys() {
-    for(let i = 0; i < 3; i++) {
+const flys = () => {
+    for (let i = 0; i < 3; i++) {
         let $img = $('<img class="fly">').attr('src', `img/ayo_mini.png`);
         $('body').append($img);
     }
@@ -31,7 +31,7 @@ function flys() {
         });
     });
 }
-function randomMove($el) {
+const randomMove = ($el) => {
     let x = Math.random() * ($(window).width() - 100);
     let y = Math.random() * ($(window).height() - 100);
     let duration = 500 + Math.random() * 800;

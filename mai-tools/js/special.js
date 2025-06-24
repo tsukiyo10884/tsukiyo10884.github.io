@@ -1,17 +1,15 @@
+let clickCount = 0;
 $(document).ready(function () {
-    let clickCount = 0;
-
     $('.user-info').on('click', function () {
         clickCount++;
 
         if (clickCount === 3) {
             createSpecialButtons();
-            clickCount = 0;
         }
     });
 });
 
-function createSpecialButtons() {
+const createSpecialButtons = () => {
     const $col1 = $('<div class="special">').addClass('col-1');
     const $col2 = $('<div class="special">').addClass('col-1');
     const $col3 = $('<div class="special">').addClass('col-1');
@@ -24,7 +22,8 @@ function createSpecialButtons() {
         .attr('data-bs-toggle', 'tooltip')
         .attr('data-bs-placement', 'bottom')
         .attr('title', '阿瑄專屬')
-        .on('click', aXuan);
+        .on('click', () => showTable('a_xuan'))
+
 
     const $button2 = $('<button>')
         .html('<img src="img/ayo_icon.png" alt="阿幽專屬" style="height: 50px;">')
@@ -34,7 +33,7 @@ function createSpecialButtons() {
         .attr('data-bs-toggle', 'tooltip')
         .attr('data-bs-placement', 'bottom')
         .attr('title', '阿幽專屬')
-        .on('click', aYo);
+        .on('click', () => showTable('a_yo'));
 
     const $button3 = $('<button>')
         .text('清空')
@@ -51,7 +50,7 @@ function createSpecialButtons() {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
 }
-function clear() {
+const clear = () => {
     $('#stat').removeClass('axuan');
     $('#stat').removeClass('ayo');
     $('.fly').remove();
@@ -59,5 +58,5 @@ function clear() {
     $('#ayo_profile').remove();
     $('.special').remove();
     $('.basic_block').show();
-
+    clickCount = 0;
 }

@@ -7,11 +7,12 @@ function bindPlateEventListeners() {
     handleCompletionFilters();
 
     $('#completed-only, #non-completed-only').on('change', () => {
-        const $input = $('#plate-progress-title').text().trim();
-        const match = $input.match(/^([\u4e00-\u9fa5]+)([\u4e00-\u9fa5])(?:\(([^()]+)\))?進度$/);
-
-        if (match) {
-            const [_, plateName, type, versionName] = match;
+        const now = $('#now-title').text().trim();
+        const mode = now.split('|')[0];
+        if (mode === 'plate') {
+            const plateName = now.split('|')[1];
+            const type = now.split('|')[2];
+            const versionName = now.split('|')[3];
             showPlateProgress(versionName, plateName === '覇' ? '覇者' : type, plateName === '覇' ? '' : plateName);
         }
     });
@@ -146,6 +147,7 @@ async function showPlateProgress(versionName, type, plateName) {
     });
     diffGroup.sort((a, b) => difficulties.indexOf(b) - difficulties.indexOf(a));
 
+    $('#now-title').text(`plate|${plateName}|${type}|${versionName}`);
     $('#song-table').html(`
         <div class="section-title text-shadow-black">
             <b id="plate-progress-title">${plateName}${type}(${versionName})進度</b>
@@ -178,22 +180,7 @@ function createNamePlateSongCard(song, type) {
         '覇者': () => parseFloat(song.score.replace('%', '')) >= 80
     }[type]();
 
-    if (($('#completed-only').is(':checked') && !isCompleted) ||
-        ($('#non-completed-only').is(':checked') && isCompleted)) {
-        return null;
-    }
-
-    return `
-        <div class="square-song-card difficulty-${song.difficulty.replace(" ", "-").toLowerCase()} ${isCompleted ? 'completed' : ''}" 
-                style="background-image: url('${song.image}');" 
-                onclick="showSongDetail('${song.title}', '${song.type}')">
-            <div class="song-overlay"></div>
-            <div class="song-content text-shadow-black square-song-title">${song.title}</div>
-            <div class="song-content text-shadow-black square-song-inner-level">${song.internalLevel ? Number.parseFloat(song.internalLevel).toFixed(1) : ''} | ${song.type.toUpperCase()}</div>
-            <div class="song-content text-shadow-black square-song-score">${song.score}</div>
-            ${isCompleted ? '<div class="completion-check"><b>✓</b></div>' : ''}
-            <div class="card-decoration"></div>
-        </div>`;
+    return createSquareSongCard(song, { isCompleted : isCompleted });
 }
 
 function showSongDetail(title, type) {

@@ -1,4 +1,4 @@
-function aXuan() {
+const initForAXuanList = () => {
     suggestions = suggestPotentialUpgrades(data.songs, getTop50Songs());
     const $songsSection = createSectionXuan(suggestions);
 
@@ -7,6 +7,15 @@ function aXuan() {
     $('#stat').removeClass('ayo');
     $('#stat').addClass('axuan');
     bindSuggestionThresholdEventListenersXuan();
+    $('#played-only, #non-played-only').off('change').on('change', function () {
+        const $this = $(this);
+        const $other = $this.attr('id') === 'played-only' ? $('#non-played-only') : $('#played-only');
+
+        if ($this.is(':checked')) {
+            $other.prop('checked', false);
+        }
+    });
+    bindPlayedEventListenersXuan();
     $('.basic_block').hide();
     $('#axuan_profile')?.remove();
     $('#ayo_profile')?.remove();
@@ -18,8 +27,6 @@ function aXuan() {
             $profile.remove();
         });
     $('#user-info').append($profile);
-      $('#completion-filters').addClass('d-none');
-      $('#play-filters').addClass('d-none');
 
 }
 
@@ -52,14 +59,14 @@ const createSectionXuan = (songs) => {
 
     return $section.append($buttonsContainer);
 };
-function createLevelButtonXuan(suggestion, displayLevel) {
+const createLevelButtonXuan = (suggestion, displayLevel) => {
     return $('<button>')
         .addClass('me-2 col-1 mb-2')
         .text(displayLevel)
         .on('click', () => showLevelDetailsXuan(suggestion));
 }
 
-function showLevelDetailsXuan(suggestion) {
+const showLevelDetailsXuan = (suggestion) => {
     const $songGrid = createSuggestionSongCardXuan(suggestion);
 
     const level = suggestion.level;
@@ -67,7 +74,8 @@ function showLevelDetailsXuan(suggestion) {
     const decimal = level - baseLevel;
     const displayLevel = decimal < 0.6 ? baseLevel : `${baseLevel}+`;
 
-    const $title = createElement('div', 'section-title text-shadow-black', `等級${displayLevel}推薦曲(不分新舊)`);
+    const $title = createElement('div', 'section-title text-shadow-black', `等級${displayLevel}候選曲(不分新舊)`);
+    $('#now-title').text(`axuan|${displayLevel}`);
 
     const $radioContainer = $('<div>').addClass('row g-4');
     const $radioCol1 = $('<div>').addClass('col-auto');
@@ -122,28 +130,7 @@ function showLevelDetailsXuan(suggestion) {
     }
 }
 
-function bindSuggestionThresholdEventListenersXuan() {
-    $('input[name="rating-threshold"]').off('change');
-    $('input[name="rating-threshold"]').on('change', function () {
-        selectedRatingThreshold = $(this).val();
-        handleSuggestionUpdateXuan();
-    });
-}
-
-function handleSuggestionUpdateXuan() {
-    const $input = $('#song-table .section-title').text().trim();
-    const match = $input.match(/^等級\s*(\d+(?:\+)?)\s*推薦曲\s*\((不分新舊)\)$/);
-    if (match) {
-        const displayLevel = match[1];
-        const matchingSuggestion = findMatchingSuggestionXuan(displayLevel);
-        if (matchingSuggestion) {
-            const $songGrid = createSuggestionSongCardXuan(matchingSuggestion);
-            $('#song-table').find('.square-song-grid').replaceWith($songGrid);
-        }
-    }
-}
-
-function findMatchingSuggestionXuan(displayLevel) {
+const findMatchingSuggestionXuan = (displayLevel) => {
     return suggestions.find(s => {
         const baseLevel = Math.floor(s.level);
         const decimal = s.level - baseLevel;
@@ -153,7 +140,7 @@ function findMatchingSuggestionXuan(displayLevel) {
 }
 
 
-function createSuggestionSongCardXuan(suggestion) {
+const createSuggestionSongCardXuan = (suggestion) => {
     const { minLevel, maxLevel } = calculateLevelRange(suggestion.level);
 
     let songs = data.songs.filter(song => {
@@ -165,7 +152,6 @@ function createSuggestionSongCardXuan(suggestion) {
 
     const songCards = songs.map(song => {
         const currentRating = calculateSongRating(song);
-        const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
 
         const selectedThreshold = $('input[name="rating-threshold"]:checked').val();
         const matchingSuggestion = suggestions.find(s => s.level === song.internalLevel && (song.version_international === currentVersion ? s.version_international === currentVersion : s.version_international === 'others'));
@@ -186,17 +172,7 @@ function createSuggestionSongCardXuan(suggestion) {
             return null;
         }
 
-        return `
-        <div class="col-1 square-song-card difficulty-${diffClass}" 
-                style="background-image: url('${song.image}');" 
-                onclick="showSongDetail('${song.title}', '${song.type}')">
-            <div class="song-overlay"></div>
-            <div class="song-content text-shadow-black square-song-title">${song.title}</div>
-            <div class="song-content text-shadow-black square-song-inner-level">${song.internalLevel ? Number.parseFloat(song.internalLevel).toFixed(1) : ''} | ${song.type.toUpperCase()}</div>
-            <div class="song-content text-shadow-black square-song-score">${song.score}</div>
-            <div class="rating-gain-info text-shadow-black" >${song.targetRating ? `${song.targetRating}(${song.ratingGain})` : ''}</div>
-            <div class="card-decoration"></div>
-        </div>`;
+        return createSquareSongCard(song, { isPlayed: song.score !== '0.0000%' });
     }).filter(card => card !== null).join('');
 
     if (!songCards) {
@@ -204,4 +180,41 @@ function createSuggestionSongCardXuan(suggestion) {
     }
 
     return $('<div>').addClass('square-song-grid col-12 row ms-0').html(songCards);
+}
+
+const bindSuggestionThresholdEventListenersXuan = () => {
+    $('input[name="rating-threshold"]').off('change');
+    $('input[name="rating-threshold"]').on('change', function () {
+        selectedRatingThreshold = $(this).val();
+        handleSuggestionUpdateXuan();
+    });
+}
+
+const handleSuggestionUpdateXuan = () => {
+    const now = $('#now-title').text().trim();
+    const mode = now.split('|')[0];
+    if (mode === 'axuan') {
+        const displayLevel = now.split('|')[1];
+        const matchingSuggestion = findMatchingSuggestionXuan(displayLevel);
+        if (matchingSuggestion) {
+            const $songGrid = createSuggestionSongCardXuan(matchingSuggestion);
+            $('#song-table').find('.square-song-grid').replaceWith($songGrid);
+        }
+    }
+}
+
+const bindPlayedEventListenersXuan = () => {
+    $('#played-only, #non-played-only').on('change', function () {
+        const now = $('#now-title').text().trim();
+        const mode = now.split('|')[0];
+        if (mode === 'axuan') {
+            const displayLevel = now.split('|')[1];
+            const isNewVersion = now.split('|')[2];
+            const matchingSuggestion = findMatchingSuggestionXuan(displayLevel);
+            if (matchingSuggestion) {
+                const $songGrid = createSuggestionSongCard(matchingSuggestion);
+                $('#song-table').find('.square-song-grid').replaceWith($songGrid);
+            }
+        }
+    });
 }

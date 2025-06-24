@@ -24,7 +24,7 @@ async function initRatingSuggestionList() {
 
     $('#song-table').empty().append($newSongsSection, $oldSongsSection);
     $('#stat').empty();
-    bindSuggestionThresholdEventListeners();
+    bindRatingThresholdEventListeners();
     $('#played-only, #non-played-only').off('change').on('change', function () {
         const $this = $(this);
         const $other = $this.attr('id') === 'played-only' ? $('#non-played-only') : $('#played-only');
@@ -136,7 +136,8 @@ const showLevelDetails = (suggestion) => {
     const decimal = level - baseLevel;
     const displayLevel = decimal < 0.6 ? baseLevel : `${baseLevel}+`;
 
-    const $title = createElement('div', 'section-title text-shadow-black', `等級${displayLevel}推薦曲(${suggestion.version_international === currentVersion ? '新曲' : '舊曲'})`);
+    const $title = createElement('div', 'section-title text-shadow-black', `等級${displayLevel}候選曲(${suggestion.version_international === currentVersion ? '新曲' : '舊曲'})`);
+    $('#now-title').text(`rating_suggestion|${displayLevel}|${suggestion.version_international === currentVersion}`);
 
     const $radioContainer = $('<div>').addClass('row g-4');
     const $radioCol1 = $('<div>').addClass('col-auto');
@@ -184,10 +185,10 @@ const showLevelDetails = (suggestion) => {
 
     $('#song-table').empty().append($title, $songGrid);
     $('#stat').empty().append($('<div class="d-flex align-items-center h-100">').append($radioContainer));
-    bindSuggestionThresholdEventListeners();
+    bindRatingThresholdEventListeners();
 
     if (selectedRatingThreshold) {
-        handleSuggestionUpdate();
+        changeRatingThreshould();
     }
 }
 
@@ -204,7 +205,6 @@ const createSuggestionSongCard = (suggestion) => {
 
     const songCards = songs.map(song => {
         const currentRating = calculateSongRating(song);
-        const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
 
         const selectedThreshold = $('input[name="rating-threshold"]:checked').val();
         const matchingSuggestion = suggestions.find(s => s.level === song.internalLevel && (isNewVersion ? s.version_international === currentVersion : s.version_international === 'others'));
@@ -224,22 +224,7 @@ const createSuggestionSongCard = (suggestion) => {
         if (gain === '+0' || currentRating >= targetRating) {
             return null;
         }
-        if ($('#played-only').is(':checked') && song.score === '0.0000%'
-            || $('#non-played-only').is(':checked') && song.score !== '0.0000%') {
-            return null;
-        }
-
-        return `
-            <div class="col-1 square-song-card difficulty-${diffClass}" 
-                style="background-image: url('${song.image}');" 
-                onclick="showSongDetail('${song.title}', '${song.type}')">
-            <div class="song-overlay"></div>
-            <div class="song-content text-shadow-black square-song-title">${song.title}</div>
-            <div class="song-content text-shadow-black square-song-inner-level">${song.internalLevel ? Number.parseFloat(song.internalLevel).toFixed(1) : ''} | ${song.type.toUpperCase()}</div>
-            <div class="song-content text-shadow-black square-song-score">${song.score}</div>
-            <div class="rating-gain-info text-shadow-black" >${song.targetRating ? `${song.targetRating}(${song.ratingGain})` : ''}</div>
-            <div class="card-decoration"></div>
-        </div>`;
+        return createSquareSongCard(song, { isPlayed: song.score !== '0.0000%' });
     }).filter(card => card !== null).join('');
 
     if (!songCards) {
@@ -258,13 +243,13 @@ const findMatchingSuggestion = (displayLevel, isNewVersion) => {
     });
 }
 
-const handleSuggestionUpdate = () => {
-    const $input = $('#song-table .section-title').text().trim();
-    const match = $input.match(/^等級\s*(\d+(?:\+)?)\s*推薦曲\s*\((新曲|舊曲)\)$/);
-    if (match) {
-        const displayLevel = match[1];
-        const isNewVersion = match[2] === '新曲';
-        const matchingSuggestion = findMatchingSuggestion(displayLevel, isNewVersion);
+const changeRatingThreshould = () => {
+    const now = $('#now-title').text().trim();
+    const type = now.split('|')[0];
+    if (type === 'rating_suggestion') {
+        const displayLevel = now.split('|')[1];
+        const isNewVersion = now.split('|')[2];
+        const matchingSuggestion = findMatchingSuggestion(displayLevel, isNewVersion === 'true');
         if (matchingSuggestion) {
             const $songGrid = createSuggestionSongCard(matchingSuggestion);
             $('#song-table').find('.square-song-grid').replaceWith($songGrid);
@@ -272,21 +257,26 @@ const handleSuggestionUpdate = () => {
     }
 }
 
-const bindSuggestionThresholdEventListeners = () => {
+const bindRatingThresholdEventListeners = () => {
     $('input[name="rating-threshold"]').off('change');
     $('input[name="rating-threshold"]').on('change', function () {
         selectedRatingThreshold = $(this).val();
-        handleSuggestionUpdate();
+        changeRatingThreshould();
     });
 }
 
 const bindPlayedEventListeners = () => {
     $('#played-only, #non-played-only').on('change', function () {
-        const $input = $('#song-table .section-title').text().trim();
-        const match = $input.match(/等級(\d+\+?)推薦曲\((新曲|舊曲)\)/);
-        if (match) {
-            const level = match[1];
-            const type = match[2] === "新曲" ? "new" : "old";
+        const now = $('#now-title').text().trim();
+        const mode = now.split('|')[0];
+        if (mode === 'rating_suggestion') {
+            const displayLevel = now.split('|')[1];
+            const isNewVersion = now.split('|')[2];
+            const matchingSuggestion = findMatchingSuggestion(displayLevel, isNewVersion === 'true');
+            if (matchingSuggestion) {
+                const $songGrid = createSuggestionSongCard(matchingSuggestion);
+                $('#song-table').find('.square-song-grid').replaceWith($songGrid);
+            }
         }
     });
 }

@@ -1,7 +1,7 @@
 (async () => {
     const childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
     childWin.postMessage({
-        type: null,
+        type: 'init',
         payload: null,
     }, "https://tsukiyo10884.github.io");
 
