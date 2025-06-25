@@ -7,15 +7,6 @@ const initForAXuanList = () => {
     $('#stat').removeClass('ayo');
     $('#stat').addClass('axuan');
     bindSuggestionThresholdEventListenersXuan();
-    $('#played-only, #non-played-only').off('change').on('change', function () {
-        const $this = $(this);
-        const $other = $this.attr('id') === 'played-only' ? $('#non-played-only') : $('#played-only');
-
-        if ($this.is(':checked')) {
-            $other.prop('checked', false);
-        }
-    });
-    bindPlayedEventListenersXuan();
     $('.basic_block').hide();
     $('#axuan_profile')?.remove();
     $('#ayo_profile')?.remove();
@@ -85,35 +76,35 @@ const showLevelDetailsXuan = (suggestion) => {
         selectedRatingThreshold = 'SSS+';
     }
 
-    for (let i = 0; i < RATING_THRESHOLDS.length; i += 2) {
+    for (let i = 0; i < SCORE_THRESHOLDS.length; i += 2) {
         const $radio1 = $('<div>').addClass('form-check');
         const $input1 = $('<input>')
             .addClass('form-check-input')
             .attr('type', 'radio')
             .attr('name', 'rating-threshold')
-            .attr('id', `threshold-${RATING_THRESHOLDS[i].name}`)
-            .attr('value', RATING_THRESHOLDS[i].name)
-            .prop('checked', selectedRatingThreshold === RATING_THRESHOLDS[i].name);
+            .attr('id', `threshold-${SCORE_THRESHOLDS[i].name}`)
+            .attr('value', SCORE_THRESHOLDS[i].name)
+            .prop('checked', selectedRatingThreshold === SCORE_THRESHOLDS[i].name);
         const $label1 = $('<label>')
             .addClass('form-check-label')
-            .attr('for', `threshold-${RATING_THRESHOLDS[i].name}`)
-            .text(RATING_THRESHOLDS[i].name);
+            .attr('for', `threshold-${SCORE_THRESHOLDS[i].name}`)
+            .text(SCORE_THRESHOLDS[i].name);
         $radio1.append($input1, $label1);
         $radioCol1.append($radio1);
 
-        if (i + 1 < RATING_THRESHOLDS.length) {
+        if (i + 1 < SCORE_THRESHOLDS.length) {
             const $radio2 = $('<div>').addClass('form-check');
             const $input2 = $('<input>')
                 .addClass('form-check-input')
                 .attr('type', 'radio')
                 .attr('name', 'rating-threshold')
-                .attr('id', `threshold-${RATING_THRESHOLDS[i + 1].name}`)
-                .attr('value', RATING_THRESHOLDS[i + 1].name)
-                .prop('checked', selectedRatingThreshold === RATING_THRESHOLDS[i + 1].name);
+                .attr('id', `threshold-${SCORE_THRESHOLDS[i + 1].name}`)
+                .attr('value', SCORE_THRESHOLDS[i + 1].name)
+                .prop('checked', selectedRatingThreshold === SCORE_THRESHOLDS[i + 1].name);
             const $label2 = $('<label>')
                 .addClass('form-check-label')
-                .attr('for', `threshold-${RATING_THRESHOLDS[i + 1].name}`)
-                .text(RATING_THRESHOLDS[i + 1].name);
+                .attr('for', `threshold-${SCORE_THRESHOLDS[i + 1].name}`)
+                .text(SCORE_THRESHOLDS[i + 1].name);
             $radio2.append($input2, $label2);
             $radioCol2.append($radio2);
         }
@@ -201,20 +192,4 @@ const handleSuggestionUpdateXuan = () => {
             $('#song-table').find('.square-song-grid').replaceWith($songGrid);
         }
     }
-}
-
-const bindPlayedEventListenersXuan = () => {
-    $('#played-only, #non-played-only').on('change', function () {
-        const now = $('#now-title').text().trim();
-        const mode = now.split('|')[0];
-        if (mode === 'axuan') {
-            const displayLevel = now.split('|')[1];
-            const isNewVersion = now.split('|')[2];
-            const matchingSuggestion = findMatchingSuggestionXuan(displayLevel);
-            if (matchingSuggestion) {
-                const $songGrid = createSuggestionSongCard(matchingSuggestion);
-                $('#song-table').find('.square-song-grid').replaceWith($songGrid);
-            }
-        }
-    });
 }

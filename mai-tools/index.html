@@ -116,6 +116,7 @@
 
     const setupEventListeners = () => {
       handleCompletionFilters();
+      bindPlayedEventListeners();
 
       $(window).on('load', () => {
         $('#json-data').text() && refreshData();

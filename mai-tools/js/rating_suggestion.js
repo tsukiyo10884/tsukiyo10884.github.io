@@ -1,11 +1,3 @@
-const RATING_THRESHOLDS = [
-    { name: 'S', score: 97.00 },
-    { name: 'S+', score: 98.00 },
-    { name: 'SS', score: 99.00 },
-    { name: 'SS+', score: 99.50 },
-    { name: 'SSS', score: 100.00 },
-    { name: 'SSS+', score: 100.50 }
-];
 let suggestions = [];
 let selectedRatingThreshold = null;
 let groupedNewSongs = {};
@@ -25,15 +17,6 @@ async function initRatingSuggestionList() {
     $('#song-table').empty().append($newSongsSection, $oldSongsSection);
     $('#stat').empty();
     bindRatingThresholdEventListeners();
-    $('#played-only, #non-played-only').off('change').on('change', function () {
-        const $this = $(this);
-        const $other = $this.attr('id') === 'played-only' ? $('#non-played-only') : $('#played-only');
-
-        if ($this.is(':checked')) {
-            $other.prop('checked', false);
-        }
-    });
-    bindPlayedEventListeners();
 }
 
 const groupSongs = (songs, isNewVersion) => {
@@ -68,13 +51,13 @@ const suggestPotentialUpgrades = (allSongs, top50Songs) => {
     const newMinRating = Math.min(...newTopSongs.map(s => calculateSongRating(s)));
     const oldMinRating = Math.min(...oldTopSongs.map(s => calculateSongRating(s)));
 
-    const newSuggestions = calculateSuggestions(newSongs, newMinRating, RATING_THRESHOLDS, currentVersion);
-    const oldSuggestions = calculateSuggestions(oldSongs, oldMinRating, RATING_THRESHOLDS, 'others');
+    const newSuggestions = calculateSuggestions(newSongs, newMinRating, currentVersion);
+    const oldSuggestions = calculateSuggestions(oldSongs, oldMinRating, 'others');
 
     return [...newSuggestions, ...oldSuggestions].sort((a, b) => parseFloat(a.level) - parseFloat(b.level));
 }
 
-const calculateSuggestions = (songs, minRating, thresholds, version) => {
+const calculateSuggestions = (songs, minRating, version) => {
     const groupedByLevel = songs.reduce((acc, song) => {
         if (!acc[song.internalLevel]) acc[song.internalLevel] = [];
         acc[song.internalLevel].push(song);
@@ -83,7 +66,7 @@ const calculateSuggestions = (songs, minRating, thresholds, version) => {
 
     return Object.entries(groupedByLevel).map(([level, _]) => {
         const lv = Number(level);
-        const upgrades = thresholds.map(({ name, score }) => {
+        const upgrades = SCORE_THRESHOLDS.map(({ name, score }) => {
             const rating = achi2rating_splashplus(lv * 10, parseFloat(score) * 10000);
             const diff = rating - minRating;
             return {
@@ -147,35 +130,35 @@ const showLevelDetails = (suggestion) => {
         selectedRatingThreshold = 'SSS+';
     }
 
-    for (let i = 0; i < RATING_THRESHOLDS.length; i += 2) {
+    for (let i = 0; i < SCORE_THRESHOLDS.length; i += 2) {
         const $radio1 = $('<div>').addClass('form-check');
         const $input1 = $('<input>')
             .addClass('form-check-input')
             .attr('type', 'radio')
             .attr('name', 'rating-threshold')
-            .attr('id', `threshold-${RATING_THRESHOLDS[i].name}`)
-            .attr('value', RATING_THRESHOLDS[i].name)
-            .prop('checked', selectedRatingThreshold === RATING_THRESHOLDS[i].name);
+            .attr('id', `threshold-${SCORE_THRESHOLDS[i].name}`)
+            .attr('value', SCORE_THRESHOLDS[i].name)
+            .prop('checked', selectedRatingThreshold === SCORE_THRESHOLDS[i].name);
         const $label1 = $('<label>')
             .addClass('form-check-label')
-            .attr('for', `threshold-${RATING_THRESHOLDS[i].name}`)
-            .text(RATING_THRESHOLDS[i].name);
+            .attr('for', `threshold-${SCORE_THRESHOLDS[i].name}`)
+            .text(SCORE_THRESHOLDS[i].name);
         $radio1.append($input1, $label1);
         $radioCol1.append($radio1);
 
-        if (i + 1 < RATING_THRESHOLDS.length) {
+        if (i + 1 < SCORE_THRESHOLDS.length) {
             const $radio2 = $('<div>').addClass('form-check');
             const $input2 = $('<input>')
                 .addClass('form-check-input')
                 .attr('type', 'radio')
                 .attr('name', 'rating-threshold')
-                .attr('id', `threshold-${RATING_THRESHOLDS[i + 1].name}`)
-                .attr('value', RATING_THRESHOLDS[i + 1].name)
-                .prop('checked', selectedRatingThreshold === RATING_THRESHOLDS[i + 1].name);
+                .attr('id', `threshold-${SCORE_THRESHOLDS[i + 1].name}`)
+                .attr('value', SCORE_THRESHOLDS[i + 1].name)
+                .prop('checked', selectedRatingThreshold === SCORE_THRESHOLDS[i + 1].name);
             const $label2 = $('<label>')
                 .addClass('form-check-label')
-                .attr('for', `threshold-${RATING_THRESHOLDS[i + 1].name}`)
-                .text(RATING_THRESHOLDS[i + 1].name);
+                .attr('for', `threshold-${SCORE_THRESHOLDS[i + 1].name}`)
+                .text(SCORE_THRESHOLDS[i + 1].name);
             $radio2.append($input2, $label2);
             $radioCol2.append($radio2);
         }
@@ -262,21 +245,5 @@ const bindRatingThresholdEventListeners = () => {
     $('input[name="rating-threshold"]').on('change', function () {
         selectedRatingThreshold = $(this).val();
         changeRatingThreshould();
-    });
-}
-
-const bindPlayedEventListeners = () => {
-    $('#played-only, #non-played-only').on('change', function () {
-        const now = $('#now-title').text().trim();
-        const mode = now.split('|')[0];
-        if (mode === 'rating_suggestion') {
-            const displayLevel = now.split('|')[1];
-            const isNewVersion = now.split('|')[2];
-            const matchingSuggestion = findMatchingSuggestion(displayLevel, isNewVersion === 'true');
-            if (matchingSuggestion) {
-                const $songGrid = createSuggestionSongCard(matchingSuggestion);
-                $('#song-table').find('.square-song-grid').replaceWith($songGrid);
-            }
-        }
     });
 }

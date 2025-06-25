@@ -1,23 +1,6 @@
 async function initPlateList() {
     $('#song-table').html(showPlateList());
-    bindPlateEventListeners();
 }
-
-function bindPlateEventListeners() {
-    handleCompletionFilters();
-
-    $('#completed-only, #non-completed-only').on('change', () => {
-        const now = $('#now-title').text().trim();
-        const mode = now.split('|')[0];
-        if (mode === 'plate') {
-            const plateName = now.split('|')[1];
-            const type = now.split('|')[2];
-            const versionName = now.split('|')[3];
-            showPlateProgress(versionName, plateName === '覇' ? '覇者' : type, plateName === '覇' ? '' : plateName);
-        }
-    });
-}
-
 function showPlateList() {
     return `<div class="row g-2">${versionList.map(version => {
         const colClass = version.plateName === '真' || version.plateName === '舞' ? 'col-6' :

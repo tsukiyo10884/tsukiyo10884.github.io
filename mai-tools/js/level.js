@@ -1,13 +1,3 @@
-const SCORE_THRESHOLDS = {
-    'clear': 80,
-    'S': 97,
-    'S+': 98,
-    'SS': 99,
-    'SS+': 99.5,
-    'SSS': 100,
-    'SSS+': 100.5
-};
-
 const FILTER_GROUPS = [
     ['clear', 'S', 'S+', 'SS', 'SS+', 'SSS', 'SSS+'],
     ['AP', 'AP+', 'FC', 'FC+', 'FS', 'FS+', 'FDX', 'FDX+']
@@ -116,8 +106,9 @@ const filteredSongsCount = (songs) => {
 const isSongCompleted = (song, filterType) => {
     const score = parseFloat(song.score.replace('%', ''));
 
-    if (SCORE_THRESHOLDS[filterType]) {
-        return score > SCORE_THRESHOLDS[filterType];
+    const threshold = SCORE_THRESHOLDS.find(t => t.name === filterType);
+    if (threshold) {
+        return score > threshold.score;
     }
 
     switch (filterType) {
@@ -146,7 +137,7 @@ const createFilterButtons = (defaultType) => {
     let html = FILTER_GROUPS.map(group => `
         <div class="mb-2 btn-group" role="group">
             ${group.map(value => `
-                <input type="radio" class="form-check-input" name="filter" id="radio-${value}" 
+                <input type="radio" class="form-check-input ms-2" name="filter" id="radio-${value}" 
                     value="${value}" autocomplete="off" ${value === defaultType ? 'checked' : ''}>
                 <label class="form-check-label" for="radio-${value}">${value}</label>
             `).join('')}
@@ -159,16 +150,5 @@ const createFilterButtons = (defaultType) => {
 
 const bindLevelEventListeners = () => {
     $('input[name="filter"]').off('change');
-    handleCompletionFilters();
-
     $('input[name="filter"]').on('change', showLevelListByRange);
-    $('#completed-only, #non-completed-only').on('change', function () {
-        const now = $('#now-title').text().trim();
-        const mode = now.split('|')[0];
-        if(mode ==='level'){
-            $('#level-start').val(now.split('|')[1]);
-            $('#level-end').val(now.split('|')[2]);
-            showLevelListByRange();
-        }
-    });
 }
