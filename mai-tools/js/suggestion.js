@@ -238,6 +238,8 @@ const createSuggestionSongCard = (gainList) => {
 
             return createSquareSongCard(song, { isPlayed: song.score !== '0.0000%' });
         }).filter(card => card !== null).join('');
+        
+        if (cards === '') return '';
 
         return header + cards;
     }).join('');

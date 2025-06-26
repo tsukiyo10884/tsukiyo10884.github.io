@@ -109,6 +109,8 @@ const updateSongGrid = (songs, minLevel, maxLevel) => {
             .filter(card => card !== null)
             .join('');
 
+        if (cards === '') return '';
+
         return header + cards;
     }).join('');
 
