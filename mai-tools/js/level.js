@@ -85,12 +85,34 @@ const updateStatistics = (songs) => {
 
 // 更新歌曲列表
 const updateSongGrid = (songs, minLevel, maxLevel) => {
-    $('#level-song-grid').html(
-        songs.sort((a, b) => b.internalLevel - a.internalLevel)
+
+
+    let groupedSongs = {};
+    songs.forEach(song => {
+        const key = formatLevel(song.internalLevel);
+        if (!groupedSongs[key]) {
+            groupedSongs[key] = [];
+        }
+        groupedSongs[key].push(song);
+    });
+
+    const songCards = Object.entries(groupedSongs).sort(([a], [b]) => parseFloat(b) - parseFloat(a)).map(([level, songList]) => {
+        const header = `
+        <div class="col-12 d-flex align-items-center my-3">
+            <div class="flex-grow-1 hr border-2"></div>
+            <b id="plate-progress-title" class="px-3">${level}</b>
+            <div class="flex-grow-1 hr border-2"></div>
+        </div>`;
+
+        const cards = songList
             .map(song => createSquareSongCard(song, { isCompleted: isSongCompleted(song, $('input[name="achivement"]:checked').val()) }))
             .filter(card => card !== null)
-            .join('')
-    );
+            .join('');
+
+        return header + cards;
+    }).join('');
+
+    $('#level-song-grid').html(songCards);
     $('#section-title').html(`<b>等級${minLevel} ~ ${maxLevel}進度</b>`);
     $('#now-title').text(`level|${minLevel}|${maxLevel}`);
 }

@@ -16,8 +16,8 @@ async function initRatingList() {
 async function showRatingList() {
     const { rating_new, rating_others } = data.ratingSongList;
     return [
-        await createRatingSection('───── new songs ─────', rating_new),
-        await createRatingSection('───── others ─────', rating_others)
+        await createRatingSection('new songs', rating_new),
+        await createRatingSection('others', rating_others)
     ].join('');
 }
 
@@ -57,7 +57,13 @@ async function renderRatingSummaryTable(newSongs, others, all) {
 async function createRatingSection(title, songs) {
     const ratedSongs = calcRatings(songs);
     return `
-        <div class="section-title text-shadow-black">${title}</div>
+        <div class="section-title text-shadow-black">
+            <div class="col-12 d-flex align-items-center my-3">
+                <div class="flex-grow-1 border-bottom border-2"></div>
+                <b id="plate-progress-title" class="px-3">${title}</b>
+                <div class="flex-grow-1 border-bottom border-2"></div>
+            </div>
+        </div>
         <div class="song-grid row ms-0">
             ${ratedSongs.map(createSongCard).join('')}
         </div>`;

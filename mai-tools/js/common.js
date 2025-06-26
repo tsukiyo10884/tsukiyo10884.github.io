@@ -222,3 +222,9 @@ const createSquareSongCard = (song, {
         </div>`;
 
 }
+
+// 如果等級是整數，則添加小數點和零
+const formatLevel = (level) => {
+  const str = level.toString();
+  return str.includes('.') ? str : `${str}.0`;
+};

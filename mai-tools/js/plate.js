@@ -138,8 +138,10 @@ async function showPlateProgress(versionName, type, plateName) {
         </div>
         ${diffGroup.map(diff => `
             ${diff === 'remaster' && versionName !== 'maimai ~ FiNALE' ? '' : `
-                <div class="col-12">
-                    <b id="plate-progress-title" class="d-flex justify-content-center mb-3">${diff}</b>
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="flex-grow-1 hr border-2"></div>
+                    <b id="plate-progress-title" class="px-3">${diff}</b>
+                    <div class="flex-grow-1 hr border-2"></div>
                 </div>
                 <div class="square-song-grid col-12 row ms-0 mb-3">
                     ${songs
@@ -163,7 +165,7 @@ function createNamePlateSongCard(song, type) {
         '覇者': () => parseFloat(song.score.replace('%', '')) >= 80
     }[type]();
 
-    return createSquareSongCard(song, { isCompleted : isCompleted });
+    return createSquareSongCard(song, { isCompleted: isCompleted });
 }
 
 function showSongDetail(title, type) {

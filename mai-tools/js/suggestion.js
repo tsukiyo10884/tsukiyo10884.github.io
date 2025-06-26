@@ -204,31 +204,44 @@ const createSuggestionSongCard = (gainList) => {
     const { minLevel, maxLevel } = calculateLevelRange(gainList.level);
 
     let songs = songFilter(data.songs, { isNewVersion: gainList.isNewVersion, minLevel: minLevel, maxLevel: maxLevel });
-    songs.sort((a, b) => b.internalLevel - a.internalLevel);
-    const songCards = songs.map(song => {
-        const currentRating = calculateSongRating(song);
 
-        const selectedThreshold = $('input[name="rating-threshold"]:checked').val();
-        const matchingSuggestion = gainListAll.find(s => s.level === song.internalLevel && (s.isNewVersion === gainList.isNewVersion));
-
-        if (!matchingSuggestion) {
-            return null;
+    let groupedSongs = {};
+    songs.forEach(song => {
+        const key = formatLevel(song.internalLevel);
+        if (!groupedSongs[key]) {
+            groupedSongs[key] = [];
         }
-        const matchingUpgrade = matchingSuggestion.upgrades.find(upg => upg.rank === selectedThreshold);
-        if (!matchingUpgrade) {
-            return null;
-        }
-        const targetRating = matchingUpgrade.rating;
-        const gain = matchingUpgrade.gain;
+        groupedSongs[key].push(song);
+    });
 
-        song.targetRating = targetRating;
-        song.ratingGain = gain;
+    const songCards = Object.entries(groupedSongs).sort(([a], [b]) => parseFloat(b) - parseFloat(a)).map(([level, songList]) => {
+        const header = `
+        <div class="col-12 d-flex align-items-center my-3">
+            <div class="flex-grow-1 hr border-2"></div>
+            <b id="plate-progress-title" class="px-3">${level}</b>
+            <div class="flex-grow-1 hr border-2"></div>
+        </div>`;
 
-        if (gain === '+0' || currentRating >= targetRating) {
-            return null;
-        }
-        return createSquareSongCard(song, { isPlayed: song.score !== '0.0000%' });
-    }).filter(card => card !== null).join('');
+        const cards = songList.map(song => {
+            const currentRating = calculateSongRating(song);
+            const selectedThreshold = $('input[name="rating-threshold"]:checked').val();
+            const matchingSuggestion = gainListAll.find(s => s.level === song.internalLevel && (s.isNewVersion === gainList.isNewVersion));
+            if (!matchingSuggestion) return null;
+            const matchingUpgrade = matchingSuggestion.upgrades.find(upg => upg.rank === selectedThreshold);
+            if (!matchingUpgrade) return null;
+
+            const targetRating = matchingUpgrade.rating;
+            const gain = matchingUpgrade.gain;
+            song.targetRating = targetRating;
+            song.ratingGain = gain;
+            if (gain === '+0' || currentRating >= targetRating) return null;
+
+            return createSquareSongCard(song, { isPlayed: song.score !== '0.0000%' });
+        }).filter(card => card !== null).join('');
+
+        return header + cards;
+    }).join('');
+
 
     if (!songCards) {
         return $('<div>').addClass('square-song-grid col-12 row ms-0 text-center').html('<div class="col-12 py-5">無</div>');
