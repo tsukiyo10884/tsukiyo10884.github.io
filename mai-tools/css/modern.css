@@ -148,7 +148,7 @@ body {
 .song-grid {
     display: grid !important;
     gap: 1em;
-    grid-template-columns: repeat(auto-fit, 114px);
+    grid-template-columns: repeat(auto-fit, 165px);
 }
 
 .song-image {

@@ -71,17 +71,17 @@
                 const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
                 const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
 
-                let version_international = songVersionData[title + "__" + type];
-                if (version_international === undefined) {
-                    version_international = versionData[versionData.length - 1].versionName;
+                let versionInternational = songVersionData[title + "__" + type];
+                if (versionInternational === undefined) {
+                    versionInternational = versionData[versionData.length - 1].versionName;
                 }
-                if (version_international.includes('でらっくす')) {
-                    version_international = version_international.replace('maimaiでらっくす', 'でらっくす');
+                if (versionInternational.includes('でらっくす')) {
+                    versionInternational = versionInternational.replace('maimaiでらっくす', 'でらっくす');
                 }
-                if (version_international.includes('Splash')) {
-                    version_international = version_international.replace('Splash', 'スプラッシュ');
+                if (versionInternational.includes('Splash')) {
+                    versionInternational = versionInternational.replace('Splash', 'スプラッシュ');
                 }
-                const version_japan = sheet?.version;
+                const versionJapan = sheet?.version;
 
                 const iconSrcList = Array.from(block.querySelectorAll('.h_30.f_r')).map(el => el.src);
                 const flags = {
@@ -97,7 +97,7 @@
                 };
 
                 songs.push({
-                    type, title, score, difficulty: difficulties[i], version_international, version_japan,
+                    type, title, score, difficulty: difficulties[i], versionInternational, versionJapan,
                     internalLevel, image, ...flags
                 });
             });
@@ -143,8 +143,8 @@
                 const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
                 const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
 
-                const version_international = songVersionData[title + "__" + type];
-                const version_japan = sheet?.version;
+                const versionInternational = songVersionData[title + "__" + type];
+                const versionJapan = sheet?.version;
 
                 const tdIcon = block.querySelector('.t_r.f_0');
                 const iconSrcList = Array.from(tdIcon?.querySelectorAll('img') || []).map(el => el.src);
@@ -161,7 +161,7 @@
                 };
 
                 songs.push({
-                    type, title, score, difficulty: difficulties[i], version_international, version_japan,
+                    type, title, score, difficulty: difficulties[i], versionInternational, versionJapan,
                     internalLevel, image, ...flags
                 });
             });

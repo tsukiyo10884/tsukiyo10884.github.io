@@ -10,9 +10,9 @@ $(document).ready(function () {
 });
 
 const createSpecialButtons = () => {
-    const $col1 = $('<div class="special">').addClass('col-1');
-    const $col2 = $('<div class="special">').addClass('col-1');
-    const $col3 = $('<div class="special">').addClass('col-1');
+    const $col1 = $('<div class="special col-1 align-content-center">');
+    const $col2 = $('<div class="special col-1 align-content-center">');
+    const $col3 = $('<div class="special col-1 align-content-center">');
 
     const $button1 = $('<button>')
         .html('<img src="img/axuan_icon.png" alt="阿瑄專屬" style="height: 50px;">')

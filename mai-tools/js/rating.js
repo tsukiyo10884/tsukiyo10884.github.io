@@ -1,8 +1,8 @@
 async function initRatingList() {
     const topSongs = getTop50Songs();
     data.ratingSongList = {
-        rating_new: topSongs.filter(s => s.version_international === currentVersion),
-        rating_others: topSongs.filter(s => s.version_international !== currentVersion)
+        rating_new: topSongs.filter(s => s.versionInternational === currentVersion),
+        rating_others: topSongs.filter(s => s.versionInternational !== currentVersion)
     };
 
     const { rating_new, rating_others } = data.ratingSongList;
@@ -23,8 +23,8 @@ async function showRatingList() {
 
 function getTop50Songs() {
     const [oldSongs, newSongs] = [
-        data.songs.filter(s => s.version_international !== currentVersion),
-        data.songs.filter(s => s.version_international === currentVersion)
+        data.songs.filter(s => s.versionInternational !== currentVersion),
+        data.songs.filter(s => s.versionInternational === currentVersion)
     ].map(songs => songs.map(s => ({ ...s, rating: calculateSongRating(s) })));
 
     const sortByRating = (a, b) => b.rating - a.rating || parseFloat(b.score) - parseFloat(a.score);

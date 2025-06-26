@@ -1,27 +1,42 @@
-const FILTER_GROUPS = [
+// 達成項目
+const ACHIVEMENT_GROUPS = [
     ['clear', 'S', 'S+', 'SS', 'SS+', 'SSS', 'SSS+'],
     ['AP', 'AP+', 'FC', 'FC+', 'FS', 'FS+', 'FDX', 'FDX+']
 ];
 
+// 初始化等級列表
 const initLevelList = () => {
     if (!data.ratingSongList) {
         const topSongs = getTop50Songs();
         data.ratingSongList = {
-            rating_new: songFilter(topSongs, { is_new_version: true }),
-            rating_others: songFilter(topSongs, { is_new_version: false })
+            rating_new: songFilter(topSongs, { isNewVersion: true }),
+            rating_others: songFilter(topSongs, { isNewVersion: false })
         };
     }
 
     const allSongs = [...data.ratingSongList.rating_new, ...data.ratingSongList.rating_others];
     const levels = allSongs.map(song => song.internalLevel);
-    const maxLevel = Math.max(...levels);
-    const minLevel = Math.min(...levels);
-    const songs = data.songs.filter(song => song.internalLevel >= minLevel && song.internalLevel <= maxLevel);
+    const minLevel = Math.min(...levels) === 0 ? 10 : Math.min(...levels);
+    const maxLevel = Math.max(...levels) === 0 ? 10 : Math.max(...levels);
+    const songs = songFilter(data.songs, { minLevel: minLevel, maxLevel: maxLevel });
 
     $('#stat').html(`
         <div class="d-flex flex-column align-items-center justify-content-center pt-2" style="min-height: 100px;">
-            ${showLevelList(minLevel, maxLevel)}
-            ${createFilterButtons('S')}
+            <div class="level-list row d-flex align-items-center justify-content-center">
+            <div class="col-3">
+                <input type="number" id="level-min" class="form-control" placeholder="最低等級" value="${minLevel}" />
+            </div>
+            <div class="col-1">
+                <span class="align-middle">～</span>
+            </div>
+            <div class="col-3">
+                <input type="number" id="level-max" class="form-control" placeholder="最高等級" value="${maxLevel}" />
+            </div>
+            <div class="col-3" align="center">
+                <button onclick="showLevelListByRange()">查詢</button>
+            </div>
+        </div>
+            ${createAchivementButtons('S')}
         </div>
     `).show();
 
@@ -31,7 +46,7 @@ const initLevelList = () => {
         </div>
         <div id="level-song-grid" class="square-song-grid col-12 row" style="margin-left:0">
             ${songs.sort((a, b) => b.internalLevel - a.internalLevel)
-            .map(song => createLevelSongCard(song)).join('')}
+            .map(song => createSquareSongCard(song, { isCompleted: isSongCompleted(song, $('input[name="achivement"]:checked').val()) })).join('')}
         </div>
     `);
 
@@ -39,73 +54,56 @@ const initLevelList = () => {
     bindLevelEventListeners();
 }
 
-const showLevelList = (startLevel, endLevel) => {
-    return `
-        <div class="level-list row d-flex align-items-center justify-content-center">
-            <div class="col-3">
-                <input type="number" id="level-start" class="form-control" placeholder="最低等級" value="${startLevel}" />
-            </div>
-            <div class="col-1">
-                <span class="align-middle">～</span>
-            </div>
-            <div class="col-3">
-                <input type="number" id="level-end" class="form-control" placeholder="最高等級" value="${endLevel}" />
-            </div>
-            <div class="col-3" align="center">
-                <button onclick="showLevelListByRange()">查詢</button>
-            </div>
-        </div>
-    `;
-}
-
+// 顯示等級範圍的歌曲列表
 const showLevelListByRange = () => {
-    const startLevel = parseFloat($('#level-start').val());
-    const endLevel = parseFloat($('#level-end').val());
+    const minLevel = parseFloat($('#level-min').val());
+    const maxLevel = parseFloat($('#level-max').val());
 
-    if (!isValidLevelRange(startLevel, endLevel)) {
+    if (!isValidLevelRange(minLevel, maxLevel)) {
         alert("等級範圍必須在 1 到 15 之間，並由低到高");
         return;
     }
 
-    const songs = data.songs.filter(song =>
-        song.internalLevel >= startLevel && song.internalLevel <= endLevel
-    );
-
+    const songs = songFilter(data.songs, { minLevel: minLevel, maxLevel: maxLevel });
     updateStatistics(songs);
-    updateSongGrid(songs, startLevel, endLevel);
+    updateSongGrid(songs, minLevel, maxLevel);
 }
 
-const isValidLevelRange = (startLevel, endLevel) => {
-    return !isNaN(startLevel) && !isNaN(endLevel) &&
-        startLevel <= endLevel &&
-        startLevel >= 1 && endLevel <= 15;
+// 檢查等級範圍是否有效
+const isValidLevelRange = (minLevel, maxLevel) => {
+    return !isNaN(minLevel) && !isNaN(maxLevel) &&
+        minLevel <= maxLevel &&
+        minLevel >= 1 && maxLevel <= 15;
 }
 
+// 更新達成率
 const updateStatistics = (songs) => {
     const completedCount = filteredSongsCount(songs);
     const percent = ((completedCount / songs.length) * 100).toFixed(2);
     $('#statText').html(`達成率：${percent}% (${completedCount}/${songs.length})`);
 }
 
-const updateSongGrid = (songs, startLevel, endLevel) => {
+// 更新歌曲列表
+const updateSongGrid = (songs, minLevel, maxLevel) => {
     $('#level-song-grid').html(
         songs.sort((a, b) => b.internalLevel - a.internalLevel)
-            .map(song => createLevelSongCard(song))
+            .map(song => createSquareSongCard(song, { isCompleted: isSongCompleted(song, $('input[name="achivement"]:checked').val()) }))
             .filter(card => card !== null)
             .join('')
     );
-    $('#section-title').html(`<b>等級${startLevel} ~ ${endLevel}進度</b>`);
-    $('#now-title').text(`level|${startLevel}|${endLevel}`);
+    $('#section-title').html(`<b>等級${minLevel} ~ ${maxLevel}進度</b>`);
+    $('#now-title').text(`level|${minLevel}|${maxLevel}`);
 }
 
+// 計算達成條件的歌曲數量
 const filteredSongsCount = (songs) => {
-    const filterType = $('input[name="filter"]:checked').val();
+    const filterType = $('input[name="achivement"]:checked').val();
     return songs.filter(song => isSongCompleted(song, filterType)).length;
 }
 
+// 判斷歌曲是否達成條件
 const isSongCompleted = (song, filterType) => {
     const score = parseFloat(song.score.replace('%', ''));
-
     const threshold = SCORE_THRESHOLDS.find(t => t.name === filterType);
     if (threshold) {
         return score > threshold.score;
@@ -124,20 +122,12 @@ const isSongCompleted = (song, filterType) => {
     }
 }
 
-const createLevelSongCard = (song) => {
-    const filterType = $('input[name="filter"]:checked').val();
-    const isCompleted = isSongCompleted(song, filterType);
-
-    return createSquareSongCard(song, {
-        isCompleted: isCompleted,
-    });
-}
-
-const createFilterButtons = (defaultType) => {
-    let html = FILTER_GROUPS.map(group => `
+// 建立成就按鈕
+const createAchivementButtons = (defaultType) => {
+    let html = ACHIVEMENT_GROUPS.map(group => `
         <div class="mb-2 btn-group" role="group">
             ${group.map(value => `
-                <input type="radio" class="form-check-input ms-2" name="filter" id="radio-${value}" 
+                <input type="radio" class="form-check-input ms-2" name="achivement" id="radio-${value}" 
                     value="${value}" autocomplete="off" ${value === defaultType ? 'checked' : ''}>
                 <label class="form-check-label" for="radio-${value}">${value}</label>
             `).join('')}
@@ -148,7 +138,8 @@ const createFilterButtons = (defaultType) => {
     return html;
 }
 
+// 監聽成就按鈕變更事件
 const bindLevelEventListeners = () => {
-    $('input[name="filter"]').off('change');
-    $('input[name="filter"]').on('change', showLevelListByRange);
+    $('input[name="achivement"]').off('change');
+    $('input[name="achivement"]').on('change', showLevelListByRange);
 }
