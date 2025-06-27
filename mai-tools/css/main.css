@@ -19,7 +19,7 @@ button {
 	background-color: #ffffffcc;
 	border-radius: 12px !important;
 	border: none;
-	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 	color: #333;
 	cursor: pointer;
 	font-size: 16px;
@@ -113,7 +113,7 @@ img {
 
 .song-overlay {
 	backdrop-filter: blur(2px);
-	background-color: rgba(0,0,0,0.2);
+	background-color: rgba(0, 0, 0, 0.2);
 	inset: -5px;
 	position: absolute;
 }
@@ -128,8 +128,14 @@ img {
 	text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
 }
 
-.hr{
+.hr {
 	border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-body-color) !important;
+}
+
+.section-divider {
+	flex-grow: 1;
+	border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+	border-width: 2px !important;
 }
 
 /**************/
@@ -166,7 +172,7 @@ img {
 .square-song-grid {
 	display: grid;
 	gap: 10px;
-	grid-template-columns: repeat(auto-fit,102px);
+	grid-template-columns: repeat(auto-fit, 102px);
 }
 
 .square-song-title {
@@ -178,6 +184,7 @@ img {
 	white-space: nowrap;
 	font-size: 10px;
 }
+
 .square-song-inner-level {
 	line-height: 12px !important;
 	font-size: 10px;
@@ -216,10 +223,10 @@ img {
 
 .rating-block-song-title {
 	display: inline-block;
-    max-width: 162px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	max-width: 162px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	bottom: 33px;
 	font-size: 12px;
 	left: 4px;
@@ -258,10 +265,11 @@ img {
 
 /**************/
 /*user profile*/
-/**************/.basic_block {
+/**************/
+.basic_block {
 	background-color: #fff;
 	border-radius: 5px;
-	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 }
 
 .f_0 {
@@ -323,7 +331,7 @@ img {
 	background-size: 34px;
 	border-radius: 5px;
 	border: 1px solid #dedede;
-	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 	color: #000;
 	height: 27px;
 	margin: 3px 0;

@@ -7,7 +7,7 @@ async function initRatingList() {
 
     const { rating_new, rating_others } = data.ratingSongList;
     const allRatingSongs = [...rating_new, ...rating_others];
-    
+
     const [newSongs, others, all] = [rating_new, rating_others, allRatingSongs].map(calcRatings);
     await renderRatingSummaryTable(newSongs, others, all);
     $('#song-table').html(await showRatingList());
@@ -36,14 +36,14 @@ function getTop50Songs() {
 
 async function renderRatingSummaryTable(newSongs, others, all) {
     const getAvg = songs => (songs.reduce((sum, item) => sum + item.rating, 0) / songs.length).toFixed(2);
-    
+
     const stats = [
         ['新曲平均', getAvg(newSongs)],
         ['舊曲平均', getAvg(others)],
         ['總平均R値', getAvg(all)]
     ];
 
-    const tableHtml = stats.map(([label, value]) => 
+    const tableHtml = stats.map(([label, value]) =>
         `<tr><td>${label}</td><td class="ps-2">${value}</td></tr>`
     ).join('');
 
@@ -59,9 +59,9 @@ async function createRatingSection(title, songs) {
     return `
         <div class="section-title text-shadow-black">
             <div class="col-12 d-flex align-items-center my-3">
-                <div class="flex-grow-1 border-bottom border-2"></div>
-                <b id="plate-progress-title" class="px-3">${title}</b>
-                <div class="flex-grow-1 border-bottom border-2"></div>
+                <div class="section-divider"></div>
+                <b class="px-3 plate-progress-title">${title}</b>
+                <div class="section-divider"></div>
             </div>
         </div>
         <div class="song-grid row ms-0">
@@ -74,13 +74,13 @@ const calcRatings = songs => songs.map(song => ({
     rating: calculateSongRating(song)
 }));
 
-const calculateSongRating = song => 
+const calculateSongRating = song =>
     achi2rating_latest(song.internalLevel * 10, parseFloat(song.score) * 10000);
 
 function createSongCard(song) {
     const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
     const { title, image, internalLevel, type, score, rating } = song;
-    
+
     if (rating === 0) {
         return '';
     }
