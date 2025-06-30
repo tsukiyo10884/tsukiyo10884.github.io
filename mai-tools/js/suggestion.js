@@ -216,11 +216,11 @@ const createSuggestionSongCard = (gainList) => {
 
     const songCards = Object.entries(groupedSongs).sort(([a], [b]) => parseFloat(b) - parseFloat(a)).map(([level, songList]) => {
         const header = `
-        <div class="col-12 d-flex align-items-center my-3">
-            <div class="flex-grow-1 hr border-2"></div>
-            <b id="plate-progress-title" class="px-3">${level}</b>
-            <div class="flex-grow-1 hr border-2"></div>
-        </div>`;
+            <div class="col-12 d-flex align-items-center my-3">
+                <div class="section-divider"></div>
+                <b class="px-3">${level}</b>
+                <div class="section-divider"></div>
+            </div>`;
 
         const cards = songList.map(song => {
             const currentRating = calculateSongRating(song);

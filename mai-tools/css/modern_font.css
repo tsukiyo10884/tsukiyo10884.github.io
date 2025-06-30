@@ -4,6 +4,11 @@ rating cards
 user profile
 for fun
 */
+@font-face {
+    font-family: 'modern-font';
+    src: url('../../font/FGMediumHankaku.ttf');
+}
+
 button {
     border-radius: 5px !important;
     padding: 10px;
@@ -13,6 +18,7 @@ button {
 
 body {
     background: #232228 !important;
+    font-family: modern-font, sans-serif !important;
     color: #fff !important;
 }
 
@@ -20,15 +26,16 @@ body {
     text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
 }
 
-.hr {
-    border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
-}
-
 .section-divider {
     flex-grow: 1;
     border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
     border-width: 2px !important;
 }
+
+.tips {
+    font-size: 14px;
+}
+
 
 /**************/
 /*square cards*/
@@ -56,6 +63,17 @@ body {
     display: grid;
     gap: 10px;
     grid-template-columns: repeat(auto-fit, 102px);
+}
+
+.square-song-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 30px;
+    position: relative;
+    top: 38px;
+    left: -10px;
+    z-index: -10;
 }
 
 .square-song-title {

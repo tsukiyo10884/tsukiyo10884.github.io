@@ -139,9 +139,9 @@ async function showPlateProgress(versionName, type, plateName) {
         ${diffGroup.map(diff => `
             ${diff === 'remaster' && versionName !== 'maimai ~ FiNALE' ? '' : `
                 <div class="col-12 d-flex align-items-center my-3">
-                    <div class="flex-grow-1 hr border-2"></div>
-                    <b id="plate-progress-title" class="px-3">${diff}</b>
-                    <div class="flex-grow-1 hr border-2"></div>
+                    <div class="flex-grow-1 section-divider border-2"></div>
+                    <b class="px-3">${diff}</b>
+                    <div class="flex-grow-1 section-divider border-2"></div>
                 </div>
                 <div class="square-song-grid col-12 row ms-0 mb-3">
                     ${songs

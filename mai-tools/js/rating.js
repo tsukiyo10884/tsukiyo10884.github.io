@@ -60,7 +60,7 @@ async function createRatingSection(title, songs) {
         <div class="section-title text-shadow-black">
             <div class="col-12 d-flex align-items-center my-3">
                 <div class="section-divider"></div>
-                <b class="px-3 plate-progress-title">${title}</b>
+                <b class="px-3">${title}</b>
                 <div class="section-divider"></div>
             </div>
         </div>

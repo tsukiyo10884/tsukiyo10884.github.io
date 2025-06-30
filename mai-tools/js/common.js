@@ -210,8 +210,8 @@ const createSquareSongCard = (song, {
 
   return `
         <div class="square-song-card difficulty-${song.difficulty.replace(" ", "-").toLowerCase()} ${isCompleted === true ? 'completed' : ''}" 
-                style="background-image: url('${song.image}');" 
                 onclick="showSongDetail('${song.title}', '${song.type}')">
+            <img src=${song.image} class="square-song-image" alt="${song.title}">
             <div class="song-overlay"></div>
             <div class="song-content text-shadow-black square-song-title">${song.title}</div>
             <div class="song-content text-shadow-black square-song-inner-level">${song.internalLevel ? Number.parseFloat(song.internalLevel).toFixed(1) : ''} | ${song.type.toUpperCase()}</div>

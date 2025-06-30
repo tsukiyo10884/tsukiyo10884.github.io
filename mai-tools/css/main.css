@@ -31,16 +31,6 @@ button {
 	transition: transform 0.1s ease, background-color 0.3s ease;
 }
 
-button:disabled {
-	background-color: #ccc;
-	cursor: not-allowed;
-}
-
-button:disabled:hover {
-	background-color: #ccc;
-	transform: none;
-}
-
 button:hover {
 	background-color: #f0f0f0;
 	transform: scale(1.03);
@@ -128,13 +118,13 @@ img {
 	text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
 }
 
-.hr {
-	border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-body-color) !important;
+.tips {
+    font-size: 14px;
 }
 
 .section-divider {
 	flex-grow: 1;
-	border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+	border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-body-color) !important;
 	border-width: 2px !important;
 }
 
@@ -173,6 +163,17 @@ img {
 	display: grid;
 	gap: 10px;
 	grid-template-columns: repeat(auto-fit, 102px);
+}
+
+.square-song-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    position: relative;
+    top: 35px;
+    left: -12px;
+    z-index: -10;
 }
 
 .square-song-title {

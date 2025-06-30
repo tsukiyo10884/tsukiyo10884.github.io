@@ -4,11 +4,6 @@ rating cards
 user profile
 for fun
 */
-@font-face {
-    font-family: 'modern-font';
-    src: url('../../font/FGMediumHankaku.ttf');
-}
-
 button {
     border-radius: 5px !important;
     padding: 10px;
@@ -18,7 +13,6 @@ button {
 
 body {
     background: #232228 !important;
-    font-family: modern-font, sans-serif !important;
     color: #fff !important;
 }
 
@@ -26,7 +20,7 @@ body {
     text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
 }
 
-.hr {
+.section-divider {
     border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
 }
 
@@ -35,7 +29,6 @@ body {
     border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
     border-width: 2px !important;
 }
-
 
 /**************/
 /*square cards*/
@@ -48,21 +41,26 @@ body {
     color: #ffffff;
     font-size: 26px;
     position: absolute;
-    right: -12px;
-    top: -21px;
+    right: 0px;
+    top: -9px;
     z-index: 2;
-    transform: rotate(75deg);
-}
-
-.completion-check::after {
-    content: "ゝ";
-    text-shadow: 1px 1px 2px black, 1px -1px 2px black, -1px 1px 2px black, -1px -1px 2px black;
 }
 
 .square-song-grid {
     display: grid;
     gap: 10px;
     grid-template-columns: repeat(auto-fit, 102px);
+}
+
+.square-song-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 30px;
+    position: relative;
+    top: 38px;
+    left: -10px;
+    z-index: -10;
 }
 
 .square-song-title {
@@ -149,6 +147,10 @@ body {
     -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
+}
+
+.tips {
+    font-size: 14px;
 }
 
 /**************/
