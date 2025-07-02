@@ -73,6 +73,30 @@ b.px-3 {
 #level-min, #level-max{
     border-radius: 20px;
 }
+.difficulty-remaster .rating-block-inner-level::after{
+    content: " (Re: Master)";
+    color:#b9b5b9;
+}
+.difficulty-remaster .square-song-inner-level::after {
+    content: " (Re: M)";
+    color:#b9b5b9;
+}
+.difficulty-master .rating-block-inner-level::after, .difficulty-master .square-song-inner-level::after {
+    content: " (Master)";
+    color:#d7a6e8;
+}
+.difficulty-expert .rating-block-inner-level::after, .difficulty-expert .square-song-inner-level::after {
+    content: " (Expert)";
+    color:#f7a5b5;
+}
+.difficulty-advanced .rating-block-inner-level::after, .difficulty-advanced .square-song-inner-level::after {
+    content: " (Advanced)";
+    color:#facd6c;
+}
+.difficulty-basic .rating-block-inner-level::after, .difficulty-basic .square-song-inner-level::after {
+    content: " (Basic)";
+    color:#76e6ac;
+}
 
 /**************/
 /*square cards*/
