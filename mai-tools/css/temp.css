@@ -1,5 +1,6 @@
 
-.triangle-corner {
+
+.card-decoration {
     position: absolute;
     top: 0;
     right: 0;
@@ -9,23 +10,23 @@
     z-index: 3;
 }
 
-.difficulty-advanced .triangle-corner {
+.difficulty-advanced .card-decoration {
     border-top: 25px solid #f8b709;
 }
 
-.difficulty-basic .triangle-corner {
+.difficulty-basic .card-decoration {
     border-top: 25px solid #81d955;
 }
 
-.difficulty-expert .triangle-corner {
+.difficulty-expert .card-decoration {
     border-top: 25px solid #ff818d;
 }
 
-.difficulty-master .triangle-corner {
+.difficulty-master .card-decoration {
     border-top: 25px solid #c346e7;
 }
 
-.difficulty-remaster .triangle-corner {
+.difficulty-remaster .card-decoration {
     border-top: 25px solid #fff;
 }
 

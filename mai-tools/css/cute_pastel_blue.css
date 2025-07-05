@@ -49,11 +49,6 @@ button:hover {
     color: #69b4ff;
 }
 
-.section-divider {
-    flex-grow: 1;
-    border-bottom: 3px dashed #c2e2ff !important;
-}
-
 .tips {
     font-size: 14px;
 }
