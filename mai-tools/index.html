@@ -29,20 +29,23 @@
 
 <body>
   <div class="main mt-3 mb-5">
-    <img id="palette" src="img/palette.svg">
     <div id="info" class="row justify-content-start">
-      <p class="f_14" style="width: fit-content;">以國際版為準<br />譜面定數： <a href="https://arcade-songs.zetaraku.dev/maimai/about/"
-          target="_blank">zetaraku</a> |
+      <p class="f_14" style="width: fit-content;">以國際版為準<br />譜面定數： <a
+          href="https://arcade-songs.zetaraku.dev/maimai/about/" target="_blank">zetaraku</a> |
         刪除曲：
         <a href="https://maimai.fandom.com/zh/wiki/%E5%88%AA%E9%99%A4%E6%9B%B2%E4%B8%80%E8%A6%BD"
           target="_blank">maimai中文維基</a> | rating計算方法： <a
           href="https://sgimera.github.io/mai_RatingAnalyzer/maidx_calc.html" target="_blank">sgimera</a>
       </p>
-      <div class="col"></div>
+      <div class="col">
+      </div>
+      <div class="col-1">
+        <img id="palette" src="img/palette.svg">
+      </div>
     </div>
     <button id="test" onclick="LoadLocalJson('json/test_data.json')">測試資料1</button>
     <button id="test2" onclick="LoadLocalJson('json/test_data_2.json')">測試資料2</button>
-    <div id="output" ></div>
+    <div id="output"></div>
     <textarea id="now-title" class="d-none"></textarea>
     <div id="button-group" class="row d-none align-items-center">
       <div class="col-2">
@@ -167,11 +170,7 @@
   <style>
     #palette {
       cursor: pointer;
-      height: 30px;
-      position: fixed;
-      right: 30px;
-      top: 20px;
-      width: 30px;
+      height: 30px !important;
       z-index: 1000;
     }
 

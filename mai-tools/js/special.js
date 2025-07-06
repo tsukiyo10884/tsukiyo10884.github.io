@@ -1,4 +1,5 @@
 let clickCount = 0;
+let clearCount = 0;
 $(document).ready(function () {
     $('.user-info').on('click', function () {
         clickCount++;
@@ -51,12 +52,18 @@ const createSpecialButtons = () => {
     })
 }
 const clear = () => {
-    $('#stat').removeClass('axuan');
-    $('#stat').removeClass('ayo');
-    $('.fly').remove();
-    $('#axuan_profile').remove();
-    $('#ayo_profile').remove();
-    $('.special').remove();
-    $('.basic_block').show();
-    clickCount = 0;
+    if (clearCount > 0) {
+        $('#stat').removeClass('axuan');
+        $('#stat').removeClass('ayo');
+        $('.fly').remove();
+        $('#axuan_profile').remove();
+        $('#ayo_profile').remove();
+        $('.special').remove();
+        $('.basic_block').show();
+        clearCount = 0;
+        clickCount = 0;
+    } else {
+        $('.fly').remove();
+        clearCount++;
+    }
 }
