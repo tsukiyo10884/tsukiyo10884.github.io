@@ -417,6 +417,11 @@ b.px-3 {
     width: 112px;
 }
 
+#div-user-course-rank-text,
+#div-user-class-rank,
+#div-user-star {
+	display: none;
+}
 /*********/
 /*for fun*/
 /*********/

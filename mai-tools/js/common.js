@@ -32,6 +32,20 @@ const initUserInfo = () => {
             </div>
             <img src="https://maimaidx-eng.com/maimai-mobile/img/line_01.png" class="user_data_block_line">
             <div class="clearfix"></div>
+            <div class="row mb-1">
+              <div id="div-user-course-rank-text" class="col-3">
+                <h6>rank</h6>
+                <span></span>
+              </div>
+              <div id="div-user-class-rank-text" class="col-3">
+                <h6>class</h6>
+                <span></span>
+              </div>
+              <div id="div-user-star-text" class="col-3">
+                <h6>star</h6>
+                <span></span>
+              </div>
+            </div>
             <img id="user-course-rank" class="h_35 f_l">
             <img id="user-class-rank" class="p_l_10 h_35 f_l">
             <div class="p_l_10 f_l f_14">
@@ -48,9 +62,73 @@ const initUserInfo = () => {
   $('#user-rating-base').attr('src', data.user_info.rating_base);
   $('#user-course-rank').attr('src', data.user_info.course_rank);
   $('#user-class-rank').attr('src', data.user_info.class_rank);
+  $('#div-user-star-text span').text('☆' + data.user_info.star);
   $('#user-star').text(data.user_info.star);
   $('#user-icon').attr('src', data.user_info.icon);
   $('#user-info').removeClass('d-none');
+
+  let course_rank_text = getCourseRank(data.user_info.course_rank_text);
+  let class_rank_text = getClassRank(data.user_info.class_rank_text);
+  $('#div-user-course-rank-text span').text(course_rank_text);
+  $('#div-user-class-rank-text span').text(class_rank_text);
+}
+
+const getCourseRank = (course_rank_text) => {
+  switch (course_rank_text) {
+    case "00": return "初心者";
+    case "01": return "初段";
+    case "02": return "二段";
+    case "03": return "三段";
+    case "04": return "四段";
+    case "05": return "五段";
+    case "06": return "六段";
+    case "07": return "七段";
+    case "08": return "八段";
+    case "09": return "九段";
+    case "10": return "十段";
+    case "12": return "真初段";
+    case "13": return "真二段";
+    case "14": return "真三段";
+    case "15": return "真四段";
+    case "16": return "真五段";
+    case "17": return "真六段";
+    case "18": return "真七段";
+    case "19": return "真八段";
+    case "20": return "真九段";
+    case "21": return "真十段";
+    case "22": return "真皆伝";
+  }
+}
+
+const getClassRank = (class_rank_text) => {
+  switch (class_rank_text) {
+    case "00": return "B5";
+    case "01": return "B4";
+    case "02": return "B3";
+    case "03": return "B2";
+    case "04": return "B1";
+    case "05": return "A5";
+    case "06": return "A4";
+    case "07": return "A3";
+    case "08": return "A2";
+    case "09": return "A1";
+    case "10": return "S5";
+    case "11": return "S4";
+    case "12": return "S3";
+    case "13": return "S2";
+    case "14": return "S1";
+    case "15": return "SS5";
+    case "16": return "SS4";
+    case "17": return "SS3";
+    case "18": return "SS2";
+    case "19": return "SS1";
+    case "20": return "SSS5";
+    case "21": return "SSS4";
+    case "22": return "SSS3";
+    case "23": return "SSS2";
+    case "24": return "SSS1";
+    case "25": return "LEGEND";
+  }
 }
 
 // 顯示對應功能

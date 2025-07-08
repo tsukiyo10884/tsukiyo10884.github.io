@@ -119,7 +119,7 @@ img {
 }
 
 .tips {
-    font-size: 14px;
+	font-size: 14px;
 }
 
 .section-divider {
@@ -166,14 +166,14 @@ img {
 }
 
 .square-song-image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 5px;
-    position: relative;
-    top: 35px;
-    left: -12px;
-    z-index: -10;
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 5px;
+	position: relative;
+	top: 35px;
+	left: -12px;
+	z-index: -10;
 }
 
 .square-song-title {
@@ -433,6 +433,13 @@ img {
 .w_112 {
 	width: 112px;
 }
+
+#div-user-course-rank-text,
+#div-user-class-rank,
+#div-user-star {
+	display: none;
+}
+
 
 /*********/
 /*for fun*/

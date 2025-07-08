@@ -303,6 +303,7 @@ b.px-3 {
 .basic_block {
     background-color: #fff;
     filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.7));
+    padding: 15px !important;
 }
 
 .basic_block::before {
@@ -384,16 +385,24 @@ b.px-3 {
 }
 
 .name_block {
+    font-weight: 1000;
     background-color: #fff;
     background-size: 34px;
     border-radius: 15px;
     border: 1px solid #dedede;
-    box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
-    color: #000;
+    color: #7a7a7a;
     height: 27px;
     margin: 3px 0;
     padding: 5px 3px 3px 3px;
     width: 158px;
+}
+
+.h_30.m_3.v_m,
+.p_l_10.f_l.f_14,
+#user-course-rank,
+#user-class-rank,
+#user-rating-base {
+    display: none;
 }
 
 .p_10 {
@@ -413,7 +422,7 @@ b.px-3 {
 }
 
 .rating_block {
-    color: white;
+    color: #222;
     font-size: 16px;
     height: 21px;
     line-height: 21px;
@@ -421,7 +430,7 @@ b.px-3 {
     right: 9px;
     text-align: right;
     top: 7px;
-    width: 73px;
+    width: 100px;
 }
 
 .t_c {
@@ -440,14 +449,6 @@ b.px-3 {
     width: 268px;
 }
 
-.trophy_Bronze {
-    background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_bronze.png)no-repeat;
-}
-
-.trophy_Gold {
-    background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_gold.png)no-repeat;
-}
-
 .trophy_inner_block {
     color: black;
     height: 24px;
@@ -457,16 +458,38 @@ b.px-3 {
     width: 259px;
 }
 
-.trophy_Normal {
-    background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_normal.png)no-repeat;
+.trophy_block {
+    position: relative;
+    overflow: hidden;
 }
 
-.trophy_Rainbow {
-    background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_rainbow.png)no-repeat;
+.trophy_block::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    filter: url(#crayon-effect);
+    opacity: 0.4;
+    z-index: 0;
 }
 
-.trophy_Silver {
-    background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_silver.png)no-repeat;
+.trophy_Normal::before {
+    background: #aaa;
+}
+
+.trophy_Bronze::before {
+    background: #fb9a6a;
+}
+
+.trophy_Silver ::before {
+    background: #e0e3f8;
+}
+
+.trophy_Gold ::before {
+    background: #ffdf4b;
+}
+
+.trophy_Rainbow::before {
+    background: linear-gradient(159deg, #ff4b4b 0%, #ff9900 15%, #ffee00 30%, #33dd00 45%, #00ddff 60%, #3366ff 75%, #cc33ff 90%, #ff4b4b 100%);
 }
 
 .user-info {
@@ -487,6 +510,77 @@ b.px-3 {
 
 .w_112 {
     width: 112px;
+}
+
+#div-user-course-rank-text span,
+#div-user-class-rank-text span,
+#div-user-star-text span {
+    color: #7a7a7a;
+    font-size: 14px;
+    line-height: 12px;
+}
+
+#div-user-course-rank-text h6,
+#div-user-class-rank-text h6,
+#div-user-star-text h6 {
+    color: #7a7a7a;
+    font-weight: 1000;
+}
+
+#user-rating::before {
+    content: "Rating:";
+    color: #222;
+}
+
+.rating_block::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    filter: url(#crayon-effect);
+    opacity: 0.4;
+    z-index: 0;
+    width: 110px;
+    left: -4px;
+}
+
+img[src*="rating_base_blue.png"]+.rating_block::after {
+    background: #86e2ff;
+}
+
+img[src*="rating_base_green.png"]+.rating_block::after {
+    background: #aeff80;
+}
+
+img[src*="rating_base_orange.png"]+.rating_block::after {
+    background: #fff15b;
+}
+
+img[src*="rating_base_red.png"]+.rating_block::after {
+    background: #ff9393;
+}
+
+img[src*="rating_base_purple.png"]+.rating_block::after {
+    background: #daa0ff;
+}
+
+img[src*="rating_base_bronze.png"]+.rating_block::after {
+    background: #c3663c;
+}
+
+img[src*="rating_base_silver.png"]+.rating_block::after {
+    background: #b2c4cd;
+}
+
+img[src*="rating_base_gold.png"]+.rating_block::after {
+    background: #e0c302;
+}
+
+img[src*="rating_base_platinum.png"]+.rating_block::after {
+    background: #fcf082;
+}
+
+img[src*="rating_base_rainbow.png"]+.rating_block::after {
+    background: linear-gradient(159deg, #ff4b4b 0%, #ff9900 15%, #ffee00 30%, #33dd00 45%, #00ddff 60%, #3366ff 75%, #cc33ff 90%, #ff4b4b 100%);
 }
 
 /*********/
