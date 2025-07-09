@@ -111,7 +111,9 @@
         user_info.rating = homeDoc.querySelector('.rating_block').textContent;
         user_info.rating_base = homeDoc.querySelector('.h_30.f_r').src;
         user_info.course_rank = homeDoc.querySelector('.h_35.f_l').src;
+        user_info.course_rank_text = homeDoc.querySelector('.h_35.f_l').src.match(/course_rank_(\d{2})/)[1];
         user_info.class_rank = homeDoc.querySelector('.p_l_10.h_35.f_l').src;
+        user_info.class_rank_text = homeDoc.querySelector('.p_l_10.h_35.f_l').src.match(/class_rank_s_(\d{2})/)[1];
         user_info.star = homeDoc.querySelector('.p_l_10.f_l.f_14').textContent;
         user_info.user_trophy_block = homeDoc.querySelector('.trophy_block.p_3.t_c.f_0').className;
         user_info.trophy = homeDoc.querySelector('.trophy_inner_block.f_13').textContent;

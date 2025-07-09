@@ -287,7 +287,7 @@ const createSquareSongCard = (song, {
   }
 
   return `
-        <div class="square-song-card difficulty-${song.difficulty.replace(" ", "-").toLowerCase()} ${isCompleted === true ? 'completed' : ''}" 
+        <div class="square-song-card difficulty-${song.difficulty.replace(" ", "-").toLowerCase()} ${isCompleted === true ? 'completed' : ''} deg${Math.floor(Math.random() * 5)}" 
                 onclick="showSongDetail('${song.title}', '${song.type}')">
             <img src=${song.image} class="square-song-image" alt="${song.title}">
             <div class="song-overlay"></div>

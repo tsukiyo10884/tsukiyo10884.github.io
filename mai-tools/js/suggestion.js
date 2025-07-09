@@ -196,7 +196,7 @@ const createAchivementButtonsSuggestion = () => {
     }
 
     $radioContainer.append($radioCol1, $radioCol2);
-    $('#stat').empty().append($('<div class="d-flex align-items-center h-100">').append($radioContainer));
+    $('#stat').empty().append($('<div id="suggestion-stat" class="d-flex align-items-center h-100">').append($radioContainer));
 }
 
 // 建立建議歌卡

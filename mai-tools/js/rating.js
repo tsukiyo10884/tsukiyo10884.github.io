@@ -48,7 +48,7 @@ async function renderRatingSummaryTable(newSongs, others, all) {
     ).join('');
 
     $('#stat').html(`
-        <div class="d-flex align-items-center">
+        <div id="rating-stat" class="d-flex align-items-center">
             <table><tbody>${tableHtml}</tbody></table>
         </div>
     `);

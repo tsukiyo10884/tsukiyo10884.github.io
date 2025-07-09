@@ -33,7 +33,7 @@ const initLevelList = () => {
                 <input type="number" id="level-max" class="form-control" placeholder="最高等級" value="${maxLevel}" />
             </div>
             <div class="col-3" align="center">
-                <button onclick="showLevelListByRange()">查詢</button>
+                <button onclick="showLevelListByRange()">査詢</button>
             </div>
         </div>
             ${createAchivementButtons('S')}
