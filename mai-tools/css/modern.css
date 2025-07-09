@@ -472,9 +472,9 @@ body {
 }
 
 #div-user-course-rank-text,
-#div-user-class-rank,
-#div-user-star {
-    display: none;
+#div-user-class-rank-text,
+#div-user-star-text {
+	display: none;
 }
 
 /*********/

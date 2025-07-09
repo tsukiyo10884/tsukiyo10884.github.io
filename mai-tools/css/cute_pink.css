@@ -418,8 +418,8 @@ b.px-3 {
 }
 
 #div-user-course-rank-text,
-#div-user-class-rank,
-#div-user-star {
+#div-user-class-rank-text,
+#div-user-star-text {
 	display: none;
 }
 /*********/
