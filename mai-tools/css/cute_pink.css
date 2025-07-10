@@ -8,424 +8,427 @@ for fun
     font-family: 'Comic Neue';
     src: url('../../font/ComicNeue-Regular.ttf');
 }
+b.px-3 {
+	color: #ff69b4;
+}
 
 body {
-    font-family: 'Comic Neue' !important;
-    background: #ffe4ec !important;
-    color: #333;
+	background: #ffe4ec !important;
+	color: #333;
+	font-family: 'Comic Neue' !important;
 }
 
 button {
-    background-color: #ffffffcc;
-    border-radius: 20px !important;
-    border: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    color: #333;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    margin-right: 1em;
-    margin: 8px;
-    padding: 0.5em 1em;
-    padding: 10px 20px;
-    transition: transform 0.1s ease, background-color 0.3s ease;
+	background-color: #ffffffcc;
+	border-radius: 20px !important;
+	border: none;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+	color: #333;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: bold;
+	margin-right: 1em;
+	margin: 8px;
+	padding: 0.5em 1em;
+	padding: 10px 20px;
+	transition: transform 0.1s ease, background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #e4ffef;
-    transform: scale(1.03);
+button:disabled {
+	background-color: #ffffff55;
+	cursor: not-allowed;
 }
 
-.section-divider {
-    flex-grow: 1;
-    border-bottom: 3px dashed #ffc2d1 !important;
+button:not(:disabled):hover {
+	background-color: #e4ffef;
+	transform: scale(1.03);
 }
 
-.section-title {
-    font-size: 20px;
-    grid-column: span 5;
-    margin: 9px 0;
-    text-align: center;
-    color: #ff69b4;
+#level-max, #level-min {
+	border-radius: 20px;
 }
 
-.tips {
-    font-size: 14px;
+.difficulty-advanced .rating-block-inner-level::after, .difficulty-advanced .square-song-inner-level::after {
+	color: #facd6c;
+	content: " (Advanced)";
 }
 
-b.px-3 {
-    color: #ff69b4;
+.difficulty-basic .rating-block-inner-level::after, .difficulty-basic .square-song-inner-level::after {
+	color: #76e6ac;
+	content: " (Basic)";
+}
+
+.difficulty-expert .rating-block-inner-level::after, .difficulty-expert .square-song-inner-level::after {
+	color: #f7a5b5;
+	content: " (Expert)";
+}
+
+.difficulty-master .rating-block-inner-level::after, .difficulty-master .square-song-inner-level::after {
+	color: #d7a6e8;
+	content: " (Master)";
+}
+
+.difficulty-remaster .rating-block-inner-level::after {
+	color: #b9b5b9;
+	content: " (Re:Master)";
+}
+
+.difficulty-remaster .square-song-inner-level::after {
+	color: #b9b5b9;
+	content: " (Re:M)";
 }
 
 .plate-progress-title {
-    padding: 0 1em;
-    font-weight: bold;
-    font-size: 1.2em;
-    color: #ff69b4;
-    border-radius: 20px;
+	border-radius: 20px;
+	color: #ff69b4;
+	font-size: 1.2em;
+	font-weight: bold;
+	padding: 0 1em;
 }
 
-#level-min, #level-max{
-    border-radius: 20px;
-}
-.difficulty-remaster .rating-block-inner-level::after{
-    content: " (Re: Master)";
-    color:#b9b5b9;
-}
-.difficulty-remaster .square-song-inner-level::after {
-    content: " (Re: M)";
-    color:#b9b5b9;
-}
-.difficulty-master .rating-block-inner-level::after, .difficulty-master .square-song-inner-level::after {
-    content: " (Master)";
-    color:#d7a6e8;
-}
-.difficulty-expert .rating-block-inner-level::after, .difficulty-expert .square-song-inner-level::after {
-    content: " (Expert)";
-    color:#f7a5b5;
-}
-.difficulty-advanced .rating-block-inner-level::after, .difficulty-advanced .square-song-inner-level::after {
-    content: " (Advanced)";
-    color:#facd6c;
-}
-.difficulty-basic .rating-block-inner-level::after, .difficulty-basic .square-song-inner-level::after {
-    content: " (Basic)";
-    color:#76e6ac;
+.section-divider {
+	border-bottom: 3px dashed #ffc2d1 !important;
+	flex-grow: 1;
 }
 
+.section-title {
+	color: #ff69b4;
+	font-size: 20px;
+	grid-column: span 5;
+	margin: 9px 0;
+	text-align: center;
+}
+
+.tips {
+	font-size: 14px;
+}
 /**************/
 /*square cards*/
 /**************/
 .completed .song-overlay {
-    background: #22222255 !important;
-}
-
-.square-song-card .song-overlay {
-    position: absolute;
-    border-radius: 20px;
-    height: 125px;
-    width: 102px;
-    top: 0px;
-    left: 0px;
+	background: #22222255 !important;
 }
 
 .completion-check {
-    color: #ff69b4;
-    text-shadow: 1px 1px 1px white, 1px -1px 1px white, -1px 1px 1px white, -1px -1px 1px white;
-    font-size: 26px;
-    position: absolute;
-    right: 3px;
-    top: -4px;
-    z-index: 2;
-}
-
-.square-song-grid {
-    display: grid;
-    gap: 10px;
-    grid-template-columns: repeat(auto-fit, 102px);
-}
-
-.square-song-card {
-    height: 125px;
-    width: 102px !important;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.12);
-    font-family: 'Comic Neue', cursive;
-    transition: transform 0.2s;
-    display: flex;
-    flex-direction: column;
-    padding: 10px !important;
-    position: relative;
-}
-
-.square-song-image {
-    width: 100%;
-    height: 50%;
-    object-fit: cover;
-    border-radius: 15px;
-}
-
-.square-song-title {
-    font-weight: bold;
-    color: #ff69b4;
-    max-width: 90px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 12px;
-    margin-top: 2px;
-}
-
-.square-song-inner-level {
-    font-size: 10px;
-    color: #666;
-}
-
-.square-song-score {
-    font-size: 14px;
-    line-height: 14px;
-    color: #999;
+	color: #ff69b4;
+	font-size: 26px;
+	position: absolute;
+	right: 3px;
+	text-shadow: 1px 1px 1px white, 1px -1px 1px white, -1px 1px 1px white, -1px -1px 1px white;
+	top: -4px;
+	z-index: 2;
 }
 
 .rating-gain-info {
-    position: absolute;
-    top: 50px;
-    right: 0px;
-    background: linear-gradient(135deg, #ff69b4, #ff91c1);
-    color: white;
-    font-size: 10px;
-    padding: 1px 5px;
-    border-radius: 999px 0 0 999px;
-    z-index: 2;
+	background: linear-gradient(135deg,#ff69b4,#ff91c1);
+	border-radius: 999px 0 0 999px;
+	color: white;
+	font-size: 10px;
+	padding: 1px 5px;
+	position: absolute;
+	right: 0px;
+	top: 50px;
+	z-index: 2;
 }
 
+.square-song-card {
+	background-color: white;
+	border-radius: 20px;
+	box-shadow: 0 6px 10px rgba(0,0,0,0.12);
+	display: flex;
+	flex-direction: column;
+	font-family: 'Comic Neue', cursive;
+	height: 125px;
+	padding: 10px !important;
+	position: relative;
+	transition: transform 0.2s;
+	width: 102px !important;
+}
+
+.square-song-card .song-overlay {
+	border-radius: 20px;
+	height: 125px;
+	left: 0px;
+	position: absolute;
+	top: 0px;
+	width: 102px;
+}
+
+.square-song-grid {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: repeat(auto-fit,102px);
+}
+
+.square-song-image {
+	border-radius: 15px;
+	height: 50%;
+	object-fit: cover;
+	width: 100%;
+}
+
+.square-song-inner-level {
+	color: #666;
+	font-size: 10px;
+}
+
+.square-song-score {
+	color: #999;
+	font-size: 14px;
+	line-height: 14px;
+}
+
+.square-song-title {
+	color: #ff69b4;
+	font-size: 12px;
+	font-weight: bold;
+	margin-top: 2px;
+	max-width: 90px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 /**************/
 /*rating cards*/
 /**************/
-
-.song-grid {
-    display: grid;
-    gap: 1em;
-    grid-template-columns: repeat(auto-fit, 165px);
-}
-
-.song-card {
-    background: white;
-    border-radius: 20px;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    width: 165px !important;
-    font-family: 'Comic Neue', cursive;
-    position: relative;
-    height: 176px;
+.rating-block-inner-level {
+	color: #666;
+	font-size: 12px;
 }
 
 .rating-block-rating {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: #ff69b4;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 4px 8px;
-    border-radius: 999px;
-    filter: drop-shadow(-1px 1px 2px #22222255);
-}
-
-.song-image {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 15px;
-}
-
-.song-content {
-    text-align: left;
-}
-
-.rating-block-song-title {
-    font-weight: bold;
-    color: #ff69b4;
-    max-width: 162px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.rating-block-inner-level {
-    font-size: 12px;
-    color: #666;
+	background-color: #ff69b4;
+	border-radius: 999px;
+	color: white;
+	filter: drop-shadow(-1px 1px 2px #22222255);
+	font-size: 14px;
+	font-weight: bold;
+	padding: 4px 8px;
+	position: absolute;
+	right: 5px;
+	top: 5px;
 }
 
 .rating-block-score {
-    font-size: 16px;
-    line-height: 16px;
-    color: #999;
+	color: #999;
+	font-size: 16px;
+	line-height: 16px;
 }
 
+.rating-block-song-title {
+	color: #ff69b4;
+	font-weight: bold;
+	max-width: 162px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.song-card {
+	background: white;
+	border-radius: 20px;
+	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+	font-family: 'Comic Neue', cursive;
+	height: 176px;
+	padding: 10px;
+	position: relative;
+	transition: transform 0.2s;
+	width: 165px !important;
+}
+
+.song-content {
+	text-align: left;
+}
+
+.song-grid {
+	display: grid;
+	gap: 1em;
+	grid-template-columns: repeat(auto-fit,165px);
+}
+
+.song-image {
+	border-radius: 15px;
+	height: 100px;
+	object-fit: cover;
+	width: 100%;
+}
 /**************/
 /*user profile*/
 /**************/
+#div-user-class-rank-text, #div-user-course-rank-text, #div-user-star-text {
+	display: none;
+}
+
 .basic_block {
-    background-color: #fff;
-    border-radius: 20px;
-    box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
-    font-family: 'Comic Neue';
+	background-color: #fff;
+	border-radius: 20px;
+	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
+	font-family: 'Comic Neue';
 }
 
 .f_0 {
-    font-size: 0;
-    line-height: 0;
+	font-size: 0;
+	line-height: 0;
 }
 
 .f_10 {
-    font-size: 10px;
-    line-height: 1rem;
+	font-size: 10px;
+	line-height: 1rem;
 }
 
 .f_12 {
-    font-size: 12px;
-    line-height: 1rem;
+	font-size: 12px;
+	line-height: 1rem;
 }
 
 .f_13 {
-    font-size: 13px;
-    line-height: 1.2rem;
+	font-size: 13px;
+	line-height: 1.2rem;
 }
 
 .f_14 {
-    font-size: 14px;
-    line-height: 1.2rem;
+	font-size: 14px;
+	line-height: 1.2rem;
 }
 
 .f_16 {
-    font-size: 16px;
-    line-height: 1.2rem;
+	font-size: 16px;
+	line-height: 1.2rem;
 }
 
 .f_l {
-    float: left;
+	float: left;
 }
 
 .f_r {
-    float: right;
+	float: right;
 }
 
 .h_30 {
-    height: 30px;
+	height: 30px;
 }
 
 .h_35 {
-    height: 35px;
+	height: 35px;
 }
 
 .m_3 {
-    margin: 3px;
+	margin: 3px;
 }
 
 .m_b_5 {
-    margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .name_block {
-    background-color: #fff;
-    background-size: 34px;
-    border-radius: 15px;
-    border: 1px solid #dedede;
-    box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
-    color: #000;
-    height: 27px;
-    margin: 3px 0;
-    padding: 5px 3px 3px 3px;
-    width: 158px;
+	background-color: #fff;
+	background-size: 34px;
+	border-radius: 15px;
+	border: 1px solid #dedede;
+	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
+	color: #000;
+	height: 27px;
+	margin: 3px 0;
+	padding: 5px 3px 3px 3px;
+	width: 158px;
 }
 
 .p_10 {
-    padding: 10px;
+	padding: 10px;
 }
 
 .p_3 {
-    padding: 3px;
+	padding: 3px;
 }
 
 .p_l_10 {
-    padding-left: 10px;
+	padding-left: 10px;
 }
 
 .p_r {
-    position: relative;
+	position: relative;
 }
 
 .rating_block {
-    color: white;
-    font-size: 16px;
-    height: 21px;
-    line-height: 21px;
-    position: absolute;
-    right: 9px;
-    text-align: right;
-    top: 7px;
-    width: 73px;
+	color: white;
+	font-size: 16px;
+	height: 21px;
+	line-height: 21px;
+	position: absolute;
+	right: 9px;
+	text-align: right;
+	top: 7px;
+	width: 73px;
 }
 
 .t_c {
-    text-align: center;
+	text-align: center;
 }
 
 .t_r {
-    text-align: right;
+	text-align: right;
 }
 
 .trophy_block {
-    height: 25px;
-    margin: 0 0 5px 0;
-    overflow: hidden;
-    white-space: nowrap;
-    width: 268px;
+	height: 25px;
+	margin: 0 0 5px 0;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 268px;
 }
 
 .trophy_Bronze {
-    background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_bronze.png)no-repeat;
+	background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_bronze.png)no-repeat;
 }
 
 .trophy_Gold {
-    background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_gold.png)no-repeat;
+	background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_gold.png)no-repeat;
 }
 
 .trophy_inner_block {
-    color: #fff;
-    height: 24px;
-    margin: 0 2px;
-    overflow: hidden;
-    text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0, black 0px 1px 0, black 0-1px 0, black -1px 0 0, black 1px 0 0;
-    white-space: nowrap;
-    width: 259px;
+	color: #fff;
+	height: 24px;
+	margin: 0 2px;
+	overflow: hidden;
+	text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0, black 0px 1px 0, black 0-1px 0, black -1px 0 0, black 1px 0 0;
+	white-space: nowrap;
+	width: 259px;
 }
 
 .trophy_Normal {
-    background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_normal.png)no-repeat;
+	background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_normal.png)no-repeat;
 }
 
 .trophy_Rainbow {
-    background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_rainbow.png)no-repeat;
+	background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_rainbow.png)no-repeat;
 }
 
 .trophy_Silver {
-    background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_silver.png)no-repeat;
+	background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_silver.png)no-repeat;
 }
 
 .user-info {
-    align-items: center;
-    display: flex;
-    gap: 1em;
-    padding: 1em;
+	align-items: center;
+	display: flex;
+	gap: 1em;
+	padding: 1em;
 }
 
 .user_data_block_line {
-    margin: 0 0 4px 0;
-    width: 280px;
+	margin: 0 0 4px 0;
+	width: 280px;
 }
 
 .v_m {
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 .w_112 {
-    width: 112px;
-}
-
-#div-user-course-rank-text,
-#div-user-class-rank-text,
-#div-user-star-text {
-	display: none;
+	width: 112px;
 }
 /*********/
 /*for fun*/
 /*********/
-
 .axuan {
     background-image: url(../img/axuan.png);
     background-position-x: right;

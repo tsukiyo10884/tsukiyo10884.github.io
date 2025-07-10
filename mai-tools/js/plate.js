@@ -1,7 +1,7 @@
-async function initPlateList() {
+const initPlateList = async () => {
     $('#song-table').html(showPlateList());
 }
-function showPlateList() {
+const showPlateList = () => {
     return `<div class="row g-2">${versionList.map(version => {
         const colClass = version.plateName === '真' || version.plateName === '舞' ? 'col-6' :
             version.plateName === '輝' ? 'col-12' :
@@ -25,53 +25,71 @@ function showPlateList() {
     }).join('')}</div>`;
 }
 
-function showVersionButton(versionName, plateName) {
+const showVersionButton = async (versionName, plateName) => {
     const buttons = [
-        `<div class="col-3"><button class="w-100" onclick="showPlateProgress('${versionName}', '極', '${plateName}')">${plateName}極</button></div>`,
+        `<div class="col"></div><div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '極', '${plateName}')">${plateName}極</button></div>`,
         versionName === 'maimai ~ maimai PLUS'
-            ? `<div class="col-3"><button class="w-100" disabled>※初代100%就AP，沒有真将</button></div>`
-            : `<div class="col-3"><button class="w-100" onclick="showPlateProgress('${versionName}', '将', '${plateName}')">${plateName}将</button></div>`,
-        `<div class="col-3"><button class="w-100" onclick="showPlateProgress('${versionName}', '神', '${plateName}')">${plateName}神</button></div>`,
-        `<div class="col-3"><button class="w-100" onclick="showPlateProgress('${versionName}', '舞舞', '${plateName}')">${plateName}舞舞</button></div>`
+            ? `<div class="col"><button class="w-100" disabled>不存在</button></div>`
+            : `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '将', '${plateName}')">${plateName}将</button></div>`,
+        `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '神', '${plateName}')">${plateName}神</button></div>`,
+        `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '舞舞', '${plateName}')">${plateName}舞舞</button></div>`
     ];
-    $('#song-table').html(`<div class="row">${buttons.join('')}</div>`);
-}
+    const difficultyCounts1 = await getDifficultyCounts(null, versionName, { plate: '極' });
+    const difficultyCounts2 = await getDifficultyCounts(null, versionName, { plate: '将' });
+    const difficultyCounts3 = await getDifficultyCounts(null, versionName, { plate: '神' });
+    const difficultyCounts4 = await getDifficultyCounts(null, versionName, { plate: '舞舞' });
+    const headers = [
+        `${plateName}極`,
+        `${plateName}将`,
+        `${plateName}神`,
+        `${plateName}舞舞`
+    ];
 
-async function showPlateProgress(versionName, type, plateName) {
-    let songs = data.songs.filter(song => song.title !== '全世界共通リズム感テスト');
-    const today = new Date();
+    const difficulties = ['basic', 'advanced', 'expert', 'master', 'remaster'];
 
-    const removeList = await fetch('./json/removed_song.json').then(res => res.json());
-    removeList.forEach(entry => {
-        if (today > new Date(entry.remove_date)) {
-            const removeTitles = entry.remove_songs.map(s => s.title);
-            songs = songs.filter(song => !removeTitles.includes(song.title));
-        }
-    });
+    const allCounts = [
+        difficultyCounts1,
+        difficultyCounts2,
+        difficultyCounts3,
+        difficultyCounts4
+    ];
 
-    if (versionName === 'maimai ~ maimai PLUS') {
-        songs = songFilter(songs, { versionInternational: 'maimai' }).concat(songFilter(songs, { versionInternational: 'maimai PLUS' }));
-    } else if (versionName === 'maimai ~ FiNALE') {
-        const finaleIndex = versionOrder.indexOf('FiNALE');
-        songs = songs.filter(song => versionOrder.indexOf(song.versionInternational) !== -1 &&
-            versionOrder.indexOf(song.versionInternational) <= finaleIndex);
-    } else {
-        songs = songFilter(songs, { versionInternational: versionName });
-    }
-
-    const difficultyCounts = {
-        basic: { total: 0, completed: 0 },
-        advanced: { total: 0, completed: 0 },
-        expert: { total: 0, completed: 0 },
-        master: { total: 0, completed: 0 },
-        remaster: { total: 0, completed: 0 }
+    const colors = {
+        basic: '#81d955',
+        advanced: '#f8b709',
+        expert: '#ff818d',
+        master: '#c346e7',
+        remaster: '#fff'
     };
 
-    songs.forEach(song => {
-        if (song.difficulty in difficultyCounts) {
-            difficultyCounts[song.difficulty].total++;
-        }
-    });
+    const summary = `
+        <table class="difficulty-table text-center" style="width: 911px !important;margin-left: -12px;">
+            <tbody>
+                ${difficulties.map(diff => {
+        if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
+        return `<tr>
+                        <td class="text-shadow-black" style="color:${colors[diff]};width:20%;">${diff.toUpperCase().slice(0, 3)}</td>
+                        ${allCounts.map(counts => {
+            const c = counts[diff];
+            return `<td style="width:20%;">${c ? `${c.completed}/${c.total}` : '-'}</td>`;
+        }).join('')}
+                    </tr>`;
+    }).join('')}
+            </tbody>
+        </table>
+    `;
+    let tip = '';
+    if(versionName === 'maimai ~ maimai PLUS'){
+        tip = `<div class="w-100 text-center">※初代100%就AP，因此沒有真将</div>`;
+    }
+    $('#song-table').html(`${tip}<div class="row">${buttons.join('')}</div>${summary}`);
+}
+
+const showPlateProgress = async (versionName, type, plateName) => {
+
+    let songs = await getPlateSongs(versionName);
+    const difficultyCounts = await getDifficultyCounts(songs, versionName, { plate: type });
+    console.log(difficultyCounts)
 
     const tips = {
         '極': '全曲/BASIC～MASTER/FULL COMBO',
@@ -80,14 +98,6 @@ async function showPlateProgress(versionName, type, plateName) {
         '舞舞': '全曲/BASIC～MASTER/FULL SYNC DX',
         '覇者': '全曲/BASIC～RE:MASTER/clear'
     }[type];
-
-    const filteredSongs = songFilter(songs, { plate: type });
-
-    filteredSongs.forEach(song => {
-        if (song.difficulty in difficultyCounts) {
-            difficultyCounts[song.difficulty].completed++;
-        }
-    });
 
     const difficultyTable = Object.entries(difficultyCounts)
         .filter(([diff, counts]) => {
@@ -156,7 +166,7 @@ async function showPlateProgress(versionName, type, plateName) {
     `);
 }
 
-function createNamePlateSongCard(song, type) {
+const createNamePlateSongCard = (song, type) => {
     const isCompleted = {
         '極': () => song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp,
         '将': () => parseFloat(song.score) > 100,
@@ -168,6 +178,61 @@ function createNamePlateSongCard(song, type) {
     return createSquareSongCard(song, { isCompleted: isCompleted });
 }
 
-function showSongDetail(title, type) {
+const showSongDetail = (title, type) => {
     window.open(`https://arcade-songs.zetaraku.dev/maimai/?title=${title}&types=${type}`, '_blank');
+}
+
+const getDifficultyCounts = async (songs, versionName, filter = null) => {
+    if (songs == null) {
+        songs = await getPlateSongs(versionName);
+    }
+
+    const counts = {
+        basic: { total: 0, completed: 0 },
+        advanced: { total: 0, completed: 0 },
+        expert: { total: 0, completed: 0 },
+        master: { total: 0, completed: 0 },
+        remaster: { total: 0, completed: 0 }
+    };
+
+    songs.forEach(song => {
+        if (song.difficulty in counts) {
+            counts[song.difficulty].total++;
+        }
+    });
+
+    const completedSongs = filter ? songFilter(songs, filter) : [];
+
+    completedSongs.forEach(song => {
+        if (song.difficulty in counts) {
+            counts[song.difficulty].completed++;
+        }
+    });
+
+    return counts;
+}
+
+const getPlateSongs = async (versionName) => {
+    let songs = data.songs.filter(song => song.title !== '全世界共通リズム感テスト');
+    const today = new Date();
+
+    const removeList = await fetch('./json/removed_song.json').then(res => res.json());
+    removeList.forEach(entry => {
+        if (today > new Date(entry.remove_date)) {
+            const removeTitles = entry.remove_songs.map(s => s.title);
+            songs = songs.filter(song => !removeTitles.includes(song.title));
+        }
+    });
+
+    if (versionName === 'maimai ~ maimai PLUS') {
+        songs = songFilter(songs, { versionInternational: 'maimai' }).concat(songFilter(songs, { versionInternational: 'maimai PLUS' }));
+    } else if (versionName === 'maimai ~ FiNALE') {
+        const finaleIndex = versionOrder.indexOf('FiNALE');
+        songs = songs.filter(song => versionOrder.indexOf(song.versionInternational) !== -1 &&
+            versionOrder.indexOf(song.versionInternational) <= finaleIndex);
+    } else {
+        songs = songFilter(songs, { versionInternational: versionName });
+    }
+
+    return songs;
 }
