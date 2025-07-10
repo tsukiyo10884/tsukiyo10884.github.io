@@ -4,7 +4,6 @@ rating cards
 user profile
 for fun
 */
-
 a {
 	color: #0056b3 !important;
 	text-decoration: underline;
@@ -19,7 +18,7 @@ button {
 	background-color: #ffffffcc;
 	border-radius: 12px !important;
 	border: none;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 	color: #333;
 	cursor: pointer;
 	font-size: 16px;
@@ -88,6 +87,12 @@ img {
 	z-index: 1;
 }
 
+.section-divider {
+	border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-body-color) !important;
+	border-width: 2px !important;
+	flex-grow: 1;
+}
+
 .section-title {
 	color: #fff;
 	font-size: 20px;
@@ -103,7 +108,7 @@ img {
 
 .song-overlay {
 	backdrop-filter: blur(2px);
-	background-color: rgba(0, 0, 0, 0.2);
+	background-color: rgba(0,0,0,0.2);
 	inset: -5px;
 	position: absolute;
 }
@@ -121,13 +126,6 @@ img {
 .tips {
 	font-size: 14px;
 }
-
-.section-divider {
-	flex-grow: 1;
-	border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-body-color) !important;
-	border-width: 2px !important;
-}
-
 /**************/
 /*square cards*/
 /**************/
@@ -162,49 +160,44 @@ img {
 .square-song-grid {
 	display: grid;
 	gap: 10px;
-	grid-template-columns: repeat(auto-fit, 102px);
+	grid-template-columns: repeat(auto-fit,102px);
 }
 
 .square-song-image {
-	width: 100px;
-	height: 100px;
-	object-fit: cover;
 	border-radius: 5px;
+	height: 100px;
+	left: -12px;
+	object-fit: cover;
 	position: relative;
 	top: 35px;
-	left: -12px;
+	width: 100px;
 	z-index: -10;
+}
+
+.square-song-inner-level {
+	font-size: 10px;
+	line-height: 12px !important;
 }
 
 .square-song-title {
 	display: inline-block;
+	font-size: 10px;
 	line-height: 12px !important;
 	max-width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	font-size: 10px;
 }
-
-.square-song-inner-level {
-	line-height: 12px !important;
-	font-size: 10px;
-}
-
 /**************/
 /*rating cards*/
 /**************/
-
 .rating-block-inner-level {
 	bottom: 19.5px;
 	font-size: 12px;
 	left: 3.5px;
 }
 
-.rating-block-inner-level,
-.rating-block-rating,
-.rating-block-score,
-.rating-block-song-title {
+.rating-block-inner-level, .rating-block-rating, .rating-block-score, .rating-block-song-title {
 	padding: 0.2em 0.4em;
 	position: absolute;
 	z-index: 2;
@@ -223,14 +216,14 @@ img {
 }
 
 .rating-block-song-title {
+	bottom: 33px;
 	display: inline-block;
+	font-size: 12px;
+	left: 4px;
 	max-width: 162px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	bottom: 33px;
-	font-size: 12px;
-	left: 4px;
 }
 
 .song-card {
@@ -256,21 +249,24 @@ img {
 .song-grid {
 	display: grid;
 	gap: 1em;
-	grid-template-columns: repeat(auto-fit, 165px);
+	grid-template-columns: repeat(auto-fit,165px);
 }
 
 .song-image {
 	object-fit: cover;
 	width: calc(100% + 2em);
 }
-
 /**************/
 /*user profile*/
 /**************/
+#div-user-class-rank-text, #div-user-course-rank-text, #div-user-star-text {
+	display: none;
+}
+
 .basic_block {
 	background-color: #fff;
 	border-radius: 5px;
-	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
 }
 
 .f_0 {
@@ -332,7 +328,7 @@ img {
 	background-size: 34px;
 	border-radius: 5px;
 	border: 1px solid #dedede;
-	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
 	color: #000;
 	height: 27px;
 	margin: 3px 0;
@@ -433,18 +429,9 @@ img {
 .w_112 {
 	width: 112px;
 }
-
-#div-user-course-rank-text,
-#div-user-class-rank-text,
-#div-user-star-text {
-	display: none;
-}
-
-
 /*********/
 /*for fun*/
 /*********/
-
 .axuan {
 	background-image: url(../img/axuan.png);
 	background-position-x: right;

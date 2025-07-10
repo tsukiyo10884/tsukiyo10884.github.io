@@ -116,7 +116,7 @@ async function showPlateProgress(versionName, type, plateName) {
         }).join('');
 
     $('#stat').html(`
-        <div class="difficulty-counts d-flex align-items-center">
+        <div id="plate-stat" class="difficulty-counts d-flex align-items-center">
             <table class="difficulty-table text-center">${difficultyTable}</table>
         </div>
     `);

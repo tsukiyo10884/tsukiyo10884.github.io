@@ -21,7 +21,7 @@ const initLevelList = () => {
     const songs = songFilter(data.songs, { minLevel: minLevel, maxLevel: maxLevel });
 
     $('#stat').html(`
-        <div class="d-flex flex-column align-items-center justify-content-center pt-2" style="min-height: 100px;">
+        <div id="level-stat" class="d-flex flex-column align-items-center justify-content-center pt-2" style="min-height: 100px;">
             <div class="level-list row d-flex align-items-center justify-content-center">
             <div class="col-3">
                 <input type="number" id="level-min" class="form-control" placeholder="最低等級" value="${minLevel}" />
@@ -33,7 +33,7 @@ const initLevelList = () => {
                 <input type="number" id="level-max" class="form-control" placeholder="最高等級" value="${maxLevel}" />
             </div>
             <div class="col-3" align="center">
-                <button onclick="showLevelListByRange()">査詢</button>
+                <button id="btn-search" onclick="showLevelListByRange()">査詢</button>
             </div>
         </div>
             ${createAchivementButtons('S')}

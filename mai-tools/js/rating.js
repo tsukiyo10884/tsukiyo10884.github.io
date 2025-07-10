@@ -57,12 +57,10 @@ async function renderRatingSummaryTable(newSongs, others, all) {
 async function createRatingSection(title, songs) {
     const ratedSongs = calcRatings(songs);
     return `
-        <div class="section-title text-shadow-black">
-            <div class="col-12 d-flex align-items-center my-3">
-                <div class="section-divider"></div>
-                <b class="px-3">${title}</b>
-                <div class="section-divider"></div>
-            </div>
+        <div class="col-12 d-flex align-items-center my-3">
+            <div class="section-divider"></div>
+            <b class="px-3">${title}</b>
+            <div class="section-divider"></div>
         </div>
         <div class="song-grid row ms-0">
             ${ratedSongs.map(createSongCard).join('')}
