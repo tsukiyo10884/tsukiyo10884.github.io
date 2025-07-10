@@ -46,15 +46,9 @@ button {
 	color: #ffffff;
 	font-size: 26px;
 	position: absolute;
-	right: -12px;
-	top: -21px;
-	transform: rotate(75deg);
+    right: 5px;
+    top: -10px;
 	z-index: 2;
-}
-
-.completion-check::after {
-	content: "ゝ";
-	text-shadow: 1px 1px 2px black, 1px -1px 2px black, -1px 1px 2px black, -1px -1px 2px black;
 }
 
 .rating-gain-info {

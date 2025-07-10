@@ -229,11 +229,11 @@ button:not(#btn-search):hover {
     border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     content: "";
-    height: 10px;
+    height: 16px;
     position: absolute;
     right: 5px;
     top: 5px;
-    width: 10px;
+    width: 16px;
 }
 
 #level-stat::before {
@@ -241,11 +241,11 @@ button:not(#btn-search):hover {
     border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     content: "";
-    height: 10px;
+    height: 16px;
     left: 5px;
     position: absolute;
     top: 5px;
-    width: 10px;
+    width: 16px;
 }
 
 #plate-stat {
@@ -741,7 +741,7 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
     background: #fb9a6a;
 }
 
-.trophy_Gold ::before {
+.trophy_Gold::before {
     background: #ffdf4b;
 }
 
@@ -762,7 +762,7 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
     background: linear-gradient(159deg, #ff4b4b 0%, #ff9900 15%, #ffee00 30%, #33dd00 45%, #00ddff 60%, #3366ff 75%, #cc33ff 90%, #ff4b4b 100%);
 }
 
-.trophy_Silver ::before {
+.trophy_Silver::before {
     background: #e0e3f8;
 }
 
