@@ -171,6 +171,10 @@ const handlePlayedFilters = () => {
   if (mode === 'suggestion') {
     const displayLevel = now.split('|')[1];
     const isNewVersion = now.split('|')[2];
+    if (displayLevel === 'all') {
+      const $songGrid = createSuggestionSongCard(isNewVersion === 'true');
+      $('#song-table').find('.square-song-grid').replaceWith($songGrid);
+    }
     const matchingSuggestion = findMatchingSuggestion(displayLevel, isNewVersion === 'true');
     if (matchingSuggestion) {
       const $songGrid = createSuggestionSongCard(matchingSuggestion);
@@ -303,6 +307,9 @@ const createSquareSongCard = (song, {
 
 // 如果等級是整數，則添加小數點和零
 const formatLevel = (level) => {
+  if (typeof level !== 'number' || isNaN(level)) {
+    return '';
+  }
   const str = level.toString();
   return str.includes('.') ? str : `${str}.0`;
 };
