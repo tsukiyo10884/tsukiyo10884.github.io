@@ -73,7 +73,7 @@ button:not(#btn-search):hover {
 }
 
 #info::after {
-    background: linear-gradient(135deg, #498250 0%, #1f2f1a 100%);
+    background: linear-gradient(135deg, #828149 0%, #2f2f1a 100%);
     border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     content: "";
@@ -85,7 +85,7 @@ button:not(#btn-search):hover {
 }
 
 #info::before {
-    background: linear-gradient(135deg, #498250 0%, #1f2f1a 100%);
+    background: linear-gradient(135deg, #828149 0%, #2f2f1a 100%);
     border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     content: "";
@@ -580,11 +580,11 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
     border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     content: "";
-    height: 10px;
+    height: 16px;
     position: absolute;
     right: 5px;
     top: 5px;
-    width: 10px;
+    width: 16px;
 }
 
 .basic_block::before {
@@ -592,11 +592,11 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
     border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     content: "";
-    height: 10px;
+    height: 16px;
     left: 5px;
     position: absolute;
     top: 5px;
-    width: 10px;
+    width: 16px;
 }
 
 .f_0 {
