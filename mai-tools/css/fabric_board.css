@@ -7,7 +7,7 @@ for fun
 
 @font-face {
     font-family: 'handwriting';
-    src: url('../../font/SanariFont002.ttf');
+    src: url('../../font/Ghatee.ttf');
 }
 
 body {
@@ -321,6 +321,10 @@ button:not(#btn-search):hover {
     transform: rotate(-15deg);
     width: 50px;
     z-index: 10;
+}
+
+.completion-check{
+    display: none;
 }
 
 .level-list {
