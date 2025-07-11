@@ -5,9 +5,10 @@ user profile
 for fun
 */
 @font-face {
-    font-family: 'Comic Neue';
-    src: url('../../font/ComicNeue-Regular.ttf');
+	font-family: 'cute-font';
+	src: url('../../font/uzura.ttf');
 }
+
 b.px-3 {
 	color: #69b4ff;
 }
@@ -15,14 +16,14 @@ b.px-3 {
 body {
 	background: #e4f2ff !important;
 	color: #333;
-	font-family: 'Comic Neue' !important;
+	font-family: 'cute-font' !important;
 }
 
 button {
 	background-color: #ffffffcc;
 	border-radius: 20px !important;
 	border: none;
-	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 	color: #333;
 	cursor: pointer;
 	font-size: 16px;
@@ -44,38 +45,43 @@ button:not(:disabled):hover {
 	transform: scale(1.03);
 }
 
-#level-max, #level-min {
+#level-max,
+#level-min {
 	border-radius: 20px;
 }
 
-.difficulty-advanced .rating-block-inner-level::after, .difficulty-advanced .square-song-inner-level::after {
+.difficulty-advanced .rating-block-inner-level::after,
+.difficulty-advanced .square-song-inner-level::after {
 	color: #facd6c;
-	content: " (Advanced)";
+	content: " (Adv)";
 }
 
-.difficulty-basic .rating-block-inner-level::after, .difficulty-basic .square-song-inner-level::after {
+.difficulty-basic .rating-block-inner-level::after,
+.difficulty-basic .square-song-inner-level::after {
 	color: #76e6ac;
-	content: " (Basic)";
+	content: " (Bas)";
 }
 
-.difficulty-expert .rating-block-inner-level::after, .difficulty-expert .square-song-inner-level::after {
+.difficulty-expert .rating-block-inner-level::after,
+.difficulty-expert .square-song-inner-level::after {
 	color: #f7a5b5;
-	content: " (Expert)";
+	content: " (Exp)";
 }
 
-.difficulty-master .rating-block-inner-level::after, .difficulty-master .square-song-inner-level::after {
+.difficulty-master .rating-block-inner-level::after,
+.difficulty-master .square-song-inner-level::after {
 	color: #d7a6e8;
-	content: " (Master)";
+	content: " (Mas)";
 }
 
 .difficulty-remaster .rating-block-inner-level::after {
 	color: #b9b5b9;
-	content: " (Re:Master)";
+	content: " (ReM)";
 }
 
 .difficulty-remaster .square-song-inner-level::after {
 	color: #b9b5b9;
-	content: " (Re:M)";
+	content: " (ReM)";
 }
 
 .plate-progress-title {
@@ -102,6 +108,7 @@ button:not(:disabled):hover {
 .tips {
 	font-size: 14px;
 }
+
 /**************/
 /*square cards*/
 /**************/
@@ -120,7 +127,7 @@ button:not(:disabled):hover {
 }
 
 .rating-gain-info {
-	background: linear-gradient(135deg,#69b4ff,#91c1ff);
+	background: linear-gradient(135deg, #69b4ff, #91c1ff);
 	border-radius: 999px 0 0 999px;
 	color: white;
 	font-size: 10px;
@@ -134,10 +141,9 @@ button:not(:disabled):hover {
 .square-song-card {
 	background-color: white;
 	border-radius: 20px;
-	box-shadow: 0 6px 10px rgba(0,0,0,0.12);
+	box-shadow: 0 6px 10px rgba(0, 0, 0, 0.12);
 	display: flex;
 	flex-direction: column;
-	font-family: 'Comic Neue', cursive;
 	height: 125px;
 	padding: 10px !important;
 	position: relative;
@@ -157,7 +163,7 @@ button:not(:disabled):hover {
 .square-song-grid {
 	display: grid;
 	gap: 10px;
-	grid-template-columns: repeat(auto-fit,102px);
+	grid-template-columns: repeat(auto-fit, 102px);
 }
 
 .square-song-image {
@@ -188,6 +194,7 @@ button:not(:disabled):hover {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
 /**************/
 /*rating cards*/
 /**************/
@@ -227,8 +234,7 @@ button:not(:disabled):hover {
 .song-card {
 	background: white;
 	border-radius: 20px;
-	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-	font-family: 'Comic Neue', cursive;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	height: 176px;
 	padding: 10px;
 	position: relative;
@@ -243,7 +249,7 @@ button:not(:disabled):hover {
 .song-grid {
 	display: grid;
 	gap: 1em;
-	grid-template-columns: repeat(auto-fit,165px);
+	grid-template-columns: repeat(auto-fit, 165px);
 }
 
 .song-image {
@@ -252,18 +258,20 @@ button:not(:disabled):hover {
 	object-fit: cover;
 	width: 100%;
 }
+
 /**************/
 /*user profile*/
 /**************/
-#div-user-class-rank-text, #div-user-course-rank-text, #div-user-star-text {
+#div-user-class-rank-text,
+#div-user-course-rank-text,
+#div-user-star-text {
 	display: none;
 }
 
 .basic_block {
 	background-color: #fff;
 	border-radius: 20px;
-	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
-	font-family: 'Comic Neue';
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 }
 
 .f_0 {
@@ -325,7 +333,7 @@ button:not(:disabled):hover {
 	background-size: 34px;
 	border-radius: 20px;
 	border: 1px solid #dedede;
-	box-shadow: 1px 3px 0px rgba(0,0,0,0.4);
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 	color: #000;
 	height: 27px;
 	margin: 3px 0;
@@ -355,10 +363,10 @@ button:not(:disabled):hover {
 	height: 21px;
 	line-height: 21px;
 	position: absolute;
-	right: 9px;
 	text-align: right;
 	top: 7px;
-	width: 73px;
+	transform: scaleX(1.3);
+	width: 84px;
 }
 
 .t_c {
@@ -426,29 +434,30 @@ button:not(:disabled):hover {
 .w_112 {
 	width: 112px;
 }
+
 /*********/
 /*for fun*/
 /*********/
 .axuan {
-    background-image: url(../img/axuan.png);
-    background-position-x: right;
-    background-repeat: no-repeat;
-    background-size: contain;
+	background-image: url(../img/axuan.png);
+	background-position-x: right;
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 .ayo {
-    background-image: url(../img/ayo.png);
-    background-position-x: right;
-    background-repeat: no-repeat;
-    background-size: contain;
+	background-image: url(../img/ayo.png);
+	background-position-x: right;
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 .fly {
-    box-sizing: content-box;
-    cursor: pointer;
-    height: auto;
-    padding: 50px;
-    position: absolute;
-    width: 50px;
-    z-index: 1000;
+	box-sizing: content-box;
+	cursor: pointer;
+	height: auto;
+	padding: 50px;
+	position: absolute;
+	width: 50px;
+	z-index: 1000;
 }

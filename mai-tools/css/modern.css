@@ -383,9 +383,10 @@ button {
 	height: 21px;
 	line-height: 21px;
 	position: absolute;
-	right: 9px;
+	right: 13px;
 	text-align: right;
 	top: 7px;
+	transform: scaleX(1.1);
 	width: 73px;
 }
 

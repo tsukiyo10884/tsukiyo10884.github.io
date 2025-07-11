@@ -26,24 +26,10 @@ const showPlateList = () => {
 }
 
 const showVersionButton = async (versionName, plateName) => {
-    const buttons = [
-        `<div class="col"></div><div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '極', '${plateName}')">${plateName}極</button></div>`,
-        versionName === 'maimai ~ maimai PLUS'
-            ? `<div class="col"><button class="w-100" disabled>不存在</button></div>`
-            : `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '将', '${plateName}')">${plateName}将</button></div>`,
-        `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '神', '${plateName}')">${plateName}神</button></div>`,
-        `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '舞舞', '${plateName}')">${plateName}舞舞</button></div>`
-    ];
     const difficultyCounts1 = await getDifficultyCounts(null, versionName, { plate: '極' });
     const difficultyCounts2 = await getDifficultyCounts(null, versionName, { plate: '将' });
     const difficultyCounts3 = await getDifficultyCounts(null, versionName, { plate: '神' });
     const difficultyCounts4 = await getDifficultyCounts(null, versionName, { plate: '舞舞' });
-    const headers = [
-        `${plateName}極`,
-        `${plateName}将`,
-        `${plateName}神`,
-        `${plateName}舞舞`
-    ];
 
     const difficulties = ['basic', 'advanced', 'expert', 'master', 'remaster'];
 
@@ -63,26 +49,38 @@ const showVersionButton = async (versionName, plateName) => {
     };
 
     const summary = `
-        <table class="difficulty-table text-center" style="width: 911px !important;margin-left: -12px;">
-            <tbody>
-                ${difficulties.map(diff => {
-        if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
-        return `<tr>
-                        <td class="text-shadow-black" style="color:${colors[diff]};width:20%;">${diff.toUpperCase().slice(0, 3)}</td>
-                        ${allCounts.map(counts => {
-            const c = counts[diff];
-            return `<td style="width:20%;">${c ? `${c.completed}/${c.total}` : '-'}</td>`;
-        }).join('')}
-                    </tr>`;
-    }).join('')}
-            </tbody>
-        </table>
+        <div class="p-3">
+            <table class="difficulty-table text-center w-100">
+                <thead>
+                    <tr>
+                        <th style="width:20%;"></th>
+                        <th colspan=3 style="width:20%;"><button class="w-100" onclick="showPlateProgress('${versionName}', '極', '${plateName}')">${plateName}極</button></th>
+                        <th colspan=3 style="width:20%;">${versionName === 'maimai ~ maimai PLUS' ? `<button class="w-100" disabled>不存在</button>` : `<button class="w-100" onclick="showPlateProgress('${versionName}', '将', '${plateName}')">${plateName}将</button>`}</th>
+                        <th colspan=3 style="width:20%;"><button class="w-100" onclick="showPlateProgress('${versionName}', '神', '${plateName}')">${plateName}神</button></th>
+                        <th colspan=3 style="width:20%;"><button class="w-100" onclick="showPlateProgress('${versionName}', '舞舞', '${plateName}')">${plateName}舞舞</button></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    ${difficulties.map(diff => {
+                        if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
+                            return `<tr>
+                                <td class="text-shadow-black" style="color:${colors[diff]};width:20%;">${diff.toUpperCase().slice(0, 3)}</td>
+                                ${allCounts.map(counts => {
+                                    const c = counts[diff];
+                                    return `${c ? `<td style="width:9%; text-align:end;">${c.completed}</td><td style="width:2%;">/</td><td style="width:9%;text-align: start;">${c.total}</td>` : '-'}`;
+                                }).join('')}
+                            </tr>`;
+                        }).join('')}
+                </tbody>
+            </table>
+        </div>
     `;
     let tip = '';
-    if(versionName === 'maimai ~ maimai PLUS'){
+    if (versionName === 'maimai ~ maimai PLUS') {
         tip = `<div class="w-100 text-center">※初代100%就AP，因此沒有真将</div>`;
     }
-    $('#song-table').html(`${tip}<div class="row">${buttons.join('')}</div>${summary}`);
+    $('#song-table').html(`${tip}${summary}`);
 }
 
 const showPlateProgress = async (versionName, type, plateName) => {
