@@ -26,6 +26,14 @@ const showPlateList = () => {
 }
 
 const showVersionButton = async (versionName, plateName) => {
+    const buttons = [
+        `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '極', '${plateName}')">${plateName}極</button></div>`,
+        versionName === 'maimai ~ maimai PLUS'
+            ? `<div class="col"><button class="w-100" disabled>不存在</button></div>`
+            : `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '将', '${plateName}')">${plateName}将</button></div>`,
+        `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '神', '${plateName}')">${plateName}神</button></div>`,
+        `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '舞舞', '${plateName}')">${plateName}舞舞</button></div>`
+    ];
     const difficultyCounts1 = await getDifficultyCounts(null, versionName, { plate: '極' });
     const difficultyCounts2 = await getDifficultyCounts(null, versionName, { plate: '将' });
     const difficultyCounts3 = await getDifficultyCounts(null, versionName, { plate: '神' });
@@ -49,29 +57,30 @@ const showVersionButton = async (versionName, plateName) => {
     };
 
     const summary = `
-        <div class="p-3">
-            <table class="difficulty-table text-center w-100">
+        <div class="pt-2"> 
+            <table class="summary-table text-center">
                 <thead>
                     <tr>
-                        <th style="width:20%;"></th>
-                        <th colspan=3 style="width:20%;"><button class="w-100" onclick="showPlateProgress('${versionName}', '極', '${plateName}')">${plateName}極</button></th>
-                        <th colspan=3 style="width:20%;">${versionName === 'maimai ~ maimai PLUS' ? `<button class="w-100" disabled>不存在</button>` : `<button class="w-100" onclick="showPlateProgress('${versionName}', '将', '${plateName}')">${plateName}将</button>`}</th>
-                        <th colspan=3 style="width:20%;"><button class="w-100" onclick="showPlateProgress('${versionName}', '神', '${plateName}')">${plateName}神</button></th>
-                        <th colspan=3 style="width:20%;"><button class="w-100" onclick="showPlateProgress('${versionName}', '舞舞', '${plateName}')">${plateName}舞舞</button></th>
+                        <th></th>
+                        <th colspan=3>${plateName}極</th>
+                        <th colspan=3>${versionName === 'maimai ~ maimai PLUS' ? `不存在` : `${plateName}将`}</th>
+                        <th colspan=3>${plateName}神</th>
+                        <th colspan=3>${plateName}舞舞</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     ${difficulties.map(diff => {
                         if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
-                            return `<tr>
-                                <td class="text-shadow-black" style="color:${colors[diff]};width:20%;">${diff.toUpperCase().slice(0, 3)}</td>
-                                ${allCounts.map(counts => {
-                                    const c = counts[diff];
-                                    return `${c ? `<td style="width:9%; text-align:end;">${c.completed}</td><td style="width:2%;">/</td><td style="width:9%;text-align: start;">${c.total}</td>` : '-'}`;
-                                }).join('')}
-                            </tr>`;
-                        }).join('')}
+                        const isRemaster = diff === 'remaster' ? `text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;` : ``;
+                        return `<tr>
+                            <td class="text-shadow-black difficulty-label" style="color:${colors[diff]};${isRemaster}">${diff.toUpperCase().slice(0, 3)}</td>
+                            ${allCounts.map(counts => {
+                                const c = counts[diff];
+                                return `${c ? `<td class="ps-2">${c.completed}</td><td>/</td><td>${c.total}</td>` : '-'}`;
+                            }).join('')}
+                        </tr>`;
+                    }).join('')}
                 </tbody>
             </table>
         </div>
@@ -80,7 +89,8 @@ const showVersionButton = async (versionName, plateName) => {
     if (versionName === 'maimai ~ maimai PLUS') {
         tip = `<div class="w-100 text-center">※初代100%就AP，因此沒有真将</div>`;
     }
-    $('#song-table').html(`${tip}${summary}`);
+    $('#song-table').html(`${tip}<div class="row">${buttons.join('')}</div>`);
+    $('#stat').html(`${summary}`);
 }
 
 const showPlateProgress = async (versionName, type, plateName) => {
@@ -113,8 +123,9 @@ const showPlateProgress = async (versionName, type, plateName) => {
                 remaster: '#fff'
             };
             const percentage = (counts.completed / counts.total * 100).toFixed(2);
+            const isRemaster = diff === 'remaster' ? `text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;` : ``;
             return `<tr>
-                <td class="text-shadow-black" style="color:${colors[diff]}">${diff.toUpperCase().slice(0, 3)}</td>
+                <td class="text-shadow-black" style="color:${colors[diff]};${isRemaster}">${diff.toUpperCase().slice(0, 3)}</td>
                 <td class="ps-2">${String(counts.completed).padStart(3, " ")}</td>
                 <td>/</td>
                 <td>${String(counts.total).padStart(3, " ")}</td>

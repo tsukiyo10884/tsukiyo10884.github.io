@@ -53,35 +53,35 @@ button:not(:disabled):hover {
 .difficulty-advanced .rating-block-inner-level::after,
 .difficulty-advanced .square-song-inner-level::after {
 	color: #facd6c;
-	content: " (Adv)";
+	content: " (ADV)";
 }
 
 .difficulty-basic .rating-block-inner-level::after,
 .difficulty-basic .square-song-inner-level::after {
 	color: #76e6ac;
-	content: " (Bas)";
+	content: " (BAS)";
 }
 
 .difficulty-expert .rating-block-inner-level::after,
 .difficulty-expert .square-song-inner-level::after {
 	color: #f7a5b5;
-	content: " (Exp)";
+	content: " (EXP)";
 }
 
 .difficulty-master .rating-block-inner-level::after,
 .difficulty-master .square-song-inner-level::after {
 	color: #d7a6e8;
-	content: " (Mas)";
+	content: " (MAS)";
 }
 
 .difficulty-remaster .rating-block-inner-level::after {
 	color: #b9b5b9;
-	content: " (ReM)";
+	content: " (REM)";
 }
 
 .difficulty-remaster .square-song-inner-level::after {
 	color: #b9b5b9;
-	content: " (ReM)";
+	content: " (REM)";
 }
 
 .plate-progress-title {
@@ -118,6 +118,7 @@ button:not(:disabled):hover {
 
 .completion-check {
 	color: #ff69b4;
+	font-family: sans-serif;
 	font-size: 26px;
 	position: absolute;
 	right: 3px;
