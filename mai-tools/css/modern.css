@@ -189,10 +189,17 @@ button {
 	position: absolute;
 	z-index: 2;
 }
+.song-info-block {
+    bottom: -15px;
+    left: -80px;
+    position: relative;
+}
 
 .rating-block-rating {
 	font-size: 18px;
-	top: -3px;
+    left: 57px;
+    position: absolute;
+    top: -135px;
 }
 
 .rating-block-score {
@@ -206,7 +213,6 @@ button {
 	bottom: 33px;
 	display: inline-block;
 	font-size: 9px;
-	max-width: 87px;
 	overflow: hidden;
 	text-align: center;
 	text-overflow: ellipsis;

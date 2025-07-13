@@ -87,10 +87,12 @@ function createSongCard(song) {
     <div class="song-card difficulty-${diffClass} deg${Math.floor(Math.random() * 5)}">
         <img src="${image}" class="song-image" alt="${title}" crossorigin="anonymous" />
         <div class="song-overlay"></div>
-        <div class="rating-block-song-title song-content text-shadow-black">${title}</div>
-        <div class="rating-block-inner-level song-content text-shadow-black">${internalLevel ? Number.parseFloat(internalLevel).toFixed(1) : ''} | ${type.toUpperCase()}</div>
-        <div class="rating-block-score song-content text-shadow-black">${score}</div>
-        <div class="rating-block-rating song-content text-shadow-black deg${Math.floor(Math.random() * 5)}">${rating}</div>
+        <div class="song-info-block">
+            <div class="rating-block-song-title song-content text-shadow-black">${title}</div>
+            <div class="rating-block-inner-level song-content text-shadow-black">${internalLevel ? Number.parseFloat(internalLevel).toFixed(1) : ''} | ${type.toUpperCase()}</div>
+            <div class="rating-block-score song-content text-shadow-black">${score}</div>
+            <div class="rating-block-rating song-content text-shadow-black deg${Math.floor(Math.random() * 5)}">${rating}</div>
+        </div>
         <div class="card-decoration"></div>
     </div>`;
 }
