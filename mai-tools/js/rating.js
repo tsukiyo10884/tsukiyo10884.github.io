@@ -9,7 +9,7 @@ async function initRatingList() {
     const allRatingSongs = [...rating_new, ...rating_others];
 
     const [newSongs, others, all] = [rating_new, rating_others, allRatingSongs].map(calcRatings);
-    await renderRatingSummaryTable(newSongs, others, all);
+    await ratingAverageTable(newSongs, others, all);
     $('#song-table').html(await showRatingList());
 }
 
@@ -21,6 +21,7 @@ async function showRatingList() {
     ].join('');
 }
 
+// 取得前50首歌
 function getTop50Songs() {
     const [oldSongs, newSongs] = [
         data.songs.filter(s => s.versionInternational !== currentVersion),
@@ -34,7 +35,8 @@ function getTop50Songs() {
     ];
 }
 
-async function renderRatingSummaryTable(newSongs, others, all) {
+// 顯示R值平均
+async function ratingAverageTable(newSongs, others, all) {
     const getAvg = songs => (songs.reduce((sum, item) => sum + item.rating, 0) / songs.length).toFixed(2);
 
     const stats = [
@@ -54,6 +56,7 @@ async function renderRatingSummaryTable(newSongs, others, all) {
     `);
 }
 
+// 建立R值表區域
 async function createRatingSection(title, songs) {
     const ratedSongs = calcRatings(songs);
     return `
@@ -67,14 +70,17 @@ async function createRatingSection(title, songs) {
         </div>`;
 }
 
+// 計算總R值
 const calcRatings = songs => songs.map(song => ({
     ...song,
     rating: calculateSongRating(song)
 }));
 
+// 計算單曲R值(by sgimera)
 const calculateSongRating = song =>
     achi2rating_latest(song.internalLevel * 10, parseFloat(song.score) * 10000);
 
+// 建立歌卡
 function createSongCard(song) {
     const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
     const { title, image, internalLevel, type, score, rating } = song;

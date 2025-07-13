@@ -1,7 +1,9 @@
 const initPlateList = async () => {
-    $('#song-table').html(showPlateList());
+    $('#song-table').html(showVersionButton());
 }
-const showPlateList = () => {
+
+// 顯示版本按鈕
+const showVersionButton = () => {
     return `<div class="row g-2">${versionList.map(version => {
         const colClass = version.plateName === '真' || version.plateName === '舞' ? 'col-6' :
             version.plateName === '輝' ? 'col-12' :
@@ -17,7 +19,7 @@ const showPlateList = () => {
         }
 
         return `<div class="${colClass}">
-            <button class="w-100 plate-version-button" onclick="showVersionButton('${version.versionName}','${version.plateName}')">              
+            <button class="w-100 plate-version-button" onclick="showPlateButton('${version.versionName}','${version.plateName}')">              
                 <span style="font-size: 16px;">${version.plateName}</span><br/>
                 <span style="font-size: 14px;">${version.versionName}</span>
             </button>
@@ -25,7 +27,8 @@ const showPlateList = () => {
     }).join('')}</div>`;
 }
 
-const showVersionButton = async (versionName, plateName) => {
+// 顯示名牌版按鈕
+const showPlateButton = async (versionName, plateName) => {
     const buttons = [
         `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '極', '${plateName}')">${plateName}極</button></div>`,
         versionName === 'maimai ~ maimai PLUS'
@@ -93,6 +96,7 @@ const showVersionButton = async (versionName, plateName) => {
     $('#stat').html(`${summary}`);
 }
 
+// 顯示進度
 const showPlateProgress = async (versionName, type, plateName) => {
 
     let songs = await getPlateSongs(versionName);
@@ -175,10 +179,11 @@ const showPlateProgress = async (versionName, type, plateName) => {
     `);
 }
 
+// 建立歌卡
 const createNamePlateSongCard = (song, type) => {
     const isCompleted = {
         '極': () => song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp,
-        '将': () => parseFloat(song.score) > 100,
+        '将': () => parseFloat(song.score) >= 100,
         '神': () => song.ap || song.app,
         '舞舞': () => song.fdx,
         '覇者': () => parseFloat(song.score.replace('%', '')) >= 80
@@ -187,10 +192,12 @@ const createNamePlateSongCard = (song, type) => {
     return createSquareSongCard(song, { isCompleted: isCompleted });
 }
 
+// 點選可跳轉到zetaraku
 const showSongDetail = (title, type) => {
     window.open(`https://arcade-songs.zetaraku.dev/maimai/?title=${title}&types=${type}`, '_blank');
 }
 
+// 計算各難度的達成數量
 const getDifficultyCounts = async (songs, versionName, filter = null) => {
     if (songs == null) {
         songs = await getPlateSongs(versionName);
@@ -221,6 +228,7 @@ const getDifficultyCounts = async (songs, versionName, filter = null) => {
     return counts;
 }
 
+// 取得該版本的歌曲
 const getPlateSongs = async (versionName) => {
     let songs = data.songs.filter(song => song.title !== '全世界共通リズム感テスト');
     const today = new Date();
