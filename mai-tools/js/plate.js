@@ -42,8 +42,6 @@ const showPlateButton = async (versionName, plateName) => {
     const difficultyCounts3 = await getDifficultyCounts(null, versionName, { plate: '神' });
     const difficultyCounts4 = await getDifficultyCounts(null, versionName, { plate: '舞舞' });
 
-    const difficulties = ['basic', 'advanced', 'expert', 'master', 'remaster'];
-
     const allCounts = [
         difficultyCounts1,
         difficultyCounts2,
@@ -74,16 +72,16 @@ const showPlateButton = async (versionName, plateName) => {
 
                 <tbody>
                     ${difficulties.map(diff => {
-                        if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
-                        const isRemaster = diff === 'remaster' ? `text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;` : ``;
-                        return `<tr>
+        if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
+        const isRemaster = diff === 'remaster' ? `text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;` : ``;
+        return `<tr>
                             <td class="text-shadow-black difficulty-label" style="color:${colors[diff]};${isRemaster}">${diff.toUpperCase().slice(0, 3)}</td>
                             ${allCounts.map(counts => {
-                                const c = counts[diff];
-                                return `${c ? `<td class="ps-2">${c.completed}</td><td>/</td><td>${c.total}</td>` : '-'}`;
-                            }).join('')}
+            const c = counts[diff];
+            return `${c ? `<td class="ps-2">${c.completed}</td><td>/</td><td>${c.total}</td>` : '-'}`;
+        }).join('')}
                         </tr>`;
-                    }).join('')}
+    }).join('')}
                 </tbody>
             </table>
         </div>
@@ -101,7 +99,6 @@ const showPlateProgress = async (versionName, type, plateName) => {
 
     let songs = await getPlateSongs(versionName);
     const difficultyCounts = await getDifficultyCounts(songs, versionName, { plate: type });
-    console.log(difficultyCounts)
 
     const tips = {
         '極': '全曲/BASIC～MASTER/FULL COMBO',
@@ -146,37 +143,73 @@ const showPlateProgress = async (versionName, type, plateName) => {
 
     const displayTips = versionName === 'maimai ~ FiNALE' ? tips.replace('～MASTER/', '～RE:MASTER/') : tips;
     let diffGroup = [];
-    songs.forEach(song => {
-        if (!diffGroup.includes(song.difficulty)) {
-            diffGroup.push(song.difficulty);
-        }
-    });
-    diffGroup.sort((a, b) => difficulties.indexOf(b) - difficulties.indexOf(a));
+    let nowDifficulties = difficulties.slice().reverse();
+    if (versionName !== 'maimai ~ FiNALE') {
+        nowDifficulties = nowDifficulties.slice(1);
+    }
+    nowDifficulties.forEach(diff => {
+        diffGroup.push(songFilter(songs, { difficulty: diff }));
+    })
 
+    let $songGrid = [];
+    diffGroup.forEach((songs, diffIndex) => {
+        let diffType = nowDifficulties[diffIndex];
+        const collapseId = `diff-${diffType.toLowerCase()}`;
+
+        let groupedSongs = {};
+        songs.forEach(song => {
+            const key = formatLevel(song.internalLevel);
+            if (!groupedSongs[key]) groupedSongs[key] = [];
+            groupedSongs[key].push(song);
+        });
+
+        const isFirst = diffIndex === 0;
+        const header = `
+            <div class="col-12">
+                <div class="d-flex align-items-center my-3 collapse-toggle" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${isFirst}" role="button">
+                    <b class="px-3"><span class="collapse-icon" data-target="${collapseId}">${isFirst ? '-' : '+'}</span> ${diffType}</b>
+                </div>
+                <div id="${collapseId}" class="collapse${isFirst ? ' show' : ''}">
+        `;
+
+        const content = Object.entries(groupedSongs)
+            .sort(([a], [b]) => parseFloat(b) - parseFloat(a))
+            .map(([level, songList]) => {
+                const levelHeader = `
+                <div class="col-12 d-flex align-items-center my-2">
+                    <div class="section-divider"></div>
+                    <b class="px-3">${level}</b>
+                    <div class="section-divider"></div>
+                </div>`;
+                const cards = songList.map(song => {
+                    if (song.difficulty === 'remaster' && versionName !== 'maimai ~ FiNALE') return null;
+                    return createNamePlateSongCard(song, type);
+                }).filter(card => card !== null).join('');
+
+                if (cards === '') return '';
+                return levelHeader + `<div class="square-song-grid col-12 row ms-0 mb-3">${cards}</div>`;
+            }).join('');
+
+        $songGrid.push(header + content + '</div></div>');
+    });
+
+
+    const $title = $(`
+    <div class="section-title text-shadow-black">
+        <b id="plate-progress-title">${plateName}${type}(${versionName})進度</b>
+        <div class="tips">${displayTips}</div>
+    </div>`);
     $('#now-title').text(`plate|${plateName}|${type}|${versionName}`);
-    $('#song-table').html(`
-        <div class="section-title text-shadow-black">
-            <b id="plate-progress-title">${plateName}${type}(${versionName})進度</b>
-            <div class="tips">${displayTips}</div>
-        </div>
-        ${diffGroup.map(diff => `
-            ${diff === 'remaster' && versionName !== 'maimai ~ FiNALE' ? '' : `
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="flex-grow-1 section-divider border-2"></div>
-                    <b class="px-3">${diff}</b>
-                    <div class="flex-grow-1 section-divider border-2"></div>
-                </div>
-                <div class="square-song-grid col-12 row ms-0 mb-3">
-                    ${songs
-                .sort((a, b) => b.internalLevel - a.internalLevel)
-                .filter(song => song.difficulty === diff)
-                .map(song => createNamePlateSongCard(song, type))
-                .filter(Boolean)
-                .join('')}
-                </div>
-            `}
-        `).join('')}
-    `);
+    $('#song-table').empty().append($title, $songGrid);
+
+    $('.collapse').on('show.bs.collapse', function () {
+        const id = $(this).attr('id');
+        $(`.collapse-icon[data-target="${id}"]`).text('-');
+    });
+    $('.collapse').on('hide.bs.collapse', function () {
+        const id = $(this).attr('id');
+        $(`.collapse-icon[data-target="${id}"]`).text('+');
+    });
 }
 
 // 建立歌卡

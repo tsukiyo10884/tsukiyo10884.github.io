@@ -159,8 +159,6 @@ const showLevelDetails = (gainList) => {
         $('#song-table').empty().append($title, $songGrid);
     }
 
-
-
     if (selectedRatingThreshold) {
         handlePlayedFilters();
     }

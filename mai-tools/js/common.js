@@ -9,6 +9,9 @@ const SCORE_THRESHOLDS = [
   { name: 'SSS+', score: 100.50 }
 ];
 
+// 難度
+const difficulties = ['basic', 'advanced', 'expert', 'master', 'remaster'];
+
 // 初始化玩家資料
 const initUserInfo = () => {
   $('#user-info').html(`
