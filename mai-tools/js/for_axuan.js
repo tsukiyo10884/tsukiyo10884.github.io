@@ -33,7 +33,7 @@ const createLevelButtonXuan = (gainList, displayLevel) => {
 const showLevelDetailsXuan = (gainList) => {
     createAchivementButtonsSuggestion();
     bindRatingThresholdEventListeners();
-    const $songGrid = createSuggestionSongCardXuan(gainList);
+    const $songGrid = createSuggestionSongCard(gainList);
 
     const baseLevel = Math.floor(gainList.level);
     const decimal = gainList.level - baseLevel;
@@ -87,6 +87,9 @@ const createSuggestionSongCardXuan = (gainList) => {
 
 // 查找符合條件的建議項目
 const findMatchingSuggestionXuan = (displayLevel) => {
+    if(displayLevel == 'all'){
+        return gainListAll;
+    }
     return gainListAll.find(s => {
         const baseLevel = Math.floor(s.level);
         const decimal = s.level - baseLevel;

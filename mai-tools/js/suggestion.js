@@ -99,6 +99,7 @@ const createButtonSection = (title) => {
                     ...(groupedOldSongs[key] || [])
                 ];
             }
+            isNewVersion = null;
             break;
     }
     Object.entries(groupedSongs)
@@ -135,7 +136,7 @@ const showLevelDetails = (gainList) => {
     createAchivementButtonsSuggestion();
     bindRatingThresholdEventListeners();
 
-    if (gainList === true || gainList === false) {
+    if (gainList === true || gainList === false || gainList === null) {
         let $songGrid = createSuggestionSongCard(gainList);
         const $title = $('<div>').addClass('section-title text-shadow-black').text('所有候選曲');
         $('#now-title').text(`suggestion|all|${gainList}`);
@@ -208,6 +209,8 @@ const createSuggestionSongCard = (gainList) => {
     let songs = [];
     if (gainList === true || gainList === false) {
         songs = songFilter(data.songs, { isNewVersion: gainList });
+    } else if (gainList === null) {
+        songs = data.songs;
     } else {
         const { minLevel, maxLevel } = calculateLevelRange(gainList.level);
         songs = songFilter(data.songs, { isNewVersion: gainList.isNewVersion, minLevel: minLevel, maxLevel: maxLevel });
@@ -236,6 +239,8 @@ const createSuggestionSongCard = (gainList) => {
             let matchingSuggestion = [];
             if (gainList === true || gainList === false) {
                 matchingSuggestion = gainListAll.find(s => s.level === song.internalLevel && (s.isNewVersion === gainList));
+            } else if (gainList === null) {
+                matchingSuggestion = gainListAll.find(s => s.level === song.internalLevel);
             } else {
                 matchingSuggestion = gainListAll.find(s => s.level === song.internalLevel && (s.isNewVersion === gainList.isNewVersion));
             }

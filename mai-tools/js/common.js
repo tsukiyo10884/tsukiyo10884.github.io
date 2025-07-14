@@ -187,7 +187,7 @@ const handlePlayedFilters = () => {
     } else if (mode === 'axuan') {
         const displayLevel = now.split('|')[1];
         const matchingSuggestion = findMatchingSuggestionXuan(displayLevel);
-        console.log(matchingSuggestion);
+        console.log('matchingSuggestion', matchingSuggestion);
         if (matchingSuggestion) {
             const $songGrid = createSuggestionSongCardXuan(matchingSuggestion);
             $('#song-table').find('.square-song-grid').replaceWith($songGrid);
