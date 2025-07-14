@@ -6,17 +6,19 @@
 
         if (event.data === "ready") {
             const script = document.currentScript;
+            console.log('script', script);
             if (script != null) {
                 const srcUrl = new URL(script.src);
                 const css = srcUrl.searchParams.get('css');
+                console.log('css', css);
                 if (css !== null && css !== '') {
-                    childWin.postMessage({ type: 'init', payload: css, }, "https://tsukiyo10884.github.io");
+                    childWin.postMessage({ type: 'init', payload: css }, "https://tsukiyo10884.github.io");
                 }
                 else {
-                    childWin.postMessage({ type: 'init', payload: null, }, "https://tsukiyo10884.github.io");
+                    childWin.postMessage({ type: 'init', payload: null }, "https://tsukiyo10884.github.io");
                 }
             } else {
-                childWin.postMessage({ type: 'init', payload: null, }, "https://tsukiyo10884.github.io");
+                childWin.postMessage({ type: 'init', payload: null }, "https://tsukiyo10884.github.io");
             }
 
             let idx = '';
