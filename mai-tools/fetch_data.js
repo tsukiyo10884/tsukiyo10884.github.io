@@ -1,6 +1,7 @@
 (async () => {
-    const urlParams = new URLSearchParams(location.search);
-    const css = urlParams.get('css');
+    const script = document.currentScript;
+    const srcUrl = new URL(script.src);
+    const css = srcUrl.searchParams.get('css');
 
     const childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
 
