@@ -4,19 +4,18 @@
     const css = srcUrl.searchParams.get('css');
 
     const childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
-
-    console.log('css', css);
-    if (css !== null && css !== '') {
+    childWin.onload = () => {
         childWin.postMessage({
-            type: 'css',
-            payload: css,
+            type: 'init',
+            payload: null,
         }, "https://tsukiyo10884.github.io");
-    }
-
-    childWin.postMessage({
-        type: 'init',
-        payload: null,
-    }, "https://tsukiyo10884.github.io");
+        if (css !== null && css !== '') {
+            childWin.postMessage({
+                type: 'css',
+                payload: css,
+            }, "https://tsukiyo10884.github.io");
+        }
+    };
 
     let idx = '';
     const url = new URL(window.location.href);
