@@ -1,12 +1,12 @@
 (async () => {
     const childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
+    const script = document.currentScript;
+    console.log('script', script);
 
     window.addEventListener("message", async function (event) {
         if (event.origin !== "https://tsukiyo10884.github.io") return;
 
         if (event.data === "ready") {
-            const script = document.currentScript;
-            console.log('script', script);
             if (script != null) {
                 const srcUrl = new URL(script.src);
                 const css = srcUrl.searchParams.get('css');
