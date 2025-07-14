@@ -4,13 +4,13 @@
 
     const childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
 
-    if (css) {
+    console.log('css', css);
+    if (css !== null && css !== '') {
         childWin.postMessage({
             type: 'css',
-            payload: 'cute_pastel_blue',
+            payload: css,
         }, "https://tsukiyo10884.github.io");
     }
-
 
     childWin.postMessage({
         type: 'init',

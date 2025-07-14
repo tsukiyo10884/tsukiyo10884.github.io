@@ -125,7 +125,7 @@
         $('#theme').attr('href', cssFiles[nextIndex]);
       });
     };
-
+    
     const setupEventListeners = () => {
       bindCompletionEventListeners();
       bindPlayedEventListeners();
@@ -142,6 +142,7 @@
       const data = event.originalEvent.data;
       if (!data || typeof data !== "object") return;
 
+      console.log('data.type', data.type);
       const $output = $('#output');
       switch (data.type) {
         case "css":
