@@ -144,17 +144,18 @@
       const data = event.originalEvent.data;
       if (!data || typeof data !== "object") return;
 
-      console.log('data.type', data.type);
+      console.log('data', data);
+    
       const $output = $('#output');
       switch (data.type) {
-        case "css":
-          $('#theme').attr('href', 'css/' + data.payload + '.css');
-          break;
         case "init":
           $output.html(`取得成績中，請勿關閉maimai-net`);
+          if (data.payload != null) {
+            $('#theme').attr('href', 'css/' + data.payload + '.css');
+          }
           break;
         case "difficulty":
-          $output.html($output.html() + `取得成績中(${data.payload})`);
+          $output.html($output.html() + `\n取得成績中(${data.payload})`);
           break;
         case "result":
           $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(data.payload, null, 2)}</textarea>`);

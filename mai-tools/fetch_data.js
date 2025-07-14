@@ -5,10 +5,19 @@
         if (event.origin !== "https://tsukiyo10884.github.io") return;
 
         if (event.data === "ready") {
-            childWin.postMessage({
-                type: 'init',
-                payload: null,
-            }, "https://tsukiyo10884.github.io");
+            const script = document.currentScript;
+            if (script != null) {
+                const srcUrl = new URL(script.src);
+                const css = srcUrl.searchParams.get('css');
+                if (css !== null && css !== '') {
+                    childWin.postMessage({ type: 'init', payload: css, }, "https://tsukiyo10884.github.io");
+                }
+                else {
+                    childWin.postMessage({ type: 'init', payload: null, }, "https://tsukiyo10884.github.io");
+                }
+            } else {
+                childWin.postMessage({ type: 'init', payload: null, }, "https://tsukiyo10884.github.io");
+            }
 
             let idx = '';
             const url = new URL(window.location.href);
@@ -47,10 +56,7 @@
                 user_info.user_trophy_block = homeDoc.querySelector('.trophy_block.p_3.t_c.f_0').className;
                 user_info.trophy = homeDoc.querySelector('.trophy_inner_block.f_13').textContent;
                 for (let i = 0; i < difficulties.length; i++) {
-                    childWin.postMessage({
-                        type: "difficulty",
-                        payload: difficulties[i],
-                    }, "https://tsukiyo10884.github.io");
+                    childWin.postMessage({ type: "difficulty", payload: difficulties[i], }, "https://tsukiyo10884.github.io");
                     const res = await fetch(`https://maimaidx-eng.com/maimai-mobile/record/musicGenre/search/?genre=99&diff=${i}`, {
                         credentials: 'include'
                     });
@@ -124,10 +130,7 @@
                 user_info.trophy = homeDoc.querySelector('.trophy_inner_block.f_13').textContent;
 
                 for (let i = 0; i < difficulties.length; i++) {
-                    childWin.postMessage({
-                        type: "difficulty",
-                        payload: difficulties[i],
-                    }, "https://tsukiyo10884.github.io");
+                    childWin.postMessage({ type: "difficulty", payload: difficulties[i], }, "https://tsukiyo10884.github.io");
                     const res = await fetch(`https://maimaidx-eng.com/maimai-mobile/friend/friendGenreVs/battleStart/?genre=99&diff=${i}&idx=${idx}`, {
                         credentials: 'include'
                     });
@@ -181,30 +184,9 @@
             };
 
             setTimeout(() => {
-                childWin.postMessage({
-                    type: "result",
-                    payload: exportData,
-                }, "https://tsukiyo10884.github.io");
+                childWin.postMessage({ type: "result", payload: exportData, }, "https://tsukiyo10884.github.io");
                 childWin.postMessage(exportData, "https://tsukiyo10884.github.io");
             }, 500);
-
-            setTimeout(() => {
-                const script = document.currentScript;
-                if (script != null) {
-                    const srcUrl = new URL(script.src);
-                    const css = srcUrl.searchParams.get('css');
-                    if (css !== null && css !== '') {
-                        setTimeout(() => {
-                            childWin.postMessage({
-                                type: 'css',
-                                payload: css,
-                            }, "https://tsukiyo10884.github.io");
-                        }, 100);
-                    }
-                }
-            }, 1500);
-
-
         }
     });
 
