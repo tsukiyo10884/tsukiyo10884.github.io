@@ -135,6 +135,7 @@
       });
     };
 
+    // 接到message事件(從maimai-net收到資料)
     $(window).on('message', (event) => {
       $('#test').addClass('d-none');
       $('#test2').addClass('d-none');
@@ -143,8 +144,12 @@
 
       const $output = $('#output');
       switch (data.type) {
+        case "css":
+          $('#theme').attr('href', data.payload);
+          break;
         case "init":
           $output.html(`取得成績中，請勿關閉maimai-net`);
+          break;
         case "difficulty":
           $output.html(`取得成績中(${data.payload})`);
           break;
@@ -156,6 +161,7 @@
       }
     });
 
+    // 取得本地json(測試資料)
     const LoadLocalJson = (filePath) => {
       $.getJSON(filePath, (json) => {
         $('#button-group').removeClass('d-none');

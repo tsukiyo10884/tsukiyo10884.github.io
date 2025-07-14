@@ -1,5 +1,17 @@
 (async () => {
+    const urlParams = new URLSearchParams(location.search);
+    const css = urlParams.get('css');
+
     const childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
+
+    if (css) {
+        childWin.postMessage({
+            type: 'css',
+            payload: 'cute_pastel_blue',
+        }, "https://tsukiyo10884.github.io");
+    }
+
+
     childWin.postMessage({
         type: 'init',
         payload: null,
