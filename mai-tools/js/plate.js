@@ -64,7 +64,7 @@ const showPlateButton = async (versionName, plateName) => {
                     <tr>
                         <th></th>
                         <th colspan=3>${plateName}極</th>
-                        <th colspan=3>${versionName === 'maimai ~ maimai PLUS' ? `不存在` : `${plateName}将`}</th>
+                        <th colspan=3>${versionName === 'maimai ~ maimai PLUS' ? `-` : `${plateName}将`}</th>
                         <th colspan=3>${plateName}神</th>
                         <th colspan=3>${plateName}舞舞</th>
                     </tr>
@@ -75,12 +75,12 @@ const showPlateButton = async (versionName, plateName) => {
         if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
         const isRemaster = diff === 'remaster' ? `text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;` : ``;
         return `<tr>
-                            <td class="text-shadow-black difficulty-label" style="color:${colors[diff]};${isRemaster}">${diff.toUpperCase().slice(0, 3)}</td>
-                            ${allCounts.map(counts => {
+        <td class="text-shadow-black difficulty-label" style="color:${colors[diff]};${isRemaster}">${diff.toUpperCase().slice(0, 3)}</td>
+        ${allCounts.map(counts => {
             const c = counts[diff];
             return `${c ? `<td class="ps-2">${c.completed}</td><td>/</td><td>${c.total}</td>` : '-'}`;
         }).join('')}
-                        </tr>`;
+        </tr>`;
     }).join('')}
                 </tbody>
             </table>
@@ -152,11 +152,13 @@ const showPlateProgress = async (versionName, type, plateName) => {
     })
 
     let $songGrid = [];
+    // 分難度
     diffGroup.forEach((songs, diffIndex) => {
         let diffType = nowDifficulties[diffIndex];
         const collapseId = `diff-${diffType.toLowerCase()}`;
 
         let groupedSongs = {};
+        // 分定數
         songs.forEach(song => {
             const key = formatLevel(song.internalLevel);
             if (!groupedSongs[key]) groupedSongs[key] = [];
@@ -169,12 +171,17 @@ const showPlateProgress = async (versionName, type, plateName) => {
                 <div class="d-flex align-items-center my-3 collapse-toggle" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${isFirst}" role="button">
                     <b class="px-3"><span class="collapse-icon" data-target="${collapseId}">${isFirst ? '-' : '+'}</span> ${diffType}</b>
                 </div>
-                <div id="${collapseId}" class="collapse${isFirst ? ' show' : ''}">
+                <div id="${collapseId}" class="collapse${isFirst ? ' show' : ''} row">
         `;
 
         const content = Object.entries(groupedSongs)
             .sort(([a], [b]) => parseFloat(b) - parseFloat(a))
             .map(([level, songList]) => {
+                songList = songList.filter(song => {
+                    if (song.difficulty === 'remaster' && versionName !== 'maimai ~ FiNALE') return false;
+                    return true;
+                });
+                const num = songList.length > 4 ? 12 : 6;
                 const levelHeader = `
                 <div class="col-12 d-flex align-items-center my-2">
                     <div class="section-divider"></div>
@@ -182,12 +189,11 @@ const showPlateProgress = async (versionName, type, plateName) => {
                     <div class="section-divider"></div>
                 </div>`;
                 const cards = songList.map(song => {
-                    if (song.difficulty === 'remaster' && versionName !== 'maimai ~ FiNALE') return null;
                     return createNamePlateSongCard(song, type);
                 }).filter(card => card !== null).join('');
 
                 if (cards === '') return '';
-                return levelHeader + `<div class="square-song-grid col-12 row ms-0 mb-3">${cards}</div>`;
+                return `<div class="col-${num} row p-2">${levelHeader}<div class="square-song-grid col-12 row ms-0 mb-3 p-0">${cards}</div></div>`;
             }).join('');
 
         $songGrid.push(header + content + '</div></div>');

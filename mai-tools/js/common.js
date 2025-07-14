@@ -100,6 +100,7 @@ const getCourseRank = (course_rank_text) => {
     case "20": return "真九段";
     case "21": return "真十段";
     case "22": return "真皆伝";
+    case "23": return "裏皆伝";
   }
 }
 
