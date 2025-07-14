@@ -142,8 +142,6 @@
       const data = event.originalEvent.data;
       if (!data || typeof data !== "object") return;
 
-      console.log('data', data);
-
       const $output = $('#output');
       switch (data.type) {
         case "init":
@@ -153,7 +151,7 @@
           }
           break;
         case "difficulty":
-          $output.html($output.html() + `<br/>取得成績中(${data.payload})`);
+          $output.html(`取得成績中，請勿關閉maimai-net(${data.payload})`);
           break;
         case "result":
           $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(data.payload, null, 2)}</textarea>`);
