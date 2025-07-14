@@ -127,7 +127,7 @@
         $('#theme').attr('href', cssFiles[nextIndex]);
       });
     };
-    
+
     const setupEventListeners = () => {
       bindCompletionEventListeners();
       bindPlayedEventListeners();
@@ -154,7 +154,7 @@
           $output.html(`取得成績中，請勿關閉maimai-net`);
           break;
         case "difficulty":
-          $output.html(`取得成績中(${data.payload})`);
+          $output.html($output.html() + `取得成績中(${data.payload})`);
           break;
         case "result":
           $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(data.payload, null, 2)}</textarea>`);

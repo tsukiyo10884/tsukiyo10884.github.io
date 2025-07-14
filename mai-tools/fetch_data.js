@@ -10,20 +10,6 @@
                 payload: null,
             }, "https://tsukiyo10884.github.io");
 
-            const script = document.currentScript;
-            if (script != null) {
-                const srcUrl = new URL(script.src);
-                const css = srcUrl.searchParams.get('css');
-                if (css !== null && css !== '') {
-                    setTimeout(() => {
-                        childWin.postMessage({
-                            type: 'css',
-                            payload: css,
-                        }, "https://tsukiyo10884.github.io");
-                    }, 100);
-                }
-            }
-
             let idx = '';
             const url = new URL(window.location.href);
             if (
@@ -201,6 +187,24 @@
                 }, "https://tsukiyo10884.github.io");
                 childWin.postMessage(exportData, "https://tsukiyo10884.github.io");
             }, 500);
+
+            setTimeout(() => {
+                const script = document.currentScript;
+                if (script != null) {
+                    const srcUrl = new URL(script.src);
+                    const css = srcUrl.searchParams.get('css');
+                    if (css !== null && css !== '') {
+                        setTimeout(() => {
+                            childWin.postMessage({
+                                type: 'css',
+                                payload: css,
+                            }, "https://tsukiyo10884.github.io");
+                        }, 100);
+                    }
+                }
+            }, 1500);
+
+
         }
     });
 
