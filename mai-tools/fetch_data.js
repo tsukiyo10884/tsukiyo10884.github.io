@@ -1,19 +1,21 @@
 (async () => {
-    const script = document.currentScript;
-    const srcUrl = new URL(script.src);
-    const css = srcUrl.searchParams.get('css');
-
     const childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
     childWin.onload = () => {
         childWin.postMessage({
             type: 'init',
             payload: null,
         }, "https://tsukiyo10884.github.io");
-        if (css !== null && css !== '') {
-            childWin.postMessage({
-                type: 'css',
-                payload: css,
-            }, "https://tsukiyo10884.github.io");
+
+        const script = document.currentScript;
+        if (script != null) {
+            const srcUrl = new URL(script.src);
+            const css = srcUrl.searchParams.get('css');
+            if (css !== null && css !== '') {
+                childWin.postMessage({
+                    type: 'css',
+                    payload: css,
+                }, "https://tsukiyo10884.github.io");
+            }
         }
     };
 
