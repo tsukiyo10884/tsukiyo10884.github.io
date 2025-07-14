@@ -62,6 +62,10 @@ button:not(:disabled):hover {
 	content: " (BAS)";
 }
 
+.difficulty-collapse{
+	color: #ff69b4;
+}
+
 .difficulty-expert .rating-block-inner-level::after,
 .difficulty-expert .square-song-inner-level::after {
 	color: #f7a5b5;

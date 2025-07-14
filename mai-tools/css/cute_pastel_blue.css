@@ -41,7 +41,7 @@ button:disabled {
 }
 
 button:not(:disabled):hover {
-	background-color: #e4ffef;
+	background-color: #fff7e4;
 	transform: scale(1.03);
 }
 
@@ -50,30 +50,6 @@ button:not(:disabled):hover {
 	border-radius: 20px;
 }
 
-.difficulty-advanced .square-song-inner-level::after {
-	color: #facd6c;
-	content: " (ADV)";
-}
-
-.difficulty-basic .square-song-inner-level::after {
-	color: #76e6ac;
-	content: " (BAS)";
-}
-
-.difficulty-expert .square-song-inner-level::after {
-	color: #f7a5b5;
-	content: " (EXP)";
-}
-
-.difficulty-master .square-song-inner-level::after {
-	color: #d7a6e8;
-	content: " (MAS)";
-}
-
-.difficulty-remaster .square-song-inner-level::after {
-	color: #b9b5b9;
-	content: " (REM)";
-}
 
 .plate-progress-title {
 	border-radius: 8px;
@@ -118,16 +94,33 @@ button:not(:disabled):hover {
 	z-index: 2;
 }
 
-.rating-gain-info {
-	background: linear-gradient(135deg, #69b4ff, #91c1ff);
-	border-radius: 999px 0 0 999px;
-	color: white;
-	font-size: 10px;
-	padding: 1px 5px;
-	position: absolute;
-	right: 0px;
-	top: 50px;
-	z-index: 2;
+.difficulty-advanced .square-song-inner-level::after {
+	color: #facd6c;
+	content: " (ADV)";
+}
+
+.difficulty-basic .square-song-inner-level::after {
+	color: #76e6ac;
+	content: " (BAS)";
+}
+
+.difficulty-collapse{
+	color: #69b4ff;
+}
+
+.difficulty-expert .square-song-inner-level::after {
+	color: #f7a5b5;
+	content: " (EXP)";
+}
+
+.difficulty-master .square-song-inner-level::after {
+	color: #d7a6e8;
+	content: " (MAS)";
+}
+
+.difficulty-remaster .square-song-inner-level::after {
+	color: #b9b5b9;
+	content: " (REM)";
 }
 
 .square-song-card {
@@ -190,6 +183,37 @@ button:not(:disabled):hover {
 /**************/
 /*rating cards*/
 /**************/
+.rating-block-song-title::before {
+	display: block;
+	font-weight: 100;
+	line-height: 10px;
+}
+
+.difficulty-advanced .rating-block-song-title::before {
+	color: #facd6c;
+	content: " Advanced \A ";
+}
+
+.difficulty-basic .rating-block-song-title::before {
+	color: #76e6ac;
+	content: " Basic \A ";
+}
+
+.difficulty-expert .rating-block-song-title::before {
+	color: #f7a5b5;
+	content: " Expert \A ";
+}
+
+.difficulty-master .rating-block-song-title::before {
+	color: #d7a6e8;
+	content: " Master \A ";
+}
+
+.difficulty-remaster .rating-block-song-title::before {
+	color: #b9b5b9;
+	content: " Re: Master \A ";
+}
+
 .rating-block-inner-level {
 	color: #666;
 	font-size: 12px;
@@ -203,9 +227,9 @@ button:not(:disabled):hover {
 	filter: drop-shadow(-1px 1px 1px #22222222);
 	font-size: 12px;
 	font-weight: bold;
+	left: 5px;
 	padding: 2px 4px;
 	position: absolute;
-	left: 5px;
 	top: 5px;
 }
 
@@ -225,57 +249,28 @@ button:not(:disabled):hover {
 	white-space: nowrap;
 }
 
-
-.difficulty-advanced .rating-block-song-title::before {
-	color: #facd6c;
-	content: " Advanced \A ";
-	display: block;
-	font-weight: 100;
-	line-height: 10px;
-}
-
-.difficulty-basic .rating-block-song-title::before {
-	color: #76e6ac;
-	content: " Basic \A ";
-	display: block;
-	font-weight: 100;
-	line-height: 10px;
-}
-
-.difficulty-expert .rating-block-song-title::before {
-	color: #f7a5b5;
-	content: " Expert \A ";
-	display: block;
-	font-weight: 100;
-	line-height: 10px;
-}
-
-.difficulty-master .rating-block-song-title::before {
-	color: #d7a6e8;
-	content: " Master \A ";
-	display: block;
-	font-weight: 100;
-	line-height: 10px;
-}
-
-.difficulty-remaster .rating-block-song-title::before {
-	color: #b9b5b9;
-	content: " Re: Master \A ";
-	display: block;
-	font-weight: 100;
-	line-height: 10px;
+.rating-gain-info {
+	background: linear-gradient(135deg, #69b4ff, #91c1ff);
+	border-radius: 999px 0 0 999px;
+	color: white;
+	font-size: 10px;
+	padding: 1px 5px;
+	position: absolute;
+	right: 0px;
+	top: 50px;
+	z-index: 2;
 }
 
 .song-card {
+	align-items: flex-start;
 	background: white;
 	border-radius: 20px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	display: flex;
 	padding: 10px;
 	position: relative;
 	transition: transform 0.2s;
 	width: 165px !important;
-	display: flex;
-	align-items: flex-start;
 }
 
 .song-content {
@@ -298,10 +293,9 @@ button:not(:disabled):hover {
 .song-info-block {
 	display: flex;
 	flex-direction: column;
-	margin-left: 5px;
 	justify-content: flex-start;
+	margin-left: 5px;
 }
-
 
 /**************/
 /*user profile*/

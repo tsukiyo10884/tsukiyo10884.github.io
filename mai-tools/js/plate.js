@@ -157,33 +157,33 @@ const showPlateProgress = async (versionName, type, plateName) => {
         let diffType = nowDifficulties[diffIndex];
         const collapseId = `diff-${diffType.toLowerCase()}`;
 
-        let groupedSongs = {};
-        // 分定數
-        songs.forEach(song => {
-            const key = formatLevel(song.internalLevel);
-            if (!groupedSongs[key]) groupedSongs[key] = [];
-            groupedSongs[key].push(song);
-        });
+        // 分等級(.0~.6為一組，.6~.9為另一組)
+        const groupedSongs = new Map();
+        songs
+            .sort((a, b) => b.internalLevel - a.internalLevel)
+            .forEach(song => {
+                const level = song.internalLevel;
+                const baseLevel = Math.floor(level);
+                const decimal = Math.round((level - baseLevel) * 10) / 10;
+                const groupKey = decimal < 0.6 ? baseLevel.toString() : `${baseLevel}+`;
+                if (!groupedSongs.has(groupKey)) groupedSongs.set(groupKey, []);
+                groupedSongs.get(groupKey).push(song);
+            });
 
+        // 第一個分類預設展開，後面預設收起
         const isFirst = diffIndex === 0;
-        const header = `
+        const groupeHeader = `
             <div class="col-12">
                 <div class="d-flex align-items-center my-3 collapse-toggle" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${isFirst}" role="button">
-                    <b class="px-3"><span class="collapse-icon" data-target="${collapseId}">${isFirst ? '-' : '+'}</span> ${diffType}</b>
+                    <b class="difficulty-collapse"><span class="collapse-icon" data-target="${collapseId}">${isFirst ? '-' : '+'}</span> ${diffType}</b>
                 </div>
                 <div id="${collapseId}" class="collapse${isFirst ? ' show' : ''} row">
         `;
 
-        const content = Object.entries(groupedSongs)
-            .sort(([a], [b]) => parseFloat(b) - parseFloat(a))
+        const content = Array.from(groupedSongs)
             .map(([level, songList]) => {
-                songList = songList.filter(song => {
-                    if (song.difficulty === 'remaster' && versionName !== 'maimai ~ FiNALE') return false;
-                    return true;
-                });
-                const num = songList.length > 4 ? 12 : 6;
                 const levelHeader = `
-                <div class="col-12 d-flex align-items-center my-2">
+                <div class="col-12 d-flex align-items-center my-2 p-0">
                     <div class="section-divider"></div>
                     <b class="px-3">${level}</b>
                     <div class="section-divider"></div>
@@ -193,10 +193,10 @@ const showPlateProgress = async (versionName, type, plateName) => {
                 }).filter(card => card !== null).join('');
 
                 if (cards === '') return '';
-                return `<div class="col-${num} row p-2">${levelHeader}<div class="square-song-grid col-12 row ms-0 mb-3 p-0">${cards}</div></div>`;
+                return `${levelHeader}<div class="square-song-grid col-12 row ms-0 mb-3 p-0">${cards}</div>`;
             }).join('');
 
-        $songGrid.push(header + content + '</div></div>');
+        $songGrid.push(groupeHeader + content + '</div></div>');
     });
 
 

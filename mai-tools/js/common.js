@@ -1,12 +1,12 @@
 // 成就對應門檻
 const SCORE_THRESHOLDS = [
-  { name: 'clear', score: 80.00 },
-  { name: 'S', score: 97.00 },
-  { name: 'S+', score: 98.00 },
-  { name: 'SS', score: 99.00 },
-  { name: 'SS+', score: 99.50 },
-  { name: 'SSS', score: 100.00 },
-  { name: 'SSS+', score: 100.50 }
+    { name: 'clear', score: 80.00 },
+    { name: 'S', score: 97.00 },
+    { name: 'S+', score: 98.00 },
+    { name: 'SS', score: 99.00 },
+    { name: 'SS+', score: 99.50 },
+    { name: 'SSS', score: 100.00 },
+    { name: 'SSS+', score: 100.50 }
 ];
 
 // 難度
@@ -14,7 +14,7 @@ const difficulties = ['basic', 'advanced', 'expert', 'master', 'remaster'];
 
 // 初始化玩家資料
 const initUserInfo = () => {
-  $('#user-info').html(`
+    $('#user-info').html(`
         <div class="basic_block p_10 f_0">
           <img id="user-icon" loading="lazy" class="w_112 f_l">
           <div class="p_l_10 f_l">
@@ -58,243 +58,243 @@ const initUserInfo = () => {
           <div class="clearfix"></div>
         </div>
       `);
-  $('#user-trophy-block').attr('class', data.user_info.user_trophy_block + ' trophy_block p_3 t_c f_0');
-  $('#user-trophy').text(data.user_info.trophy);
-  $('#user-name').text(data.user_info.name);
-  $('#user-rating').text(data.user_info.rating);
-  $('#user-rating-base').attr('src', data.user_info.rating_base);
-  $('#user-course-rank').attr('src', data.user_info.course_rank);
-  $('#user-class-rank').attr('src', data.user_info.class_rank);
-  $('#div-user-star-text span').text('☆' + data.user_info.star);
-  $('#user-star').text(data.user_info.star);
-  $('#user-icon').attr('src', data.user_info.icon);
-  $('#user-info').removeClass('d-none');
+    $('#user-trophy-block').attr('class', data.user_info.user_trophy_block + ' trophy_block p_3 t_c f_0');
+    $('#user-trophy').text(data.user_info.trophy);
+    $('#user-name').text(data.user_info.name);
+    $('#user-rating').text(data.user_info.rating);
+    $('#user-rating-base').attr('src', data.user_info.rating_base);
+    $('#user-course-rank').attr('src', data.user_info.course_rank);
+    $('#user-class-rank').attr('src', data.user_info.class_rank);
+    $('#div-user-star-text span').text('☆' + data.user_info.star);
+    $('#user-star').text(data.user_info.star);
+    $('#user-icon').attr('src', data.user_info.icon);
+    $('#user-info').removeClass('d-none');
 
-  let course_rank_text = getCourseRank(data.user_info.course_rank_text);
-  let class_rank_text = getClassRank(data.user_info.class_rank_text);
-  $('#div-user-course-rank-text span').text(course_rank_text);
-  $('#div-user-class-rank-text span').text(class_rank_text);
+    let course_rank_text = getCourseRank(data.user_info.course_rank_text);
+    let class_rank_text = getClassRank(data.user_info.class_rank_text);
+    $('#div-user-course-rank-text span').text(course_rank_text);
+    $('#div-user-class-rank-text span').text(class_rank_text);
 }
 
 const getCourseRank = (course_rank_text) => {
-  switch (course_rank_text) {
-    case "00": return "初心者";
-    case "01": return "初段";
-    case "02": return "二段";
-    case "03": return "三段";
-    case "04": return "四段";
-    case "05": return "五段";
-    case "06": return "六段";
-    case "07": return "七段";
-    case "08": return "八段";
-    case "09": return "九段";
-    case "10": return "十段";
-    case "12": return "真初段";
-    case "13": return "真二段";
-    case "14": return "真三段";
-    case "15": return "真四段";
-    case "16": return "真五段";
-    case "17": return "真六段";
-    case "18": return "真七段";
-    case "19": return "真八段";
-    case "20": return "真九段";
-    case "21": return "真十段";
-    case "22": return "真皆伝";
-    case "23": return "裏皆伝";
-  }
+    switch (course_rank_text) {
+        case "00": return "初心者";
+        case "01": return "初段";
+        case "02": return "二段";
+        case "03": return "三段";
+        case "04": return "四段";
+        case "05": return "五段";
+        case "06": return "六段";
+        case "07": return "七段";
+        case "08": return "八段";
+        case "09": return "九段";
+        case "10": return "十段";
+        case "12": return "真初段";
+        case "13": return "真二段";
+        case "14": return "真三段";
+        case "15": return "真四段";
+        case "16": return "真五段";
+        case "17": return "真六段";
+        case "18": return "真七段";
+        case "19": return "真八段";
+        case "20": return "真九段";
+        case "21": return "真十段";
+        case "22": return "真皆伝";
+        case "23": return "裏皆伝";
+    }
 }
 
 const getClassRank = (class_rank_text) => {
-  switch (class_rank_text) {
-    case "00": return "B5";
-    case "01": return "B4";
-    case "02": return "B3";
-    case "03": return "B2";
-    case "04": return "B1";
-    case "05": return "A5";
-    case "06": return "A4";
-    case "07": return "A3";
-    case "08": return "A2";
-    case "09": return "A1";
-    case "10": return "S5";
-    case "11": return "S4";
-    case "12": return "S3";
-    case "13": return "S2";
-    case "14": return "S1";
-    case "15": return "SS5";
-    case "16": return "SS4";
-    case "17": return "SS3";
-    case "18": return "SS2";
-    case "19": return "SS1";
-    case "20": return "SSS5";
-    case "21": return "SSS4";
-    case "22": return "SSS3";
-    case "23": return "SSS2";
-    case "24": return "SSS1";
-    case "25": return "LEGEND";
-  }
+    switch (class_rank_text) {
+        case "00": return "B5";
+        case "01": return "B4";
+        case "02": return "B3";
+        case "03": return "B2";
+        case "04": return "B1";
+        case "05": return "A5";
+        case "06": return "A4";
+        case "07": return "A3";
+        case "08": return "A2";
+        case "09": return "A1";
+        case "10": return "S5";
+        case "11": return "S4";
+        case "12": return "S3";
+        case "13": return "S2";
+        case "14": return "S1";
+        case "15": return "SS5";
+        case "16": return "SS4";
+        case "17": return "SS3";
+        case "18": return "SS2";
+        case "19": return "SS1";
+        case "20": return "SSS5";
+        case "21": return "SSS4";
+        case "22": return "SSS3";
+        case "23": return "SSS2";
+        case "24": return "SSS1";
+        case "25": return "LEGEND";
+    }
 }
 
 // 顯示對應功能
 const showTable = async (mode) => {
-  $('#level-filter').hide();
-  $('#stat').empty();
-  $('#now-title').text('');
+    $('#level-filter').hide();
+    $('#stat').empty();
+    $('#now-title').text('');
 
-  const tableHandlers = {
-    'rating': initRatingList,
-    'plate': initPlateList,
-    'level': initLevelList,
-    'suggestion': initSuggestionList,
-    'a_xuan': initForAXuanList,
-    'a_yo': initForAyoList,
-  };
+    const tableHandlers = {
+        'rating': initRatingList,
+        'plate': initPlateList,
+        'level': initLevelList,
+        'suggestion': initSuggestionList,
+        'a_xuan': initForAXuanList,
+        'a_yo': initForAyoList,
+    };
 
-  $('#completion-filters').toggleClass('d-none', !['plate', 'level'].includes(mode));
-  $('#play-filters').toggleClass('d-none', !['suggestion', 'a_xuan'].includes(mode));
+    $('#completion-filters').toggleClass('d-none', !['plate', 'level'].includes(mode));
+    $('#play-filters').toggleClass('d-none', !['suggestion', 'a_xuan'].includes(mode));
 
-  const handler = tableHandlers[mode];
-  handler ? await handler() : $('#song-table').empty();
+    const handler = tableHandlers[mode];
+    handler ? await handler() : $('#song-table').empty();
 };
 
 // 是否已遊玩過
 const bindPlayedEventListeners = () => {
-  $('#played-only, #non-played-only').on('change', function () {
-    const $this = $(this);
-    const $other = $this.attr('id') === 'played-only' ? $('#non-played-only') : $('#played-only');
+    $('#played-only, #non-played-only').on('change', function () {
+        const $this = $(this);
+        const $other = $this.attr('id') === 'played-only' ? $('#non-played-only') : $('#played-only');
 
-    if ($this.is(':checked')) {
-      $other.prop('checked', false);
-    }
-    handlePlayedFilters();
-  });
+        if ($this.is(':checked')) {
+            $other.prop('checked', false);
+        }
+        handlePlayedFilters();
+    });
 }
 const handlePlayedFilters = () => {
-  const now = $('#now-title').text().trim();
-  const mode = now.split('|')[0];
-  if (mode === 'suggestion') {
-    const displayLevel = now.split('|')[1];
-    const isNewVersion = now.split('|')[2];
-    if (displayLevel === 'all') {
-      const $songGrid = createSuggestionSongCard(isNewVersion === 'true');
-      $('#song-table').find('.square-song-grid').replaceWith($songGrid);
+    const now = $('#now-title').text().trim();
+    const mode = now.split('|')[0];
+    if (mode === 'suggestion') {
+        const displayLevel = now.split('|')[1];
+        const isNewVersion = now.split('|')[2];
+        if (displayLevel === 'all') {
+            const $songGrid = createSuggestionSongCard(isNewVersion === 'true');
+            $('#song-table').find('.square-song-grid').replaceWith($songGrid);
+        }
+        const matchingSuggestion = findMatchingSuggestion(displayLevel, isNewVersion === 'true');
+        if (matchingSuggestion) {
+            const $songGrid = createSuggestionSongCard(matchingSuggestion);
+            $('#song-table').find('.square-song-grid').replaceWith($songGrid);
+        }
+    } else if (mode === 'axuan') {
+        const displayLevel = now.split('|')[1];
+        const matchingSuggestion = findMatchingSuggestionXuan(displayLevel);
+        console.log(matchingSuggestion);
+        if (matchingSuggestion) {
+            const $songGrid = createSuggestionSongCardXuan(matchingSuggestion);
+            $('#song-table').find('.square-song-grid').replaceWith($songGrid);
+        }
     }
-    const matchingSuggestion = findMatchingSuggestion(displayLevel, isNewVersion === 'true');
-    if (matchingSuggestion) {
-      const $songGrid = createSuggestionSongCard(matchingSuggestion);
-      $('#song-table').find('.square-song-grid').replaceWith($songGrid);
-    }
-  } else if (mode === 'axuan') {
-    const displayLevel = now.split('|')[1];
-    const matchingSuggestion = findMatchingSuggestionXuan(displayLevel);
-    console.log(matchingSuggestion);
-    if (matchingSuggestion) {
-      const $songGrid = createSuggestionSongCardXuan(matchingSuggestion);
-      $('#song-table').find('.square-song-grid').replaceWith($songGrid);
-    }
-  }
 }
 
 // 是否已達成
 const bindCompletionEventListeners = () => {
-  $('#completed-only, #non-completed-only').on('change', function () {
-    const $this = $(this);
-    const $other = $this.attr('id') === 'completed-only' ? $('#non-completed-only') : $('#completed-only');
+    $('#completed-only, #non-completed-only').on('change', function () {
+        const $this = $(this);
+        const $other = $this.attr('id') === 'completed-only' ? $('#non-completed-only') : $('#completed-only');
 
-    if ($this.is(':checked')) {
-      $other.prop('checked', false);
-    }
-    handleCompletionFilters();
-  });
+        if ($this.is(':checked')) {
+            $other.prop('checked', false);
+        }
+        handleCompletionFilters();
+    });
 };
 const handleCompletionFilters = () => {
-  const now = $('#now-title').text().trim();
-  const mode = now.split('|')[0];
-  if (mode === 'plate') {
-    const plateName = now.split('|')[1];
-    const type = now.split('|')[2];
-    const versionName = now.split('|')[3];
-    showPlateProgress(versionName, plateName === '覇' ? '覇者' : type, plateName === '覇' ? '' : plateName);
-  } else if (mode === 'level') {
-    $('#level-start').val(now.split('|')[1]);
-    $('#level-end').val(now.split('|')[2]);
-    showLevelListByRange();
-  }
+    const now = $('#now-title').text().trim();
+    const mode = now.split('|')[0];
+    if (mode === 'plate') {
+        const plateName = now.split('|')[1];
+        const type = now.split('|')[2];
+        const versionName = now.split('|')[3];
+        showPlateProgress(versionName, plateName === '覇' ? '覇者' : type, plateName === '覇' ? '' : plateName);
+    } else if (mode === 'level') {
+        $('#level-start').val(now.split('|')[1]);
+        $('#level-end').val(now.split('|')[2]);
+        showLevelListByRange();
+    }
 };
 
 // 過濾歌曲
 const songFilter = (songs, {
-  isNewVersion = null,
-  type = null,
-  title = null,
-  difficulty = null,
-  versionInternational = null,
-  versionJapan = null,
-  internalLevel = null,
-  minLevel = null,
-  maxLevel = null,
-  plate = null
+    isNewVersion = null,
+    type = null,
+    title = null,
+    difficulty = null,
+    versionInternational = null,
+    versionJapan = null,
+    internalLevel = null,
+    minLevel = null,
+    maxLevel = null,
+    plate = null
 } = {}) => {
-  let result = songs;
+    let result = songs;
 
-  if (isNewVersion !== null) {
-    result = result.filter(x => (x.versionInternational === currentVersion) === isNewVersion);
-  }
-  if (plate !== null) {
-    result = result.filter(song => {
-      switch (plate) {
-        case '極': return song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp;
-        case '将': return parseFloat(song.score) > 100;
-        case '神': return song.ap || song.app;
-        case '舞舞': return song.fdx;
-        case '覇者': return parseFloat(song.score.replace('%', '')) >= 80;
-        default: return false;
-      }
-    });
-  }
-  if (minLevel !== null && maxLevel !== null) {
-    result = result.filter(song => {
-      return song.internalLevel >= minLevel && song.internalLevel <= maxLevel;
-    });
-  }
-
-  const filters = {
-    type,
-    title,
-    difficulty,
-    versionInternational,
-    versionJapan,
-    internalLevel
-  };
-
-  for (const [key, value] of Object.entries(filters)) {
-    if (value !== null) {
-      result = result.filter(x => x[key] === value);
+    if (isNewVersion !== null) {
+        result = result.filter(x => (x.versionInternational === currentVersion) === isNewVersion);
     }
-  }
+    if (plate !== null) {
+        result = result.filter(song => {
+            switch (plate) {
+                case '極': return song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp;
+                case '将': return parseFloat(song.score) > 100;
+                case '神': return song.ap || song.app;
+                case '舞舞': return song.fdx;
+                case '覇者': return parseFloat(song.score.replace('%', '')) >= 80;
+                default: return false;
+            }
+        });
+    }
+    if (minLevel !== null && maxLevel !== null) {
+        result = result.filter(song => {
+            return song.internalLevel >= minLevel && song.internalLevel <= maxLevel;
+        });
+    }
 
-  return result;
+    const filters = {
+        type,
+        title,
+        difficulty,
+        versionInternational,
+        versionJapan,
+        internalLevel
+    };
+
+    for (const [key, value] of Object.entries(filters)) {
+        if (value !== null) {
+            result = result.filter(x => x[key] === value);
+        }
+    }
+
+    return result;
 };
 
 // 建立方形歌卡
 const createSquareSongCard = (song, {
-  isCompleted = null,
-  isPlayed: isPlayed = null
+    isCompleted = null,
+    isPlayed: isPlayed = null
 } = {}) => {
-  if (isCompleted !== null) {
-    if (($('#completed-only').is(':checked') && !isCompleted) ||
-      ($('#non-completed-only').is(':checked') && isCompleted)) {
-      return null;
+    if (isCompleted !== null) {
+        if (($('#completed-only').is(':checked') && !isCompleted) ||
+            ($('#non-completed-only').is(':checked') && isCompleted)) {
+            return null;
+        }
     }
-  }
-  if (isPlayed !== null) {
-    if (($('#played-only').is(':checked') && !isPlayed) ||
-      ($('#non-played-only').is(':checked') && isPlayed)) {
-      return null;
+    if (isPlayed !== null) {
+        if (($('#played-only').is(':checked') && !isPlayed) ||
+            ($('#non-played-only').is(':checked') && isPlayed)) {
+            return null;
+        }
     }
-  }
 
-  return `
+    return `
         <div class="square-song-card difficulty-${song.difficulty.replace(" ", "-").toLowerCase()} ${isCompleted === true ? 'completed' : ''} deg${Math.floor(Math.random() * 5)}" 
                 onclick="showSongDetail('${song.title}', '${song.type}')">
             <img src=${song.image} class="square-song-image" alt="${song.title}">
@@ -311,9 +311,18 @@ const createSquareSongCard = (song, {
 
 // 如果等級是整數，則添加小數點和零
 const formatLevel = (level) => {
-  if (typeof level !== 'number' || isNaN(level)) {
-    return '';
-  }
-  const str = level.toString();
-  return str.includes('.') ? str : `${str}.0`;
+    if (typeof level !== 'number' || isNaN(level)) {
+        return '';
+    }
+    const str = level.toString();
+    return str.includes('.') ? str : `${str}.0`;
+};
+
+// 計算等級範圍
+const calculateLevelRange = (level) => {
+    const baseLevel = Math.floor(level);
+    const decimal = level - baseLevel;
+    const minLevel = decimal < 0.6 ? baseLevel : baseLevel + 0.6;
+    const maxLevel = decimal < 0.6 ? baseLevel + 0.5 : baseLevel + 0.9;
+    return { minLevel, maxLevel };
 };

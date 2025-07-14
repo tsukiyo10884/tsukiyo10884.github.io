@@ -31,15 +31,6 @@ const groupSongs = (gainListAll, isNewVersion) => {
     }, {});
 }
 
-// 計算等級範圍
-const calculateLevelRange = (level) => {
-    const baseLevel = Math.floor(level);
-    const decimal = level - baseLevel;
-    const minLevel = decimal < 0.6 ? baseLevel : baseLevel + 0.6;
-    const maxLevel = decimal < 0.6 ? baseLevel + 0.5 : baseLevel + 0.9;
-    return { minLevel, maxLevel };
-};
-
 // 找出能加分的曲子
 const songsCanGainRating = (allSongs, top50Songs) => {
     const newSongs = songFilter(allSongs, { isNewVersion: true });
