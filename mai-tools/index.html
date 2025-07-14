@@ -104,6 +104,8 @@
     let currentVersion = "PRiSM";
 
     const init = async () => {
+      window.opener.postMessage("ready", "https://maimaidx-eng.com");
+
       versionList = await $.getJSON('json/version.json');
       versionOrder = [...new Set(
         versionList
