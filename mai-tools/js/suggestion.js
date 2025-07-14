@@ -224,7 +224,7 @@ const createSuggestionSongCard = (gainList) => {
 
     const songCards = Object.entries(groupedSongs).sort(([a], [b]) => parseFloat(b) - parseFloat(a)).map(([level, songList]) => {
         const header = `
-            <div class="col-12 d-flex align-items-center my-3">
+            <div class="col-12 d-flex align-items-center my-3 p-0">
                 <div class="section-divider"></div>
                 <b class="px-3">${level}</b>
                 <div class="section-divider"></div>

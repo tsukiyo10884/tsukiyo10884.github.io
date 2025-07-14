@@ -105,9 +105,7 @@ button {
 }
 
 .square-song-grid {
-	display: grid;
-	gap: 10px;
-	grid-template-columns: repeat(auto-fit, 102px);
+	gap: 12px;
 }
 
 .square-song-image {

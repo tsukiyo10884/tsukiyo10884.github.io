@@ -153,7 +153,7 @@ button:not(:disabled):hover {
 	padding: 10px !important;
 	position: relative;
 	transition: transform 0.2s;
-	width: 105px !important;
+	width: 102px !important;
 }
 
 .square-song-card .song-overlay {
@@ -162,7 +162,7 @@ button:not(:disabled):hover {
 	left: 0px;
 	position: absolute;
 	top: 0px;
-	width: 105px;
+	width: 102px;
 }
 
 .square-song-grid {
@@ -250,7 +250,7 @@ button:not(:disabled):hover {
 }
 
 .song-grid {
-	gap: 18	px;
+	gap: 16px;
 }
 
 .song-image {

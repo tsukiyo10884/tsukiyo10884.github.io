@@ -44,7 +44,7 @@ const initLevelList = () => {
         <div id="section-title" class="section-title text-shadow-black">
             <b>等級${minLevel} ~ ${maxLevel}進度</b>
         </div>
-        <div id="level-song-grid" class="square-song-grid col-12 row" style="margin-left:0">
+        <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
             ${songs.sort((a, b) => b.internalLevel - a.internalLevel)
             .map(song => createSquareSongCard(song, { isCompleted: isSongCompleted(song, $('input[name="achivement"]:checked').val()) })).join('')}
         </div>
@@ -98,7 +98,7 @@ const updateSongGrid = (songs, minLevel, maxLevel) => {
 
     const songCards = Object.entries(groupedSongs).sort(([a], [b]) => parseFloat(b) - parseFloat(a)).map(([level, songList]) => {
         const header = `
-        <div class="col-12 d-flex align-items-center my-3">
+        <div class="col-12 d-flex align-items-center my-3 p-0">
             <div class="flex-grow-1 section-divider border-2"></div>
             <b class="px-3">${level}</b>
             <div class="flex-grow-1 section-divider border-2"></div>

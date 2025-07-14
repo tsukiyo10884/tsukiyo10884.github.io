@@ -177,7 +177,7 @@ const showPlateProgress = async (versionName, type, plateName) => {
                 <div class="d-flex align-items-center my-3 collapse-toggle" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${isFirst}" role="button">
                     <b class="difficulty-collapse"><span class="collapse-icon" data-target="${collapseId}">${isFirst ? '-' : '+'}</span> ${diffType}</b>
                 </div>
-                <div id="${collapseId}" class="collapse${isFirst ? ' show' : ''} row">
+                <div id="${collapseId}" class="collapse${isFirst ? ' show' : ''} row w-100 ms-0">
         `;
 
         const content = Array.from(groupedSongs)

@@ -155,28 +155,26 @@ img {
 	color: #fff;
 	display: flex;
 	flex-direction: column;
-	height: 100px;
+	height: 102px;
 	justify-content: flex-end;
 	overflow: hidden;
 	padding: 0.5em;
 	position: relative;
-	width: 100px !important;
+	width: 102px !important;
 }
 
 .square-song-grid {
-	display: grid;
 	gap: 10px;
-	grid-template-columns: repeat(auto-fit, 102px);
 }
 
 .square-song-image {
 	border-radius: 5px;
-	height: 100px;
+	height: 102px;
 	left: -12px;
 	object-fit: cover;
 	position: relative;
 	top: 48px;
-	width: 100px;
+	width: 102px;
 	z-index: -10;
 }
 
@@ -258,9 +256,7 @@ img {
 }
 
 .song-grid {
-	display: grid;
-	gap: 1em;
-	grid-template-columns: repeat(auto-fit, 165px);
+	gap: 18px;
 }
 
 .song-image {
