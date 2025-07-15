@@ -29,6 +29,7 @@ javascript:(function(){
 - 譜面定數來源：[zetaraku](https://arcade-songs.zetaraku.dev/maimai/about/)  
 - 刪除曲來源：[maimai中文維基](https://maimai.fandom.com/zh/wiki/%E5%88%AA%E9%99%A4%E6%9B%B2%E4%B8%80%E8%A6%BD)  
 - rating 計算方法來源：[sgimera](https://sgimera.github.io/mai_RatingAnalyzer/maidx_calc.html)
+
 ---
 
 ### [x to twitter](https://tsukiyo10884.github.io/it-is-twitter/index.html)
