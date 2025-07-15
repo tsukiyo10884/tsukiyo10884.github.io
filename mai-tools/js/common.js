@@ -174,24 +174,24 @@ const handlePlayedFilters = () => {
     const mode = now.split('|')[0];
     if (mode === 'suggestion') {
         const displayLevel = now.split('|')[1];
-        const isNewVersion = now.split('|')[2];
+        const versionTitle = now.split('|')[2];
+        let isNewVersion = null;
+        let gainChart = null;
+
         if (displayLevel === 'all') {
-            const $songGrid = createSuggestionSongCard(isNewVersion === 'true');
-            $('#song-table').find('.square-song-grid').replaceWith($songGrid);
+            if (versionTitle !== '不分新舊') {
+                isNewVersion = versionTitle === '新曲';
+            }
         }
-        const matchingSuggestion = findMatchingSuggestion(displayLevel, isNewVersion === 'true');
-        if (matchingSuggestion) {
-            const $songGrid = createSuggestionSongCard(matchingSuggestion);
-            $('#song-table').find('.square-song-grid').replaceWith($songGrid);
+        if (versionTitle !== '不分新舊') {
+            isNewVersion = versionTitle === '新曲';
+            gainChart = findMatchingSuggestion(displayLevel, isNewVersion);
+        } else {
+            gainChart = findMatchingSuggestion(displayLevel, null);
         }
-    } else if (mode === 'axuan') {
-        const displayLevel = now.split('|')[1];
-        const matchingSuggestion = findMatchingSuggestionXuan(displayLevel);
-        console.log('matchingSuggestion', matchingSuggestion);
-        if (matchingSuggestion) {
-            const $songGrid = createSuggestionSongCardXuan(matchingSuggestion);
-            $('#song-table').find('.square-song-grid').replaceWith($songGrid);
-        }
+
+        const $songGrid = createSuggestionSongCard(gainChart, isNewVersion);
+        $('#song-table').find('.square-song-grid').replaceWith($songGrid);
     }
 }
 

@@ -1,13 +1,13 @@
-let gainListAll = [];
+let gainChartList = [];
 let selectedRatingThreshold = null;
 let groupedNewSongs = {};
 let groupedOldSongs = {};
 
 // 初始化候選曲列表
 async function initSuggestionList() {
-    gainListAll = songsCanGainRating(data.songs, getTop50Songs());
-    groupedNewSongs = groupSongs(gainListAll, true);
-    groupedOldSongs = groupSongs(gainListAll, false);
+    gainChartList = rangeCanGainRating(data.songs, getTop50Songs());
+    groupedNewSongs = groupSongs(true);
+    groupedOldSongs = groupSongs(false);
     const $newSongsSection = createButtonSection('new songs');
     const $oldSongsSection = createButtonSection('others');
 
@@ -15,24 +15,8 @@ async function initSuggestionList() {
     $('#stat').empty();
 }
 
-// 等級分組(.0~.6為一組，.6~.9為另一組)
-const groupSongs = (gainListAll, isNewVersion) => {
-    return gainListAll.filter(s => s.isNewVersion === isNewVersion).reduce((acc, song) => {
-        const level = song.level;
-        const baseLevel = Math.floor(level);
-        const decimal = level - baseLevel;
-        const groupKey = decimal < 0.6 ? baseLevel : `${baseLevel}+`;
-
-        if (!acc[groupKey]) {
-            acc[groupKey] = [];
-        }
-        acc[groupKey].push(song);
-        return acc;
-    }, {});
-}
-
-// 找出能加分的曲子
-const songsCanGainRating = (allSongs, top50Songs) => {
+// 計算能加分的等級範圍
+const rangeCanGainRating = (allSongs, top50Songs) => {
     const newSongs = songFilter(allSongs, { isNewVersion: true });
     const oldSongs = songFilter(allSongs, { isNewVersion: false });
     const newTopSongs = songFilter(top50Songs, { isNewVersion: true });
@@ -45,6 +29,22 @@ const songsCanGainRating = (allSongs, top50Songs) => {
     const oldSuggestions = calculateSuggestions(oldSongs, oldMinRating, false);
 
     return [...newSuggestions, ...oldSuggestions].sort((a, b) => parseFloat(a.level) - parseFloat(b.level));
+}
+
+// 等級分組(.0~.6為一組，.6~.9為另一組)
+const groupSongs = (isNewVersion) => {
+    return gainChartList.filter(s => s.isNewVersion === isNewVersion).reduce((acc, song) => {
+        const level = song.level;
+        const baseLevel = Math.floor(level);
+        const decimal = level - baseLevel;
+        const groupKey = decimal < 0.6 ? baseLevel : `${baseLevel}+`;
+
+        if (!acc[groupKey]) {
+            acc[groupKey] = [];
+        }
+        acc[groupKey].push(song);
+        return acc;
+    }, {});
 }
 
 // 計算推薦等級可以加多少rating
@@ -80,7 +80,7 @@ const createButtonSection = (title) => {
     const $section = $('<div>');
     const $title = $('<div>').addClass('section-title text-shadow-black').text(title);
     const $buttonsContainer = $('<div>').addClass('level-buttons-container mb-3 text-center row');
-    let isNewVersion;
+    let isNewVersion = null;
 
     let groupedSongs = {}
     switch (title) {
@@ -99,7 +99,6 @@ const createButtonSection = (title) => {
                     ...(groupedOldSongs[key] || [])
                 ];
             }
-            isNewVersion = null;
             break;
     }
     Object.entries(groupedSongs)
@@ -109,45 +108,64 @@ const createButtonSection = (title) => {
             return aNum - bNum;
         })
         .forEach(([groupKey, groupSongs]) => {
-            if (title === 'all songs') {
-                $buttonsContainer.append(createLevelButtonXuan(groupSongs[0], groupKey));
-            } else {
-                $buttonsContainer.append(createLevelButton(groupSongs[0], groupKey));
-            }
+            $buttonsContainer.append(createLevelButton(groupSongs[0], groupKey, isNewVersion));
         });
-    $buttonsContainer.append($('<button>')
-        .addClass('me-2 col-1 mb-2')
-        .text('all')
-        .on('click', () => showLevelDetails(isNewVersion)));
+
+    $buttonsContainer.append(createLevelButton(null, 'all', isNewVersion));
 
     return $section.append($title, $buttonsContainer);
 };
 
 // 建立等級按鈕
-const createLevelButton = (gainList, displayLevel) => {
+const createLevelButton = (gainChart, displayLevel, isNewVersion) => {
     return $('<button>')
         .addClass('me-2 col-1 mb-2')
         .text(displayLevel)
-        .on('click', () => showLevelDetails(gainList));
+        .on('click', () => showLevelDetails(gainChart, isNewVersion));
 }
 
 // 依等級顯示成就項目及歌卡
-const showLevelDetails = (gainList) => {
+const showLevelDetails = (gainChart, isNewVersion) => {
     createAchivementButtonsSuggestion();
     bindRatingThresholdEventListeners();
 
-    if (gainList === true || gainList === false || gainList === null) {
-        let $songGrid = createSuggestionSongCard(gainList);
-        const $title = $('<div>').addClass('section-title text-shadow-black').text('所有候選曲');
-        $('#now-title').text(`suggestion|all|${gainList}`);
+    if (gainChart === null) {
+        const $songGrid = createSuggestionSongCard(gainChart, isNewVersion);
+        const displayLevel = 'all';
+        let versionTitle = "";
+        switch (isNewVersion) {
+            case null:
+                versionTitle = "不分新舊";
+                break;
+            case true:
+                versionTitle = "新曲";
+                break;
+            case false:
+                versionTitle = "舊曲";
+                break;
+        }
+        const $title = $(`<div>`).addClass('section-title text-shadow-black').text(`等級${displayLevel}候選曲(${versionTitle})`);
+        $('#now-title').text(`suggestion|${displayLevel}|${versionTitle}`);
         $('#song-table').empty().append($title, $songGrid);
     } else {
-        const $songGrid = createSuggestionSongCard(gainList);
-        const baseLevel = Math.floor(gainList.level);
-        const decimal = gainList.level - baseLevel;
+        const $songGrid = createSuggestionSongCard(gainChart, isNewVersion);
+        const baseLevel = Math.floor(gainChart.level);
+        const decimal = gainChart.level - baseLevel;
         const displayLevel = decimal < 0.6 ? baseLevel : `${baseLevel}+`;
-        const $title = $(`<div>`).addClass('section-title text-shadow-black').text(`等級${displayLevel}候選曲(${gainList.isNewVersion ? '新曲' : '舊曲'})`);
-        $('#now-title').text(`suggestion|${displayLevel}|${gainList.isNewVersion}`);
+        let versionTitle = "";
+        switch (isNewVersion) {
+            case null:
+                versionTitle = "不分新舊";
+                break;
+            case true:
+                versionTitle = "新曲";
+                break;
+            case false:
+                versionTitle = "舊曲";
+                break;
+        }
+        const $title = $(`<div>`).addClass('section-title text-shadow-black').text(`等級${displayLevel}候選曲(${versionTitle})`);
+        $('#now-title').text(`suggestion|${displayLevel}|${versionTitle}`);
         $('#song-table').empty().append($title, $songGrid);
     }
 
@@ -156,7 +174,7 @@ const showLevelDetails = (gainList) => {
     }
 }
 
-// 建立成就項目按鈕
+// 建立成就項目(S,SS那些)按鈕
 const createAchivementButtonsSuggestion = () => {
     const $radioContainer = $('<div>').addClass('row g-4');
     const $radioCol1 = $('<div>').addClass('col-auto');
@@ -205,62 +223,68 @@ const createAchivementButtonsSuggestion = () => {
 }
 
 // 建立建議歌卡
-const createSuggestionSongCard = (gainList) => {
-    let songs = [];
-    if (gainList === true || gainList === false) {
-        songs = songFilter(data.songs, { isNewVersion: gainList });
-    } else if (gainList === null) {
-        songs = data.songs;
-    } else {
-        const { minLevel, maxLevel } = calculateLevelRange(gainList.level);
-        songs = songFilter(data.songs, { isNewVersion: gainList.isNewVersion, minLevel: minLevel, maxLevel: maxLevel });
-    }
-
-    let groupedSongs = {};
-    songs.forEach(song => {
-        const key = formatLevel(song.internalLevel);
-        if (!groupedSongs[key]) {
-            groupedSongs[key] = [];
+const createSuggestionSongCard = (gainChart, isNewVersion) => {
+    let songs = []
+    if (gainChart === null || gainChart === undefined) {
+        const minLevel = Math.min(...gainChartList.map(s => s.level));
+        const maxLevel = Math.max(...gainChartList.map(s => s.level));
+        if (isNewVersion === null) {
+            songs = songFilter(data.songs, { minLevel: minLevel, maxLevel: maxLevel });
+        } else if (isNewVersion) {
+            songs = songFilter(data.songs, { isNewVersion: true });
         }
-        groupedSongs[key].push(song);
-    });
+    } else {
+        const { minLevel, maxLevel } = calculateLevelRange(gainChart.level);
 
-    const songCards = Object.entries(groupedSongs).sort(([a], [b]) => parseFloat(b) - parseFloat(a)).map(([level, songList]) => {
-        const header = `
+        if (isNewVersion == null) {
+            songs = songFilter(data.songs, { minLevel: minLevel, maxLevel: maxLevel });
+        } else {
+            songs = songFilter(data.songs, { isNewVersion: isNewVersion, minLevel: minLevel, maxLevel: maxLevel });
+        }
+
+    }
+    const groupedSongs = new Map();
+    songs
+        .sort((a, b) => b.internalLevel - a.internalLevel)
+        .forEach(song => {
+            const groupKey = formatLevel(song.internalLevel);
+            if (!groupedSongs[groupKey]) {
+                groupedSongs[groupKey] = [];
+            }
+            if (!groupedSongs.has(groupKey)) groupedSongs.set(groupKey, []);
+            groupedSongs.get(groupKey).push(song);
+        });
+
+    const songCards = Array.from(groupedSongs)
+        .map(([level, songList]) => {
+            const header = `
             <div class="col-12 d-flex align-items-center my-3 p-0">
                 <div class="section-divider"></div>
                 <b class="px-3">${level}</b>
                 <div class="section-divider"></div>
             </div>`;
 
-        const cards = songList.map(song => {
-            const currentRating = calculateSongRating(song);
-            const selectedThreshold = $('input[name="rating-threshold"]:checked').val();
-            let matchingSuggestion = [];
-            if (gainList === true || gainList === false) {
-                matchingSuggestion = gainListAll.find(s => s.level === song.internalLevel && (s.isNewVersion === gainList));
-            } else if (gainList === null) {
-                matchingSuggestion = gainListAll.find(s => s.level === song.internalLevel);
-            } else {
-                matchingSuggestion = gainListAll.find(s => s.level === song.internalLevel && (s.isNewVersion === gainList.isNewVersion));
-            }
-            if (!matchingSuggestion) return null;
-            const matchingUpgrade = matchingSuggestion.upgrades.find(upg => upg.rank === selectedThreshold);
-            if (!matchingUpgrade) return null;
+            const cards = songList.map(song => {
+                const currentRating = calculateSongRating(song);
+                const selectedThreshold = $('input[name="rating-threshold"]:checked').val();
+                const gainChart = gainChartList.find(s => s.level === song.internalLevel && s.isNewVersion === (song.versionInternational === currentVersion));
+                if (!gainChart) return null;
+                const rankGain = gainChart.upgrades.find(upg => upg.rank === selectedThreshold);
+                if (!rankGain) return null;
 
-            const targetRating = matchingUpgrade.rating;
-            const gain = matchingUpgrade.gain;
-            song.targetRating = targetRating;
-            song.ratingGain = gain;
-            if (gain === '+0' || currentRating >= targetRating) return null;
+                const targetRating = rankGain.rating;
+                const gain = rankGain.gain;
+                song.targetRating = targetRating;
+                song.ratingGain = gain;
+                if (gain === '+0' || currentRating >= targetRating) return null;
 
-            return createSquareSongCard(song, { isPlayed: song.score !== '0.0000%' });
-        }).filter(card => card !== null).join('');
+                return createSquareSongCard(song, { isPlayed: song.score !== '0.0000%' });
+            }).filter(card => card !== null).join('');
 
-        if (cards === '') return '';
+            if (cards === '') return '';
 
-        return header + cards;
-    }).join('');
+            return header + cards;
+        }).join('');
 
 
     if (!songCards) {
@@ -281,7 +305,15 @@ const bindRatingThresholdEventListeners = () => {
 
 // 查找符合條件的建議項目
 const findMatchingSuggestion = (displayLevel, isNewVersion) => {
-    return gainListAll.find(s => {
+    if (isNewVersion === null) {
+        return gainChartList.find(s => {
+            const baseLevel = Math.floor(s.level);
+            const decimal = s.level - baseLevel;
+            const groupKey = decimal < 0.6 ? baseLevel.toString() : `${baseLevel}+`;
+            return groupKey === displayLevel;
+        });
+    }
+    return gainChartList.find(s => {
         const baseLevel = Math.floor(s.level);
         const decimal = s.level - baseLevel;
         const groupKey = decimal < 0.6 ? baseLevel.toString() : `${baseLevel}+`;
