@@ -16,25 +16,6 @@ body {
     background-size: 300px !important;
 }
 
-b.px-3 {
-    background: #a7c7e7;
-    color: #222;
-    filter: drop-shadow(0px 5px 3px rgba(0, 0, 0, 0.7));
-    padding: 5px;
-}
-
-b.px-3::after {
-    background: linear-gradient(135deg, #496582 0%, #1a242f 100%);
-    border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    content: "";
-    height: 10px;
-    left: calc(50% - 5px);
-    position: absolute;
-    top: -2px;
-    width: 10px;
-}
-
 button {
     background: #f9f2dc;
     border: 1px solid #d2b48c;
@@ -48,11 +29,11 @@ button:not(#btn-search):hover {
 }
 
 #btn-search {
-    line-height: 14px;
-    border: 1px solid #b8b8b8;
-    color: #7a7a7a;
     background: none;
+    border: 1px solid #b8b8b8;
     box-shadow: none;
+    color: #7a7a7a;
+    line-height: 14px;
 }
 
 #completion-filters {
@@ -106,6 +87,7 @@ button:not(#btn-search):hover {
 
 #stat {
     padding: 1em;
+    align-items: center;
 }
 
 .col-12.d-flex.align-items-center.my-3 {
@@ -118,6 +100,14 @@ button:not(#btn-search):hover {
 
 .difficulty-basic .card-decoration {
     background: linear-gradient(135deg, #81d955 0%, #5dbb30 100%);
+}
+
+.difficulty-collapse {
+    background: #f9f2dc;
+    border: 1px solid #d2b48c;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 6px 12px;
+    position: relative;
 }
 
 .difficulty-expert .card-decoration {
@@ -160,8 +150,76 @@ button:not(#btn-search):hover {
 }
 
 .section-divider {
+    background: repeating-linear-gradient(45deg, #c9a066, #c9a066 2px, #a67c52 2px, #a67c52 4px);
     border-bottom: 0px !important;
+    border-radius: 3px;
     flex-grow: 1;
+    flex: 1;
+    height: 6px;
+    position: relative;
+    top: -18px;
+}
+
+.section-divider-title {
+    background: #a7c7e7;
+    border: 1px solid #999;
+    filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.7));
+    padding: 0.4em 1em;
+    position: relative;
+    z-index: 1;
+}
+
+.section-divider-title::after {
+    right: 6px;
+}
+
+.section-divider-title::after,
+.section-divider-title::before {
+    background: #444;
+    border-radius: 1px;
+    content: '';
+    height: 18px;
+    position: absolute;
+    top: -8px;
+    width: 6px;
+}
+
+.section-divider-title::before {
+    left: 6px;
+}
+
+.section-divider.left {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+    transform: rotateZ(1deg);
+}
+
+.section-divider.left::before {
+    background: linear-gradient(135deg, #e7a746 0%, #9a4814 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    content: "";
+    height: 16px;
+    left: -5px;
+    position: absolute;
+    top: -6px;
+    width: 16px;
+}
+
+.section-divider.right {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+    transform: rotateZ(-1deg);
+}
+
+.section-divider.right::before {
+    background: linear-gradient(135deg, #e7a746 0%, #9a4814 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    content: "";
+    height: 16px;
+    position: absolute;
+    right: -5px;
+    top: -6px;
+    width: 16px;
 }
 
 .section-title {
@@ -252,13 +310,12 @@ button:not(#btn-search):hover {
     background: #fff;
     color: #7a7a7a;
     filter: drop-shadow(0px 5px 3px rgba(0, 0, 0, 0.7));
-    height: 120px !important;
     justify-content: center;
     left: 50px;
+    padding: 15px 5px 5px 5px;
     position: relative;
-    top: 15px;
     transform: rotate(-1deg);
-    width: 200px;
+    width: fit-content;
 }
 
 #plate-stat::before {
@@ -280,12 +337,34 @@ button:not(#btn-search):hover {
     justify-content: center;
     left: 50px;
     position: relative;
-    top: 15px;
     transform: rotate(1deg);
     width: 200px;
 }
 
 #suggestion-stat::before {
+    background: linear-gradient(135deg, #824949 0%, #2f1a1a 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    content: "";
+    height: 16px;
+    left: calc(50% - 8px);
+    position: absolute;
+    top: -3px;
+    width: 16px;
+}
+
+#summary-table {
+    background: #fff;
+    color: #7a7a7a;
+    filter: drop-shadow(0px 5px 3px rgba(0, 0, 0, 0.7));
+    justify-content: center;
+    left: 50px;
+    padding: 15px 5px 5px 5px;
+    position: relative;
+    width: fit-content;
+}
+
+#summary-table::before {
     background: linear-gradient(135deg, #824949 0%, #2f1a1a 100%);
     border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -323,7 +402,7 @@ button:not(#btn-search):hover {
     z-index: 10;
 }
 
-.completion-check{
+.completion-check {
     display: none;
 }
 
@@ -400,7 +479,6 @@ button:not(#btn-search):hover {
     justify-content: center;
     left: 50px;
     position: relative;
-    top: 15px;
     transform: rotate(-2deg);
     width: 200px;
 }

@@ -61,9 +61,9 @@ async function createRatingSection(title, songs) {
     const ratedSongs = calcRatings(songs);
     return `
         <div class="col-12 d-flex align-items-center my-3">
-            <div class="section-divider"></div>
-            <b class="px-3">${title}</b>
-            <div class="section-divider"></div>
+            <div class="section-divider left"></div>
+            <b class="px-3 section-divider-title">${title}</b>
+            <div class="section-divider right"></div>
         </div>
         <div class="song-grid row ms-0">
             ${ratedSongs.map(createSongCard).join('')}

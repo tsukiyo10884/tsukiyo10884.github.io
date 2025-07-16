@@ -59,36 +59,38 @@ const showPlateButton = async (versionName, plateName) => {
 
     const summary = `
         <div class="pt-2"> 
-            <table class="summary-table text-center">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th colspan=3>${plateName}極</th>
-                        <th colspan=3>${versionName === 'maimai ~ maimai PLUS' ? `-` : `${plateName}将`}</th>
-                        <th colspan=3>${plateName}神</th>
-                        <th colspan=3>${plateName}舞舞</th>
-                    </tr>
-                </thead>
+            <div id="summary-table" >
+                <table class="text-center">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th colspan=3>${plateName}極</th>
+                            <th colspan=3>${versionName === 'maimai ~ maimai PLUS' ? `-` : `${plateName}将`}</th>
+                            <th colspan=3>${plateName}神</th>
+                            <th colspan=3>${plateName}舞舞</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    ${difficulties.map(diff => {
-        if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
-        const isRemaster = diff === 'remaster' ? `text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;` : ``;
-        return `<tr>
-        <td class="text-shadow-black difficulty-label" style="color:${colors[diff]};${isRemaster}">${diff.toUpperCase().slice(0, 3)}</td>
-        ${allCounts.map(counts => {
-            const c = counts[diff];
-            return `${c ? `<td class="ps-2">${c.completed}</td><td>/</td><td>${c.total}</td>` : '-'}`;
+                    <tbody>
+                        ${difficulties.map(diff => {
+            if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
+            const isRemaster = diff === 'remaster' ? `text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;` : ``;
+            return `<tr>
+            <td class="text-shadow-black difficulty-label" style="color:${colors[diff]};${isRemaster}">${diff.toUpperCase().slice(0, 3)}</td>
+            ${allCounts.map(counts => {
+                const c = counts[diff];
+                return `${c ? `<td class="ps-2">${c.completed}</td><td>/</td><td>${c.total}</td>` : '-'}`;
+            }).join('')}
+            </tr>`;
         }).join('')}
-        </tr>`;
-    }).join('')}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     `;
     let tip = '';
     if (versionName === 'maimai ~ maimai PLUS') {
-        tip = `<div class="w-100 text-center">※初代100%就AP，因此沒有真将</div>`;
+        tip = `<div class="col-9 text-center">※初代100%就AP，因此沒有真将</div>`;
     }
     $('#song-table').html(`${tip}<div class="row">${buttons.join('')}</div>`);
     $('#stat').html(`${summary}`);
@@ -184,9 +186,9 @@ const showPlateProgress = async (versionName, type, plateName) => {
             .map(([level, songList]) => {
                 const levelHeader = `
                 <div class="col-12 d-flex align-items-center my-2 p-0">
-                    <div class="section-divider"></div>
-                    <b class="px-3">${level}</b>
-                    <div class="section-divider"></div>
+                    <div class="section-divider left"></div>
+                    <b class="px-3 section-divider-title">${level}</b>
+                    <div class="section-divider right"></div>
                 </div>`;
                 const cards = songList.map(song => {
                     return createNamePlateSongCard(song, type);

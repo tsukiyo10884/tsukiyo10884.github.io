@@ -144,7 +144,7 @@ const showLevelDetails = (gainChart, isNewVersion) => {
                 versionTitle = "舊曲";
                 break;
         }
-        const $title = $(`<div>`).addClass('section-title text-shadow-black').text(`等級${displayLevel}候選曲(${versionTitle})`);
+        const $title = $(`<div>`).addClass('section-title text-shadow-black').text(`所有等級候選曲(${versionTitle})`);
         $('#now-title').text(`suggestion|${displayLevel}|${versionTitle}`);
         $('#song-table').empty().append($title, $songGrid);
     } else {
@@ -259,9 +259,9 @@ const createSuggestionSongCard = (gainChart, isNewVersion) => {
         .map(([level, songList]) => {
             const header = `
             <div class="col-12 d-flex align-items-center my-3 p-0">
-                <div class="section-divider"></div>
-                <b class="px-3">${level}</b>
-                <div class="section-divider"></div>
+                <div class="section-divider left"></div>
+                <b class="px-3 section-divider-title">${level}</b>
+                <div class="section-divider right"></div>
             </div>`;
 
             const cards = songList.map(song => {

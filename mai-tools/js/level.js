@@ -99,9 +99,9 @@ const updateSongGrid = (songs, minLevel, maxLevel) => {
     const songCards = Object.entries(groupedSongs).sort(([a], [b]) => parseFloat(b) - parseFloat(a)).map(([level, songList]) => {
         const header = `
         <div class="col-12 d-flex align-items-center my-3 p-0">
-            <div class="flex-grow-1 section-divider border-2"></div>
-            <b class="px-3">${level}</b>
-            <div class="flex-grow-1 section-divider border-2"></div>
+            <div class="flex-grow-1 section-divider border-2 left"></div>
+            <b class="px-3 section-divider-title">${level}</b>
+            <div class="flex-grow-1 section-divider border-2 right"></div>
         </div>`;
 
         const cards = songList
