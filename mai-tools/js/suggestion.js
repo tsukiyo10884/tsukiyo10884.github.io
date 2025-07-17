@@ -228,10 +228,10 @@ const createSuggestionSongCard = (gainChart, isNewVersion) => {
     if (gainChart === null || gainChart === undefined) {
         const minLevel = Math.min(...gainChartList.map(s => s.level));
         const maxLevel = Math.max(...gainChartList.map(s => s.level));
-        if (isNewVersion === null) {
+        if (isNewVersion === null || isNewVersion === undefined) {
             songs = songFilter(data.songs, { minLevel: minLevel, maxLevel: maxLevel });
-        } else if (isNewVersion) {
-            songs = songFilter(data.songs, { isNewVersion: true });
+        } else {
+            songs = songFilter(data.songs, { isNewVersion: isNewVersion, minLevel: minLevel, maxLevel: maxLevel });
         }
     } else {
         const { minLevel, maxLevel } = calculateLevelRange(gainChart.level);
@@ -241,8 +241,8 @@ const createSuggestionSongCard = (gainChart, isNewVersion) => {
         } else {
             songs = songFilter(data.songs, { isNewVersion: isNewVersion, minLevel: minLevel, maxLevel: maxLevel });
         }
-
     }
+
     const groupedSongs = new Map();
     songs
         .sort((a, b) => b.internalLevel - a.internalLevel)
