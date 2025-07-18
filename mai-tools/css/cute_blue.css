@@ -100,7 +100,7 @@ button:not(:disabled):hover {
 }
 
 .difficulty-basic .square-song-inner-level::after {
-	color: #76e6ac;
+	color: #82e676;
 	content: " (BAS)";
 }
 
@@ -109,17 +109,17 @@ button:not(:disabled):hover {
 }
 
 .difficulty-expert .square-song-inner-level::after {
-	color: #f7a5b5;
+	color: #ff6969;
 	content: " (EXP)";
 }
 
 .difficulty-master .square-song-inner-level::after {
-	color: #d7a6e8;
+	color: #e269ff;
 	content: " (MAS)";
 }
 
 .difficulty-remaster .square-song-inner-level::after {
-	color: #b9b5b9;
+	color: #cfcfcf;
 	content: " (REM)";
 }
 
@@ -193,22 +193,22 @@ button:not(:disabled):hover {
 }
 
 .difficulty-basic .rating-block-song-title::before {
-	color: #76e6ac;
+	color: #82e676;
 	content: " Basic \A ";
 }
 
 .difficulty-expert .rating-block-song-title::before {
-	color: #f7a5b5;
+	color: #ff6969;
 	content: " Expert \A ";
 }
 
 .difficulty-master .rating-block-song-title::before {
-	color: #d7a6e8;
+	color: #e269ff;
 	content: " Master \A ";
 }
 
 .difficulty-remaster .rating-block-song-title::before {
-	color: #b9b5b9;
+	color: #cfcfcf;
 	content: " Re: Master \A ";
 }
 
