@@ -1,5 +1,5 @@
 (async () => {
-    const childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
+    const childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index_tmp.html");
     const script = document.currentScript;
     setTimeout(() => {
         if (script != null) {
