@@ -103,7 +103,6 @@ button {
 	width: 100px;
 	z-index: 0;
 }
-
 .square-song-grid {
 	gap: 12px;
 }
@@ -117,6 +116,11 @@ button {
 	top: 50px;
 	width: 100px;
 	z-index: -10;
+}
+
+.square-song-info-block {
+	display: flex;
+	flex-direction: column;
 }
 
 .square-song-inner-level {
@@ -187,17 +191,18 @@ button {
 	position: absolute;
 	z-index: 2;
 }
+
 .song-info-block {
-    bottom: -15px;
-    left: -80px;
-    position: relative;
+	bottom: -15px;
+	left: -80px;
+	position: relative;
 }
 
 .rating-block-rating {
 	font-size: 18px;
-    left: 57px;
-    position: absolute;
-    top: -135px;
+	left: 57px;
+	position: absolute;
+	top: -135px;
 }
 
 .rating-block-score {

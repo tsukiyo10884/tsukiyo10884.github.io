@@ -25,7 +25,6 @@ button {
 	font-weight: bold;
 	margin-right: 1em;
 	margin: 8px;
-	padding: 0.5em 1em;
 	padding: 10px 20px;
 	transition: transform 0.1s ease, background-color 0.3s ease;
 }
@@ -176,6 +175,11 @@ img {
 	top: 48px;
 	width: 102px;
 	z-index: -10;
+}
+
+.square-song-info-block {
+	display: flex;
+	flex-direction: column;
 }
 
 .square-song-inner-level {

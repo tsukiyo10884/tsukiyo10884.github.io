@@ -1,0 +1,538 @@
+/*
+square cards
+rating cards
+user profile
+for fun
+*/
+@font-face {
+    font-family: 'heavy-font';
+    src: url('../../font/ResourceHanRoundedCN-Regular.ttf');
+}
+
+#info {
+    color: #fff;
+}
+
+a {
+    color: #ccffff !important;
+}
+
+button {
+    background: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px !important;
+    color: #4d4d4d;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+body {
+    font-family: 'heavy-font' !important;
+    background-size: cover;
+    background-image: linear-gradient(0deg, #7af4c3, #7c81ff);
+    width: 100%;
+    height: 100%;
+    animation: gradient 10s infinite linear;
+    min-height: 100vh;
+    background-attachment: fixed;
+}
+
+/**************/
+/*square cards*/
+/**************/
+.completed .card-decoration {
+    background: #2222228c;
+    height: 70px;
+    width: 201px;
+    position: absolute;
+    top: -9px;
+    left: -68px;
+    border-radius: 5px;
+}
+
+.completion-check {
+    display: none;
+}
+
+.song-grid {
+    gap: 10px;
+}
+
+.square-song-card {
+    background: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    height: 70px;
+    width: 200px !important;
+    border-radius: 5px;
+}
+
+.square-song-image {
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    top: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.square-song-card .song-overlay {
+    position: absolute;
+    inset: 0;
+    width: 199px;
+    z-index: -2;
+    border-radius: 5px;
+}
+
+.square-song-inner-level {
+    font-size: 10px;
+    line-height: 12px !important;
+}
+
+.square-song-score {
+    font-size: 13px;
+}
+
+.square-song-title {
+    display: inline-block;
+    flex-shrink: 0;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.square-song-grid {
+    gap: 12px;
+}
+
+.rating-gain-info {
+    font-size: 10px;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    text-align: right;
+    top: 5px;
+    z-index: 1;
+}
+
+.square-song-info-block {
+    top: 8px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    margin-left: 5px;
+    height: 50px;
+}
+
+/**************/
+/*rating cards*/
+/**************/
+.song-grid {
+    gap: 10px;
+}
+
+.song-card {
+    position: relative;
+    display: flex;
+    width: 293px !important;
+    height: 90px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.4) !important;
+    padding-left: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.song-image {
+    border-radius: 5px;
+    width: 70px;
+    height: 70px;
+    top: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.song-card .song-overlay {
+    position: absolute;
+    inset: 0;
+    width: 291px;
+    z-index: -2;
+    border-radius: 5px;
+}
+
+.song-info-block {
+    top: 10px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    margin-left: 5px;
+    height: 70px;
+}
+
+.rating-block-rating {
+    font-size: 22px;
+    font-weight: 900;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    align-self: flex-start;
+    line-height: 22px;
+}
+
+.song-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.rating-block-song-title {
+    font-size: 16px;
+    line-height: 16px;
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rating-block-inner-level,
+.rating-block-score {
+    font-size: 10px;
+    line-height: 10px;
+    opacity: 0.85;
+}
+
+.difficulty-remaster .song-overlay {
+    background: linear-gradient(to right, #f0f0f0 50%, transparent);
+}
+
+.difficulty-master .song-overlay {
+    background: linear-gradient(to right, #bfa2e2 50%, transparent);
+}
+
+.difficulty-expert .song-overlay {
+    background: linear-gradient(to right, #f2b6b6 50%, transparent);
+}
+
+.difficulty-advanced .song-overlay {
+    background: linear-gradient(to right, #fff2b8 50%, transparent);
+}
+
+.difficulty-basic .song-overlay {
+    background: linear-gradient(to right, #97d3b6 50%, transparent);
+}
+
+/**************/
+/*user profile*/
+/**************/
+img[src*="rating_base_blue.png"]+.rating_block::after {
+    background: #86e2ff;
+    z-index: -1;
+}
+
+img[src*="rating_base_bronze.png"]+.rating_block::after {
+    background: #c3663c;
+    z-index: -1;
+}
+
+img[src*="rating_base_gold.png"]+.rating_block::after {
+    background: #e0c302;
+    z-index: -1;
+}
+
+img[src*="rating_base_green.png"]+.rating_block::after {
+    background: #aeff80;
+    z-index: -1;
+}
+
+img[src*="rating_base_orange.png"]+.rating_block::after {
+    background: #fff15b;
+    z-index: -1;
+}
+
+img[src*="rating_base_platinum.png"]+.rating_block::after {
+    background: #fcf082;
+    z-index: -1;
+}
+
+img[src*="rating_base_purple.png"]+.rating_block::after {
+    background: #daa0ff;
+    z-index: -1;
+}
+
+img[src*="rating_base_rainbow.png"]+.rating_block::after {
+    background: linear-gradient(159deg, #ff4b4b 0%, #ff9900 15%, #ffee00 30%, #33dd00 45%, #00ddff 60%, #3366ff 75%, #cc33ff 90%, #ff4b4b 100%);
+    z-index: -1;
+}
+
+img[src*="rating_base_red.png"]+.rating_block::after {
+    background: #ff9393;
+    z-index: -1;
+}
+
+img[src*="rating_base_silver.png"]+.rating_block::after {
+    background: #b2c4cd;
+    z-index: -1;
+}
+
+#div-user-class-rank-text h6,
+#div-user-course-rank-text h6,
+#div-user-star-text h6 {
+    color: #4d4d4d;
+    font-weight: 1000;
+}
+
+#div-user-class-rank-text span,
+#div-user-course-rank-text span,
+#div-user-star-text span {
+    color: #4d4d4d;
+    font-size: 14px;
+    line-height: 12px;
+}
+
+#user-class-rank,
+#user-course-rank,
+#user-rating-base,
+.h_30.m_3.v_m,
+.p_l_10.f_l.f_14 {
+    display: none;
+}
+
+.basic_block {
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.f_0 {
+    font-size: 0;
+    line-height: 0;
+}
+
+.f_10 {
+    font-size: 10px;
+    line-height: 1rem;
+}
+
+.f_12 {
+    font-size: 12px;
+    line-height: 1rem;
+}
+
+.f_13 {
+    font-size: 13px;
+    line-height: 1.2rem;
+}
+
+.f_14 {
+    font-size: 14px;
+    line-height: 1.2rem;
+}
+
+.f_16 {
+    font-size: 16px;
+    line-height: 1.2rem;
+}
+
+.f_l {
+    float: left;
+}
+
+.f_r {
+    float: right;
+}
+
+.h_30 {
+    height: 30px;
+}
+
+.h_35 {
+    height: 35px;
+}
+
+.m_3 {
+    margin: 3px;
+}
+
+.m_b_5 {
+    margin-bottom: 5px;
+}
+
+.name_block {
+    background-size: 34px;
+    border-radius: 15px;
+    color: #4d4d4d;
+    font-weight: 1000;
+    height: 27px;
+    margin: 3px 0;
+    padding: 5px 3px 3px 3px;
+    width: 158px;
+}
+
+.p_10 {
+    padding: 10px;
+}
+
+.p_3 {
+    padding: 3px;
+}
+
+.p_l_10 {
+    padding-left: 10px;
+}
+
+.p_r {
+    position: relative;
+}
+
+.rating_block {
+    color: #4d4d4d;
+    font-size: 16px;
+    height: 21px;
+    line-height: 21px;
+    position: absolute;
+    right: 9px;
+    text-align: center;
+    top: 7px;
+    width: 100px;
+}
+
+.rating_block::after {
+    content: "";
+    inset: 0;
+    left: -4px;
+    opacity: 0.4;
+    position: absolute;
+    width: 110px;
+    z-index: 0;
+}
+
+.rating_block::before {
+    color: #4d4d4d;
+    content: "Rating: ";
+    float: left;
+}
+
+.t_c {
+    text-align: center;
+}
+
+.t_r {
+    text-align: right;
+}
+
+.trophy_block {
+    height: 25px;
+    margin: 0 0 5px 0;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+    width: 268px;
+}
+
+.trophy_block::before {
+    content: "";
+    inset: 0;
+    opacity: 0.4;
+    position: absolute;
+    z-index: 0;
+}
+
+.trophy_Bronze::before {
+    background: #fb9a6a;
+    z-index: -1;
+}
+
+.trophy_Gold::before {
+    background: #ffdf4b;
+    z-index: -1;
+}
+
+.trophy_inner_block {
+    color: #4d4d4d;
+    height: 24px;
+    margin: 0 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 259px;
+}
+
+.trophy_Normal::before {
+    background: #aaa;
+    z-index: -1;
+}
+
+.trophy_Rainbow::before {
+    background: linear-gradient(159deg, #ff4b4b 0%, #ff9900 15%, #ffee00 30%, #33dd00 45%, #00ddff 60%, #3366ff 75%, #cc33ff 90%, #ff4b4b 100%);
+    z-index: -1;
+}
+
+.trophy_Silver::before {
+    background: #e0e3f8;
+    z-index: -1;
+}
+
+.user-info {
+    align-items: center;
+    display: flex;
+    gap: 1em;
+    padding: 1em;
+}
+
+.user_data_block_line {
+    margin: 0 0 4px 0;
+    width: 280px;
+}
+
+.v_m {
+    vertical-align: middle;
+}
+
+.w_112 {
+    width: 112px;
+}
+
+/*********/
+/*for fun*/
+/*********/
+.axuan {
+    background-image: url(../img/axuan.png);
+    background-position-x: right;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.ayo {
+    background-image: url(../img/ayo.png);
+    background-position-x: right;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.fly {
+    box-sizing: content-box;
+    cursor: pointer;
+    height: auto;
+    padding: 50px;
+    position: absolute;
+    width: 50px;
+    z-index: 1000;
+}

@@ -299,12 +299,14 @@ const createSquareSongCard = (song, {
                 onclick="showSongDetail('${song.title}', '${song.type}')">
             <img src=${song.image} class="square-song-image" alt="${song.title}">
             <div class="song-overlay"></div>
-            <div class="song-content text-shadow-black square-song-title">${song.title}</div>
-            <div class="song-content text-shadow-black square-song-inner-level">${song.internalLevel ? Number.parseFloat(song.internalLevel).toFixed(1) : ''} | ${song.type.toUpperCase()}</div>
-            <div class="song-content text-shadow-black square-song-score">${song.score}</div>
-            ${isCompleted === true ? '<div class="completion-check"><b>✓</b></div>' : ''}
-            ${isPlayed !== null ? `<div class="rating-gain-info text-shadow-black" >${song.targetRating ? `${song.targetRating}(${song.ratingGain})` : ''}</div>` : ''}
-            <div class="card-decoration"></div>
+            <div class="square-song-info-block">
+                <div class="song-content text-shadow-black square-song-title">${song.title}</div>
+                <div class="song-content text-shadow-black square-song-inner-level">${song.internalLevel ? Number.parseFloat(song.internalLevel).toFixed(1) : ''} | ${song.type.toUpperCase()}</div>
+                <div class="song-content text-shadow-black square-song-score">${song.score}</div>
+                ${isCompleted === true ? '<div class="completion-check"><b>✓</b></div>' : ''}
+                ${isPlayed !== null ? `<div class="rating-gain-info text-shadow-black" >${song.targetRating ? `${song.targetRating}(${song.ratingGain})` : ''}</div>` : ''}
+                <div class="card-decoration"></div>
+            </div>
         </div>`;
 
 }
