@@ -6,18 +6,10 @@ const ACHIVEMENT_GROUPS = [
 
 // 初始化等級列表
 const initLevelList = () => {
-    if (!data.ratingSongList) {
-        const topSongs = getTop50Songs();
-        data.ratingSongList = {
-            rating_new: songFilter(topSongs, { isNewVersion: true }),
-            rating_others: songFilter(topSongs, { isNewVersion: false })
-        };
-    }
-
-    const allSongs = [...data.ratingSongList.rating_new, ...data.ratingSongList.rating_others];
-    const levels = allSongs.map(song => song.internalLevel);
-    const minLevel = Math.min(...levels) === 0 ? 10 : Math.min(...levels);
+    const topSongs = getTop50Songs();
+    const levels = topSongs.map(song => song.internalLevel);
     const maxLevel = Math.max(...levels) === 0 ? 10 : Math.max(...levels);
+    const minLevel = maxLevel - 1;
     const songs = songFilter(data.songs, { minLevel: minLevel, maxLevel: maxLevel });
 
     $('#stat').html(`
