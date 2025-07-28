@@ -40,13 +40,74 @@ body {
     background-attachment: fixed;
 }
 
+.section-divider {
+    border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-body-color) !important;
+    border-width: 2px !important;
+    flex-grow: 1;
+}
+
+.section-title {
+    font-size: 20px;
+    grid-column: span 5;
+    margin: 9px 0;
+    text-align: center;
+}
+
+.wave {
+    background: rgb(255 255 255 / 25%);
+    border-radius: 1000% 1000% 0 0;
+    position: fixed;
+    width: 200%;
+    height: 12em;
+    animation: wave 10s -3s linear infinite;
+    transform: translate3d(0, 0, 0);
+    opacity: 0.8;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.wave:nth-of-type(2) {
+    bottom: -1.25em;
+    animation: wave 18s linear reverse infinite;
+    opacity: 0.8;
+}
+
+.wave:nth-of-type(3) {
+    bottom: -2.5em;
+    animation: wave 20s -1s reverse infinite;
+    opacity: 0.9;
+}
+
+@keyframes wave {
+    2% {
+        transform: translateX(1);
+    }
+
+    25% {
+        transform: translateX(-25%);
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+
+    75% {
+        transform: translateX(-25%);
+    }
+
+    100% {
+        transform: translateX(1);
+    }
+}
+
 /**************/
 /*square cards*/
 /**************/
 .completed .card-decoration {
     background: #2222228c;
-    height: 70px;
-    width: 201px;
+    height: 71px;
+    width: 213px;
     position: absolute;
     top: -9px;
     left: -68px;
@@ -64,12 +125,11 @@ body {
 .square-song-card {
     background: rgba(255, 255, 255, 0.4) !important;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     display: flex;
     height: 70px;
-    width: 200px !important;
+    width: 212px !important;
+    position: relative;
     border-radius: 5px;
 }
 
@@ -86,9 +146,10 @@ body {
 .square-song-card .song-overlay {
     position: absolute;
     inset: 0;
-    width: 199px;
+    width: 211px;
     z-index: -2;
     border-radius: 5px;
+    opacity: 0.8;
 }
 
 .square-song-inner-level {
@@ -103,7 +164,7 @@ body {
 .square-song-title {
     display: inline-block;
     flex-shrink: 0;
-    max-width: 120px;
+    max-width: 135px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -115,12 +176,12 @@ body {
 }
 
 .rating-gain-info {
-    font-size: 10px;
+    font-size: 13px;
     font-weight: bold;
     position: absolute;
-    right: 10px;
+    right: 0px;
+    bottom: -2px;
     text-align: right;
-    top: 5px;
     z-index: 1;
 }
 
@@ -150,10 +211,7 @@ body {
     height: 90px;
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.4) !important;
-    padding-left: 10px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -170,9 +228,10 @@ body {
 .song-card .song-overlay {
     position: absolute;
     inset: 0;
-    width: 291px;
+    width: 292px;
     z-index: -2;
     border-radius: 5px;
+    opacity: 0.8;
 }
 
 .song-info-block {
@@ -218,23 +277,23 @@ body {
 }
 
 .difficulty-remaster .song-overlay {
-    background: linear-gradient(to right, #f0f0f0 50%, transparent);
+    background: #f0f0f0;
 }
 
 .difficulty-master .song-overlay {
-    background: linear-gradient(to right, #bfa2e2 50%, transparent);
+    background: #bfa2e2;
 }
 
 .difficulty-expert .song-overlay {
-    background: linear-gradient(to right, #f2b6b6 50%, transparent);
+    background: #f2b6b6;
 }
 
 .difficulty-advanced .song-overlay {
-    background: linear-gradient(to right, #fff2b8 50%, transparent);
+    background: #fff2b8;
 }
 
 .difficulty-basic .song-overlay {
-    background: linear-gradient(to right, #97d3b6 50%, transparent);
+    background: #97d3b6;
 }
 
 /**************/
