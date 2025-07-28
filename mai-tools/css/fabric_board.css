@@ -655,6 +655,7 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
     background-color: #fff;
     filter: drop-shadow(0px 5px 3px rgba(0, 0, 0, 0.7));
     padding: 15px !important;
+    position: relative;
 }
 
 .basic_block::after {
