@@ -170,7 +170,7 @@ const showLevelDetails = (gainChart, isNewVersion) => {
     }
 
     if (selectedRatingThreshold) {
-        handlePlayedFilters();
+        handleFilterChange();
     }
 }
 
@@ -299,7 +299,7 @@ const bindRatingThresholdEventListeners = () => {
     $('input[name="rating-threshold"]').off('change');
     $('input[name="rating-threshold"]').on('change', function () {
         selectedRatingThreshold = $(this).val();
-        handlePlayedFilters();
+        handleFilterChange();
     });
 }
 

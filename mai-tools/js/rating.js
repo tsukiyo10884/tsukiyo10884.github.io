@@ -1,8 +1,8 @@
 async function initRatingList() {
     const topSongs = getTop50Songs();
     data.ratingSongList = {
-        rating_new: topSongs.filter(s => s.versionInternational === currentVersion),
-        rating_others: topSongs.filter(s => s.versionInternational !== currentVersion)
+        rating_new: songFilter(topSongs, { isNewVersion: true }),
+        rating_others: songFilter(topSongs, { isNewVersion: false })
     };
 
     const { rating_new, rating_others } = data.ratingSongList;
@@ -11,6 +11,7 @@ async function initRatingList() {
     const [newSongs, others, all] = [rating_new, rating_others, allRatingSongs].map(calcRatings);
     await ratingAverageTable(newSongs, others, all);
     $('#song-table').html(await showRatingList());
+    $('#now-title').text('rating');
 }
 
 async function showRatingList() {
@@ -37,7 +38,7 @@ function getTop50Songs() {
 
 // 顯示R值平均
 async function ratingAverageTable(newSongs, others, all) {
-    const getAvg = songs => (songs.reduce((sum, item) => sum + item.rating, 0) / songs.length).toFixed(2);
+    const getAvg = songs => (songs.reduce((sum, item) => sum + item.rating, 0) / songs.filter(song => song.score != "0.0000%").length).toFixed(2);
 
     const stats = [
         ['新曲平均', getAvg(newSongs)],

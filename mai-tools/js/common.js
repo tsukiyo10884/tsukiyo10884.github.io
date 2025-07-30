@@ -16,48 +16,48 @@ const difficulties = ['basic', 'advanced', 'expert', 'master', 'remaster'];
 const initUserInfo = () => {
     $('#user-info').html(`
         <div class="basic_block p_10 f_0">
-          <img id="user-icon" loading="lazy" class="w_112 f_l">
-          <div class="p_l_10 f_l">
+            <img id="user-icon" loading="lazy" class="w_112 f_l">
+            <div class="p_l_10 f_l">
             <div id="user-trophy-block" class="trophy_block p_3 t_c f_0">
-              <div class="trophy_inner_block f_13">
+                <div class="trophy_inner_block f_13">
                 <span id="user-trophy"></span>
-              </div>
+                </div>
             </div>
             <div class="m_b_5">
-              <div id="user-name" class="name_block f_l f_16"></div>
-              <div class="f_r t_r f_0">
+                <div id="user-name" class="name_block f_l f_16"></div>
+                <div class="f_r t_r f_0">
                 <div class="p_r p_3">
-                  <img id="user-rating-base" class="h_30 f_r">
-                  <div id="user-rating" class="rating_block"></div>
+                    <img id="user-rating-base" class="h_30 f_r">
+                    <div id="user-rating" class="rating_block"></div>
                 </div>
-              </div>
-              <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
             </div>
             <img src="https://maimaidx-eng.com/maimai-mobile/img/line_01.png" class="user_data_block_line">
             <div class="clearfix"></div>
             <div class="row mb-1">
-              <div id="div-user-course-rank-text" class="col-3">
+                <div id="div-user-course-rank-text" class="col-3">
                 <h6>rank</h6>
                 <span></span>
-              </div>
-              <div id="div-user-class-rank-text" class="col-3">
+                </div>
+                <div id="div-user-class-rank-text" class="col-3">
                 <h6>class</h6>
                 <span></span>
-              </div>
-              <div id="div-user-star-text" class="col-3">
+                </div>
+                <div id="div-user-star-text" class="col-3">
                 <h6>star</h6>
                 <span></span>
-              </div>
+                </div>
             </div>
             <img id="user-course-rank" class="h_35 f_l">
             <img id="user-class-rank" class="p_l_10 h_35 f_l">
             <div class="p_l_10 f_l f_14">
-              <img class="h_30 m_3 v_m" src="https://maimaidx-eng.com/maimai-mobile/img/icon_star.png"><span id="user-star"></span>
+                <img class="h_30 m_3 v_m" src="https://maimaidx-eng.com/maimai-mobile/img/icon_star.png"><span id="user-star"></span>
             </div>
-          </div>
-          <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
         </div>
-      `);
+        `);
     $('#user-trophy-block').attr('class', data.user_info.user_trophy_block + ' trophy_block p_3 t_c f_0');
     $('#user-trophy').text(data.user_info.trophy);
     $('#user-name').text(data.user_info.name);
@@ -76,6 +76,7 @@ const initUserInfo = () => {
     $('#div-user-class-rank-text span').text(class_rank_text);
 }
 
+// 段位的圖片編號對應段位名稱
 const getCourseRank = (course_rank_text) => {
     switch (course_rank_text) {
         case "00": return "初心者";
@@ -104,6 +105,7 @@ const getCourseRank = (course_rank_text) => {
     }
 }
 
+// class的圖片編號對應class名稱
 const getClassRank = (class_rank_text) => {
     switch (class_rank_text) {
         case "00": return "B5";
@@ -166,13 +168,37 @@ const bindPlayedEventListeners = () => {
         if ($this.is(':checked')) {
             $other.prop('checked', false);
         }
-        handlePlayedFilters();
+        handleFilterChange();
     });
 }
-const handlePlayedFilters = () => {
+
+// 是否已達成
+const bindCompletionEventListeners = () => {
+    $('#completed-only, #non-completed-only').on('change', function () {
+        const $this = $(this);
+        const $other = $this.attr('id') === 'completed-only' ? $('#non-completed-only') : $('#completed-only');
+
+        if ($this.is(':checked')) {
+            $other.prop('checked', false);
+        }
+        handleFilterChange();
+    });
+};
+
+// 重新處理現在的資料
+const handleFilterChange = () => {
     const now = $('#now-title').text().trim();
     const mode = now.split('|')[0];
-    if (mode === 'suggestion') {
+    if (mode === 'plate') {
+        const plateName = now.split('|')[1];
+        const type = now.split('|')[2];
+        const versionName = now.split('|')[3];
+        showPlateProgress(versionName, plateName === '覇' ? '覇者' : type, plateName === '覇' ? '' : plateName);
+    } else if (mode === 'level') {
+        $('#level-start').val(now.split('|')[1]);
+        $('#level-end').val(now.split('|')[2]);
+        showLevelListByRange();
+    } else if (mode === 'suggestion') {
         const displayLevel = now.split('|')[1];
         const versionTitle = now.split('|')[2];
         let isNewVersion = null;
@@ -192,33 +218,8 @@ const handlePlayedFilters = () => {
 
         const $songGrid = createSuggestionSongCard(gainChart, isNewVersion);
         $('#song-table').find('.square-song-grid').replaceWith($songGrid);
-    }
-}
-
-// 是否已達成
-const bindCompletionEventListeners = () => {
-    $('#completed-only, #non-completed-only').on('change', function () {
-        const $this = $(this);
-        const $other = $this.attr('id') === 'completed-only' ? $('#non-completed-only') : $('#completed-only');
-
-        if ($this.is(':checked')) {
-            $other.prop('checked', false);
-        }
-        handleCompletionFilters();
-    });
-};
-const handleCompletionFilters = () => {
-    const now = $('#now-title').text().trim();
-    const mode = now.split('|')[0];
-    if (mode === 'plate') {
-        const plateName = now.split('|')[1];
-        const type = now.split('|')[2];
-        const versionName = now.split('|')[3];
-        showPlateProgress(versionName, plateName === '覇' ? '覇者' : type, plateName === '覇' ? '' : plateName);
-    } else if (mode === 'level') {
-        $('#level-start').val(now.split('|')[1]);
-        $('#level-end').val(now.split('|')[2]);
-        showLevelListByRange();
+    } else if (mode === 'rating') {
+        initRatingList();
     }
 };
 
@@ -228,8 +229,7 @@ const songFilter = (songs, {
     type = null,
     title = null,
     difficulty = null,
-    versionInternational = null,
-    versionJapan = null,
+    version = null,
     internalLevel = null,
     minLevel = null,
     maxLevel = null,
@@ -237,7 +237,9 @@ const songFilter = (songs, {
 } = {}) => {
     let result = songs;
 
-    if (isNewVersion !== null) {
+    if (isNewVersion !== null && $('#version-switch').is(':checked')) {
+        result = result.filter(x => (x.versionJapan === currentVersion) === isNewVersion);
+    } else if (isNewVersion !== null) {
         result = result.filter(x => (x.versionInternational === currentVersion) === isNewVersion);
     }
     if (plate !== null) {
@@ -257,13 +259,16 @@ const songFilter = (songs, {
             return song.internalLevel >= minLevel && song.internalLevel <= maxLevel;
         });
     }
+    if (version !== null && $('#version-switch').is(':checked')) {
+        result = result.filter(x => x.versionJapan === version);
+    } else if (version !== null) {
+        result = result.filter(x => x.versionInternational === version);
+    }
 
     const filters = {
         type,
         title,
         difficulty,
-        versionInternational,
-        versionJapan,
         internalLevel
     };
 

@@ -283,13 +283,13 @@ const getPlateSongs = async (versionName) => {
     });
 
     if (versionName === 'maimai ~ maimai PLUS') {
-        songs = songFilter(songs, { versionInternational: 'maimai' }).concat(songFilter(songs, { versionInternational: 'maimai PLUS' }));
+        songs = songFilter(songs, { version: 'maimai' }).concat(songFilter(songs, { version: 'maimai PLUS' }));
     } else if (versionName === 'maimai ~ FiNALE') {
         const finaleIndex = versionOrder.indexOf('FiNALE');
         songs = songs.filter(song => versionOrder.indexOf(song.versionInternational) !== -1 &&
             versionOrder.indexOf(song.versionInternational) <= finaleIndex);
     } else {
-        songs = songFilter(songs, { versionInternational: versionName });
+        songs = songFilter(songs, { version: versionName });
     }
 
     return songs;
