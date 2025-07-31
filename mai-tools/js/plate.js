@@ -73,16 +73,16 @@ const showPlateButton = async (versionName, plateName) => {
 
                     <tbody>
                         ${difficulties.map(diff => {
-            if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
-            const isRemaster = diff === 'remaster' ? `text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;` : ``;
-            return `<tr>
+        if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
+        const isRemaster = diff === 'remaster' ? `text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;` : ``;
+        return `<tr>
             <td class="text-shadow-black difficulty-label" style="color:${colors[diff]};${isRemaster}">${diff.toUpperCase().slice(0, 3)}</td>
             ${allCounts.map(counts => {
-                const c = counts[diff];
-                return `${c ? `<td class="ps-2">${c.completed}</td><td>/</td><td>${c.total}</td>` : '-'}`;
-            }).join('')}
-            </tr>`;
+            const c = counts[diff];
+            return `${c ? `<td class="ps-2">${c.completed}</td><td>/</td><td>${c.total}</td>` : '-'}`;
         }).join('')}
+            </tr>`;
+    }).join('')}
                     </tbody>
                 </table>
             </div>
@@ -274,7 +274,12 @@ const getPlateSongs = async (versionName) => {
     let songs = data.songs.filter(song => song.title !== '全世界共通リズム感テスト');
     const today = new Date();
 
-    const removeList = await fetch('./json/removed_song.json').then(res => res.json());
+    let removeList = [];
+    if ($('#version-switch').is(':checked')) {
+        removeList = await fetch('./json/removed_song_jp.json').then(res => res.json());
+    } else {
+        removeList = await fetch('./json/removed_song.json').then(res => res.json());
+    }
     removeList.forEach(entry => {
         if (today > new Date(entry.remove_date)) {
             const removeTitles = entry.remove_songs.map(s => s.title);

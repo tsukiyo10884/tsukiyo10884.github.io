@@ -19,11 +19,14 @@
     setTimeout(async () => {
         let idx = '';
         const url = new URL(window.location.href);
+        let domain = '';
         if (
-            url.origin === "https://maimaidx-eng.com" &&
+            (url.origin === "https://maimaidx-eng.com" || url.origin === "https://maimaidx.jp") &&
             url.pathname === "/maimai-mobile/friend/friendDetail/"
         ) {
             idx = url.searchParams.get("idx");
+            domain = url.origin;
+            childWin.postMessage({ type: "domain", payload: domain }, "https://tsukiyo10884.github.io");
         }
 
         const difficulties = ["basic", "advanced", "expert", "master", "remaster"];
@@ -35,11 +38,10 @@
             .then(res => res.json());
 
         const user_info = {};
-
         const songs = [];
 
         if (idx === '') {
-            const homeRes = await fetch('https://maimaidx-eng.com/maimai-mobile/home/', { credentials: 'include' });
+            const homeRes = await fetch(`${domain}/maimai-mobile/home/`, { credentials: 'include' });
             const homeText = await homeRes.text();
             const homeDoc = new DOMParser().parseFromString(homeText, 'text/html');
             user_info.icon = homeDoc.querySelector('.w_112.f_l').src;
@@ -55,7 +57,7 @@
             user_info.trophy = homeDoc.querySelector('.trophy_inner_block.f_13').textContent;
             for (let i = 0; i < difficulties.length; i++) {
                 childWin.postMessage({ type: "difficulty", payload: difficulties[i], }, "https://tsukiyo10884.github.io");
-                const res = await fetch(`https://maimaidx-eng.com/maimai-mobile/record/musicGenre/search/?genre=99&diff=${i}`, {
+                const res = await fetch(`${domain}/maimai-mobile/record/musicGenre/search/?genre=99&diff=${i}`, {
                     credentials: 'include'
                 });
                 const text = await res.text();
@@ -112,7 +114,7 @@
                 });
             }
         } else {
-            const homeRes = await fetch('https://maimaidx-eng.com/maimai-mobile/friend/friendDetail/?idx=' + idx, { credentials: 'include' });
+            const homeRes = await fetch(`${domain}/maimai-mobile/friend/friendDetail/?idx=` + idx, { credentials: 'include' });
             const homeText = await homeRes.text();
             const homeDoc = new DOMParser().parseFromString(homeText, 'text/html');
             user_info.icon = homeDoc.querySelector('.w_112.f_l').src;
@@ -129,7 +131,7 @@
 
             for (let i = 0; i < difficulties.length; i++) {
                 childWin.postMessage({ type: "difficulty", payload: difficulties[i], }, "https://tsukiyo10884.github.io");
-                const res = await fetch(`https://maimaidx-eng.com/maimai-mobile/friend/friendGenreVs/battleStart/?genre=99&diff=${i}&idx=${idx}`, {
+                const res = await fetch(`${domain}/maimai-mobile/friend/friendGenreVs/battleStart/?genre=99&diff=${i}&idx=${idx}`, {
                     credentials: 'include'
                 });
                 const text = await res.text();

@@ -1,40 +1,10 @@
 [
     {
         "version": "maimaiでらっくす",
-        "remove_date": "2019/11/25",
+        "remove_date": "2019/07/11",
         "remove_songs": [
             {
-                "title": "アンチクロックワイズ"
-            },
-            {
-                "title": "おじゃま蟲"
-            },
-            {
-                "title": "はじめまして地球人さん"
-            },
-            {
-                "title": "ファッとして桃源郷"
-            },
-            {
-                "title": "Daydream café"
-            },
-            {
-                "title": "絵の上手かった友達"
-            },
-            {
-                "title": "極上スマイル"
-            },
-            {
-                "title": "甲賀忍法帖"
-            },
-            {
-                "title": "ヤバい○○"
-            },
-            {
-                "title": "前前前世"
-            },
-            {
-                "title": "紅蓮の弓矢"
+                "title": "PERFECT HUMAN"
             },
             {
                 "title": "SUSHI食べたい feat.ソイソース"
@@ -43,13 +13,16 @@
                 "title": "7 Girls War"
             },
             {
-                "title": "Sweet Devil"
+                "title": "Jumping!!"
             },
             {
-                "title": "妄想稅"
+                "title": "ゆりゆららららゆるゆり大事件"
             },
             {
-                "title": "すろぉもぉしょん"
+                "title": "いぇす！ゆゆゆ☆ゆるゆり♪♪"
+            },
+            {
+                "title": "ちょちょちょ！ゆるゆり☆かぷりっちょ！！！"
             },
             {
                 "title": "H-A-J-I-M-A-R-I-U-T-A-!!"
@@ -61,13 +34,34 @@
     },
     {
         "version": "maimaiでらっくす PLUS",
-        "remove_date": "2020/07/29",
+        "remove_date": "2020/01/23",
         "remove_songs": [
             {
-                "title": "1/3の純情な感情"
+                "title": "前前前世"
             },
             {
+                "title": "紅蓮の弓矢"
+            },
+            {
+                "title": "ホシトハナ"
+            },
+            {
+                "title": "SAKURAスキップ"
+            },
+            {
+                "title": "Now Loading!!!!"
+            }
+        ]
+    },
+    {
+        "version": "Splash",
+        "remove_date": "2020/09/17",
+        "remove_songs": [
+            {
                 "title": "Stand Up!!!!"
+            },
+            {
+                "title": "ヤバい○○"
             },
             {
                 "title": "Pursuing My True Self"
@@ -90,9 +84,18 @@
         ]
     },
     {
-        "version": "Splash",
-        "remove_date": "2021/01/29",
+        "version": "Splash PLUS",
+        "remove_date": "2021/03/18",
         "remove_songs": [
+            {
+                "title": "POP TEAM EPIC"
+            },
+            {
+                "title": "全力☆Summer!"
+            },
+            {
+                "title": "Arrival of Tears"
+            },
             {
                 "title": "にめんせい☆ウラオモテライフ！"
             },
@@ -101,27 +104,39 @@
             },
             {
                 "title": "夏祭り"
-            }
-        ]
-    },
-    {
-        "version": "Splash PLUS",
-        "remove_date": "2021/07/30",
-        "remove_songs": [
-            {
-                "title": "かくしん的☆めたまるふぉ～ぜっ！"
             },
             {
-                "title": "Ievan Polkka"
-            },
-            {
-                "title": "Arrival of Tears"
+                "title": "SAVIOR OF SONG"
             }
         ]
     },
     {
         "version": "UNiVERSE",
-        "remove_date": "2022/01/27",
+        "remove_date": "2021/09/16",
+        "remove_songs": [
+            {
+                "title": "かくしん的☆めたまるふぉ～ぜっ！"
+            },
+            {
+                "title": "Deep in Abyss"
+            },
+            {
+                "title": "NOISY LOVE POWER☆"
+            },
+            {
+                "title": "極上スマイル"
+            },
+            {
+                "title": "甲賀忍法帖"
+            },
+            {
+                "title": "Ievan Polkka"
+            }
+        ]
+    },
+    {
+        "version": "UNiVERSE PLUS",
+        "remove_date": "2022/03/24",
         "remove_songs": [
             {
                 "title": "LOSER"
@@ -133,10 +148,46 @@
                 "title": "新寶島"
             },
             {
+                "title": "未完成人"
+            },
+            {
                 "title": "シュガーソングとビターステップ"
             },
             {
+                "title": "Daydream café"
+            },
+            {
                 "title": "コネクト"
+            },
+            {
+                "title": "The Gong of Knockout"
+            },
+            {
+                "title": "Clattanoia"
+            },
+            {
+                "title": "UNION"
+            },
+            {
+                "title": "東奔西走行進曲"
+            },
+            {
+                "title": "Soul-ride ON!"
+            },
+            {
+                "title": "乗ってけ！ジャパリビート"
+            },
+            {
+                "title": "フレ！フレ！ベストフレンズ"
+            },
+            {
+                "title": "POPPY PAPPY DAY"
+            },
+            {
+                "title": "アリサのテーマ"
+            },
+            {
+                "title": "絵の上手かった友達"
             },
             {
                 "title": "アウトサイダー"
@@ -153,17 +204,29 @@
         ]
     },
     {
-        "version": "UNiVERSE PLUS",
-        "remove_date": "2022/07/28",
+        "version": "FESTiVAL",
+        "remove_date": "2022/09/15",
         "remove_songs": [
             {
-                "title": "六厘歌"
+                "title": "ファッとして桃源郷"
+            },
+            {
+                "title": "徒花ネクロマンシー"
+            },
+            {
+                "title": "目覚めRETURNER"
             },
             {
                 "title": "青空のラプソディ"
             },
             {
                 "title": "ラブ・ドラマティック feat. 伊原六花"
+            },
+            {
+                "title": "異世界かるてっと"
+            },
+            {
+                "title": "オトモダチフィルム"
             },
             {
                 "title": "馬と鹿"
@@ -177,9 +240,15 @@
         ]
     },
     {
-        "version": "FESTiVAL",
-        "remove_date": "2023/01/19",
+        "version": "FESTiVAL PLUS",
+        "remove_date": "2023/03/23",
         "remove_songs": [
+            {
+                "title": "1/3の純情な感情"
+            },
+            {
+                "title": "Paradisus-Paradoxum"
+            },
             {
                 "title": "ノーポイッ!"
             },
@@ -190,22 +259,28 @@
                 "title": "紅蓮華"
             },
             {
+                "title": "MIRACLE RUSH"
+            },
+            {
                 "title": "Pretender"
             }
         ]
     },
     {
         "version": "BUDDiES",
-        "remove_date": "2024/01/18",
+        "remove_date": "2023/09/14",
         "remove_songs": [
             {
-                "title": "君の知らない物語"
+                "title": "あ・え・い・う・え・お・あお!!"
             },
             {
-                "title": "ヒビカセ"
+                "title": "This game"
             },
             {
-                "title": "Our Fighting"
+                "title": "Los! Los! Los!"
+            },
+            {
+                "title": "ガヴリールドロップキック"
             },
             {
                 "title": "秒針を噛む"
@@ -214,17 +289,50 @@
                 "title": "Shiny Smily Story"
             },
             {
+                "title": "インフェルノ"
+            },
+            {
+                "title": "God knows..."
+            },
+            {
+                "title": "乙女のルートはひとつじゃない！"
+            },
+            {
                 "title": "冬のこもりうた"
+            },
+            {
+                "title": "ビックカメラのテーマソング"
             }
         ]
     },
     {
-        "version": "BUDDiES+",
-        "remove_date": "2024/09/13",
+        "version": "BUDDiES PLUS",
+        "remove_date": "2024/03/21",
         "remove_songs": [
             {
-                "title": "二息歩行"
+                "title": "君の知らない物語"
             },
+            {
+                "title": "アンチクロックワイズ"
+            },
+            {
+                "title": "おじゃま蟲"
+            },
+            {
+                "title": "ヒビカセ"
+            },
+            {
+                "title": "はじめまして地球人さん"
+            },
+            {
+                "title": "Our Fighting"
+            }
+        ]
+    },
+    {
+        "version": "PRiSM",
+        "remove_date": "2024/09/12",
+        "remove_songs": [
             {
                 "title": "うっせぇわ"
             },
@@ -264,8 +372,8 @@
         ]
     },
     {
-        "version": "PRiSM",
-        "remove_date": "2025/02/27",
+        "version": "PRiSM PLUS",
+        "remove_date": "2025/03/13",
         "remove_songs": [
             {
                 "title": "YONA YONA DANCE"

@@ -207,6 +207,10 @@
                     $('#button-group').removeClass('d-none');
                     refreshData();
                     break;
+                case "domain":
+                    if (data.payload != 'https://maimaidx-eng.com') {
+                        $('#version-switch').prop('checked', true);
+                    }
             }
         });
 
