@@ -38,7 +38,12 @@ function getTop50Songs() {
 
 // 顯示R值平均
 async function ratingAverageTable(newSongs, others, all) {
-    const getAvg = songs => (songs.reduce((sum, item) => sum + item.rating, 0) / songs.filter(song => song.score != "0.0000%").length).toFixed(2);
+    const getAvg = songs => {
+        const validSongs = songs.filter(song => song.score != "0.0000%");
+        return validSongs.length
+            ? (validSongs.reduce((sum, item) => sum + item.rating, 0) / validSongs.length).toFixed(2)
+            : 0;
+    };
 
     const stats = [
         ['新曲平均', getAvg(newSongs)],
