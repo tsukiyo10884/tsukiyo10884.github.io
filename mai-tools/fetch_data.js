@@ -26,7 +26,6 @@
         ) {
             idx = url.searchParams.get("idx");
             domain = url.origin;
-            childWin.postMessage({ type: "domain", payload: domain }, "https://tsukiyo10884.github.io");
         }
 
         const difficulties = ["basic", "advanced", "expert", "master", "remaster"];
@@ -177,6 +176,7 @@
                 });
             }
         }
+        childWin.postMessage({ type: "domain", payload: domain }, "https://tsukiyo10884.github.io");
 
         const exportData = {
             user_info,
