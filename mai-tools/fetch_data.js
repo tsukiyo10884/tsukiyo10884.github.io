@@ -49,7 +49,6 @@
 
             gate1.songs.push({ title: song.title, songLastPlayedDate: songLastPlayedDate });
         });
-        console.log(gate1);
         setTimeout(() => {
             childWin.postMessage({ type: "gate1", payload: gate1 }, "https://tsukiyo10884.github.io");
         }, 3000);
