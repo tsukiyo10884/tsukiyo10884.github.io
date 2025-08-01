@@ -28,7 +28,8 @@
             <div id="gate" class="align-items-center mb-4">
                 <div class="col-12 d-flex align-items-center my-3">
                     <div class="section-divider left"></div>
-                    <b class="px-3 section-divider-title">連線中...由於一次請求過多容易被鎖連線，此動作會相當緩慢...</b>
+                    <b id="msg"
+                        class="px-3 section-divider-title">連線中，請勿關閉maimai-net...(如過10秒無反應，請回maimai-net重整後再試一次)</b>
                     <div class="section-divider right"></div>
                 </div>
             </div>
@@ -43,7 +44,10 @@
     // 接到message事件(從maimai-net收到資料)
     $(window).on('message', (event) => {
         const data = event.originalEvent.data;
-        if (data.type === 'gate1') {
+        if (data.type === 'gate1_init') {
+            $('#msg').text('連線中，請勿關閉maimai-net...由於一次請求過多容易被鎖連線(說的就是你29首的青鑰匙)，此動作會相當緩慢...');
+        }
+        else if (data.type === 'gate1') {
             const gate1 = data.payload;
             const res = []
             gate1.keySongs.forEach(song => {

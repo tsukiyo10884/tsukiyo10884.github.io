@@ -207,6 +207,7 @@
         }, 1500);
     }
     else if (type === 'gate1') {
+        childWin.postMessage({ type: "gate1_init", payload: null }, "https://tsukiyo10884.github.io");
         const gate1Res = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=1`, { credentials: 'include' });
         const gate1Text = await gate1Res.text();
         const gate1Doc = new DOMParser().parseFromString(gate1Text, 'text/html');
