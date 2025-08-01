@@ -37,7 +37,7 @@
             const gate1 = data.payload;
             const res = []
             gate1.songs.forEach(song => {
-                const songEntity = detailData.songs.find(s => s.songId === title);
+                const songEntry = detailData.songs.find(s => s.songId === song.title);
                 const type = 'dx';
                 const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
                 const isCompleted = song.songLastPlayedDate > '2025-01-16'
