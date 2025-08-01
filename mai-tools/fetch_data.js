@@ -229,11 +229,12 @@
             const songRes = await fetch(domain + song.url, { credentials: 'include' });
             const songText = await songRes.text();
             const songDoc = new DOMParser().parseFromString(songText, 'text/html');
+            const songLastPlayedDate_remaster = songDoc.querySelector('#remaster td:nth-of-type(2)')?.textContent.trim();
             const songLastPlayedDate_master = songDoc.querySelector('#master td:nth-of-type(2)')?.textContent.trim();
             const songLastPlayedDate_expert = songDoc.querySelector('#expert td:nth-of-type(2)')?.textContent.trim();
             const songLastPlayedDate_advanced = songDoc.querySelector('#advanced td:nth-of-type(2)')?.textContent.trim();
             const songLastPlayedDate_basic = songDoc.querySelector('#basic td:nth-of-type(2)')?.textContent.trim();
-            const songLastPlayedDate = [songLastPlayedDate_master, songLastPlayedDate_expert, songLastPlayedDate_advanced, songLastPlayedDate_basic]
+            const songLastPlayedDate = [songLastPlayedDate_remaster, songLastPlayedDate_master, songLastPlayedDate_expert, songLastPlayedDate_advanced, songLastPlayedDate_basic]
                 .filter(date => date && date !== '―')
                 .map(date => new Date(date))
                 .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '0000-00-00';
@@ -243,6 +244,7 @@
             // 延遲1秒避免被鎖
             await new Promise(resolve => setTimeout(resolve, 1000));
         }
+        console.log(gate1);
         childWin.postMessage({ type: "gate1", payload: gate1 }, "https://tsukiyo10884.github.io");
     }
 })()
