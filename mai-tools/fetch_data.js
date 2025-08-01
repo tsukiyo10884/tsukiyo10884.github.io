@@ -1,4 +1,18 @@
 (async () => {
+    let idx = '';
+    const url = new URL(window.location.href);
+    let domain = '';
+    if (
+        (url.origin === "https://maimaidx-eng.com" || url.origin === "https://maimaidx.jp") &&
+        url.pathname === "/maimai-mobile/friend/friendDetail/"
+    ) {
+        idx = url.searchParams.get("idx");
+        domain = url.origin;
+        if (url.origin === "https://maimaidx.jp") {
+            childWin.postMessage({ type: "jp", payload: true }, "https://tsukiyo10884.github.io");
+        }
+    }
+
     const childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
     const script = document.currentScript;
     setTimeout(() => {
@@ -14,20 +28,9 @@
         } else {
             childWin.postMessage({ type: 'init', payload: null }, "https://tsukiyo10884.github.io");
         }
-    }, 2000);
+    }, 1000);
 
     setTimeout(async () => {
-        let idx = '';
-        const url = new URL(window.location.href);
-        let domain = '';
-        if (
-            (url.origin === "https://maimaidx-eng.com" || url.origin === "https://maimaidx.jp") &&
-            url.pathname === "/maimai-mobile/friend/friendDetail/"
-        ) {
-            idx = url.searchParams.get("idx");
-            domain = url.origin;
-        }
-
         const difficulties = ["basic", "advanced", "expert", "master", "remaster"];
         const detailData = await fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
             .then(res => res.json());
@@ -176,7 +179,6 @@
                 });
             }
         }
-        childWin.postMessage({ type: "domain", payload: domain }, "https://tsukiyo10884.github.io");
 
         const exportData = {
             user_info,
@@ -186,6 +188,6 @@
         setTimeout(() => {
             childWin.postMessage({ type: "result", payload: exportData }, "https://tsukiyo10884.github.io");
         }, 500);
-    }, 100);
+    }, 1500);
 
 })()
