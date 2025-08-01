@@ -40,11 +40,11 @@
             const songLastPlayedDate_advanced = songDoc.querySelector('#advanced td:nth-of-type(2)')?.textContent.trim();
             const songLastPlayedDate_basic = songDoc.querySelector('#basic td:nth-of-type(2)')?.textContent.trim();
             const songLastPlayedDate = [songLastPlayedDate_master, songLastPlayedDate_expert, songLastPlayedDate_advanced, songLastPlayedDate_basic]
-                .filter(date => date !== '―')
+                .filter(date => date && date !== '―')
                 .map(date => new Date(date))
                 .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '未遊玩';
 
-            gate1.songs.push({ title: song.title, lastPlayedDate: songLastPlayedDate });
+            gate1.songs.push({ title: song.title, songLastPlayedDate: songLastPlayedDate });
         });
         setTimeout(() => {
             childWin.postMessage({ type: "gate1", payload: gate1 }, "https://tsukiyo10884.github.io");
