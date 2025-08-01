@@ -25,8 +25,8 @@
 <body>
     <div class="main mb-5">
         <div class="result-container">
-            <div id="gate" class="d-flex justify-content-center align-items-center mb-4"> </div>
-            <div id="map"></div>
+            <div id="gate" class="align-items-center mb-4"> </div>
+            <div id="map" class="w-100 mb-4 d-flex justify-content-center "> </div>
             <div id="song-table" class="ms-1 mt-1"></div>
         </div>
     </div>
@@ -58,11 +58,22 @@
             const headerImg = gate1.headerImg ? `<img src="${gate1.headerImg}" class="w-100" alt="Header Image">` : '';
             $('#gate').html([headerImg, gate1.gateImgHTML].join(''));
             $('#song-table').html(`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Key</b>
+                    <div class="section-divider right"></div>
+                </div>
                 <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
                     ${res.join('')}
                 </div>
             ` );
-            $('#map').html(gate1.mapHTML);
+            $('#map').html([`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Gate</b>
+                    <div class="section-divider right"></div>
+                </div>
+            `, gate1.mapHTML].join(''));
         }
 
     });
@@ -111,5 +122,70 @@
 
     .square-song-image {
         top: 32px;
+    }
+
+    .map_comp_img {
+        width: 150px;
+        margin: 0 auto;
+    }
+
+    .w_180 {
+        width: 320px;
+    }
+
+    .m_t_0 {
+        margin-top: 0;
+    }
+
+    .m_10 {
+        margin: 10px;
+    }
+
+    .map_comp_img {
+        position: absolute;
+    }
+
+    .map_name_block {
+        width: 280px;
+        height: 36px;
+        line-height: 38px;
+        background: url('https://maimaidx-eng.com/maimai-mobile/img/info_base_02.png') bottom no-repeat;
+        background-size: 280px;
+        overflow: hidden;
+    }
+
+    .see_through_block {
+        background-color: rgba(255, 255, 255, 0.6);
+        box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+        border: 2px solid #000;
+        border-radius: 5px;
+    }
+
+    form[action="https://maimaidx-eng.com/maimai-mobile/map/mapDetail/"] {
+        display: none;
+    }
+
+    .p_b_0 {
+        padding-bottom: 0;
+    }
+
+    .m_l_10 {
+        margin-left: 10px;
+    }
+
+    .m_t_5 {
+        margin-top: 5px;
+    }
+
+    .w_270 {
+        width: 270px;
+    }
+
+    .p_r_10 {
+        padding-right: 10px;
+    }
+
+    .p_5 {
+        padding: 5px;
     }
 </style>

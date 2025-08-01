@@ -241,6 +241,7 @@
         const gate1MapHTML = blocks.find(b => b.textContent.includes('スカイストリートちほー6'))?.outerHTML;
         gate1.mapHTML = gate1MapHTML || '';
 
+        console.log(gate1);
         setTimeout(() => {
             childWin.postMessage({ type: "gate1", payload: gate1 }, "https://tsukiyo10884.github.io");
         }, 3000);
