@@ -24,7 +24,7 @@
 
 <body>
     <div class="result-container">
-            <div id="song-table" class="ms-1 mt-1"></div>
+        <div id="song-table" class="ms-1 mt-1"></div>
     </div>
 </body>
 
@@ -53,7 +53,11 @@
 
             const headerImg = gate1.header ? `<img src="${gate1.header}" class="w-100" alt="Header Image">` : '';
             $('.result-container').append([headerImg, gate1.gate].join(''));
-            $('#song-table').html(res.join(''));
+            $('#song-table').html(`
+                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
+                    ${res.join('')}
+                </div>
+            ` );
         }
 
     });
@@ -65,7 +69,6 @@
     const createSquareSongCard = (song, {
         isCompleted = null,
     } = {}) => {
-
         return `
         <div class="square-song-card difficulty-${song.difficulty.replace(" ", "-").toLowerCase()} ${isCompleted === true ? 'completed' : ''} deg${Math.floor(Math.random() * 5)}" 
                 onclick="showSongDetail('${song.title}', '${song.type}')">
