@@ -136,5 +136,115 @@
         {
             "title": "Latent Kingdom"
         }
+    ],
+    "gate3": [
+        {
+            "title": "BLACK ROSE",
+            "type": "dx"
+        },
+        {
+            "title": "Secret Sleuth",
+            "type": "dx"
+        },
+        {
+            "title": "ヤミツキ",
+            "type": "dx"
+        },
+        {
+            "title": "ワードワードワード",
+            "type": "dx"
+        },
+        {
+            "title": "シアトリカル・ケース",
+            "type": "dx"
+        },
+        {
+            "title": "ステップアンドライム",
+            "type": "dx"
+        },
+        {
+            "title": "屆かない花束",
+            "type": "dx"
+        },
+        {
+            "title": "アンビバレンス",
+            "type": "dx"
+        },
+        {
+            "title": "パーフェクション",
+            "type": "dx"
+        },
+        {
+            "title": "デーモンベット",
+            "type": "dx"
+        },
+        {
+            "title": "分解収束テイル",
+            "type": "dx"
+        },
+        {
+            "title": "ヱデン",
+            "type": "dx"
+        },
+        {
+            "title": "にゃーにゃー冒険譚",
+            "type": "dx"
+        },
+        {
+            "title": "Mystic Parade",
+            "type": "dx"
+        },
+        {
+            "title": "にゃーにゃー冒険譚",
+            "type": "dx"
+        },
+        {
+            "title": "Cry Cry Cry",
+            "type": "dx"
+        },
+        {
+            "title": "言ノ葉カルマ",
+            "type": "std"
+        },
+        {
+            "title": "悪戱",
+            "type": "std"
+        },
+        {
+            "title": "言ノ葉遊戱",
+            "type": "std"
+        },
+        {
+            "title": "りばーぶ",
+            "type": "std"
+        },
+        {
+            "title": "洗脳",
+            "type": "std"
+        },
+        {
+            "title": "Barbed Eye",
+            "type": "std"
+        },
+        {
+            "title": "空威張りビヘイビア",
+            "type": "std"
+        },
+        {
+            "title": "分からない",
+            "type": "std"
+        },
+        {
+            "title": "天國と地獄 -言ノ葉リンネ-",
+            "type": "std"
+        },
+        {
+            "title": "相思創愛",
+            "type": "std"
+        },
+        {
+            "title": "咲キ誇レ常世ノ華",
+            "type": "std"
+        }
     ]
 }

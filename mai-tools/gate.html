@@ -98,7 +98,6 @@
                 const songEntry = detailData.songs.find(s => s.songId === song.title);
                 const type = 'dx';
                 const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
-                const isCompleted = song.songLastPlayedDate > '2025-01-16'
 
                 res.push(createSquareSongCard({
                     title: song.title,
@@ -128,6 +127,44 @@
                 </div>
                 <div class="d-flex justify-content-center mb-4">白門發現條件：走完「天界ちほー8」</div>
             `, gate2.mapHTML].join(''));
+
+        }
+        else if (data.type === 'gate3'){
+            const gate3 = data.payload;
+            const res = []
+            gate3.keySongs.forEach(song => {
+                const songEntry = detailData.songs.find(s => s.songId === song.title);
+                const type = song.type;
+                const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
+
+                res.push(createSquareSongCard({
+                    title: song.title,
+                    type: type,
+                    image: image
+                }));
+            });
+
+            const headerImg = gate3.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate3.headerImg}" alt="Header Image"></div>` : '';
+            $('#gate').html([headerImg, gate3.gateImgHTML].join(''));
+            $('#song-table').html(`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Key</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4">紫鑰匙獲得條件：アウル（BLACK ROSEちほー)或アウル（BLACK ROSEちほー4)作為隊長，並在一道內遊玩黑薔薇或言葉系列歌曲，該道內不可重複選曲，雙人時需遊玩4曲(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
+                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
+                    ${res.join('')}
+                </div>
+            ` );
+            $('#map').html([`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Gate</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4">紫門發現條件：走完「BLACK ROSEちほー10」</div>
+            `, gate3.mapHTML].join(''));
 
         }
     });
