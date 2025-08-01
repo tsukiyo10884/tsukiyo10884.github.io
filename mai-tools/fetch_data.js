@@ -244,10 +244,9 @@
 
             gate1.keySongs.push({ title: song.title, songLastPlayedDate });
 
-            // 延遲1秒避免被鎖
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // 延遲避免被鎖
+            await new Promise(resolve => setTimeout(resolve, 10));
         }
-        console.log(gate1);
         childWin.postMessage({ type: "gate1", payload: gate1 }, "https://tsukiyo10884.github.io");
     }
 })()
