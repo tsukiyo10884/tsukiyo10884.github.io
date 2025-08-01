@@ -40,7 +40,7 @@
         if (data.type === 'gate1') {
             const gate1 = data.payload;
             const res = []
-            gate1.songs.forEach(song => {
+            gate1.keySongs.forEach(song => {
                 const songEntry = detailData.songs.find(s => s.songId === song.title);
                 const type = 'dx';
                 const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
