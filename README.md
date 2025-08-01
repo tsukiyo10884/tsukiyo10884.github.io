@@ -22,8 +22,12 @@ javascript:(function(){
 
 並在 [maimai-net](https://maimaidx-eng.com/maimai-mobile/home/) 開啟書籤以擷取資料  
 
-#### ※補充
-- 可在好友的主頁使用以擷取好友資料（但會擷取不到自己未解鎖的歌曲）  
+#### 目前可用功能  
+- 擷取個人資料並可使用 R值表、R值候選曲、名牌版進度、等級進度 功能
+- 在好友的主頁使用：擷取好友資料(但無法擷取自己未解鎖的歌曲)，並有如上功能
+- 在青門畫面使用：顯示青鑰匙需打曲子及完成進度
+
+#### ※補充 
 - `css` 可替換成下列樣式之一：`default`, `translucent`, `modern`, `cute_pink`, `cute_blue`, `fabric_board`  
 - 譜面定數來源：[zetaraku](https://arcade-songs.zetaraku.dev/maimai/about/)  
 - 刪除曲來源：[maimai中文維基](https://maimai.fandom.com/zh/wiki/%E5%88%AA%E9%99%A4%E6%9B%B2%E4%B8%80%E8%A6%BD)  
