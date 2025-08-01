@@ -233,11 +233,6 @@ const createNamePlateSongCard = (song, type) => {
     return createSquareSongCard(song, { isCompleted: isCompleted });
 }
 
-// 點選可跳轉到zetaraku
-const showSongDetail = (title, type) => {
-    window.open(`https://arcade-songs.zetaraku.dev/maimai/?title=${title}&types=${type}`, '_blank');
-}
-
 // 計算各難度的達成數量
 const getDifficultyCounts = async (songs, versionName, filter = null) => {
     if (songs == null) {

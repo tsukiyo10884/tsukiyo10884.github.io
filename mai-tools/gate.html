@@ -41,6 +41,7 @@
 
 <script>
     let detailData = null;
+    let gateSongData = null;
     // 接到message事件(從maimai-net收到資料)
     $(window).on('message', (event) => {
         const data = event.originalEvent.data;
@@ -90,6 +91,8 @@
     $(window).on('load', async () => {
         detailData = await fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
             .then(res => res.json());
+        gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
+            .then(res => res.json());
     });
 
     const createSquareSongCard = (song, {
@@ -109,17 +112,33 @@
         </div>`;
 
     }
-    // 取得本地json(測試資料)
-    const LoadLocalJson = (filePath) => {
-        $.getJSON(filePath, (json) => {
-            $('#test').addClass('d-none');
-            $('#test2').addClass('d-none');
-            $('#output').html(`<textarea id="json-data" class="d-none">${JSON.stringify(json, null, 2)}</textarea>`);
-            refreshData();
-        });
-    };
+
+    // 點選可跳轉到zetaraku
+    const showSongDetail = (title, type) => {
+        window.open(`https://arcade-songs.zetaraku.dev/maimai/?title=${title}&types=${type}`, '_blank');
+    }
 </script>
 <style>
+    form[action="https://maimaidx-eng.com/maimai-mobile/map/mapDetail/"] {
+        display: none;
+    }
+
+    .m_10 {
+        margin: 10px;
+    }
+
+    .m_l_10 {
+        margin-left: 10px;
+    }
+
+    .m_t_0 {
+        margin-top: 0;
+    }
+
+    .m_t_5 {
+        margin-top: 5px;
+    }
+
     .main {
         --bs-gutter-x: 1.5rem;
         --bs-gutter-y: 0;
@@ -130,69 +149,53 @@
         width: 915px;
     }
 
-    .square-song-image {
-        top: 32px;
-    }
-
     .map_comp_img {
+        margin: 34px;
         position: absolute;
         width: 200px;
-        margin: 34px;
-    }
-
-    .w_180 {
-        width: 320px;
-    }
-
-    .m_t_0 {
-        margin-top: 0;
-    }
-
-    .m_10 {
-        margin: 10px;
     }
 
     .map_name_block {
-        width: 280px;
+        background-size: 280px;
+        background: url('https://maimaidx-eng.com/maimai-mobile/img/info_base_02.png') bottom no-repeat;
         height: 36px;
         line-height: 38px;
-        background: url('https://maimaidx-eng.com/maimai-mobile/img/info_base_02.png') bottom no-repeat;
-        background-size: 280px;
         overflow: hidden;
+        width: 280px;
     }
 
-    .see_through_block {
-        background-color: rgba(255, 255, 255, 0.6);
-        box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
-        border: 2px solid #000;
-        border-radius: 5px;
-    }
-
-    form[action="https://maimaidx-eng.com/maimai-mobile/map/mapDetail/"] {
-        display: none;
+    .p_5 {
+        padding: 5px;
     }
 
     .p_b_0 {
         padding-bottom: 0;
     }
 
-    .m_l_10 {
-        margin-left: 10px;
-    }
-
-    .m_t_5 {
-        margin-top: 5px;
-    }
-
-    .w_270 {
-        width: 270px;
-    }
-
     .p_r_10 {
         padding-right: 10px;
     }
 
-    .p_5 {
-        padding: 5px;
+    .see_through_block {
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 5px;
+        border: 2px solid #000;
+        box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+    }
+
+    .square-song-image {
+        top: 32px;
+    }
+
+    .square-song-title {
+        white-space: break-spaces;
+    }
+
+    .w_180 {
+        width: 320px;
+    }
+
+    .w_270 {
+        width: 270px;
     }
 </style>

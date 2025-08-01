@@ -316,6 +316,11 @@ const createSquareSongCard = (song, {
 
 }
 
+// 點選可跳轉到zetaraku
+const showSongDetail = (title, type) => {
+    window.open(`https://arcade-songs.zetaraku.dev/maimai/?title=${title}&types=${type}`, '_blank');
+}
+
 // 如果等級是整數，則添加小數點和零
 const formatLevel = (level) => {
     if (typeof level !== 'number' || isNaN(level)) {
