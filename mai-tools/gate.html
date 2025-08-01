@@ -25,8 +25,14 @@
 <body>
     <div class="main mb-5">
         <div class="result-container">
-            <div id="gate" class="align-items-center mb-4"> </div>
-            <div id="map" class="w-100 mb-4 d-flex justify-content-center "> </div>
+            <div id="gate" class="align-items-center mb-4">
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                    <b class="px-3 section-divider-title">連線中...由於一次請求過多容易被鎖連線，此動作會相當緩慢...</b>
+                    <div class="section-divider right"></div>
+                </div>
+            </div>
+            <div id="map" class="w-100 mb-4"></div>
             <div id="song-table" class="ms-1 mt-1"></div>
         </div>
     </div>
@@ -55,8 +61,8 @@
                 }));
             });
 
-            const headerImg = gate1.headerImg ? `<img src="${gate1.headerImg}" class="w-100" alt="Header Image">` : '';
-            $('#gate').html([headerImg, gate1.gateImgHTML, gate1.conditionsHTML].join(''));
+            const headerImg = gate1.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate1.headerImg}" alt="Header Image"></div>` : '';
+            $('#gate').html([headerImg, gate1.gateImgHTML].join(''));
             $('#song-table').html(`
                 <div class="col-12 d-flex align-items-center my-3">
                     <div class="section-divider left"></div>
@@ -125,8 +131,9 @@
     }
 
     .map_comp_img {
-        width: 150px;
-        margin: 0 auto;
+        position: absolute;
+        width: 200px;
+        margin: 34px;
     }
 
     .w_180 {
@@ -139,10 +146,6 @@
 
     .m_10 {
         margin: 10px;
-    }
-
-    .map_comp_img {
-        position: absolute;
     }
 
     .map_name_block {

@@ -210,16 +210,22 @@
         const gate1Res = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=1`, { credentials: 'include' });
         const gate1Text = await gate1Res.text();
         const gate1Doc = new DOMParser().parseFromString(gate1Text, 'text/html');
-        const gate1 = [];
+        const gate1 = {};
         gate1.headerImg = gate1Doc.querySelector('.w_450')?.src;
         gate1.gateImgHTML = gate1Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
-        gate1.conditionsHTML = gate1Doc.querySelectorAll('.ks_block')[1]?.innerHTML;
-        gate1.keySongs = [];
+
+        const gate1MapRes = await fetch(`${domain}/maimai-mobile/map/`, { credentials: 'include' });
+        const gate1MapText = await gate1MapRes.text();
+        const gate1MapDoc = new DOMParser().parseFromString(gate1MapText, 'text/html');
+        const blocks = Array.from(gate1MapDoc.querySelectorAll('.m_10.m_t_0.f_0'));
+        const gate1MapHTML = blocks.find(b => b.textContent.includes('スカイストリートちほー6'))?.outerHTML;
+        gate1.mapHTML = gate1MapHTML;
 
         const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
             .then(res => res.json());
+        gate1.keySongs = [];
         const gateSongs = gateSongData.gate1;
-        gateSongs.forEach(async song => {
+        for (const song of gateSongs) {
             const songRes = await fetch(domain + song.url, { credentials: 'include' });
             const songText = await songRes.text();
             const songDoc = new DOMParser().parseFromString(songText, 'text/html');
@@ -232,19 +238,11 @@
                 .map(date => new Date(date))
                 .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '未遊玩';
 
-            gate1.keySongs.push({ title: song.title, songLastPlayedDate: songLastPlayedDate });
-        });
+            gate1.keySongs.push({ title: song.title, songLastPlayedDate });
 
-        const gate1MapRes = await fetch(`${domain}/maimai-mobile/map/`, { credentials: 'include' });
-        const gate1MapText = await gate1MapRes.text();
-        const gate1MapDoc = new DOMParser().parseFromString(gate1MapText, 'text/html');
-        const blocks = Array.from(gate1MapDoc.querySelectorAll('.m_10.m_t_0.f_0'));
-        const gate1MapHTML = blocks.find(b => b.textContent.includes('スカイストリートちほー6'))?.outerHTML;
-        gate1.mapHTML = gate1MapHTML || '';
-
-        console.log(gate1);
-        setTimeout(() => {
-            childWin.postMessage({ type: "gate1", payload: gate1 }, "https://tsukiyo10884.github.io");
-        }, 3000);
+            // 延遲1秒避免被鎖
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+        childWin.postMessage({ type: "gate1", payload: gate1 }, "https://tsukiyo10884.github.io");
     }
 })()
