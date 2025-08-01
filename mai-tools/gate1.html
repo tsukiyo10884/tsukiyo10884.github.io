@@ -51,7 +51,8 @@
                 }));
             });
 
-            $('.result-container').append([gate1.header, gate1.gate].join(''));
+            const headerImg = gate1.header ? `<img src="${gate1.header}" class="w-100" alt="Header Image">` : '';
+            $('.result-container').append([headerImg, gate1.gate].join(''));
             $('#song-table').html(res.join(''));
         }
 

@@ -12,11 +12,14 @@
     }, 500);
 
     let childWin = null;
+    // 好友資訊
     if (url.pathname === "/maimai-mobile/friend/friendDetail/") {
         idx = url.searchParams.get("idx");
         childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
         type = "friend";
-    } else if (url.pathname + url.search === "/maimai-mobile/map/kaleidxScopeDetail/?gate=1") {
+    } 
+    // 青門
+    else if (url.pathname + url.search === "/maimai-mobile/map/kaleidxScopeDetail/?gate=1") {
         type = "gate1";
         childWin = window.open("https://tsukiyo10884.github.io/mai-tools/gate1.html");
 
@@ -24,8 +27,8 @@
         const gate1Text = await gate1Res.text();
         const gate1Doc = new DOMParser().parseFromString(gate1Text, 'text/html');
         const gate1 = [];
-        gate1.header = gate1Doc.querySelector('.w_450')?.innerHTML;
-        gate1.gate = gate1Doc.querySelectorAll('.ks_block')[1]?.innerHTML;
+        gate1.header = gate1Doc.querySelectorAll('.w_450')?.src;
+        gate1.gate = gate1Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
         gate1.songs = [];
 
         const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
@@ -50,7 +53,9 @@
             childWin.postMessage({ type: "gate1", payload: gate1 }, "https://tsukiyo10884.github.io");
         }, 3000);
 
-    } else {
+    } 
+    // 自己資訊
+    else {
         type = 'main'
         childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
     }
