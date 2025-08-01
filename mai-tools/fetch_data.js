@@ -236,7 +236,7 @@
             const songLastPlayedDate = [songLastPlayedDate_master, songLastPlayedDate_expert, songLastPlayedDate_advanced, songLastPlayedDate_basic]
                 .filter(date => date && date !== '―')
                 .map(date => new Date(date))
-                .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '未遊玩';
+                .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '0000-00-00';
 
             gate1.keySongs.push({ title: song.title, songLastPlayedDate });
 
