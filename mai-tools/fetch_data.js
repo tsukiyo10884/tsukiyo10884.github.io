@@ -21,38 +21,7 @@
     // 青門
     else if (url.pathname + url.search === "/maimai-mobile/map/kaleidxScopeDetail/?gate=1") {
         type = "gate1";
-        childWin = window.open("https://tsukiyo10884.github.io/mai-tools/gate1.html");
-
-        const gate1Res = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=1`, { credentials: 'include' });
-        const gate1Text = await gate1Res.text();
-        const gate1Doc = new DOMParser().parseFromString(gate1Text, 'text/html');
-        const gate1 = [];
-        gate1.header = gate1Doc.querySelectorAll('.w_450')?.src;
-        gate1.gate = gate1Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
-        gate1.songs = [];
-
-        const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
-            .then(res => res.json());
-        const gateSongs = gateSongData.gate1;
-        gateSongs.forEach(async song => {
-            const songRes = await fetch(domain + song.url, { credentials: 'include' });
-            const songText = await songRes.text();
-            const songDoc = new DOMParser().parseFromString(songText, 'text/html');
-            const songLastPlayedDate_master = songDoc.querySelector('#master td:nth-of-type(2)')?.textContent.trim();
-            const songLastPlayedDate_expert = songDoc.querySelector('#expert td:nth-of-type(2)')?.textContent.trim();
-            const songLastPlayedDate_advanced = songDoc.querySelector('#advanced td:nth-of-type(2)')?.textContent.trim();
-            const songLastPlayedDate_basic = songDoc.querySelector('#basic td:nth-of-type(2)')?.textContent.trim();
-            const songLastPlayedDate = [songLastPlayedDate_master, songLastPlayedDate_expert, songLastPlayedDate_advanced, songLastPlayedDate_basic]
-                .filter(date => date && date !== '―')
-                .map(date => new Date(date))
-                .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '未遊玩';
-
-            gate1.songs.push({ title: song.title, songLastPlayedDate: songLastPlayedDate });
-        });
-        setTimeout(() => {
-            childWin.postMessage({ type: "gate1", payload: gate1 }, "https://tsukiyo10884.github.io");
-        }, 3000);
-
+        childWin = window.open("https://tsukiyo10884.github.io/mai-tools/gate.html");
     }
     // 自己資訊
     else {
@@ -236,5 +205,44 @@
                 childWin.postMessage({ type: "result", payload: exportData }, "https://tsukiyo10884.github.io");
             }, 500);
         }, 1500);
+    }
+    else if (type === 'gate1') {
+        const gate1Res = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=1`, { credentials: 'include' });
+        const gate1Text = await gate1Res.text();
+        const gate1Doc = new DOMParser().parseFromString(gate1Text, 'text/html');
+        const gate1 = [];
+        gate1.headerImg = gate1Doc.querySelectorAll('.w_450')?.src;
+        gate1.gateImgHTML = gate1Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
+        gate1.keySongs = [];
+
+        const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
+            .then(res => res.json());
+        const gateSongs = gateSongData.gate1;
+        gateSongs.forEach(async song => {
+            const songRes = await fetch(domain + song.url, { credentials: 'include' });
+            const songText = await songRes.text();
+            const songDoc = new DOMParser().parseFromString(songText, 'text/html');
+            const songLastPlayedDate_master = songDoc.querySelector('#master td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate_expert = songDoc.querySelector('#expert td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate_advanced = songDoc.querySelector('#advanced td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate_basic = songDoc.querySelector('#basic td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate = [songLastPlayedDate_master, songLastPlayedDate_expert, songLastPlayedDate_advanced, songLastPlayedDate_basic]
+                .filter(date => date && date !== '―')
+                .map(date => new Date(date))
+                .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '未遊玩';
+
+            gate1.keySongs.push({ title: song.title, songLastPlayedDate: songLastPlayedDate });
+        });
+
+        const gate1MapRes = await fetch(`${domain}/maimai-mobile/map/`, { credentials: 'include' });
+        const gate1MapText = await gate1MapRes.text();
+        const gate1MapDoc = new DOMParser().parseFromString(gate1MapText, 'text/html');
+        const blocks = Array.from(gate1MapDoc.querySelectorAll('.m_10.m_t_0.f_0'));
+        const gate1MapHTML = blocks.find(b => b.textContent.includes('スカイストリートちほー6'))?.outerHTML;
+        gate1.mapHTML = gate1MapHTML || '';
+
+        setTimeout(() => {
+            childWin.postMessage({ type: "gate1", payload: gate1 }, "https://tsukiyo10884.github.io");
+        }, 3000);
     }
 })()

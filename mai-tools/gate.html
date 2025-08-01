@@ -26,6 +26,7 @@
     <div class="main mb-5">
         <div class="result-container">
             <div id="gate" class="d-flex justify-content-center align-items-center mb-4"> </div>
+            <div id="map"></div>
             <div id="song-table" class="ms-1 mt-1"></div>
         </div>
     </div>
@@ -54,13 +55,14 @@
                 }));
             });
 
-            const headerImg = gate1.header ? `<img src="${gate1.header}" class="w-100" alt="Header Image">` : '';
-            $('#gate').html([headerImg, gate1.gate].join(''));
+            const headerImg = gate1.headerImg ? `<img src="${gate1.headerImg}" class="w-100" alt="Header Image">` : '';
+            $('#gate').html([headerImg, gate1.gateImgHTML].join(''));
             $('#song-table').html(`
                 <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
                     ${res.join('')}
                 </div>
             ` );
+            $('#map').html(gate1.mapHTML);
         }
 
     });
@@ -86,6 +88,15 @@
         </div>`;
 
     }
+    // 取得本地json(測試資料)
+    const LoadLocalJson = (filePath) => {
+        $.getJSON(filePath, (json) => {
+            $('#test').addClass('d-none');
+            $('#test2').addClass('d-none');
+            $('#output').html(`<textarea id="json-data" class="d-none">${JSON.stringify(json, null, 2)}</textarea>`);
+            refreshData();
+        });
+    };
 </script>
 <style>
     .main {
