@@ -211,8 +211,9 @@
         const gate1Text = await gate1Res.text();
         const gate1Doc = new DOMParser().parseFromString(gate1Text, 'text/html');
         const gate1 = [];
-        gate1.headerImg = gate1Doc.querySelectorAll('.w_450')?.src;
+        gate1.headerImg = gate1Doc.querySelector('.w_450')?.src;
         gate1.gateImgHTML = gate1Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
+        gate1.conditionsHTML = gate1Doc.querySelectorAll('.ks_block')[1]?.innerHTML;
         gate1.keySongs = [];
 
         const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
