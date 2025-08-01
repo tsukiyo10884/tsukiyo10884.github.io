@@ -23,6 +23,11 @@
         type = "gate1";
         childWin = window.open("https://tsukiyo10884.github.io/mai-tools/gate.html");
     }
+    // 白門
+    else if (url.pathname + url.search === "/maimai-mobile/map/kaleidxScopeDetail/?gate=2") {
+        type = "gate2";
+        childWin = window.open("https://tsukiyo10884.github.io/mai-tools/gate.html");
+    }
     // 自己資訊
     else {
         type = 'main'
@@ -248,5 +253,28 @@
             await new Promise(resolve => setTimeout(resolve, 10));
         }
         childWin.postMessage({ type: "gate1", payload: gate1 }, "https://tsukiyo10884.github.io");
+    }
+    else if (type === 'gate2') {
+        setTimeout(() => {
+            childWin.postMessage({ type: "gate2_init", payload: null }, "https://tsukiyo10884.github.io");
+        }, 500);
+        const gate2Res = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=1`, { credentials: 'include' });
+        const gate2Text = await gate2Res.text();
+        const gate2Doc = new DOMParser().parseFromString(gate2Text, 'text/html');
+        const gate2 = {};
+        gate2.headerImg = gate2Doc.querySelector('.w_450')?.src;
+        gate2.gateImgHTML = gate2Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
+
+        const gate2MapRes = await fetch(`${domain}/maimai-mobile/map/`, { credentials: 'include' });
+        const gate2MapText = await gate2MapRes.text();
+        const gate2MapDoc = new DOMParser().parseFromString(gate2MapText, 'text/html');
+        const blocks = Array.from(gate2MapDoc.querySelectorAll('.m_10.m_t_0.f_0'));
+        const gate2MapHTML = blocks.find(b => b.textContent.includes('スカイストリートちほー6'))?.outerHTML;
+        gate2.mapHTML = gate2MapHTML;
+
+        const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
+            .then(res => res.json());
+        gate2.keySongs = gateSongData.gate2;
+        childWin.postMessage({ type: "gate2", payload: gate2 }, "https://tsukiyo10884.github.io");
     }
 })()

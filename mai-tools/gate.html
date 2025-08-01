@@ -48,6 +48,9 @@
         if (data.type === 'gate1_init') {
             $('#msg').text('連線中，請勿關閉maimai-net...由於一次請求過多容易被鎖連線(說的就是你29首的青鑰匙)，此動作會相當緩慢...');
         }
+        else if(data.type === 'init'){
+            $('#msg').text('連線中，請勿關閉maimai-net...');
+        }
         else if (data.type === 'gate1') {
             const gate1 = data.payload;
             const res = []
@@ -74,6 +77,7 @@
                         <b class="px-3 section-divider-title">Key</b>
                     <div class="section-divider right"></div>
                 </div>
+                <div class="d-flex justify-content-center mb-4">青鑰匙獲得條件：在青門開放後(國際版為2025/01/16)，打過以下所有曲子(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
                 <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
                     ${res.join('')}
                 </div>
@@ -84,9 +88,48 @@
                         <b class="px-3 section-divider-title">Gate</b>
                     <div class="section-divider right"></div>
                 </div>
+                <div class="d-flex justify-content-center mb-4">青門發現條件：走完「スカイストリートちほー6」</div>
             `, gate1.mapHTML].join(''));
         }
+        else if (data.type === 'gate2'){
+            const gate2 = data.payload;
+            const res = []
+            gate2.keySongs.forEach(song => {
+                const songEntry = detailData.songs.find(s => s.songId === song.title);
+                const type = 'dx';
+                const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
+                const isCompleted = song.songLastPlayedDate > '2025-01-16'
 
+                res.push(createSquareSongCard({
+                    title: song.title,
+                    type: type,
+                    image: image
+                }));
+            });
+
+            const headerImg = gate2.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate2.headerImg}" alt="Header Image"></div>` : '';
+            $('#gate').html([headerImg, gate2.gateImgHTML].join(''));
+            $('#song-table').html(`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Key</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4">白鑰匙獲得條件：一道內遊玩作曲家大國奏音歌曲，該道內不可重複選曲，雙人時需遊玩4曲(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
+                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
+                    ${res.join('')}
+                </div>
+            ` );
+            $('#map').html([`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Gate</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4">白門發現條件：走完「天界ちほー8」</div>
+            `, gate2.mapHTML].join(''));
+
+        }
     });
     $(window).on('load', async () => {
         detailData = await fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
