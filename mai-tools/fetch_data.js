@@ -258,7 +258,7 @@
         setTimeout(() => {
             childWin.postMessage({ type: "gate2_init", payload: null }, "https://tsukiyo10884.github.io");
         }, 500);
-        const gate2Res = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=1`, { credentials: 'include' });
+        const gate2Res = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=2`, { credentials: 'include' });
         const gate2Text = await gate2Res.text();
         const gate2Doc = new DOMParser().parseFromString(gate2Text, 'text/html');
         const gate2 = {};
@@ -269,7 +269,7 @@
         const gate2MapText = await gate2MapRes.text();
         const gate2MapDoc = new DOMParser().parseFromString(gate2MapText, 'text/html');
         const blocks = Array.from(gate2MapDoc.querySelectorAll('.m_10.m_t_0.f_0'));
-        const gate2MapHTML = blocks.find(b => b.textContent.includes('スカイストリートちほー6'))?.outerHTML;
+        const gate2MapHTML = blocks.find(b => b.textContent.includes('天界ちほー8'))?.outerHTML;
         gate2.mapHTML = gate2MapHTML;
 
         const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
