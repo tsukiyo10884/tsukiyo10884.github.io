@@ -43,4 +43,4 @@ javascript:(function(){
 
 ---
 
-Made by [tsukiyo](https://github.com/tsukiyo10884/), In collaboration with [Ayo](https://www.instagram.com/mua_2110/) and [Axuan](https://www.instagram.com/aaaaaaaaaxiuan/).
+Made by [tsukiyo](https://github.com/tsukiyo10884/), in collaboration with [Ayo](https://www.instagram.com/mua_2110/) and [Axuan](https://www.instagram.com/aaaaaaaaaxiuan/).
