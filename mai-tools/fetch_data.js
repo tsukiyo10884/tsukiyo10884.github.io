@@ -436,7 +436,7 @@
                 .map(date => new Date(date))
                 .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '0000-00-00';
 
-            gate.keySongs.push({ title: song.title, songLastPlayedDate });
+            gate.keySongs.push({ title: song.title, type: song.type, songLastPlayedDate });
         }
         childWin.postMessage({ type: "gate6", payload: gate }, "https://tsukiyo10884.github.io");
     }
