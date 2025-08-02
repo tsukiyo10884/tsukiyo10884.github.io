@@ -163,7 +163,7 @@
             "type": "dx"
         },
         {
-            "title": "屆かない花束",
+            "title": "届かない花束",
             "type": "dx"
         },
         {
@@ -195,10 +195,6 @@
             "type": "dx"
         },
         {
-            "title": "にゃーにゃー冒険譚",
-            "type": "dx"
-        },
-        {
             "title": "Cry Cry Cry",
             "type": "dx"
         },
@@ -207,11 +203,11 @@
             "type": "std"
         },
         {
-            "title": "悪戱",
+            "title": "悪戯",
             "type": "std"
         },
         {
-            "title": "言ノ葉遊戱",
+            "title": "言ノ葉遊戯",
             "type": "std"
         },
         {
@@ -235,7 +231,7 @@
             "type": "std"
         },
         {
-            "title": "天國と地獄 -言ノ葉リンネ-",
+            "title": "天国と地獄 -言ノ葉リンネ-",
             "type": "std"
         },
         {
@@ -291,6 +287,86 @@
         {
             "title": "Divide et impera!",
             "url": "/maimai-mobile/record/musicDetail/?idx=aead208c0b28bc3458da1eda43f5748d40f77e3043b4ce3d1bd5e2945d937eb07ebaa4e741900ce131e484eb5d222460f77ded143089454a81e1a2bad1d2c0b5CJZTYRkDzkGCo1c5vsHr%2BAqswDr9pbLNCx%2FedWi2HQA%3D"
+        }
+    ],
+    "gate5": [
+        {
+            "title": "でらっくmaimai♪てんてこまい!"
+        },
+        {
+            "title": "絡めトリック利己ライザー"
+        },
+        {
+            "title": "ぼくたちいつでも　しゅわっしゅわ！"
+        },
+        {
+            "title": "Paradisoda"
+        },
+        {
+            "title": "とびだせ！TO THE COSMIC!!"
+        },
+        {
+            "title": "ミルキースター・シューティングスター"
+        },
+        {
+            "title": "ホシシズク"
+        },
+        {
+            "title": "ツムギボシ"
+        },
+        {
+            "title": "NOIZY BOUNCE"
+        },
+        {
+            "title": "エスオーエス"
+        },
+        {
+            "title": "プリズム△▽リズム"
+        },
+        {
+            "title": "Fraq"
+        }
+    ],
+    "gate6": [
+        {
+            "title": "ドラゴンエネルギー",
+            "url": "/maimai-mobile/record/musicDetail/?idx=fd004be5f8c2aabb02fc7d577a08ef806fd6d2298aacaf7313abb9760571533309051ee9e324cc7f1a4b5a7d17b9f663a9b713adbbd42d49278e1b3044c9402dntICTEy65x8VshiPYAUIpwXWsmRj7ILKUh5%2F5Pp9KmM%3D"
+        },
+        {
+            "title": "DRAGONLADY",
+            "url": "/maimai-mobile/record/musicDetail/?idx=063dd983a8b831cf3b453ad5d161e84bf4059ad8620201d379366e6e26d559b81ad978256b9fb69042337b182a0b9f796a828de8a34e4674d80829f8cd9be28cbLPyaDiO1R%2BOkLeWPwtEBHwtDfLyOg4yQssRD1cR5IM%3D"
+        },
+        {
+            "title": "Garden Of The Dragon",
+            "url": "/maimai-mobile/record/musicDetail/?idx=638e5ed10c0977771d057d679bd254010fc9c742e432bbaf44f71097406be9fe96a064be42479059cb956f4d20b3e670c54a1e90bd07efd6522a8b5899c2427b8GZ1xoCR4BC67iP6djZzc1XVueXpmJJerOUp0bePr68%3D"
+        },
+        {
+            "title": "好きな惣菜発表ドラゴン",
+            "url": "/maimai-mobile/record/musicDetail/?idx="
+        },
+        {
+            "title": "Brand-new Japanesque",
+            "url": "/maimai-mobile/record/musicDetail/?idx=84ce68b41c8b0fbf4486a35bf516887e3e83f649d894c06c0af656e40e61be34cd508c504a0ad39547f114acbfd419a6f9d937d43196e174025e2016fae71514YTZCJsiAZk%2BGKLNM5jRnRKy53vP0x1htOugkenSw%2BiI%3D"
+        },
+        {
+            "title": "Outlaw’s Lullaby",
+            "url": "/maimai-mobile/record/musicDetail/?idx=4269f9abfab4a18e7036bc3e3af8dc764f6b18889154e6552ca16435bab8f7430030fa8ff8f35825777dd876d0da7e49daa229b3e96759775eda311ba8da043bw%2B9hLzVZrY6J78Dnx%2BReDFbyZ%2FOHrX4eE84o4UHhHj0%3D"
+        },
+        {
+            "title": "鼓動",
+            "url": "/maimai-mobile/record/musicDetail/?idx=07dc5a5d87de8cf18a0bbf3feeb84b7760a2040f0c5be58eff9c7d30685f996402b444a71d43f2b102cdc1e8c188a730d68278fe6ff8fb97ba4171c5a8af9e8cncjPfN7L7PLrWmgs0d2Nn1KRgd%2Fj3fWhX1dXr%2B3Xixc%3D"
+        },
+        {
+            "title": "神室雪月花",
+            "url": "/maimai-mobile/record/musicDetail/?idx=cb56d7964fd8a8cf9f2e4ea6da62bd1d3cc9d051e29409b114a5fd09cef9660a50deb35889ec8106338503ec9b78865a40a3b833b60bcef5b5e2c4d789c89c22%2BIMgq2Zde%2B1iQceR6s6SEEqv9sz1HK7ygetXcAiP5wg%3D"
+        },
+        {
+            "title": "KONNANじゃないっ！",
+            "url": "/maimai-mobile/record/musicDetail/?idx=03685bb8aae92cf1ab22b8cc44dfcd747c148418e78acc86f00a714af622669b572cef93c768c44f6d39997cf7a0f0bb77d9c57b3dd46b36ff24009a2c5c278abLbN9joDnrYtmNcJjCsQ7XX6YTw4M5JMCQnuSCKVpEg%3D"
+        },
+        {
+            "title": "ばかみたい【Taxi Driver Edition】",
+            "url": "/maimai-mobile/record/musicDetail/?idx=b9369fe745d4ab22fa2b3bdfd837c3d9e754b83e49b4ee093076c8d10edc8ade53563555e4220f909148f3cc353aa0fb1c1980076769de25dbd2fe7cb3e9c6bbS%2FWbWTAKG7i6aVzOQfWQKqP%2FnsLt0gAjIy1UpHkb5SE%3D"
         }
     ]
 }

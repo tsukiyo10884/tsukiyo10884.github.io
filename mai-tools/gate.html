@@ -41,177 +41,274 @@
 
 <script>
     let detailData = null;
-    let gateSongData = null;
     // 接到message事件(從maimai-net收到資料)
     $(window).on('message', (event) => {
         const data = event.originalEvent.data;
         if (data.type === 'gate1_init') {
             $('#msg').text('連線中，請勿關閉maimai-net...由於一次請求過多容易被鎖連線(說的就是你29首的青鑰匙)，此動作會相當緩慢...');
         }
-        else if(data.type === 'init'){
+        else if (data.type === 'init') {
             $('#msg').text('連線中，請勿關閉maimai-net...');
         }
         else if (data.type === 'gate1') {
-            const gate1 = data.payload;
+            const gate = data.payload;
             const res = []
-            gate1.keySongs.forEach(song => {
+            gate.keySongs.forEach(song => {
                 const songEntry = detailData.songs.find(s => s.songId === song.title);
-                const type = 'dx';
-                const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
-                const isCompleted = song.songLastPlayedDate > '2025-01-16'
-
-                res.push(createSquareSongCard({
-                    title: song.title,
-                    type: type,
-                    image: image
-                }, {
-                    isCompleted: isCompleted
-                }));
-            });
-
-            const headerImg = gate1.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate1.headerImg}" alt="Header Image"></div>` : '';
-            $('#gate').html([headerImg, gate1.gateImgHTML].join(''));
-            $('#song-table').html(`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Key</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4 text-center">青鑰匙獲得條件：在青門開放後(國際版為2025/01/16)，打過以下所有曲子<br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
-                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
-                    ${res.join('')}
-                </div>
-            ` );
-            $('#map').html([`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Gate</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4">青門發現條件：走完「スカイストリートちほー6」</div>
-            `, gate1.mapHTML].join(''));
-        }
-        else if (data.type === 'gate2'){
-            const gate2 = data.payload;
-            const res = []
-            gate2.keySongs.forEach(song => {
-                const songEntry = detailData.songs.find(s => s.songId === song.title);
-                const type = 'dx';
-                const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
-
-                res.push(createSquareSongCard({
-                    title: song.title,
-                    type: type,
-                    image: image
-                }));
-            });
-
-            const headerImg = gate2.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate2.headerImg}" alt="Header Image"></div>` : '';
-            $('#gate').html([headerImg, gate2.gateImgHTML].join(''));
-            $('#song-table').html(`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Key</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4 text-center">白鑰匙獲得條件：一道內遊玩作曲家大國奏音的歌曲，該道內不可重複選曲，雙人時需遊玩4曲<br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
-                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
-                    ${res.join('')}
-                </div>
-            ` );
-            $('#map').html([`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Gate</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4">白門發現條件：走完「天界ちほー8」</div>
-            `, gate2.mapHTML].join(''));
-
-        }
-        else if (data.type === 'gate3'){
-            const gate3 = data.payload;
-            const res = []
-            gate3.keySongs.forEach(song => {
-                const songEntry = detailData.songs.find(s => s.songId === song.title);
-                const type = song.type;
-                const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
-
-                res.push(createSquareSongCard({
-                    title: song.title,
-                    type: type,
-                    image: image
-                }));
-            });
-
-            const headerImg = gate3.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate3.headerImg}" alt="Header Image"></div>` : '';
-            $('#gate').html([headerImg, gate3.gateImgHTML].join(''));
-            $('#song-table').html(`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Key</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4 text-center">紫鑰匙獲得條件：アウル（BLACK ROSEちほー)或アウル（BLACK ROSEちほー4)作為隊長，並在一道內遊玩黑薔薇或言葉系列歌曲，該道內不可重複選曲，雙人時需遊玩4曲<br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
-                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
-                    ${res.join('')}
-                </div>
-            ` );
-            $('#map').html([`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Gate</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4">紫門發現條件：走完「BLACK ROSEちほー10」</div>
-            `, gate3.mapHTML].join(''));
-
-        }
-        else if (data.type === 'gate4') {
-            const gate4 = data.payload;
-            const res = []
-            gate4.keySongs.forEach(song => {
-                const songEntry = detailData.songs.find(s => s.songId === song.title);
-                const type = song.type;
-                const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
-                const isCompleted = song.songLastPlayedDate > '2025-02-27'
-
                 res.push(createSquareSongCard({
                     title: song.title,
                     type: 'dx',
-                    image: image
+                    image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
                 }, {
-                    isCompleted: isCompleted
+                    isCompleted: song.songLastPlayedDate > (data.domain === 'jp' ? '2024-09-12' : '2025-01-16')
                 }));
             });
 
-            const headerImg = gate4.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate4.headerImg}" alt="Header Image"></div>` : '';
-            $('#gate').html([headerImg, gate4.gateImgHTML].join(''));
-            $('#song-table').html(`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Key</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4 text-center">黑鑰匙獲得條件：在黑門開放後(國際版為2025/02/27)，打過以下所有KOP(KING of Performai)曲子<br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
-                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
-                    ${res.join('')}
-                </div>
-            ` );
+            const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
+            $('#gate').html([headerImg, gate.gateImgHTML].join(''));
             $('#map').html([`
                 <div class="col-12 d-flex align-items-center my-3">
                     <div class="section-divider left"></div>
                         <b class="px-3 section-divider-title">Gate</b>
                     <div class="section-divider right"></div>
                 </div>
-                <div class="d-flex justify-content-center mb-4">黑門發現條件：走完「メトロポリスちほー9」</div>
-            `, gate4.mapHTML].join(''));
+                <div class="d-flex justify-content-center mb-4">青門發現條件：走完地圖「スカイストリートちほー6」</div>
+            `, gate.mapHTML].join(''));
+            $('#song-table').html(`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Key</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4 text-center">青鑰匙獲得條件：在青門開放後(日版:2024年9月12日 | 國際版:2025年1月16日)，打過所有青春區域的歌曲<br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
+                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
+                    ${res.join('')}
+                </div>
+            ` );
+        }
+        else if (data.type === 'gate2') {
+            const gate = data.payload;
+            const res = []
+            gate.keySongs.forEach(song => {
+                const songEntry = detailData.songs.find(s => s.songId === song.title);
+                res.push(createSquareSongCard({
+                    title: song.title,
+                    type: 'dx',
+                    image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
+                }));
+            });
+
+            const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
+            $('#gate').html([headerImg, gate.gateImgHTML].join(''));
+            $('#map').html([`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Gate</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4">白門發現條件：走完地圖「天界ちほー8」</div>
+            `, gate.mapHTML].join(''));
+            $('#song-table').html(`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Key</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4 text-center">白鑰匙獲得條件：設定底板為「Latent Kingdom」的狀態下，一道內遊玩作曲家大国奏音的歌曲，該道內不可重複選曲，雙人時需遊玩4曲<br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
+                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
+                    ${res.join('')}
+                </div>
+            ` );
+
+        }
+        else if (data.type === 'gate3') {
+            const gate = data.payload;
+            const res = []
+            gate.keySongs.forEach(song => {
+                const songEntry = detailData.songs.find(s => s.songId === song.title);
+                res.push(createSquareSongCard({
+                    title: song.title,
+                    type: song.type,
+                    image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
+                }));
+            });
+
+            const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
+            $('#gate').html([headerImg, gate.gateImgHTML].join(''));
+            $('#map').html([`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Gate</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4">紫門發現條件：走完地圖「BLACK ROSEちほー10」</div>
+            `, gate.mapHTML].join(''));
+            $('#song-table').html(`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Key</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4 text-center">紫鑰匙(國際版)獲得條件：設定アウル（BLACK ROSEちほー)或アウル（BLACK ROSEちほー4)作為隊長的狀態下，一道內遊玩黑薔薇或言葉系列歌曲，該道內不可重複選曲，雙人時需遊玩4曲<br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
+                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
+                    ${res.join('')}
+                </div>
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Key(JP)</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4 text-center">紫鑰匙(日版)獲得條件：
+                    <table style="width: 100%; border-collapse: collapse; border-color: rgb(255, 255, 255); height: 192px;"><tbody><tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); height: 21px; width: 5%; vertical-align: top;">1.</td> <td style="border-color: rgb(255, 255, 255); height: 21px; width: 95%; vertical-align: top;"><a href="https://maimai.sega.jp/kotonoha/" target="_blank" rel="noopener">「言ノ葉Project」公式サイト</a> → <a href="https://maimai.sega.jp/kotonoha/special/" target="_blank" rel="noopener">「SPECIAL」ページ</a> にアクセスする。</td></tr> <tr style="height: 43px;"><td style="border-color: rgb(255, 255, 255); height: 43px; width: 5%; vertical-align: top;">2.</td> <td style="border-color: rgb(255, 255, 255); height: 43px; width: 95%; vertical-align: top;">「インスト音源」の項目に追加されている隠し音源のモールス信号を解読し、<br> <span style="color: rgb(0, 0, 0);">「change spec to factor」</span>というヒントを得る。</td></tr> <tr style="height: 43px;"><td style="border-color: rgb(255, 255, 255); height: 43px; width: 5%; vertical-align: top;">3.</td> <td style="border-color: rgb(255, 255, 255); height: 43px; width: 95%; vertical-align: top;">&nbsp;上記のヒントから、「SPECIAL」ページのURLに含まれている、<br>
+                    「<span style="color: rgb(255, 0, 0);">spec</span>ial」を「<span style="color: rgb(255, 0, 0);">factor</span>ial」に変更しアクセスすると、<a href="https://maimai.sega.jp/kotonoha/factorial/" target="_blank" rel="noopener">隠しページ</a>が表示される。</td></tr> <tr style="height: 64px;"><td style="border-color: rgb(255, 255, 255); height: 64px; width: 5%; vertical-align: top;">4.</td> <td style="border-color: rgb(255, 255, 255); height: 64px; width: 95%; vertical-align: top;">&nbsp;隠しページのヒュド・ルーが持つ「XXI（21）」のカードと、<br>
+                    URLに含まれる「factorial（階乗）」をヒントに、<br>
+                    「21の階乗」を計算して、20ケタの数字<span style="color: rgb(255, 0, 0);">「51090942171709440000」<span style="color: rgb(0, 0, 0);">を得る。</span></span></td></tr> <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); height: 21px; width: 5%; vertical-align: top;">5.</td> <td style="border-color: rgb(255, 255, 255); height: 21px; width: 95%; vertical-align: top;"><a href="https://maimaidx.jp/" target="_blank" rel="noopener">maimaiでらっくすNET</a> の「シリアルコード」のページに、上記の数字を入力する。</td></tr></tbody></table>
+                </div>
+            ` );
+
+        }
+        else if (data.type === 'gate4') {
+            const gate = data.payload;
+            const res = []
+            gate.keySongs.forEach(song => {
+                const songEntry = detailData.songs.find(s => s.songId === song.title);
+                res.push(createSquareSongCard({
+                    title: song.title,
+                    type: 'dx',
+                    image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
+                }, {
+                    isCompleted: song.songLastPlayedDate > '2025-02-27'
+                }));
+            });
+
+            const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
+            $('#gate').html([headerImg, gate.gateImgHTML].join(''));
+            $('#map').html([`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Gate</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4">黑門發現條件：走完地圖「メトロポリスちほー9」</div>
+            `, gate.mapHTML].join(''));
+            $('#song-table').html(`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Key</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4 text-center">黑鑰匙獲得條件：在黑門開放後(日版&國際版:2025年2月27日)，打過所有「KING of Performai 2019」～「KING of Performai The 6th」的maimai でらっくす 部門中，
+                    <br/>・線上預選的新曲（包含新增的 Re:MASTER 譜面）
+                    <br/>・國內版決賽課題曲（不含第6屆）
+                    <br/>・表演賽（Exhibition）樂曲
+                    <br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
+                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
+                    ${res.join('')}
+                </div>
+            ` );
+        }
+        else if (data.type === 'gate5') {
+            const gate = data.payload;
+            const res = []
+            gate.keySongs.forEach(song => {
+                const songEntry = detailData.songs.find(s => s.songId === song.title);
+                res.push(createSquareSongCard({
+                    title: song.title,
+                    type: 'dx',
+                    image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
+                }));
+            });
+
+            const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
+            $('#gate').html([headerImg, gate.gateImgHTML].join(''));
+            $('#map').html([`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Gate</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4">黃門發現條件：走完地圖「なないろちほー」</div>
+            `, gate.mapHTML].join(''));
+            $('#song-table').html(`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Key</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4 text-center">黃鑰匙獲得條件：使用隨機選曲功能並遊玩「maimai でらっくす」至「maimai でらっくす PRiSM PLUS」之間任一版本的主題曲一首(可在我的最愛抽)<br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
+                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
+                    ${res.join('')}
+                </div>
+            ` );
+        }
+        else if (data.type === 'gate6') {
+            const gate = data.payload;
+            const res = []
+            gate.keySongs.forEach(song => {
+                const songEntry = detailData.songs.find(s => s.songId === song.title);
+                res.push(createSquareSongCard({
+                    title: song.title,
+                    type: 'dx',
+                    image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
+                }, {
+                    isCompleted: song.songLastPlayedDate > (data.domain === 'jp' ? '2025-05-09' : '9999-12-31')
+                }));
+            });
+
+            const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
+            $('#gate').html([headerImg, gate.gateImgHTML].join(''));
+            $('#map').html([`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Gate</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4">紅門發現條件：走完地圖「ドラゴンちほー4」</div>
+            `, gate.mapHTML].join(''));
+            $('#song-table').html(`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Key</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4 text-center">紅鑰匙獲得條件：在紅門開放後(日版:2025年5月9日 | 國際版:-)，打過所有
+                    <br/>・樂曲名稱中包含「ドラゴン」、「DRAGON」或「Dragon」的樂曲
+                    <br/>・收錄於遊戲《人中之龍》系列的樂曲
+                    <br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
+                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
+                    ${res.join('')}
+                </div>
+            ` );
+        }
+        else if (data.type === 'gate7') {
+            const gate = data.payload;
+            const res = []
+
+            const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
+            $('#gate').html([headerImg, gate.gateImgHTML].join(''));
+            $('#map').html([`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Gate</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4">PRiSM塔發現條件：走完地圖「7sRefちほー4」</div>
+            `, gate.mapHTML].join(''));
+            $('#song-table').html(`
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Key</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="d-flex justify-content-center mb-4 text-center">萬能鑰匙獲得條件：通關萬花筒模式的六扇門(獲得六個碎片)
+                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
+                    ${res.join('')}
+                </div>
+            ` );
         }
     });
     $(window).on('load', async () => {
         detailData = await fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
-            .then(res => res.json());
-        gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
             .then(res => res.json());
     });
 

@@ -3,6 +3,7 @@
     const url = new URL(window.location.href);
     let domain = '';
     let type = '';
+    const gate = {};
 
     domain = url.origin;
     setTimeout(() => {
@@ -19,8 +20,11 @@
         type = "friend";
     }
     // 門
-    else if (url.pathname + url.search === "/maimai-mobile/map/kaleidxScopeDetail/?gate=1") {
+    else if (url.pathname === "/maimai-mobile/map/kaleidxScopeDetail/") {
         childWin = window.open("https://tsukiyo10884.github.io/mai-tools/gate.html");
+        if (url.origin === "https://maimaidx.jp") {
+            gate.domain = 'jp';
+        }
         switch (url.search) {
             // 青門
             case "?gate=1":
@@ -293,21 +297,22 @@
         const gate2Res = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=2`, { credentials: 'include' });
         const gate2Text = await gate2Res.text();
         const gate2Doc = new DOMParser().parseFromString(gate2Text, 'text/html');
-        const gate2 = {};
-        gate2.headerImg = gate2Doc.querySelector('.w_450')?.src;
-        gate2.gateImgHTML = gate2Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
+        gate.headerImg = gate2Doc.querySelector('.w_450')?.src;
+        gate.gateImgHTML = gate2Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
 
         const gate2MapRes = await fetch(`${domain}/maimai-mobile/map/`, { credentials: 'include' });
         const gate2MapText = await gate2MapRes.text();
         const gate2MapDoc = new DOMParser().parseFromString(gate2MapText, 'text/html');
         const blocks = Array.from(gate2MapDoc.querySelectorAll('.m_10.m_t_0.f_0'));
         const gate2MapHTML = blocks.find(b => b.textContent.includes('天界ちほー8'))?.outerHTML;
-        gate2.mapHTML = gate2MapHTML;
+        gate.mapHTML = gate2MapHTML;
 
         const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
             .then(res => res.json());
-        gate2.keySongs = gateSongData.gate2;
-        childWin.postMessage({ type: "gate2", payload: gate2 }, "https://tsukiyo10884.github.io");
+        gate.keySongs = gateSongData.gate2;
+        setTimeout(() => {
+            childWin.postMessage({ type: "gate2", payload: gate }, "https://tsukiyo10884.github.io");
+        }, 1000);
     }
     else if (type === 'gate3') {
         setTimeout(() => {
@@ -316,21 +321,22 @@
         const gate3Res = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=3`, { credentials: 'include' });
         const gate3Text = await gate3Res.text();
         const gate3Doc = new DOMParser().parseFromString(gate3Text, 'text/html');
-        const gate3 = {};
-        gate3.headerImg = gate3Doc.querySelector('.w_450')?.src;
-        gate3.gateImgHTML = gate3Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
+        gate.headerImg = gate3Doc.querySelector('.w_450')?.src;
+        gate.gateImgHTML = gate3Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
 
         const gate3MapRes = await fetch(`${domain}/maimai-mobile/map/`, { credentials: 'include' });
         const gate3MapText = await gate3MapRes.text();
         const gate3MapDoc = new DOMParser().parseFromString(gate3MapText, 'text/html');
         const blocks = Array.from(gate3MapDoc.querySelectorAll('.m_10.m_t_0.f_0'));
         const gate3MapHTML = blocks.find(b => b.textContent.includes('BLACK ROSEちほー10'))?.outerHTML;
-        gate3.mapHTML = gate3MapHTML;
+        gate.mapHTML = gate3MapHTML;
 
         const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
             .then(res => res.json());
-        gate3.keySongs = gateSongData.gate3;
-        childWin.postMessage({ type: "gate3", payload: 3 }, "https://tsukiyo10884.github.io");
+        gate.keySongs = gateSongData.gate3;
+        setTimeout(() => {
+            childWin.postMessage({ type: "gate3", payload: gate }, "https://tsukiyo10884.github.io");
+        }, 1000);
     }
     else if (type === 'gate4') {
         setTimeout(() => {
@@ -339,20 +345,19 @@
         const gate4Res = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=4`, { credentials: 'include' });
         const gate4Text = await gate4Res.text();
         const gate4Doc = new DOMParser().parseFromString(gate4Text, 'text/html');
-        const gate4 = {};
-        gate4.headerImg = gate4Doc.querySelector('.w_450')?.src;
-        gate4.gateImgHTML = gate4Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
+        gate.headerImg = gate4Doc.querySelector('.w_450')?.src;
+        gate.gateImgHTML = gate4Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
 
         const gate4MapRes = await fetch(`${domain}/maimai-mobile/map/`, { credentials: 'include' });
         const gate4MapText = await gate4MapRes.text();
         const gate4MapDoc = new DOMParser().parseFromString(gate4MapText, 'text/html');
         const blocks = Array.from(gate4MapDoc.querySelectorAll('.m_10.m_t_0.f_0'));
         const gate4MapHTML = blocks.find(b => b.textContent.includes('メトロポリスちほー9'))?.outerHTML;
-        gate4.mapHTML = gate4MapHTML;
+        gate.mapHTML = gate4MapHTML;
 
         const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
             .then(res => res.json());
-        gate4.keySongs = [];
+        gate.keySongs = [];
         const gateSongs = gateSongData.gate4;
         for (const song of gateSongs) {
             const songRes = await fetch(domain + song.url, { credentials: 'include' });
@@ -368,11 +373,110 @@
                 .map(date => new Date(date))
                 .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '0000-00-00';
 
-            gate4.keySongs.push({ title: song.title, songLastPlayedDate });
-
-            // 延遲避免被鎖
-            await new Promise(resolve => setTimeout(resolve, 10));
+            gate.keySongs.push({ title: song.title, songLastPlayedDate });
         }
-        childWin.postMessage({ type: "gate4", payload: gate4 }, "https://tsukiyo10884.github.io");
+        childWin.postMessage({ type: "gate4", payload: gate }, "https://tsukiyo10884.github.io");
+    }
+    else if (type === 'gate5') {
+        setTimeout(() => {
+            childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
+        }, 500);
+        const gate5Res = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=5`, { credentials: 'include' });
+        const gate5Text = await gate5Res.text();
+        const gate5Doc = new DOMParser().parseFromString(gate5Text, 'text/html');
+        gate.headerImg = gate5Doc.querySelector('.w_450')?.src;
+        gate.gateImgHTML = gate5Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
+
+        const gate5MapRes = await fetch(`${domain}/maimai-mobile/map/`, { credentials: 'include' });
+        const gate5MapText = await gate5MapRes.text();
+        const gate5MapDoc = new DOMParser().parseFromString(gate5MapText, 'text/html');
+        const blocks = Array.from(gate5MapDoc.querySelectorAll('.m_10.m_t_0.f_0'));
+        const gate5MapHTML = blocks.find(b => b.textContent.includes('なないろちほー'))?.outerHTML;
+        gate.mapHTML = gate5MapHTML;
+
+        const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
+            .then(res => res.json());
+        gate.keySongs = gateSongData.gate5;
+        setTimeout(() => {
+            childWin.postMessage({ type: "gate5", payload: gate }, "https://tsukiyo10884.github.io");
+        }, 1000);
+    }
+    else if (type === 'gate6') {
+        setTimeout(() => {
+            childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
+        }, 500);
+        const gate6Res = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=6`, { credentials: 'include' });
+        const gate6Text = await gate6Res.text();
+        const gate6Doc = new DOMParser().parseFromString(gate6Text, 'text/html');
+        gate.headerImg = gate6Doc.querySelector('.w_450')?.src;
+        gate.gateImgHTML = gate6Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
+
+        const gate6MapRes = await fetch(`${domain}/maimai-mobile/map/`, { credentials: 'include' });
+        const gate6MapText = await gate6MapRes.text();
+        const gate6MapDoc = new DOMParser().parseFromString(gate6MapText, 'text/html');
+        const blocks = Array.from(gate6MapDoc.querySelectorAll('.m_10.m_t_0.f_0'));
+        const gate6MapHTML = blocks.find(b => b.textContent.includes('ドラゴンちほー4'))?.outerHTML;
+        gate.mapHTML = gate6MapHTML;
+
+        const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
+            .then(res => res.json());
+        gate.keySongs = [];
+        const gateSongs = gateSongData.gate6;
+        for (const song of gateSongs) {
+            const songRes = await fetch(domain + song.url, { credentials: 'include' });
+            const songText = await songRes.text();
+            const songDoc = new DOMParser().parseFromString(songText, 'text/html');
+            const songLastPlayedDate_remaster = songDoc.querySelector('#remaster td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate_master = songDoc.querySelector('#master td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate_expert = songDoc.querySelector('#expert td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate_advanced = songDoc.querySelector('#advanced td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate_basic = songDoc.querySelector('#basic td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate = [songLastPlayedDate_remaster, songLastPlayedDate_master, songLastPlayedDate_expert, songLastPlayedDate_advanced, songLastPlayedDate_basic]
+                .filter(date => date && date !== '―')
+                .map(date => new Date(date))
+                .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '0000-00-00';
+
+            gate.keySongs.push({ title: song.title, songLastPlayedDate });
+        }
+        childWin.postMessage({ type: "gate6", payload: gate }, "https://tsukiyo10884.github.io");
+    }
+    else if (type === 'gate7') {
+        setTimeout(() => {
+            childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
+        }, 500);
+        const gate7Res = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=7`, { credentials: 'include' });
+        const gate7Text = await gate7Res.text();
+        const gate7Doc = new DOMParser().parseFromString(gate7Text, 'text/html');
+        gate.headerImg = gate7Doc.querySelector('.w_450')?.src;
+        gate.gateImgHTML = gate7Doc.querySelectorAll('.ks_block')[0]?.innerHTML;
+
+        const gate7MapRes = await fetch(`${domain}/maimai-mobile/map/`, { credentials: 'include' });
+        const gate7MapText = await gate7MapRes.text();
+        const gate7MapDoc = new DOMParser().parseFromString(gate7MapText, 'text/html');
+        const blocks = Array.from(gate7MapDoc.querySelectorAll('.m_10.m_t_0.f_0'));
+        const gate7MapHTML = blocks.find(b => b.textContent.includes('7sRefちほー4'))?.outerHTML;
+        gate.mapHTML = gate7MapHTML;
+
+        const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
+            .then(res => res.json());
+        gate.keySongs = [];
+        const gateSongs = gateSongData.gate7;
+        for (const song of gateSongs) {
+            const songRes = await fetch(domain + song.url, { credentials: 'include' });
+            const songText = await songRes.text();
+            const songDoc = new DOMParser().parseFromString(songText, 'text/html');
+            const songLastPlayedDate_remaster = songDoc.querySelector('#remaster td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate_master = songDoc.querySelector('#master td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate_expert = songDoc.querySelector('#expert td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate_advanced = songDoc.querySelector('#advanced td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate_basic = songDoc.querySelector('#basic td:nth-of-type(2)')?.textContent.trim();
+            const songLastPlayedDate = [songLastPlayedDate_remaster, songLastPlayedDate_master, songLastPlayedDate_expert, songLastPlayedDate_advanced, songLastPlayedDate_basic]
+                .filter(date => date && date !== '―')
+                .map(date => new Date(date))
+                .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '0000-00-00';
+
+            gate.keySongs.push({ title: song.title, songLastPlayedDate });
+        }
+        childWin.postMessage({ type: "gate7", payload: gate }, "https://tsukiyo10884.github.io");
     }
 })()
