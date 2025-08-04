@@ -473,7 +473,6 @@
             });
         }
 
-        console.log(gate);
         childWin.postMessage({ type: "gate7", payload: gate }, "https://tsukiyo10884.github.io");
     }
 })()
