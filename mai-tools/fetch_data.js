@@ -461,6 +461,19 @@
         const gate7MapHTML = blocks.find(b => b.textContent.includes('7sRefちほー4'))?.outerHTML;
         gate.mapHTML = gate7MapHTML;
 
+        gate.key=[];
+
+        for (let i = 1; i < 7; i++) {
+            const gateRes = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=${i}`, { credentials: 'include' });
+            const gateText = await gateRes.text();
+            const gateDoc = new DOMParser().parseFromString(gateText, 'text/html');
+            gate.key.push({
+                headerImg: gateDoc.querySelector('.w_450')?.src,
+                gateImgHTML: gateDoc.querySelectorAll('.ks_block')[0]?.innerHTML
+            });
+        }
+
+        console.log(gate);
         childWin.postMessage({ type: "gate7", payload: gate }, "https://tsukiyo10884.github.io");
     }
 })()

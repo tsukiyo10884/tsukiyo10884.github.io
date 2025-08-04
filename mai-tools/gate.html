@@ -343,6 +343,14 @@
         else if (data.type === 'gate7') {
             const gate = data.payload;
             const res = []
+            gate.key.forEach(key => {
+                res.push(`
+                    <div class="col-2 gate7">
+                        <img class="" src="${key.headerImg}">
+                        ${key.gateImgHTML}
+                    </div>
+                `)
+            })
 
             const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
             $('#gate').html([headerImg, gate.gateImgHTML].join(''));
@@ -398,6 +406,10 @@
 <style>
     form[action="https://maimaidx-eng.com/maimai-mobile/map/mapDetail/"] {
         display: none;
+    }
+
+    .gate7 img {
+        width: 100%;
     }
 
     .m_10 {
