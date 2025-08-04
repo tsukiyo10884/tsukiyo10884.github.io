@@ -316,7 +316,7 @@ const createSquareSongCard = (song, {
 
 }
 
-// 點選可跳轉到zetaraku
+// 點選可跳轉到arcade-songs
 const showSongDetail = (title, type) => {
     window.open(`https://arcade-songs.zetaraku.dev/maimai/?title=${title}&types=${type}`, '_blank');
 }

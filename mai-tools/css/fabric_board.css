@@ -10,6 +10,10 @@ for fun
     src: url('../../font/Ghatee.ttf');
 }
 
+a {
+    text-decoration: none!important;
+}
+
 body {
     font-family: 'handwriting' !important;
     background: url(../../mai-tools/img/fabric_board.jpg) !important;
@@ -44,12 +48,46 @@ button:not(#btn-search):hover {
     position: relative;
 }
 
+#credit {
+    background: #fdfaf3;
+    border: 1px dashed #ccc;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    position: relative;
+}
+
+#credit::after {
+    background: linear-gradient(135deg, #828149 0%, #2f2f1a 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    content: "";
+    height: 10px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 10px;
+}
+
+#credit::before {
+    background: linear-gradient(135deg, #828149 0%, #2f2f1a 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    content: "";
+    height: 10px;
+    left: 5px;
+    position: absolute;
+    top: 5px;
+    width: 10px;
+}
+
 #info {
     background: #fdfaf3;
     border: 1px dashed #ccc;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    margin-top: -21px;
     padding: 10px;
+    padding-right: 0px;
     position: relative;
 }
 
@@ -994,14 +1032,14 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 /*for fun*/
 /*********/
 .axuan {
-    background-image: url(../img/axuan.png);
+    background-image: url(../img/axuan_bg.png);
     background-position-x: right;
     background-repeat: no-repeat;
     background-size: contain;
 }
 
 .ayo {
-    background-image: url(../img/ayo.png);
+    background-image: url(../img/ayo_bg.png);
     background-position-x: right;
     background-repeat: no-repeat;
     background-size: contain;
