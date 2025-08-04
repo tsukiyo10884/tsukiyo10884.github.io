@@ -1,0 +1,31 @@
+{
+  "domain": "jp",
+  "headerImg": "https://maimaidx.jp/maimai-mobile/img/KaleidxScope/Banner/11abf0d8d02e60ba.png",
+  "gateImgHTML": "\n\t<div class=\"ks_block_inner w_450 m_t_15 m_b_15 t_c f_11\">\n\t\t\t\t<img src=\"https://maimaidx.jp/maimai-mobile/img/kaleidxscope_title_achievements.png\" class=\"\"><br>\n\t\t\t\t\t<img src=\"https://maimaidx.jp/maimai-mobile/img/KaleidxScope/LockDoor/b787e94aaaf189a4.png\" class=\"\"><br>\n\t\t\t\t<div class=\"ks_block_acv\">\n\t\t\t\t\t\t\t<div class=\"ks_acv_img h_35 p_r t_c\">\n\t\t\t\t\t<img src=\"https://maimaidx.jp/maimai-mobile/img/kaleidxscope_noplay.png\" class=\"\">\n\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t</div>\n",
+  "key": [
+    {
+      "gateImg": "https://maimaidx-eng.com/maimai-mobile/img/KaleidxScope/Clear/64871174f5b02ba9.png",
+      "gateAcvImgHTML": "<div class=\"ks_acv_img h_35 p_r t_c\">\n\t\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/kaleidxscope_clear.png\" class=\"\">\n\t\t\t\t</div>"
+    },
+    {
+      "gateImg": "https://maimaidx-eng.com/maimai-mobile/img/KaleidxScope/LockDoor/f5d8dd9bfff61dbb.png",
+      "gateAcvImgHTML": "<div class=\"ks_acv_img h_35 p_r t_c\">\n\t\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/kaleidxscope_noplay.png\" class=\"\">\n\t\t\t\t</div>"
+    },
+    {
+      "gateImg": "https://maimaidx.jp/maimai-mobile/img/KaleidxScope/LockDoor/337baf0fa641ac9e.png",
+      "gateAcvImgHTML": "<div class=\"ks_acv_img h_35 p_r t_c\">\n\t\t\t\t\t<img src=\"https://maimaidx.jp/maimai-mobile/img/kaleidxscope_noplay.png\" class=\"\">\n\t\t\t\t</div>"
+    },
+    {
+      "gateImg": "https://maimaidx.jp/maimai-mobile/img/KaleidxScope/LockDoor/d2de5269924298fe.png",
+      "gateAcvImgHTML": "<div class=\"ks_acv_img h_35 p_r t_c\">\n\t\t\t\t\t<img src=\"https://maimaidx.jp/maimai-mobile/img/kaleidxscope_noplay.png\" class=\"\">\n\t\t\t\t</div>"
+    },
+    {
+      "gateImg": "https://maimaidx.jp/maimai-mobile/img/KaleidxScope/LockDoor/ea516b77eb459714.png",
+      "gateAcvImgHTML": "<div class=\"ks_acv_img h_35 p_r t_c\">\n\t\t\t\t\t<img src=\"https://maimaidx.jp/maimai-mobile/img/kaleidxscope_noplay.png\" class=\"\">\n\t\t\t\t</div>"
+    },
+    {
+      "gateImg": "https://maimaidx.jp/maimai-mobile/img/KaleidxScope/LockDoor/74ce2aa10b5ea5e6.png",
+      "gateAcvImgHTML": "<div class=\"ks_acv_img h_35 p_r t_c\">\n\t\t\t\t\t<img src=\"https://maimaidx.jp/maimai-mobile/img/kaleidxscope_noplay.png\" class=\"\">\n\t\t\t\t</div>"
+    }
+  ]
+}

@@ -468,8 +468,8 @@
             const gateText = await gateRes.text();
             const gateDoc = new DOMParser().parseFromString(gateText, 'text/html');
             gate.key.push({
-                headerImg: gateDoc.querySelector('.w_450')?.src,
-                gateImgHTML: gateDoc.querySelectorAll('.ks_block')[0]?.innerHTML
+                gateImg: gateDoc.querySelectorAll('.ks_block img')[1]?.src,
+                gateAcvImgHTML: gateDoc.querySelector('.ks_acv_img')?.outerHTML
             });
         }
 
