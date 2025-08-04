@@ -8,8 +8,19 @@
     domain = url.origin;
 
     let childWin = null;
+
+    // 自己資訊
+    if(url.pathname === "/maimai-mobile/home/"){        
+        type = 'main'
+        childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
+        setTimeout(() => {
+            if (url.origin === "https://maimaidx.jp") {
+                childWin.postMessage({ type: "jp", payload: true }, "https://tsukiyo10884.github.io");
+            }
+        }, 500);
+    }    
     // 好友資訊
-    if (url.pathname === "/maimai-mobile/friend/friendDetail/") {
+    else if (url.pathname === "/maimai-mobile/friend/friendDetail/") {
         idx = url.searchParams.get("idx");
         childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
         type = "friend";
@@ -63,16 +74,6 @@
                 type = "gate10";
                 break;
         }
-    }
-    // 自己資訊
-    else {
-        type = 'main'
-        childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
-        setTimeout(() => {
-            if (url.origin === "https://maimaidx.jp") {
-                childWin.postMessage({ type: "jp", payload: true }, "https://tsukiyo10884.github.io");
-            }
-        }, 500);
     }
 
     if (type == 'main' || type == 'friend') {
