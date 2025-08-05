@@ -338,3 +338,66 @@ const calculateLevelRange = (level) => {
     const maxLevel = decimal < 0.6 ? baseLevel + 0.5 : baseLevel + 0.9;
     return { minLevel, maxLevel };
 };
+
+// 大大的Credit
+const createCreditSection = () => {
+    return `
+    <div id="credit" class="mt-4 p-4 d-flex justify-content-center">
+        <div class="row col-12" style="width: 915px;">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="img/ayo_credit_icon.svg" class="w-100">
+                    </div>
+                    <div class="col-8">
+                        這是阿幽
+                        <p class="f_10">This is Ayo</p>
+                        這個小工具的功能規劃者之一
+                        <p class="f_10">One of the planners of this tool</p>
+                        也是推廣者
+                        <p class="f_10">Also the promoter</p>
+                        沒有給她Credit她會森77
+                        <p class="f_10">If I don't give her credit, she will be angy</p>
+                        <img src="img/ayo_angy.png" class="w-100"><br><br>
+                        所以給她大大的Credit
+                        <p class="f_10">So I give her a big credit</p>
+                        她很棒，跟她說謝謝
+                        <p class="f_10">She is great, say thank you to her</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row mb-5">
+                    <div class="col-4">
+                        <img src="img/axuan_credit_icon.svg" class="w-100">
+                    </div>
+                    <div class="col-8">
+                        這是阿瑄
+                        <p class="f_10">This is Axuan</p>
+                        這個小工具的功能規劃者之一
+                        <p class="f_10">One of the planners of this tool</p>
+                        她還有專屬小功能
+                        <p class="f_10">She also has her own special features</p>
+                        她很棒，跟她說謝謝
+                        <p class="f_10">She is great, say thank you to her</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <img src="img/gua_credit_icon.svg" class="w-100">
+                    </div>
+                    <div class="col-8">
+                        這是瓜
+                        <p class="f_10">This is Gua</p>
+                        這個小工具的QA之一
+                        <p class="f_10">One of the QAs of this tool</p>
+                        他很棒，跟他說謝謝
+                        <p class="f_10">He is great, say thank you to him</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    `
+}
