@@ -21,13 +21,15 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
 </head>
 
 <body>
     <div class="main mb-5">
         <button id="test1" class="test" onclick="LoadLocalJson('json/test_data_record.json')">測試資料1</button>
         <div class="result-container my-4">
-            <canvas id="ratingChart" height="100"></canvas>
+            <canvas id="ratingChart" height="100" class="my-4"></canvas>
             <div id="song-list" class="row g-3"></div>
         </div>
     </div>
@@ -65,14 +67,17 @@
             const pointColors = ratings.map((_, i) =>
                 i === ratings.length - 1 ? 'white' : '#0b4670'
             );
-            // 找出有變化的點
+
+            // 找出有變化的點，變化的半徑設 2，沒變化設 0
             const pointRadii = ratings.map((val, i, arr) =>
-                i === 0 || val !== arr[i + 1] ? 4 : 0 || val !== arr[i - 1] ? 4 : 0
+                i === 0 || val !== arr[i - 1] ? 2 : 0 || val !== arr[i + 1] ? 2 : 0
             );
 
             // 設定每個點的邊框色
-            const pointBorders = ratings.map((_, i) => '#0b4670');
+            const pointBorders = ratings.map(() => '#0b4670');
+
             const ctx = document.getElementById('ratingChart').getContext('2d');
+
             new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -82,28 +87,60 @@
                         data: ratings,
                         borderColor: '#0b4670',
                         backgroundColor: '#0b4670',
-                        fill: false, // 不填滿
+                        fill: false,
                         tension: 0,
-                        borderWidth: 1, // 線變細
-                        pointRadius: pointRadii, // 動態設定每個點大小
-                        pointBackgroundColor: pointColors, // 上面定義的點顏色陣列
+                        borderWidth: 1,
+                        pointRadius: pointRadii,
+                        pointBackgroundColor: pointColors,
                         pointBorderColor: pointBorders,
                         pointBorderWidth: 2
                     }]
                 },
                 options: {
                     responsive: true,
-                    plugins: {
-                        legend: { display: false }, // 不顯示圖例
-                        tooltip: { enabled: true }  // hover 時顯示 label
+                    layout: {
+                        padding: {
+                            left: 35,
+                            right: 25
+                        }
                     },
                     scales: {
-                        x: {
-                            ticks: { display: false } // 關掉 x 軸文字
-                        },
+                        x: { ticks: { display: false } },
                         y: { beginAtZero: false }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // 不顯示圖例
+                        },
+                        datalabels: {
+                            formatter: (value, context) => {
+                                return context.dataset.pointRadius[context.dataIndex] === 2 ? value : '';
+                            },
+                            anchor: (context) => {
+                                const index = context.dataIndex;
+                                const dataset = context.dataset;
+                                const pointRadii = dataset.pointRadius;
+                                const last = context.chart.$lastLabelPos || { pos: 'end' };
+
+                                let pos;
+                                if (pointRadii[index] === 2) {
+                                    pos = last.pos === 'end' ? 'start' : 'end';
+                                    context.chart.$lastLabelPos = { pos };
+                                } else {
+                                    pos = last.pos;
+                                }
+                                return pos;
+                            },
+                            align: (context) => {
+                                const lastPos = context.chart.$lastLabelPos?.pos || 'end';
+                                return context.dataset.pointRadius[context.dataIndex] === 2
+                                    ? (lastPos === 'end' ? 'bottom' : 'top')
+                                    : 'center';
+                            }
+                        }
                     }
-                }
+                },
+                plugins: [ChartDataLabels] // 啟用 datalabels 插件
             });
 
             // 設定背景色

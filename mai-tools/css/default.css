@@ -5,6 +5,17 @@ rating cards
 user profile
 for fun
 */
+
+.main {
+	--bs-gutter-x: 1.5rem;
+	--bs-gutter-y: 0;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: calc(var(--bs-gutter-x) * .5);
+	padding-right: calc(var(--bs-gutter-x) * .5);
+	width: 915px;
+}
+
 a {
 	color: #0056b3 !important;
 	text-decoration: underline;
