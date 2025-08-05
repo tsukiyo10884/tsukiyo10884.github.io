@@ -10,7 +10,7 @@
     let childWin = null;
 
     // 自己資訊
-    if(url.pathname === "/maimai-mobile/home/"){        
+    if (url.pathname === "/maimai-mobile/home/") {
         type = 'main'
         childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
         setTimeout(() => {
@@ -18,7 +18,7 @@
                 childWin.postMessage({ type: "jp", payload: true }, "https://tsukiyo10884.github.io");
             }
         }, 500);
-    }    
+    }
     // 好友資訊
     else if (url.pathname === "/maimai-mobile/friend/friendDetail/") {
         idx = url.searchParams.get("idx");
@@ -75,6 +75,13 @@
                 break;
         }
     }
+    // 最近遊玩記錄
+    else if (url.pathname === "/maimai-mobile/record/") {
+        childWin = window.open("https://tsukiyo10884.github.io/mai-tools/record.html");
+        type = "record";
+    }
+
+
 
     if (type == 'main' || type == 'friend') {
         const script = document.currentScript;
@@ -105,6 +112,7 @@
             const user_info = {};
             const songs = [];
 
+            // 自己資訊
             if (idx === '') {
                 const homeRes = await fetch(`${domain}/maimai-mobile/home/`, { credentials: 'include' });
                 const homeText = await homeRes.text();
@@ -178,7 +186,10 @@
                         });
                     });
                 }
-            } else {
+
+            }
+            // 好友資訊
+            else {
                 const homeRes = await fetch(`${domain}/maimai-mobile/friend/friendDetail/?idx=` + idx, { credentials: 'include' });
                 const homeText = await homeRes.text();
                 const homeDoc = new DOMParser().parseFromString(homeText, 'text/html');
@@ -253,6 +264,7 @@
             }, 500);
         }, 1500);
     }
+    // 青門
     else if (type === 'gate1') {
         setTimeout(() => {
             childWin.postMessage({ type: "gate1_init", payload: null }, "https://tsukiyo10884.github.io");
@@ -274,6 +286,7 @@
             .then(res => res.json());
         gate.keySongs = [];
         const gateSongs = gateSongData.gate1;
+        let count = 0;
         for (const song of gateSongs) {
             const songRes = await fetch(domain + song.url, { credentials: 'include' });
             const songText = await songRes.text();
@@ -290,11 +303,15 @@
 
             gate.keySongs.push({ title: song.title, songLastPlayedDate });
 
-            // 延遲避免被鎖
-            await new Promise(resolve => setTimeout(resolve, 10));
+            // 每25頁就延遲一下，避免被鎖連線
+            count++;
+            if (count % 25 === 0) {
+                await new Promise(resolve => setTimeout(resolve, 10));
+            }
         }
         childWin.postMessage({ type: "gate1", payload: gate }, "https://tsukiyo10884.github.io");
     }
+    // 白門
     else if (type === 'gate2') {
         setTimeout(() => {
             childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
@@ -319,6 +336,7 @@
             childWin.postMessage({ type: "gate2", payload: gate }, "https://tsukiyo10884.github.io");
         }, 1000);
     }
+    // 紫門
     else if (type === 'gate3') {
         setTimeout(() => {
             childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
@@ -343,6 +361,7 @@
             childWin.postMessage({ type: "gate3", payload: gate }, "https://tsukiyo10884.github.io");
         }, 1000);
     }
+    // 黑門
     else if (type === 'gate4') {
         setTimeout(() => {
             childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
@@ -382,6 +401,7 @@
         }
         childWin.postMessage({ type: "gate4", payload: gate }, "https://tsukiyo10884.github.io");
     }
+    // 黃門
     else if (type === 'gate5') {
         setTimeout(() => {
             childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
@@ -406,6 +426,7 @@
             childWin.postMessage({ type: "gate5", payload: gate }, "https://tsukiyo10884.github.io");
         }, 1000);
     }
+    // 紅門
     else if (type === 'gate6') {
         setTimeout(() => {
             childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
@@ -445,6 +466,7 @@
         }
         childWin.postMessage({ type: "gate6", payload: gate }, "https://tsukiyo10884.github.io");
     }
+    // 塔
     else if (type === 'gate7') {
         setTimeout(() => {
             childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
@@ -462,7 +484,7 @@
         const gate7MapHTML = blocks.find(b => b.textContent.includes('7sRefちほー4'))?.outerHTML;
         gate.mapHTML = gate7MapHTML;
 
-        gate.key=[];
+        gate.key = [];
 
         for (let i = 1; i < 7; i++) {
             const gateRes = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=${i}`, { credentials: 'include' });
@@ -475,5 +497,79 @@
         }
 
         childWin.postMessage({ type: "gate7", payload: gate }, "https://tsukiyo10884.github.io");
+    }
+    // 最近遊玩紀錄
+    else if (type === "record") {
+        setTimeout(() => {
+            childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
+        }, 500);
+
+        const idxs = [...document.querySelectorAll('input[name="idx"]')].map(el => el.value);
+        let result = [];
+        let count = 0;
+        for (const idx of idxs) {
+            const homeRes = await fetch(`https://maimaidx-eng.com/maimai-mobile/record/playlogDetail/?idx=${idx}`, { credentials: 'include' });
+            const homeText = await homeRes.text();
+            const doc = new DOMParser().parseFromString(homeText, 'text/html');
+
+            const data = {
+                title: doc.querySelector('.basic_block').childNodes[2].textContent.trim(),
+                score: doc.querySelector('.playlog_achievement_txt').textContent.trim(),
+                dx_score: doc.querySelector('.white.p_r_5').textContent.trim(),
+                fast: doc.querySelectorAll('.playlog_fl_block .p_t_5')[0].textContent.trim(),
+                late: doc.querySelectorAll('.playlog_fl_block .p_t_5')[1].textContent.trim(),
+                rating: doc.querySelectorAll('.rating_block')[1]?.textContent.trim() ?? doc.querySelectorAll('.rating_block')[0]?.textContent.trim(),
+                rating_plus: doc.querySelector('.t_r.f_0 span').textContent.trim(),
+                notes: {
+                    tap: {
+                        critical_perfect: doc.querySelectorAll('tr:nth-of-type(2) td')[0].textContent.trim(),
+                        perfect: doc.querySelectorAll('tr:nth-of-type(2) td')[1].textContent.trim(),
+                        great: doc.querySelectorAll('tr:nth-of-type(2) td')[2].textContent.trim(),
+                        good: doc.querySelectorAll('tr:nth-of-type(2) td')[3].textContent.trim(),
+                        miss: doc.querySelectorAll('tr:nth-of-type(2) td')[4].textContent.trim()
+                    },
+                    hold: {
+                        critical_perfect: doc.querySelectorAll('tr:nth-of-type(3) td')[0].textContent.trim(),
+                        perfect: doc.querySelectorAll('tr:nth-of-type(3) td')[1].textContent.trim(),
+                        great: doc.querySelectorAll('tr:nth-of-type(3) td')[2].textContent.trim(),
+                        good: doc.querySelectorAll('tr:nth-of-type(3) td')[3].textContent.trim(),
+                        miss: doc.querySelectorAll('tr:nth-of-type(3) td')[4].textContent.trim()
+                    },
+                    slide: {
+                        critical_perfect: doc.querySelectorAll('tr:nth-of-type(4) td')[0].textContent.trim(),
+                        perfect: doc.querySelectorAll('tr:nth-of-type(4) td')[1].textContent.trim(),
+                        great: doc.querySelectorAll('tr:nth-of-type(4) td')[2].textContent.trim(),
+                        good: doc.querySelectorAll('tr:nth-of-type(4) td')[3].textContent.trim(),
+                        miss: doc.querySelectorAll('tr:nth-of-type(4) td')[4].textContent.trim()
+                    },
+                    touch: {
+                        critical_perfect: doc.querySelectorAll('tr:nth-of-type(5) td')[0].textContent.trim(),
+                        perfect: doc.querySelectorAll('tr:nth-of-type(5) td')[1].textContent.trim(),
+                        great: doc.querySelectorAll('tr:nth-of-type(5) td')[2].textContent.trim(),
+                        good: doc.querySelectorAll('tr:nth-of-type(5) td')[3].textContent.trim(),
+                        miss: doc.querySelectorAll('tr:nth-of-type(5) td')[4].textContent.trim()
+                    },
+                    break: {
+                        critical_perfect: doc.querySelectorAll('tr:nth-of-type(6) td')[0].textContent.trim(),
+                        perfect: doc.querySelectorAll('tr:nth-of-type(6) td')[1].textContent.trim(),
+                        great: doc.querySelectorAll('tr:nth-of-type(6) td')[2].textContent.trim(),
+                        good: doc.querySelectorAll('tr:nth-of-type(6) td')[3].textContent.trim(),
+                        miss: doc.querySelectorAll('tr:nth-of-type(6) td')[4].textContent.trim()
+                    }
+                },
+                max_combo: doc.querySelectorAll('.col2 .white')[0].textContent.trim(),
+                max_sync: doc.querySelectorAll('.col2 .white')[1].textContent.trim()
+            };
+
+            result.push(data);
+
+            // 每25頁就延遲一下，避免被鎖連線
+            count++;
+            if (count % 25 === 0) {
+                await new Promise(resolve => setTimeout(resolve, 10));
+            }
+        }
+
+        childWin.postMessage({ type: "record", payload: result }, "https://tsukiyo10884.github.io");
     }
 })()

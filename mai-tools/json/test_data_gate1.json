@@ -1,123 +1,123 @@
 {
-    "headerImg": "https://maimaidx-eng.com/maimai-mobile/img/KaleidxScope/Banner/81f131dc639eb373.png",
-    "gateImgHTML": "\n\t<div class=\"ks_block_inner w_450 m_t_15 m_b_15 t_c f_11\">\n\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/kaleidxscope_title_achievements.png\" class=\"\"><br>\n\t\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/KaleidxScope/Clear/64871174f5b02ba9.png\" class=\"\"><br>\n\t\t\t\t<div class=\"ks_block_acv\">\n\t\t\t\t\t\t\t\t\t\t\t<div class=\"ks_acv_img h_35 p_r t_c\">\n\t\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/kaleidxscope_clear.png\" class=\"\">\n\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t</div>\n",
-    "mapHTML": "<div class=\"m_10 m_t_0 f_0\">\n\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"w_180 p_r f_l\">\n\t\t\t\t\t\t<img loading=\"lazy\" src=\"https://maimaidx-eng.com/maimai-mobile/img/Map/Comp/f677a7041952dd18.png\" class=\"w_180 map_img_adj\">\n\t\t\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/map_complete.png\" class=\"map_comp_img\">\n\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"f_r\">\n\t\t\t\t\t<div class=\"map_name_block t_c f_r f_12\"><div class=\"map_name_block_inner\"><span>スカイストリートちほー6</span></div></div>\n\t\t\t\t\t<div class=\"clearfix\"></div>\n\t\t\t\t\t<div class=\"see_through_block w_270 m_t_5 m_l_10 p_10 p_b_0\">\n\t\t\t\t\t\t<div class=\"basic_block t_r p_5 p_r_10 f_14\"><img src=\"https://maimaidx-eng.com/maimai-mobile/img/map_total_length_label.png\" class=\"h_20 f_l\">800 Km</div>\n\t\t\t\t\t\t<div class=\"t_r p_5 p_r_10 f_11\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tNEXT REWARD <span class=\"f_14\">--</span> Km\n\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<form action=\"https://maimaidx-eng.com/maimai-mobile/map/mapDetail/\" method=\"get\" accept-charset=\"utf-8\" class=\"m_t_5 t_r\">\n\t\t\t\t\t\t<input type=\"hidden\" name=\"idx\" value=\"576ac68e4497b1aa6eb24a699520e6fe89e3c1454477f571b3f27f81011b6a10b604a497a605d050c6f936f21665dff9347766ba2060a65058d51d75ff10338c1SRh0viGKpEh29DCfVqRk9MIO0/LPpZ3iOSakEwL0aQ=\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"f_0\"><img src=\"https://maimaidx-eng.com/maimai-mobile/img/btn_detail.png\" class=\"w_84\"></button>\n\t\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"clearfix\"></div>\n\t\t\t\t\t</div>",
-    "keySongs": [
-        {
-            "title": "STEREOSCAPE",
-            "songLastPlayedDate": "2025/02/16"
-        },
-        {
-            "title": "Crazy Circle",
-            "songLastPlayedDate": "2025/03/23"
-        },
-        {
-            "title": "シエルブルーマルシェ",
-            "songLastPlayedDate": "2025/04/06"
-        },
-        {
-            "title": "ブレインジャックシンドローム",
-            "songLastPlayedDate": "2025/03/23"
-        },
-        {
-            "title": "共鳴",
-            "songLastPlayedDate": "2025/04/06"
-        },
-        {
-            "title": "Ututu",
-            "songLastPlayedDate": "2025/04/06"
-        },
-        {
-            "title": "REAL VOICE",
-            "songLastPlayedDate": "2025/03/23"
-        },
-        {
-            "title": "ユメヒバナ",
-            "songLastPlayedDate": "2025/03/23"
-        },
-        {
-            "title": "オリフィス",
-            "songLastPlayedDate": "2025/04/06"
-        },
-        {
-            "title": "パラボラ",
-            "songLastPlayedDate": "2025/03/23"
-        },
-        {
-            "title": "生命不詳",
-            "songLastPlayedDate": "2025/03/23"
-        },
-        {
-            "title": "星めぐり、果ての君へ。",
-            "songLastPlayedDate": "2025/03/23"
-        },
-        {
-            "title": "スローアライズ",
-            "songLastPlayedDate": "2025/03/30"
-        },
-        {
-            "title": "チエルカ／エソテリカ",
-            "songLastPlayedDate": "2025/04/06"
-        },
-        {
-            "title": "RIFFRAIN",
-            "songLastPlayedDate": "2025/04/06"
-        },
-        {
-            "title": "Falling",
-            "songLastPlayedDate": "2025/04/06"
-        },
-        {
-            "title": "ピリオドサイン",
-            "songLastPlayedDate": "2025/03/30"
-        },
-        {
-            "title": "群青シグナル",
-            "songLastPlayedDate": "2025/03/30"
-        },
-        {
-            "title": "アンバークロニクル",
-            "songLastPlayedDate": "2025/04/06"
-        },
-        {
-            "title": "宵の鳥",
-            "songLastPlayedDate": "2025/02/23"
-        },
-        {
-            "title": "Kairos",
-            "songLastPlayedDate": "2025/07/13"
-        },
-        {
-            "title": "リフヴェイン",
-            "songLastPlayedDate": "2025/03/30"
-        },
-        {
-            "title": "フェイクフェイス・フェイルセイフ",
-            "songLastPlayedDate": "2025/03/30"
-        },
-        {
-            "title": "シックスプラン",
-            "songLastPlayedDate": "2025/06/01"
-        },
-        {
-            "title": "フタタビ",
-            "songLastPlayedDate": "2025/04/06"
-        },
-        {
-            "title": "ふらふらふら、",
-            "songLastPlayedDate": "2025/03/23"
-        },
-        {
-            "title": "パラドクスイヴ",
-            "songLastPlayedDate": "2025/03/23"
-        },
-        {
-            "title": "YKWTD",
-            "songLastPlayedDate": "2025/07/27"
-        },
-        {
-            "title": "184億回のマルチトニック",
-            "songLastPlayedDate": "2025/06/21"
-        }
-    ]
+  "headerImg": "https://maimaidx-eng.com/maimai-mobile/img/KaleidxScope/Banner/81f131dc639eb373.png",
+  "gateImgHTML": "\n\t<div class=\"ks_block_inner w_450 m_t_15 m_b_15 t_c f_11\">\n\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/kaleidxscope_title_achievements.png\" class=\"\"><br>\n\t\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/KaleidxScope/Clear/64871174f5b02ba9.png\" class=\"\"><br>\n\t\t\t\t<div class=\"ks_block_acv\">\n\t\t\t\t\t\t\t\t\t\t\t<div class=\"ks_acv_img h_35 p_r t_c\">\n\t\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/kaleidxscope_clear.png\" class=\"\">\n\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t</div>\n",
+  "mapHTML": "<div class=\"m_10 m_t_0 f_0\">\n\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"w_180 p_r f_l\">\n\t\t\t\t\t\t<img loading=\"lazy\" src=\"https://maimaidx-eng.com/maimai-mobile/img/Map/Comp/f677a7041952dd18.png\" class=\"w_180 map_img_adj\">\n\t\t\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/map_complete.png\" class=\"map_comp_img\">\n\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"f_r\">\n\t\t\t\t\t<div class=\"map_name_block t_c f_r f_12\"><div class=\"map_name_block_inner\"><span>スカイストリートちほー6</span></div></div>\n\t\t\t\t\t<div class=\"clearfix\"></div>\n\t\t\t\t\t<div class=\"see_through_block w_270 m_t_5 m_l_10 p_10 p_b_0\">\n\t\t\t\t\t\t<div class=\"basic_block t_r p_5 p_r_10 f_14\"><img src=\"https://maimaidx-eng.com/maimai-mobile/img/map_total_length_label.png\" class=\"h_20 f_l\">800 Km</div>\n\t\t\t\t\t\t<div class=\"t_r p_5 p_r_10 f_11\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tNEXT REWARD <span class=\"f_14\">--</span> Km\n\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<form action=\"https://maimaidx-eng.com/maimai-mobile/map/mapDetail/\" method=\"get\" accept-charset=\"utf-8\" class=\"m_t_5 t_r\">\n\t\t\t\t\t\t<input type=\"hidden\" name=\"idx\" value=\"84083e04bbb1ecf3f8d4429efbc84afc70cf7e8676afb9c8c23cfaf2a6d215370c3563c1ab0513c4f3932d5f1357173bf6ac7d91eb606b0e9ffecab9f9e44e13xv5RMlHLHPGgNg6cQ1/jTOl+G09bMLsvtsThnhCzqjg=\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"f_0\"><img src=\"https://maimaidx-eng.com/maimai-mobile/img/btn_detail.png\" class=\"w_84\"></button>\n\t\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"clearfix\"></div>\n\t\t\t\t\t</div>",
+  "keySongs": [
+    {
+      "title": "STEREOSCAPE",
+      "songLastPlayedDate": "2025/03/23"
+    },
+    {
+      "title": "Crazy Circle",
+      "songLastPlayedDate": "2025/03/23"
+    },
+    {
+      "title": "シエルブルーマルシェ",
+      "songLastPlayedDate": "2025/04/06"
+    },
+    {
+      "title": "ブレインジャックシンドローム",
+      "songLastPlayedDate": "2025/03/23"
+    },
+    {
+      "title": "共鳴",
+      "songLastPlayedDate": "2025/04/06"
+    },
+    {
+      "title": "Ututu",
+      "songLastPlayedDate": "2025/04/06"
+    },
+    {
+      "title": "REAL VOICE",
+      "songLastPlayedDate": "2025/03/23"
+    },
+    {
+      "title": "ユメヒバナ",
+      "songLastPlayedDate": "2025/03/23"
+    },
+    {
+      "title": "オリフィス",
+      "songLastPlayedDate": "2025/04/06"
+    },
+    {
+      "title": "パラボラ",
+      "songLastPlayedDate": "2025/03/23"
+    },
+    {
+      "title": "生命不詳",
+      "songLastPlayedDate": "2025/03/23"
+    },
+    {
+      "title": "星めぐり、果ての君へ。",
+      "songLastPlayedDate": "2025/03/23"
+    },
+    {
+      "title": "スローアライズ",
+      "songLastPlayedDate": "2025/03/30"
+    },
+    {
+      "title": "チエルカ／エソテリカ",
+      "songLastPlayedDate": "2025/04/06"
+    },
+    {
+      "title": "RIFFRAIN",
+      "songLastPlayedDate": "2025/04/06"
+    },
+    {
+      "title": "Falling",
+      "songLastPlayedDate": "2025/04/06"
+    },
+    {
+      "title": "ピリオドサイン",
+      "songLastPlayedDate": "2025/03/30"
+    },
+    {
+      "title": "群青シグナル",
+      "songLastPlayedDate": "2025/03/30"
+    },
+    {
+      "title": "アンバークロニクル",
+      "songLastPlayedDate": "2025/04/06"
+    },
+    {
+      "title": "宵の鳥",
+      "songLastPlayedDate": "2025/02/23"
+    },
+    {
+      "title": "Kairos",
+      "songLastPlayedDate": "2025/07/13"
+    },
+    {
+      "title": "リフヴェイン",
+      "songLastPlayedDate": "2025/03/30"
+    },
+    {
+      "title": "フェイクフェイス・フェイルセイフ",
+      "songLastPlayedDate": "2025/03/30"
+    },
+    {
+      "title": "シックスプラン",
+      "songLastPlayedDate": "2025/06/01"
+    },
+    {
+      "title": "フタタビ",
+      "songLastPlayedDate": "2025/04/06"
+    },
+    {
+      "title": "ふらふらふら、",
+      "songLastPlayedDate": "2025/03/23"
+    },
+    {
+      "title": "パラドクスイヴ",
+      "songLastPlayedDate": "2025/03/23"
+    },
+    {
+      "title": "YKWTD",
+      "songLastPlayedDate": "2025/07/27"
+    },
+    {
+      "title": "184億回のマルチトニック",
+      "songLastPlayedDate": "2025/06/21"
+    }
+  ]
 }
