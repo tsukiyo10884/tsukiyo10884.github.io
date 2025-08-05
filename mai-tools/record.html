@@ -20,22 +20,15 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
     <div class="main mb-5">
-        <div class="result-container">
-            <div id="gate" class="align-items-center mb-4">
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                    <b id="msg"
-                        class="px-3 section-divider-title">連線中，請勿關閉maimai-net...</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <button id="test1" class="test" onclick="LoadLocalJson('json/test_data_record.json')">測試資料1</button>
-            </div>
-            <div id="map" class="w-100 mb-4"></div>
-            <div id="song-table" class="ms-1 mt-1"></div>
+        <button id="test1" class="test" onclick="LoadLocalJson('json/test_data_record.json')">測試資料1</button>
+        <div class="result-container my-4">
+            <canvas id="ratingChart" height="100"></canvas>
+            <div id="song-list" class="row g-3"></div>
         </div>
     </div>
     <footer class="text-center">
@@ -59,9 +52,118 @@
     $(window).on('message', (event) => {
         const data = event.originalEvent.data;
         if (data.type === 'init') {
-            $('#msg').text('連線中，請勿關閉maimai-net...由於一次請求過多容易被鎖連線，此動作會相當緩慢...');
+            $('#msg').text('連線中，請勿關閉maimai-net...');
         }
-    }
-    );
+        else if (data.type === 'record') {
+            const recordData = data.payload;
+
+            // R值折線圖
+            const labels = [...recordData].reverse().map((song, i) => `${i + 1}. ${song.title}`);
+            const ratings = [...recordData].reverse().map(song => parseInt(song.rating, 10));
+
+            // 設定每個點的背景色，最後一個透明
+            const pointColors = ratings.map((_, i) =>
+                i === ratings.length - 1 ? 'white' : '#0b4670'
+            );
+            // 找出有變化的點
+            const pointRadii = ratings.map((val, i, arr) =>
+                i === 0 || val !== arr[i + 1] ? 4 : 0 || val !== arr[i - 1] ? 4 : 0
+            );
+
+            // 設定每個點的邊框色
+            const pointBorders = ratings.map((_, i) => '#0b4670');
+            const ctx = document.getElementById('ratingChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Rating',
+                        data: ratings,
+                        borderColor: '#0b4670',
+                        backgroundColor: '#0b4670',
+                        fill: false, // 不填滿
+                        tension: 0,
+                        borderWidth: 1, // 線變細
+                        pointRadius: pointRadii, // 動態設定每個點大小
+                        pointBackgroundColor: pointColors, // 上面定義的點顏色陣列
+                        pointBorderColor: pointBorders,
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }, // 不顯示圖例
+                        tooltip: { enabled: true }  // hover 時顯示 label
+                    },
+                    scales: {
+                        x: {
+                            ticks: { display: false } // 關掉 x 軸文字
+                        },
+                        y: { beginAtZero: false }
+                    }
+                }
+            });
+
+            // 設定背景色
+            Chart.defaults.color = '#203844';
+            ctx.canvas.style.backgroundColor = '#ffffff';
+
+
+            // 歌曲詳細資料
+            const $container = $("#song-list");
+
+            $.each(recordData, function (_, song) {
+                let notesTable = `
+                <table class="mb-2">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Type</th>
+                            <th>Critical Perfect</th>
+                            <th>Perfect</th>
+                            <th>Great</th>
+                            <th>Good</th>
+                            <th>Miss</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `;
+
+                $.each(song.notes, function (type, vals) {
+                    notesTable += `
+                    <tr>
+                        <td>${type.charAt(0).toUpperCase() + type.slice(1)}</td>
+                        <td>${vals.critical_perfect}</td>
+                        <td>${vals.perfect}</td>
+                        <td>${vals.great}</td>
+                        <td>${vals.good}</td>
+                        <td>${vals.miss}</td>
+                    </tr>
+                `;
+                });
+
+                notesTable += `</tbody></table>`;
+
+                $container.append(`
+                    <div class="col-2">
+                        <div class="">
+                        <img src="${song.image}" class="card-img-top" alt="${song.title}">
+                        <div class="">
+                            <h5 class="">${song.title}</h5>
+                            <p class=""><strong>Score:</strong> ${song.score}</p>
+                            <p class=""><strong>DX Score:</strong> ${song.dx_score}</p>
+                            <p class=""><strong>FAST:</strong> ${song.fast} | <strong>LATE:</strong> ${song.late}</p>
+                            <p class=""><strong>Rating:</strong> ${song.rating} ${song.rating_plus}</p>
+                            ${notesTable}
+                            <p class=""><strong>Max Combo:</strong> ${song.max_combo}</p>
+                            <p class=""><strong>Max Sync:</strong> ${song.max_sync}</p>
+                        </div>
+                        </div>
+                    </div>
+                `);
+            });
+        }
+    });
 
 </script>

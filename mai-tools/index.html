@@ -24,13 +24,13 @@
     <script src="https://sgimera.github.io/mai_RatingAnalyzer/scripts_maimai/maidx_calc_sub.js"></script>
     <script src="https://sgimera.github.io/mai_RatingAnalyzer/scripts_maimai/maidx_calc_rating.js"></script>
     <script src="js/common.js"></script>
-    <script src="js/rating.js"></script>
-    <script src="js/suggestion.js"></script>
-    <script src="js/plate.js"></script>
-    <script src="js/level.js"></script>
-    <script src="js/special.js"></script>
-    <script src="js/for_axuan.js"></script>
-    <script src="js/for_ayo.js"></script>
+    <script src="js/main_feature/rating.js"></script>
+    <script src="js/main_feature/suggestion.js"></script>
+    <script src="js/main_feature/plate.js"></script>
+    <script src="js/main_feature/level.js"></script>
+    <script src="js/main_feature/special.js"></script>
+    <script src="js/main_feature/for_axuan.js"></script>
+    <script src="js/main_feature/for_ayo.js"></script>
 </head>
 
 <body>
@@ -195,7 +195,7 @@
 
             const $output = $('#output');
             switch (data.type) {
-                case "init":
+                case "init": {
                     $output.html(`取得成績中，請勿關閉maimai-net`);
                     if (data.payload != null) {
                         if (cssFiles.includes('css/' + data.payload + '.css')) {
@@ -207,18 +207,31 @@
                         }
                     }
                     break;
-                case "difficulty":
+                }
+                case "difficulty": {
                     $output.html(`取得成績中(${data.payload})，請勿關閉maimai-net`);
                     break;
-                case "result":
+                }
+                case "result": {
                     $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(data.payload, null, 2)}</textarea>`);
                     $('#button-group').removeClass('d-none');
                     refreshData();
                     break;
-                case "jp":
+                }
+                case "jp": {
                     if (data.payload) {
                         $('#version-switch').prop('checked', true);
                     }
+                    break;
+                }
+                case "special": {
+                    if (data.payload === 'ayo') {
+                        $('#output').html('<p class="f_14 p_0">Ayo專用版</p>');
+                    }
+                    else if (data.payload === 'axun') {
+                        $('#output').html('<p class="f_14 p_0">Axuan專用版</p>');
+                    }
+                }
             }
         });
 

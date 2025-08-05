@@ -117,10 +117,7 @@
     $(window).on('message', (event) => {
         $('.test').hide();
         const data = event.originalEvent.data;
-        if (data.type === 'gate1_init') {
-            $('#msg').text('連線中，請勿關閉maimai-net...由於一次請求過多容易被鎖連線(說的就是你29首的青鑰匙)，此動作會相當緩慢...');
-        }
-        else if (data.type === 'init') {
+        if (data.type === 'init') {
             $('#msg').text('連線中，請勿關閉maimai-net...');
         }
         else if (data.type === 'gate1') {
