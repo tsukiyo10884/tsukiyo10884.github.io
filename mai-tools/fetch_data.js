@@ -1,8 +1,8 @@
 (async () => {
-    const getGateUnlockProgress = async (domain, no) => {
+    const getGateUnlockProgress = async (domain, no, map) => {
         const gate = {};
 
-        const gateData = await fetchGateStatus(domain, no);
+        const gateData = await fetchGateStatus(domain, no, map);
         gate.headerImg = gateData.headerImg;
         gate.gateImgHTML = gateData.gateImgHTML;
         gate.mapHTML = gateData.mapHTML;
@@ -38,10 +38,10 @@
         return gate;
     }
 
-    const getGateRequirements = async (domain, no) => {
+    const getGateRequirements = async (domain, no, map) => {
         const gate = {};
 
-        const gateData = await fetchGateStatus(domain, no);
+        const gateData = await fetchGateStatus(domain, no, map);
         gate.headerImg = gateData.headerImg;
         gate.gateImgHTML = gateData.gateImgHTML;
         gate.mapHTML = gateData.mapHTML;
@@ -53,7 +53,7 @@
         return gate;
     }
 
-    const fetchGateStatus = async (domain, no) => {
+    const fetchGateStatus = async (domain, no, map) => {
         const gateRes = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=${no}`, { credentials: 'include' });
         const gateText = await gateRes.text();
         const gateDoc = new DOMParser().parseFromString(gateText, 'text/html');
@@ -64,7 +64,7 @@
         const MapText = await MapRes.text();
         const MapDoc = new DOMParser().parseFromString(MapText, 'text/html');
         const blocks = Array.from(MapDoc.querySelectorAll('.m_10.m_t_0.f_0'));
-        const MapHTML = blocks.find(b => b.textContent.includes('スカイストリートちほー6'))?.outerHTML;
+        const MapHTML = blocks.find(b => b.textContent.includes(map))?.outerHTML;
         const mapHTML = MapHTML;
 
         return { headerImg, gateImgHTML, mapHTML };
@@ -348,23 +348,33 @@
         }, 500);
         const no = parseInt(type.replace('gate', ''), 10);
         switch (no) {
-            // 青門、黑門、紅門
+            // 青門
             case 1:
-            case 4:
-            case 6:
-                gate = await getGateUnlockProgress(domain, no);
+                gate = await getGateUnlockProgress(domain, no, 'スカイストリートちほー6');
                 break;
-
-            // 白門、紫門、黃門
+            // 白門
             case 2:
-            case 3:
-            case 5:
-                gate = await getGateRequirements(domain, no);
+                gate = await getGateRequirements(domain, no, '天界ちほー8');
                 break;
-
+            // 紫門
+            case 3:
+                gate = await getGateRequirements(domain, no, 'BLACK ROSEちほー10');
+                break;
+            // 黑門
+            case 4:
+                gate = await getGateUnlockProgress(domain, no, 'メトロポリスちほー9');
+                break;
+            // 黃門
+            case 5:
+                gate = await getGateRequirements(domain, no, 'なないろちほー');
+                break;
+            // 紅門
+            case 6:
+                gate = await getGateUnlockProgress(domain, no, 'ドラゴンちほー4');
+                break;
             // 塔
             case 7: {
-                const gateData = await fetchGateStatus(domain, 7);
+                const gateData = await fetchGateStatus(domain, 7, '7sRefちほー4');
                 gate.headerImg = gateData.headerImg;
                 gate.gateImgHTML = gateData.gateImgHTML;
                 gate.mapHTML = gateData.mapHTML;
@@ -380,6 +390,29 @@
                         gateAcvImgHTML: gateDoc.querySelector('.ks_acv_img')?.outerHTML
                     });
                 }
+                break;
+            }
+
+            // 希望之門
+            case 9: {
+                const gateData = await fetchGateStatus(domain, 9, null);
+                gate.headerImg = gateData.headerImg;
+                gate.gateImgHTML = gateData.gateImgHTML;
+                break;
+            }
+
+            // 萬花筒
+            case 10: {
+                const gateData = await fetchGateStatus(domain, 10, null);
+                gate.headerImg = gateData.headerImg;
+                gate.gateImgHTML = gateData.gateImgHTML;
+                gate.key = {};
+
+                const gateRes = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=7`, { credentials: 'include' });
+                const gateText = await gateRes.text();
+                const gateDoc = new DOMParser().parseFromString(gateText, 'text/html');
+                gate.key.gateImg = gateDoc.querySelectorAll('.ks_block img')[1]?.src;
+                gate.key.gateAcvImgHTML = gateDoc.querySelector('.ks_acv_img')?.outerHTML;
                 break;
             }
         }

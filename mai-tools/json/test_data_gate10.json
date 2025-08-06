@@ -1,0 +1,9 @@
+{
+    "domain": "jp",
+    "headerImg": "https://maimaidx.jp/maimai-mobile/img/KaleidxScope/Banner/512b1332980ec5b0.png",
+    "gateImgHTML": "\n\t<div class=\"ks_block_inner w_450 m_t_15 m_b_15 t_c f_11\">\n\t\t\t\t<img src=\"https://maimaidx.jp/maimai-mobile/img/kaleidxscope_title_achievements.png\" class=\"\"><br>\n\t\t\t\t\t<img src=\"https://maimaidx.jp/maimai-mobile/img/KaleidxScope/LockDoor/be446b65d6be97fd.png\" class=\"\"><br>\n\t\t\t\t<div class=\"ks_block_acv\">\n\t\t\t\t\t\t\t<div class=\"ks_acv_img h_35 p_r t_c\">\n\t\t\t\t\t<img src=\"https://maimaidx.jp/maimai-mobile/img/kaleidxscope_noplay.png\" class=\"\">\n\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t</div>\n",
+    "key": {
+        "gateImg": "https://maimaidx.jp/maimai-mobile/img/KaleidxScope/LockDoor/b787e94aaaf189a4.png",
+        "gateAcvImgHTML": "<div class=\"ks_acv_img h_35 p_r t_c\">\n\t\t\t\t\t<img src=\"https://maimaidx.jp/maimai-mobile/img/kaleidxscope_noplay.png\" class=\"\">\n\t\t\t\t</div>"
+    }
+}
