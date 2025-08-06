@@ -106,47 +106,50 @@
         }
         // 萬花筒區域
         case "/maimai-mobile/map/kaleidxScopeDetail/": {
-            childWin = window.open("https://tsukiyo10884.github.io/mai-tools/gate.html");
-            if (url.origin === "https://maimaidx.jp") {
-                gate.domain = 'jp';
-            }
-            switch (url.search) {
-                // 青門
-                case "?gate=1":
-                    type = "gate1";
-                    break;
-                // 白門
-                case "?gate=2":
-                    type = "gate2";
-                    break;
-                // 紫門
-                case "?gate=3":
-                    type = "gate3";
-                    break;
-                // 黑門
-                case "?gate=4":
-                    type = "gate4";
-                    break;
-                // 黃門
-                case "?gate=5":
-                    type = "gate5";
-                    break;
-                // 紅門
-                case "?gate=6":
-                    type = "gate6";
-                    break;
-                // 塔
-                case "?gate=7":
-                    type = "gate7";
-                    break;
-                // 希望之門
-                case "?gate=9":
-                    type = "gate9";
-                    break;
-                // 萬花筒
-                case "?gate=10":
-                    type = "gate10";
-                    break;
+            if (url.search != null) {
+
+                childWin = window.open("https://tsukiyo10884.github.io/mai-tools/gate.html");
+                if (url.origin === "https://maimaidx.jp") {
+                    gate.domain = 'jp';
+                }
+                switch (url.search) {
+                    // 青門
+                    case "?gate=1":
+                        type = "gate1";
+                        break;
+                    // 白門
+                    case "?gate=2":
+                        type = "gate2";
+                        break;
+                    // 紫門
+                    case "?gate=3":
+                        type = "gate3";
+                        break;
+                    // 黑門
+                    case "?gate=4":
+                        type = "gate4";
+                        break;
+                    // 黃門
+                    case "?gate=5":
+                        type = "gate5";
+                        break;
+                    // 紅門
+                    case "?gate=6":
+                        type = "gate6";
+                        break;
+                    // 塔
+                    case "?gate=7":
+                        type = "gate7";
+                        break;
+                    // 希望之門
+                    case "?gate=9":
+                        type = "gate9";
+                        break;
+                    // 萬花筒
+                    case "?gate=10":
+                        type = "gate10";
+                        break;
+                }
             }
             break;
         }
