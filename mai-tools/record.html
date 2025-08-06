@@ -23,6 +23,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
+    <script src="js/common.js"></script>
 
 </head>
 
@@ -44,7 +45,7 @@
                 <canvas id="rating-chart" height="100" class="my-4"></canvas>
                 <div class="heavy-hr"></div>
             </div>
-            <table width="100%">
+            <table id="song-table" width="100%">
                 <thead>
                     <tr>
                         <th>封面</th>
@@ -54,7 +55,7 @@
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody id="song-table">
+                <tbody>
                     <!-- 由JS產生 -->
                 </tbody>
             </table>
@@ -65,7 +66,8 @@
         Made by <a href="https://github.com/tsukiyo10884/" target="_blank">Tsukiyo</a>, in collaboration with <a
             href="https://www.instagram.com/mua_2110/" target="_blank">Ayo</a> and <a
             href="https://www.instagram.com/aaaaaaaaaxiuan/" target="_blank">Axuan</a>.
-    </footer>
+    </footer>    
+    <extra></extra>
 </body>
 
 <script>
@@ -336,5 +338,35 @@
 
     .tr-remaster {
         background: #fff;
+    }
+
+
+    .table-wrapper {
+        margin: 10px 70px 70px;
+        box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    #song-table {
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+
+    #song-table th {
+        border: none;
+        background-color: black;
+        color: white;
+        font-weight: bold;
+    }
+
+    #song-table td {
+        border: none;
+    }
+
+    #song-table tr {
+        border-bottom: 1px solid black;
+    }
+
+    #song-table tr:last-child {
+        border-bottom: none;
     }
 </style>

@@ -350,7 +350,7 @@ const createCreditSection = () => {
                         <img src="img/ayo_credit_icon.svg" class="w-100">
                     </div>
                     <div class="col-8">
-                        這是阿幽
+                        這是洪阿幽
                         <p class="f_10">This is Ayo</p>
                         這個小工具的功能規劃者之一
                         <p class="f_10">One of the planners of this tool</p>
@@ -372,7 +372,7 @@ const createCreditSection = () => {
                         <img src="img/axuan_credit_icon.svg" class="w-100">
                     </div>
                     <div class="col-8">
-                        這是阿瑄
+                        這是簡阿瑄
                         <p class="f_10">This is Axuan</p>
                         這個小工具的功能規劃者之一
                         <p class="f_10">One of the planners of this tool</p>
@@ -401,3 +401,7 @@ const createCreditSection = () => {
     </div>
     `
 }
+
+$(document).ready(function() {
+    $('extra').html(createCreditSection());
+});
