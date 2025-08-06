@@ -238,14 +238,14 @@
             // 顯示歌單
             recordData.forEach((song, index) => {
                 $("#song-table").append(`
-                    <tr class="${song.difficulty}">
+                    <tr class="tr-${song.difficulty}">
                         <td><img src="${song.image}" width="50"></td>
                         <td>${song.title}</td>
                         <td>${song.score}</td>
                         <td>${song.dx_score}</td>
                         <td><button class="toggle-detail" data-id="${index}">詳細</button></td>
                     </tr>
-                    <tr class="detail-row ${song.difficulty}" id="detail-${index}" style="display:none;">
+                    <tr class="detail-row" id="detail-${index}" style="display:none;">
                         <td colspan="5" style="background:#f9f9f9;">
                             ${renderDetails(song)}
                         </td>
@@ -311,5 +311,30 @@
         background: #fcd810;
         width: 100%;
         height: 10px;
+    }
+
+    .tr-advanced {
+        background: #f8b709;
+    }
+
+    .tr-basic {
+        background: #81d955;
+    }
+
+    .tr-count {
+        display: block;
+        text-align: left;
+    }
+
+    .tr-expert {
+        background: #ff818d;
+    }
+
+    .tr-master {
+        background: #c346e7;
+    }
+
+    .tr-remaster {
+        background: #fff;
     }
 </style>
