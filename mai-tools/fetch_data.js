@@ -457,8 +457,8 @@
             if (count % 25 === 0) {
                 await new Promise(resolve => setTimeout(resolve, 10));
             }
-            
-            childWin.postMessage({ type: "record", payload: result }, "https://tsukiyo10884.github.io");
         }
+
+        childWin.postMessage({ type: "record", payload: result }, "https://tsukiyo10884.github.io");
     }
 })()

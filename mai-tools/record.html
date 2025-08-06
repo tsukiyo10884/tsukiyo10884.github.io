@@ -29,6 +29,11 @@
 <body>
     <div class="main mb-5">
         <h3>施工中</h3>
+        <div id="div-msg" class="col-12 d-flex align-items-center my-3">
+            <div class="section-divider left"></div>
+            <b id="msg" class="px-3 section-divider-title">如果你看到這行字超過5秒，代表資料沒傳成功，請回maimai-net重整後再試一次</b>
+            <div class="section-divider right"></div>
+        </div>
         <button id="test1" class="test" onclick="LoadLocalJson('json/test_data_record.json')">測試資料1</button>
         <div class="result-container my-4 d-none">
             <div id="div-rating-chart" class="mb-4">
@@ -67,14 +72,15 @@
     // 取得本地json(測試資料)
     const LoadLocalJson = (filePath) => {
         $.getJSON(filePath, (json) => {
-            $('.test').addClass('d-none');
-            $('.result-container').removeClass('d-none');
             window.postMessage({ type: "record", payload: json }, '*');
         });
     };
     let detailData = null;
     // 接到message事件(從maimai-net收到資料)
     $(window).on('message', (event) => {
+        $('.test').addClass('d-none');
+        $('.result-container').removeClass('d-none');
+        $('#div-msg').addClass('d-none');
         const data = event.originalEvent.data;
         if (data.type === 'init') {
             $('#msg').text('連線中，請勿關閉maimai-net...');
@@ -300,8 +306,8 @@
         padding-top: 10px;
     }
 
-    .heavy-hr{
-        background:#fcd810;
+    .heavy-hr {
+        background: #fcd810;
         width: 100%;
         height: 10px;
     }
