@@ -399,7 +399,9 @@
             const doc = new DOMParser().parseFromString(homeText, 'text/html');
 
             const data = {
+                no: count + 1,
                 title: doc.querySelector('.basic_block').childNodes[2].textContent.trim(),
+                difficulty: doc.querySelector('.playlog_diff').src.replace('https://maimaidx-eng.com/maimai-mobile/img/diff_', '').replace('.png', ''),
                 image: doc.querySelector('.music_img').src,
                 score: doc.querySelector('.playlog_achievement_txt').textContent.trim(),
                 dx_score: doc.querySelector('.white.p_r_5').textContent.trim(),
@@ -456,7 +458,5 @@
                 await new Promise(resolve => setTimeout(resolve, 10));
             }
         }
-
-        childWin.postMessage({ type: "record", payload: result }, "https://tsukiyo10884.github.io");
     }
 })()

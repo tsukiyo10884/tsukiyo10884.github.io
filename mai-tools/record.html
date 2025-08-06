@@ -22,15 +22,37 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
 
 </head>
 
 <body>
     <div class="main mb-5">
+        <h3>施工中</h3>
         <button id="test1" class="test" onclick="LoadLocalJson('json/test_data_record.json')">測試資料1</button>
-        <div class="result-container my-4">
-            <canvas id="ratingChart" height="100" class="my-4"></canvas>
-            <div id="song-list" class="row g-3"></div>
+        <div class="result-container my-4 d-none">
+            <div id="div-rating-chart" class="mb-4">
+                <div id="rating-chart-title" class="text-center mb-3">
+                    <h5>近50首Rating變化</h5>
+                </div>
+                <div class="heavy-hr"></div>
+                <canvas id="rating-chart" height="100" class="my-4"></canvas>
+                <div class="heavy-hr"></div>
+            </div>
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>封面</th>
+                        <th>曲名</th>
+                        <th>成績</th>
+                        <th>DX成績</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="song-table">
+                    <!-- 由JS產生 -->
+                </tbody>
+            </table>
         </div>
     </div>
     <footer class="text-center">
@@ -45,7 +67,8 @@
     // 取得本地json(測試資料)
     const LoadLocalJson = (filePath) => {
         $.getJSON(filePath, (json) => {
-            $('.test').hide();
+            $('.test').addClass('d-none');
+            $('.result-container').removeClass('d-none');
             window.postMessage({ type: "record", payload: json }, '*');
         });
     };
@@ -59,24 +82,15 @@
         else if (data.type === 'record') {
             const recordData = data.payload;
 
-            // R值折線圖
-            const labels = [...recordData].reverse().map((song, i) => `${i + 1}. ${song.title}`);
-            const ratings = [...recordData].reverse().map(song => parseInt(song.rating, 10));
-
-            // 設定每個點的背景色，最後一個透明
+            // R值折線圖            
+            const filteredData = recordData.filter((item, index, arr) => index === recordData.length - 1 || (arr[index + 1] != null && item.rating !== arr[index + 1].rating));
+            const labels = filteredData.map((song, i) => `${song.no}.${song.difficulty} : ${song.title} ${song.rating_plus}`);
+            const ratings = filteredData.map(song => parseInt(song.rating, 10));
+            // 設定每個點的背景色，最後一個空心
             const pointColors = ratings.map((_, i) =>
-                i === ratings.length - 1 ? 'white' : '#0b4670'
+                i === 0 ? 'white' : '#0b4670'
             );
-
-            // 找出有變化的點，變化的半徑設 2，沒變化設 0
-            const pointRadii = ratings.map((val, i, arr) =>
-                i === 0 || val !== arr[i - 1] ? 2 : 0 || val !== arr[i + 1] ? 2 : 0
-            );
-
-            // 設定每個點的邊框色
-            const pointBorders = ratings.map(() => '#0b4670');
-
-            const ctx = document.getElementById('ratingChart').getContext('2d');
+            const ctx = document.getElementById('rating-chart').getContext('2d');
 
             new Chart(ctx, {
                 type: 'line',
@@ -90,9 +104,9 @@
                         fill: false,
                         tension: 0,
                         borderWidth: 1,
-                        pointRadius: pointRadii,
+                        pointRadius: 3,
                         pointBackgroundColor: pointColors,
-                        pointBorderColor: pointBorders,
+                        pointBorderColor: '#0b4670',
                         pointBorderWidth: 2
                     }]
                 },
@@ -100,42 +114,55 @@
                     responsive: true,
                     layout: {
                         padding: {
-                            left: 35,
-                            right: 25
+                            right: 60,
+                            top: 40,
+                            bottom: 40,
                         }
                     },
                     scales: {
-                        x: { ticks: { display: false } },
-                        y: { beginAtZero: false }
+                        x: {
+                            ticks: { display: false },
+                            grid: { display: false },
+                            reverse: true,
+                        },
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                stepSize: 500,
+                                callback: (value) => value.toLocaleString(),
+                                color: '#203844',
+                                font: {
+                                    size: 12
+                                },
+                                padding: 15,
+                            }
+                        }
                     },
                     plugins: {
                         legend: {
-                            display: false // 不顯示圖例
+                            display: false
                         },
                         datalabels: {
-                            formatter: (value, context) => {
-                                return context.dataset.pointRadius[context.dataIndex] === 2 ? value : '';
+                            formatter: (value, ctx) => {
+                                return value.toLocaleString();
                             },
-                            anchor: (context) => {
-                                const index = context.dataIndex;
-                                const dataset = context.dataset;
-                                const pointRadii = dataset.pointRadius;
-                                const last = context.chart.$lastLabelPos || { pos: 'end' };
-
-                                let pos;
-                                if (pointRadii[index] === 2) {
-                                    pos = last.pos === 'end' ? 'start' : 'end';
-                                    context.chart.$lastLabelPos = { pos };
-                                } else {
-                                    pos = last.pos;
+                            color: (ctx) => ctx.dataIndex === 0 ? 'red' : '#0b4670',
+                            align: (ctx) => ctx.dataIndex === 0 ? 'right' : 'bottom',
+                            offset: 2,
+                            font: {
+                                size: 12
+                            },
+                        },
+                        annotation: {
+                            annotations: {
+                                line1: {
+                                    type: 'line',
+                                    yMin: ratings[0],
+                                    yMax: ratings[0],
+                                    borderColor: 'red',
+                                    borderWidth: 1,
+                                    drawTime: 'beforeDatasetsDraw'
                                 }
-                                return pos;
-                            },
-                            align: (context) => {
-                                const lastPos = context.chart.$lastLabelPos?.pos || 'end';
-                                return context.dataset.pointRadius[context.dataIndex] === 2
-                                    ? (lastPos === 'end' ? 'bottom' : 'top')
-                                    : 'center';
                             }
                         }
                     }
@@ -200,7 +227,82 @@
                     </div>
                 `);
             });
+
+
+            // 顯示歌單
+            recordData.forEach((song, index) => {
+                $("#song-table").append(`
+                    <tr class="${song.difficulty}">
+                        <td><img src="${song.image}" width="50"></td>
+                        <td>${song.title}</td>
+                        <td>${song.score}</td>
+                        <td>${song.dx_score}</td>
+                        <td><button class="toggle-detail" data-id="${index}">詳細</button></td>
+                    </tr>
+                    <tr class="detail-row ${song.difficulty}" id="detail-${index}" style="display:none;">
+                        <td colspan="5" style="background:#f9f9f9;">
+                            ${renderDetails(song)}
+                        </td>
+                    </tr>
+                `);
+            });
+
+            $(document).on("click", ".toggle-detail", function () {
+                const id = $(this).data("id");
+                $(`#detail-${id}`).toggle();
+            });
         }
     });
-
+    const renderDetails = (song) => {
+        return `
+            <div>
+                <p>FAST: ${song.fast} | LATE: ${song.late}</p>
+                <p>Rating: ${song.rating} ${song.rating_plus}</p>
+                <table class="detail-table">
+                <thead>
+                    <tr>
+                    <th>類型</th>
+                    <th>Critical Perfect</th>
+                    <th>Perfect</th>
+                    <th>Great</th>
+                    <th>Good</th>
+                    <th>Miss</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${Object.entries(song.notes).map(([type, stats]) => `
+                    <tr>
+                        <td>${type}</td>
+                        <td>${stats.critical_perfect}</td>
+                        <td>${stats.perfect}</td>
+                        <td>${stats.great}</td>
+                        <td>${stats.good}</td>
+                        <td>${stats.miss}</td>
+                    </tr>
+                    `).join('')}
+                </tbody>
+                </table>
+                <p>Max Combo: ${song.max_combo} | Max Sync: ${song.max_sync}</p>
+            </div>
+        `;
+    }
 </script>
+<style>
+    #div-rating-chart {
+        background: #203844;
+        padding: 20px;
+        border-radius: 20px;
+        border: 1px solid #ffffff;
+    }
+
+    #rating-chart-title {
+        color: #ffffff;
+        padding-top: 10px;
+    }
+
+    .heavy-hr{
+        background:#fcd810;
+        width: 100%;
+        height: 10px;
+    }
+</style>
