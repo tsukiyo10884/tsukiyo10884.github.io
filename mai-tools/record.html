@@ -79,13 +79,13 @@
     // 接到message事件(從maimai-net收到資料)
     $(window).on('message', (event) => {
         $('.test').addClass('d-none');
-        $('.result-container').removeClass('d-none');
-        $('#div-msg').addClass('d-none');
         const data = event.originalEvent.data;
         if (data.type === 'init') {
             $('#msg').text('連線中，請勿關閉maimai-net...');
         }
         else if (data.type === 'record') {
+            $('.result-container').removeClass('d-none');
+            $('#div-msg').addClass('d-none');
             const recordData = data.payload;
 
             // R值折線圖            
@@ -297,6 +297,7 @@
     #div-rating-chart {
         background: #203844;
         padding: 20px;
+        padding-top: 10px;
         border-radius: 20px;
         border: 1px solid #ffffff;
     }
