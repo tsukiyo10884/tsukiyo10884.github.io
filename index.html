@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=915">
+    <title>隨便寫寫 | tsukiyo10884</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="main mt-5">
+        <h3>隨便寫寫</h3>
+        <p>一切都是看心情，不保證正確性也不一定會維護</p>
+        <hr />
+        <p>本頁連結: <a href="https://tsukiyo10884.github.io">https://tsukiyo10884.github.io</a><br />
+            <img src="/QR.png" alt="https://tsukiyo10884.github.io" />
+        </p>
+        
+        <hr />
+
+        <h3>maimai小工具</h3>
+        <p>把以下內容加入書籤</p>
+        <div id="div-bookmark">
+            <textarea id="bookmark" rows="7"></textarea>
+            <button id="copy-btn">複製</button>
+        </div>
+        <p>並在 <a href="https://maimaidx-eng.com/maimai-mobile/home/">maimai-net</a> 開啟書籤以擷取資料</p>
+        <h4>目前可用功能</h4>
+        <ul>
+            <li>在首頁使用：擷取個人資料並可使用 R值表、R值候選曲、名牌版進度、等級進度 功能</li>
+            <li>在好友的主頁使用：擷取好友資料(但無法擷取自己未解鎖的歌曲)，並有如上功能</li>
+            <li>在萬花筒的各個門畫面使用：顯示該門地圖及鑰匙獲得條件及進度</li>
+            <li>神秘功能：阿瑄專屬功能與阿幽蒼蠅小遊戲</li>
+        </ul>
+
+        <h4>※補充</h4>
+        <ul>
+            <li>css可替換成下列樣式之一：
+                <button class="change-css">default</button>,
+                <button class="change-css">translucent</button>,
+                <button class="change-css">modern</button>,
+                <button class="change-css">cute_pink</button>,
+                <button class="change-css">cute_blue</button>,
+                <button class="change-css">fabric_board</button>
+            </li>
+            <li>譜面定數來源：<a href="https://arcade-songs.zetaraku.dev/maimai/about/">arcade-songs</a></li>
+            <li>刪除曲來源：<a
+                    href="https://maimai.fandom.com/zh/wiki/%E5%88%AA%E9%99%A4%E6%9B%B2%E4%B8%80%E8%A6%BD">maimai中文維基</a>
+            </li>
+            <li>rating 計算方法來源：<a href="https://sgimera.github.io/mai_RatingAnalyzer/maidx_calc.html">sgimera</a></li>
+        </ul>
+
+        <hr />
+
+        <h3 id="x-to-twitter"><a href="https://tsukiyo10884.github.io/it-is-twitter/index.html">x to twitter</a></h3>
+        <p>只是寫給還堅持使用藍色小鳥的小夥伴<br />
+            但其實用手機捷徑比較快</p>
+
+        <hr />
+
+        <p>Made by <a href="https://github.com/tsukiyo10884/">tsukiyo</a>, in collaboration with <a
+                href="https://www.instagram.com/mua_2110/">Ayo</a> and <a
+                href="https://www.instagram.com/aaaaaaaaaxiuan/">Axuan</a>.</p>
+
+
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+<script>
+    $('#copy-btn').on('click', function () {
+        const $textarea = $('#bookmark');
+        $textarea.select();
+        document.execCommand('copy');
+    });
+    const getBookmark = (css) => {
+        if (!css) {
+            css = 'default';
+        }
+        $('#bookmark').val(
+            `javascript:(function(){
+var css='${css}';
+var code="var
+s=document.createElement('script');s.src='https://tsukiyo10884.github.io/mai-tools/fetch_data.js?css="
++ css + "';document.body.appendChild(s);";
+eval(code);
+})();`);
+    };
+
+    getBookmark();
+    $('.change-css').on('click', function () {
+        const css = $(this).text();
+        getBookmark(css);
+        $('#bookmark').focus();
+    });
+</script>
+<style>
+    #div-bookmark {
+        position: relative;
+        width: 100%;
+    }
+
+    #bookmark {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+
+    #copy-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        padding: 4px 8px;
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    .main {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 0;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: calc(var(--bs-gutter-x) * .5);
+        padding-right: calc(var(--bs-gutter-x) * .5);
+        width: 915px;
+    }
+</style>

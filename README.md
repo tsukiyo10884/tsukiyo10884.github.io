@@ -25,7 +25,7 @@ javascript:(function(){
 #### 目前可用功能  
 - 在首頁使用：擷取個人資料並可使用 R值表、R值候選曲、名牌版進度、等級進度 功能
 - 在好友的主頁使用：擷取好友資料(但無法擷取自己未解鎖的歌曲)，並有如上功能
-- 在萬花筒的各個門畫面使用：顯示該門地圖及鑰匙獲得條件及進度  
+- 在萬花筒的各個門畫面使用：顯示該門及鑰匙獲得條件及進度  
 - 神秘功能：阿瑄專屬功能與阿幽蒼蠅小遊戲  
 
 #### ※補充 
@@ -33,6 +33,7 @@ javascript:(function(){
 - 譜面定數來源：[arcade-songs](https://arcade-songs.zetaraku.dev/maimai/about/)  
 - 刪除曲來源：[maimai中文維基](https://maimai.fandom.com/zh/wiki/%E5%88%AA%E9%99%A4%E6%9B%B2%E4%B8%80%E8%A6%BD)  
 - rating 計算方法來源：[sgimera](https://sgimera.github.io/mai_RatingAnalyzer/maidx_calc.html)
+- 部分功能靈感來源：[Ming-yuen Jien](https://github.com/myjian/)
 
 ---
 

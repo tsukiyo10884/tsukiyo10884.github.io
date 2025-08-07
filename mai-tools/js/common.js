@@ -403,5 +403,5 @@ const createCreditSection = () => {
 }
 
 $(document).ready(function() {
-    $('extra').html(createCreditSection());
+    $('.extra-credits').html(createCreditSection());
 });
