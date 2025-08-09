@@ -307,7 +307,7 @@
                         const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
                         const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
 
-                        const versionInternational = songVersionData[title + "__" + type];
+                        let versionInternational = songVersionData[title + "__" + type];
                         if (versionInternational === undefined) {
                             versionInternational = versionData[versionData.length - 1].versionName;
                         }
