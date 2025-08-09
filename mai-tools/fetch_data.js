@@ -308,6 +308,15 @@
                         const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
 
                         const versionInternational = songVersionData[title + "__" + type];
+                        if (versionInternational === undefined) {
+                            versionInternational = versionData[versionData.length - 1].versionName;
+                        }
+                        if (versionInternational.includes('でらっくす')) {
+                            versionInternational = versionInternational.replace('maimaiでらっくす', 'でらっくす');
+                        }
+                        if (versionInternational.includes('Splash')) {
+                            versionInternational = versionInternational.replace('Splash', 'スプラッシュ');
+                        }
                         const versionJapan = sheet?.version;
 
                         const tdIcon = block.querySelector('.t_r.f_0');
