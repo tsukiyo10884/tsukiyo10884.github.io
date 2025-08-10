@@ -49,6 +49,7 @@
                 <thead>
                     <tr>
                         <th>封面</th>
+                        <th>定數</th>
                         <th>曲名</th>
                         <th>成績</th>
                         <th>DX成績</th>
@@ -239,6 +240,7 @@
                 $("#song-table").append(`
                     <tr class="tr-${song.difficulty}">
                         <td><img src="${song.image}" width="50"></td>
+                        <td>${song.internalLevel}</td>
                         <td>${song.title}</td>
                         <td>${song.score}</td>
                         <td>${song.dx_score}</td>

@@ -1,4 +1,6 @@
 (async () => {
+    const detailData = await fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
+        .then(res => res.json());
     const getGateUnlockProgress = async (domain, no, map) => {
         const gate = {};
 
@@ -175,8 +177,6 @@
 
         setTimeout(async () => {
             const difficulties = ["basic", "advanced", "expert", "master", "remaster"];
-            const detailData = await fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
-                .then(res => res.json());
             const songVersionData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/international_song_version.json')
                 .then(res => res.json());
             const versionData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/version.json')
@@ -433,66 +433,76 @@
     else if (type === "record") {
         setTimeout(() => {
             childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
-        }, 500);
+        }, 1000);
 
         const idxs = [...document.querySelectorAll('input[name="idx"]')].map(el => el.value);
         let result = [];
         let count = 0;
         for (const idx of idxs) {
-            const homeRes = await fetch(`https://maimaidx-eng.com/maimai-mobile/record/playlogDetail/?idx=${idx}`, { credentials: 'include' });
-            const homeText = await homeRes.text();
-            const doc = new DOMParser().parseFromString(homeText, 'text/html');
+            const recordRes = await fetch(`https://maimaidx-eng.com/maimai-mobile/record/playlogDetail/?idx=${idx}`, { credentials: 'include' });
+            const recordText = await recordRes.text();
+            const recordDoc = new DOMParser().parseFromString(recordText, 'text/html');
+
+            const title = recordDoc.querySelector('.basic_block').childNodes[2].textContent.trim();
+            const difficulty = recordDoc.querySelector('.playlog_diff').src.replace('https://maimaidx-eng.com/maimai-mobile/img/diff_', '').replace('.png', '');
+            const type = recordDoc.querySelector('.playlog_music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
+
+            const songEntry = detailData.songs.find(s => s.songId === title);
+            const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulty);
+            const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
+            const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
 
             const data = {
                 no: count + 1,
-                title: doc.querySelector('.basic_block').childNodes[2].textContent.trim(),
-                difficulty: doc.querySelector('.playlog_diff').src.replace('https://maimaidx-eng.com/maimai-mobile/img/diff_', '').replace('.png', ''),
-                image: doc.querySelector('.music_img').src,
-                score: doc.querySelector('.playlog_achievement_txt').textContent.trim(),
-                dx_score: doc.querySelector('.white.p_r_5').textContent.trim(),
-                fast: doc.querySelectorAll('.playlog_fl_block .p_t_5')[0].textContent.trim(),
-                late: doc.querySelectorAll('.playlog_fl_block .p_t_5')[1].textContent.trim(),
-                rating: doc.querySelectorAll('.rating_block')[1]?.textContent.trim() ?? doc.querySelectorAll('.rating_block')[0]?.textContent.trim(),
-                rating_plus: doc.querySelector('.t_r.f_0 span').textContent.trim(),
+                title: title,
+                internalLevel: internalLevel,
+                difficulty: difficulty,
+                image: recordDoc.querySelector('.music_img').src,
+                score: recordDoc.querySelector('.playlog_achievement_txt').textContent.trim(),
+                dx_score: recordDoc.querySelector('.white.p_r_5').textContent.trim(),
+                fast: recordDoc.querySelectorAll('.playlog_fl_block .p_t_5')[0].textContent.trim(),
+                late: recordDoc.querySelectorAll('.playlog_fl_block .p_t_5')[1].textContent.trim(),
+                rating: recordDoc.querySelectorAll('.rating_block')[1]?.textContent.trim() ?? recordDoc.querySelectorAll('.rating_block')[0]?.textContent.trim(),
+                rating_plus: recordDoc.querySelector('.t_r.f_0 span').textContent.trim(),
                 notes: {
                     tap: {
-                        critical_perfect: doc.querySelectorAll('tr:nth-of-type(2) td')[0].textContent.trim(),
-                        perfect: doc.querySelectorAll('tr:nth-of-type(2) td')[1].textContent.trim(),
-                        great: doc.querySelectorAll('tr:nth-of-type(2) td')[2].textContent.trim(),
-                        good: doc.querySelectorAll('tr:nth-of-type(2) td')[3].textContent.trim(),
-                        miss: doc.querySelectorAll('tr:nth-of-type(2) td')[4].textContent.trim()
+                        critical_perfect: recordDoc.querySelectorAll('tr:nth-of-type(2) td')[0].textContent.trim(),
+                        perfect: recordDoc.querySelectorAll('tr:nth-of-type(2) td')[1].textContent.trim(),
+                        great: recordDoc.querySelectorAll('tr:nth-of-type(2) td')[2].textContent.trim(),
+                        good: recordDoc.querySelectorAll('tr:nth-of-type(2) td')[3].textContent.trim(),
+                        miss: recordDoc.querySelectorAll('tr:nth-of-type(2) td')[4].textContent.trim()
                     },
                     hold: {
-                        critical_perfect: doc.querySelectorAll('tr:nth-of-type(3) td')[0].textContent.trim(),
-                        perfect: doc.querySelectorAll('tr:nth-of-type(3) td')[1].textContent.trim(),
-                        great: doc.querySelectorAll('tr:nth-of-type(3) td')[2].textContent.trim(),
-                        good: doc.querySelectorAll('tr:nth-of-type(3) td')[3].textContent.trim(),
-                        miss: doc.querySelectorAll('tr:nth-of-type(3) td')[4].textContent.trim()
+                        critical_perfect: recordDoc.querySelectorAll('tr:nth-of-type(3) td')[0].textContent.trim(),
+                        perfect: recordDoc.querySelectorAll('tr:nth-of-type(3) td')[1].textContent.trim(),
+                        great: recordDoc.querySelectorAll('tr:nth-of-type(3) td')[2].textContent.trim(),
+                        good: recordDoc.querySelectorAll('tr:nth-of-type(3) td')[3].textContent.trim(),
+                        miss: recordDoc.querySelectorAll('tr:nth-of-type(3) td')[4].textContent.trim()
                     },
                     slide: {
-                        critical_perfect: doc.querySelectorAll('tr:nth-of-type(4) td')[0].textContent.trim(),
-                        perfect: doc.querySelectorAll('tr:nth-of-type(4) td')[1].textContent.trim(),
-                        great: doc.querySelectorAll('tr:nth-of-type(4) td')[2].textContent.trim(),
-                        good: doc.querySelectorAll('tr:nth-of-type(4) td')[3].textContent.trim(),
-                        miss: doc.querySelectorAll('tr:nth-of-type(4) td')[4].textContent.trim()
+                        critical_perfect: recordDoc.querySelectorAll('tr:nth-of-type(4) td')[0].textContent.trim(),
+                        perfect: recordDoc.querySelectorAll('tr:nth-of-type(4) td')[1].textContent.trim(),
+                        great: recordDoc.querySelectorAll('tr:nth-of-type(4) td')[2].textContent.trim(),
+                        good: recordDoc.querySelectorAll('tr:nth-of-type(4) td')[3].textContent.trim(),
+                        miss: recordDoc.querySelectorAll('tr:nth-of-type(4) td')[4].textContent.trim()
                     },
                     touch: {
-                        critical_perfect: doc.querySelectorAll('tr:nth-of-type(5) td')[0].textContent.trim(),
-                        perfect: doc.querySelectorAll('tr:nth-of-type(5) td')[1].textContent.trim(),
-                        great: doc.querySelectorAll('tr:nth-of-type(5) td')[2].textContent.trim(),
-                        good: doc.querySelectorAll('tr:nth-of-type(5) td')[3].textContent.trim(),
-                        miss: doc.querySelectorAll('tr:nth-of-type(5) td')[4].textContent.trim()
+                        critical_perfect: recordDoc.querySelectorAll('tr:nth-of-type(5) td')[0].textContent.trim(),
+                        perfect: recordDoc.querySelectorAll('tr:nth-of-type(5) td')[1].textContent.trim(),
+                        great: recordDoc.querySelectorAll('tr:nth-of-type(5) td')[2].textContent.trim(),
+                        good: recordDoc.querySelectorAll('tr:nth-of-type(5) td')[3].textContent.trim(),
+                        miss: recordDoc.querySelectorAll('tr:nth-of-type(5) td')[4].textContent.trim()
                     },
                     break: {
-                        critical_perfect: doc.querySelectorAll('tr:nth-of-type(6) td')[0].textContent.trim(),
-                        perfect: doc.querySelectorAll('tr:nth-of-type(6) td')[1].textContent.trim(),
-                        great: doc.querySelectorAll('tr:nth-of-type(6) td')[2].textContent.trim(),
-                        good: doc.querySelectorAll('tr:nth-of-type(6) td')[3].textContent.trim(),
-                        miss: doc.querySelectorAll('tr:nth-of-type(6) td')[4].textContent.trim()
+                        critical_perfect: recordDoc.querySelectorAll('tr:nth-of-type(6) td')[0].textContent.trim(),
+                        perfect: recordDoc.querySelectorAll('tr:nth-of-type(6) td')[1].textContent.trim(),
+                        great: recordDoc.querySelectorAll('tr:nth-of-type(6) td')[2].textContent.trim(),
+                        good: recordDoc.querySelectorAll('tr:nth-of-type(6) td')[3].textContent.trim(),
+                        miss: recordDoc.querySelectorAll('tr:nth-of-type(6) td')[4].textContent.trim()
                     }
                 },
-                max_combo: doc.querySelectorAll('.col2 .white')[0].textContent.trim(),
-                max_sync: doc.querySelectorAll('.col2 .white')[1].textContent.trim()
+                max_combo: recordDoc.querySelectorAll('.col2 .white')[0].textContent.trim(),
+                max_sync: recordDoc.querySelectorAll('.col2 .white')[1].textContent.trim()
             };
 
             result.push(data);
@@ -503,7 +513,6 @@
                 await new Promise(resolve => setTimeout(resolve, 10));
             }
         }
-
         childWin.postMessage({ type: "record", payload: result }, "https://tsukiyo10884.github.io");
     }
 })()
