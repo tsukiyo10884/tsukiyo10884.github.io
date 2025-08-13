@@ -454,6 +454,7 @@
 
             const data = {
                 no: count + 1,
+                date: recordDoc.querySelectorAll('.sub_title .v_b')[1].textContent.trim(),
                 title: title,
                 internalLevel: internalLevel,
                 difficulty: difficulty,

@@ -24,6 +24,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
     <script src="js/common.js"></script>
+    <script src="js/others/record.js"></script>
 
 </head>
 
@@ -45,14 +46,15 @@
                 <canvas id="rating-chart" height="100" class="my-4"></canvas>
                 <div class="heavy-hr"></div>
             </div>
-            <table id="song-table" width="100%">
+            <table id="song-table" class="text-center w-100">
                 <thead>
                     <tr>
                         <th>封面</th>
                         <th>定數</th>
-                        <th>曲名</th>
+                        <th class="text-start">曲名</th>
                         <th>成績</th>
                         <th>DX成績</th>
+                        <th>遊玩時間</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -92,211 +94,20 @@
             $('.result-container').removeClass('d-none');
             $('#div-msg').addClass('d-none');
             const recordData = data.payload;
-
-            // R值折線圖            
-            const filteredData = recordData.filter((item, index, arr) => index === recordData.length - 1 || (arr[index + 1] != null && item.rating !== arr[index + 1].rating));
-            const labels = filteredData.map((song, i) => `${song.no}.${song.difficulty} : ${song.title} ${song.rating_plus}`);
-            const ratings = filteredData.map(song => parseInt(song.rating, 10));
-            const pointColors = ratings.map((_, i) => i === 0 ? 'white' : '#0b4670');
-            const ctx = document.getElementById('rating-chart').getContext('2d');
-
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Rating',
-                        data: ratings,
-                        borderColor: '#0b4670',
-                        backgroundColor: '#0b4670',
-                        fill: false,
-                        tension: 0,
-                        borderWidth: 1,
-                        pointRadius: 3,
-                        pointBackgroundColor: pointColors,
-                        pointBorderColor: '#0b4670',
-                        pointBorderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    layout: {
-                        padding: {
-                            right: 60,
-                            top: 40,
-                            bottom: 40,
-                        }
-                    },
-                    scales: {
-                        x: {
-                            ticks: { display: false },
-                            grid: { display: false },
-                            reverse: true,
-                        },
-                        y: {
-                            beginAtZero: false,
-                            ticks: {
-                                stepSize: 500,
-                                callback: (value) => value.toLocaleString(),
-                                color: '#203844',
-                                font: {
-                                    size: 12
-                                },
-                                padding: 15,
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        datalabels: {
-                            formatter: (value, ctx) => {
-                                return value.toLocaleString();
-                            },
-                            color: (ctx) => ctx.dataIndex === 0 ? 'red' : '#0b4670',
-                            align: (ctx) => ctx.dataIndex === 0 ? 'right' : 'bottom',
-                            offset: 2,
-                            font: {
-                                size: 12
-                            },
-                        },
-                        annotation: {
-                            annotations: {
-                                line1: {
-                                    type: 'line',
-                                    yMin: ratings[0],
-                                    yMax: ratings[0],
-                                    borderColor: 'red',
-                                    borderWidth: 1,
-                                    drawTime: 'beforeDatasetsDraw'
-                                }
-                            }
-                        }
-                    }
-                },
-                plugins: [ChartDataLabels]
-            });
-            Chart.defaults.color = '#203844';
-            ctx.canvas.style.backgroundColor = '#ffffff';
-
-
-            // 歌曲詳細資料
-            const $container = $("#song-list");
-
-            $.each(recordData, function (_, song) {
-                let notesTable = `
-                <table class="mb-2">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Type</th>
-                            <th>Critical Perfect</th>
-                            <th>Perfect</th>
-                            <th>Great</th>
-                            <th>Good</th>
-                            <th>Miss</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                `;
-
-                $.each(song.notes, function (type, vals) {
-                    notesTable += `
-                    <tr>
-                        <td>${type.charAt(0).toUpperCase() + type.slice(1)}</td>
-                        <td>${vals.critical_perfect}</td>
-                        <td>${vals.perfect}</td>
-                        <td>${vals.great}</td>
-                        <td>${vals.good}</td>
-                        <td>${vals.miss}</td>
-                    </tr>
-                `;
-                });
-
-                notesTable += `</tbody></table>`;
-
-                $container.append(`
-                    <div class="col-2">
-                        <div class="">
-                        <img src="${song.image}" class="card-img-top" alt="${song.title}">
-                        <div class="">
-                            <h5 class="">${song.title}</h5>
-                            <p class=""><strong>Score:</strong> ${song.score}</p>
-                            <p class=""><strong>DX Score:</strong> ${song.dx_score}</p>
-                            <p class=""><strong>FAST:</strong> ${song.fast} | <strong>LATE:</strong> ${song.late}</p>
-                            <p class=""><strong>Rating:</strong> ${song.rating} ${song.rating_plus}</p>
-                            ${notesTable}
-                            <p class=""><strong>Max Combo:</strong> ${song.max_combo}</p>
-                            <p class=""><strong>Max Sync:</strong> ${song.max_sync}</p>
-                        </div>
-                        </div>
-                    </div>
-                `);
-            });
-
-
-            // 顯示歌曲紀錄清單
-            recordData.forEach((song, index) => {
-                $("#song-table").append(`
-                    <tr class="tr-${song.difficulty}">
-                        <td><img src="${song.image}" width="50"></td>
-                        <td>${song.internalLevel}</td>
-                        <td>${song.title}</td>
-                        <td>${song.score}</td>
-                        <td>${song.dx_score}</td>
-                        <td><button class="toggle-detail" data-id="${index}">詳細</button></td>
-                    </tr>
-                    <tr class="detail-row" id="detail-${index}" style="display:none;">
-                        <td colspan="5" style="background:#f9f9f9;">
-                            ${renderRecordDetails(song)}
-                        </td>
-                    </tr>
-                `);
-            });
-
-            $(document).on("click", ".toggle-detail", function () {
-                const id = $(this).data("id");
-                $(`#detail-${id}`).toggle();
-            });
+            showRatingChart(recordData);
+            showSongRecord(recordData);
         }
     });
 
-    //顯示詳細記錄
-    const renderRecordDetails = (song) => {
-        return `
-            <div>
-                <p>FAST: ${song.fast} | LATE: ${song.late}</p>
-                <p>Rating: ${song.rating} ${song.rating_plus}</p>
-                <table class="detail-table">
-                <thead>
-                    <tr>
-                    <th>類型</th>
-                    <th>Critical Perfect</th>
-                    <th>Perfect</th>
-                    <th>Great</th>
-                    <th>Good</th>
-                    <th>Miss</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${Object.entries(song.notes).map(([type, stats]) => `
-                    <tr>
-                        <td>${type}</td>
-                        <td>${stats.critical_perfect}</td>
-                        <td>${stats.perfect}</td>
-                        <td>${stats.great}</td>
-                        <td>${stats.good}</td>
-                        <td>${stats.miss}</td>
-                    </tr>
-                    `).join('')}
-                </tbody>
-                </table>
-                <p>Max Combo: ${song.max_combo} | Max Sync: ${song.max_sync}</p>
-            </div>
-        `;
-    }
 </script>
 <style>
+    .toggle-detail {
+        cursor: pointer;
+        color: black !important;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
     #div-rating-chart {
         background: #203844;
         padding: 20px;
@@ -369,5 +180,60 @@
 
     #song-table tr:last-child {
         border-bottom: none;
+    }
+
+    .detail-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .detail-table th,
+    .detail-table td {
+        border: 1px solid #ccc;
+        padding: 6px;
+        text-align: center;
+        vertical-align: middle;
+        word-wrap: break-word;
+    }
+
+    .cp {
+        background: #e1f1f9;
+        color: #ffbc09;
+        font-weight: bold;
+    }
+
+    .p {
+        background: #e1f1f9;
+        color: #ff9d00;
+        font-weight: bold;
+    }
+
+    .g {
+        background: #e1f1f9;
+        color: #f75ea3;
+        font-weight: bold;
+    }
+
+    .good {
+        background: #e1f1f9;
+        color: #2fca4c;
+        font-weight: bold;
+    }
+
+    .m {
+        background: #e1f1f9;
+        color: #8c8c8c;
+        font-weight: bold;
+    }
+
+    .fast {
+        color: #2974e0;
+        font-weight: bold;
+    }
+
+    .late {
+        color: #f35016;
+        font-weight: bold;
     }
 </style>
