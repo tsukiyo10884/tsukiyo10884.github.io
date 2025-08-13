@@ -536,6 +536,8 @@
             point: playerDataDoc.querySelector('.class_point_txt .f_29.f_b').textContent.trim()
         }
 
-        childWin.postMessage({ type: "playerData", payload: classData }, "https://tsukiyo10884.github.io");
+        setTimeout(() => {
+            childWin.postMessage({ type: "playerData", payload: classData }, "https://tsukiyo10884.github.io");
+        }, 1500);
     }
 })()
