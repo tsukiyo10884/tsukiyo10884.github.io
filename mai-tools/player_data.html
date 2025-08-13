@@ -95,7 +95,7 @@
                     $targetSelect.append(opt);
                 }
             });
-            countRequiredPoints(currentClass, currentCP, this.value);
+            countRequiredPoints(currentClass, currentCP, $targetSelect.val());
             $targetSelect.on('change', function () {
                 countRequiredPoints(currentClass, currentCP, this.value);
             });
