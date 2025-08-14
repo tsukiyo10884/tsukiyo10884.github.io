@@ -31,19 +31,50 @@ const classes = [
     { id: 25, name: "LEGEND", reqCP: null, win: { up: 1, same: 1, down: 1, boss: 1 }, lose: { up: 1, same: 1, down: 1 } }
 ];
 
-// 計算到目標階級還差幾分
-const countRequiredPoints = (cls, startCP, targetClass) => {
-    let totalPoints = 0;
-    let currentClass = cls;
-    let currentCP = startCP;
+// 計算到達目標階級還須打幾場(幾場普通戰跟幾場BOSS戰)
+const countRequiredPlay = (ccls, currentCP, tcls) => {
+    let normalBattles = 0;
+    let totalNormalBattles = 0;
+    let totalBossBattles = 0;
+    let allBattles = {};
 
-    while (currentClass !== targetClass) {
-        const classData = classes.find(c => c.name === currentClass);
-        if (!classData) break;
+    let currentClass = classes.find(c => c.name === ccls);
+    const targetClass = classes.find(c => c.name === tcls);
 
-        totalPoints += classData.reqCP;
-        currentClass = classes[classes.indexOf(classData) + 1]?.name;
+    // 先算當前位階還差幾場
+    let requiredPoints = currentClass.reqCP - currentCP;
+    while (requiredPoints > 0) {
+        totalNormalBattles++;
+        normalBattles++;
+        requiredPoints -= currentClass.win.up;
+    }
+    totalBossBattles++;
+    allBattles[currentClass.name] = { normal: normalBattles };
+    currentClass = classes[currentClass.id + 1];
+    normalBattles = 0;
+
+    // 算後續的位階
+    while (currentClass != targetClass) {
+        // 新的一階從上一階打贏BOSS的點數開始
+        requiredPoints = currentClass.reqCP - classes[currentClass.id - 1].win.boss;
+
+        while (requiredPoints > 0) {
+            totalNormalBattles++;
+            normalBattles++;
+            requiredPoints -= currentClass.win.up;
+        }
+        totalBossBattles++;
+        allBattles[currentClass.name] = { normal: normalBattles };
+        currentClass = classes[currentClass.id + 1];
+        normalBattles = 0;
     }
 
-    $('#requiredCP').val(totalPoints - currentCP);
+    let result = '<table class="text-center">';
+    result += '<tr><th>階級</th><th>所需最短場數</th><th>起始CP</th><th>總需CP</th><th>打贏上位</th><th>打贏同位</th><th>打贏下位</th></tr>';
+    Object.keys(allBattles).forEach(element => {
+        result += `<tr><td>${element}</td><td>${allBattles[element].normal}場</td><td>${classes[classes.find(c => c.name === element).id - 1].win.boss}分</td><td>${classes.find(c => c.name === element).reqCP}分</td><td>+${classes.find(c => c.name === element).win.up}分</td><td>+${classes.find(c => c.name === element).win.same}分</td><td>+${classes.find(c => c.name === element).win.down}分</td></tr>`;
+    });
+    result += `<tr><td colspan="7"><b>＞到達目標階級${tcls}為止總共需打贏${totalNormalBattles}場上位，並打贏${totalBossBattles}場BOSS戰<br/></b></td></tr>`;
+    result += '</table>';
+    $('#requiredBattles').html(result);
 };

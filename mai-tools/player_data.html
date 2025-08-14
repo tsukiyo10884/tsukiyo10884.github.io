@@ -41,12 +41,14 @@
         <div class="result-container my-4 d-none">
             <div id="classHTML" class="d-flex justify-content-center"></div>
             <div>
-                <label>目標 Class：
-                    <select id="targetClass"></select>
-                </label>
-                <label>所需CP：
-                    <input type="number" id="requiredCP" readonly />
-                </label>
+                <div class="col-12 d-flex justify-content-center mb-3">
+                    <label>目標 Class：<br />
+                        <select id="targetClass"></select>
+                    </label>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <div id="requiredBattles"></div>
+                </div>
             </div>
             <div id="classRule"></div>
         </div>
@@ -95,9 +97,9 @@
                     $targetSelect.append(opt);
                 }
             });
-            countRequiredPoints(currentClass, currentCP, $targetSelect.val());
+            countRequiredPlay(currentClass, currentCP, $targetSelect.val());
             $targetSelect.on('change', function () {
-                countRequiredPoints(currentClass, currentCP, this.value);
+                countRequiredPlay(currentClass, currentCP, this.value);
             });
         }
     });
@@ -106,6 +108,13 @@
 
 </script>
 <style>
+    #requiredBattles table,
+    #requiredBattles th,
+    #requiredBattles td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
     .class_geuge_frame,
     .class_geuge_meter {
         left: 23px;
