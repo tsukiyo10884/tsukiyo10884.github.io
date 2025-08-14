@@ -144,14 +144,14 @@ const showSongRecord = (recordData) => {
     // 顯示歌曲紀錄清單
     recordData.forEach((song, index) => {
         $("#song-table").append(`
-            <tr class="tr-${song.difficulty}">
+            <tr class="tr-${song.difficulty} toggle-row" data-id="${index}">
                 <td><img src="${song.image}" width="30"></td>
                 <td>${song.internalLevel}</td>
                 <td class="text-start">${song.title}</td>
                 <td>${song.score}</td>
                 <td>${song.dx_score}</td>
                 <td>${song.date}</td>
-                <td><a class="toggle-detail" data-id="${index}">＋</a></td>
+                <td><span id="toggle-status-${index}">＋</span></td>
             </tr>
             <tr class="detail-row" id="detail-${index}" style="display:none;">
                 <td colspan="7" style="background:#f9f9f9;width: 100%">
@@ -161,13 +161,13 @@ const showSongRecord = (recordData) => {
         `);
     });
 
-    $(document).on("click", ".toggle-detail", function () {
+    $(document).on("click", ".toggle-row", function () {
         const id = $(this).data("id");
         $(`#detail-${id}`).toggle();
         if ($(`#detail-${id}`).is(":visible")) {
-            $(this).text("－");
+            $(`#toggle-status-${id}`).text("－");
         } else {
-            $(this).text("＋");
+            $(`#toggle-status-${id}`).text("＋");
         }
     });
 }
