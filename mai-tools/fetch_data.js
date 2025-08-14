@@ -442,7 +442,7 @@
         let result = [];
         let count = 0;
         for (const idx of idxs) {
-            const recordRes = await fetch(`https://maimaidx-eng.com/maimai-mobile/record/playlogDetail/?idx=${idx}`, { credentials: 'include' });
+            const recordRes = await fetch(`${domain}/maimai-mobile/record/playlogDetail/?idx=${idx}`, { credentials: 'include' });
             const recordText = await recordRes.text();
             const recordDoc = new DOMParser().parseFromString(recordText, 'text/html');
 
@@ -525,7 +525,7 @@
             childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
         }, 1000);
 
-        const playerDataRes = await fetch(`https://maimaidx-eng.com/maimai-mobile/playerData/`, { credentials: 'include' });
+        const playerDataRes = await fetch(`${domain}/maimai-mobile/playerData/`, { credentials: 'include' });
         const playerDataText = await playerDataRes.text();
         const playerDataDoc = new DOMParser().parseFromString(playerDataText, 'text/html');
 
