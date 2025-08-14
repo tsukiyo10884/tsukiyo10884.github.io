@@ -3,11 +3,11 @@ const showClassProgress = (playerData) => {
 };
 
 const classes = [
-    { id: 0, name: "B5", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 5 }, lose: { up: 0, same: 0, down: 0 } },
-    { id: 1, name: "B4", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 5 }, lose: { up: 0, same: 0, down: 0 } },
-    { id: 2, name: "B3", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 5 }, lose: { up: 0, same: 0, down: 0 } },
-    { id: 3, name: "B2", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 5 }, lose: { up: 0, same: 0, down: 0 } },
-    { id: 4, name: "B1", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 5 }, lose: { up: 0, same: 0, down: 0 } },
+    { id: 0, name: "B5", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
+    { id: 1, name: "B4", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
+    { id: 2, name: "B3", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
+    { id: 3, name: "B2", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
+    { id: 4, name: "B1", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
     { id: 5, name: "A5", reqCP: 20, win: { up: 4, same: 4, down: 3, boss: 10 }, lose: { up: 1, same: 1, down: 1 } },
     { id: 6, name: "A4", reqCP: 20, win: { up: 4, same: 4, down: 3, boss: 10 }, lose: { up: 1, same: 1, down: 1 } },
     { id: 7, name: "A3", reqCP: 20, win: { up: 4, same: 4, down: 3, boss: 10 }, lose: { up: 1, same: 1, down: 1 } },
@@ -28,7 +28,7 @@ const classes = [
     { id: 22, name: "SSS3", reqCP: 80, win: { up: 3, same: 2, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
     { id: 23, name: "SSS2", reqCP: 90, win: { up: 3, same: 2, down: 1, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
     { id: 24, name: "SSS1", reqCP: 100, win: { up: 3, same: 2, down: 1, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 25, name: "LEGEND", reqCP: null, win: { up: 1, same: 1, down: 1, boss: 1 }, lose: { up: 1, same: 1, down: 1 } }
+    { id: 25, name: "LEGEND", reqCP: null, win: { up: 1, same: 1, down: 1, boss: 0 }, lose: { up: 1, same: 1, down: 1 } }
 ];
 
 // 計算到達目標階級還須打幾場(幾場普通戰跟幾場BOSS戰)
@@ -48,7 +48,11 @@ const countRequiredPlay = (ccls, currentCP, tcls) => {
         normalBattles++;
         requiredPoints -= currentClass.win.up;
     }
-    totalBossBattles++;
+
+    // A5之前沒有boss戰
+    if (currentClass.win.boss != 0) {
+        totalBossBattles++;
+    }
     allBattles[currentClass.name] = { normal: normalBattles };
     currentClass = classes[currentClass.id + 1];
     normalBattles = 0;
@@ -63,18 +67,23 @@ const countRequiredPlay = (ccls, currentCP, tcls) => {
             normalBattles++;
             requiredPoints -= currentClass.win.up;
         }
-        totalBossBattles++;
+
+        // A5之前沒有boss戰
+        if (currentClass.win.boss != 0) {
+            totalBossBattles++;
+        }
         allBattles[currentClass.name] = { normal: normalBattles };
         currentClass = classes[currentClass.id + 1];
         normalBattles = 0;
     }
 
     let result = '<table class="text-center">';
-    result += '<tr><th>階級</th><th>所需最短場數</th><th>起始CP</th><th>總需CP</th><th>打贏上位</th><th>打贏同位</th><th>打贏下位</th></tr>';
+    result += '<tr><th>階級</th><th>所需最短場數</th><th>起始CP</th><th>總需CP</th><th>打贏上位</th><th>打贏同位</th><th>打贏下位</th><th>打輸上位</th><th>打輸同位</th><th>打輸下位</th></tr>';
     Object.keys(allBattles).forEach(element => {
-        result += `<tr><td>${element}</td><td>${allBattles[element].normal}場</td><td>${classes[classes.find(c => c.name === element).id - 1].win.boss}分</td><td>${classes.find(c => c.name === element).reqCP}分</td><td>+${classes.find(c => c.name === element).win.up}分</td><td>+${classes.find(c => c.name === element).win.same}分</td><td>+${classes.find(c => c.name === element).win.down}分</td></tr>`;
+        if (element === "B5") { result += `<tr><td>${element}</td><td>${allBattles[element].normal}場</td><td>0分</td><td>${classes.find(c => c.name === element).reqCP}分</td><td>+${classes.find(c => c.name === element).win.up}分</td><td>+${classes.find(c => c.name === element).win.same}分</td><td>+${classes.find(c => c.name === element).win.down}分</td><td>-${classes.find(c => c.name === element).lose.up}分</td><td>-${classes.find(c => c.name === element).lose.same}分</td><td>-${classes.find(c => c.name === element).lose.down}分</td></tr>`; }
+        else { result += `<tr><td>${element}</td><td>${allBattles[element].normal}場</td><td>${classes[classes.find(c => c.name === element).id - 1].win.boss}分</td><td>${classes.find(c => c.name === element).reqCP}分</td><td>+${classes.find(c => c.name === element).win.up}分</td><td>+${classes.find(c => c.name === element).win.same}分</td><td>+${classes.find(c => c.name === element).win.down}分</td><td>-${classes.find(c => c.name === element).lose.up}分</td><td>-${classes.find(c => c.name === element).lose.same}分</td><td>-${classes.find(c => c.name === element).lose.down}分</td></tr>`; }
     });
-    result += `<tr><td colspan="7"><b>＞到達目標階級${tcls}為止總共需打贏${totalNormalBattles}場上位，並打贏${totalBossBattles}場BOSS戰<br/></b></td></tr>`;
+    result += `<tr><td colspan="10"><b>＞到達目標階級${tcls}為止總共需打贏${totalNormalBattles}場上位，並打贏${totalBossBattles}場BOSS戰＜<br/></b></td></tr>`;
     result += '</table>';
     $('#requiredBattles').html(result);
 };
