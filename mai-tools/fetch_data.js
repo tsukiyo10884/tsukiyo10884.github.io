@@ -92,12 +92,13 @@
 
         return { headerImg, gateImgHTML, mapHTML };
     }
+
+    // start
     let idx = '';
     const url = new URL(window.location.href);
     let domain = '';
     let type = '';
     let gate = {};
-
 
     domain = url.origin;
 
@@ -186,6 +187,12 @@
         case "/maimai-mobile/playerData/": {
             childWin = window.open("https://tsukiyo10884.github.io/mai-tools/player_data.html");
             type = "playerData";
+            break;
+        }
+        // 段位
+        case "/maimai-mobile/record/course/": {
+            childWin = window.open("https://tsukiyo10884.github.io/mai-tools/course.html");
+            type = "course";
             break;
         }
     }
@@ -519,7 +526,7 @@
         }
         childWin.postMessage({ type: "record", payload: result }, "https://tsukiyo10884.github.io");
     }
-
+    // 計算class
     else if (type === "playerData") {
         setTimeout(() => {
             childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
@@ -540,4 +547,18 @@
             childWin.postMessage({ type: "playerData", payload: classData }, "https://tsukiyo10884.github.io");
         }, 1500);
     }
-})()
+    // 段位
+    else if (type === "course") {
+        setTimeout(() => {
+            childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
+        }, 1000);
+
+        const courseDataRes = await fetch(`${domain}/maimai-mobile/course/`, { credentials: 'include' });
+        const courseDataText = await courseDataRes.text();
+        const courseDataDoc = new DOMParser().parseFromString(courseDataText, 'text/html');
+
+        setTimeout(() => {
+            childWin.postMessage({ type: "course", payload: result }, "https://tsukiyo10884.github.io");
+        }, 1500);
+    }
+})();
