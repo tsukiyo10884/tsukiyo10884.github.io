@@ -3,32 +3,32 @@ const showClassProgress = (playerData) => {
 };
 
 const classes = [
-    { id: 0, name: "B5", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
-    { id: 1, name: "B4", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
-    { id: 2, name: "B3", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
-    { id: 3, name: "B2", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
-    { id: 4, name: "B1", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
-    { id: 5, name: "A5", reqCP: 20, win: { up: 4, same: 4, down: 3, boss: 10 }, lose: { up: 1, same: 1, down: 1 } },
-    { id: 6, name: "A4", reqCP: 20, win: { up: 4, same: 4, down: 3, boss: 10 }, lose: { up: 1, same: 1, down: 1 } },
-    { id: 7, name: "A3", reqCP: 20, win: { up: 4, same: 4, down: 3, boss: 10 }, lose: { up: 1, same: 1, down: 1 } },
-    { id: 8, name: "A2", reqCP: 20, win: { up: 4, same: 4, down: 3, boss: 10 }, lose: { up: 1, same: 1, down: 1 } },
-    { id: 9, name: "A1", reqCP: 20, win: { up: 4, same: 4, down: 3, boss: 10 }, lose: { up: 1, same: 1, down: 1 } },
-    { id: 10, name: "S5", reqCP: 30, win: { up: 4, same: 3, down: 3, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 11, name: "S4", reqCP: 30, win: { up: 4, same: 3, down: 3, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 12, name: "S3", reqCP: 30, win: { up: 4, same: 3, down: 3, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 13, name: "S2", reqCP: 30, win: { up: 4, same: 3, down: 3, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 14, name: "S1", reqCP: 30, win: { up: 4, same: 3, down: 3, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 15, name: "SS5", reqCP: 50, win: { up: 3, same: 3, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 16, name: "SS4", reqCP: 50, win: { up: 3, same: 3, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 17, name: "SS3", reqCP: 50, win: { up: 3, same: 3, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 18, name: "SS2", reqCP: 50, win: { up: 3, same: 3, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 19, name: "SS1", reqCP: 50, win: { up: 3, same: 3, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 20, name: "SSS5", reqCP: 60, win: { up: 3, same: 2, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 21, name: "SSS4", reqCP: 70, win: { up: 3, same: 2, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 22, name: "SSS3", reqCP: 80, win: { up: 3, same: 2, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 23, name: "SSS2", reqCP: 90, win: { up: 3, same: 2, down: 1, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 24, name: "SSS1", reqCP: 100, win: { up: 3, same: 2, down: 1, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
-    { id: 25, name: "LEGEND", reqCP: null, win: { up: 1, same: 1, down: 1, boss: 0 }, lose: { up: 1, same: 1, down: 1 } }
+    { id: 0, name: "B5", class: "B", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
+    { id: 1, name: "B4", class: "B", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
+    { id: 2, name: "B3", class: "B", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
+    { id: 3, name: "B2", class: "B", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
+    { id: 4, name: "B1", class: "B", reqCP: 10, win: { up: 5, same: 5, down: 5, boss: 0 }, lose: { up: 0, same: 0, down: 0 } },
+    { id: 5, name: "A5", class: "A", reqCP: 20, win: { up: 4, same: 4, down: 3, boss: 10 }, lose: { up: 1, same: 1, down: 1 } },
+    { id: 6, name: "A4", class: "A", reqCP: 20, win: { up: 4, same: 4, down: 3, boss: 10 }, lose: { up: 1, same: 1, down: 1 } },
+    { id: 7, name: "A3", class: "A", reqCP: 20, win: { up: 4, same: 4, down: 3, boss: 10 }, lose: { up: 1, same: 1, down: 1 } },
+    { id: 8, name: "A2", class: "A", reqCP: 20, win: { up: 4, same: 4, down: 3, boss: 10 }, lose: { up: 1, same: 1, down: 1 } },
+    { id: 9, name: "A1", class: "A", reqCP: 20, win: { up: 4, same: 4, down: 3, boss: 10 }, lose: { up: 1, same: 1, down: 1 } },
+    { id: 10, name: "S5", class: "S", reqCP: 30, win: { up: 4, same: 3, down: 3, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 11, name: "S4", class: "S", reqCP: 30, win: { up: 4, same: 3, down: 3, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 12, name: "S3", class: "S", reqCP: 30, win: { up: 4, same: 3, down: 3, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 13, name: "S2", class: "S", reqCP: 30, win: { up: 4, same: 3, down: 3, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 14, name: "S1", class: "S", reqCP: 30, win: { up: 4, same: 3, down: 3, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 15, name: "SS5", class: "SS", reqCP: 50, win: { up: 3, same: 3, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 16, name: "SS4", class: "SS", reqCP: 50, win: { up: 3, same: 3, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 17, name: "SS3", class: "SS", reqCP: 50, win: { up: 3, same: 3, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 18, name: "SS2", class: "SS", reqCP: 50, win: { up: 3, same: 3, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 19, name: "SS1", class: "SS", reqCP: 50, win: { up: 3, same: 3, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 20, name: "SSS5", class: "SSS", reqCP: 60, win: { up: 3, same: 2, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 21, name: "SSS4", class: "SSS", reqCP: 70, win: { up: 3, same: 2, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 22, name: "SSS3", class: "SSS", reqCP: 80, win: { up: 3, same: 2, down: 2, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 23, name: "SSS2", class: "SSS", reqCP: 90, win: { up: 3, same: 2, down: 1, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 24, name: "SSS1", class: "SSS", reqCP: 100, win: { up: 3, same: 2, down: 1, boss: 10 }, lose: { up: 1, same: 2, down: 3 } },
+    { id: 25, name: "LEGEND", class: "LEGEND", reqCP: null, win: { up: 1, same: 1, down: 1, boss: 0 }, lose: { up: 1, same: 1, down: 1 } }
 ];
 
 // 計算到達目標階級還須打幾場(幾場普通戰跟幾場BOSS戰)
@@ -80,10 +80,10 @@ const countRequiredPlay = (ccls, currentCP, tcls) => {
     let result = '<table class="text-center">';
     result += '<tr><th>階級</th><th>所需最短場數</th><th>起始CP</th><th>總需CP</th><th>打贏上位</th><th>打贏同位</th><th>打贏下位</th><th>打輸上位</th><th>打輸同位</th><th>打輸下位</th></tr>';
     Object.keys(allBattles).forEach(element => {
-        if (element === "B5") { result += `<tr><td>${element}</td><td>${allBattles[element].normal}場</td><td>0分</td><td>${classes.find(c => c.name === element).reqCP}分</td><td>+${classes.find(c => c.name === element).win.up}分</td><td>+${classes.find(c => c.name === element).win.same}分</td><td>+${classes.find(c => c.name === element).win.down}分</td><td>-${classes.find(c => c.name === element).lose.up}分</td><td>-${classes.find(c => c.name === element).lose.same}分</td><td>-${classes.find(c => c.name === element).lose.down}分</td></tr>`; }
-        else { result += `<tr><td>${element}</td><td>${allBattles[element].normal}場</td><td>${classes[classes.find(c => c.name === element).id - 1].win.boss}分</td><td>${classes.find(c => c.name === element).reqCP}分</td><td>+${classes.find(c => c.name === element).win.up}分</td><td>+${classes.find(c => c.name === element).win.same}分</td><td>+${classes.find(c => c.name === element).win.down}分</td><td>-${classes.find(c => c.name === element).lose.up}分</td><td>-${classes.find(c => c.name === element).lose.same}分</td><td>-${classes.find(c => c.name === element).lose.down}分</td></tr>`; }
+        if (element === "B5") { result += `<tr class="color_${classes.find(c => c.name === element).class}"><td>${element}</td><td>${allBattles[element].normal}場</td><td>0分</td><td>${classes.find(c => c.name === element).reqCP}分</td><td>+${classes.find(c => c.name === element).win.up}分</td><td>+${classes.find(c => c.name === element).win.same}分</td><td>+${classes.find(c => c.name === element).win.down}分</td><td>-${classes.find(c => c.name === element).lose.up}分</td><td>-${classes.find(c => c.name === element).lose.same}分</td><td>-${classes.find(c => c.name === element).lose.down}分</td></tr>`; }
+        else { result += `<tr class="color_${classes.find(c => c.name === element).class}"><td>${element}</td><td>${allBattles[element].normal}場</td><td>${classes[classes.find(c => c.name === element).id - 1].win.boss}分</td><td>${classes.find(c => c.name === element).reqCP}分</td><td>+${classes.find(c => c.name === element).win.up}分</td><td>+${classes.find(c => c.name === element).win.same}分</td><td>+${classes.find(c => c.name === element).win.down}分</td><td>-${classes.find(c => c.name === element).lose.up}分</td><td>-${classes.find(c => c.name === element).lose.same}分</td><td>-${classes.find(c => c.name === element).lose.down}分</td></tr>`; }
     });
-    result += `<tr><td colspan="10"><b>＞到達目標階級${tcls}為止總共需打贏${totalNormalBattles}場上位，並打贏${totalBossBattles}場BOSS戰＜<br/></b></td></tr>`;
+    result += `<tr class="color_result"><td colspan="10"><b>＞到達目標階級${tcls}為止總共需打贏${totalNormalBattles}場上位，並打贏${totalBossBattles}場BOSS戰＜<br/></b></td></tr>`;
     result += '</table>';
     $('#requiredBattles').html(result);
 };

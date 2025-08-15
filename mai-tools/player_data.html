@@ -36,8 +36,8 @@
             <b id="msg" class="px-3 section-divider-title">如果你看到這行字超過5秒，代表資料沒傳成功，請回maimai-net重整後再試一次</b>
             <div class="section-divider right"></div>
         </div>
-        <button id="test1" class="test"
-            onclick="LoadLocalJson('json/test_data/test_data_player_data.json')">測試資料1</button>
+        <button id="test1" class="test" onclick="LoadLocalJson('json/test_data/test_data_player_data.json')">測試資料1</button>
+        <button id="test2" class="test" onclick="LoadLocalJson('json/test_data/test_data_player_data2.json')">測試資料2</button>
         <div class="result-container my-4 d-none">
             <div id="classHTML" class="d-flex justify-content-center"></div>
             <div>
@@ -113,8 +113,9 @@
         border: 1px solid black;
         border-collapse: collapse;
     }
-    
-    #requiredBattles th {
+
+    #requiredBattles th,
+    .color_result {
         background-color: black;
         color: white;
         font-weight: bold;
@@ -254,5 +255,25 @@
 
     .w_230 {
         width: 230px;
+    }
+
+    .color_B {
+        background-color: #c7eedf;
+    }
+
+    .color_A {
+        background-color: #ffc8c8;
+    }
+
+    .color_S {
+        background-color: #ffe1c9;
+    }
+
+    .color_SS {
+        background-color: #b7daff;
+    }
+
+    .color_SSS {
+        background-color: #fef65e;
     }
 </style>
