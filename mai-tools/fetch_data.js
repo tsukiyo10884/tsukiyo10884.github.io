@@ -93,8 +93,9 @@
         return { headerImg, gateImgHTML, mapHTML };
     }
 
-    // start
+    //////////////////////////////////////////////////////////////////////// start ////////////////////////////////////////////////////////////////////////
     let idx = '';
+    const difficulties = ["basic", "advanced", "expert", "master", "remaster"];
     const url = new URL(window.location.href);
     let domain = '';
     let type = '';
@@ -210,11 +211,8 @@
         }, 1000);
 
         setTimeout(async () => {
-            const difficulties = ["basic", "advanced", "expert", "master", "remaster"];
-            const songVersionData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/international_song_version.json')
-                .then(res => res.json());
-            const versionData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/version.json')
-                .then(res => res.json());
+            const songVersionData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/international_song_version.json').then(res => res.json());
+            const versionData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/version.json').then(res => res.json());
 
             let user_info = {};
             const songs = [];
@@ -552,6 +550,63 @@
         setTimeout(() => {
             childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
         }, 1000);
+
+        const courseData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/course.json').then(res => res.json());
+
+        let courseSongs = {};
+        courseData.forEach(course => {
+            course.songs.forEach(song => {
+                if (song.difficulty === "basic") {
+                    courseSongs.basic = courseSongs.basic || [];
+                    courseSongs.basic.push(song);
+                } else if (song.difficulty === "advanced") {
+                    courseSongs.advanced = courseSongs.advanced || [];
+                    courseSongs.advanced.push(song);
+                } else if (song.difficulty === "expert") {
+                    courseSongs.expert = courseSongs.expert || [];
+                    courseSongs.expert.push(song);
+                } else if (song.difficulty === "master") {
+                    courseSongs.master = courseSongs.master || [];
+                    courseSongs.master.push(song);
+                } else if (song.difficulty === "remaster") {
+                    courseSongs.remaster = courseSongs.remaster || [];
+                    courseSongs.remaster.push(song);
+                }
+            });
+        });
+
+        for (let i = 0; i < difficulties.length; i++) {
+            childWin.postMessage({ type: "difficulty", payload: difficulties[i] }, "https://tsukiyo10884.github.io");
+            const res = await fetch(`${domain}/maimai-mobile/record/musicGenre/search/?genre=99&diff=${i}`, {
+                credentials: 'include'
+            });
+            const text = await res.text();
+            const doc = new DOMParser().parseFromString(text, 'text/html');
+            const blocks = doc.querySelectorAll('div.w_450.m_15.p_r.f_0');
+
+            let result = [];
+
+            courseSongs[difficulties[i]].forEach(song => {
+
+                const target = [...blocks].find(block => {
+                    const hasdifficulty = block.querySelector('.music_' + difficulties[i] + '_score_back');
+                    const name = block.querySelector('.music_name_block')?.textContent.trim();
+                    const kindIcon = block.querySelector('.music_kind_icon')?.getAttribute('src');
+                    return hasdifficulty && name === song.title && kindIcon?.includes(song.type);
+                });
+
+                const score = parseFloat(
+                    target.querySelector('.music_score_block.w_112')?.textContent.trim().replace('%', '') || "0"
+                ).toFixed(4) + "%";
+
+                result.push({
+                    title: song.title,
+                    type: song.type,
+                    difficulty: difficulties[i],
+                    score: score
+                });
+            });
+        }
 
         const courseDataRes = await fetch(`${domain}/maimai-mobile/course/`, { credentials: 'include' });
         const courseDataText = await courseDataRes.text();

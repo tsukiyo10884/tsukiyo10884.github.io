@@ -8,7 +8,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 20,
-        "Songs": [
+        "songs": [
             {
                 "title": "いーあるふぁんくらぶ",
                 "type": "dx",
@@ -40,7 +40,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 20,
-        "Songs": [
+        "songs": [
             {
                 "title": "唱",
                 "type": "dx",
@@ -72,7 +72,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 50,
-        "Songs": [
+        "songs": [
             {
                 "title": "さよならヒストリー",
                 "type": "dx",
@@ -104,7 +104,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 50,
-        "Songs": [
+        "songs": [
             {
                 "title": "酔いどれ知らず",
                 "type": "dx",
@@ -136,7 +136,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 50,
-        "Songs": [
+        "songs": [
             {
                 "title": "ポップミュージックは僕のもの",
                 "type": "std",
@@ -168,7 +168,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 50,
-        "Songs": [
+        "songs": [
             {
                 "title": "最終鬼畜妹・一部声",
                 "type": "std",
@@ -200,7 +200,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 50,
-        "Songs": [
+        "songs": [
             {
                 "title": "再会",
                 "type": "dx",
@@ -232,7 +232,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 50,
-        "Songs": [
+        "songs": [
             {
                 "title": "福宿音屋魂音泉",
                 "type": "dx",
@@ -264,7 +264,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 30,
-        "Songs": [
+        "songs": [
             {
                 "title": "新人類",
                 "type": "dx",
@@ -296,7 +296,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 30,
-        "Songs": [
+        "songs": [
             {
                 "title": "Imperishable Night 2006 (2016 Refine)",
                 "type": "std",
@@ -328,7 +328,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 10,
-        "Songs": [
+        "songs": [
             {
                 "title": "STARTLINER",
                 "type": "dx",
@@ -360,7 +360,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 10,
-        "Songs": [
+        "songs": [
             {
                 "title": "ロールプレイングゲーム",
                 "type": "std",
@@ -392,7 +392,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 10,
-        "Songs": [
+        "songs": [
             {
                 "title": "まにまに",
                 "type": "dx",
@@ -424,7 +424,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 10,
-        "Songs": [
+        "songs": [
             {
                 "title": "ライアーダンサー",
                 "type": "dx",
@@ -456,7 +456,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 10,
-        "Songs": [
+        "songs": [
             {
                 "title": "インターネットサバイバー",
                 "type": "dx",
@@ -488,7 +488,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 10,
-        "Songs": [
+        "songs": [
             {
                 "title": "We Are Us",
                 "type": "dx",
@@ -520,7 +520,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 10,
-        "Songs": [
+        "songs": [
             {
                 "title": "Neon Kingdom",
                 "type": "dx",
@@ -552,7 +552,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 10,
-        "Songs": [
+        "songs": [
             {
                 "title": "アマノジャクリバース feat. ｙｔｒ",
                 "type": "std",
@@ -566,7 +566,7 @@
             {
                 "title": "Sun Dance",
                 "type": "std",
-                "difficulty": "re:master"
+                "difficulty": "remaster"
             },
             {
                 "title": "夜明けまであと３秒",
@@ -584,7 +584,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 10,
-        "Songs": [
+        "songs": [
             {
                 "title": "勦滅",
                 "type": "dx",
@@ -598,7 +598,7 @@
             {
                 "title": "Panopticon",
                 "type": "std",
-                "difficulty": "re:master"
+                "difficulty": "remaster"
             },
             {
                 "title": "MarbleBlue.",
@@ -616,7 +616,7 @@
             "miss": 5
         },
         "lifeRecoveryPerSong": 10,
-        "Songs": [
+        "songs": [
             {
                 "title": "脳天直撃",
                 "type": "dx",
