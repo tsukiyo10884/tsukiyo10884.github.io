@@ -547,10 +547,18 @@
     }
     // 段位
     else if (type === "course") {
+        const script = document.currentScript;
         setTimeout(() => {
-            childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
+            if (script != null) {
+                const srcUrl = new URL(script.src);
+                const css = srcUrl.searchParams.get('css');
+                childWin.postMessage({ type: 'init', payload: css }, "https://tsukiyo10884.github.io");
+            } else {
+                childWin.postMessage({ type: 'init', payload: null }, "https://tsukiyo10884.github.io");
+            }
         }, 1000);
 
+        let result = [];
         const courseData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/course.json').then(res => res.json());
 
         let courseSongs = {};
@@ -584,15 +592,13 @@
             const doc = new DOMParser().parseFromString(text, 'text/html');
             const blocks = doc.querySelectorAll('div.w_450.m_15.p_r.f_0');
 
-            let result = [];
-
             courseSongs[difficulties[i]].forEach(song => {
-
+                const type = song.type === "dx" ? "dx" : "standard";
                 const target = [...blocks].find(block => {
                     const hasdifficulty = block.querySelector('.music_' + difficulties[i] + '_score_back');
                     const name = block.querySelector('.music_name_block')?.textContent.trim();
                     const kindIcon = block.querySelector('.music_kind_icon')?.getAttribute('src');
-                    return hasdifficulty && name === song.title && kindIcon?.includes(song.type);
+                    return hasdifficulty && name === song.title && kindIcon?.includes(type);
                 });
 
                 const score = parseFloat(
@@ -608,9 +614,10 @@
             });
         }
 
-        const courseDataRes = await fetch(`${domain}/maimai-mobile/course/`, { credentials: 'include' });
-        const courseDataText = await courseDataRes.text();
-        const courseDataDoc = new DOMParser().parseFromString(courseDataText, 'text/html');
+        console.log(result);
+        // const courseDataRes = await fetch(`${domain}/maimai-mobile/course/`, { credentials: 'include' });
+        // const courseDataText = await courseDataRes.text();
+        // const courseDataDoc = new DOMParser().parseFromString(courseDataText, 'text/html');
 
         setTimeout(() => {
             childWin.postMessage({ type: "course", payload: result }, "https://tsukiyo10884.github.io");

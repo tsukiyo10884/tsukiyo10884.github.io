@@ -7,7 +7,7 @@ for fun
 */
 @font-face {
 	font-family: 'modern-font';
-	src: url('../../font/NotoSansJP-Bold.ttf');
+	src: url('../font/NotoSansJP-Bold.ttf');
 }
 
 body {

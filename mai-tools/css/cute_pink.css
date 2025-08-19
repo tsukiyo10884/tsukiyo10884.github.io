@@ -6,7 +6,7 @@ for fun
 */
 @font-face {
 	font-family: 'cute-font';
-	src: url('../../font/uzura.ttf');
+	src: url('../font/uzura.woff2');
 }
 
 b.px-3 {
@@ -16,7 +16,7 @@ b.px-3 {
 body {
 	background: #ffe4ec !important;
 	color: #333;
-	font-family: 'cute-font' !important;
+	font-family: 'cute-font', sans-serif !important;
 }
 
 button {

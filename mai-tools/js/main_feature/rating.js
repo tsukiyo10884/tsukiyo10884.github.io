@@ -85,29 +85,3 @@ const calcRatings = songs => songs.map(song => ({
 // 計算單曲R值(by sgimera)
 const calculateSongRating = song =>
     achi2rating_latest(song.internalLevel * 10, parseFloat(song.score) * 10000);
-
-// 建立歌卡
-function createSongCard(song) {
-    const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
-    const { title, image, internalLevel, type, score, rating } = song;
-
-    if (rating === 0) {
-        return '';
-    }
-
-    const deg = Math.floor(Math.random() * 5)
-
-    return `
-    <div class="song-card difficulty-${diffClass} deg${deg}">
-        <img src="${image}" class="song-image" alt="${title}" crossorigin="anonymous" />
-        <div class="song-overlay"></div>
-        <div class="song-info-block">
-            <div class="rating-block-song-title song-content text-shadow-black">${title}</div>
-            <div class="rating-block-inner-level song-content text-shadow-black">${internalLevel ? Number.parseFloat(internalLevel).toFixed(1) : ''} | ${type.toUpperCase()}</div>
-            <div class="rating-block-score song-content text-shadow-black">${score}</div>
-            <div class="rating-block-rating song-content text-shadow-black deg${deg}">${rating}</div>
-        </div>
-        <div class="card-decoration"></div>
-    </div>`;
-}
-

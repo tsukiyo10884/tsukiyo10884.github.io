@@ -133,14 +133,6 @@
         let versionOrder = [];
         let data = "";
         let currentVersion = "PRiSM PLUS";
-        const cssFiles = [
-            'css/translucent.css',
-            'css/modern.css',
-            'css/cute_pink.css',
-            'css/cute_blue.css',
-            'css/fabric_board.css',
-            'css/default.css',
-        ];
 
         const init = async () => {
             versionList = await $.getJSON('json/version.json');
@@ -149,28 +141,7 @@
                     .map(v => v.versionName)
                     .filter(name => !name.includes('~'))
             )];
-
-            setupEventListeners();
-            $('#palette')
-                .attr('data-bs-toggle', 'tooltip')
-                .attr('data-bs-placement', 'bottom')
-                .attr('data-bs-title', 'default');
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            })
-
-            $('#palette').on('click', () => {
-                const currentIndex = cssFiles.indexOf($('#theme').attr('href'));
-                const nextIndex = (currentIndex + 1) % cssFiles.length;
-                $('#theme').attr('href', cssFiles[nextIndex]);
-                $('#palette')
-                    .attr('data-bs-title', cssFiles[nextIndex].replace('css/', '').replace('.css', ''))
-                    .tooltip('dispose')
-                    .tooltip()
-                    .tooltip('show');
-            });
-
+            initPalette();
             $('#version-switch').on('change', () => {
                 handleFilterChange();
             });
