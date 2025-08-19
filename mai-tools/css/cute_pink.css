@@ -6,7 +6,7 @@ for fun
 */
 @font-face {
 	font-family: 'cute-font';
-	src: url('../font/uzura.woff2');
+	src: url('../font/uzura.woff2') format('woff2');
 }
 
 b.px-3 {
