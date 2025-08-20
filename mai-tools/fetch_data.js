@@ -614,11 +614,6 @@
             });
         }
 
-        console.log(result);
-        // const courseDataRes = await fetch(`${domain}/maimai-mobile/course/`, { credentials: 'include' });
-        // const courseDataText = await courseDataRes.text();
-        // const courseDataDoc = new DOMParser().parseFromString(courseDataText, 'text/html');
-
         setTimeout(() => {
             childWin.postMessage({ type: "course", payload: result }, "https://tsukiyo10884.github.io");
         }, 1500);
