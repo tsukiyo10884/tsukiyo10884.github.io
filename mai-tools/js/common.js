@@ -293,7 +293,7 @@ function createSongCard(song) {
     const deg = Math.floor(Math.random() * 5)
 
     return `
-    <div class="song-card difficulty-${diffClass} deg${deg}">
+    <div class="song-card difficulty-${diffClass} deg${deg}" onclick="showSongDetail('${song.title}', '${song.type}')">
         <img src="${image}" class="song-image" alt="${title}" crossorigin="anonymous" />
         <div class="song-overlay"></div>
         <div class="song-info-block">

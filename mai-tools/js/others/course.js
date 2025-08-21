@@ -12,7 +12,7 @@ const showCourseList = async (playerData) => {
                         </div>
                         <p class="mb-4">Life ${course.totalLives} | great -${course.lifeLossPerJudgement.great} / good -${course.lifeLossPerJudgement.good} / miss -${course.lifeLossPerJudgement.miss} | pass + ${course.lifeRecoveryPerSong}</p>
                     </div>
-                    <div class="row justify-content-center gap-3">
+                    <div id="course-song-card" class="row justify-content-center gap-3">
                         ${course.songs.map(song => {
                             const songEntry = songDetailData.find(s => s.songId === song.title);
                             const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
@@ -23,7 +23,7 @@ const showCourseList = async (playerData) => {
                             song.internalLevel = internalLevel;
                             song.score = playerData.find(p => p.title === song.title && p.type === song.type && p.difficulty === song.difficulty)?.score || "0.0000%";
 
-                            return createSquareSongCard(song);
+                            return createSongCard(song);
                         }).join('')}
                     </div>
                 </div>`);

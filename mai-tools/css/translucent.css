@@ -365,7 +365,7 @@ button {
     z-index: 2;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     flex: 1;
     margin-left: 5px;
     height: 70px;
@@ -419,6 +419,30 @@ button {
 
 .difficulty-basic .song-overlay {
     background: #97d3b6;
+}
+
+#course-song-card .song-card {
+    width: 440px !important;
+}
+
+#course-song-card .song-card .song-overlay {
+    width: 439px !important;
+}
+
+#course-song-card .rating-block-inner-level,
+#course-song-card .rating-block-score {
+    font-size: 14px;
+    line-height: 16px;
+    opacity: 0.85;
+}
+
+#course-song-card .rating-block-song-title {
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 340px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /**************/
