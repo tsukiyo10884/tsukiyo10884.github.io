@@ -87,6 +87,6 @@ const countRequiredPlay = (ccls, currentCP, tcls) => {
         }
     });
     result += `<tr class="color_result"><td colspan="10"><b>＞到達目標階級${tcls}為止總共需打贏${totalNormalBattles}場上位，並打贏${totalBossBattles}場BOSS戰＜<br/></b></td></tr>`;
-    result += '</table>';
+    result += '</table><p>※B階級不用打Boss戰</p>';
     $('#requiredBattles').html(result);
 };
