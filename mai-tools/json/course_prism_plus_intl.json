@@ -1,641 +1,651 @@
 [
     {
-        "courseName": "初段",
-        "totalLives": 350,
-        "lifeLossPerJudgement": {
-            "great": 0,
-            "good": 2,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 20,
-        "songs": [
+        "type": "段位認定",
+        "course": [
             {
-                "title": "いーあるふぁんくらぶ",
-                "type": "dx",
-                "difficulty": "basic"
+                "courseName": "初段",
+                "totalLives": 350,
+                "lifeLossPerJudgement": {
+                    "great": 0,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 20,
+                "songs": [
+                    {
+                        "title": "いーあるふぁんくらぶ",
+                        "type": "dx",
+                        "difficulty": "basic"
+                    },
+                    {
+                        "title": "グリーンライツ・セレナーデ",
+                        "type": "dx",
+                        "difficulty": "basic"
+                    },
+                    {
+                        "title": "幻想のサテライト",
+                        "type": "dx",
+                        "difficulty": "basic"
+                    },
+                    {
+                        "title": "オトヒメモリー☆ウタゲーション",
+                        "type": "std",
+                        "difficulty": "basic"
+                    }
+                ]
             },
             {
-                "title": "グリーンライツ・セレナーデ",
-                "type": "dx",
-                "difficulty": "basic"
+                "courseName": "二段",
+                "totalLives": 350,
+                "lifeLossPerJudgement": {
+                    "great": 0,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 20,
+                "songs": [
+                    {
+                        "title": "唱",
+                        "type": "dx",
+                        "difficulty": "advanced"
+                    },
+                    {
+                        "title": "Oath Act",
+                        "type": "dx",
+                        "difficulty": "advanced"
+                    },
+                    {
+                        "title": "Alice in 冷凍庫",
+                        "type": "dx",
+                        "difficulty": "advanced"
+                    },
+                    {
+                        "title": "ラビットホール",
+                        "type": "dx",
+                        "difficulty": "advanced"
+                    }
+                ]
             },
             {
-                "title": "幻想のサテライト",
-                "type": "dx",
-                "difficulty": "basic"
+                "courseName": "三段",
+                "totalLives": 600,
+                "lifeLossPerJudgement": {
+                    "great": 1,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 50,
+                "songs": [
+                    {
+                        "title": "さよならヒストリー",
+                        "type": "dx",
+                        "difficulty": "advanced"
+                    },
+                    {
+                        "title": "エンヴィーベイビー",
+                        "type": "dx",
+                        "difficulty": "advanced"
+                    },
+                    {
+                        "title": "Luminaria",
+                        "type": "dx",
+                        "difficulty": "advanced"
+                    },
+                    {
+                        "title": "星界ちゃんと可不ちゃんのおつかい合騒曲",
+                        "type": "dx",
+                        "difficulty": "advanced"
+                    }
+                ]
             },
             {
-                "title": "オトヒメモリー☆ウタゲーション",
-                "type": "std",
-                "difficulty": "basic"
+                "courseName": "四段",
+                "totalLives": 700,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 50,
+                "songs": [
+                    {
+                        "title": "酔いどれ知らず",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "今、誰が為のかがり火へ",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "色は匂へど散りぬるを",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "ウミユリ海底譚",
+                        "type": "std",
+                        "difficulty": "expert"
+                    }
+                ]
+            },
+            {
+                "courseName": "五段",
+                "totalLives": 700,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 50,
+                "songs": [
+                    {
+                        "title": "ポップミュージックは僕のもの",
+                        "type": "std",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "でらっくmaimai♪てんてこまい!",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "Southern Cross",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "Ultimate taste",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    }
+                ]
+            },
+            {
+                "courseName": "六段",
+                "totalLives": 700,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 50,
+                "songs": [
+                    {
+                        "title": "最終鬼畜妹・一部声",
+                        "type": "std",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "エータ・ベータ・イータ",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "幸せになれる隠しコマンドがあるらしい",
+                        "type": "std",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "約束",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "七段",
+                "totalLives": 700,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 50,
+                "songs": [
+                    {
+                        "title": "再会",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "GET!! 夢&DREAM",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "解けないように",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "デビルじゃないもん",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "八段",
+                "totalLives": 700,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 50,
+                "songs": [
+                    {
+                        "title": "福宿音屋魂音泉",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "ナイト・オブ・ナイツ (Cranky Remix)",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "ぽわわん劇場",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "きゅうくらりん",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "九段",
+                "totalLives": 800,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 30,
+                "songs": [
+                    {
+                        "title": "新人類",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "energy trixxx",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "セイクリッド　ルイン",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Destiny Runner",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "十段",
+                "totalLives": 900,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 30,
+                "songs": [
+                    {
+                        "title": "Imperishable Night 2006 (2016 Refine)",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Ether Strike",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "初音天地開闢神話",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Garakuta Doll Play",
+                        "type": "std",
+                        "difficulty": "master"
+                    }
+                ]
             }
         ]
     },
     {
-        "courseName": "二段",
-        "totalLives": 350,
-        "lifeLossPerJudgement": {
-            "great": 0,
-            "good": 2,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 20,
-        "songs": [
+        "type": "真段位認定",
+        "course": [
             {
-                "title": "唱",
-                "type": "dx",
-                "difficulty": "advanced"
+                "courseName": "真初段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "STARTLINER",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Catch the Wave",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "サドマミホリック",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Streak",
+                        "type": "std",
+                        "difficulty": "expert"
+                    }
+                ]
             },
             {
-                "title": "Oath Act",
-                "type": "dx",
-                "difficulty": "advanced"
+                "courseName": "真二段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "ロールプレイングゲーム",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "悪戯センセーション",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "脳漿炸裂ガール",
+                        "type": "std",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "ヱデン",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
             },
             {
-                "title": "Alice in 冷凍庫",
-                "type": "dx",
-                "difficulty": "advanced"
+                "courseName": "真三段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "まにまに",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Money Money",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "System “Z”",
+                        "type": "std",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "アウターサイエンス",
+                        "type": "std",
+                        "difficulty": "master"
+                    }
+                ]
             },
             {
-                "title": "ラビットホール",
-                "type": "dx",
-                "difficulty": "advanced"
-            }
-        ]
-    },
-    {
-        "courseName": "三段",
-        "totalLives": 600,
-        "lifeLossPerJudgement": {
-            "great": 1,
-            "good": 2,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 50,
-        "songs": [
-            {
-                "title": "さよならヒストリー",
-                "type": "dx",
-                "difficulty": "advanced"
+                "courseName": "真四段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "ライアーダンサー",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "ねぇ、壊れタ人形ハ何処へ棄テらレるノ？",
+                        "type": "std",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "ナイト・オブ・ナイツ",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Garden Of The Dragon",
+                        "type": "std",
+                        "difficulty": "master"
+                    }
+                ]
             },
             {
-                "title": "エンヴィーベイビー",
-                "type": "dx",
-                "difficulty": "advanced"
+                "courseName": "真五段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "インターネットサバイバー",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "ULTRA POWER",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "ありふれたせかいせいふく",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "咲キ誇レ常世ノ華",
+                        "type": "std",
+                        "difficulty": "master"
+                    }
+                ]
             },
             {
-                "title": "Luminaria",
-                "type": "dx",
-                "difficulty": "advanced"
+                "courseName": "真六段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "We Are Us",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "サイバーサンダーサイダー",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "レーイレーイ",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "疾走あんさんぶる",
+                        "type": "std",
+                        "difficulty": "master"
+                    }
+                ]
             },
             {
-                "title": "星界ちゃんと可不ちゃんのおつかい合騒曲",
-                "type": "dx",
-                "difficulty": "advanced"
-            }
-        ]
-    },
-    {
-        "courseName": "四段",
-        "totalLives": 700,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 2,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 50,
-        "songs": [
-            {
-                "title": "酔いどれ知らず",
-                "type": "dx",
-                "difficulty": "expert"
+                "courseName": "真七段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "Neon Kingdom",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Cyaegha",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "頓珍漢の宴",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Armageddon",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
             },
             {
-                "title": "今、誰が為のかがり火へ",
-                "type": "dx",
-                "difficulty": "expert"
+                "courseName": "真八段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "アマノジャクリバース feat. ｙｔｒ",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Arty Party",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Sun Dance",
+                        "type": "std",
+                        "difficulty": "remaster"
+                    },
+                    {
+                        "title": "夜明けまであと３秒",
+                        "type": "std",
+                        "difficulty": "master"
+                    }
+                ]
             },
             {
-                "title": "色は匂へど散りぬるを",
-                "type": "dx",
-                "difficulty": "expert"
+                "courseName": "真九段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "勦滅",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Energizing Flame",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Panopticon",
+                        "type": "std",
+                        "difficulty": "remaster"
+                    },
+                    {
+                        "title": "MarbleBlue.",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
             },
             {
-                "title": "ウミユリ海底譚",
-                "type": "std",
-                "difficulty": "expert"
-            }
-        ]
-    },
-    {
-        "courseName": "五段",
-        "totalLives": 700,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 2,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 50,
-        "songs": [
-            {
-                "title": "ポップミュージックは僕のもの",
-                "type": "std",
-                "difficulty": "expert"
-            },
-            {
-                "title": "でらっくmaimai♪てんてこまい!",
-                "type": "dx",
-                "difficulty": "expert"
-            },
-            {
-                "title": "Southern Cross",
-                "type": "dx",
-                "difficulty": "expert"
-            },
-            {
-                "title": "Ultimate taste",
-                "type": "dx",
-                "difficulty": "expert"
-            }
-        ]
-    },
-    {
-        "courseName": "六段",
-        "totalLives": 700,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 2,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 50,
-        "songs": [
-            {
-                "title": "最終鬼畜妹・一部声",
-                "type": "std",
-                "difficulty": "expert"
-            },
-            {
-                "title": "エータ・ベータ・イータ",
-                "type": "dx",
-                "difficulty": "expert"
-            },
-            {
-                "title": "幸せになれる隠しコマンドがあるらしい",
-                "type": "std",
-                "difficulty": "expert"
-            },
-            {
-                "title": "約束",
-                "type": "dx",
-                "difficulty": "master"
-            }
-        ]
-    },
-    {
-        "courseName": "七段",
-        "totalLives": 700,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 2,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 50,
-        "songs": [
-            {
-                "title": "再会",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "GET!! 夢&DREAM",
-                "type": "std",
-                "difficulty": "master"
-            },
-            {
-                "title": "解けないように",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "デビルじゃないもん",
-                "type": "dx",
-                "difficulty": "master"
-            }
-        ]
-    },
-    {
-        "courseName": "八段",
-        "totalLives": 700,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 2,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 50,
-        "songs": [
-            {
-                "title": "福宿音屋魂音泉",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "ナイト・オブ・ナイツ (Cranky Remix)",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "ぽわわん劇場",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "きゅうくらりん",
-                "type": "dx",
-                "difficulty": "master"
-            }
-        ]
-    },
-    {
-        "courseName": "九段",
-        "totalLives": 800,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 2,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 30,
-        "songs": [
-            {
-                "title": "新人類",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "energy trixxx",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "セイクリッド　ルイン",
-                "type": "std",
-                "difficulty": "master"
-            },
-            {
-                "title": "Destiny Runner",
-                "type": "dx",
-                "difficulty": "master"
-            }
-        ]
-    },
-    {
-        "courseName": "十段",
-        "totalLives": 900,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 2,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 30,
-        "songs": [
-            {
-                "title": "Imperishable Night 2006 (2016 Refine)",
-                "type": "std",
-                "difficulty": "master"
-            },
-            {
-                "title": "Ether Strike",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "初音天地開闢神話",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "Garakuta Doll Play",
-                "type": "std",
-                "difficulty": "master"
-            }
-        ]
-    },
-    {
-        "courseName": "真初段",
-        "totalLives": 50,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 3,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 10,
-        "songs": [
-            {
-                "title": "STARTLINER",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "Catch the Wave",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "サドマミホリック",
-                "type": "std",
-                "difficulty": "master"
-            },
-            {
-                "title": "Streak",
-                "type": "std",
-                "difficulty": "expert"
-            }
-        ]
-    },
-    {
-        "courseName": "真二段",
-        "totalLives": 50,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 3,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 10,
-        "songs": [
-            {
-                "title": "ロールプレイングゲーム",
-                "type": "std",
-                "difficulty": "master"
-            },
-            {
-                "title": "悪戯センセーション",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "脳漿炸裂ガール",
-                "type": "std",
-                "difficulty": "expert"
-            },
-            {
-                "title": "ヱデン",
-                "type": "dx",
-                "difficulty": "master"
-            }
-        ]
-    },
-    {
-        "courseName": "真三段",
-        "totalLives": 50,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 3,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 10,
-        "songs": [
-            {
-                "title": "まにまに",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "Money Money",
-                "type": "std",
-                "difficulty": "master"
-            },
-            {
-                "title": "System “Z”",
-                "type": "std",
-                "difficulty": "expert"
-            },
-            {
-                "title": "アウターサイエンス",
-                "type": "std",
-                "difficulty": "master"
-            }
-        ]
-    },
-    {
-        "courseName": "真四段",
-        "totalLives": 50,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 3,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 10,
-        "songs": [
-            {
-                "title": "ライアーダンサー",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "ねぇ、壊れタ人形ハ何処へ棄テらレるノ？",
-                "type": "std",
-                "difficulty": "expert"
-            },
-            {
-                "title": "ナイト・オブ・ナイツ",
-                "type": "std",
-                "difficulty": "master"
-            },
-            {
-                "title": "Garden Of The Dragon",
-                "type": "std",
-                "difficulty": "master"
-            }
-        ]
-    },
-    {
-        "courseName": "真五段",
-        "totalLives": 50,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 3,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 10,
-        "songs": [
-            {
-                "title": "インターネットサバイバー",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "ULTRA POWER",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "ありふれたせかいせいふく",
-                "type": "std",
-                "difficulty": "master"
-            },
-            {
-                "title": "咲キ誇レ常世ノ華",
-                "type": "std",
-                "difficulty": "master"
-            }
-        ]
-    },
-    {
-        "courseName": "真六段",
-        "totalLives": 50,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 3,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 10,
-        "songs": [
-            {
-                "title": "We Are Us",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "サイバーサンダーサイダー",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "レーイレーイ",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "疾走あんさんぶる",
-                "type": "std",
-                "difficulty": "master"
-            }
-        ]
-    },
-    {
-        "courseName": "真七段",
-        "totalLives": 50,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 3,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 10,
-        "songs": [
-            {
-                "title": "Neon Kingdom",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "Cyaegha",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "頓珍漢の宴",
-                "type": "std",
-                "difficulty": "master"
-            },
-            {
-                "title": "Armageddon",
-                "type": "dx",
-                "difficulty": "master"
-            }
-        ]
-    },
-    {
-        "courseName": "真八段",
-        "totalLives": 50,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 3,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 10,
-        "songs": [
-            {
-                "title": "アマノジャクリバース feat. ｙｔｒ",
-                "type": "std",
-                "difficulty": "master"
-            },
-            {
-                "title": "Arty Party",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "Sun Dance",
-                "type": "std",
-                "difficulty": "remaster"
-            },
-            {
-                "title": "夜明けまであと３秒",
-                "type": "std",
-                "difficulty": "master"
-            }
-        ]
-    },
-    {
-        "courseName": "真九段",
-        "totalLives": 50,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 3,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 10,
-        "songs": [
-            {
-                "title": "勦滅",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "Energizing Flame",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "Panopticon",
-                "type": "std",
-                "difficulty": "remaster"
-            },
-            {
-                "title": "MarbleBlue.",
-                "type": "dx",
-                "difficulty": "master"
-            }
-        ]
-    },
-    {
-        "courseName": "真十段",
-        "totalLives": 50,
-        "lifeLossPerJudgement": {
-            "great": 2,
-            "good": 3,
-            "miss": 5
-        },
-        "lifeRecoveryPerSong": 10,
-        "songs": [
-            {
-                "title": "脳天直撃",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "TEmPTaTiON",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "康莊大道",
-                "type": "dx",
-                "difficulty": "master"
-            },
-            {
-                "title": "KHYMΞXΛ",
-                "type": "dx",
-                "difficulty": "master"
+                "courseName": "真十段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "脳天直撃",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "TEmPTaTiON",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "康莊大道",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "KHYMΞXΛ",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
             }
         ]
     }
