@@ -273,7 +273,7 @@ const getPlateSongs = async (versionName) => {
     if ($('#version-switch').is(':checked')) {
         removeList = await fetch('./json/removed_song_jp.json').then(res => res.json());
     } else {
-        removeList = await fetch('./json/removed_song.json').then(res => res.json());
+        removeList = await fetch('./json/removed_song_intl.json').then(res => res.json());
     }
     removeList.forEach(entry => {
         if (today > new Date(entry.remove_date)) {
