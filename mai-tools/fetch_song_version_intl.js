@@ -45,7 +45,7 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'international_song_version.json';
+    a.download = 'song_version_intl.json';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

@@ -211,7 +211,7 @@
         }, 1000);
 
         setTimeout(async () => {
-            const songVersionData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/international_song_version.json').then(res => res.json());
+            const songVersionData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/song_version_intl.json').then(res => res.json());
             const versionData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/version.json').then(res => res.json());
 
             let user_info = {};
