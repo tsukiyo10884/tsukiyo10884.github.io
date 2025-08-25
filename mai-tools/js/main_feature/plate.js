@@ -177,7 +177,7 @@ const showPlateProgress = async (versionName, type, plateName) => {
         const groupeHeader = `
             <div class="col-12">
                 <div class="d-flex align-items-center my-3 collapse-toggle" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${isFirst}" role="button">
-                    <b class="difficulty-collapse"><span class="collapse-icon" data-target="${collapseId}">${isFirst ? '-' : '+'}</span> ${diffType}</b>
+                    <b class="difficulty-collapse"><span class="collapse-icon" data-target="${collapseId}">${isFirst ? '－' : '＋'}</span> ${diffType.toUpperCase()}</b>
                 </div>
                 <div id="${collapseId}" class="collapse${isFirst ? ' show' : ''} row w-100 ms-0">
         `;
@@ -212,11 +212,11 @@ const showPlateProgress = async (versionName, type, plateName) => {
 
     $('.collapse').on('show.bs.collapse', function () {
         const id = $(this).attr('id');
-        $(`.collapse-icon[data-target="${id}"]`).text('-');
+        $(`.collapse-icon[data-target="${id}"]`).text('－');
     });
     $('.collapse').on('hide.bs.collapse', function () {
         const id = $(this).attr('id');
-        $(`.collapse-icon[data-target="${id}"]`).text('+');
+        $(`.collapse-icon[data-target="${id}"]`).text('＋');
     });
 }
 

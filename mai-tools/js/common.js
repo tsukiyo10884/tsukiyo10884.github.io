@@ -148,6 +148,7 @@ const showTable = async (mode) => {
         'plate': initPlateList,
         'level': initLevelList,
         'suggestion': initSuggestionList,
+        'course': initCourseList,
         'a_xuan': initForAXuanList,
         'a_yo': initForAyoList,
     };

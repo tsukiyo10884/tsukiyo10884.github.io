@@ -27,6 +27,7 @@
     <script src="js/main_feature/suggestion.js"></script>
     <script src="js/main_feature/plate.js"></script>
     <script src="js/main_feature/level.js"></script>
+    <script src="js/main_feature/course.js"></script>
     <script src="js/main_feature/special.js"></script>
     <script src="js/main_feature/for_axuan.js"></script>
     <script src="js/main_feature/for_ayo.js"></script>
@@ -89,17 +90,20 @@
             <div class="col-2">
                 <button class="w-100" onclick="showTable('level')">等級進度</button>
             </div>
-            <div id="completion-filters" class="col-3 d-none">
+            <div class="col-2">
+                <button class="w-100" onclick="showTable('course')">段位認定</button>
+            </div>
+            <div id="completion-filters" class="col-2 d-none">
                 <div class="checkbox-group">
                     <input type="checkbox" id="completed-only" name="completion-filter" class="form-check-input">
-                    <label for="completed-only">只顯示達成曲</label>
+                    <label for="completed-only">只顯示已達成</label>
                 </div>
                 <div class="checkbox-group">
                     <input type="checkbox" id="non-completed-only" name="completion-filter" class="form-check-input">
-                    <label for="non-completed-only">只顯示未達成曲</label>
+                    <label for="non-completed-only">只顯示未達成</label>
                 </div>
             </div>
-            <div id="play-filters" class="col-3 d-none">
+            <div id="play-filters" class="col-2 d-none">
                 <div class="checkbox-group">
                     <input type="checkbox" id="played-only" name="play-filter" class="form-check-input">
                     <label for="completed-only">只顯示已玩過</label>
@@ -132,6 +136,7 @@
         let versionList = [];
         let versionOrder = [];
         let data = "";
+        let courseData = "";
         let currentVersion = "PRiSM PLUS";
 
         const init = async () => {
@@ -196,10 +201,10 @@
                 }
                 case "special": {
                     if (data.payload === 'ayo') {
-                        $('#output').html('<p class="f_14 p_0">Ayo專用版</p>');
+                        $('#stat').html(`<div class="d-flex align-items-center"><p>你的星將跟白將呢</p></div>`);
                     }
                     else if (data.payload === 'axun') {
-                        $('#output').html('<p class="f_14 p_0">Axuan專用版</p>');
+                        $('#stat').html(`<div class="d-flex align-items-center"><p>你的超怪呢</p></div>`);
                     }
                 }
             }
@@ -207,6 +212,7 @@
 
         // 取得本地json(測試資料)
         const LoadLocalJson = (filePath) => {
+            window.postMessage({ type: 'init', payload: null }, '*');
             $.getJSON(filePath, (json) => {
                 $('#button-group').removeClass('d-none');
                 $('#test').addClass('d-none');
