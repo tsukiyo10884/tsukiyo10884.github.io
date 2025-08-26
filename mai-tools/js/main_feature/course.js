@@ -1,9 +1,11 @@
 const initCourseList = async () => {
-    const courseProgress = '' // 之後去抓資料回來
+    const maxCourse = Math.max(
+        ...data.courseRecord.flatMap(c => c.course.map(d => parseInt(d.courseName, 10)))
+    ).toString().padStart(2, "0");;
     $('#stat').html(`
         <div class="d-flex align-items-center">
             <p>※施工中</p>
-            <p>　　目前最高段位: ${courseProgress}</p>
+            <p>　　目前最高段位: ${getCourseRank(maxCourse)}</p>
         </div>
     `);
     let courseFilePath = $('#version-switch').is(':checked')
@@ -22,6 +24,8 @@ const initCourseList = async () => {
     }, 100);
 }
 
+
+
 const showCourseProgress = async (type) => {
     let courseFilePath = $('#version-switch').is(':checked')
         ? 'json/course_prism_plus_jp.json'
@@ -30,7 +34,7 @@ const showCourseProgress = async (type) => {
     $('#now-title').text(`course|${type}`);
     let courseContent = '';
     courseData.find(x => x.type === type).course.forEach(course => {
-        const playedCourse = data.course.find(c => c.type === type);
+        const playedCourse = data.courseRecord.find(c => c.type === type);
         let currentCourse = null;
         if (playedCourse != null) {
             currentCourse = playedCourse.course.find(c => getCourseRank(c.courseName) === course.courseName);
@@ -51,18 +55,18 @@ const showCourseProgress = async (type) => {
                 </div>
                 <div id="course-song-card" class="row justify-content-center gap-3">
                     ${course.songs.map((song, index) => {
-                        const songData = data.songs.find(s => s.title === song.title && s.type === song.type && s.difficulty === song.difficulty);
-                        let lastPlayedData = null;
-                        if (currentCourse != null && currentCourse.songs.length >= index) {
-                            lastPlayedData = currentCourse.songs[index];
-                        }
-                        return `
+            const songData = data.songs.find(s => s.title === song.title && s.type === song.type && s.difficulty === song.difficulty);
+            let lastPlayedData = null;
+            if (currentCourse != null && currentCourse.songs.length >= index) {
+                lastPlayedData = currentCourse.songs[index];
+            }
+            return `
                             <div style="width:fit-content">
                                 ${createSongCard(songData)}
                                 ${lastPlayedData != null ? `<p class="mt-2 mb-0">上次成績：${lastPlayedData.score}</p>
                                 <p class="mb-0">上次命數：${lastPlayedData.life}</p>` : ''}
                             </div>`;
-                    }).join('')}
+        }).join('')}
                 </div>
             </div>`;
     });

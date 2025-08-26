@@ -290,7 +290,7 @@
                         else if (src.includes("3uT2WsrBT")) type = "Random段位認定";
                     }
 
-                    const courses = [];
+                    const courseRecord = [];
                     const items = block.querySelectorAll("div.p_r.p_5");
                     for (const item of items) {
                         const idx = item.querySelector("input[name=idx]")?.value;
@@ -313,16 +313,16 @@
                             songs.push({ score, life });
                         });
 
-                        courses.push({ courseName, remainLife, totalScore, isClear, songs });
+                        courseRecord.push({ courseName, remainLife, totalScore, isClear, songs });
                     }
 
-                    course.push({ type, course: courses });
+                    course.push({ type, courseRecord: courseRecord });
                 }
 
                 exportData = {
                     userInfo,
                     songs,
-                    course
+                    lastPlayedCourseData
                 };
             }
             // 好友資訊
