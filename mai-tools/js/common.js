@@ -221,6 +221,8 @@ const handleFilterChange = () => {
         $('#song-table').find('.square-song-grid').replaceWith($songGrid);
     } else if (mode === 'rating') {
         initRatingList();
+    } else if (mode === 'course') {
+        showCourseProgress(now.split('|')[1]);
     }
 };
 
@@ -395,6 +397,13 @@ const initPalette = () => {
             .tooltip('show');
     });
 };
+
+// 自己包Promise
+const getJSON = (path) => {
+    return new Promise((resolve, reject) => {
+        $.getJSON(path, resolve).fail(reject);
+    });
+}
 
 // 大大的Credit
 const createCreditSection = () => {

@@ -234,7 +234,7 @@
                     "good": 2,
                     "miss": 5
                 },
-                "lifeRecoveryPerSong": 50,
+                "lifeRecoveryPerSong": 20,
                 "songs": [
                     {
                         "title": "福宿音屋魂音泉",

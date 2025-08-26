@@ -206,6 +206,7 @@
 
             let userInfo = {};
             const songs = [];
+            let exportData = {};
 
             // 自己資訊
             if (idx === '') {
@@ -277,7 +278,7 @@
                 const doc = await fetchHTML(`${domain}/maimai-mobile/record/course/`);
                 const blocks = doc.querySelectorAll("div.w_480.f_0");
 
-                const results = [];
+                const course = [];
 
                 for (const block of blocks) {
                     let type = "";
@@ -300,24 +301,29 @@
                         const clearImg = detailDoc.querySelector("img.course_clear")?.src || "";
                         const isClear = clearImg.includes("icon_course_clear.png");
 
-                        const courseName = detailDoc.querySelector("img.course_img.h_55")?.src || "";
+                        const courseName = detailDoc.querySelector("img.course_img.h_55")?.src.match(/course_(\d{2})(\d{2})/)[2];
                         const remainLife = detailDoc.querySelector(".course_life_txt.f_13.t_c")?.textContent.trim() || "";
                         const totalScore = detailDoc.querySelector(".course_achievement_txt.t_r")?.textContent.replace(/\s+/g, "") || "";
 
                         const songs = [];
                         detailDoc.querySelectorAll(".coursemusic_container.w_430.p_r.f_0").forEach(song => {
                             const score = song.querySelector(".music_score_block.w_84")?.textContent.trim() || "";
-                            const life = song.querySelector(".coursemusic_life_txt.f_12.white")?.textContent.trim() || "";
+                            const lifeRaw = song.querySelector(".coursemusic_life_txt.f_12.white")?.textContent.trim() || "";
+                            const life = lifeRaw.split("/")[1] + "->" + lifeRaw.split("/")[0];
                             songs.push({ score, life });
                         });
 
                         courses.push({ courseName, remainLife, totalScore, isClear, songs });
                     }
 
-                    results.push({ type, course: courses });
+                    course.push({ type, course: courses });
                 }
 
-                console.log(results);
+                exportData = {
+                    userInfo,
+                    songs,
+                    course
+                };
             }
             // 好友資訊
             else {
@@ -375,12 +381,14 @@
                         });
                     });
                 }
+
+                exportData = {
+                    userInfo,
+                    songs
+                };
             }
 
-            const exportData = {
-                userInfo,
-                songs
-            };
+            console.log(exportData);
 
             setTimeout(() => {
                 childWin.postMessage({ type: "result", payload: exportData }, "https://tsukiyo10884.github.io");

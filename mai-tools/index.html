@@ -79,19 +79,19 @@
         <textarea id="now-title" class="d-none"></textarea>
         <div id="button-group" class="row d-none align-items-center">
             <div class="col-2">
-                <button class="w-100" onclick="showTable('rating')">R値入選曲</button>
+                <button id="btn-rating" class="w-100" onclick="showTable('rating')">R値入選曲</button>
             </div>
             <div class="col-2">
-                <button class="w-100" onclick="showTable('suggestion')">R値候選曲</button>
+                <button id="btn-suggestion" class="w-100" onclick="showTable('suggestion')">R値候選曲</button>
             </div>
             <div class="col-2">
-                <button class="w-100" onclick="showTable('plate')">名牌版進度</button>
+                <button id="btn-plate" class="w-100" onclick="showTable('plate')">名牌版進度</button>
             </div>
             <div class="col-2">
-                <button class="w-100" onclick="showTable('level')">等級進度</button>
+                <button id="btn-level" class="w-100" onclick="showTable('level')">等級進度</button>
             </div>
             <div class="col-2">
-                <button class="w-100" onclick="showTable('course')">段位認定</button>
+                <button id="btn-course" class="w-100" onclick="showTable('course')">段位認定</button>
             </div>
             <div id="completion-filters" class="col-2 d-none">
                 <div class="checkbox-group">
@@ -224,6 +224,10 @@
 
         const refreshData = () => {
             data = JSON.parse($('#json-data').text());
+
+            if (data.course == null) {
+                $('#btn-course').addClass('d-none');
+            }
             initUserInfo();
         };
 
