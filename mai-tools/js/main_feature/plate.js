@@ -276,8 +276,8 @@ const getPlateSongs = async (versionName) => {
         removeList = await fetch('./json/removed_song_intl.json').then(res => res.json());
     }
     removeList.forEach(entry => {
-        if (today > new Date(entry.remove_date)) {
-            const removeTitles = entry.remove_songs.map(s => s.title);
+        if (today > new Date(entry.removeDate)) {
+            const removeTitles = entry.removeSongs.map(s => s.title);
             songs = songs.filter(song => !removeTitles.includes(song.title));
         }
     });

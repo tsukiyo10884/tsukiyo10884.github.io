@@ -1,8 +1,8 @@
 [
     {
         "version": "maimaiでらっくす",
-        "remove_date": "2019/07/11",
-        "remove_songs": [
+        "removeDate": "2019/07/11",
+        "removeSongs": [
             {
                 "title": "PERFECT HUMAN"
             },
@@ -34,8 +34,8 @@
     },
     {
         "version": "maimaiでらっくす PLUS",
-        "remove_date": "2020/01/23",
-        "remove_songs": [
+        "removeDate": "2020/01/23",
+        "removeSongs": [
             {
                 "title": "前前前世"
             },
@@ -55,8 +55,8 @@
     },
     {
         "version": "Splash",
-        "remove_date": "2020/09/17",
-        "remove_songs": [
+        "removeDate": "2020/09/17",
+        "removeSongs": [
             {
                 "title": "Stand Up!!!!"
             },
@@ -85,8 +85,8 @@
     },
     {
         "version": "Splash PLUS",
-        "remove_date": "2021/03/18",
-        "remove_songs": [
+        "removeDate": "2021/03/18",
+        "removeSongs": [
             {
                 "title": "POP TEAM EPIC"
             },
@@ -112,8 +112,8 @@
     },
     {
         "version": "UNiVERSE",
-        "remove_date": "2021/09/16",
-        "remove_songs": [
+        "removeDate": "2021/09/16",
+        "removeSongs": [
             {
                 "title": "かくしん的☆めたまるふぉ～ぜっ！"
             },
@@ -136,8 +136,8 @@
     },
     {
         "version": "UNiVERSE PLUS",
-        "remove_date": "2022/03/24",
-        "remove_songs": [
+        "removeDate": "2022/03/24",
+        "removeSongs": [
             {
                 "title": "LOSER"
             },
@@ -205,8 +205,8 @@
     },
     {
         "version": "FESTiVAL",
-        "remove_date": "2022/09/15",
-        "remove_songs": [
+        "removeDate": "2022/09/15",
+        "removeSongs": [
             {
                 "title": "ファッとして桃源郷"
             },
@@ -241,8 +241,8 @@
     },
     {
         "version": "FESTiVAL PLUS",
-        "remove_date": "2023/03/23",
-        "remove_songs": [
+        "removeDate": "2023/03/23",
+        "removeSongs": [
             {
                 "title": "1/3の純情な感情"
             },
@@ -268,8 +268,8 @@
     },
     {
         "version": "BUDDiES",
-        "remove_date": "2023/09/14",
-        "remove_songs": [
+        "removeDate": "2023/09/14",
+        "removeSongs": [
             {
                 "title": "あ・え・い・う・え・お・あお!!"
             },
@@ -307,8 +307,8 @@
     },
     {
         "version": "BUDDiES PLUS",
-        "remove_date": "2024/03/21",
-        "remove_songs": [
+        "removeDate": "2024/03/21",
+        "removeSongs": [
             {
                 "title": "君の知らない物語"
             },
@@ -331,8 +331,8 @@
     },
     {
         "version": "PRiSM",
-        "remove_date": "2024/09/12",
-        "remove_songs": [
+        "removeDate": "2024/09/12",
+        "removeSongs": [
             {
                 "title": "うっせぇわ"
             },
@@ -373,8 +373,8 @@
     },
     {
         "version": "PRiSM PLUS",
-        "remove_date": "2025/03/13",
-        "remove_songs": [
+        "removeDate": "2025/03/13",
+        "removeSongs": [
             {
                 "title": "YONA YONA DANCE"
             },

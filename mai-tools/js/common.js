@@ -58,27 +58,27 @@ const initUserInfo = () => {
             <div class="clearfix"></div>
         </div>
         `);
-    $('#user-trophy-block').attr('class', data.user_info.user_trophy_block + ' trophy_block p_3 t_c f_0');
-    $('#user-trophy').text(data.user_info.trophy);
-    $('#user-name').text(data.user_info.name);
-    $('#user-rating').text(data.user_info.rating);
-    $('#user-rating-base').attr('src', data.user_info.rating_base);
-    $('#user-course-rank').attr('src', data.user_info.course_rank);
-    $('#user-class-rank').attr('src', data.user_info.class_rank);
-    $('#div-user-star-text span').text('☆' + data.user_info.star);
-    $('#user-star').text(data.user_info.star);
-    $('#user-icon').attr('src', data.user_info.icon);
+    $('#user-trophy-block').attr('class', data.userInfo.userTrophyBlock + ' trophy_block p_3 t_c f_0');
+    $('#user-trophy').text(data.userInfo.trophy);
+    $('#user-name').text(data.userInfo.name);
+    $('#user-rating').text(data.userInfo.rating);
+    $('#user-rating-base').attr('src', data.userInfo.ratingBase);
+    $('#user-course-rank').attr('src', data.userInfo.courseRank);
+    $('#user-class-rank').attr('src', data.userInfo.classRank);
+    $('#div-user-star-text span').text('☆' + data.userInfo.star);
+    $('#user-star').text(data.userInfo.star);
+    $('#user-icon').attr('src', data.userInfo.icon);
     $('#user-info').removeClass('d-none');
 
-    let course_rank_text = getCourseRank(data.user_info.course_rank_text);
-    let class_rank_text = getClassRank(data.user_info.class_rank_text);
-    $('#div-user-course-rank-text span').text(course_rank_text);
-    $('#div-user-class-rank-text span').text(class_rank_text);
+    let courseRankText = getCourseRank(data.userInfo.courseRankText);
+    let classRankText = getClassRank(data.userInfo.classRankText);
+    $('#div-user-course-rank-text span').text(courseRankText);
+    $('#div-user-class-rank-text span').text(classRankText);
 }
 
 // 段位的圖片編號對應段位名稱
-const getCourseRank = (course_rank_text) => {
-    switch (course_rank_text) {
+const getCourseRank = (courseRankText) => {
+    switch (courseRankText) {
         case "00": return "初心者";
         case "01": return "初段";
         case "02": return "二段";
@@ -106,8 +106,8 @@ const getCourseRank = (course_rank_text) => {
 }
 
 // class的圖片編號對應class名稱
-const getClassRank = (class_rank_text) => {
-    switch (class_rank_text) {
+const getClassRank = (classRankText) => {
+    switch (classRankText) {
         case "00": return "B5";
         case "01": return "B4";
         case "02": return "B3";

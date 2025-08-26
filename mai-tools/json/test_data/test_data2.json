@@ -1,15 +1,15 @@
 {
-  "user_info": {
+  "userInfo": {
     "icon": "https://maimaidx-eng.com/maimai-mobile/img/Icon/cd7309307df0cf24.png",
     "name": "ＴＥＳＴ",
     "rating": "-----",
-    "rating_base": "https://maimaidx-eng.com/maimai-mobile/img/rating_base_orange.png?ver=1.50",
-    "course_rank": "https://maimaidx-eng.com/maimai-mobile/img/course/course_rank_00T7GHJvGe.png",
-    "course_rank_text": "00",
-    "class_rank": "https://maimaidx-eng.com/maimai-mobile/img/class/class_rank_s_00ZqZmdpb8.png",
-    "class_rank_text": "00",
+    "ratingBase": "https://maimaidx-eng.com/maimai-mobile/img/rating_base_orange.png?ver=1.50",
+    "courseRank": "https://maimaidx-eng.com/maimai-mobile/img/course/course_rank_00T7GHJvGe.png",
+    "courseRankText": "00",
+    "classRank": "https://maimaidx-eng.com/maimai-mobile/img/class/class_rank_s_00ZqZmdpb8.png",
+    "classRankText": "00",
     "star": "×10",
-    "user_trophy_block": "trophy_block trophy_Normal p_3 t_c f_0",
+    "userTrophyBlock": "trophy_block trophy_Normal p_3 t_c f_0",
     "trophy": "\n\t\t\t\tmaimai でらっくすへようこそ！\n\t\t\t"
   },
   "songs": [

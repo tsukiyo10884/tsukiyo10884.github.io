@@ -1,15 +1,15 @@
 {
-  "user_info": {
+  "userInfo": {
     "icon": "https://maimaidx-eng.com/maimai-mobile/img/Icon/63145430a5501fbe.png",
     "name": "Ｔｓｕｋｉｙｏ",
     "rating": "15000",
-    "rating_base": "https://maimaidx-eng.com/maimai-mobile/img/rating_base_rainbow.png?ver=1.50",
-    "course_rank": "https://maimaidx-eng.com/maimai-mobile/img/course/course_rank_09eKhcbFNK.png",
-    "course_rank_text": "09",
-    "class_rank": "https://maimaidx-eng.com/maimai-mobile/img/class/class_rank_s_14brd4ch6F.png",
-    "class_rank_text": "14",
+    "ratingBase": "https://maimaidx-eng.com/maimai-mobile/img/rating_base_rainbow.png?ver=1.50",
+    "courseRank": "https://maimaidx-eng.com/maimai-mobile/img/course/course_rank_09eKhcbFNK.png",
+    "courseRankText": "09",
+    "classRank": "https://maimaidx-eng.com/maimai-mobile/img/class/class_rank_s_14brd4ch6F.png",
+    "classRankText": "14",
     "star": "×136",
-    "user_trophy_block": "trophy_block trophy_Normal p_3 t_c f_0",
+    "userTrophyBlock": "trophy_block trophy_Normal p_3 t_c f_0",
     "trophy": "\n\t\t\t\t\t息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる\n\t\t\t\t"
   },
   "songs": [

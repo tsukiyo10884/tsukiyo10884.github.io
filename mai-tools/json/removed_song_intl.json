@@ -1,8 +1,8 @@
 [
     {
         "version": "maimaiでらっくす",
-        "remove_date": "2019/11/25",
-        "remove_songs": [
+        "removeDate": "2019/11/25",
+        "removeSongs": [
             {
                 "title": "アンチクロックワイズ"
             },
@@ -61,8 +61,8 @@
     },
     {
         "version": "maimaiでらっくす PLUS",
-        "remove_date": "2020/07/29",
-        "remove_songs": [
+        "removeDate": "2020/07/29",
+        "removeSongs": [
             {
                 "title": "1/3の純情な感情"
             },
@@ -91,8 +91,8 @@
     },
     {
         "version": "Splash",
-        "remove_date": "2021/01/29",
-        "remove_songs": [
+        "removeDate": "2021/01/29",
+        "removeSongs": [
             {
                 "title": "にめんせい☆ウラオモテライフ！"
             },
@@ -106,8 +106,8 @@
     },
     {
         "version": "Splash PLUS",
-        "remove_date": "2021/07/30",
-        "remove_songs": [
+        "removeDate": "2021/07/30",
+        "removeSongs": [
             {
                 "title": "かくしん的☆めたまるふぉ～ぜっ！"
             },
@@ -121,8 +121,8 @@
     },
     {
         "version": "UNiVERSE",
-        "remove_date": "2022/01/27",
-        "remove_songs": [
+        "removeDate": "2022/01/27",
+        "removeSongs": [
             {
                 "title": "LOSER"
             },
@@ -154,8 +154,8 @@
     },
     {
         "version": "UNiVERSE PLUS",
-        "remove_date": "2022/07/28",
-        "remove_songs": [
+        "removeDate": "2022/07/28",
+        "removeSongs": [
             {
                 "title": "六厘歌"
             },
@@ -178,8 +178,8 @@
     },
     {
         "version": "FESTiVAL",
-        "remove_date": "2023/01/19",
-        "remove_songs": [
+        "removeDate": "2023/01/19",
+        "removeSongs": [
             {
                 "title": "ノーポイッ!"
             },
@@ -196,8 +196,8 @@
     },
     {
         "version": "BUDDiES",
-        "remove_date": "2024/01/18",
-        "remove_songs": [
+        "removeDate": "2024/01/18",
+        "removeSongs": [
             {
                 "title": "君の知らない物語"
             },
@@ -220,8 +220,8 @@
     },
     {
         "version": "BUDDiES+",
-        "remove_date": "2024/09/13",
-        "remove_songs": [
+        "removeDate": "2024/09/13",
+        "removeSongs": [
             {
                 "title": "二息歩行"
             },
@@ -265,8 +265,8 @@
     },
     {
         "version": "PRiSM",
-        "remove_date": "2025/02/27",
-        "remove_songs": [
+        "removeDate": "2025/02/27",
+        "removeSongs": [
             {
                 "title": "YONA YONA DANCE"
             },
