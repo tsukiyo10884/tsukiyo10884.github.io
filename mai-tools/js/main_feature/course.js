@@ -1,6 +1,6 @@
 const initCourseList = async () => {
     const maxCourse = Math.max(
-        ...data.courseRecord.flatMap(c => c.course.map(d => parseInt(d.courseName, 10)))
+        ...data.course.flatMap(c => c.courseRecord.map(d => parseInt(d.courseName, 10)))
     ).toString().padStart(2, "0");;
     $('#stat').html(`
         <div class="d-flex align-items-center">
@@ -34,7 +34,7 @@ const showCourseProgress = async (type) => {
     $('#now-title').text(`course|${type}`);
     let courseContent = '';
     courseData.find(x => x.type === type).course.forEach(course => {
-        const playedCourse = data.courseRecord.find(c => c.type === type);
+        const playedCourse = data.course.find(c => c.type === type);
         let currentCourse = null;
         if (playedCourse != null) {
             currentCourse = playedCourse.course.find(c => getCourseRank(c.courseName) === course.courseName);

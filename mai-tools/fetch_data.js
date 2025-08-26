@@ -290,7 +290,7 @@
                         else if (src.includes("3uT2WsrBT")) type = "Random段位認定";
                     }
 
-                    const courseRecord = [];
+                    const courses = [];
                     const items = block.querySelectorAll("div.p_r.p_5");
                     for (const item of items) {
                         const idx = item.querySelector("input[name=idx]")?.value;
@@ -313,10 +313,10 @@
                             songs.push({ score, life });
                         });
 
-                        courseRecord.push({ courseName, remainLife, totalScore, isClear, songs });
+                        courses.push({ courseName, remainLife, totalScore, isClear, songs });
                     }
 
-                    course.push({ type, courseRecord: courseRecord });
+                    course.push({ type, courseRecord: courses });
                 }
 
                 exportData = {
