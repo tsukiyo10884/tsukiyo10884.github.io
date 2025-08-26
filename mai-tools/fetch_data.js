@@ -318,8 +318,6 @@
                 }
 
                 console.log(results);
-                return results;
-
             }
             // 好友資訊
             else {
