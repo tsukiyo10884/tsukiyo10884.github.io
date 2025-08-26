@@ -101906,10 +101906,10 @@
             "fdxp": false
         }
     ],
-    "courseRecord": [
+    "course": [
         {
             "type": "段位認定",
-            "course": [
+            "courseRecord": [
                 {
                     "courseName": "08",
                     "remainLife": "587",

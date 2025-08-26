@@ -37,7 +37,7 @@ const showCourseProgress = async (type) => {
         const playedCourse = data.course.find(c => c.type === type);
         let currentCourse = null;
         if (playedCourse != null) {
-            currentCourse = playedCourse.course.find(c => getCourseRank(c.courseName) === course.courseName);
+            currentCourse = playedCourse.courseRecord.find(c => getCourseRank(c.courseName) === course.courseName);
         }
         courseContent += `
             <div class="course-block mb-5 p_0">

@@ -201,7 +201,7 @@
                 }
                 case "special": {
                     if (data.payload === 'ayo') {
-                        $('#stat').html(`<div class="d-flex align-items-center"><p>你的星將跟白將呢</p></div>`);
+                        $('#stat').html(`<div class="d-flex align-items-center"><p>你的星將、白將、祭將、熊將呢</p></div>`);
                     }
                     else if (data.payload === 'axun') {
                         $('#stat').html(`<div class="d-flex align-items-center"><p>你的超怪呢</p></div>`);
@@ -225,7 +225,7 @@
         const refreshData = () => {
             data = JSON.parse($('#json-data').text());
 
-            if (data.courseRecord == null) {
+            if (data.course == null) {
                 $('#btn-course').addClass('d-none');
             }
             initUserInfo();
