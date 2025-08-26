@@ -322,7 +322,7 @@
                 exportData = {
                     userInfo,
                     songs,
-                    lastPlayedCourseData
+                    course
                 };
             }
             // 好友資訊
@@ -387,8 +387,6 @@
                     songs
                 };
             }
-
-            console.log(exportData);
 
             setTimeout(() => {
                 childWin.postMessage({ type: "result", payload: exportData }, "https://tsukiyo10884.github.io");
