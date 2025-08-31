@@ -187,6 +187,10 @@
                     $output.html(`取得成績中(${data.payload})，請勿關閉maimai-net`);
                     break;
                 }
+                case "course": {
+                    $output.html(`取得成績中(段位認定)，請勿關閉maimai-net`);
+                    break;
+                }
                 case "result": {
                     $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(data.payload, null, 2)}</textarea>`);
                     $('#button-group').removeClass('d-none');

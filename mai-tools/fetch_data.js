@@ -275,6 +275,7 @@
                 }
 
                 // 段位資料
+                childWin.postMessage({ type: "course", payload: null }, "https://tsukiyo10884.github.io");
                 const doc = await fetchHTML(`${domain}/maimai-mobile/record/course/`);
                 const blocks = doc.querySelectorAll("div.w_480.f_0");
 
@@ -309,7 +310,7 @@
                         detailDoc.querySelectorAll(".coursemusic_container.w_430.p_r.f_0").forEach(song => {
                             const score = song.querySelector(".music_score_block.w_84")?.textContent.trim() || "";
                             const lifeRaw = song.querySelector(".coursemusic_life_txt.f_12.white")?.textContent.trim() || "";
-                            const life = lifeRaw.split("/")[1] + "->" + lifeRaw.split("/")[0];
+                            const life = lifeRaw.split("/")[1] + "->" + lifeRaw.split("/")[0] + '(-' + (lifeRaw.split("/")[1] - lifeRaw.split("/")[0]) + ')';
                             songs.push({ score, life });
                         });
 
