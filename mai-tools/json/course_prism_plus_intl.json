@@ -646,6 +646,70 @@
                         "difficulty": "master"
                     }
                 ]
+            },
+            {
+                "courseName": "真皆伝",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 1,
+                    "good": 3,
+                    "miss": 10
+                },
+                "lifeRecoveryPerSong": 5,
+                "songs": [
+                    {
+                        "title": "Heavenly Blast",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "氷滅の135小節",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "躯樹の墓守",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "宙天",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "裏皆伝",
+                "totalLives": 10,
+                "lifeLossPerJudgement": {
+                    "great": 1,
+                    "good": 3,
+                    "miss": 10
+                },
+                "lifeRecoveryPerSong": 0,
+                "songs": [
+                    {
+                        "title": "PANDORA PARADOXXX",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Latent Kingdom",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "raputa",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "系ぎて",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
             }
         ]
     }

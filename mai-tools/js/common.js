@@ -70,14 +70,14 @@ const initUserInfo = () => {
     $('#user-icon').attr('src', data.userInfo.icon);
     $('#user-info').removeClass('d-none');
 
-    let courseRankText = getCourseRank(data.userInfo.courseRankText);
-    let classRankText = getClassRank(data.userInfo.classRankText);
+    let courseRankText = getProfileCourseText(data.userInfo.courseRankText);
+    let classRankText = getProfileClassText(data.userInfo.classRankText);
     $('#div-user-course-rank-text span').text(courseRankText);
     $('#div-user-class-rank-text span').text(classRankText);
 }
 
 // 段位的圖片編號對應段位名稱
-const getCourseRank = (courseRankText) => {
+const getProfileCourseText = (courseRankText) => {
     switch (courseRankText) {
         case "00": return "初心者";
         case "01": return "初段";
@@ -106,7 +106,7 @@ const getCourseRank = (courseRankText) => {
 }
 
 // class的圖片編號對應class名稱
-const getClassRank = (classRankText) => {
+const getProfileClassText = (classRankText) => {
     switch (classRankText) {
         case "00": return "B5";
         case "01": return "B4";
@@ -134,6 +134,35 @@ const getClassRank = (classRankText) => {
         case "23": return "SSS2";
         case "24": return "SSS1";
         case "25": return "LEGEND";
+    }
+}
+
+
+// 段位認定的段位圖片編號對應段位名稱
+const getRecordCourseText = (courseRankText) => {
+    switch (courseRankText) {
+        case "1001": return "初段";
+        case "1002": return "二段";
+        case "1003": return "三段";
+        case "1004": return "四段";
+        case "1005": return "五段";
+        case "1006": return "六段";
+        case "1007": return "七段";
+        case "1008": return "八段";
+        case "1009": return "九段";
+        case "1010": return "十段";
+        case "1101": return "真初段";
+        case "1102": return "真二段";
+        case "1103": return "真三段";
+        case "1104": return "真四段";
+        case "1105": return "真五段";
+        case "1106": return "真六段";
+        case "1107": return "真七段";
+        case "1108": return "真八段";
+        case "1109": return "真九段";
+        case "1110": return "真十段";
+        case "1121": return "真皆伝";
+        case "1122": return "裏皆伝";
     }
 }
 

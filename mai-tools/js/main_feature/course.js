@@ -1,11 +1,18 @@
 const initCourseList = async () => {
     const maxCourse = Math.max(
-        ...data.course.flatMap(c => c.courseRecord.map(d => parseInt(d.courseName, 10)))
-    ).toString().padStart(2, "0");;
+        ...data.course.flatMap(c =>
+            c.courseRecord
+                .filter(d => d.isClear === true)
+                .map(d => parseInt(d.courseName, 10))
+        )
+    ).toString().padStart(4, "0");
+
     $('#stat').html(`
-        <div class="d-flex align-items-center">
-            <p>※施工中</p>
-            <p>　　目前最高段位: ${getCourseRank(maxCourse)}</p>
+        <div id="course-info" class="d-flex align-items-center">
+            <div>
+                <p>目前最高合格段位: ${getRecordCourseText(maxCourse)}</p>
+                <p class="f_12">※十段合格後才能挑戰真段位認定<br/>　真皆伝合格後才能挑戰裏皆伝<br/>　(雙人遊玩時，一方可挑戰另一方就也可跳級挑戰)</p>
+            </div>
         </div>
     `);
     let courseFilePath = $('#version-switch').is(':checked')
@@ -37,7 +44,7 @@ const showCourseProgress = async (type) => {
         const playedCourse = data.course.find(c => c.type === type);
         let currentCourse = null;
         if (playedCourse != null) {
-            currentCourse = playedCourse.courseRecord.find(c => getCourseRank(c.courseName) === course.courseName);
+            currentCourse = playedCourse.courseRecord.find(c => getRecordCourseText(c.courseName) === course.courseName);
         }
         courseContent += `
             <div class="course-block mb-5 p_0">
@@ -51,18 +58,18 @@ const showCourseProgress = async (type) => {
                 </div>
                 <div id="course-song-card" class="row justify-content-center gap-3">
                     ${course.songs.map((song, index) => {
-                        const songData = data.songs.find(s => s.title === song.title && s.type === song.type && s.difficulty === song.difficulty);
-                        let lastPlayedData = null;
-                        if (currentCourse != null && currentCourse.songs.length >= index) {
-                            lastPlayedData = currentCourse.songs[index];
-                        }
-                        return `
+            const songData = data.songs.find(s => s.title === song.title && s.type === song.type && s.difficulty === song.difficulty);
+            let lastPlayedData = null;
+            if (currentCourse != null && currentCourse.songs.length >= index) {
+                lastPlayedData = currentCourse.songs[index];
+            }
+            return `
                             <div style="width:fit-content">
                                 ${createSongCard(songData)}
                                 ${lastPlayedData != null ? `<p class="mt-2 mb-0">上次成績：${lastPlayedData.score}</p>
                                 <p class="mb-0">上次命數：${lastPlayedData.life}</p>` : ''}
                             </div>`;
-                    }).join('')}
+        }).join('')}
                 </div>
                 <div class="course-info text-center mt-3">
                     ${currentCourse != null ? `

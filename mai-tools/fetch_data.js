@@ -302,7 +302,7 @@
                         const clearImg = detailDoc.querySelector("img.course_clear")?.src || "";
                         const isClear = clearImg.includes("icon_course_clear.png");
 
-                        const courseName = detailDoc.querySelector("img.course_img.h_55")?.src.match(/course_(\d{2})(\d{2})/)[2];
+                        const courseName = detailDoc.querySelector("img.course_img.h_55")?.src.match(/course_(\d{4})/)[1];
                         const remainLife = detailDoc.querySelector(".course_life_txt.f_13.t_c")?.textContent.trim() || "";
                         const totalScore = detailDoc.querySelector(".course_achievement_txt.t_r")?.textContent.replace(/\s+/g, "") || "";
 
