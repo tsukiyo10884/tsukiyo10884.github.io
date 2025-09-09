@@ -66,8 +66,8 @@ const showCourseProgress = async (type) => {
             return `
                             <div style="width:fit-content">
                                 ${createSongCard(songData)}
-                                ${lastPlayedData != null ? `<p class="mt-2 mb-0">上次成績：${lastPlayedData.score}</p>
-                                <p class="mb-0">上次命數：${lastPlayedData.life}</p>` : ''}
+                                ${lastPlayedData != null ? `<p class="mt-2 mb-0 f_14">上次成績：${lastPlayedData.score}</p>
+                                <p class="mb-0 f_14">上次命數：${lastPlayedData.life}</p>` : ''}
                             </div>`;
         }).join('')}
                 </div>
