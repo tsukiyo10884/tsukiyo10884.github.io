@@ -148,8 +148,8 @@ const showSongRecord = (recordData) => {
                 <td><img src="${song.image}" width="30"></td>
                 <td>${song.internalLevel}</td>
                 <td class="text-start">${song.title}</td>
-                <td>${song.score}</td>
-                <td>${song.dx_score}</td>
+                <td class="text-end">${song.score_new_record ? ' <span class="new-record">NEW!</span>' : ''}${song.score}</td>
+                <td class="text-end">${song.dx_score_new_record ? '<span class="new-record">NEW!</span>' : ''}${song.dx_score}</td>
                 <td>${song.date}</td>
                 <td><span id="toggle-status-${index}">＋</span></td>
             </tr>
