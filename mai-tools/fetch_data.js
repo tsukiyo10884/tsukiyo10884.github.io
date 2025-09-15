@@ -309,7 +309,7 @@
                         const songs = [];
                         detailDoc.querySelectorAll(".coursemusic_container.w_430.p_r.f_0").forEach(song => {
                             const score = song.querySelector(".music_score_block.w_84")?.textContent.trim() || "";
-                            const lifeRaw = song.querySelector(".coursemusic_life_txt.f_12.white")?.textContent.trim() || "";
+                            const lifeRaw = song.querySelector(".coursemusic_life_txt.f_12")?.textContent.trim() || "";
                             const life = lifeRaw.split("/")[1] + "->" + lifeRaw.split("/")[0] + '(-' + (lifeRaw.split("/")[1] - lifeRaw.split("/")[0]) + ')';
                             songs.push({ score, life });
                         });
