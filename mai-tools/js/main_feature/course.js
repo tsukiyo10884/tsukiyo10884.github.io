@@ -47,11 +47,16 @@ const showCourseProgress = async (type) => {
             currentCourse = playedCourse.courseRecord.find(c => getRecordCourseText(c.courseName) === course.courseName);
         }
         courseContent += `
-            <div class="course-block mb-5 p_0">
+            <div class="course-block ${currentCourse == null ? 'mb-5' : null} p_0">
                 <div class="course-info text-center mb-3">
-                    <div class="col-12 d-flex align-items-center my-3">
+                    <div class="col-12 d-flex align-items-center">
                         <div class="section-divider left"></div>
-                            <b class="px-3 section-divider-title f-20">${course.courseName}</b>
+                            <div class="section-divider-title f-20 m-0">
+                                <div class="pt-4 m-0">
+                                    <p class="mb-0"><b>${course.courseName}</b></p>
+                                    ${currentCourse == null ? '(尚未挑戰)' : currentCourse.isClear ? '合格' : '不合格'}
+                                </div>
+                            </div>
                         <div class="section-divider right"></div>
                     </div>
                     <p class="mb-4">Life ${course.totalLives} | great -${course.lifeLossPerJudgement.great} / good -${course.lifeLossPerJudgement.good} / miss -${course.lifeLossPerJudgement.miss} | pass + ${course.lifeRecoveryPerSong}</p>
@@ -66,14 +71,14 @@ const showCourseProgress = async (type) => {
             return `
                             <div style="width:fit-content">
                                 ${createSongCard(songData)}
-                                ${lastPlayedData != null ? `<p class="mt-2 mb-0 f_14">上次成績：${lastPlayedData.score}</p>
-                                <p class="mb-0 f_14">上次命數：${lastPlayedData.life}</p>` : ''}
+                                ${lastPlayedData != null ? `<p class="mt-2 mb-0">成績：${lastPlayedData.score}</p>
+                                <p class="mb-0">命數：${lastPlayedData.life}</p>` : ''}
                             </div>`;
         }).join('')}
                 </div>
                 <div class="course-info text-center mt-3">
                     ${currentCourse != null ? `
-                        <p class="mb-2">上次總成績：${currentCourse.totalScore}、上次剩餘命數：${currentCourse.remainLife}、判定結果：${currentCourse.isClear ? '合格' : '不合格'}</p>
+                        <p class="mb-2">總成績：${currentCourse.totalScore}、剩餘命數：${currentCourse.remainLife}</p>
                     ` : ''}
                 </div>
             </div>`;

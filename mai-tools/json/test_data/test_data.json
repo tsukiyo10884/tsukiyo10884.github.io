@@ -101987,6 +101987,18 @@
             "type": "段位認定",
             "courseRecord": [
                 {
+                    "courseName": "1010",
+                    "remainLife": "0",
+                    "totalScore": "0.0000%",
+                    "isClear": false,
+                    "songs": [
+                        {
+                            "score": "0.0000%",
+                            "life": "900->0(-900)"
+                        }
+                    ]
+                },
+                {
                     "courseName": "1009",
                     "remainLife": "242",
                     "totalScore": "394.2630%",
