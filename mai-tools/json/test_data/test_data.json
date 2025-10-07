@@ -102047,6 +102047,23 @@
                     ]
                 }
             ]
+        },
+        {
+            "type": "真段位認定",
+            "courseRecord": [
+                {
+                    "courseName": "1106",
+                    "remainLife": "0",
+                    "totalScore": "0.0000%",
+                    "isClear": false,
+                    "songs": [
+                        {
+                            "score": "0.0000%",
+                            "life": "50->0(-50)"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

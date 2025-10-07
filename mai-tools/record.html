@@ -46,6 +46,21 @@
                 <canvas id="rating-chart" height="100" class="my-4"></canvas>
                 <div class="heavy-hr"></div>
             </div>
+            <div id="filters" class="d-flex justify-content-center mb-3">
+                <div id="date-button-group"></div>
+            </div>
+            <div id="filters" class="d-flex justify-content-center mb-3">
+                <input type="checkbox" id="new-record-button" class="ms-2" onclick="showSongRecord()">
+                <label for="new-record-button">只顯示新記錄</label>
+                <input type="checkbox" id="new-dx-record-button" class="ms-2"
+                    onclick="showSongRecord()">
+                <label for="new-dx-record-button">只顯示DX新記錄</label>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+                <span class="me-2 align-self-center">詳細資料：</span>
+                <button class="me-2" onclick="uncollapseAllDetails()" value="展開全部">展開全部</button>
+                <button onclick="collapseAllDetails()">收合全部</button>
+            </div>
             <table id="song-table" class="text-center w-100">
                 <thead>
                     <tr>
@@ -75,6 +90,7 @@
 
 <script>
     let detailData = null;
+    let recordData = [];
 
     // 取得本地json(測試資料)
     const LoadLocalJson = (filePath) => {
@@ -93,9 +109,12 @@
         else if (data.type === 'record') {
             $('.result-container').removeClass('d-none');
             $('#div-msg').addClass('d-none');
-            const recordData = data.payload;
-            showRatingChart(recordData);
-            showSongRecord(recordData);
+            recordData = data.payload;
+            let dates = [...new Set(recordData.map(song => song.date.substring(0, 10)))];
+            dates.sort((a, b) => new Date(b) - new Date(a));
+            createDateButtons(dates);
+            showRatingChart();
+            showSongRecord();
         }
     });
 
@@ -158,6 +177,9 @@
         background: #fff;
     }
 
+    .tr-utage {
+        background: #ff6ffd;
+    }
 
     .table-wrapper {
         margin: 10px 70px 70px;
@@ -241,5 +263,11 @@
     .late {
         color: #f35016;
         font-weight: bold;
+    }
+
+    .dx-score {
+        background-color: #424242;
+        color: white;
+        margin-bottom: -2px;
     }
 </style>

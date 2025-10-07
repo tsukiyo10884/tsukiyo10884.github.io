@@ -1,5 +1,5 @@
 
-const showRatingChart = (recordData) => {
+const showRatingChart = () => {
     const filteredData = recordData.filter((item, index, arr) => index === recordData.length - 1 || (arr[index + 1] != null && item.rating !== arr[index + 1].rating));
     const labels = filteredData.map((song, i) => `${song.no}.${song.difficulty} : ${song.title} ${song.rating_plus}`);
     const ratings = filteredData.map(song => parseInt(song.rating, 10));
@@ -42,7 +42,6 @@ const showRatingChart = (recordData) => {
                 y: {
                     beginAtZero: false,
                     ticks: {
-                        stepSize: 500,
                         callback: (value) => value.toLocaleString(),
                         color: '#203844',
                         font: {
@@ -88,70 +87,49 @@ const showRatingChart = (recordData) => {
 }
 
 // 歌曲詳細資料
-const showSongRecord = (recordData) => {
+const showSongRecord = () => {
     const $container = $("#song-list");
+    $container.empty();
+    $("#song-table").empty();
 
-    $.each(recordData, function (_, song) {
-        let notesTable = `
-            <table class="mb-2">
-                <thead class="table-light">
-                    <tr>
-                        <th>Type</th>
-                        <th>Critical Perfect</th>
-                        <th>Perfect</th>
-                        <th>Great</th>
-                        <th>Good</th>
-                        <th>Miss</th>
-                    </tr>
-                </thead>
-                <tbody>
-            `;
-
-        $.each(song.notes, function (type, vals) {
-            notesTable += `
-                <tr>
-                    <td>${type.charAt(0).toUpperCase() + type.slice(1)}</td>
-                    <td>${vals.critical_perfect}</td>
-                    <td>${vals.perfect}</td>
-                    <td>${vals.great}</td>
-                    <td>${vals.good}</td>
-                    <td>${vals.miss}</td>
-                </tr>
-            `;
-        });
-
-        notesTable += `</tbody></table>`;
-
-        $container.append(`
-            <div class="col-2">
-                <div>
-                <img src="${song.image}" class="card-img-top" alt="${song.title}">
-                <div>
-                    <h5>${song.title}</h5>
-                    <p><strong>Score:</strong> ${song.score}</p>
-                    <p><strong>DX Score:</strong> ${song.dx_score}</p>
-                    <p><strong>FAST:</strong> ${song.fast} | <strong>LATE:</strong> ${song.late}</p>
-                    <p><strong>Rating:</strong> ${song.rating} ${song.rating_plus}</p>
-                    ${notesTable}
-                    <p><strong>Max Combo:</strong> ${song.max_combo}</p>
-                    <p><strong>Max Sync:</strong> ${song.max_sync}</p>
-                </div>
-                </div>
-            </div>
-        `);
-    });
+    // 篩選條件
+    let filteredData = recordData;
+    const selectedDates = $('input[name="date-filter"]:checked').map(function() {
+        return this.value;
+    }).get();
+    if (selectedDates.length > 0) {
+        filteredData = filteredData.filter(song => selectedDates.includes(song.date.substring(0, 10)));
+    }
+    if ($('#new-record-button').is(':checked')) {
+        filteredData = filteredData.filter(song => song.score_new_record);
+    }
+    if ($('#new-dx-record-button').is(':checked')) {
+        filteredData = filteredData.filter(song => song.dx_score_new_record);
+    }
 
     // 顯示歌曲紀錄清單
-    recordData.forEach((song, index) => {
+    $('#song-table').append(`
+        <thead>
+            <tr>
+                <th>封面</th>
+                <th>定數</th>
+                <th class="text-start">曲名</th>
+                <th>成績</th>
+                <th>DX成績</th>
+                <th>遊玩時間</th>
+                <th>詳細</th>
+            </tr>
+        </thead>`);
+    filteredData.forEach((song, index) => {
         $("#song-table").append(`
-            <tr class="tr-${song.difficulty} toggle-row" data-id="${index}">
+            <tr class="tr-${song.difficulty} toggle-row" data-id="${index}" onclick="toggleRecordDetails(${index})">
                 <td><img src="${song.image}" width="30"></td>
-                <td>${song.internalLevel}</td>
+                <td>${song.internalLevel.toString().includes('?') ? song.internalLevel : Number.parseFloat(song.internalLevel).toFixed(1)}</td>
                 <td class="text-start">${song.title}</td>
                 <td class="text-end">${song.score_new_record ? ' <span class="new-record">NEW!</span>' : ''}${song.score}</td>
                 <td class="text-end">${song.dx_score_new_record ? '<span class="new-record">NEW!</span>' : ''}${song.dx_score}</td>
                 <td>${song.date}</td>
-                <td><span id="toggle-status-${index}">＋</span></td>
+                <td style="cursor: pointer;"><span id="toggle-status-${index}">＋</span></td>
             </tr>
             <tr class="detail-row" id="detail-${index}" style="display:none;">
                 <td colspan="7" style="background:#f9f9f9;width: 100%">
@@ -160,23 +138,21 @@ const showSongRecord = (recordData) => {
             </tr>
         `);
     });
-
-    $(document).on("click", ".toggle-row", function () {
-        const id = $(this).data("id");
-        $(`#detail-${id}`).toggle();
-        if ($(`#detail-${id}`).is(":visible")) {
-            $(`#toggle-status-${id}`).text("－");
-        } else {
-            $(`#toggle-status-${id}`).text("＋");
-        }
-    });
 }
+
+//toggle detail
+const toggleRecordDetails = (id) => {
+    const $detailRow = $(`#detail-${id}`);
+    $detailRow.toggle();
+    const $toggleStatus = $(`#toggle-status-${id}`);
+    $toggleStatus.text($detailRow.is(":visible") ? "－" : "＋");
+};
 
 //顯示詳細記錄
 const renderRecordDetails = (song) => {
     return `
-        <div class="row align-items-center">
-            <div class="col-md-7">
+        <div class="row align-items-center f_12 px-2">
+            <div class="col-md-5">
                 <table class="detail-table">
                     <thead>
                         <tr>
@@ -203,15 +179,46 @@ const renderRecordDetails = (song) => {
                 </table>
             </div>
 
-            <div class="col-md-5 p-4">
-                <p>
+            <div class="col-md-3 px-4">
+                <div>
                     <span class="fast">FAST: ${song.fast}</span> |
                     <span class="late">LATE: ${song.late}</span>
-                </p>
-                <p>Rating: ${song.rating} ${song.rating_plus}</p>
-                <p>Max Combo: ${song.max_combo}</p>
-                <p>Max Sync: ${song.max_sync.replace('―', '-')}</p>
+                </div>
+                <div>Rating: ${song.rating} ${song.rating_plus}</div>
+                <div>Max Combo: ${song.max_combo}</div>
+                <div>Max Sync: ${song.max_sync.replace('―', '-')}</div>
+                <div class="dx-score mt-3">DX SCORE: ${song.dx_score}</div>
+                ${song.star ? `<div class="d-flex justify-content-end w-100"><img src="${song.star}" alt="Star" height="15"></div>` : ''}
+                <div class="d-flex justify-content-center w-100 mt-1">
+                    <img src="${song.achive_1}" alt="Achieve 1" height="40">
+                    <img src="${song.achive_2}" alt="Achieve 2" height="40">
+                </div>
             </div>
         </div>
     `;
+};
+
+// 展開全部詳細資料
+const uncollapseAllDetails = () => {
+    $(".detail-row").show();
+    $("span[id^='toggle-status-']").text("－");
+}
+
+// 收合全部詳細資料
+const collapseAllDetails = () => {
+    $(".detail-row").hide();
+    $("span[id^='toggle-status-']").text("＋");
+};
+
+// 建立日期按鈕
+const createDateButtons = (dates) => {
+    const $dateButtonGroup = $('#date-button-group');
+    $dateButtonGroup.empty();
+    $dateButtonGroup.append('<span class="me-2 align-self-center">遊玩日期：</span>');
+    dates.forEach(date => {
+        const $button = $(`
+            <input type="checkbox" name="date-filter" value="${date}" class="ms-2" onclick="showSongRecord()" checked>
+            <label for="${date}">${date}</label>`);
+        $dateButtonGroup.append($button);
+    });
 };

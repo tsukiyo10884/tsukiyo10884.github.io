@@ -489,7 +489,7 @@
             const songEntry = detailData.songs.find(s => s.songId === title);
             const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulty);
             const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
-            const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
+            const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? recordDoc.querySelector('.music_lv_back').textContent.trim();
 
             const data = {
                 no: count + 1,
@@ -504,6 +504,9 @@
                 dx_score_new_record: recordDoc.querySelector('.playlog_deluxscore_newrecord') ? true : false,
                 fast: recordDoc.querySelectorAll('.playlog_fl_block .p_t_5')[0].textContent.trim(),
                 late: recordDoc.querySelectorAll('.playlog_fl_block .p_t_5')[1].textContent.trim(),
+                star: recordDoc.querySelector('.playlog_deluxscore_star')?.src,
+                achive_1: recordDoc.querySelectorAll('.h_35.m_5.f_l')[0].src,
+                achive_2: recordDoc.querySelectorAll('.h_35.m_5.f_l')[1].src,
                 rating: recordDoc.querySelectorAll('.rating_block')[1]?.textContent.trim() ?? recordDoc.querySelectorAll('.rating_block')[0]?.textContent.trim(),
                 rating_plus: recordDoc.querySelector('.t_r.f_0 span').textContent.trim(),
                 notes: {
@@ -555,6 +558,7 @@
                 await new Promise(resolve => setTimeout(resolve, 10));
             }
         }
+        console.log(result);
         childWin.postMessage({ type: "record", payload: result }, "https://tsukiyo10884.github.io");
     }
     // 計算class
