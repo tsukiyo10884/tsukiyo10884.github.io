@@ -94,11 +94,13 @@ const showSongRecord = () => {
 
     // 篩選條件
     let filteredData = recordData;
-    const selectedDates = $('input[name="date-filter"]:checked').map(function() {
+    const selectedDates = $('input[name="date-filter"]:checked').map(function () {
         return this.value;
     }).get();
     if (selectedDates.length > 0) {
         filteredData = filteredData.filter(song => selectedDates.includes(song.date.substring(0, 10)));
+    } else {
+        filteredData = [];
     }
     if ($('#new-record-button').is(':checked')) {
         filteredData = filteredData.filter(song => song.score_new_record);
@@ -125,7 +127,7 @@ const showSongRecord = () => {
             <tr class="tr-${song.difficulty} toggle-row" data-id="${index}" onclick="toggleRecordDetails(${index})">
                 <td><img src="${song.image}" width="30"></td>
                 <td>${song.internalLevel.toString().includes('?') ? song.internalLevel : Number.parseFloat(song.internalLevel).toFixed(1)}</td>
-                <td class="text-start">${song.title}</td>
+                <td class="text-start"><span class="song-tag">${(song.difficulty == "utage" ? song.title.substring(0, 3) : "[" + song.type.toUpperCase() + "]")}</span> ${song.difficulty == "utage" ? song.title.substring(3, song.title.length) : song.title}</td>
                 <td class="text-end">${song.score_new_record ? ' <span class="new-record">NEW!</span>' : ''}${song.score}</td>
                 <td class="text-end">${song.dx_score_new_record ? '<span class="new-record">NEW!</span>' : ''}${song.dx_score}</td>
                 <td>${song.date}</td>
@@ -151,8 +153,17 @@ const toggleRecordDetails = (id) => {
 //顯示詳細記錄
 const renderRecordDetails = (song) => {
     return `
-        <div class="row align-items-center f_12 px-2">
-            <div class="col-md-5">
+        <div class="row f_12 px-2">
+            <div class="col-md-3 pt-2">
+                <p class="fw-bold text-start text-danger mb-1">${song.track}</p>
+                <img src="${song.image}" alt="${song.title}" width="120">
+                <div>
+                    <div><strong>${song.difficulty == "utage" ? song.title.substring(3, song.title.length) : song.title}</strong></div>
+                    <div>${song.internalLevel.toString().includes('?') ? song.internalLevel : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.difficulty == "utage" ? song.title.substring(1, 2) : song.type.toUpperCase()}</div>
+                </div>
+            </div>
+
+            <div class="col-md-5 p-0">
                 <table class="detail-table">
                     <thead>
                         <tr>
@@ -179,7 +190,7 @@ const renderRecordDetails = (song) => {
                 </table>
             </div>
 
-            <div class="col-md-3 px-4">
+            <div class="col px-4 pt-3">
                 <div>
                     <span class="fast">FAST: ${song.fast}</span> |
                     <span class="late">LATE: ${song.late}</span>

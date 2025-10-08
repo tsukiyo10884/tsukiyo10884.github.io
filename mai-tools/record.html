@@ -30,7 +30,6 @@
 
 <body>
     <div class="main mb-5">
-        <h3>施工中</h3>
         <div id="div-msg" class="col-12 d-flex align-items-center my-3">
             <div class="section-divider left"></div>
             <b id="msg" class="px-3 section-divider-title">如果看到這行字超過5秒，代表資料沒傳成功，請回maimai-net重整後再試一次</b>
@@ -52,8 +51,7 @@
             <div id="filters" class="d-flex justify-content-center mb-3">
                 <input type="checkbox" id="new-record-button" class="ms-2" onclick="showSongRecord()">
                 <label for="new-record-button">只顯示新記錄</label>
-                <input type="checkbox" id="new-dx-record-button" class="ms-2"
-                    onclick="showSongRecord()">
+                <input type="checkbox" id="new-dx-record-button" class="ms-2" onclick="showSongRecord()">
                 <label for="new-dx-record-button">只顯示DX新記錄</label>
             </div>
             <div class="d-flex justify-content-center mb-3">
@@ -120,25 +118,12 @@
 
 </script>
 <style>
-    .new-record {
-        color: #ff9d00;
-        font-weight: bold;
-        font-size: 8px;
-    }
-
-    .toggle-detail {
-        cursor: pointer;
-        color: black !important;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
     #div-rating-chart {
         background: #203844;
-        padding: 20px;
-        padding-top: 10px;
         border-radius: 20px;
         border: 1px solid #ffffff;
+        padding-top: 10px;
+        padding: 20px;
     }
 
     #rating-chart-title {
@@ -146,10 +131,119 @@
         padding-top: 10px;
     }
 
+    #song-table {
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+
+    #song-table td {
+        border: none;
+    }
+
+    #song-table th {
+        background-color: black;
+        border: none;
+        color: white;
+        font-weight: bold;
+    }
+
+    #song-table tr {
+        border-bottom: 1px solid black;
+    }
+
+    #song-table tr:last-child {
+        border-bottom: none;
+    }
+
+    .cp {
+        background: #e1f1f9;
+        color: #ffbc09;
+        font-weight: bold;
+    }
+
+    .detail-table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .detail-table td,
+    .detail-table th {
+        border: 1px solid #ccc;
+        padding: 6px;
+        text-align: center;
+        vertical-align: middle;
+        word-wrap: break-word;
+    }
+
+    .dx-score {
+        background-color: #424242;
+        color: white;
+        margin-bottom: -2px;
+    }
+
+    .fast {
+        color: #2974e0;
+        font-weight: bold;
+    }
+
+    .g {
+        background: #e1f1f9;
+        color: #f75ea3;
+        font-weight: bold;
+    }
+
+    .good {
+        background: #e1f1f9;
+        color: #2fca4c;
+        font-weight: bold;
+    }
+
     .heavy-hr {
         background: #fcd810;
-        width: 100%;
         height: 10px;
+        width: 100%;
+    }
+
+    .late {
+        color: #f35016;
+        font-weight: bold;
+    }
+
+    .m {
+        background: #e1f1f9;
+        color: #8c8c8c;
+        font-weight: bold;
+    }
+
+    .new-record {
+        color: #ff9d00;
+        font-size: 8px;
+        font-weight: bold;
+    }
+
+    .p {
+        background: #e1f1f9;
+        color: #ff9d00;
+        font-weight: bold;
+    }
+
+    .song-tag {
+        display: inline-block;
+        text-align: center;
+        width: 45px;
+    }
+
+    .table-wrapper {
+        box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+        margin: 10px 70px 70px;
+    }
+
+    .toggle-detail {
+        color: black !important;
+        cursor: pointer;
+        font-weight: bold;
+        text-decoration: none;
     }
 
     .tr-advanced {
@@ -174,100 +268,10 @@
     }
 
     .tr-remaster {
-        background: #fff;
+        background: #e3c7eb;
     }
 
     .tr-utage {
         background: #ff6ffd;
-    }
-
-    .table-wrapper {
-        margin: 10px 70px 70px;
-        box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
-    }
-
-    #song-table {
-        border-collapse: collapse;
-        border: 1px solid black;
-    }
-
-    #song-table th {
-        border: none;
-        background-color: black;
-        color: white;
-        font-weight: bold;
-    }
-
-    #song-table td {
-        border: none;
-    }
-
-    #song-table tr {
-        border-bottom: 1px solid black;
-    }
-
-    #song-table tr:last-child {
-        border-bottom: none;
-    }
-
-    .detail-table {
-        width: 100%;
-        border-collapse: collapse;
-        table-layout: fixed;
-    }
-
-    .detail-table th,
-    .detail-table td {
-        border: 1px solid #ccc;
-        padding: 6px;
-        text-align: center;
-        vertical-align: middle;
-        word-wrap: break-word;
-    }
-
-    .cp {
-        background: #e1f1f9;
-        color: #ffbc09;
-        font-weight: bold;
-    }
-
-    .p {
-        background: #e1f1f9;
-        color: #ff9d00;
-        font-weight: bold;
-    }
-
-    .g {
-        background: #e1f1f9;
-        color: #f75ea3;
-        font-weight: bold;
-    }
-
-    .good {
-        background: #e1f1f9;
-        color: #2fca4c;
-        font-weight: bold;
-    }
-
-    .m {
-        background: #e1f1f9;
-        color: #8c8c8c;
-        font-weight: bold;
-    }
-
-    .fast {
-        color: #2974e0;
-        font-weight: bold;
-    }
-
-    .late {
-        color: #f35016;
-        font-weight: bold;
-    }
-
-    .dx-score {
-        background-color: #424242;
-        color: white;
-        margin-bottom: -2px;
     }
 </style>

@@ -226,6 +226,10 @@ button:not(#btn-search):hover {
     left: 6px;
 }
 
+.section-divider-title .pt-4 {
+    padding: 0px !important;
+}
+
 .section-divider.left {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
     transform: rotateZ(1deg);

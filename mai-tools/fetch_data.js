@@ -494,7 +494,9 @@
             const data = {
                 no: count + 1,
                 date: recordDoc.querySelectorAll('.sub_title .v_b')[1].textContent.trim(),
+                track: recordDoc.querySelector('.red.f_b.v_b').textContent.trim(),
                 title: title,
+                type: type,
                 internalLevel: internalLevel,
                 difficulty: difficulty,
                 image: recordDoc.querySelector('.music_img').src,
@@ -558,7 +560,6 @@
                 await new Promise(resolve => setTimeout(resolve, 10));
             }
         }
-        console.log(result);
         childWin.postMessage({ type: "record", payload: result }, "https://tsukiyo10884.github.io");
     }
     // 計算class
