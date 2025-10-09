@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<svg width="0" height="0">
+    <filter id="crayon-effect">
+        <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+</svg>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=915">
+    <link rel="icon" href="img/favicon.ico">
+    <title>maimai小工具</title>
+    <link id="theme" rel="stylesheet" href="css/default.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="js/common.js"></script>
+    <script src="js/others/collection.js"></script>
+</head>
+
+<body>
+    <div class="main mb-5">
+        <button id="test_data" class="test"
+            onclick="LoadLocalJson('json/test_data/test_data_collection.json',1)">測試資料</button>
+        <div class="result-container">
+            <div id="tmp">
+                <div class="col-12 d-flex align-items-center my-3">
+                <div class="section-divider left"></div>
+                <b id="msg" class="px-3 section-divider-title">如果看到這行字超過5秒，代表資料沒傳成功，請回maimai-net重整後再試一次</b>
+                <div class="section-divider right"></div>
+            </div>
+            </div>
+            <div id="collection">
+                <div id="div-template">
+                    <img id="template" src="./img/collection_template.png" />
+                </div>
+                <div id="div-icon">
+                    <img id="icon" src="" />
+                </div>
+                <div id="div-rating">
+                    <img id="rating-base">
+                    <span id="rating"></span>
+                </div>
+                <div id="div-name">
+                    <div id="user-name"></div>
+                </div>
+                <div id="div-trophy">
+                    <div id="user-trophy-block">
+                        <div class="trophy-inner-block">
+                            <span id="user-trophy"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="div-class">
+                    <img id="class" src="" />
+                </div>
+                <div id="div-course">
+                    <img id="course" src="" />
+                </div>
+                <div id="div-nameplate">
+                    <img id="nameplate" src="" />
+                </div>
+                <div id="div-frame">
+                    <img id="frame" src="" />
+                </div>
+                <div id="div-leader">
+                    <img id="leader" src="" width="183" />
+                </div>
+                <div id="div-member2">
+                    <img id="member2" src="" />
+                </div>
+                <div id="div-member3">
+                    <img id="member3" src="" />
+                </div>
+                <div id="div-member4">
+                    <img id="member4" src="" />
+                </div>
+                <div id="div-member5">
+                    <img id="member5" src="" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center">
+        <hr>
+        Made by <a href="https://github.com/tsukiyo10884/" target="_blank">Tsukiyo</a>, in collaboration with <a
+            href="https://www.instagram.com/mua_2110/" target="_blank">Ayo</a> and <a
+            href="https://www.instagram.com/aaaaaaaaaxiuan/" target="_blank">Axuan</a>.
+    </footer>
+    <div class="extra-credits"></div>
+</body>
+
+<script>
+    // 取得本地json(測試資料)
+    const LoadLocalJson = (filePath, no) => {
+        $.getJSON(filePath, (json) => {
+            window.postMessage({ type: "collection", payload: json }, '*');
+        });
+    };
+    $('extra').html(createCreditSection());
+    let detailData = null;
+    // 接到message事件(從maimai-net收到資料)
+    $(window).on('message', (event) => {
+        $('.test').hide();
+        const data = event.originalEvent.data;
+        if (data.type === 'init') {
+            $('#msg').text('連線中，請勿關閉maimai-net...');
+        }
+        else if (data.type == "collection") {
+            $('#tmp').hide();
+            showCollection(data.payload);
+        }
+    });
+</script>
+<style>
+    @font-face {
+        font-family: 'Hiragino';
+        src: url(./font/HiraginoKaku-Pro-W3.otf) format('opentype');
+    }
+
+    .main {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 0;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: calc(var(--bs-gutter-x) * .5);
+        padding-right: calc(var(--bs-gutter-x) * .5);
+        width: 915px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #collection {
+        width: 640px;
+        height: 264px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #div-template {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 640px;
+        height: 264px;
+        z-index: 5;
+    }
+
+    #div-frame,
+    #div-icon {
+        position: relative;
+    }
+
+    #icon {
+        position: absolute;
+        top: 17.9px;
+        left: 23.1px;
+        width: 59.3px;
+        height: 59.3px;
+        z-index: 2;
+    }
+
+    #div-course {
+        position: absolute;
+        top: 50px;
+        left: 193px;
+        display: flex;
+        align-items: center;
+    }
+
+    #course {
+        position: absolute;
+        height: 20.5px;
+        z-index: 2;
+    }
+
+    #div-class {
+        position: absolute;
+        top: 9px;
+        left: 192.2px;
+        display: flex;
+        align-items: center;
+    }
+
+    #class {
+        width: 50.2px;
+        z-index: 2;
+    }
+
+    #div-trophy {
+        position: absolute;
+        top: 64px;
+        left: 84px;
+        display: flex;
+        align-items: center;
+        z-index: 2;
+    }
+
+    #user-trophy-block {
+        width: 160px;
+        background-size: contain;
+    }
+
+    #user-trophy {
+        font-size: 8.5px;
+        z-index: 2;
+    }
+
+    .trophy-inner-block {
+        color: #fff;
+        line-height: 1.5;
+        margin-top: -1.5px;
+        overflow: hidden;
+        text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0, black 0px 1px 0, black 0 -1px 0, black -1px 0 0, black 1px 0 0;
+        white-space: nowrap;
+    }
+
+    #frame {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 640px;
+        height: 264px;
+        z-index: -1;
+    }
+
+    #div-nameplate {
+        position: absolute;
+        top: 48px;
+        left: 19px;
+        display: flex;
+        align-items: center;
+        z-index: 1;
+    }
+
+    #nameplate {
+        position: absolute;
+        height: 67.5px;
+    }
+
+    #div-name {
+        position: absolute;
+        top: 37.9px;
+        left: 84px;
+        display: flex;
+        align-items: center;
+        z-index: 2;
+    }
+
+    #user-name {
+        background-color: #fff;
+        background-size: 34px;
+        border-radius: 3px;
+        border: 2px solid #dedede;
+        color: #000;
+        height: 25px;
+        width: 160px;
+        font-family: 'Hiragino', sans-serif;
+        line-height: 1.5;
+        font-size: 13px;
+        padding-left: 2px;
+        padding-top: 2px;
+    }
+
+    #div-rating {
+        position: absolute;
+        top: 18px;
+        left: 85px;
+        display: flex;
+        align-items: center;
+        z-index: 2;
+    }
+
+    #rating-base {
+        width: 101px;
+        height: 18.5px;
+        z-index: 2;
+    }
+
+    #rating {
+        font-family: 'Hiragino';
+        position: absolute;
+        left: 51px;
+        top: 2px;
+        font-size: 12px;
+        transform: scaleX(1.1);
+        color: #dbc03a;
+        z-index: 100;
+        text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0, black 0px 1px 0, black 0 -1px 0, black -1px 0 0, black 1px 0 0;
+    }
+
+    #div-leader {
+        position: absolute;
+        top: 84px;
+        left: -28px;
+        display: flex;
+        align-items: center;
+        z-index: 2;
+    }
+
+    #div-member2,
+    #div-member3,
+    #div-member4,
+    #div-member5 {
+        position: absolute;
+        top: 128px;
+        display: flex;
+        align-items: center;
+        z-index: 2;
+    }
+
+    #div-member2 {
+        left: 108px;
+    }
+
+    #div-member3 {
+        left: 191px;
+    }
+
+    #div-member4 {
+        left: 274px;
+    }
+
+    #div-member5 {
+        left: 355px;
+    }
+
+    #member2,
+    #member3,
+    #member4,
+    #member5 {
+        width: 117px;
+        clip-path: polygon(50% 0%, 67% 6%, 75% 20%, 74% 80%, 66% 94%, 50% 100%, 34% 95%, 25% 80%, 25% 20%, 34% 6%);
+    }
+</style>

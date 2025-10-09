@@ -128,7 +128,6 @@
         // 萬花筒區域
         case "/maimai-mobile/map/kaleidxScopeDetail/": {
             if (url.search != null) {
-
                 childWin = window.open("https://tsukiyo10884.github.io/mai-tools/gate.html");
                 if (url.origin === "https://maimaidx.jp") {
                     gate.domain = 'jp';
@@ -184,6 +183,12 @@
         case "/maimai-mobile/playerData/": {
             childWin = window.open("https://tsukiyo10884.github.io/mai-tools/player_data.html");
             type = "playerData";
+            break;
+        }
+        // 收藏品(collection)
+        case "/maimai-mobile/collection/": {
+            childWin = window.open("https://tsukiyo10884.github.io/mai-tools/collection.html");
+            type = "collection";
             break;
         }
     }
@@ -582,5 +587,56 @@
         setTimeout(() => {
             childWin.postMessage({ type: "playerData", payload: classData }, "https://tsukiyo10884.github.io");
         }, 1500);
+    }
+    // 收藏品排列模擬
+    else if (type === "collection") {
+        const iconRes = await fetch(`${domain}/maimai-mobile/collection/`, { credentials: 'include' });
+        const iconText = await iconRes.text();
+        const iconDoc = new DOMParser().parseFromString(iconText, 'text/html');
+        const icon = iconDoc.querySelector('.w_80.m_r_10.f_l').src;
+
+        const nameplateRes = await fetch(`${domain}/maimai-mobile/collection/nameplate`, { credentials: 'include' });
+        const nameplateText = await nameplateRes.text();
+        const nameplateDoc = new DOMParser().parseFromString(nameplateText, 'text/html');
+        const nameplate = nameplateDoc.querySelector('.w_396.m_r_10').src;
+
+        const frameRes = await fetch(`${domain}/maimai-mobile/collection/frame`, { credentials: 'include' });
+        const frameText = await frameRes.text();
+        const frameDoc = new DOMParser().parseFromString(frameText, 'text/html');
+        const frame = frameDoc.querySelector('.w_396.m_r_10').src;
+
+        const characterRes = await fetch(`${domain}/maimai-mobile/collection/character`, { credentials: 'include' });
+        const characterText = await characterRes.text();
+        const characterDoc = new DOMParser().parseFromString(characterText, 'text/html');
+        const characters = Array.from(characterDoc.querySelectorAll('.chara_cycle_img')).slice(0,5).map(img => img.src);
+
+        const homeRes = await fetch(`${domain}/maimai-mobile/home`, { credentials: 'include' });
+        const homeText = await homeRes.text();
+        const homeDoc = new DOMParser().parseFromString(homeText, 'text/html');
+        const name = homeDoc.querySelector('.name_block.f_l.f_16').textContent;
+        const rating = homeDoc.querySelector('.rating_block')?.textContent;
+        const ratingBase = homeDoc.querySelector('.h_30.f_r').src;
+        const courseRank = homeDoc.querySelector('.h_35.f_l')?.src;
+        const classRank = homeDoc.querySelector('.p_l_10.h_35.f_l')?.src;
+        const trophyBlock = homeDoc.querySelector('.trophy_block.p_3.t_c.f_0').className;
+        const trophy = homeDoc.querySelector('.trophy_inner_block.f_13').textContent;
+
+        const collections = {
+            icon,
+            nameplate,
+            frame,
+            trophy,
+            trophyBlock,
+            characters,
+            name,
+            rating,
+            ratingBase,
+            courseRank,
+            classRank
+        }
+
+        setTimeout(() => {
+            childWin.postMessage({ type: "collection", payload: collections }, "https://tsukiyo10884.github.io");
+        }, 1000);
     }
 })();

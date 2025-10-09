@@ -1,0 +1,19 @@
+{
+    "icon": "https://maimaidx-eng.com/maimai-mobile/img/Icon/63145430a5501fbe.png",
+    "nameplate": "https://maimaidx-eng.com/maimai-mobile/img/NamePlate/73db72b0fc8d2f9e.png",
+    "frame": "https://maimaidx-eng.com/maimai-mobile/img/Frame/12d3b2acb57ccfc3.png",
+    "trophy": "\n\t\t\t\t\t息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる\n\t\t\t\t",
+    "trophyBlock": "trophy_block trophy_Normal p_3 t_c f_0",
+    "characters": [
+        "https://maimaidx-eng.com/maimai-mobile/img/Chara/2d88245506b370eb.png",
+        "https://maimaidx-eng.com/maimai-mobile/img/Chara/05d06b73c1c27704.png",
+        "https://maimaidx-eng.com/maimai-mobile/img/Chara/6d121745a423b0cd.png",
+        "https://maimaidx-eng.com/maimai-mobile/img/Chara/91927195418c3996.png",
+        "https://maimaidx-eng.com/maimai-mobile/img/Chara/075cd3741e4ec0dd.png"
+    ],
+    "name": "Ｔｓｕｋｉｙｏ",
+    "rating": "14987",
+    "ratingBase": "https://maimaidx-eng.com/maimai-mobile/img/rating_base_platinum.png?ver=1.50",
+    "courseRank": "https://maimaidx-eng.com/maimai-mobile/img/course/course_rank_10hvsSHd90.png",
+    "classRank": "https://maimaidx-eng.com/maimai-mobile/img/class/class_rank_s_15D7JMvMhJ.png"
+}
