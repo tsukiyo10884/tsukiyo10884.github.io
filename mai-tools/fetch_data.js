@@ -49,7 +49,7 @@
                 .map(date => new Date(date))
                 .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '0000-00-00';
 
-            gate.keySongs.push({ title: song.title, songLastPlayedDate });
+            gate.keySongs.push({ title: song.title, songLastPlayedDate, type: song.type });
 
             // 每25頁就延遲一下，避免被鎖連線
             count++;
@@ -608,7 +608,7 @@
         const characterRes = await fetch(`${domain}/maimai-mobile/collection/character`, { credentials: 'include' });
         const characterText = await characterRes.text();
         const characterDoc = new DOMParser().parseFromString(characterText, 'text/html');
-        const characters = Array.from(characterDoc.querySelectorAll('.chara_cycle_img')).slice(0,5).map(img => img.src);
+        const characters = Array.from(characterDoc.querySelectorAll('.chara_cycle_img')).slice(0, 5).map(img => img.src);
 
         const homeRes = await fetch(`${domain}/maimai-mobile/home`, { credentials: 'include' });
         const homeText = await homeRes.text();

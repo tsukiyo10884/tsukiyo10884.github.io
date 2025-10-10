@@ -1,0 +1,57 @@
+{
+    "headerImg": "https://maimaidx-eng.com/maimai-mobile/img/KaleidxScope/Banner/0c86a629f28d9348.png",
+    "gateImgHTML": "\n\t<div class=\"ks_block_inner w_450 m_t_15 m_b_15 t_c f_11\">\n\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/kaleidxscope_title_achievements.png\" class=\"\"><br>\n\t\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/KaleidxScope/LockDoor/74ce2aa10b5ea5e6.png\" class=\"\"><br>\n\t\t\t\t<div class=\"ks_block_acv\">\n\t\t\t\t\t\t\t<div class=\"ks_acv_img h_35 p_r t_c\">\n\t\t\t\t\t<img src=\"https://maimaidx-eng.com/maimai-mobile/img/kaleidxscope_noplay.png\" class=\"\">\n\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t</div>\n",
+    "mapHTML": "<div class=\"m_10 m_t_0 f_0\">\n\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"map_img_block w_180 f_l\">\n\t\t\t\t\t\t<img loading=\"lazy\" src=\"https://maimaidx-eng.com/maimai-mobile/img/Map/Body/abfb81680e044f9a.png\" class=\"w_180\">\n\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"f_r\">\n\t\t\t\t\t<div class=\"map_name_block t_c f_r f_12\"><div class=\"map_name_block_inner\"><span>ドラゴンちほー4</span></div></div>\n\t\t\t\t\t<div class=\"clearfix\"></div>\n\t\t\t\t\t<div class=\"see_through_block w_270 m_t_5 m_l_10 p_10 p_b_0\">\n\t\t\t\t\t\t<div class=\"basic_block t_r p_5 p_r_10 f_14\"><img src=\"https://maimaidx-eng.com/maimai-mobile/img/map_total_length_label.png\" class=\"h_20 f_l\">50 Km</div>\n\t\t\t\t\t\t<div class=\"t_r p_5 p_r_10 f_11\">\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tNEXT REWARD <span class=\"f_14\">0</span> Km\n\t\t\t\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<form action=\"https://maimaidx-eng.com/maimai-mobile/map/mapDetail/\" method=\"get\" accept-charset=\"utf-8\" class=\"m_t_5 t_r\">\n\t\t\t\t\t\t<input type=\"hidden\" name=\"idx\" value=\"2e892837ba18530aed4e27ae34638af19cdecfa283f8d186364e1f1209ae58ee335f90d727c47ca5e6022fa1b351a0121676a0e9183e07c60e2fea644b13a269LGqPVe3q+QIh+u3jlkReNe1ACqEREtaOCl4CShhqwRc=\">\n\t\t\t\t\t\t<button type=\"submit\" class=\"f_0\"><img src=\"https://maimaidx-eng.com/maimai-mobile/img/btn_detail.png\" class=\"w_84\"></button>\n\t\t\t\t\t</form>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"clearfix\"></div>\n\t\t\t\t\t</div>",
+    "keySongs": [
+        {
+            "title": "ドラゴンエネルギー",
+            "songLastPlayedDate": "0000-00-00",
+            "type": "dx"
+        },
+        {
+            "title": "DRAGONLADY",
+            "songLastPlayedDate": "2020/01/09",
+            "type": "dx"
+        },
+        {
+            "title": "Garden Of The Dragon",
+            "songLastPlayedDate": "2020/01/09",
+            "type": "dx"
+        },
+        {
+            "title": "好きな惣菜発表ドラゴン",
+            "songLastPlayedDate": "0000-00-00",
+            "type": "dx"
+        },
+        {
+            "title": "Brand-new Japanesque",
+            "songLastPlayedDate": "0000-00-00",
+            "type": "dx"
+        },
+        {
+            "title": "Outlaw's Lullaby",
+            "songLastPlayedDate": "0000-00-00",
+            "type": "std"
+        },
+        {
+            "title": "鼓動",
+            "songLastPlayedDate": "2020/01/09",
+            "type": "dx"
+        },
+        {
+            "title": "神室雪月花",
+            "songLastPlayedDate": "2020/01/09",
+            "type": "dx"
+        },
+        {
+            "title": "KONNANじゃないっ！",
+            "songLastPlayedDate": "0000-00-00",
+            "type": "dx"
+        },
+        {
+            "title": "ばかみたい【Taxi Driver Edition】",
+            "songLastPlayedDate": "2025/08/31",
+            "type": "dx"
+        }
+    ]
+}

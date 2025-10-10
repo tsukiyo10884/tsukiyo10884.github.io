@@ -9,7 +9,7 @@ const showGateData = (data) => {
                 type: 'dx',
                 image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
             }, {
-                isCompleted: song.songLastPlayedDate > (data.domain === 'jp' ? '2024-09-12' : '2025-01-16')
+                isCompleted: song.songLastPlayedDate > (data.domain === 'jp' ? '2024/09/12' : '2025/01/16')
             }));
         });
 
@@ -126,7 +126,7 @@ const showGateData = (data) => {
                 type: 'dx',
                 image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
             }, {
-                isCompleted: song.songLastPlayedDate > '2025-02-27'
+                isCompleted: song.songLastPlayedDate > '2025/02/27'
             }));
         });
 
@@ -197,7 +197,7 @@ const showGateData = (data) => {
                 type: song.type,
                 image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
             }, {
-                isCompleted: song.songLastPlayedDate > (data.domain === 'jp' ? '2025-05-09' : '2025-09-26')
+                isCompleted: song.songLastPlayedDate > (data.domain === 'jp' ? '2025/05/09' : '2025/09/26')
             }));
         });
 
