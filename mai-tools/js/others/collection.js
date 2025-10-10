@@ -15,3 +15,11 @@ const showCollection = (data) => {
     $('#member4').attr('src', data.characters[3]);
     $('#member5').attr('src', data.characters[4]);
 }
+
+const toggleDisplay = (id) => {
+    if ($('#btn-' + id).prop('checked')) {
+        $('#div-' + id).removeClass('d-none');
+    }else{
+        $('#div-' + id).addClass('d-none');
+    }
+}

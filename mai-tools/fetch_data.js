@@ -608,7 +608,8 @@
         const characterRes = await fetch(`${domain}/maimai-mobile/collection/character`, { credentials: 'include' });
         const characterText = await characterRes.text();
         const characterDoc = new DOMParser().parseFromString(characterText, 'text/html');
-        const characters = Array.from(characterDoc.querySelectorAll('.chara_cycle_img')).slice(0, 5).map(img => img.src);
+        const characters = Array.from(characterDoc.querySelectorAll('.collection_setting_block .chara_cycle_img')).map(img => img.src);
+        const charactersLevel = Array.from(characterDoc.querySelectorAll('.collection_setting_block .collection_chara_lv_block')).map(div => div.textContent);
 
         const homeRes = await fetch(`${domain}/maimai-mobile/home`, { credentials: 'include' });
         const homeText = await homeRes.text();
@@ -628,6 +629,7 @@
             trophy,
             trophyBlock,
             characters,
+            charactersLevel,
             name,
             rating,
             ratingBase,
@@ -635,6 +637,7 @@
             classRank
         }
 
+        console.log(collections)
         setTimeout(() => {
             childWin.postMessage({ type: "collection", payload: collections }, "https://tsukiyo10884.github.io");
         }, 1000);
