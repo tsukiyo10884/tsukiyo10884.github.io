@@ -637,7 +637,6 @@
             classRank
         }
 
-        console.log(collections)
         setTimeout(() => {
             childWin.postMessage({ type: "collection", payload: collections }, "https://tsukiyo10884.github.io");
         }, 1000);
