@@ -38,7 +38,8 @@
         const gateSongs = gateSongData['gate' + no];
         let count = 0;
         for (const song of gateSongs) {
-            const songDoc = await fetchHTML(domain + song.url);
+            const idx = domain == 'jp' ? song.idxJp : song.idxIntl;
+            const songDoc = await fetchHTML(domain + '/maimai-mobile/record/musicDetail/?idx=' + idx);
             const songLastPlayedDate_remaster = songDoc.querySelector('#remaster td:nth-of-type(2)')?.textContent.trim();
             const songLastPlayedDate_master = songDoc.querySelector('#master td:nth-of-type(2)')?.textContent.trim();
             const songLastPlayedDate_expert = songDoc.querySelector('#expert td:nth-of-type(2)')?.textContent.trim();
