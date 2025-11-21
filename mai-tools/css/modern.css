@@ -18,23 +18,23 @@ body {
 
 button {
 	background-color: #d1cde1;
-	border-radius: 5px !important;
-	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
-	padding: 10px;
+	border-radius: 0.3125rem !important;
+	box-shadow: 0.0625rem 0.1875rem 0rem rgba(0, 0, 0, 0.4);
+	padding: 0.625rem;
 }
 
 .section-divider {
 	border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
-	border-width: 2px !important;
+	border-width: 0.125rem !important;
 	flex-grow: 1;
 }
 
 .text-shadow-black {
-	text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
+	text-shadow: 0.0625rem 0.0625rem 0.0625rem black, 0.0625rem -0.0625rem 0.0625rem black, -0.0625rem 0.0625rem 0.0625rem black, -0.0625rem -0.0625rem 0.0625rem black;
 }
 
 .tips {
-	font-size: 14px;
+	font-size: 0.875rem;
 }
 
 /**********/
@@ -57,8 +57,8 @@ button {
 	display: -ms-flexbox;
 	display: flex;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 12px;
-	line-height: 15px;
+	font-size: 0.75rem;
+	line-height: 0.9375rem;
 	position: relative;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -74,27 +74,27 @@ button {
 
 .checkbox-wrapper-35 .switch+label::before {
 	background-color: #0d6efd;
-	border-radius: 500px;
-	height: 15px;
-	margin-right: 8px;
+	border-radius: 31.25rem;
+	height: 0.9375rem;
+	margin-right: 0.5rem;
 	-webkit-transition: background-color 0.125s ease-out;
 	transition: background-color 0.125s ease-out;
-	width: 25px;
+	width: 1.5625rem;
 }
 
 .checkbox-wrapper-35 .switch+label::after {
 	background-color: #fff;
-	border-radius: 13px;
-	box-shadow: 0 3px 1px 0 rgba(37, 34, 71, 0.05), 0 2px 2px 0 rgba(37, 34, 71, 0.1), 0 3px 3px 0 rgba(37, 34, 71, 0.05);
-	height: 13px;
-	left: 1px;
+	border-radius: 0.8125rem;
+	box-shadow: 0 0.1875rem 0.0625rem 0 rgba(37, 34, 71, 0.05), 0 0.125rem 0.125rem 0 rgba(37, 34, 71, 0.1), 0 0.1875rem 0.1875rem 0 rgba(37, 34, 71, 0.05);
+	height: 0.8125rem;
+	left: 0.0625rem;
 	position: absolute;
-	top: 1px;
+	top: 0.0625rem;
 	-webkit-transition: -webkit-transform 0.125s ease-out;
 	transition: -webkit-transform 0.125s ease-out;
 	transition: transform 0.125s ease-out;
 	transition: transform 0.125s ease-out, -webkit-transform 0.125s ease-out;
-	width: 13px;
+	width: 0.8125rem;
 }
 
 .checkbox-wrapper-35 .switch+label .switch-x-text {
@@ -105,10 +105,10 @@ button {
 .checkbox-wrapper-35 .switch+label .switch-x-toggletext {
 	display: block;
 	font-weight: bold;
-	height: 15px;
+	height: 0.9375rem;
 	overflow: hidden;
 	position: relative;
-	width: 100px;
+	width: 6.25rem;
 }
 
 .checkbox-wrapper-35 .switch+label .switch-x-unchecked,
@@ -144,8 +144,8 @@ button {
 }
 
 .checkbox-wrapper-35 .switch:checked+label::after {
-	-webkit-transform: translate3d(10px, 0, 0);
-	transform: translate3d(10px, 0, 0);
+	-webkit-transform: translate3d(0.625rem, 0, 0);
+	transform: translate3d(0.625rem, 0, 0);
 }
 
 .checkbox-wrapper-35 .switch:checked+label .switch-x-unchecked {
@@ -169,77 +169,77 @@ button {
 
 .completion-check {
 	color: #ffffff;
-	font-size: 26px;
+	font-size: 1.625rem;
 	position: absolute;
-	right: 9px;
-	top: -3px;
+	right: 0.5625rem;
+	top: -0.1875rem;
 	z-index: 2;
 }
 
 .rating-gain-info {
-	font-size: 10px;
-	font-size: 12px;
+	font-size: 0.625rem;
+	font-size: 0.75rem;
 	font-weight: bold;
 	position: absolute;
-	right: 10px;
+	right: 0.625rem;
 	text-align: right;
-	top: 5px;
+	top: 0.3125rem;
 	z-index: 1;
 }
 
 .square-song-card {
 	background-position: center;
 	background-size: cover;
-	border-radius: 25px;
+	border-radius: 1.5625rem;
 	color: #fff;
 	display: flex;
-	filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.7));
+	filter: drop-shadow(0rem 0rem 0.1875rem rgba(0, 0, 0, 0.7));
 	flex-direction: column;
-	height: 100px;
+	height: 6.25rem;
 	justify-content: flex-end;
 	overflow: hidden;
-	padding: 10px !important;
+	padding: 0.625rem !important;
 	position: relative;
-	width: 100px !important;
+	width: 6.25rem !important;
 }
 
 .square-song-card .song-overlay {
 	background: linear-gradient(to top, #222222, #0000);
-	border-radius: 26px;
-	height: 100px;
-	left: 0px;
+	border-radius: 1.625rem;
+	height: 6.25rem;
+	left: 0rem;
 	position: absolute;
-	top: 0px;
-	width: 100px;
+	top: 0rem;
+	width: 6.25rem;
 }
 
 .square-song-card::before {
 	-webkit-mask-composite: destination-out;
 	-webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-	border-radius: 26px;
-	border: 3px solid transparent;
+	border-radius: 1.625rem;
+	border: 0.1875rem solid transparent;
 	content: "";
-	height: 100px;
-	left: 0px;
+	height: 6.25rem;
+	left: 0rem;
 	mask-composite: exclude;
 	position: absolute;
-	top: 0px;
-	width: 100px;
+	top: 0rem;
+	width: 6.25rem;
 	z-index: 0;
 }
 
 .square-song-grid {
-	gap: 12px;
+	gap: 0.75rem;
 }
 
 .square-song-image {
-	border-radius: 30px;
-	height: 100px;
-	left: -10px;
+	border-radius: 1.875rem;
+	height: 6.25rem;
+	left: -0.625rem;
 	object-fit: cover;
 	position: relative;
-	top: 50px;
-	width: 100px;
+	top: 3.125rem;
+	width: 6.25rem;
 	z-index: -10;
 }
 
@@ -249,19 +249,19 @@ button {
 }
 
 .square-song-inner-level {
-	font-size: 10px;
-	line-height: 12px !important;
+	font-size: 0.625rem;
+	line-height: 0.75rem !important;
 }
 
 .square-song-score {
-	font-size: 13px;
+	font-size: 0.8125rem;
 }
 
 .square-song-title {
 	display: inline-block;
 	flex-shrink: 0;
-	font-size: 10px;
-	line-height: 12px !important;
+	font-size: 0.625rem;
+	line-height: 0.75rem !important;
 	max-width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -272,7 +272,7 @@ button {
 /*rating cards*/
 /**************/
 .card-decoration {
-	border-left: 25px solid transparent;
+	border-left: 1.5625rem solid transparent;
 	height: 0;
 	position: absolute;
 	right: 0;
@@ -302,10 +302,10 @@ button {
 }
 
 .rating-block-inner-level {
-	bottom: 21px;
-	font-size: 10px;
+	bottom: 1.3125rem;
+	font-size: 0.625rem;
 	text-align: center;
-	width: 165px;
+	width: 10.3125rem;
 }
 
 .rating-block-inner-level,
@@ -318,41 +318,41 @@ button {
 }
 
 .song-info-block {
-	bottom: -15px;
-	left: -80px;
+	bottom: -0.9375rem;
+	left: -5rem;
 	position: relative;
 }
 
 .rating-block-rating {
-	font-size: 18px;
-	left: 57px;
+	font-size: 1.125rem;
+	left: 3.5625rem;
 	position: absolute;
-	top: -135px;
+	top: -8.4375rem;
 }
 
 .rating-block-score {
-	bottom: 5px;
-	font-size: 16px;
+	bottom: 0.3125rem;
+	font-size: 1rem;
 	text-align: center;
-	width: 165px;
+	width: 10.3125rem;
 }
 
 .rating-block-song-title {
-	bottom: 33px;
+	bottom: 2.0625rem;
 	display: inline-block;
-	font-size: 9px;
+	font-size: 0.5625rem;
 	overflow: hidden;
 	text-align: center;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	width: 165px;
+	width: 10.3125rem;
 }
 
 .section-title {
 	color: #fff;
-	font-size: 20px;
+	font-size: 1.25rem;
 	grid-column: span 5;
-	margin: 9px 0;
+	margin: 0.5625rem 0;
 	text-align: center;
 }
 
@@ -360,37 +360,37 @@ button {
 	align-items: center;
 	background-position: center;
 	background-size: cover;
-	border-radius: 5px;
+	border-radius: 0.3125rem;
 	color: #fff;
 	display: flex;
-	filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.7));
+	filter: drop-shadow(0rem 0rem 0.1875rem rgba(0, 0, 0, 0.7));
 	flex-direction: column;
-	height: 136px;
+	height: 8.5rem;
 	justify-content: center;
 	overflow: hidden;
 	position: relative;
-	width: 163px !important;
+	width: 10.1875rem !important;
 }
 
 .song-card .song-overlay {
 	background: linear-gradient(to top, #222222, #0000 60%);
-	border-radius: 500px;
-	height: 100px;
+	border-radius: 31.25rem;
+	height: 6.25rem;
 	position: absolute;
-	width: 95px;
+	width: 5.9375rem;
 }
 
 .song-card::before {
 	-webkit-mask-composite: destination-out;
 	-webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-	border-radius: 500px;
-	border: 3px solid transparent;
+	border-radius: 31.25rem;
+	border: 0.1875rem solid transparent;
 	content: "";
-	height: 100px;
+	height: 6.25rem;
 	mask-composite: exclude;
 	position: absolute;
-	top: 19px;
-	width: 100px;
+	top: 1.1875rem;
+	width: 6.25rem;
 	z-index: 0;
 }
 
@@ -402,14 +402,14 @@ button {
 .song-grid {
 	display: grid !important;
 	gap: 1em;
-	grid-template-columns: repeat(auto-fit, 165px);
+	grid-template-columns: repeat(auto-fit, 10.3125rem);
 }
 
 .song-image {
-	border-radius: 65px;
-	height: 95px;
-	margin-left: 1px;
-	margin-top: 2px;
+	border-radius: 4.0625rem;
+	height: 5.9375rem;
+	margin-left: 0.0625rem;
+	margin-top: 0.125rem;
 	object-fit: cover;
 }
 
@@ -424,8 +424,8 @@ button {
 
 .basic_block {
 	background-color: #413f4a;
-	border-radius: 5px;
-	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+	border-radius: 0.3125rem;
+	box-shadow: 0.0625rem 0.1875rem 0rem rgba(0, 0, 0, 0.4);
 }
 
 .f_0 {
@@ -434,27 +434,27 @@ button {
 }
 
 .f_10 {
-	font-size: 10px;
+	font-size: 0.625rem;
 	line-height: 1rem;
 }
 
 .f_12 {
-	font-size: 12px;
+	font-size: 0.75rem;
 	line-height: 1rem;
 }
 
 .f_13 {
-	font-size: 13px;
+	font-size: 0.8125rem;
 	line-height: 1.2rem;
 }
 
 .f_14 {
-	font-size: 14px;
+	font-size: 0.875rem;
 	line-height: 1.2rem;
 }
 
 .f_16 {
-	font-size: 16px;
+	font-size: 1rem;
 	line-height: 1.2rem;
 }
 
@@ -467,44 +467,44 @@ button {
 }
 
 .h_30 {
-	height: 30px;
+	height: 1.875rem;
 }
 
 .h_35 {
-	height: 35px;
+	height: 2.1875rem;
 }
 
 .m_3 {
-	margin: 3px;
+	margin: 0.1875rem;
 }
 
 .m_b_5 {
-	margin-bottom: 5px;
+	margin-bottom: 0.3125rem;
 }
 
 .name_block {
 	background-color: #fff;
-	background-size: 34px;
-	border-radius: 5px;
-	border: 1px solid #dedede;
-	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+	background-size: 2.125rem;
+	border-radius: 0.3125rem;
+	border: 0.0625rem solid #dedede;
+	box-shadow: 0.0625rem 0.1875rem 0rem rgba(0, 0, 0, 0.4);
 	color: #000;
-	height: 27px;
-	margin: 3px 0;
-	padding: 5px 3px 3px 3px;
-	width: 158px;
+	height: 1.6875rem;
+	margin: 0.1875rem 0;
+	padding: 0.3125rem 0.1875rem 0.1875rem 0.1875rem;
+	width: 9.875rem;
 }
 
 .p_10 {
-	padding: 10px;
+	padding: 0.625rem;
 }
 
 .p_3 {
-	padding: 3px;
+	padding: 0.1875rem;
 }
 
 .p_l_10 {
-	padding-left: 10px;
+	padding-left: 0.625rem;
 }
 
 .p_r {
@@ -513,15 +513,15 @@ button {
 
 .rating_block {
 	color: white;
-	font-size: 16px;
-	height: 21px;
-	line-height: 21px;
+	font-size: 1rem;
+	height: 1.3125rem;
+	line-height: 1.3125rem;
 	position: absolute;
-	right: 13px;
+	right: 0.8125rem;
 	text-align: right;
-	top: 7px;
+	top: 0.4375rem;
 	transform: scaleX(1.1);
-	width: 73px;
+	width: 4.5625rem;
 }
 
 .t_c {
@@ -533,11 +533,11 @@ button {
 }
 
 .trophy_block {
-	height: 25px;
-	margin: 0 0 5px 0;
+	height: 1.5625rem;
+	margin: 0 0 0.3125rem 0;
 	overflow: hidden;
 	white-space: nowrap;
-	width: 268px;
+	width: 16.75rem;
 }
 
 .trophy_Bronze {
@@ -550,12 +550,12 @@ button {
 
 .trophy_inner_block {
 	color: #fff;
-	height: 24px;
-	margin: 0 2px;
+	height: 1.5rem;
+	margin: 0 0.125rem;
 	overflow: hidden;
-	text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0, black 0px 1px 0, black 0-1px 0, black -1px 0 0, black 1px 0 0;
+	text-shadow: black 0.0625rem 0.0625rem 0, black -0.0625rem -0.0625rem 0, black -0.0625rem 0.0625rem 0, black 0.0625rem -0.0625rem 0, black 0rem 0.0625rem 0, black 0-0.0625rem 0, black -0.0625rem 0 0, black 0.0625rem 0 0;
 	white-space: nowrap;
-	width: 259px;
+	width: 16.1875rem;
 }
 
 .trophy_Normal {
@@ -578,8 +578,8 @@ button {
 }
 
 .user_data_block_line {
-	margin: 0 0 4px 0;
-	width: 280px;
+	margin: 0 0 0.25rem 0;
+	width: 17.5rem;
 }
 
 .v_m {
@@ -587,7 +587,7 @@ button {
 }
 
 .w_112 {
-	width: 112px;
+	width: 7rem;
 }
 
 /*********/
@@ -611,8 +611,8 @@ button {
 	box-sizing: content-box;
 	cursor: pointer;
 	height: auto;
-	padding: 50px;
+	padding: 3.125rem;
 	position: absolute;
-	width: 50px;
+	width: 3.125rem;
 	z-index: 1000;
 }

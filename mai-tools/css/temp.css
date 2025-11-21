@@ -6,46 +6,46 @@
     right: 0;
     width: 0;
     height: 0;
-    border-left: 25px solid transparent;
+    border-left: 1.5625rem solid transparent;
     z-index: 3;
 }
 
 .difficulty-advanced .card-decoration {
-    border-top: 25px solid #f8b709;
+    border-top: 1.5625rem solid #f8b709;
 }
 
 .difficulty-basic .card-decoration {
-    border-top: 25px solid #81d955;
+    border-top: 1.5625rem solid #81d955;
 }
 
 .difficulty-expert .card-decoration {
-    border-top: 25px solid #ff818d;
+    border-top: 1.5625rem solid #ff818d;
 }
 
 .difficulty-master .card-decoration {
-    border-top: 25px solid #c346e7;
+    border-top: 1.5625rem solid #c346e7;
 }
 
 .difficulty-remaster .card-decoration {
-    border-top: 25px solid #fff;
+    border-top: 1.5625rem solid #fff;
 }
 
 .song-card.difficulty-advanced {
-    border: solid 5px #f8b709;
+    border: solid 0.3125rem #f8b709;
 }
 
 .song-card.difficulty-basic {
-    border: solid 5px #81d955;
+    border: solid 0.3125rem #81d955;
 }
 
 .song-card.difficulty-expert {
-    border: solid 5px #ff818d;
+    border: solid 0.3125rem #ff818d;
 }
 
 .song-card.difficulty-master {
-    border: solid 5px #c346e7;
+    border: solid 0.3125rem #c346e7;
 }
 
 .song-card.difficulty-remaster {
-    border: solid 5px #fff;
+    border: solid 0.3125rem #fff;
 }
