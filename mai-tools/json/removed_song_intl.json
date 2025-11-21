@@ -219,7 +219,7 @@
         ]
     },
     {
-        "version": "BUDDiES+",
+        "version": "BUDDiES PLUS",
         "removeDate": "2024/09/13",
         "removeSongs": [
             {
@@ -281,6 +281,18 @@
             },
             {
                 "title": "オントロジー"
+            }
+        ]
+    },
+    {
+        "version": "PRiSM PLUS",
+        "removeDate": "2025/09/05",
+        "removeSongs": [
+            {
+                "title": "残響散歌"
+            },
+            {
+                "title": "アマカミサマ"
             }
         ]
     }

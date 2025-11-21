@@ -1,7 +1,7 @@
 {
     "icon": "https://maimaidx-eng.com/maimai-mobile/img/Icon/63145430a5501fbe.png",
-    "nameplate": "https://maimaidx-eng.com/maimai-mobile/img/NamePlate/73db72b0fc8d2f9e.png",
-    "frame": "https://maimaidx-eng.com/maimai-mobile/img/Frame/12d3b2acb57ccfc3.png",
+    "nameplate": "https://maimaidx-eng.com/maimai-mobile/img/NamePlate/af79c8fed1d26394.png",
+    "frame": "https://maimaidx-eng.com/maimai-mobile/img/Frame/a2b132908dce32f7.png",
     "trophy": "\n\t\t\t\t\t息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる息が詰まる\n\t\t\t\t",
     "trophyBlock": "trophy_block trophy_Normal p_3 t_c f_0",
     "characters": [
@@ -10,6 +10,13 @@
         "https://maimaidx-eng.com/maimai-mobile/img/Chara/6d121745a423b0cd.png",
         "https://maimaidx-eng.com/maimai-mobile/img/Chara/91927195418c3996.png",
         "https://maimaidx-eng.com/maimai-mobile/img/Chara/075cd3741e4ec0dd.png"
+    ],
+    "charactersLevel": [
+        "Lv270",
+        "Lv270",
+        "Lv435",
+        "Lv1795",
+        "Lv270"
     ],
     "name": "Ｔｓｕｋｉｙｏ",
     "rating": "14987",

@@ -31,12 +31,12 @@
         <div class="result-container">
             <div id="tmp">
                 <div class="col-12 d-flex align-items-center my-3">
-                <div class="section-divider left"></div>
-                <b id="msg" class="px-3 section-divider-title">如果看到這行字超過5秒，代表資料沒傳成功，請回maimai-net重整後再試一次</b>
-                <div class="section-divider right"></div>
+                    <div class="section-divider left"></div>
+                    <b id="msg" class="px-3 section-divider-title">如果看到這行字超過5秒，代表資料沒傳成功，請回maimai-net重整後再試一次</b>
+                    <div class="section-divider right"></div>
+                </div>
             </div>
-            </div>
-            <div id="collection">
+            <div id="collection" class="d-none">
                 <div id="div-template">
                     <img id="template" src="./img/collection_template.png" />
                 </div>
@@ -73,18 +73,39 @@
                     <img id="leader" src="" width="183" />
                 </div>
                 <div id="div-member2">
+                    <div class="level">
+                        LV<span style="font-size: 13px;"> 9999</span>
+                    </div>
                     <img id="member2" src="" />
                 </div>
                 <div id="div-member3">
+                    <div class="level">
+                        LV<span style="font-size: 13px;"> 9999</span>
+                    </div>
                     <img id="member3" src="" />
                 </div>
                 <div id="div-member4">
+                    <div class="level">
+                        LV<span style="font-size: 13px;"> 9999</span>
+                    </div>
                     <img id="member4" src="" />
                 </div>
                 <div id="div-member5">
+                    <div class="level">
+                        LV<span style="font-size: 13px;"> 9999</span>
+                    </div>
                     <img id="member5" src="" />
                 </div>
             </div>
+            <div id="filters" class="d-flex justify-content-center mb-3">
+                <input type="checkbox" id="btn-rating" class="ms-2" onclick="toggleDisplay('rating')" checked>
+                <label for="btn-rating">顯示R值</label>
+                <input type="checkbox" id="btn-class" class="ms-2" onclick="toggleDisplay('class')" checked>
+                <label for="btn-class">顯示Class</label>
+                <input type="checkbox" id="btn-course" class="ms-2" onclick="toggleDisplay('course')" checked>
+                <label for="btn-course">顯示段位</label>
+            </div>
+            ※僅供參考，位置一定有誤差，旅伴的等級是模板不會變
         </div>
     </div>
     <footer class="text-center">
@@ -114,6 +135,7 @@
         }
         else if (data.type == "collection") {
             $('#tmp').hide();
+            $('#collection').removeClass('d-none');
             showCollection(data.payload);
         }
     });
@@ -338,6 +360,18 @@
     #member4,
     #member5 {
         width: 117px;
-        clip-path: polygon(50% 0%, 67% 6%, 75% 20%, 74% 80%, 66% 94%, 50% 100%, 34% 95%, 25% 80%, 25% 20%, 34% 6%);
+        clip-path: polygon(20% 0, 80% 0, 80% 80%, 68% 94%, 50% 100%, 32% 94%, 20% 80%);
+    }
+
+    .level {
+        color: white;
+        font-size: 9px;
+        position: absolute;
+        top: -21px;
+        left: 35px;
+        z-index: 150;
+        font-weight: bold;
+        font-family: 'Hiragino';
+        transform: scaleX(1.1);
     }
 </style>

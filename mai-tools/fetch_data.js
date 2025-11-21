@@ -38,7 +38,8 @@
         const gateSongs = gateSongData['gate' + no];
         let count = 0;
         for (const song of gateSongs) {
-            const songDoc = await fetchHTML(domain + song.url);
+            const idx = domain == 'jp' ? song.idxJp : song.idxIntl;
+            const songDoc = await fetchHTML(domain + '/maimai-mobile/record/musicDetail/?idx=' + idx);
             const songLastPlayedDate_remaster = songDoc.querySelector('#remaster td:nth-of-type(2)')?.textContent.trim();
             const songLastPlayedDate_master = songDoc.querySelector('#master td:nth-of-type(2)')?.textContent.trim();
             const songLastPlayedDate_expert = songDoc.querySelector('#expert td:nth-of-type(2)')?.textContent.trim();
@@ -49,7 +50,7 @@
                 .map(date => new Date(date))
                 .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '0000-00-00';
 
-            gate.keySongs.push({ title: song.title, songLastPlayedDate });
+            gate.keySongs.push({ title: song.title, songLastPlayedDate, type: song.type });
 
             // 每25頁就延遲一下，避免被鎖連線
             count++;
@@ -608,7 +609,8 @@
         const characterRes = await fetch(`${domain}/maimai-mobile/collection/character`, { credentials: 'include' });
         const characterText = await characterRes.text();
         const characterDoc = new DOMParser().parseFromString(characterText, 'text/html');
-        const characters = Array.from(characterDoc.querySelectorAll('.chara_cycle_img')).slice(0,5).map(img => img.src);
+        const characters = Array.from(characterDoc.querySelectorAll('.collection_setting_block .chara_cycle_img')).map(img => img.src);
+        const charactersLevel = Array.from(characterDoc.querySelectorAll('.collection_setting_block .collection_chara_lv_block')).map(div => div.textContent);
 
         const homeRes = await fetch(`${domain}/maimai-mobile/home`, { credentials: 'include' });
         const homeText = await homeRes.text();
@@ -628,6 +630,7 @@
             trophy,
             trophyBlock,
             characters,
+            charactersLevel,
             name,
             rating,
             ratingBase,

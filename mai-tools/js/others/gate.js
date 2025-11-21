@@ -9,7 +9,7 @@ const showGateData = (data) => {
                 type: 'dx',
                 image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
             }, {
-                isCompleted: song.songLastPlayedDate > (data.domain === 'jp' ? '2024-09-12' : '2025-01-16')
+                isCompleted: song.songLastPlayedDate > (data.domain === 'jp' ? '2024/09/12' : '2025/01/16')
             }));
         });
 
@@ -126,7 +126,7 @@ const showGateData = (data) => {
                 type: 'dx',
                 image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
             }, {
-                isCompleted: song.songLastPlayedDate > '2025-02-27'
+                isCompleted: song.songLastPlayedDate > '2025/02/27'
             }));
         });
 
@@ -197,7 +197,7 @@ const showGateData = (data) => {
                 type: song.type,
                 image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
             }, {
-                isCompleted: song.songLastPlayedDate > (data.domain === 'jp' ? '2025-05-09' : '9999-12-31')
+                isCompleted: song.songLastPlayedDate > (data.domain === 'jp' ? '2025/05/09' : '2025/09/26')
             }));
         });
 
@@ -217,7 +217,7 @@ const showGateData = (data) => {
                         <b class="px-3 section-divider-title">Key</b>
                     <div class="section-divider right"></div>
                 </div>
-                <div class="mb-4 text-center">紅鑰匙獲得條件：在紅門開放後(日版:2025年5月9日 | 國際版:-)，打過所有樂曲名稱中包含「ドラゴン」、「DRAGON」、「Dragon」或收錄於遊戲《人中之龍》系列的歌曲
+                <div class="mb-4 text-center">紅鑰匙獲得條件：在紅門開放後(日版:2025年5月9日 | 國際版:2025年9月26日)，打過所有樂曲名稱中包含「ドラゴン」、「DRAGON」、「Dragon」或收錄於遊戲《人中之龍》系列的歌曲
                     <br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
                 <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
                     ${res.join('')}
