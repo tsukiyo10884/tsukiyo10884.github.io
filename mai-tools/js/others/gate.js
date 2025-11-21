@@ -334,6 +334,7 @@ const showGateData = (data) => {
                     <div class="section-divider right"></div>
                 </div>
                 <div class="mb-4 text-center">KALEIDXSCOPE(國際版)修復條件：
+                    <p>省略，可直接打</p>
                 </div>
                 <div class="col-12 d-flex align-items-center my-3">
                     <div class="section-divider left"></div>
