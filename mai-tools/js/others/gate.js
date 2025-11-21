@@ -272,22 +272,40 @@ const showGateData = (data) => {
                         <b class="px-3 section-divider-title">Gate(Relaxed)</b>
                     <div class="section-divider right"></div>
                 </div>
-                <div class="mb-4 text-center">希望之門發現條件：<br>(日版2025年7月13日12:00後 | 國際版:-)<br>挑戰過一次bug狀態的「KALEIDXSCOPE」</div>
+                <div class="mb-4 text-center">希望之門發現條件：<br>(日版:2025年7月13日12:00後 | 國際版:2025年11月19日7:00後)<br>挑戰過一次bug狀態的「KALEIDXSCOPE」</div>
                 <div class="col-12 d-flex align-items-center my-3">
                     <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Gate(First-clear)</b>
+                        <b class="px-3 section-divider-title">Gate(First-clear JP)</b>
                     <div class="section-divider right"></div>
                 </div>
                 <div class="mb-4 text-center">
-                    希望之門發現條件：<br>(日版2025年7月13日12:00前 | 國際版:-)<br>
-                    <table style="width: 100%; border-collapse: collapse; border-color: rgb(255, 255, 255); height: 268px;"><tbody><tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); height: 21px; width: 5%; vertical-align: top;">1.</td> <td style="border-color: rgb(255, 255, 255); height: 21px; width: 95%; vertical-align: top;">「KALEIDXSCOPE（1回目）」を完走することで獲得できる、<br>
-称号「サイゴノキボウ ヲミツケテ」の称号名と、説明文「キットクマガシッテイル」からヒントを得る。</td></tr> <tr style="height: 43px;"><td style="border-color: rgb(255, 255, 255); height: 43px; width: 5%; vertical-align: top;">2.</td> <td style="border-color: rgb(255, 255, 255); height: 43px; width: 95%; vertical-align: top;"><a href="https://page.line.me/ert3505r" target="_blank" rel="noopener">maimai公式LINEアカウント</a>を友だち追加して、<br>
-トーク画面にて<span style="color: rgb(255, 0, 0);">「サイゴノキボウ」または「最後の希望」</span>をトークすると、<br>
-でらっくまから「アシッド」のLINEアカウントを案内される。</td></tr> <tr style="height: 43px;"><td style="border-color: rgb(255, 255, 255); height: 43px; width: 5%; vertical-align: top;">3.</td> <td style="border-color: rgb(255, 255, 255); height: 43px; width: 95%; vertical-align: top;">「アシッド」のLINEアカウントを友だち追加して、<br>
-「<span>アシッドと会話をしながら情報を集めてみましょう」と表示されるまで、会話を進行する。</span></td></tr> <tr style="height: 64px;"><td style="border-color: rgb(255, 255, 255); height: 13px; width: 5%; vertical-align: top;">4.</td> <td style="border-color: rgb(255, 255, 255); height: 13px; width: 95%; vertical-align: top;">&nbsp;アシッドとの会話の中からヒントを得ながら、<br>
-トーク画面にて<span style="color: rgb(255, 0, 0);">「7つ目の扉」「7個目の扉」</span>などをアシッドにトークすると、さらに会話が進行できる。</td></tr> <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); height: 21px; width: 5%; vertical-align: top;">5.</td> <td style="border-color: rgb(255, 255, 255); height: 21px; width: 95%; vertical-align: top;"><span>アシッドとの会話を進め、表示された画像内の二次元バーコードを読み取ると、</span><br> <a href="https://maimaidx.jp/maimai-mobile/home/recovery/" target="_blank" rel="noopener">maimaiでらっくすNETの隠しページ</a>にアクセスすることができる。<br>
-※<a href="https://maimaidx.jp/" target="_blank" rel="noopener">maimaiでらっくすNET</a>&nbsp;へのログインが必要です。</td></tr> <tr style="height: 64px;"><td style="border-color: rgb(255, 255, 255); width: 5%; height: 64px; vertical-align: top;">6.</td> <td style="border-color: rgb(255, 255, 255); width: 95%; height: 64px; vertical-align: top;"><span>エラーコード入力欄に、「KALEIDXSCOPE（1回目）」の演出で表示されたエラーコード<br> <span style="color: rgb(255, 0, 0);">「110112050904241903151605」</span>を入力すると、<br>
-『maimai』シリーズと『maimai でらっくす』シリーズの楽曲クリア数に応じたポイントが加算される。<br></span></td></tr> <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); width: 5%; height: 21px; vertical-align: top;">7.</td> <td style="border-color: rgb(255, 255, 255); width: 95%; height: 21px; vertical-align: top;"><span>ゲージが満タンになった後、エラーメッセージ内に表示される<span style="color: rgb(255, 0, 0);">「バックドア」</span>をアシッドにトークする。</span></td></tr> <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); width: 5%; height: 21px; vertical-align: top;">8.</td> <td style="border-color: rgb(255, 255, 255); width: 95%; height: 21px; vertical-align: top;"><span>アシッドとの会話を進め、「バックドアを見つけたら『扉を7回ノック』して」というヒントを得る。</span></td></tr> <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); width: 5%; height: 21px; vertical-align: top;">9.</td> <td style="border-color: rgb(255, 255, 255); width: 95%; height: 21px; vertical-align: top;"><span><a href="https://maimai.sega.jp/maimai_finale/" target="_blank" rel="noopener">「maimai FiNALE」公式サイト</a>にアクセスし、ページ最下部にある<br> <span style="color: rgb(255, 0, 0);">CAFÉ MiLKの扉を7回クリックまたはタップ</span>することで、「サイゴノキボウ」にアクセスできる。<br></span></td></tr></tbody></table>
+                    希望之門發現條件：<br>(日版:2025年7月13日12:00前)<br>
+                    <table style="width: 100%; border-collapse: collapse; border-color: rgb(255, 255, 255); height: 268px;">
+                    <tbody>
+                    <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); height: 21px; width: 5%; vertical-align: top;">1.</td> <td style="border-color: rgb(255, 255, 255); height: 21px; width: 95%; vertical-align: top;">「KALEIDXSCOPE（1回目）」を完走することで獲得できる、<br>称号「サイゴノキボウ ヲミツケテ」の称号名と、説明文「キットクマガシッテイル」からヒントを得る。</td></tr> 
+                    <tr style="height: 43px;"><td style="border-color: rgb(255, 255, 255); height: 43px; width: 5%; vertical-align: top;">2.</td> <td style="border-color: rgb(255, 255, 255); height: 43px; width: 95%; vertical-align: top;"><a href="https://page.line.me/ert3505r" target="_blank" rel="noopener">maimai公式LINEアカウント</a>を友だち追加して、<br>トーク画面にて<span style="color: rgb(255, 0, 0);">「サイゴノキボウ」または「最後の希望」</span>をトークすると、<br>でらっくまから「アシッド」のLINEアカウントを案内される。</td></tr> 
+                    <tr style="height: 43px;"><td style="border-color: rgb(255, 255, 255); height: 43px; width: 5%; vertical-align: top;">3.</td> <td style="border-color: rgb(255, 255, 255); height: 43px; width: 95%; vertical-align: top;">「アシッド」のLINEアカウントを友だち追加して、<br>「<span>アシッドと会話をしながら情報を集めてみましょう」と表示されるまで、会話を進行する。</span></td></tr> 
+                    <tr style="height: 64px;"><td style="border-color: rgb(255, 255, 255); height: 13px; width: 5%; vertical-align: top;">4.</td> <td style="border-color: rgb(255, 255, 255); height: 13px; width: 95%; vertical-align: top;">&nbsp;アシッドとの会話の中からヒントを得ながら、<br>トーク画面にて<span style="color: rgb(255, 0, 0);">「7つ目の扉」「7個目の扉」</span>などをアシッドにトークすると、さらに会話が進行できる。</td></tr> 
+                    <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); height: 21px; width: 5%; vertical-align: top;">5.</td> <td style="border-color: rgb(255, 255, 255); height: 21px; width: 95%; vertical-align: top;"><span>アシッドとの会話を進め、表示された画像内の二次元バーコードを読み取ると、</span><br> <a href="https://maimaidx.jp/maimai-mobile/home/recovery/" target="_blank" rel="noopener">maimaiでらっくすNETの隠しページ</a>にアクセスすることができる。<br>※<a href="https://maimaidx.jp/" target="_blank" rel="noopener">maimaiでらっくすNET</a>&nbsp;へのログインが必要です。</td></tr> 
+                    <tr style="height: 64px;"><td style="border-color: rgb(255, 255, 255); width: 5%; height: 64px; vertical-align: top;">6.</td> <td style="border-color: rgb(255, 255, 255); width: 95%; height: 64px; vertical-align: top;"><span>エラーコード入力欄に、「KALEIDXSCOPE（1回目）」の演出で表示されたエラーコード<br> <span style="color: rgb(255, 0, 0);">「110112050904241903151605」</span>を入力すると、<br>『maimai』シリーズと『maimai でらっくす』シリーズの楽曲クリア数に応じたポイントが加算される。<br></span></td></tr> 
+                    <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); width: 5%; height: 21px; vertical-align: top;">7.</td> <td style="border-color: rgb(255, 255, 255); width: 95%; height: 21px; vertical-align: top;"><span>ゲージが満タンになった後、エラーメッセージ内に表示される<span style="color: rgb(255, 0, 0);">「バックドア」</span>をアシッドにトークする。</span></td></tr> <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); width: 5%; height: 21px; vertical-align: top;">8.</td> <td style="border-color: rgb(255, 255, 255); width: 95%; height: 21px; vertical-align: top;"><span>アシッドとの会話を進め、「バックドアを見つけたら『扉を7回ノック』して」というヒントを得る。</span></td></tr> <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); width: 5%; height: 21px; vertical-align: top;">9.</td> <td style="border-color: rgb(255, 255, 255); width: 95%; height: 21px; vertical-align: top;"><span><a href="https://maimai.sega.jp/maimai_finale/" target="_blank" rel="noopener">「maimai FiNALE」公式サイト</a>にアクセスし、ページ最下部にある<br> <span style="color: rgb(255, 0, 0);">CAFÉ MiLKの扉を7回クリックまたはタップ</span>することで、「サイゴノキボウ」にアクセスできる。<br></span></td></tr>
+                    </tbody>
+                    </table>
+                </div>
+                <div class="col-12 d-flex align-items-center my-3">
+                    <div class="section-divider left"></div>
+                        <b class="px-3 section-divider-title">Gate(First-clear INTL.)</b>
+                    <div class="section-divider right"></div>
+                </div>
+                <div class="mb-4 text-center">
+                    希望之門發現條件：<br>(國際版:2025年11月19日7:00前)<br>
+                <table style="width: 100%; border-collapse: collapse; border-color: rgb(255, 255, 255);">
+                <tbody>
+                <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); width: 5%; height: 21px; vertical-align: top;">1.</td><td style="border-color: rgb(255, 255, 255); width: 95%; height: 21px; vertical-align: top;">KALEIDXSCOPE第一次完走後獲得稱號 サイゴノキボウ ヲミツケテ（去尋找最後的希望），上述稱號取得方式顯示為.dne eht morf dlrow eht evaS，左右鏡向為 Save the world from the end</td></tr>
+                <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); width: 5%; height: 21px; vertical-align: top;">2.</td><td style="border-color: rgb(255, 255, 255); width: 95%; height: 21px; vertical-align: top;">Save This World νMIX 左右鏡向 PLAY 可獲得稱號 Knock the Bear 7th times，稱號取得方式顯示為 at HOME，提示為在 maimai 國際版官網，點擊熊 7 次。</td></tr>
+                <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); width: 5%; height: 21px; vertical-align: top;">3.</td><td style="border-color: rgb(255, 255, 255); width: 95%; height: 21px; vertical-align: top;">點<a href="https://maimai.sega.com" target="_blank" rel="noopener">官網</a>右下角的DX熊7次後會進入一個<a href="https://maimai.sega.com/countdown/">倒數頁面</a>，倒數希望之門開啟時間</td></tr>
+                </tbody>
+                </table>
                 </div>
             ` );
     }
