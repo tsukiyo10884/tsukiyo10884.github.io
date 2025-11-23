@@ -26,15 +26,15 @@ body {
 }
 
 button {
-    -webkit-backdrop-filter: blur(0.3125rem);
-    backdrop-filter: blur(0.3125rem);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
     background: rgba(255, 255, 255, 0.4) !important;
-    border-radius: 0.3125rem !important;
-    border: 0.0625rem solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0.25rem 1.875rem rgba(0, 0, 0, 0.1);
+    border-radius: 5px !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     color: #4d4d4d;
     font-weight: bold;
-    padding: 0.625rem 1.25rem;
+    padding: 10px 20px;
 }
 
 #info {
@@ -43,14 +43,14 @@ button {
 
 .section-divider {
     border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-body-color) !important;
-    border-width: 0.125rem !important;
+    border-width: 2px !important;
     flex-grow: 1;
 }
 
 .section-title {
-    font-size: 1.25rem;
+    font-size: 20px;
     grid-column: span 5;
-    margin: 0.5625rem 0;
+    margin: 9px 0;
     text-align: center;
 }
 
@@ -123,8 +123,8 @@ button {
     display: -ms-flexbox;
     display: flex;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 0.75rem;
-    line-height: 0.9375rem;
+    font-size: 12px;
+    line-height: 15px;
     position: relative;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -140,27 +140,27 @@ button {
 
 .checkbox-wrapper-35 .switch+label::before {
     background-color: #7af4c3;
-    border-radius: 31.25rem;
-    height: 0.9375rem;
-    margin-right: 0.5rem;
+    border-radius: 500px;
+    height: 15px;
+    margin-right: 8px;
     -webkit-transition: background-color 0.125s ease-out;
     transition: background-color 0.125s ease-out;
-    width: 1.5625rem;
+    width: 25px;
 }
 
 .checkbox-wrapper-35 .switch+label::after {
     background-color: #fff;
-    border-radius: 0.8125rem;
-    box-shadow: 0 0.1875rem 0.0625rem 0 rgba(37, 34, 71, 0.05), 0 0.125rem 0.125rem 0 rgba(37, 34, 71, 0.1), 0 0.1875rem 0.1875rem 0 rgba(37, 34, 71, 0.05);
-    height: 0.8125rem;
-    left: 0.0625rem;
+    border-radius: 13px;
+    box-shadow: 0 3px 1px 0 rgba(37, 34, 71, 0.05), 0 2px 2px 0 rgba(37, 34, 71, 0.1), 0 3px 3px 0 rgba(37, 34, 71, 0.05);
+    height: 13px;
+    left: 1px;
     position: absolute;
-    top: 0.0625rem;
+    top: 1px;
     -webkit-transition: -webkit-transform 0.125s ease-out;
     transition: -webkit-transform 0.125s ease-out;
     transition: transform 0.125s ease-out;
     transition: transform 0.125s ease-out, -webkit-transform 0.125s ease-out;
-    width: 0.8125rem;
+    width: 13px;
 }
 
 .checkbox-wrapper-35 .switch+label .switch-x-text {
@@ -171,10 +171,10 @@ button {
 .checkbox-wrapper-35 .switch+label .switch-x-toggletext {
     display: block;
     font-weight: bold;
-    height: 0.9375rem;
+    height: 15px;
     overflow: hidden;
     position: relative;
-    width: 6.25rem;
+    width: 100px;
 }
 
 .checkbox-wrapper-35 .switch+label .switch-x-unchecked,
@@ -210,8 +210,8 @@ button {
 }
 
 .checkbox-wrapper-35 .switch:checked+label::after {
-    -webkit-transform: translate3d(0.625rem, 0, 0);
-    transform: translate3d(0.625rem, 0, 0);
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
 }
 
 .checkbox-wrapper-35 .switch:checked+label .switch-x-unchecked {
@@ -231,12 +231,12 @@ button {
 /**************/
 .completed .card-decoration {
     background: #2222228c;
-    height: 4.4375rem;
-    width: 13.3125rem;
+    height: 71px;
+    width: 213px;
     position: absolute;
-    top: -0.5625rem;
-    left: -4.25rem;
-    border-radius: 0.3125rem;
+    top: -9px;
+    left: -68px;
+    border-radius: 5px;
 }
 
 .completion-check {
@@ -244,25 +244,25 @@ button {
 }
 
 .song-grid {
-    gap: 0.625rem;
+    gap: 10px;
 }
 
 .square-song-card {
     background: rgba(255, 255, 255, 0.4) !important;
-    box-shadow: 0 0.25rem 1.875rem rgba(0, 0, 0, 0.1);
-    border: 0.0625rem solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     display: flex;
-    height: 4.375rem;
-    width: 13.25rem !important;
+    height: 70px;
+    width: 212px !important;
     position: relative;
-    border-radius: 0.3125rem;
+    border-radius: 5px;
 }
 
 .square-song-image {
-    border-radius: 0.3125rem;
-    width: 3.125rem;
-    height: 3.125rem;
-    top: 0.625rem;
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    top: 10px;
     object-fit: cover;
     flex-shrink: 0;
     position: relative;
@@ -271,80 +271,80 @@ button {
 .square-song-card .song-overlay {
     position: absolute;
     inset: 0;
-    width: 13.1875rem;
+    width: 211px;
     z-index: -2;
-    border-radius: 0.3125rem;
+    border-radius: 5px;
     opacity: 0.8;
 }
 
 .square-song-inner-level {
-    font-size: 0.625rem;
-    line-height: 0.75rem !important;
+    font-size: 10px;
+    line-height: 12px !important;
 }
 
 .square-song-score {
-    font-size: 0.8125rem;
+    font-size: 13px;
 }
 
 .square-song-title {
     display: inline-block;
     flex-shrink: 0;
-    max-width: 8.4375rem;
+    max-width: 135px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 0.875rem;
+    font-size: 14px;
 }
 
 .square-song-grid {
-    gap: 0.75rem;
+    gap: 12px;
 }
 
 .rating-gain-info {
-    font-size: 0.8125rem;
+    font-size: 13px;
     font-weight: bold;
     position: absolute;
-    right: 0rem;
-    bottom: -0.125rem;
+    right: 0px;
+    bottom: -2px;
     text-align: right;
     z-index: 1;
 }
 
 .square-song-info-block {
-    top: 0.5rem;
+    top: 8px;
     position: relative;
     z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex: 1;
-    margin-left: 0.3125rem;
-    height: 3.125rem;
+    margin-left: 5px;
+    height: 50px;
 }
 
 /**************/
 /*rating cards*/
 /**************/
 .song-grid {
-    gap: 0.625rem;
+    gap: 10px;
 }
 
 .song-card {
     position: relative;
     display: flex;
-    width: 18.0625rem !important;
-    height: 5.625rem;
-    border-radius: 0.3125rem;
+    width: 289px !important;
+    height: 90px;
+    border-radius: 5px;
     background: rgba(255, 255, 255, 0.4) !important;
-    box-shadow: 0 0.25rem 1.875rem rgba(0, 0, 0, 0.1);
-    border: 0.0625rem solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .song-image {
-    border-radius: 0.3125rem;
-    width: 4.375rem;
-    height: 4.375rem;
-    top: 0.625rem;
+    border-radius: 5px;
+    width: 70px;
+    height: 70px;
+    top: 10px;
     object-fit: cover;
     flex-shrink: 0;
     position: relative;
@@ -353,42 +353,42 @@ button {
 .song-card .song-overlay {
     position: absolute;
     inset: 0;
-    width: 18rem;
+    width: 288px;
     z-index: -2;
-    border-radius: 0.3125rem;
+    border-radius: 5px;
     opacity: 0.8;
 }
 
 .song-info-block {
-    top: 0.625rem;
+    top: 10px;
     position: relative;
     z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     flex: 1;
-    margin-left: 0.3125rem;
-    height: 4.375rem;
+    margin-left: 5px;
+    height: 70px;
 }
 
 .rating-block-rating {
-    font-size: 1.375rem;
+    font-size: 22px;
     font-weight: 900;
-    text-shadow: 0 0 0.375rem rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
     align-self: flex-start;
-    line-height: 1.375rem;
+    line-height: 22px;
 }
 
 .song-details {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 4px;
 }
 
 .rating-block-song-title {
-    font-size: 1rem;
-    line-height: 1rem;
-    max-width: 11.25rem;
+    font-size: 16px;
+    line-height: 16px;
+    max-width: 180px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -396,8 +396,8 @@ button {
 
 .rating-block-inner-level,
 .rating-block-score {
-    font-size: 0.625rem;
-    line-height: 0.625rem;
+    font-size: 10px;
+    line-height: 10px;
     opacity: 0.85;
 }
 
@@ -423,24 +423,24 @@ button {
 
 #course-song-card .song-card {
     padding-left: calc(var(--bs-gutter-x) * .5);
-    width: 26.25rem !important;
+    width: 420px !important;
 }
 
 #course-song-card .song-card .song-overlay {
-    width: 26.1875rem !important;
+    width: 419px !important;
 }
 
 #course-song-card .rating-block-inner-level,
 #course-song-card .rating-block-score {
-    font-size: 0.875rem;
-    line-height: 1rem;
+    font-size: 14px;
+    line-height: 16px;
     opacity: 0.85;
 }
 
 #course-song-card .rating-block-song-title {
-    font-size: 1rem;
+    font-size: 16px;
     line-height: 1.5;
-    max-width: 21.25rem;
+    max-width: 340px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -510,8 +510,8 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 #div-user-course-rank-text span,
 #div-user-star-text span {
     color: #4d4d4d;
-    font-size: 0.875rem;
-    line-height: 0.75rem;
+    font-size: 14px;
+    line-height: 12px;
 }
 
 #user-class-rank,
@@ -523,12 +523,12 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 }
 
 .basic_block {
-    border-radius: 0.3125rem;
+    border-radius: 5px;
     background: rgba(255, 255, 255, 0.4) !important;
-    box-shadow: 0 0.25rem 1.875rem rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(0.3125rem);
-    -webkit-backdrop-filter: blur(0.3125rem);
-    border: 0.0625rem solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .f_0 {
@@ -537,27 +537,27 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 }
 
 .f_10 {
-    font-size: 0.625rem;
+    font-size: 10px;
     line-height: 1rem;
 }
 
 .f_12 {
-    font-size: 0.75rem;
+    font-size: 12px;
     line-height: 1rem;
 }
 
 .f_13 {
-    font-size: 0.8125rem;
+    font-size: 13px;
     line-height: 1.2rem;
 }
 
 .f_14 {
-    font-size: 0.875rem;
+    font-size: 14px;
     line-height: 1.2rem;
 }
 
 .f_16 {
-    font-size: 1rem;
+    font-size: 16px;
     line-height: 1.2rem;
 }
 
@@ -570,42 +570,42 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 }
 
 .h_30 {
-    height: 1.875rem;
+    height: 30px;
 }
 
 .h_35 {
-    height: 2.1875rem;
+    height: 35px;
 }
 
 .m_3 {
-    margin: 0.1875rem;
+    margin: 3px;
 }
 
 .m_b_5 {
-    margin-bottom: 0.3125rem;
+    margin-bottom: 5px;
 }
 
 .name_block {
-    background-size: 2.125rem;
-    border-radius: 0.9375rem;
+    background-size: 34px;
+    border-radius: 15px;
     color: #4d4d4d;
     font-weight: 1000;
-    height: 1.6875rem;
-    margin: 0.1875rem 0;
-    padding: 0.3125rem 0.1875rem 0.1875rem 0.1875rem;
-    width: 9.875rem;
+    height: 27px;
+    margin: 3px 0;
+    padding: 5px 3px 3px 3px;
+    width: 158px;
 }
 
 .p_10 {
-    padding: 0.625rem;
+    padding: 10px;
 }
 
 .p_3 {
-    padding: 0.1875rem;
+    padding: 3px;
 }
 
 .p_l_10 {
-    padding-left: 0.625rem;
+    padding-left: 10px;
 }
 
 .p_r {
@@ -614,23 +614,23 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 
 .rating_block {
     color: #4d4d4d;
-    font-size: 1rem;
-    height: 1.3125rem;
-    line-height: 1.3125rem;
+    font-size: 16px;
+    height: 21px;
+    line-height: 21px;
     position: absolute;
-    right: 0.5625rem;
+    right: 9px;
     text-align: center;
-    top: 0.4375rem;
-    width: 6.25rem;
+    top: 7px;
+    width: 100px;
 }
 
 .rating_block::after {
     content: "";
     inset: 0;
-    left: -0.25rem;
+    left: -4px;
     opacity: 0.4;
     position: absolute;
-    width: 6.875rem;
+    width: 110px;
     z-index: 0;
 }
 
@@ -649,12 +649,12 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 }
 
 .trophy_block {
-    height: 1.5625rem;
-    margin: 0 0 0.3125rem 0;
+    height: 25px;
+    margin: 0 0 5px 0;
     overflow: hidden;
     position: relative;
     white-space: nowrap;
-    width: 16.75rem;
+    width: 268px;
 }
 
 .trophy_block::before {
@@ -677,11 +677,11 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 
 .trophy_inner_block {
     color: #4d4d4d;
-    height: 1.5rem;
-    margin: 0 0.125rem;
+    height: 24px;
+    margin: 0 2px;
     overflow: hidden;
     white-space: nowrap;
-    width: 16.1875rem;
+    width: 259px;
 }
 
 .trophy_Normal::before {
@@ -707,8 +707,8 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 }
 
 .user_data_block_line {
-    margin: 0 0 0.25rem 0;
-    width: 17.5rem;
+    margin: 0 0 4px 0;
+    width: 280px;
 }
 
 .v_m {
@@ -716,7 +716,7 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 }
 
 .w_112 {
-    width: 7rem;
+    width: 112px;
 }
 
 /*********/
@@ -740,8 +740,8 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
     box-sizing: content-box;
     cursor: pointer;
     height: auto;
-    padding: 3.125rem;
+    padding: 50px;
     position: absolute;
-    width: 3.125rem;
+    width: 50px;
     z-index: 1000;
 }

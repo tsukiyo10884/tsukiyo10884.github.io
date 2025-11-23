@@ -21,17 +21,17 @@ body {
 
 button {
 	background-color: #ffffffcc;
-	border-radius: 1.25rem !important;
+	border-radius: 20px !important;
 	border: none;
-	box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 	color: #333;
 	cursor: pointer;
-	font-size: 1rem;
+	font-size: 16px;
 	font-weight: bold;
 	margin-right: 1em;
-	margin: 0.5rem;
+	margin: 8px;
 	padding: 0.5em 1em;
-	padding: 0.625rem 1.25rem;
+	padding: 10px 20px;
 	transition: transform 0.1s ease, background-color 0.3s ease;
 }
 
@@ -47,12 +47,12 @@ button:not(:disabled):hover {
 
 #level-max,
 #level-min {
-	border-radius: 1.25rem;
+	border-radius: 20px;
 }
 
 
 .plate-progress-title {
-	border-radius: 0.5rem;
+	border-radius: 8px;
 	color: #69b4ff;
 	font-size: 1.2em;
 	font-weight: bold;
@@ -60,20 +60,20 @@ button:not(:disabled):hover {
 }
 
 .section-divider {
-	border-bottom: 0.1875rem dashed #c2e2ff !important;
+	border-bottom: 3px dashed #c2e2ff !important;
 	flex-grow: 1;
 }
 
 .section-title {
 	color: #69b4ff;
-	font-size: 1.25rem;
+	font-size: 20px;
 	grid-column: span 5;
-	margin: 0.5625rem 0;
+	margin: 9px 0;
 	text-align: center;
 }
 
 .tips {
-	font-size: 0.875rem;
+	font-size: 14px;
 }
 
 
@@ -97,8 +97,8 @@ button:not(:disabled):hover {
 	display: -ms-flexbox;
 	display: flex;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 0.75rem;
-	line-height: 0.9375rem;
+	font-size: 12px;
+	line-height: 15px;
 	position: relative;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -114,27 +114,27 @@ button:not(:disabled):hover {
 
 .checkbox-wrapper-35 .switch+label::before {
 	background-color: #69b4ff;
-	border-radius: 31.25rem;
-	height: 0.9375rem;
-	margin-right: 0.5rem;
+	border-radius: 500px;
+	height: 15px;
+	margin-right: 8px;
 	-webkit-transition: background-color 0.125s ease-out;
 	transition: background-color 0.125s ease-out;
-	width: 1.5625rem;
+	width: 25px;
 }
 
 .checkbox-wrapper-35 .switch+label::after {
 	background-color: #fff;
-	border-radius: 0.8125rem;
-	box-shadow: 0 0.1875rem 0.0625rem 0 rgba(37, 34, 71, 0.05), 0 0.125rem 0.125rem 0 rgba(37, 34, 71, 0.1), 0 0.1875rem 0.1875rem 0 rgba(37, 34, 71, 0.05);
-	height: 0.8125rem;
-	left: 0.0625rem;
+	border-radius: 13px;
+	box-shadow: 0 3px 1px 0 rgba(37, 34, 71, 0.05), 0 2px 2px 0 rgba(37, 34, 71, 0.1), 0 3px 3px 0 rgba(37, 34, 71, 0.05);
+	height: 13px;
+	left: 1px;
 	position: absolute;
-	top: 0.0625rem;
+	top: 1px;
 	-webkit-transition: -webkit-transform 0.125s ease-out;
 	transition: -webkit-transform 0.125s ease-out;
 	transition: transform 0.125s ease-out;
 	transition: transform 0.125s ease-out, -webkit-transform 0.125s ease-out;
-	width: 0.8125rem;
+	width: 13px;
 }
 
 .checkbox-wrapper-35 .switch+label .switch-x-text {
@@ -145,10 +145,10 @@ button:not(:disabled):hover {
 .checkbox-wrapper-35 .switch+label .switch-x-toggletext {
 	display: block;
 	font-weight: bold;
-	height: 0.9375rem;
+	height: 15px;
 	overflow: hidden;
 	position: relative;
-	width: 6.25rem;
+	width: 100px;
 }
 
 .checkbox-wrapper-35 .switch+label .switch-x-unchecked,
@@ -184,8 +184,8 @@ button:not(:disabled):hover {
 }
 
 .checkbox-wrapper-35 .switch:checked+label::after {
-	-webkit-transform: translate3d(0.625rem, 0, 0);
-	transform: translate3d(0.625rem, 0, 0);
+	-webkit-transform: translate3d(10px, 0, 0);
+	transform: translate3d(10px, 0, 0);
 }
 
 .checkbox-wrapper-35 .switch:checked+label .switch-x-unchecked {
@@ -210,11 +210,11 @@ button:not(:disabled):hover {
 .completion-check {
 	color: #69b4ff;
 	font-family: sans-serif;
-	font-size: 1.625rem;
+	font-size: 26px;
 	position: absolute;
-	right: 0.1875rem;
-	text-shadow: 0.0625rem 0.0625rem 0.0625rem white, 0.0625rem -0.0625rem 0.0625rem white, -0.0625rem 0.0625rem 0.0625rem white, -0.0625rem -0.0625rem 0.0625rem white;
-	top: -0.25rem;
+	right: 3px;
+	text-shadow: 1px 1px 1px white, 1px -1px 1px white, -1px 1px 1px white, -1px -1px 1px white;
+	top: -4px;
 	z-index: 2;
 }
 
@@ -249,32 +249,32 @@ button:not(:disabled):hover {
 
 .square-song-card {
 	background-color: white;
-	border-radius: 1.25rem;
-	box-shadow: 0 0.375rem 0.625rem rgba(0, 0, 0, 0.12);
+	border-radius: 20px;
+	box-shadow: 0 6px 10px rgba(0, 0, 0, 0.12);
 	display: flex;
 	flex-direction: column;
-	height: 7.8125rem;
-	padding: 0.625rem !important;
+	height: 125px;
+	padding: 10px !important;
 	position: relative;
 	transition: transform 0.2s;
-	width: 6.375rem !important;
+	width: 102px !important;
 }
 
 .square-song-card .song-overlay {
-	border-radius: 1.25rem;
-	height: 7.8125rem;
-	left:0rem;
+	border-radius: 20px;
+	height: 125px;
+	left: 0px;
 	position: absolute;
-	top:0rem;
-	width: 6.375rem;
+	top: 0px;
+	width: 102px;
 }
 
 .square-song-grid {
-	gap: 0.625rem;
+	gap: 10px;
 }
 
 .square-song-image {
-	border-radius: 0.75rem;
+	border-radius: 12px;
 	height: 50%;
 	object-fit: cover;
 	width: 100%;
@@ -282,21 +282,21 @@ button:not(:disabled):hover {
 
 .square-song-inner-level {
 	color: #666;
-	font-size: 0.625rem;
+	font-size: 10px;
 }
 
 .square-song-score {
 	color: #999;
-	font-size: 0.875rem;
-	line-height: 0.875rem;
+	font-size: 14px;
+	line-height: 14px;
 }
 
 .square-song-title {
 	color: #69b4ff;
-	font-size: 0.75rem;
+	font-size: 12px;
 	font-weight: bold;
-	margin-top: 0.125rem;
-	max-width: 5.625rem;
+	margin-top: 2px;
+	max-width: 90px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -308,7 +308,7 @@ button:not(:disabled):hover {
 .rating-block-song-title::before {
 	display: block;
 	font-weight: 100;
-	line-height: 0.625rem;
+	line-height: 10px;
 }
 
 .difficulty-advanced .rating-block-song-title::before {
@@ -338,34 +338,34 @@ button:not(:disabled):hover {
 
 .rating-block-inner-level {
 	color: #666;
-	font-size: 0.75rem;
-	line-height: 0.75rem;
+	font-size: 12px;
+	line-height: 12px;
 }
 
 .rating-block-rating {
 	background-color: #69b4ff;
-	border-radius: 62.4375rem;
+	border-radius: 999px;
 	color: white;
-	filter: drop-shadow(-0.0625rem 0.0625rem 0.0625rem #22222222);
-	font-size: 0.75rem;
+	filter: drop-shadow(-1px 1px 1px #22222222);
+	font-size: 12px;
 	font-weight: bold;
-	left: 0.3125rem;
-	padding: 0.125rem 0.25rem;
+	left: 5px;
+	padding: 2px 4px;
 	position: absolute;
-	top: 0.3125rem;
+	top: 5px;
 }
 
 .rating-block-score {
 	color: #999;
-	font-size: 1rem;
-	line-height: 1rem;
+	font-size: 16px;
+	line-height: 16px;
 }
 
 .rating-block-song-title {
 	color: #69b4ff;
-	font-size: 0.75rem;
+	font-size: 12px;
 	font-weight: bold;
-	max-width: 6.25rem;
+	max-width: 100px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -373,26 +373,26 @@ button:not(:disabled):hover {
 
 .rating-gain-info {
 	background: linear-gradient(135deg, #69b4ff, #91c1ff);
-	border-radius: 62.4375rem 0 0 62.4375rem;
+	border-radius: 999px 0 0 999px;
 	color: white;
-	font-size: 0.625rem;
-	padding: 0.0625rem 0.3125rem;
+	font-size: 10px;
+	padding: 1px 5px;
 	position: absolute;
-	right:0rem;
-	top: 3.125rem;
+	right: 0px;
+	top: 50px;
 	z-index: 2;
 }
 
 .song-card {
 	align-items: flex-start;
 	background: white;
-	border-radius: 1.25rem;
-	box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	display: flex;
-	padding: 0.625rem;
+	padding: 10px;
 	position: relative;
 	transition: transform 0.2s;
-	width: 10.625rem !important;
+	width: 170px !important;
 }
 
 .song-content {
@@ -400,21 +400,21 @@ button:not(:disabled):hover {
 }
 
 .song-grid {
-	gap: 0.75rem;
+	gap: 12px;
 }
 
 .song-image {
-	border-radius: 0.75rem;
-	height: 3.4375rem;
+	border-radius: 12px;
+	height: 55px;
 	object-fit: cover;
-	width: 3.125rem;
+	width: 50px;
 }
 
 .song-info-block {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	margin-left: 0.3125rem;
+	margin-left: 5px;
 }
 
 /**************/
@@ -428,8 +428,8 @@ button:not(:disabled):hover {
 
 .basic_block {
 	background-color: #fff;
-	border-radius: 1.25rem;
-	box-shadow: 0.0625rem 0.1875rem0rem rgba(0, 0, 0, 0.4);
+	border-radius: 20px;
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 }
 
 .f_0 {
@@ -438,27 +438,27 @@ button:not(:disabled):hover {
 }
 
 .f_10 {
-	font-size: 0.625rem;
+	font-size: 10px;
 	line-height: 1rem;
 }
 
 .f_12 {
-	font-size: 0.75rem;
+	font-size: 12px;
 	line-height: 1rem;
 }
 
 .f_13 {
-	font-size: 0.8125rem;
+	font-size: 13px;
 	line-height: 1.2rem;
 }
 
 .f_14 {
-	font-size: 0.875rem;
+	font-size: 14px;
 	line-height: 1.2rem;
 }
 
 .f_16 {
-	font-size: 1rem;
+	font-size: 16px;
 	line-height: 1.2rem;
 }
 
@@ -471,44 +471,44 @@ button:not(:disabled):hover {
 }
 
 .h_30 {
-	height: 1.875rem;
+	height: 30px;
 }
 
 .h_35 {
-	height: 2.1875rem;
+	height: 35px;
 }
 
 .m_3 {
-	margin: 0.1875rem;
+	margin: 3px;
 }
 
 .m_b_5 {
-	margin-bottom: 0.3125rem;
+	margin-bottom: 5px;
 }
 
 .name_block {
 	background-color: #fff;
-	background-size: 2.125rem;
-	border-radius: 1.25rem;
-	border: 0.0625rem solid #dedede;
-	box-shadow: 0.0625rem 0.1875rem0rem rgba(0, 0, 0, 0.4);
+	background-size: 34px;
+	border-radius: 20px;
+	border: 1px solid #dedede;
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 	color: #000;
-	height: 1.6875rem;
-	margin: 0.1875rem 0;
-	padding: 0.3125rem 0.1875rem 0.1875rem 0.1875rem;
-	width: 9.875rem;
+	height: 27px;
+	margin: 3px 0;
+	padding: 5px 3px 3px 3px;
+	width: 158px;
 }
 
 .p_10 {
-	padding: 0.625rem;
+	padding: 10px;
 }
 
 .p_3 {
-	padding: 0.1875rem;
+	padding: 3px;
 }
 
 .p_l_10 {
-	padding-left: 0.625rem;
+	padding-left: 10px;
 }
 
 .p_r {
@@ -517,14 +517,14 @@ button:not(:disabled):hover {
 
 .rating_block {
 	color: white;
-	font-size: 1rem;
-	height: 1.3125rem;
-	line-height: 1.3125rem;
+	font-size: 16px;
+	height: 21px;
+	line-height: 21px;
 	position: absolute;
 	text-align: right;
-	top: 0.4375rem;
+	top: 7px;
 	transform: scaleX(1.3);
-	width: 5.25rem;
+	width: 84px;
 }
 
 .t_c {
@@ -536,11 +536,11 @@ button:not(:disabled):hover {
 }
 
 .trophy_block {
-	height: 1.5625rem;
-	margin: 0 0 0.3125rem 0;
+	height: 25px;
+	margin: 0 0 5px 0;
 	overflow: hidden;
 	white-space: nowrap;
-	width: 16.75rem;
+	width: 268px;
 }
 
 .trophy_Bronze {
@@ -553,12 +553,12 @@ button:not(:disabled):hover {
 
 .trophy_inner_block {
 	color: #fff;
-	height: 1.5rem;
-	margin: 0 0.125rem;
+	height: 24px;
+	margin: 0 2px;
 	overflow: hidden;
-	text-shadow: black 0.0625rem 0.0625rem 0, black -0.0625rem -0.0625rem 0, black -0.0625rem 0.0625rem 0, black 0.0625rem -0.0625rem 0, black 0rem 0.0625rem 0, black 0-0.0625rem 0, black -0.0625rem 0 0, black 0.0625rem 0 0;
+	text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0, black 0px 1px 0, black 0-1px 0, black -1px 0 0, black 1px 0 0;
 	white-space: nowrap;
-	width: 16.1875rem;
+	width: 259px;
 }
 
 .trophy_Normal {
@@ -581,8 +581,8 @@ button:not(:disabled):hover {
 }
 
 .user_data_block_line {
-	margin: 0 0 0.25rem 0;
-	width: 17.5rem;
+	margin: 0 0 4px 0;
+	width: 280px;
 }
 
 .v_m {
@@ -590,7 +590,7 @@ button:not(:disabled):hover {
 }
 
 .w_112 {
-	width: 7rem;
+	width: 112px;
 }
 
 /*********/
@@ -614,8 +614,8 @@ button:not(:disabled):hover {
 	box-sizing: content-box;
 	cursor: pointer;
 	height: auto;
-	padding: 3.125rem;
+	padding: 50px;
 	position: absolute;
-	width: 3.125rem;
+	width: 50px;
 	z-index: 1000;
 }
