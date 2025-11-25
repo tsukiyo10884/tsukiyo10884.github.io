@@ -280,16 +280,54 @@
                     });
                 }
 
+                const ratingDoc = await fetchHTML(`${domain}/maimai-mobile/home/ratingTargetMusic/`);
+                const ratingBlocks = ratingDoc.querySelectorAll("div.w_480.f_0");
+                ratingBlocks.forEach(ratingblock => {
+                    const diffDiv = ratingblock.querySelector('.pointer.w_450.m_15.p_3.f_0');
+                    const cls = [...diffDiv.classList].find(c =>
+                        c.startsWith('music_') && c.endsWith('_score_back')
+                    );
+                    let difficulty = cls
+                        .replace('music_', '')
+                        .replace('_score_back', '');
+                    
+                    const type = ratingblock.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
+                    let title = ratingblock.querySelector('.music_name_block')?.textContent || "　";
+                    if (title === "Bad Apple!! feat nomico") {
+                        title = "Bad Apple!! feat.nomico";
+                    }
+                    const score = parseFloat(
+                        ratingblock.querySelector('.music_score_block.w_112')?.textContent.trim().replace('%', '') || "0"
+                    ).toFixed(4) + "%";
+                    if(songs.findIndex(s => s.title === title && s.type === type && s.difficulty === difficulty) === -1) {
+                        const songEntry = detailData.songs.find(s => s.songId === title);
+                        const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulty);
+                        const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
+                        const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
+                        const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
+                        let versionInternational = songVersionData[title + "__" + type];
+                        if (versionInternational === undefined) {
+                            versionInternational = versionData[versionData.length - 1].versionName;
+                        }
+                        const versionJapan = sheet?.version;
+
+                        songs.push({
+                            type, title, score, difficulty: difficulties[i], versionInternational, versionJapan,
+                            internalLevel, image
+                        });
+                    }
+                });
+
                 // 段位資料
                 childWin.postMessage({ type: "course", payload: null }, "https://tsukiyo10884.github.io");
-                const doc = await fetchHTML(`${domain}/maimai-mobile/record/course/`);
-                const blocks = doc.querySelectorAll("div.w_480.f_0");
+                const courseDoc = await fetchHTML(`${domain}/maimai-mobile/record/course/`);
+                const courseBlocks = courseDoc.querySelectorAll("div.w_480.f_0");
 
                 const course = [];
 
-                for (const block of blocks) {
+                for (const courseBlock of courseBlocks) {
                     let type = "";
-                    const headerImg = block.querySelector("img.w_480");
+                    const headerImg = courseBlock.querySelector("img.w_480");
                     if (headerImg) {
                         const src = headerImg.src;
                         if (src.includes("2Bakl72Qo")) type = "真段位認定";
@@ -298,7 +336,7 @@
                     }
 
                     const courses = [];
-                    const items = block.querySelectorAll("div.p_r.p_5");
+                    const items = courseBlock.querySelectorAll("div.p_r.p_5");
                     for (const item of items) {
                         const idx = item.querySelector("input[name=idx]")?.value;
                         if (!idx) continue;
