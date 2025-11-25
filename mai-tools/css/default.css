@@ -6,6 +6,16 @@ user profile
 for fun
 */
 
+.main {
+	--bs-gutter-x: 1.5rem;
+	--bs-gutter-y: 0;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: calc(var(--bs-gutter-x) * .5);
+	padding-right: calc(var(--bs-gutter-x) * .5);
+	width: 915px;
+}
+
 a {
 	color: #0056b3 !important;
 	text-decoration: underline;
@@ -18,16 +28,16 @@ body {
 
 button {
 	background-color: #ffffffcc;
-	border-radius: 0.75rem !important;
+	border-radius: 12px !important;
 	border: none;
-	box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 	color: #333;
 	cursor: pointer;
-	font-size: 1rem;
+	font-size: 16px;
 	font-weight: bold;
-	margin: 0.5rem;
 	margin-right: 1em;
-	padding: 0.625rem 1.25rem;
+	margin: 8px;
+	padding: 10px 20px;
 	transition: transform 0.1s ease, background-color 0.3s ease;
 }
 
@@ -55,11 +65,11 @@ img {
 }
 
 .difficulty-advanced {
-	box-shadow: 0.3125rem 0.3125rem 0.25rem #f8b709;
+	box-shadow: 5px 5px 4px #f8b709;
 }
 
 .difficulty-basic {
-	box-shadow: 0.3125rem 0.3125rem 0.25rem #81d955;
+	box-shadow: 5px 5px 4px #81d955;
 }
 
 .difficulty-count {
@@ -68,42 +78,42 @@ img {
 }
 
 .difficulty-expert {
-	box-shadow: 0.3125rem 0.3125rem 0.25rem #ff818d;
+	box-shadow: 5px 5px 4px #ff818d;
 }
 
 .difficulty-master {
-	box-shadow: 0.3125rem 0.3125rem 0.25rem #c346e7;
+	box-shadow: 5px 5px 4px #c346e7;
 }
 
 .difficulty-remaster {
-	box-shadow: 0.3125rem 0.3125rem 0.25rem #fff;
+	box-shadow: 5px 5px 4px #fff;
 }
 
 .plate-version-button {
-	font-size: 0.875rem;
+	font-size: 14px;
 }
 
 .rating-gain-info {
-	font-size: 0.75rem;
+	font-size: 12px;
 	font-weight: bold;
 	position: absolute;
-	right: 0.3125rem;
+	right: 5px;
 	text-align: right;
-	top: 0.3125rem;
+	top: 5px;
 	z-index: 1;
 }
 
 .section-divider {
 	border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-body-color) !important;
-	border-width: 0.125rem !important;
+	border-width: 2px !important;
 	flex-grow: 1;
 }
 
 .section-title {
 	color: #fff;
-	font-size: 1.25rem;
+	font-size: 20px;
 	grid-column: span 5;
-	margin: 0.5625rem 0;
+	margin: 9px 0;
 	text-align: center;
 }
 
@@ -113,9 +123,9 @@ img {
 }
 
 .song-overlay {
-	backdrop-filter: blur(0.0625rem);
+	backdrop-filter: blur(1px);
 	background-color: rgba(0, 0, 0, 0.3);
-	inset: -0.3125rem;
+	inset: -5px;
 	position: absolute;
 }
 
@@ -126,12 +136,12 @@ img {
 }
 
 .text-shadow-black {
-	text-shadow: 0.0625rem 0.0625rem 0.0625rem black, 0.0625rem -0.0625rem 0.0625rem black, -0.0625rem 0.0625rem 0.0625rem black, -0.0625rem -0.0625rem 0.0625rem black;
-	filter: drop-shadow(0 0.0625rem 0.0625rem rgba(0, 0, 0, 1));
+	text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
+	filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 1));
 }
 
 .tips {
-	font-size: 0.875rem;
+	font-size: 14px;
 }
 
 /**********/
@@ -154,8 +164,8 @@ img {
 	display: -ms-flexbox;
 	display: flex;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 0.75rem;
-	line-height: 0.9375rem;
+	font-size: 12px;
+	line-height: 15px;
 	position: relative;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -171,27 +181,27 @@ img {
 
 .checkbox-wrapper-35 .switch+label::before {
 	background-color: #05012c;
-	border-radius: 31.25rem;
-	height: 0.9375rem;
-	margin-right: 0.5rem;
+	border-radius: 500px;
+	height: 15px;
+	margin-right: 8px;
 	-webkit-transition: background-color 0.125s ease-out;
 	transition: background-color 0.125s ease-out;
-	width: 1.5625rem;
+	width: 25px;
 }
 
 .checkbox-wrapper-35 .switch+label::after {
 	background-color: #fff;
-	border-radius: 0.8125rem;
-	box-shadow: 0 0.1875rem 0.0625rem 0 rgba(37, 34, 71, 0.05), 0 0.125rem 0.125rem 0 rgba(37, 34, 71, 0.1), 0 0.1875rem 0.1875rem 0 rgba(37, 34, 71, 0.05);
-	height: 0.8125rem;
-	left: 0.0625rem;
+	border-radius: 13px;
+	box-shadow: 0 3px 1px 0 rgba(37, 34, 71, 0.05), 0 2px 2px 0 rgba(37, 34, 71, 0.1), 0 3px 3px 0 rgba(37, 34, 71, 0.05);
+	height: 13px;
+	left: 1px;
 	position: absolute;
-	top: 0.0625rem;
+	top: 1px;
 	-webkit-transition: -webkit-transform 0.125s ease-out;
 	transition: -webkit-transform 0.125s ease-out;
 	transition: transform 0.125s ease-out;
 	transition: transform 0.125s ease-out, -webkit-transform 0.125s ease-out;
-	width: 0.8125rem;
+	width: 13px;
 }
 
 .checkbox-wrapper-35 .switch+label .switch-x-text {
@@ -202,10 +212,10 @@ img {
 .checkbox-wrapper-35 .switch+label .switch-x-toggletext {
 	display: block;
 	font-weight: bold;
-	height: 0.9375rem;
+	height: 15px;
 	overflow: hidden;
 	position: relative;
-	width: 6.25rem;
+	width: 100px;
 }
 
 .checkbox-wrapper-35 .switch+label .switch-x-unchecked,
@@ -241,8 +251,8 @@ img {
 }
 
 .checkbox-wrapper-35 .switch:checked+label::after {
-	-webkit-transform: translate3d(0.625rem, 0, 0);
-	transform: translate3d(0.625rem, 0, 0);
+	-webkit-transform: translate3d(10px, 0, 0);
+	transform: translate3d(10px, 0, 0);
 }
 
 .checkbox-wrapper-35 .switch:checked+label .switch-x-unchecked {
@@ -266,40 +276,40 @@ img {
 
 .completion-check {
 	color: #0f0;
-	font-size: 1.625rem;
+	font-size: 26px;
 	position: absolute;
-	right: 0.1875rem;
-	top: -0.25rem;
+	right: 3px;
+	top: -4px;
 	z-index: 2;
 }
 
 .square-song-card {
 	background-position: center;
 	background-size: cover;
-	border-radius: 0.3125rem;
+	border-radius: 5px;
 	color: #fff;
 	display: flex;
 	flex-direction: column;
-	height: 6.375rem;
+	height: 102px;
 	justify-content: flex-end;
 	overflow: hidden;
 	padding: 0.5em;
 	position: relative;
-	width: 6.375rem !important;
+	width: 102px !important;
 }
 
 .square-song-grid {
-	gap: 0.625rem;
+	gap: 10px;
 }
 
 .square-song-image {
-	border-radius: 0.3125rem;
-	height: 6.375rem;
-	left: -0.75rem;
+	border-radius: 5px;
+	height: 102px;
+	left: -12px;
 	object-fit: cover;
 	position: relative;
-	top: 3rem;
-	width: 6.375rem;
+	top: 48px;
+	width: 102px;
 	z-index: -10;
 }
 
@@ -309,16 +319,16 @@ img {
 }
 
 .square-song-inner-level {
-	font-size: 0.625rem;
-	line-height: 0.75rem !important;
+	font-size: 10px;
+	line-height: 12px !important;
 }
 
 .square-song-title {
 	display: inline-block;
 	flex-shrink: 0;
-	font-size: 0.625rem;
-	line-height: 0.75rem !important;
-	max-width: 8.125rem;
+	font-size: 10px;
+	line-height: 12px !important;
+	max-width: 130px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -328,9 +338,9 @@ img {
 /*rating cards*/
 /**************/
 .rating-block-inner-level {
-	bottom: 1.21875rem;
-	font-size: 0.75rem;
-	left: 0.21875rem;
+	bottom: 19.5px;
+	font-size: 12px;
+	left: 3.5px;
 }
 
 .rating-block-inner-level,
@@ -343,23 +353,23 @@ img {
 }
 
 .rating-block-rating {
-	font-size: 1.375rem;
-	right: -0.1875rem;
-	top: 0.1875rem;
+	font-size: 22px;
+	right: -3px;
+	top: 3px;
 }
 
 .rating-block-score {
-	bottom: 0.1875rem;
-	font-size: 1rem;
-	left: 0.0625rem;
+	bottom: 3px;
+	font-size: 16px;
+	left: 1px;
 }
 
 .rating-block-song-title {
-	bottom: 2.0625rem;
+	bottom: 33px;
 	display: inline-block;
-	font-size: 0.75rem;
-	left: 0.25rem;
-	max-width: 10.125rem;
+	font-size: 12px;
+	left: 4px;
+	max-width: 162px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -369,16 +379,16 @@ img {
 	align-items: center;
 	background-position: center;
 	background-size: cover;
-	border-radius: 0.3125rem;
+	border-radius: 5px;
 	color: #fff;
 	display: flex;
 	flex-direction: column;
-	height: 6.3125rem;
+	height: 101px;
 	justify-content: center;
 	overflow: hidden;
 	padding: 0.5em;
 	position: relative;
-	width: 10.1875rem !important;
+	width: 163px !important;
 }
 
 .song-card.completed {
@@ -386,7 +396,7 @@ img {
 }
 
 .song-grid {
-	gap: 1.125rem;
+	gap: 18px;
 }
 
 .song-image {
@@ -404,8 +414,8 @@ img {
 
 .basic_block {
 	background-color: #fff;
-	border-radius: 0.3125rem;
-	box-shadow: 0.0625rem 0.1875rem 0rem rgba(0, 0, 0, 0.4);
+	border-radius: 5px;
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 }
 
 .f_0 {
@@ -414,27 +424,27 @@ img {
 }
 
 .f_10 {
-	font-size: 0.625rem;
+	font-size: 10px;
 	line-height: 1rem;
 }
 
 .f_12 {
-	font-size: 0.75rem;
+	font-size: 12px;
 	line-height: 1rem;
 }
 
 .f_13 {
-	font-size: 0.8125rem;
+	font-size: 13px;
 	line-height: 1.2rem;
 }
 
 .f_14 {
-	font-size: 0.875rem;
+	font-size: 14px;
 	line-height: 1.2rem;
 }
 
 .f_16 {
-	font-size: 1rem;
+	font-size: 16px;
 	line-height: 1.2rem;
 }
 
@@ -447,44 +457,44 @@ img {
 }
 
 .h_30 {
-	height: 1.875rem;
+	height: 30px;
 }
 
 .h_35 {
-	height: 2.1875rem;
+	height: 35px;
 }
 
 .m_3 {
-	margin: 0.1875rem;
+	margin: 3px;
 }
 
 .m_b_5 {
-	margin-bottom: 0.3125rem;
+	margin-bottom: 5px;
 }
 
 .name_block {
 	background-color: #fff;
-	background-size: 2.125rem;
-	border-radius: 0.3125rem;
-	border: 0.0625rem solid #dedede;
-	box-shadow: 0.0625rem 0.1875rem 0rem rgba(0, 0, 0, 0.4);
+	background-size: 34px;
+	border-radius: 5px;
+	border: 1px solid #dedede;
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 	color: #000;
-	height: 1.6875rem;
-	margin: 0.1875rem 0;
-	padding: 0.3125rem 0.1875rem 0.1875rem 0.1875rem;
-	width: 9.875rem;
+	height: 27px;
+	margin: 3px 0;
+	padding: 5px 3px 3px 3px;
+	width: 158px;
 }
 
 .p_10 {
-	padding: 0.625rem;
+	padding: 10px;
 }
 
 .p_3 {
-	padding: 0.1875rem;
+	padding: 3px;
 }
 
 .p_l_10 {
-	padding-left: 0.625rem;
+	padding-left: 10px;
 }
 
 .p_r {
@@ -493,15 +503,15 @@ img {
 
 .rating_block {
 	color: white;
-	font-size: 1rem;
-	height: 1.3125rem;
-	line-height: 1.3125rem;
+	font-size: 16px;
+	height: 21px;
+	line-height: 21px;
 	position: absolute;
-	right: 0.8125rem;
+	right: 13px;
 	text-align: right;
-	top: 0.4375rem;
+	top: 7px;
 	transform: scaleX(1.1);
-	width: 4.5625rem;
+	width: 73px;
 }
 
 .t_c {
@@ -513,11 +523,11 @@ img {
 }
 
 .trophy_block {
-	height: 1.5625rem;
-	margin: 0 0 0.3125rem 0;
+	height: 25px;
+	margin: 0 0 5px 0;
 	overflow: hidden;
 	white-space: nowrap;
-	width: 16.75rem;
+	width: 268px;
 }
 
 .trophy_Bronze {
@@ -530,12 +540,12 @@ img {
 
 .trophy_inner_block {
 	color: #fff;
-	height: 1.5rem;
-	margin: 0 0.125rem;
+	height: 24px;
+	margin: 0 2px;
 	overflow: hidden;
-	text-shadow: black 0.0625rem 0.0625rem 0, black -0.0625rem -0.0625rem 0, black -0.0625rem 0.0625rem 0, black 0.0625rem -0.0625rem 0, black 0rem 0.0625rem 0, black 0-0.0625rem 0, black -0.0625rem 0 0, black 0.0625rem 0 0;
+	text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0, black 0px 1px 0, black 0-1px 0, black -1px 0 0, black 1px 0 0;
 	white-space: nowrap;
-	width: 16.1875rem;
+	width: 259px;
 }
 
 .trophy_Normal {
@@ -558,8 +568,8 @@ img {
 }
 
 .user_data_block_line {
-	margin: 0 0 0.25rem 0;
-	width: 17.5rem;
+	margin: 0 0 4px 0;
+	width: 280px;
 }
 
 .v_m {
@@ -567,7 +577,7 @@ img {
 }
 
 .w_112 {
-	width: 7rem;
+	width: 112px;
 }
 
 /*********/
@@ -591,8 +601,8 @@ img {
 	box-sizing: content-box;
 	cursor: pointer;
 	height: auto;
-	padding: 3.125rem;
+	padding: 50px;
 	position: absolute;
-	width: 3.125rem;
+	width: 50px;
 	z-index: 1000;
 }

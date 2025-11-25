@@ -9,7 +9,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=915">
     <link rel="icon" href="img/favicon.ico">
     <title>maimai小工具</title>
     <link id="theme" rel="stylesheet" href="css/default.css" />
@@ -39,97 +39,97 @@
         <div class="wave"></div>
         <div class="wave"></div>
     </div>
-    <div class="scale-wrapper">
-        <div class="main mb-5">
-            <div id="info" class="row justify-content-start ms-1">
-                <div class="checkbox-wrapper-35 p-0">
-                    <input value="private" name="switch" id="version-switch" type="checkbox" class="switch">
-                    <label for="version-switch" style="width: fit-content;">
-                        <span class="switch-x-text">歌曲版本：</span>
-                        <span class="switch-x-toggletext">
-                            <span class="switch-x-unchecked"><span class="switch-x-hiddenlabel">Unchecked:
-                                </span>International
-                                Ver.</span>
-                            <span class="switch-x-checked"><span class="switch-x-hiddenlabel">Checked: </span>Japanese
-                                Ver.</span>
-                        </span>
-                    </label>
-                </div>
+    <div class="main mb-5">
 
-                <p class="f_14 p_0" style="width: fit-content;">譜面定數/段位認定： <a
-                        href="https://arcade-songs.zetaraku.dev/maimai/about/" target="_blank">arcade-songs</a></p>
-                <p class="f_14 p_0" style="width: fit-content;">　|　刪除曲：
-                    <a href="https://maimai.fandom.com/zh/wiki/%E5%88%AA%E9%99%A4%E6%9B%B2%E4%B8%80%E8%A6%BD"
-                        target="_blank">maimai中文維基</a>
-                </p>
-                <p class="f_14 p_0" style="width: fit-content;">　|　rating計算方法： <a
-                        href="https://sgimera.github.io/mai_RatingAnalyzer/maidx_calc.html" target="_blank">sgimera</a>
-                </p>
-                <div class="col">
-                </div>
-                <div class="col-1">
-                    <img id="palette" src="img/palette.svg">
-                </div>
+        <div id="info" class="row justify-content-start ms-1">
+
+            <!-- From Uiverse.io by Bodyhc -->
+            <div class="checkbox-wrapper-35 p-0">
+                <input value="private" name="switch" id="version-switch" type="checkbox" class="switch">
+                <label for="version-switch" style="width: fit-content;">
+                    <span class="switch-x-text">歌曲版本：</span>
+                    <span class="switch-x-toggletext">
+                        <span class="switch-x-unchecked"><span class="switch-x-hiddenlabel">Unchecked:
+                            </span>International
+                            Ver.</span>
+                        <span class="switch-x-checked"><span class="switch-x-hiddenlabel">Checked: </span>Japanese
+                            Ver.</span>
+                    </span>
+                </label>
             </div>
-            <button id="test" onclick="LoadLocalJson('json/test_data/test_data.json')">測試資料1</button>
-            <button id="test2" onclick="LoadLocalJson('json/test_data/test_data2.json')">測試資料2</button>
-            <div id="output"></div>
-            <textarea id="now-title" class="d-none"></textarea>
-            <div id="button-group" class="row d-none align-items-center">
-                <div class="col-2">
-                    <button id="btn-rating" class="w-100" onclick="showTable('rating')">R値入選曲</button>
-                </div>
-                <div class="col-2">
-                    <button id="btn-suggestion" class="w-100" onclick="showTable('suggestion')">R値候選曲</button>
-                </div>
-                <div class="col-2">
-                    <button id="btn-plate" class="w-100" onclick="showTable('plate')">名牌版進度</button>
-                </div>
-                <div class="col-2">
-                    <button id="btn-level" class="w-100" onclick="showTable('level')">等級進度</button>
-                </div>
-                <div class="col-2">
-                    <button id="btn-course" class="w-100" onclick="showTable('course')">段位認定</button>
-                </div>
-                <div id="completion-filters" class="col-2 d-none">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="completed-only" name="completion-filter" class="form-check-input">
-                        <label for="completed-only">只顯示已達成</label>
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="non-completed-only" name="completion-filter"
-                            class="form-check-input">
-                        <label for="non-completed-only">只顯示未達成</label>
-                    </div>
-                </div>
-                <div id="play-filters" class="col-2 d-none">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="played-only" name="play-filter" class="form-check-input">
-                        <label for="completed-only">只顯示已玩過</label>
-                    </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="non-played-only" name="play-filter" class="form-check-input">
-                        <label for="non-completed-only">只顯示未玩過</label>
-                    </div>
-                </div>
+
+            <p class="f_14 p_0" style="width: fit-content;">譜面定數： <a
+                    href="https://arcade-songs.zetaraku.dev/maimai/about/" target="_blank">arcade-songs</a></p>
+            <p class="f_14 p_0" style="width: fit-content;">　|　刪除曲：
+                <a href="https://maimai.fandom.com/zh/wiki/%E5%88%AA%E9%99%A4%E6%9B%B2%E4%B8%80%E8%A6%BD"
+                    target="_blank">maimai中文維基</a>
+            </p>
+            <p class="f_14 p_0" style="width: fit-content;">　|　rating計算方法： <a
+                    href="https://sgimera.github.io/mai_RatingAnalyzer/maidx_calc.html" target="_blank">sgimera</a>
+            </p>
+            <div class="col">
             </div>
-            <div class="result-container">
-                <div class="row border-bottom border-secondary">
-                    <div id="user-info" class="user-info col-6 d-none">
-                    </div>
-                    <div id="stat" class="col-6 row"></div>
-                </div>
-                <div id="song-table" class="ms-1 mt-1"></div>
+            <div class="col-1">
+                <img id="palette" src="img/palette.svg">
             </div>
-            <footer class="text-center">
-                <hr>
-                <p id="credit">
-                    Made by <a href="https://github.com/tsukiyo10884/" target="_blank">Tsukiyo</a>, in
-                    collaboration with <a href="https://www.instagram.com/mua_2110/" target="_blank">Ayo</a> and <a
-                        href="https://www.instagram.com/aaaaaaaaaxiuan/" target="_blank">Axuan</a>
-                    ; inspired by <a href="https://github.com/myjian/">Ming-yuen Jien</a>.</p>
-            </footer>
         </div>
+        <button id="test" onclick="LoadLocalJson('json/test_data/test_data.json')">測試資料1</button>
+        <button id="test2" onclick="LoadLocalJson('json/test_data/test_data2.json')">測試資料2</button>
+        <div id="output"></div>
+        <textarea id="now-title" class="d-none"></textarea>
+        <div id="button-group" class="row d-none align-items-center">
+            <div class="col-2">
+                <button id="btn-rating" class="w-100" onclick="showTable('rating')">R値入選曲</button>
+            </div>
+            <div class="col-2">
+                <button id="btn-suggestion" class="w-100" onclick="showTable('suggestion')">R値候選曲</button>
+            </div>
+            <div class="col-2">
+                <button id="btn-plate" class="w-100" onclick="showTable('plate')">名牌版進度</button>
+            </div>
+            <div class="col-2">
+                <button id="btn-level" class="w-100" onclick="showTable('level')">等級進度</button>
+            </div>
+            <div class="col-2">
+                <button id="btn-course" class="w-100" onclick="showTable('course')">段位認定</button>
+            </div>
+            <div id="completion-filters" class="col-2 d-none">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="completed-only" name="completion-filter" class="form-check-input">
+                    <label for="completed-only">只顯示已達成</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="non-completed-only" name="completion-filter" class="form-check-input">
+                    <label for="non-completed-only">只顯示未達成</label>
+                </div>
+            </div>
+            <div id="play-filters" class="col-2 d-none">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="played-only" name="play-filter" class="form-check-input">
+                    <label for="completed-only">只顯示已玩過</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="non-played-only" name="play-filter" class="form-check-input">
+                    <label for="non-completed-only">只顯示未玩過</label>
+                </div>
+            </div>
+        </div>
+        <div class="result-container">
+            <div class="row border-bottom border-secondary">
+                <div id="user-info" class="user-info col-6 d-none">
+                </div>
+                <div id="stat" class="col-6 row"></div>
+            </div>
+            <div id="song-table" class="ms-1 mt-1"></div>
+        </div>
+        <footer class="text-center">
+            <hr>
+            <p id="credit">
+                Made by <a href="https://github.com/tsukiyo10884/" target="_blank">Tsukiyo</a>, in
+                collaboration with <a href="https://www.instagram.com/mua_2110/" target="_blank">Ayo</a> and <a
+                    href="https://www.instagram.com/aaaaaaaaaxiuan/" target="_blank">Axuan</a>
+                ; inspired by <a href="https://github.com/myjian/">Ming-yuen Jien</a>.</p>
+        </footer>
     </div>
 
     <script>
@@ -150,6 +150,7 @@
             $('#version-switch').on('change', () => {
                 handleFilterChange();
             });
+            setupEventListeners();
         };
 
         const setupEventListeners = () => {
@@ -238,18 +239,13 @@
         $(init);
     </script>
     <style>
-        .scale-wrapper {
-            width: 57.1875rem;
-            margin: 0 auto;
-        }
-
         .p_0 {
             padding: 0 !important;
         }
 
         #palette {
             cursor: pointer;
-            height: 1.875rem !important;
+            height: 30px !important;
             z-index: 1000;
         }
 
@@ -260,11 +256,11 @@
             margin-right: auto;
             padding-left: calc(var(--bs-gutter-x) * .5);
             padding-right: calc(var(--bs-gutter-x) * .5);
+            width: 915px;
         }
 
         body {
             overflow-y: scroll;
-            overflow-x: hidden;
         }
     </style>
 </body>
