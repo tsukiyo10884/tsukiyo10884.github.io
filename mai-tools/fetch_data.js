@@ -280,11 +280,11 @@
                     });
                 }
 
+                //R值表
                 const ratingDoc = await fetchHTML(`${domain}/maimai-mobile/home/ratingTargetMusic/`);
-                const ratingBlocks = ratingDoc.querySelectorAll("div.w_480.f_0");
+                const ratingBlocks = ratingDoc.querySelectorAll(".pointer.w_450.m_15.p_3.f_0");
                 ratingBlocks.forEach(ratingblock => {
-                    const diffDiv = ratingblock.querySelector('.pointer.w_450.m_15.p_3.f_0');
-                    const cls = [...diffDiv.classList].find(c =>
+                    const cls = [...ratingblock.classList].find(c =>
                         c.startsWith('music_') && c.endsWith('_score_back')
                     );
                     let difficulty = cls
@@ -297,7 +297,7 @@
                         title = "Bad Apple!! feat.nomico";
                     }
                     const score = parseFloat(
-                        ratingblock.querySelector('.music_score_block.w_112')?.textContent.trim().replace('%', '') || "0"
+                        ratingblock.querySelector('.music_score_block.w_150')?.textContent.trim().replace('%', '') || "0"
                     ).toFixed(4) + "%";
                     if(songs.findIndex(s => s.title === title && s.type === type && s.difficulty === difficulty) === -1) {
                         const songEntry = detailData.songs.find(s => s.songId === title);
@@ -312,7 +312,7 @@
                         const versionJapan = sheet?.version;
 
                         songs.push({
-                            type, title, score, difficulty: difficulties[i], versionInternational, versionJapan,
+                            type, title, score, difficulty, versionInternational, versionJapan,
                             internalLevel, image
                         });
                     }
