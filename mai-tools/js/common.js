@@ -375,6 +375,7 @@ const createSquareSongCard = (song, {
 
 // 點選可跳轉到arcade-songs
 const showSongDetail = (title, type) => {
+    title = encodeURIComponent(title);
     window.open(`https://arcade-songs.zetaraku.dev/maimai/?title=${title}&types=${type}`, '_blank');
 }
 
