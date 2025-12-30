@@ -233,6 +233,13 @@
             if (data.course == null) {
                 $('#btn-course').addClass('d-none');
             }
+
+            const topSongs = getTop50Songs();
+            data.ratingSongList = {
+                rating_new: songFilter(topSongs, { isNewVersion: true }),
+                rating_others: songFilter(topSongs, { isNewVersion: false })
+            };
+            
             initUserInfo();
         };
 

@@ -60,6 +60,7 @@ const calculateSuggestions = (songs, minRating, isNewVersion) => {
         const upgrades = SCORE_THRESHOLDS.map(({ name, score }) => {
             const rating = achi2rating_splashplus(lv * 10, parseFloat(score) * 10000);
             const diff = rating - minRating;
+
             return {
                 rank: name,
                 rating,
@@ -257,6 +258,7 @@ const createSuggestionSongCard = (gainChart, isNewVersion) => {
 
     const songCards = Array.from(groupedSongs)
         .map(([level, songList]) => {
+
             const header = `
             <div class="col-12 d-flex align-items-center my-3 p-0">
                 <div class="section-divider left"></div>
@@ -266,6 +268,7 @@ const createSuggestionSongCard = (gainChart, isNewVersion) => {
 
             const cards = songList.map(song => {
                 const currentRating = calculateSongRating(song);
+
                 const selectedThreshold = $('input[name="rating-threshold"]:checked').val();
                 const gainChart = gainChartList.find(s => s.level === song.internalLevel && s.isNewVersion === (song.versionInternational === currentVersion));
                 if (!gainChart) return null;
@@ -273,7 +276,15 @@ const createSuggestionSongCard = (gainChart, isNewVersion) => {
                 if (!rankGain) return null;
 
                 const targetRating = rankGain.rating;
-                const gain = rankGain.gain;
+                let gain = rankGain.gain;
+                
+                // 如果已經在R表上的歌就要跟現有分數比
+                const allRatingSongs = [...data.ratingSongList.rating_new, ...data.ratingSongList.rating_others];
+                if (songFilter(allRatingSongs, { internalLevel: song.internalLevel, title: song.title }).length > 0) {
+                    const existingSong = songFilter(allRatingSongs, { internalLevel: song.internalLevel, title: song.title })[0];
+                    gain = '+' + (targetRating - existingSong.rating);
+                }
+
                 song.targetRating = targetRating;
                 song.ratingGain = gain;
                 if (gain === '+0' || currentRating >= targetRating) return null;
