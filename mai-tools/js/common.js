@@ -255,6 +255,21 @@ const handleFilterChange = () => {
     }
 };
 
+const getTargetVersions = () => {
+    const currentIdx = versionOrder.indexOf(currentVersion);
+    const circleIdx = versionOrder.indexOf("CiRCLE");
+
+    if (currentIdx >= 0) {
+        if (circleIdx >= 0 && currentIdx >= circleIdx) {
+            const startIdx = Math.max(0, currentIdx - 1);
+            return versionOrder.slice(startIdx, currentIdx + 1);
+        } else {
+            return [versionOrder[currentIdx]];
+        }
+    }
+    return versionOrder.slice(-2);
+};
+
 // 過濾歌曲
 const songFilter = (songs, {
     isNewVersion = null,
@@ -270,9 +285,11 @@ const songFilter = (songs, {
     let result = songs;
 
     if (isNewVersion !== null && $('#version-switch').is(':checked')) {
-        result = result.filter(x => (x.versionJapan === currentVersion) === isNewVersion);
+        const targetVersions = getTargetVersions();
+        result = result.filter(x => targetVersions.includes(x.versionJapan) === isNewVersion);
     } else if (isNewVersion !== null) {
-        result = result.filter(x => (x.versionInternational === currentVersion) === isNewVersion);
+        const targetVersions = getTargetVersions();
+        result = result.filter(x => targetVersions.includes(x.versionInternational) === isNewVersion);
     }
     if (plate !== null) {
         result = result.filter(song => {

@@ -137,10 +137,21 @@
         let versionOrder = [];
         let data = "";
         let courseData = "";
-        let currentVersion = "PRiSM PLUS";
+        let currentVersion = "";
+        let currentVersionJP = "";
+        let currentVersionIntl = "";
 
         const init = async () => {
             versionList = await $.getJSON('json/version.json');
+
+            const today = new Date().toISOString().split('T')[0];
+            const jpVersions = versionList.filter(v => v.startDateJP && v.startDateJP <= today);
+            currentVersionJP = jpVersions.length > 0 ? jpVersions[jpVersions.length - 1].versionName : "PRiSM PLUS";
+
+            const intlVersions = versionList.filter(v => v.startDateIntl && v.startDateIntl <= today);
+            currentVersionIntl = intlVersions.length > 0 ? intlVersions[intlVersions.length - 1].versionName : "BUDDiES PLUS";
+
+            updateCurrentVersion();
             versionOrder = [...new Set(
                 versionList
                     .map(v => v.versionName)
@@ -148,6 +159,7 @@
             )];
             initPalette();
             $('#version-switch').on('change', () => {
+                updateCurrentVersion();
                 handleFilterChange();
             });
             setupEventListeners();
@@ -227,6 +239,14 @@
             });
         };
 
+        const updateCurrentVersion = () => {
+            if ($('#version-switch').is(':checked')) {
+                currentVersion = currentVersionJP;
+            } else {
+                currentVersion = currentVersionIntl;
+            }
+        };
+
         const refreshData = () => {
             data = JSON.parse($('#json-data').text());
 
@@ -239,7 +259,7 @@
                 rating_new: songFilter(topSongs, { isNewVersion: true }),
                 rating_others: songFilter(topSongs, { isNewVersion: false })
             };
-            
+
             initUserInfo();
         };
 

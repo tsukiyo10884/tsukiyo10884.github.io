@@ -1,106 +1,164 @@
 [
     {
         "versionName": "maimai ~ maimai PLUS",
-        "plateName": "真"
+        "plateName": "真",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "GreeN",
-        "plateName": "超"
+        "plateName": "超",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "GreeN PLUS",
-        "plateName": "檄"
+        "plateName": "檄",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "ORANGE",
-        "plateName": "橙"
+        "plateName": "橙",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "ORANGE PLUS",
-        "plateName": "暁"
+        "plateName": "暁",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "PiNK",
-        "plateName": "桃"
+        "plateName": "桃",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "PiNK PLUS",
-        "plateName": "櫻"
+        "plateName": "櫻",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "MURASAKi",
-        "plateName": "紫"
+        "plateName": "紫",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "MURASAKi PLUS",
-        "plateName": "菫"
+        "plateName": "菫",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "MiLK",
-        "plateName": "白"
+        "plateName": "白",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "MiLK PLUS",
-        "plateName": "雪"
+        "plateName": "雪",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "FiNALE",
-        "plateName": "輝"
+        "plateName": "輝",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "maimai ~ FiNALE",
-        "plateName": "覇者"
+        "plateName": "覇者",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "maimai ~ FiNALE",
-        "plateName": "舞"
+        "plateName": "舞",
+        "startDateJP": null,
+        "startDateIntl": null
     },
     {
         "versionName": "でらっくす",
-        "plateName": "熊"
+        "plateName": "熊",
+        "startDateJP": "2019-07-11",
+        "startDateIntl": "2020-01-23"
     },
     {
         "versionName": "でらっくす PLUS",
-        "plateName": "華"
+        "plateName": "華",
+        "startDateJP": "2020-01-23",
+        "startDateIntl": "2020-07-29"
     },
     {
         "versionName": "スプラッシュ",
-        "plateName": "爽"
+        "plateName": "爽",
+        "startDateJP": "2020-09-17",
+        "startDateIntl": "2021-01-29"
     },
     {
         "versionName": "スプラッシュ PLUS",
-        "plateName": "煌"
+        "plateName": "煌",
+        "startDateJP": "2021-03-18",
+        "startDateIntl": "2021-07-30"
     },
     {
         "versionName": "UNiVERSE",
-        "plateName": "宙"
+        "plateName": "宙",
+        "startDateJP": "2021-09-16",
+        "startDateIntl": "2022-01-27"
     },
     {
         "versionName": "UNiVERSE PLUS",
-        "plateName": "星"
+        "plateName": "星",
+        "startDateJP": "2022-03-24",
+        "startDateIntl": "2022-07-28"
     },
     {
         "versionName": "FESTiVAL",
-        "plateName": "祭"
+        "plateName": "祭",
+        "startDateJP": "2022-09-15",
+        "startDateIntl": "2023-01-19"
     },
     {
         "versionName": "FESTiVAL PLUS",
-        "plateName": "祝"
+        "plateName": "祝",
+        "startDateJP": "2023-03-23",
+        "startDateIntl": "2023-07-27"
     },
     {
         "versionName": "BUDDiES",
-        "plateName": "双"
+        "plateName": "双",
+        "startDateJP": "2023-09-14",
+        "startDateIntl": "2024-01-18"
     },
     {
         "versionName": "BUDDiES PLUS",
-        "plateName": "宴"
+        "plateName": "宴",
+        "startDateJP": "2024-03-21",
+        "startDateIntl": "2024-07-25"
     },
     {
         "versionName": "PRiSM",
-        "plateName": "鏡"
+        "plateName": "鏡",
+        "startDateJP": "2024-09-12",
+        "startDateIntl": "2025-01-16"
     },
     {
         "versionName": "PRiSM PLUS",
-        "plateName": "彩"
+        "plateName": "彩",
+        "startDateJP": "2025-03-13",
+        "startDateIntl": "2025-07-24"
+    },
+    {
+        "versionName": "CiRCLE",
+        "plateName": null,
+        "startDateJP": "2025-09-18",
+        "startDateIntl": "2026-01-22"
     }
 ]

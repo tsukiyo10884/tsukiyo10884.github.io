@@ -18,9 +18,14 @@ async function showRatingList() {
 
 // 取得前50首歌
 function getTop50Songs() {
+    const isJP = $('#version-switch').is(':checked');
+    const versionField = isJP ? 'versionJapan' : 'versionInternational';
+
+    const targetVersions = getTargetVersions();
+
     const [oldSongs, newSongs] = [
-        data.songs.filter(s => s.versionInternational !== currentVersion),
-        data.songs.filter(s => s.versionInternational === currentVersion)
+        data.songs.filter(s => !targetVersions.includes(s[versionField])),
+        data.songs.filter(s => targetVersions.includes(s[versionField]))
     ].map(songs => songs.map(s => ({ ...s, rating: calculateSongRating(s) })));
 
     const sortByRating = (a, b) => b.rating - a.rating || parseFloat(b.score) - parseFloat(a.score);
