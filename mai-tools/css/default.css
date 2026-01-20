@@ -137,7 +137,6 @@ img {
 
 .text-shadow-black {
 	text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
-	filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 1));
 }
 
 .tips {
@@ -403,6 +402,7 @@ img {
 	object-fit: cover;
 	width: calc(100% + 2em);
 }
+
 /**************/
 /*user profile*/
 /**************/
