@@ -1,4 +1,81 @@
 (async () => {
+    const siteOrigin = new URL(document.currentScript.src).origin;
+
+    const requestQueue = async (items, limit, fn) => {
+        let results = [];
+        const executing = [];
+        for (const item of items) {
+            const p = fn(item).then(r => results.push(r));
+            executing.push(p);
+            if (executing.length >= limit) {
+                await Promise.race(executing);
+                // Remove completed promises
+                for (let i = executing.length - 1; i >= 0; i--) {
+                    if (await Promise.race([executing[i], 'pending']) !== 'pending') {
+                        executing.splice(i, 1);
+                    }
+                }
+            }
+        }
+        await Promise.all(executing);
+        return results;
+    };
+
+    // A simpler queue that guarantees limit but preserves order in results array is not strictly needed 
+    // since the original code pushed to arrays (keySongs, result) which implies order might not be strictly 
+    // enforced or cleaned up later. However, for 'record', 'no' property depends on count.
+    // Let's use a robust map-like queue or just process and sort if needed. 
+    // Actually, for 'record' the 'no' is just 'count+1'. 
+    // Safe approach for 'record': map indices to promises, await all? 
+    // No, we want to limit concurrency.
+    // Let's use a p-limit style helper.
+    const pLimit = (concurrency) => {
+        const queue = [];
+        let activeCount = 0;
+        const next = () => {
+            activeCount--;
+            if (queue.length > 0) {
+                queue.shift()();
+            }
+        };
+        const run = async (fn, resolve, reject) => {
+            activeCount++;
+            const result = (async () => fn())();
+            try {
+                const res = await result;
+                resolve(res);
+            } catch (err) {
+                reject(err);
+            }
+            next();
+        };
+        const enqueue = (fn, resolve, reject) => {
+            queue.push(run.bind(null, fn, resolve, reject));
+            if (activeCount < concurrency && queue.length > 0) {
+                queue.shift()();
+            }
+        };
+        const generator = (fn) => new Promise((resolve, reject) => enqueue(fn, resolve, reject));
+        return generator;
+    };
+    const limit = pLimit(5); // Concurrency limit 5
+
+    const toBase64 = async (url) => {
+        try {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
+        } catch (e) {
+            console.warn("Failed to convert to base64", url, e);
+            return url;
+        }
+    };
+
     const fetchHTML = async (url) => {
         const res = await fetch(url, { credentials: "include" });
         const text = await res.text();
@@ -10,16 +87,18 @@
     const getUserData = async (url) => {
         const userInfo = {};
         const userDoc = await fetchHTML(url);
-        userInfo.icon = userDoc.querySelector('.w_112.f_l').src;
+        userInfo.icon = await toBase64(userDoc.querySelector('.w_112.f_l').src);
         userInfo.name = userDoc.querySelector('.name_block.f_l.f_16').textContent;
         userInfo.rating = userDoc.querySelector('.rating_block').textContent;
-        userInfo.ratingBase = userDoc.querySelector('.h_30.f_r').src;
-        userInfo.courseRank = userDoc.querySelector('.h_35.f_l').src;
+        userInfo.ratingBase = await toBase64(userDoc.querySelector('.h_30.f_r').src);
+        userInfo.courseRank = await toBase64(userDoc.querySelector('.h_35.f_l').src);
         userInfo.courseRankText = userDoc.querySelector('.h_35.f_l').src.match(/course_rank_(\d{2})/)[1];
-        userInfo.classRank = userDoc.querySelector('.p_l_10.h_35.f_l').src;
+        userInfo.classRank = await toBase64(userDoc.querySelector('.p_l_10.h_35.f_l').src);
         userInfo.classRankText = userDoc.querySelector('.p_l_10.h_35.f_l').src.match(/class_rank_s_(\d{2})/)[1];
         userInfo.star = userDoc.querySelector('.p_l_10.f_l.f_14').textContent;
-        userInfo.userTrophyBlock = userDoc.querySelector('.trophy_block.p_3.t_c.f_0').className;
+        userInfo.userTrophyBlock = userDoc.querySelector('.trophy_block.p_3.t_c.f_0').className; // Styling class, not image
+        // Trophy background is CSS text, might be hard to capture if it relies on external CSS. 
+        // User reported rating_base_platinum.png (ratingBase).
         userInfo.trophy = userDoc.querySelector('.trophy_inner_block.f_13').textContent;
 
         return userInfo;
@@ -33,11 +112,12 @@
         gate.gateImgHTML = gateData.gateImgHTML;
         gate.mapHTML = gateData.mapHTML;
 
-        const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json').then(res => res.json());
-        gate.keySongs = [];
+        const gateSongData = await fetch(`${siteOrigin}/mai-tools/json/gate.json`).then(res => res.json());
+        // gate.keySongs = []; -- will be populated by map
         const gateSongs = gateSongData['gate' + no];
-        let count = 0;
-        for (const song of gateSongs) {
+
+        // Concurrent fetching for songs
+        const promises = gateSongs.map(song => limit(async () => {
             const idx = domain == 'jp' ? song.idxJp : song.idxIntl;
             const songDoc = await fetchHTML(domain + '/maimai-mobile/record/musicDetail/?idx=' + idx);
             const songLastPlayedDate_remaster = songDoc.querySelector('#remaster td:nth-of-type(2)')?.textContent.trim();
@@ -50,15 +130,10 @@
                 .map(date => new Date(date))
                 .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '0000-00-00';
 
-            gate.keySongs.push({ title: song.title, songLastPlayedDate, type: song.type });
+            return { title: song.title, songLastPlayedDate, type: song.type };
+        }));
 
-            // 每25頁就延遲一下，避免被鎖連線
-            count++;
-            if (count % 25 === 0) {
-                await new Promise(resolve => setTimeout(resolve, 10));
-            }
-        }
-
+        gate.keySongs = await Promise.all(promises);
         return gate;
     }
 
@@ -70,7 +145,7 @@
         gate.gateImgHTML = gateData.gateImgHTML;
         gate.mapHTML = gateData.mapHTML;
 
-        const gateSongData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/gate.json')
+        const gateSongData = await fetch(`${siteOrigin}/mai-tools/json/gate.json`)
             .then(res => res.json());
         gate.keySongs = gateSongData['gate' + no];
 
@@ -106,10 +181,10 @@
         // 自己資訊
         case "/maimai-mobile/home/": {
             type = 'main'
-            childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
+            childWin = window.open(`${siteOrigin}/mai-tools/index.html`);
             setTimeout(() => {
                 if (url.origin === "https://maimaidx.jp") {
-                    childWin.postMessage({ type: "jp", payload: true }, "https://tsukiyo10884.github.io");
+                    childWin.postMessage({ type: "jp", payload: true }, siteOrigin);
                 }
             }, 500);
             break;
@@ -117,11 +192,11 @@
         // 好友資訊
         case "/maimai-mobile/friend/friendDetail/": {
             idx = url.searchParams.get("idx");
-            childWin = window.open("https://tsukiyo10884.github.io/mai-tools/index.html");
+            childWin = window.open(`${siteOrigin}/mai-tools/index.html`);
             type = "friend";
             setTimeout(() => {
                 if (url.origin === "https://maimaidx.jp") {
-                    childWin.postMessage({ type: "jp", payload: true }, "https://tsukiyo10884.github.io");
+                    childWin.postMessage({ type: "jp", payload: true }, siteOrigin);
                 }
             }, 500);
             break;
@@ -129,7 +204,7 @@
         // 萬花筒區域
         case "/maimai-mobile/map/kaleidxScopeDetail/": {
             if (url.search != null) {
-                childWin = window.open("https://tsukiyo10884.github.io/mai-tools/gate.html");
+                childWin = window.open(`${siteOrigin}/mai-tools/gate.html`);
                 if (url.origin === "https://maimaidx.jp") {
                     gate.domain = 'jp';
                 }
@@ -176,19 +251,19 @@
         }
         // 最近遊玩記錄
         case "/maimai-mobile/record/": {
-            childWin = window.open("https://tsukiyo10884.github.io/mai-tools/record.html");
+            childWin = window.open(`${siteOrigin}/mai-tools/record.html`);
             type = "record";
             break;
         }
         // 玩家資訊(player-data)
         case "/maimai-mobile/playerData/": {
-            childWin = window.open("https://tsukiyo10884.github.io/mai-tools/player_data.html");
+            childWin = window.open(`${siteOrigin}/mai-tools/player_data.html`);
             type = "playerData";
             break;
         }
         // 收藏品(collection)
         case "/maimai-mobile/collection/": {
-            childWin = window.open("https://tsukiyo10884.github.io/mai-tools/collection.html");
+            childWin = window.open(`${siteOrigin}/mai-tools/collection.html`);
             type = "collection";
             break;
         }
@@ -200,15 +275,15 @@
             if (script != null) {
                 const srcUrl = new URL(script.src);
                 const css = srcUrl.searchParams.get('css');
-                childWin.postMessage({ type: 'init', payload: css }, "https://tsukiyo10884.github.io");
+                childWin.postMessage({ type: 'init', payload: css }, siteOrigin);
             } else {
-                childWin.postMessage({ type: 'init', payload: null }, "https://tsukiyo10884.github.io");
+                childWin.postMessage({ type: 'init', payload: null }, siteOrigin);
             }
         }, 1000);
 
         setTimeout(async () => {
-            const songVersionData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/song_version_intl.json').then(res => res.json());
-            const versionData = await fetch('https://tsukiyo10884.github.io/mai-tools/json/version.json').then(res => res.json());
+            const songVersionData = await fetch(`${siteOrigin}/mai-tools/json/song_version_intl.json`).then(res => res.json());
+            const versionData = await fetch(`${siteOrigin}/mai-tools/json/version.json`).then(res => res.json());
 
             let userInfo = {};
             const songs = [];
@@ -219,14 +294,14 @@
                 userInfo = await getUserData(`${domain}/maimai-mobile/home/`);
 
                 if (userInfo.name === "†Ａｙｏｏｏω†") {
-                    childWin.postMessage({ type: "special", payload: 'ayo' }, "https://tsukiyo10884.github.io");
+                    childWin.postMessage({ type: "special", payload: 'ayo' }, siteOrigin);
                 } else if (userInfo.name === "ＸＵ☆Ａ　") {
-                    childWin.postMessage({ type: "special", payload: 'axun' }, "https://tsukiyo10884.github.io");
+                    childWin.postMessage({ type: "special", payload: 'axun' }, siteOrigin);
                 }
 
                 // 歌曲資訊
                 for (let i = 0; i < difficulties.length; i++) {
-                    childWin.postMessage({ type: "difficulty", payload: difficulties[i] }, "https://tsukiyo10884.github.io");
+                    childWin.postMessage({ type: "difficulty", payload: difficulties[i] }, siteOrigin);
                     const doc = await fetchHTML(`${domain}/maimai-mobile/record/musicGenre/search/?genre=99&diff=${i}`);
                     const blocks = doc.querySelectorAll('div.w_450.m_15.p_r.f_0');
 
@@ -290,7 +365,7 @@
                     let difficulty = cls
                         .replace('music_', '')
                         .replace('_score_back', '');
-                    
+
                     const type = ratingblock.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
                     let title = ratingblock.querySelector('.music_name_block')?.textContent || "　";
                     if (title === "Bad Apple!! feat nomico") {
@@ -299,7 +374,7 @@
                     const score = parseFloat(
                         ratingblock.querySelector('.music_score_block.w_150')?.textContent.trim().replace('%', '') || "0"
                     ).toFixed(4) + "%";
-                    if(songs.findIndex(s => s.title === title && s.type === type && s.difficulty === difficulty) === -1) {
+                    if (songs.findIndex(s => s.title === title && s.type === type && s.difficulty === difficulty) === -1) {
                         const songEntry = detailData.songs.find(s => s.songId === title);
                         const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulty);
                         const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
@@ -319,7 +394,7 @@
                 });
 
                 // 段位資料
-                childWin.postMessage({ type: "course", payload: null }, "https://tsukiyo10884.github.io");
+                childWin.postMessage({ type: "course", payload: null }, siteOrigin);
                 const courseDoc = await fetchHTML(`${domain}/maimai-mobile/record/course/`);
                 const courseBlocks = courseDoc.querySelectorAll("div.w_480.f_0");
 
@@ -375,7 +450,7 @@
                 userInfo = await getUserData(`${domain}/maimai-mobile/friend/friendDetail/?idx=` + idx);
 
                 for (let i = 0; i < difficulties.length; i++) {
-                    childWin.postMessage({ type: "difficulty", payload: difficulties[i] }, "https://tsukiyo10884.github.io");
+                    childWin.postMessage({ type: "difficulty", payload: difficulties[i] }, siteOrigin);
                     const doc = await fetchHTML(`${domain}/maimai-mobile/friend/friendGenreVs/battleStart/?genre=99&diff=${i}&idx=${idx}`);
                     const blocks = doc.querySelectorAll('div.w_450.m_15.p_3.f_0');
 
@@ -434,13 +509,13 @@
             }
 
             setTimeout(() => {
-                childWin.postMessage({ type: "result", payload: exportData }, "https://tsukiyo10884.github.io");
+                childWin.postMessage({ type: "result", payload: exportData }, siteOrigin);
             }, 500);
         }, 1500);
     }
     else if (type.includes('gate')) {
         setTimeout(() => {
-            childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
+            childWin.postMessage({ type: "init", payload: null }, siteOrigin);
         }, 500);
         const no = parseInt(type.replace('gate', ''), 10);
         switch (no) {
@@ -477,13 +552,14 @@
 
                 gate.key = [];
 
-                for (let i = 1; i < 7; i++) {
+                const keys = [1, 2, 3, 4, 5, 6];
+                gate.key = await Promise.all(keys.map(async (i) => {
                     const gateDoc = await fetchHTML(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=${i}`);
-                    gate.key.push({
+                    return {
                         gateImg: gateDoc.querySelectorAll('.ks_block img')[1]?.src,
                         gateAcvImgHTML: gateDoc.querySelector('.ks_acv_img')?.outerHTML
-                    });
-                }
+                    };
+                }));
                 break;
             }
 
@@ -505,25 +581,26 @@
                 const gateRes = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=7`, { credentials: 'include' });
                 const gateText = await gateRes.text();
                 const gateDoc = new DOMParser().parseFromString(gateText, 'text/html');
-                gate.key.gateImg = gateDoc.querySelectorAll('.ks_block img')[1]?.src;
-                gate.key.gateAcvImgHTML = gateDoc.querySelector('.ks_acv_img')?.outerHTML;
+                gate.key.gateImg = gateDoc.querySelectorAll('.ks_block img')[1]?.src,
+                    gate.key.gateAcvImgHTML = gateDoc.querySelector('.ks_acv_img')?.outerHTML;
                 break;
             }
         }
         setTimeout(() => {
-            childWin.postMessage({ type: "gate" + no, payload: gate }, "https://tsukiyo10884.github.io");
+            childWin.postMessage({ type: "gate" + no, payload: gate }, siteOrigin);
         }, 500);
     }
     // 最近遊玩紀錄
     else if (type === "record") {
         setTimeout(() => {
-            childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
+            childWin.postMessage({ type: "init", payload: null }, siteOrigin);
         }, 1000);
 
         const idxs = [...document.querySelectorAll('input[name="idx"]')].map(el => el.value);
-        let result = [];
         let count = 0;
-        for (const idx of idxs) {
+
+        // Concurrent fetching with limit
+        const result = await Promise.all(idxs.map((idx, i) => limit(async () => {
             const recordDoc = await fetchHTML(`${domain}/maimai-mobile/record/playlogDetail/?idx=${idx}`);
 
             const title = recordDoc.querySelector('.basic_block').childNodes[2].textContent.trim();
@@ -536,7 +613,7 @@
             const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? recordDoc.querySelector('.music_lv_back').textContent.trim();
 
             const data = {
-                no: count + 1,
+                no: i + 1, // Order is preserved by Promise.all mapping
                 date: recordDoc.querySelectorAll('.sub_title .v_b')[1].textContent.trim(),
                 track: recordDoc.querySelector('.red.f_b.v_b').textContent.trim(),
                 title: title,
@@ -595,21 +672,15 @@
                 max_combo: recordDoc.querySelectorAll('.col2 .white')[0].textContent.trim(),
                 max_sync: recordDoc.querySelectorAll('.col2 .white')[1].textContent.trim()
             };
+            return data;
+        })));
 
-            result.push(data);
-
-            // 每25頁就延遲一下，避免被鎖連線
-            count++;
-            if (count % 25 === 0) {
-                await new Promise(resolve => setTimeout(resolve, 10));
-            }
-        }
-        childWin.postMessage({ type: "record", payload: result }, "https://tsukiyo10884.github.io");
+        childWin.postMessage({ type: "record", payload: result }, siteOrigin);
     }
     // 計算class
     else if (type === "playerData") {
         setTimeout(() => {
-            childWin.postMessage({ type: "init", payload: null }, "https://tsukiyo10884.github.io");
+            childWin.postMessage({ type: "init", payload: null }, siteOrigin);
         }, 1000);
 
         const playerDataRes = await fetch(`${domain}/maimai-mobile/playerData/`, { credentials: 'include' });
@@ -618,13 +689,13 @@
 
         const classData = {
             html: playerDataDoc.querySelector('.town_block').outerHTML,
-            img: playerDataDoc.querySelector(".w_160.p_15.m_r_10").src,
+            img: await toBase64(playerDataDoc.querySelector(".w_160.p_15.m_r_10").src),
             text: playerDataDoc.querySelector('.w_160.p_15.m_r_10').src.match(/class_rank_l_(\d{2})/)[1],
             point: playerDataDoc.querySelector('.class_point_txt .f_29.f_b').textContent.trim()
         }
 
         setTimeout(() => {
-            childWin.postMessage({ type: "playerData", payload: classData }, "https://tsukiyo10884.github.io");
+            childWin.postMessage({ type: "playerData", payload: classData }, siteOrigin);
         }, 1500);
     }
     // 收藏品排列模擬
@@ -632,22 +703,25 @@
         const iconRes = await fetch(`${domain}/maimai-mobile/collection/`, { credentials: 'include' });
         const iconText = await iconRes.text();
         const iconDoc = new DOMParser().parseFromString(iconText, 'text/html');
-        const icon = iconDoc.querySelector('.w_80.m_r_10.f_l').src;
+        const icon = await toBase64(iconDoc.querySelector('.w_80.m_r_10.f_l').src);
 
         const nameplateRes = await fetch(`${domain}/maimai-mobile/collection/nameplate`, { credentials: 'include' });
         const nameplateText = await nameplateRes.text();
         const nameplateDoc = new DOMParser().parseFromString(nameplateText, 'text/html');
-        const nameplate = nameplateDoc.querySelector('.w_396.m_r_10').src;
+        const nameplate = await toBase64(nameplateDoc.querySelector('.w_396.m_r_10').src);
 
         const frameRes = await fetch(`${domain}/maimai-mobile/collection/frame`, { credentials: 'include' });
         const frameText = await frameRes.text();
         const frameDoc = new DOMParser().parseFromString(frameText, 'text/html');
-        const frame = frameDoc.querySelector('.w_396.m_r_10').src;
+        const frame = await toBase64(frameDoc.querySelector('.w_396.m_r_10').src);
 
         const characterRes = await fetch(`${domain}/maimai-mobile/collection/character`, { credentials: 'include' });
         const characterText = await characterRes.text();
         const characterDoc = new DOMParser().parseFromString(characterText, 'text/html');
-        const characters = Array.from(characterDoc.querySelectorAll('.collection_setting_block .chara_cycle_img')).map(img => img.src);
+        // concurrent mapping for characters
+        const charImgs = Array.from(characterDoc.querySelectorAll('.collection_setting_block .chara_cycle_img')).map(img => img.src);
+        const characters = await Promise.all(charImgs.map(url => toBase64(url)));
+
         const charactersLevel = Array.from(characterDoc.querySelectorAll('.collection_setting_block .collection_chara_lv_block')).map(div => div.textContent);
 
         const homeRes = await fetch(`${domain}/maimai-mobile/home`, { credentials: 'include' });
@@ -655,9 +729,9 @@
         const homeDoc = new DOMParser().parseFromString(homeText, 'text/html');
         const name = homeDoc.querySelector('.name_block.f_l.f_16').textContent;
         const rating = homeDoc.querySelector('.rating_block')?.textContent;
-        const ratingBase = homeDoc.querySelector('.h_30.f_r').src;
-        const courseRank = homeDoc.querySelector('.h_35.f_l')?.src;
-        const classRank = homeDoc.querySelector('.p_l_10.h_35.f_l')?.src;
+        const ratingBase = await toBase64(homeDoc.querySelector('.h_30.f_r').src);
+        const courseRank = await toBase64(homeDoc.querySelector('.h_35.f_l')?.src);
+        const classRank = await toBase64(homeDoc.querySelector('.p_l_10.h_35.f_l')?.src);
         const trophyBlock = homeDoc.querySelector('.trophy_block.p_3.t_c.f_0').className;
         const trophy = homeDoc.querySelector('.trophy_inner_block.f_13').textContent;
 
@@ -677,7 +751,7 @@
         }
 
         setTimeout(() => {
-            childWin.postMessage({ type: "collection", payload: collections }, "https://tsukiyo10884.github.io");
+            childWin.postMessage({ type: "collection", payload: collections }, siteOrigin);
         }, 1000);
     }
 })();

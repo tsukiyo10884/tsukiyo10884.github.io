@@ -295,6 +295,10 @@ img {
 	padding: 0.5em;
 	position: relative;
 	width: 102px !important;
+	contain: strict;
+	transform: translateZ(0);
+	backface-visibility: hidden;
+	will-change: transform;
 }
 
 .square-song-grid {
@@ -388,6 +392,10 @@ img {
 	padding: 0.5em;
 	position: relative;
 	width: 163px !important;
+	contain: strict;
+	transform: translateZ(0);
+	backface-visibility: hidden;
+	will-change: transform;
 }
 
 .song-card.completed {

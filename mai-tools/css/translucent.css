@@ -256,6 +256,10 @@ button {
     width: 212px !important;
     position: relative;
     border-radius: 5px;
+    contain: strict;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
 }
 
 .square-song-image {
@@ -338,6 +342,10 @@ button {
     background: rgba(255, 255, 255, 0.4) !important;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.3);
+    contain: strict;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
 }
 
 .song-image {

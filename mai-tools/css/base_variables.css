@@ -1,0 +1,31 @@
+:root {
+    /* Main Layout Colors */
+    --color-bg: #51bcf3;
+    --color-text: #333;
+    /* Default text color is usually dark on light backgrounds */
+
+    /* Button Colors */
+    --color-btn-bg: #ffffffcc;
+    --color-btn-text: #333;
+    --color-btn-shadow: rgba(0, 0, 0, 0.2);
+    --color-btn-hover: #f0f0f0;
+
+    /* Difficulty Colors (Shared across themes) */
+    --color-diff-basic: #81d955;
+    --color-diff-advanced: #f8b709;
+    --color-diff-expert: #ff818d;
+    --color-diff-master: #c346e7;
+    --color-diff-remaster: #fff;
+
+    /* Switch Colors */
+    --color-switch-active: #ffb500;
+    --color-switch-inactive: #05012c;
+    --color-switch-knob: #fff;
+
+    /* Fonts */
+    --font-main: sans-serif;
+
+    /* Section Divider */
+    --divider-color: var(--bs-body-color);
+    --divider-style: solid;
+}

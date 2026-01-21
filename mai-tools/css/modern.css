@@ -5,26 +5,48 @@ rating cards
 user profile
 for fun
 */
+
+:root {
+	--color-bg: #232228;
+	--color-text: #fff;
+
+	--color-btn-bg: #d1cde1;
+	--color-btn-text: #fff;
+	--color-btn-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+
+	--color-switch-active: #ffb500;
+
+	/* Difficulty Colors (Overrides if needed, but modern seems to use standard) */
+	--color-diff-advanced: #f8b709;
+	--color-diff-basic: #81d955;
+	--color-diff-expert: #ff818d;
+	--color-diff-master: #c346e7;
+	--color-diff-remaster: #ffffff;
+
+	--divider-color: var(--bs-border-color);
+}
+
 @font-face {
 	font-family: 'modern-font';
 	src: url('../font/NotoSansJP-Bold.woff2') format('woff2');
 }
 
 body {
-	background: #232228 !important;
-	color: #fff !important;
+	background: var(--color-bg) !important;
+	color: var(--color-text) !important;
 	font-family: modern-font, sans-serif !important;
 }
 
 button {
-	background-color: #d1cde1;
+	background-color: var(--color-btn-bg);
 	border-radius: 5px !important;
-	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+	box-shadow: var(--color-btn-shadow);
 	padding: 10px;
+	color: var(--color-btn-text);
 }
 
 .section-divider {
-	border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+	border-bottom: var(--bs-border-width) var(--bs-border-style) var(--divider-color) !important;
 	border-width: 2px !important;
 	flex-grow: 1;
 }
@@ -74,6 +96,7 @@ button {
 
 .checkbox-wrapper-35 .switch+label::before {
 	background-color: #0d6efd;
+	/* unique to modern? */
 	border-radius: 500px;
 	height: 15px;
 	margin-right: 8px;
@@ -140,7 +163,7 @@ button {
 }
 
 .checkbox-wrapper-35 .switch:checked+label::before {
-	background-color: #ffb500;
+	background-color: var(--color-switch-active);
 }
 
 .checkbox-wrapper-35 .switch:checked+label::after {
@@ -201,6 +224,10 @@ button {
 	padding: 10px !important;
 	position: relative;
 	width: 100px !important;
+	contain: strict;
+	transform: translateZ(0);
+	backface-visibility: hidden;
+	will-change: transform;
 }
 
 .square-song-card .song-overlay {
@@ -282,23 +309,23 @@ button {
 }
 
 .difficulty-advanced::before {
-	background: linear-gradient(60deg, #232228, #f8b709) border-box;
+	background: linear-gradient(60deg, var(--color-bg), var(--color-diff-advanced)) border-box;
 }
 
 .difficulty-basic::before {
-	background: linear-gradient(60deg, #232228, #81d955) border-box;
+	background: linear-gradient(60deg, var(--color-bg), var(--color-diff-basic)) border-box;
 }
 
 .difficulty-expert::before {
-	background: linear-gradient(60deg, #232228, #ff818d) border-box;
+	background: linear-gradient(60deg, var(--color-bg), var(--color-diff-expert)) border-box;
 }
 
 .difficulty-master::before {
-	background: linear-gradient(60deg, #232228, #c346e7) border-box;
+	background: linear-gradient(60deg, var(--color-bg), var(--color-diff-master)) border-box;
 }
 
 .difficulty-remaster::before {
-	background: linear-gradient(60deg, #232228, #ffffff) border-box;
+	background: linear-gradient(60deg, var(--color-bg), var(--color-diff-remaster)) border-box;
 }
 
 .rating-block-inner-level {
@@ -349,7 +376,7 @@ button {
 }
 
 .section-title {
-	color: #fff;
+	color: var(--color-text);
 	font-size: 20px;
 	grid-column: span 5;
 	margin: 9px 0;
@@ -370,6 +397,10 @@ button {
 	overflow: hidden;
 	position: relative;
 	width: 163px !important;
+	contain: strict;
+	transform: translateZ(0);
+	backface-visibility: hidden;
+	will-change: transform;
 }
 
 .song-card .song-overlay {

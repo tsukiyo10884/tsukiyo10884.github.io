@@ -102,11 +102,23 @@ const showSongRecord = () => {
     } else {
         filteredData = [];
     }
-    if ($('#new-record-button').is(':checked')) {
+    if ($('#btn-new-record').is(':checked')) {
         filteredData = filteredData.filter(song => song.score_new_record);
     }
-    if ($('#new-dx-record-button').is(':checked')) {
+    if ($('#btn-new-dx-record').is(':checked')) {
         filteredData = filteredData.filter(song => song.dx_score_new_record);
+    }
+    if ($('#btn-highest-score').is(':checked')) {
+        const highestScores = new Map();
+        filteredData.forEach(song => {
+            const key = `${song.title}_${song.type}_${song.difficulty}`;
+            const currentScore = parseFloat(song.score.replace('%', ''));
+            const existingEntry = highestScores.get(key);
+            if (!existingEntry || currentScore > parseFloat(existingEntry.score.replace('%', ''))) {
+                highestScores.set(key, song);
+            }
+        });
+        filteredData = Array.from(highestScores.values());
     }
 
     // 顯示歌曲紀錄清單

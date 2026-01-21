@@ -614,10 +614,14 @@ button:not(#btn-search):hover {
     padding: 10px;
     position: relative;
     width: 118px !important;
+    contain: strict;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
 }
 
 .square-song-card:hover {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-4px) scale(1.02) translateZ(0);
 }
 
 .square-song-grid {
@@ -748,10 +752,14 @@ button:not(#btn-search):hover {
     padding: 10px;
     position: relative;
     width: 165px !important;
+    contain: strict;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
 }
 
 .song-card:hover {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-4px) scale(1.02) translateZ(0);
 }
 
 .song-content {

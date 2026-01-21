@@ -4,27 +4,46 @@ rating cards
 user profile
 for fun
 */
+:root {
+	--color-bg: #ffe4ec;
+	--color-text: #333;
+
+	--color-btn-bg: #ffffffcc;
+	--color-btn-text: #333;
+	--color-btn-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	--color-btn-hover: #e4ffef;
+
+	--color-switch-active: #ffb500;
+
+	/* Specific to cute_pink */
+	--color-accent: #ff69b4;
+	--divider-style: dashed;
+	--divider-color: #ffc2d1;
+
+	--font-main: 'cute-font', sans-serif;
+}
+
 @font-face {
 	font-family: 'cute-font';
 	src: url('../font/uzura.woff2') format('woff2');
 }
 
 b.px-3 {
-	color: #ff69b4;
+	color: var(--color-accent);
 }
 
 body {
-	background: #ffe4ec !important;
-	color: #333;
-	font-family: 'cute-font', sans-serif !important;
+	background: var(--color-bg) !important;
+	color: var(--color-text);
+	font-family: var(--font-main) !important;
 }
 
 button {
-	background-color: #ffffffcc;
+	background-color: var(--color-btn-bg);
 	border-radius: 20px !important;
 	border: none;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-	color: #333;
+	box-shadow: var(--color-btn-shadow);
+	color: var(--color-btn-text);
 	cursor: pointer;
 	font-size: 16px;
 	font-weight: bold;
@@ -41,7 +60,7 @@ button:disabled {
 }
 
 button:not(:disabled):hover {
-	background-color: #e4ffef;
+	background-color: var(--color-btn-hover);
 	transform: scale(1.03);
 }
 
@@ -62,8 +81,8 @@ button:not(:disabled):hover {
 	content: " (BAS)";
 }
 
-.difficulty-collapse{
-	color: #ff69b4;
+.difficulty-collapse {
+	color: var(--color-accent);
 }
 
 .difficulty-expert .rating-block-inner-level::after,
@@ -90,19 +109,19 @@ button:not(:disabled):hover {
 
 .plate-progress-title {
 	border-radius: 20px;
-	color: #ff69b4;
+	color: var(--color-accent);
 	font-size: 1.2em;
 	font-weight: bold;
 	padding: 0 1em;
 }
 
 .section-divider {
-	border-bottom: 3px dashed #ffc2d1 !important;
+	border-bottom: 3px var(--divider-style) var(--divider-color) !important;
 	flex-grow: 1;
 }
 
 .section-title {
-	color: #ff69b4;
+	color: var(--color-accent);
 	font-size: 20px;
 	grid-column: span 5;
 	margin: 9px 0;
@@ -150,7 +169,7 @@ button:not(:disabled):hover {
 }
 
 .checkbox-wrapper-35 .switch+label::before {
-	background-color: #ff69b4;
+	background-color: var(--color-accent);
 	border-radius: 500px;
 	height: 15px;
 	margin-right: 8px;
@@ -217,7 +236,7 @@ button:not(:disabled):hover {
 }
 
 .checkbox-wrapper-35 .switch:checked+label::before {
-	background-color: #ffb500;
+	background-color: var(--color-switch-active);
 }
 
 .checkbox-wrapper-35 .switch:checked+label::after {
@@ -245,7 +264,7 @@ button:not(:disabled):hover {
 }
 
 .completion-check {
-	color: #ff69b4;
+	color: var(--color-accent);
 	font-family: sans-serif;
 	font-size: 26px;
 	position: absolute;
@@ -257,6 +276,7 @@ button:not(:disabled):hover {
 
 .rating-gain-info {
 	background: linear-gradient(135deg, #ff69b4, #ff91c1);
+	/* Hard to generalize gradient */
 	border-radius: 999px 0 0 999px;
 	color: white;
 	font-size: 10px;
@@ -278,6 +298,10 @@ button:not(:disabled):hover {
 	position: relative;
 	transition: transform 0.2s;
 	width: 102px !important;
+	contain: strict;
+	transform: translateZ(0);
+	backface-visibility: hidden;
+	will-change: transform;
 }
 
 .square-song-card .song-overlay {
@@ -312,7 +336,7 @@ button:not(:disabled):hover {
 }
 
 .square-song-title {
-	color: #ff69b4;
+	color: var(--color-accent);
 	font-size: 12px;
 	font-weight: bold;
 	margin-top: 2px;
@@ -331,7 +355,7 @@ button:not(:disabled):hover {
 }
 
 .rating-block-rating {
-	background-color: #ff69b4;
+	background-color: var(--color-accent);
 	border-radius: 999px;
 	color: white;
 	filter: drop-shadow(-1px 1px 2px #22222255);
@@ -350,7 +374,7 @@ button:not(:disabled):hover {
 }
 
 .rating-block-song-title {
-	color: #ff69b4;
+	color: var(--color-accent);
 	font-weight: bold;
 	max-width: 162px;
 	overflow: hidden;
@@ -367,6 +391,10 @@ button:not(:disabled):hover {
 	position: relative;
 	transition: transform 0.2s;
 	width: 165px !important;
+	contain: strict;
+	transform: translateZ(0);
+	backface-visibility: hidden;
+	will-change: transform;
 }
 
 .song-content {
