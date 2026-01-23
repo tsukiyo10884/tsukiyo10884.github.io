@@ -6,7 +6,7 @@
         "FiNALE", "でらっくす", "でらっくす PLUS", "スプラッシュ",
         "スプラッシュ PLUS", "UNiVERSE", "UNiVERSE PLUS",
         "FESTiVAL", "FESTiVAL PLUS", "BUDDiES",
-        "BUDDiES PLUS", "PRiSM", "PRiSM PLUS"
+        "BUDDiES PLUS", "PRiSM", "PRiSM PLUS", "CiRCLE"
     ];
 
     const titleTypeToVersion = {};

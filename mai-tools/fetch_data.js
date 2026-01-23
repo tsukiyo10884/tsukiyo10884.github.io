@@ -9,7 +9,6 @@
             executing.push(p);
             if (executing.length >= limit) {
                 await Promise.race(executing);
-                // Remove completed promises
                 for (let i = executing.length - 1; i >= 0; i--) {
                     if (await Promise.race([executing[i], 'pending']) !== 'pending') {
                         executing.splice(i, 1);
@@ -21,14 +20,6 @@
         return results;
     };
 
-    // A simpler queue that guarantees limit but preserves order in results array is not strictly needed 
-    // since the original code pushed to arrays (keySongs, result) which implies order might not be strictly 
-    // enforced or cleaned up later. However, for 'record', 'no' property depends on count.
-    // Let's use a robust map-like queue or just process and sort if needed. 
-    // Actually, for 'record' the 'no' is just 'count+1'. 
-    // Safe approach for 'record': map indices to promises, await all? 
-    // No, we want to limit concurrency.
-    // Let's use a p-limit style helper.
     const pLimit = (concurrency) => {
         const queue = [];
         let activeCount = 0;
@@ -58,7 +49,7 @@
         const generator = (fn) => new Promise((resolve, reject) => enqueue(fn, resolve, reject));
         return generator;
     };
-    const limit = pLimit(5); // Concurrency limit 5
+    const limit = pLimit(5);
 
     const toBase64 = async (url) => {
         try {
@@ -96,9 +87,7 @@
         userInfo.classRank = await toBase64(userDoc.querySelector('.p_l_10.h_35.f_l').src);
         userInfo.classRankText = userDoc.querySelector('.p_l_10.h_35.f_l').src.match(/class_rank_s_(\d{2})/)[1];
         userInfo.star = userDoc.querySelector('.p_l_10.f_l.f_14').textContent;
-        userInfo.userTrophyBlock = userDoc.querySelector('.trophy_block.p_3.t_c.f_0').className; // Styling class, not image
-        // Trophy background is CSS text, might be hard to capture if it relies on external CSS. 
-        // User reported rating_base_platinum.png (ratingBase).
+        userInfo.userTrophyBlock = userDoc.querySelector('.trophy_block.p_3.t_c.f_0').className;
         userInfo.trophy = userDoc.querySelector('.trophy_inner_block.f_13').textContent;
 
         return userInfo;
@@ -113,10 +102,8 @@
         gate.mapHTML = gateData.mapHTML;
 
         const gateSongData = await fetch(`${siteOrigin}/mai-tools/json/gate.json`).then(res => res.json());
-        // gate.keySongs = []; -- will be populated by map
         const gateSongs = gateSongData['gate' + no];
 
-        // Concurrent fetching for songs
         const promises = gateSongs.map(song => limit(async () => {
             const idx = domain == 'jp' ? song.idxJp : song.idxIntl;
             const songDoc = await fetchHTML(domain + '/maimai-mobile/record/musicDetail/?idx=' + idx);
@@ -718,7 +705,6 @@
         const characterRes = await fetch(`${domain}/maimai-mobile/collection/character`, { credentials: 'include' });
         const characterText = await characterRes.text();
         const characterDoc = new DOMParser().parseFromString(characterText, 'text/html');
-        // concurrent mapping for characters
         const charImgs = Array.from(characterDoc.querySelectorAll('.collection_setting_block .chara_cycle_img')).map(img => img.src);
         const characters = await Promise.all(charImgs.map(url => toBase64(url)));
 
