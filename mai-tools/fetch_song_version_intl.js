@@ -1,6 +1,6 @@
 (async () => {
     const siteOrigin = new URL(document.currentScript.src).origin;
-    const versions = await fetch(`${siteOrigin}/mai-tools/json/version.json`).then(res => res.json()).then(res => res.versionName);
+    const versions = (await fetch(`${siteOrigin}/mai-tools/json/version.json`).then(res => res.json())).map(function (e) { return e.versionName });
 
     const titleTypeToVersion = {};
 
