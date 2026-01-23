@@ -114,9 +114,7 @@
                     <label for="non-completed-only">只顯示未玩過</label>
                 </div>
             </div>
-            <div class="col-2">
-                <button id="btn-save-image" class="w-100" onclick="saveImage()">下載圖片</button>
-            </div>
+
         </div>
         <div class="result-container">
             <div class="row border-bottom border-secondary">
@@ -136,29 +134,7 @@
         </footer>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
     <script>
-        const saveImage = () => {
-            const element = document.querySelector(".result-container");
-            if (!element) {
-                alert("目前沒有內容可供截圖");
-                return;
-            }
-
-            // html-to-image supports backdrop-filter and cleaner rendering
-            htmlToImage.toPng(element, {
-                backgroundColor: getComputedStyle(document.body).backgroundColor,
-                pixelRatio: 2, // High resolution
-            }).then(dataUrl => {
-                const link = document.createElement('a');
-                link.download = `maimai-result-${new Date().getTime()}.png`;
-                link.href = dataUrl;
-                link.click();
-            }).catch(err => {
-                console.error(err);
-                alert("截圖失敗，請檢查 console 錯誤訊息\n(可能是因為圖片跨域問題或瀏覽器限制)");
-            });
-        }
 
         let versionList = [];
 
