@@ -1,13 +1,6 @@
 (async () => {
-    const versions = [
-        "maimai", "maimai PLUS", "GreeN", "GreeN PLUS",
-        "ORANGE", "ORANGE PLUS", "PiNK", "PiNK PLUS",
-        "MURASAKi", "MURASAKi PLUS", "MiLK", "MiLK PLUS",
-        "FiNALE", "でらっくす", "でらっくす PLUS", "スプラッシュ",
-        "スプラッシュ PLUS", "UNiVERSE", "UNiVERSE PLUS",
-        "FESTiVAL", "FESTiVAL PLUS", "BUDDiES",
-        "BUDDiES PLUS", "PRiSM", "PRiSM PLUS", "CiRCLE"
-    ];
+    const siteOrigin = new URL(document.currentScript.src).origin;
+    const versions = await fetch(`${siteOrigin}/mai-tools/json/version.json`).then(res => res.json());
 
     const titleTypeToVersion = {};
 
@@ -41,13 +34,5 @@
         });
     }
 
-    const blob = new Blob([JSON.stringify(titleTypeToVersion, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'song_version_intl.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    console.log(titleTypeToVersion);
 })();
