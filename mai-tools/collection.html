@@ -72,30 +72,27 @@
                 </div>
                 <div id="div-leader">
                     <img id="leader" src="" width="183" />
+                    <img id="leader-bar" src="" />
                 </div>
                 <div id="div-member2">
-                    <div class="level">
-                        LV<span style="font-size: 13px;"> 9999</span>
-                    </div>
                     <img id="member2" src="" />
+                    <img id="member2-bg" src="" />
+                    <img id="member2-layout" src="" />
                 </div>
                 <div id="div-member3">
-                    <div class="level">
-                        LV<span style="font-size: 13px;"> 9999</span>
-                    </div>
                     <img id="member3" src="" />
+                    <img id="member3-bg" src="" />
+                    <img id="member3-layout" src="" />
                 </div>
                 <div id="div-member4">
-                    <div class="level">
-                        LV<span style="font-size: 13px;"> 9999</span>
-                    </div>
                     <img id="member4" src="" />
+                    <img id="member4-bg" src="" />
+                    <img id="member4-layout" src="" />
                 </div>
                 <div id="div-member5">
-                    <div class="level">
-                        LV<span style="font-size: 13px;"> 9999</span>
-                    </div>
                     <img id="member5" src="" />
+                    <img id="member5-bg" src="" />
+                    <img id="member5-layout" src="" />
                 </div>
             </div>
             <div id="filters" class="d-flex justify-content-center mb-3">
@@ -362,6 +359,25 @@
     #member5 {
         width: 117px;
         clip-path: polygon(20% 0, 80% 0, 80% 80%, 68% 94%, 50% 100%, 32% 94%, 20% 80%);
+    }
+
+    #leader-bar {
+        position: absolute;
+        left: 52px;
+        bottom: 6px;
+    }
+
+    #member2-bg, #member3-bg, #member4-bg, #member5-bg {
+        position: absolute;
+        left: 19px;
+        bottom: -15px;
+        z-index: -1;
+    }
+
+    #member2-layout, #member3-layout, #member4-layout, #member5-layout {
+        position: absolute;
+        left: 19px;
+        bottom: -15px;
     }
 
     .level {

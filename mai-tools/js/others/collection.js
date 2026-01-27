@@ -1,4 +1,5 @@
 const showCollection = (data) => {
+    console.log(data);
     $('#icon').attr('src', data.icon);
     $('#user-name').text(data.name);
     $('#rating').text(data.rating);
@@ -14,6 +15,55 @@ const showCollection = (data) => {
     $('#member3').attr('src', data.characters[2]);
     $('#member4').attr('src', data.characters[3]);
     $('#member5').attr('src', data.characters[4]);
+
+     if(data.charactersLevel[0].replace('lv','') >= 1 && data.charactersLevel[0].replace('Lv','') <= 8){
+            $('#leader-bar').attr('src', '/mai-tools/img/member_blue_bar.png');
+        } else if(data.charactersLevel[0].replace('Lv','') >= 9 && data.charactersLevel[0].replace('Lv','') <= 48){
+            $('#leader-bar').attr('src', '/mai-tools/img/member_green_bar.png');
+        } else if(data.charactersLevel[0].replace('Lv','') >= 49 && data.charactersLevel[0].replace('Lv','') <= 98){
+            $('#leader-bar').attr('src', '/mai-tools/img/member_red_bar.png');
+        } else if(data.charactersLevel[0].replace('Lv','') >= 99 && data.charactersLevel[0].replace('Lv','') <= 298){
+            $('#leader-bar').attr('src', '/mai-tools/img/member_bronze_bar.png');
+        } else if(data.charactersLevel[0].replace('Lv','') >= 299 && data.charactersLevel[0].replace('Lv','') <= 998){
+            $('#leader-bar').attr('src', '/mai-tools/img/member_silver_bar.png');
+        } else if(data.charactersLevel[0].replace('Lv','') >= 999 && data.charactersLevel[0].replace('Lv','') <= 9998){
+            $('#leader-bar').attr('src', '/mai-tools/img/member_gold_bar.png');
+        } else if(data.charactersLevel[0].replace('Lv','') >= 9999){
+            $('#leader-bar').attr('src', '/mai-tools/img/member_rainbow_bar.png');
+        }   
+
+    const dict = {
+        1: 'member2',
+        2: 'member3',
+        3: 'member4',
+        4: 'member5'
+    };
+    for (let i = 1; i < data.charactersLevel.length; i++) {
+        if(data.charactersLevel[i].replace('lv','') >= 1 && data.charactersLevel[i].replace('Lv','') <= 8){
+            $('#' + dict[i] + '-bg').attr('src', '/mai-tools/img/member_blue_bg.png');
+            $('#' + dict[i] + '-layout').attr('src', '/mai-tools/img/member_blue_layout.png');
+        } else if(data.charactersLevel[i].replace('Lv','') >= 9 && data.charactersLevel[i].replace('Lv','') <= 48){
+            $('#' + dict[i] + '-bg').attr('src', '/mai-tools/img/member_green_bg.png');
+            $('#' + dict[i] + '-layout').attr('src', '/mai-tools/img/member_green_layout.png');
+        } else if(data.charactersLevel[i].replace('Lv','') >= 49 && data.charactersLevel[i].replace('Lv','') <= 98){
+            $('#' + dict[i] + '-bg').attr('src', '/mai-tools/img/member_red_bg.png');
+            $('#' + dict[i] + '-layout').attr('src', '/mai-tools/img/member_red_layout.png');
+        } else if(data.charactersLevel[i].replace('Lv','') >= 99 && data.charactersLevel[i].replace('Lv','') <= 298){
+            $('#' + dict[i] + '-bg').attr('src', '/mai-tools/img/member_bronze_bg.png');
+            $('#' + dict[i] + '-layout').attr('src', '/mai-tools/img/member_bronze_layout.png');
+        } else if(data.charactersLevel[i].replace('Lv','') >= 299 && data.charactersLevel[i].replace('Lv','') <= 998){
+            $('#' + dict[i] + '-bg').attr('src', '/mai-tools/img/member_silver_bg.png');
+            $('#' + dict[i] + '-layout').attr('src', '/mai-tools/img/member_silver_layout.png');
+        } else if(data.charactersLevel[i].replace('Lv','') >= 999 && data.charactersLevel[i].replace('Lv','') <= 9998){
+            $('#' + dict[i] + '-bg').attr('src', '/mai-tools/img/member_gold_bg.png');
+            $('#' + dict[i] + '-layout').attr('src', '/mai-tools/img/member_gold_layout.png');
+        } else if(data.charactersLevel[i].replace('Lv','') >= 9999){
+            $('#' + dict[i] + '-bg').attr('src', '/mai-tools/img/member_rainbow_bg.png');
+            $('#' + dict[i] + '-layout').attr('src', '/mai-tools/img/member_rainbow_layout.png');
+        }   
+    }
+
+
 }
 
 const toggleDisplay = (id) => {
