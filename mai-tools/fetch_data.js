@@ -249,7 +249,13 @@
             break;
         }
         // 收藏品(collection)
-        case "/maimai-mobile/collection/": {
+        case "/maimai-mobile/collection/":
+        case "/maimai-mobile/collection/nameplate":
+        case "/maimai-mobile/collection/frame":
+        case "/maimai-mobile/collection/trophy":
+        case "/maimai-mobile/collection/character":
+        case "/maimai-mobile/collection/partner":
+        {
             childWin = window.open(`${siteOrigin}/mai-tools/collection.html`);
             type = "collection";
             break;
