@@ -255,11 +255,11 @@
         case "/maimai-mobile/collection/trophy":
         case "/maimai-mobile/collection/character":
         case "/maimai-mobile/collection/partner":
-        {
-            childWin = window.open(`${siteOrigin}/mai-tools/collection.html`);
-            type = "collection";
-            break;
-        }
+            {
+                childWin = window.open(`${siteOrigin}/mai-tools/collection.html`);
+                type = "collection";
+                break;
+            }
     }
 
     if (type == 'main' || type == 'friend') {
@@ -714,7 +714,14 @@
         const charImgs = Array.from(characterDoc.querySelectorAll('.collection_setting_block .chara_cycle_img')).map(img => img.src);
         const characters = await Promise.all(charImgs.map(url => toBase64(url)));
 
-        const charactersLevel = Array.from(characterDoc.querySelectorAll('.collection_setting_block .collection_chara_lv_block')).map(div => div.textContent);
+        const charactersLevel = Array.from(characterDoc.querySelectorAll('.p_r.f_0.col5.d_ib .collection_chara_img_block.m_r_10.t_c.f_l')).map(div => {
+            const span = div.querySelector('span.collection_chara_awakening_block_reborn_txt.f_11');
+            if (span) {
+                return 'Lv9999';
+            } else {
+                return div.querySelector('.collection_setting_block .collection_chara_lv_block').textContent;
+            }
+        });
 
         const homeRes = await fetch(`${domain}/maimai-mobile/home`, { credentials: 'include' });
         const homeText = await homeRes.text();
