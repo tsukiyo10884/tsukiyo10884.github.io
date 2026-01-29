@@ -73,26 +73,36 @@
                 <div id="div-leader">
                     <img id="leader" src="" width="183" />
                     <img id="leader-bar" src="" />
+                    <span class="level" id="leader-level"></span>
+                    <img id="leader-reborn" src="/mai-tools/img/member_bar_reborn.png" />
                 </div>
                 <div id="div-member2">
                     <img id="member2" src="" />
                     <img id="member2-bg" src="" />
                     <img id="member2-layout" src="" />
+                    <span class="level" id="member2-level"></span>
+                    <img class="reborn" id="member2-reborn" src="/mai-tools/img/member_layout_reborn.png" />
                 </div>
                 <div id="div-member3">
                     <img id="member3" src="" />
                     <img id="member3-bg" src="" />
                     <img id="member3-layout" src="" />
+                    <span class="level" id="member3-level"></span>
+                    <img class="reborn" id="member3-reborn" src="/mai-tools/img/member_layout_reborn.png" />
                 </div>
                 <div id="div-member4">
                     <img id="member4" src="" />
                     <img id="member4-bg" src="" />
                     <img id="member4-layout" src="" />
+                    <span class="level" id="member4-level"></span>
+                    <img class="reborn" id="member4-reborn" src="/mai-tools/img/member_layout_reborn.png" />
                 </div>
                 <div id="div-member5">
                     <img id="member5" src="" />
                     <img id="member5-bg" src="" />
                     <img id="member5-layout" src="" />
+                    <span class="level" id="member5-level"></span>
+                    <img class="reborn" id="member5-reborn" src="/mai-tools/img/member_layout_reborn.png" />
                 </div>
             </div>
             <div id="filters" class="d-flex justify-content-center mb-3">
@@ -141,7 +151,7 @@
 <style>
     @font-face {
         font-family: 'Hiragino';
-        src: url(./font/HiraginoKaku-Pro-W3.otf) format('opentype');
+        src: url(./font/HiraginoKaku-Pro-W6.otf) format('opentype');
     }
 
     .main {
@@ -308,13 +318,13 @@
     #rating {
         font-family: 'Hiragino';
         position: absolute;
-        left: 51px;
+        left: 48px;
         top: 2px;
-        font-size: 12px;
-        transform: scaleX(1.1);
+        font-size: 10px;
         color: #dbc03a;
         z-index: 100;
         text-shadow: black 1px 1px 0, black -1px -1px 0, black -1px 1px 0, black 1px -1px 0, black 0px 1px 0, black 0 -1px 0, black -1px 0 0, black 1px 0 0;
+        letter-spacing: 2px;
     }
 
     #div-leader {
@@ -367,28 +377,53 @@
         bottom: 6px;
     }
 
-    #member2-bg, #member3-bg, #member4-bg, #member5-bg {
+    #leader-level {
+        font-size: 12px;
+        position: absolute;
+        top: 135px;
+        left: 87px;
+        z-index: 99;
+    }
+
+    #member2-bg,
+    #member3-bg,
+    #member4-bg,
+    #member5-bg {
         position: absolute;
         left: 19px;
         bottom: -15px;
         z-index: -1;
     }
 
-    #member2-layout, #member3-layout, #member4-layout, #member5-layout {
+    #member2-layout,
+    #member3-layout,
+    #member4-layout,
+    #member5-layout {
         position: absolute;
         left: 19px;
         bottom: -15px;
     }
 
     .level {
+        font-size: 13px;
+        left: 51px;
         color: white;
-        font-size: 9px;
         position: absolute;
         top: -21px;
-        left: 35px;
         z-index: 150;
         font-weight: bold;
         font-family: 'Hiragino';
-        transform: scaleX(1.1);
+    }
+
+    #leader-reborn {
+        position: absolute;
+        left: 33px;
+        bottom: 29px;
+    }
+
+    .reborn {
+        position: absolute;
+        top: -4px;
+        left: 19px;
     }
 </style>
