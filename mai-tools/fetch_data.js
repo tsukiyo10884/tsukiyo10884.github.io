@@ -714,22 +714,11 @@
         const charImgs = Array.from(characterDoc.querySelectorAll('.collection_setting_block .chara_cycle_img')).map(img => img.src);
         const characters = await Promise.all(charImgs.map(url => toBase64(url)));
 
-<<<<<<< Updated upstream
-        const charactersLevel = Array.from(characterDoc.querySelectorAll('.p_r.f_0.col5.d_ib .collection_chara_img_block.m_r_10.t_c.f_l')).map(div => {
-            const span = div.querySelector('span.collection_chara_awakening_block_reborn_txt.f_11');
-            if (span) {
-                return 'Lv9999';
-            } else {
-                return div.querySelector('.collection_setting_block .collection_chara_lv_block').textContent;
-            }
-        });
-=======
         const charactersLevel = Array.from(
             characterDoc.querySelectorAll('.see_through_block.collection_setting_block .collection_chara_img_block')
         ).map(block => {
             const lvEl = block.querySelector('.collection_chara_lv_block.f_13');
             const rebornEl = block.querySelector('.collection_chara_awakening_block_reborn_txt.f_11');
->>>>>>> Stashed changes
 
             return {
                 lv: lvEl ? lvEl.textContent.replace('Lv', '').trim() : '',
