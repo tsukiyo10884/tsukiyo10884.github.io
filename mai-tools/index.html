@@ -309,6 +309,10 @@
                     $output.html(`取得成績中(段位認定)，請勿關閉maimai-net`);
                     break;
                 }
+                case "ratingHistory": {
+                    $output.html(`取得歷史R值中，請勿關閉maimai-net`);
+                    break;
+                }
                 case "result": {
                     $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(data.payload, null, 2)}</textarea>`);
                     refreshData();

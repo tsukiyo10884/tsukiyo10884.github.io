@@ -410,6 +410,8 @@
                     course.push({ type, courseRecord: courses });
                 }
 
+                // 取得歷史R值
+                childWin.postMessage({ type: "ratingHistory", payload: null }, siteOrigin);
                 const recordListDoc = await fetchHTML(`${domain}/maimai-mobile/record/`);
                 const idxs = [...recordListDoc.querySelectorAll('input[name="idx"]')].map(el => el.value);
                 let ratingHistory = await Promise.all(idxs.map((idx, i) => limit(async () => {
@@ -501,7 +503,11 @@
             }
 
             setTimeout(() => {
-                childWin.postMessage({ type: "result-friend", payload: exportData }, siteOrigin);
+                if (idx === '') {
+                    childWin.postMessage({ type: "result", payload: exportData }, siteOrigin);
+                } else {
+                    childWin.postMessage({ type: "result-friend", payload: exportData }, siteOrigin);
+                }
             }, 500);
         }, 1500);
     }
