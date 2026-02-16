@@ -285,6 +285,7 @@
             const $output = $('#output');
             switch (data.type) {
                 case "init": {
+                    $('#btn-import').addClass("d-none");
                     $output.html(`取得成績中，請勿關閉maimai-net`);
                     if (data.payload != null) {
                         if (cssFiles.includes('css/' + data.payload + '.css')) {
