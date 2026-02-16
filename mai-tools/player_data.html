@@ -37,11 +37,11 @@
             <b id="msg" class="px-3 section-divider-title">如果看到這行字超過5秒，代表資料沒傳成功，請回maimai-net重整後再試一次</b>
             <div class="section-divider right"></div>
         </div>
-        <button id="test1" class="test"
+        <button id="test1" class="test d-none"
             onclick="LoadLocalJson('json/test_data/test_data_player_data.json')">測試資料1</button>
-        <button id="test2" class="test"
+        <button id="test2" class="test d-none"
             onclick="LoadLocalJson('json/test_data/test_data_player_data2.json')">測試資料2</button>
-        <div class="result-container my-4 d-none">
+        <div id="result-container" class="my-4 d-none">
             <div id="classHTML" class="d-flex justify-content-center"></div>
             <div>
                 <div class="col-12 d-flex justify-content-center mb-3">
@@ -83,7 +83,7 @@
             $('#msg').text('連線中，請勿關閉maimai-net...');
         }
         else if (data.type === 'playerData') {
-            $('.result-container').removeClass('d-none');
+            $('#result-container').removeClass('d-none');
             $('#div-msg').addClass('d-none');
             const playerData = data.payload;
             showClassProgress(playerData);

@@ -33,7 +33,7 @@ const initUserInfo = () => {
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <img src="https://maimaidx-eng.com/maimai-mobile/img/line_01.png" class="user_data_block_line">
+            <img src="https://wsrv.nl/?url=${encodeURIComponent("https://maimaidx-eng.com/maimai-mobile/img/line_01.png")}" class="user_data_block_line">
             <div class="clearfix"></div>
             <div class="row mb-1">
                 <div id="div-user-course-rank-text" class="col-3">
@@ -52,7 +52,7 @@ const initUserInfo = () => {
             <img id="user-course-rank" class="h_35 f_l">
             <img id="user-class-rank" class="p_l_10 h_35 f_l">
             <div class="p_l_10 f_l f_14">
-                <img class="h_30 m_3 v_m" src="https://maimaidx-eng.com/maimai-mobile/img/icon_star.png"><span id="user-star"></span>
+                <img class="h_30 m_3 v_m" src="https://wsrv.nl/?url=${encodeURIComponent("https://maimaidx-eng.com/maimai-mobile/img/icon_star.png")}"><span id="user-star"></span>
             </div>
             </div>
             <div class="clearfix"></div>
@@ -62,12 +62,12 @@ const initUserInfo = () => {
     $('#user-trophy').text(data.userInfo.trophy);
     $('#user-name').text(data.userInfo.name);
     $('#user-rating').text(data.userInfo.rating);
-    $('#user-rating-base').attr('src', data.userInfo.ratingBase);
-    $('#user-course-rank').attr('src', data.userInfo.courseRank);
-    $('#user-class-rank').attr('src', data.userInfo.classRank);
+    $('#user-rating-base').attr('src', "https://wsrv.nl/?url=" + encodeURIComponent(data.userInfo.ratingBase));
+    $('#user-course-rank').attr('src', "https://wsrv.nl/?url=" + encodeURIComponent(data.userInfo.courseRank));
+    $('#user-class-rank').attr('src', "https://wsrv.nl/?url=" + encodeURIComponent(data.userInfo.classRank));
     $('#div-user-star-text span').text('☆' + data.userInfo.star);
     $('#user-star').text(data.userInfo.star);
-    $('#user-icon').attr('src', data.userInfo.icon);
+    $('#user-icon').attr('src', "https://wsrv.nl/?url=" + encodeURIComponent(data.userInfo.icon));
     $('#user-info').removeClass('d-none');
 
     let courseRankText = getProfileCourseText(data.userInfo.courseRankText);
@@ -173,6 +173,7 @@ const showTable = async (mode) => {
     $('#now-title').text('');
 
     const tableHandlers = {
+        'overview': initOverview,
         'rating': initRatingList,
         'plate': initPlateList,
         'level': initLevelList,
@@ -182,8 +183,9 @@ const showTable = async (mode) => {
         'a_yo': initForAyoList,
     };
 
-    $('#completion-filters').toggleClass('d-none', !['plate', 'level'].includes(mode));
-    $('#play-filters').toggleClass('d-none', !['suggestion', 'a_xuan'].includes(mode));
+    $('#div-completion-filters').toggleClass('d-none', !['plate', 'level'].includes(mode));
+    $('#div-play-filters').toggleClass('d-none', !['suggestion', 'a_xuan'].includes(mode));
+    $('#div-download-image').toggleClass('d-none', !['rating'].includes(mode));
 
     const handler = tableHandlers[mode];
     handler ? await handler() : $('#song-table').empty();
@@ -428,10 +430,6 @@ const initPalette = () => {
         .attr('data-bs-toggle', 'tooltip')
         .attr('data-bs-placement', 'bottom')
         .attr('data-bs-title', 'default');
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
 
     $('#palette').on('click', () => {
         const currentIndex = cssFiles.indexOf($('#theme').attr('href'));
@@ -518,3 +516,55 @@ const createCreditSection = () => {
 $(document).ready(function () {
     $('.extra-credits').html(createCreditSection());
 });
+
+// 下載圖片功能
+const downloadResultImage = async () => {
+    const element = document.querySelector('#result-container');
+    const clone = element.cloneNode(true);
+
+    clone.style.position = 'absolute';
+    clone.style.left = '-9999px';
+    clone.style.top = '0';
+    clone.style.width = parseFloat(window.getComputedStyle(element).width) + 40 + 'px';
+    clone.style.padding = '20px';
+    clone.style.paddingTop = '5px';
+    clone.style.borderRadius = '10px';
+    document.body.appendChild(clone);
+
+    switch (cssFiles.indexOf($('#theme').attr('href'))) {
+        case 0: // translucent
+            clone.style.background = 'linear-gradient(0deg, #7af4c3, #7c81ff)';
+            break;
+        case 1: // modern
+            clone.style.backgroundColor = '#232228';
+            break;
+        case 2: // cute_pink
+            clone.style.backgroundColor = '#ffe4ec';
+            break;
+        case 3: // cute_blue
+            clone.style.backgroundColor = '#e4f2ff';
+            break;
+        case 4: // fabric_board
+            clone.style.background = 'url(../../mai-tools/img/fabric_board.jpg)';
+            clone.style.backgroundSize = '300px';
+            break;
+        default:
+            clone.style.backgroundColor = '#51bcf3';
+
+    }
+    html2canvas(clone, {
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: 'transparent',
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'maimai-' + $('#user-name').text() + '-' + new Date().toLocaleString().replace(/[/:\s]/g, '-') + '.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        document.body.removeChild(clone);
+    }).catch(err => {
+        console.error('Screenshot failed:', err);
+        alert('圖片下載失敗，請稍後再試。');
+        document.body.removeChild(clone);
+    });
+};

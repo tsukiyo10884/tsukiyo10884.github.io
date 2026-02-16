@@ -1,25 +1,6 @@
 (async () => {
     const siteOrigin = new URL(document.currentScript.src).origin;
 
-    const requestQueue = async (items, limit, fn) => {
-        let results = [];
-        const executing = [];
-        for (const item of items) {
-            const p = fn(item).then(r => results.push(r));
-            executing.push(p);
-            if (executing.length >= limit) {
-                await Promise.race(executing);
-                for (let i = executing.length - 1; i >= 0; i--) {
-                    if (await Promise.race([executing[i], 'pending']) !== 'pending') {
-                        executing.splice(i, 1);
-                    }
-                }
-            }
-        }
-        await Promise.all(executing);
-        return results;
-    };
-
     const pLimit = (concurrency) => {
         const queue = [];
         let activeCount = 0;
@@ -51,22 +32,6 @@
     };
     const limit = pLimit(5);
 
-    const toBase64 = async (url) => {
-        try {
-            const response = await fetch(url);
-            const blob = await response.blob();
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onloadend = () => resolve(reader.result);
-                reader.onerror = reject;
-                reader.readAsDataURL(blob);
-            });
-        } catch (e) {
-            console.warn("Failed to convert to base64", url, e);
-            return url;
-        }
-    };
-
     const fetchHTML = async (url) => {
         const res = await fetch(url, { credentials: "include" });
         const text = await res.text();
@@ -75,20 +40,32 @@
     const detailData = await fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
         .then(res => res.json());
 
-    const getUserData = async (url) => {
+    const getUserData = async (domain, idx) => {
         const userInfo = {};
-        const userDoc = await fetchHTML(url);
-        userInfo.icon = await toBase64(userDoc.querySelector('.w_112.f_l').src);
+        let userDoc;
+        if (idx != null) {
+            userDoc = await fetchHTML(`${domain}/maimai-mobile/friend/friendDetail/?idx=` + idx);
+        } else {
+            userDoc = await fetchHTML(`${domain}/maimai-mobile/home/`);
+        }
+        userInfo.icon = userDoc.querySelector('.w_112.f_l').src;
         userInfo.name = userDoc.querySelector('.name_block.f_l.f_16').textContent;
         userInfo.rating = userDoc.querySelector('.rating_block').textContent;
-        userInfo.ratingBase = await toBase64(userDoc.querySelector('.h_30.f_r').src);
-        userInfo.courseRank = await toBase64(userDoc.querySelector('.h_35.f_l').src);
+        userInfo.ratingBase = userDoc.querySelector('.h_30.f_r').src;
+        userInfo.courseRank = userDoc.querySelector('.h_35.f_l').src;
         userInfo.courseRankText = userDoc.querySelector('.h_35.f_l').src.match(/course_rank_(\d{2})/)[1];
-        userInfo.classRank = await toBase64(userDoc.querySelector('.p_l_10.h_35.f_l').src);
+        userInfo.classRank = userDoc.querySelector('.p_l_10.h_35.f_l').src;
         userInfo.classRankText = userDoc.querySelector('.p_l_10.h_35.f_l').src.match(/class_rank_s_(\d{2})/)[1];
         userInfo.star = userDoc.querySelector('.p_l_10.f_l.f_14').textContent;
         userInfo.userTrophyBlock = userDoc.querySelector('.trophy_block.p_3.t_c.f_0').className;
         userInfo.trophy = userDoc.querySelector('.trophy_inner_block.f_13').textContent;
+
+        if (idx != null) {
+            userInfo.id = idx;
+        } else {
+            const friendCodeDoc = await fetchHTML(`${domain}/maimai-mobile/friend/userFriendCode/`);
+            userInfo.id = friendCodeDoc.querySelector('.see_through_block.m_t_5.m_b_5.p_5.t_c.f_15')?.textContent.trim() || '';
+        }
 
         return userInfo;
     };
@@ -104,7 +81,7 @@
         const gateSongData = await fetch(`${siteOrigin}/mai-tools/json/gate.json`).then(res => res.json());
         const gateSongs = gateSongData['gate' + no];
 
-        const promises = gateSongs.map(song => limit(async () => {
+        const promises = gateSongs.map((song, i) => limit(async () => {
             const idx = domain == 'jp' ? song.idxJp : song.idxIntl;
             const songDoc = await fetchHTML(domain + '/maimai-mobile/record/musicDetail/?idx=' + idx);
             const songLastPlayedDate_remaster = songDoc.querySelector('#remaster td:nth-of-type(2)')?.textContent.trim();
@@ -117,6 +94,7 @@
                 .map(date => new Date(date))
                 .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '0000-00-00';
 
+            await new Promise(resolve => setTimeout(resolve, i * 200));
             return { title: song.title, songLastPlayedDate, type: song.type };
         }));
 
@@ -242,18 +220,19 @@
             type = "record";
             break;
         }
-        // 玩家資訊(player-data)
+        // 玩家資訊
         case "/maimai-mobile/playerData/": {
             childWin = window.open(`${siteOrigin}/mai-tools/player_data.html`);
             type = "playerData";
             break;
         }
-        // 收藏品(collection)
+        // 收藏品
         case "/maimai-mobile/collection/":
         case "/maimai-mobile/collection/nameplate/":
         case "/maimai-mobile/collection/frame/":
         case "/maimai-mobile/collection/trophy/":
         case "/maimai-mobile/collection/character/":
+        case "/maimai-mobile/collection/editCharacter/":
         case "/maimai-mobile/collection/partner/":
             {
                 childWin = window.open(`${siteOrigin}/mai-tools/collection.html`);
@@ -284,7 +263,7 @@
 
             // 自己資訊
             if (idx === '') {
-                userInfo = await getUserData(`${domain}/maimai-mobile/home/`);
+                userInfo = await getUserData(domain, null);
 
                 if (userInfo.name === "†Ａｙｏｏｏω†") {
                     childWin.postMessage({ type: "special", payload: 'ayo' }, siteOrigin);
@@ -408,8 +387,7 @@
                     for (const item of items) {
                         const idx = item.querySelector("input[name=idx]")?.value;
                         if (!idx) continue;
-                        const detailUrl = `${domain}/maimai-mobile/record/courseDetail/?idx=${idx}`;
-                        const detailDoc = await fetchHTML(detailUrl);
+                        const detailDoc = await fetchHTML(`${domain}/maimai-mobile/record/courseDetail/?idx=${idx}`);
 
                         const clearImg = detailDoc.querySelector("img.course_clear")?.src || "";
                         const isClear = clearImg.includes("icon_course_clear.png");
@@ -432,15 +410,36 @@
                     course.push({ type, courseRecord: courses });
                 }
 
+                const recordListDoc = await fetchHTML(`${domain}/maimai-mobile/record/`);
+                const idxs = [...recordListDoc.querySelectorAll('input[name="idx"]')].map(el => el.value);
+                let ratingHistory = await Promise.all(idxs.map((idx, i) => limit(async () => {
+                    const recordDoc = await fetchHTML(`${domain}/maimai-mobile/record/playlogDetail/?idx=${idx}`);
+
+                    const data = {
+                        record_date: recordDoc.querySelectorAll('.sub_title .v_b')[1].textContent.trim(),
+                        rating: recordDoc.querySelectorAll('.rating_block')[1]?.textContent.trim() ?? recordDoc.querySelectorAll('.rating_block')[0]?.textContent.trim()
+                    };
+                    await new Promise(resolve => setTimeout(resolve, i * 200));
+                    return data;
+                })));
+                const uniqeRating = new Map();
+                ratingHistory.toReversed().forEach(item => {
+                    if (!uniqeRating.has(item.rating)) {
+                        uniqeRating.set(item.rating, item);
+                    }
+                })
+                ratingHistory = Array.from(uniqeRating.values());
+
                 exportData = {
                     userInfo,
                     songs,
-                    course
+                    course,
+                    ratingHistory
                 };
             }
             // 好友資訊
             else {
-                userInfo = await getUserData(`${domain}/maimai-mobile/friend/friendDetail/?idx=` + idx);
+                userInfo = await getUserData(domain, idx);
 
                 for (let i = 0; i < difficulties.length; i++) {
                     childWin.postMessage({ type: "difficulty", payload: difficulties[i] }, siteOrigin);
@@ -502,7 +501,7 @@
             }
 
             setTimeout(() => {
-                childWin.postMessage({ type: "result", payload: exportData }, siteOrigin);
+                childWin.postMessage({ type: "result-friend", payload: exportData }, siteOrigin);
             }, 500);
         }, 1500);
     }
@@ -590,9 +589,6 @@
         }, 1000);
 
         const idxs = [...document.querySelectorAll('input[name="idx"]')].map(el => el.value);
-        let count = 0;
-
-        // Concurrent fetching with limit
         const result = await Promise.all(idxs.map((idx, i) => limit(async () => {
             const recordDoc = await fetchHTML(`${domain}/maimai-mobile/record/playlogDetail/?idx=${idx}`);
 
@@ -606,7 +602,7 @@
             const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? recordDoc.querySelector('.music_lv_back').textContent.trim();
 
             const data = {
-                no: i + 1, // Order is preserved by Promise.all mapping
+                no: i + 1,
                 date: recordDoc.querySelectorAll('.sub_title .v_b')[1].textContent.trim(),
                 track: recordDoc.querySelector('.red.f_b.v_b').textContent.trim(),
                 title: title,
@@ -665,6 +661,7 @@
                 max_combo: recordDoc.querySelectorAll('.col2 .white')[0].textContent.trim(),
                 max_sync: recordDoc.querySelectorAll('.col2 .white')[1].textContent.trim()
             };
+            await new Promise(resolve => setTimeout(resolve, i * 200));
             return data;
         })));
 
@@ -682,7 +679,7 @@
 
         const classData = {
             html: playerDataDoc.querySelector('.town_block').outerHTML,
-            img: await toBase64(playerDataDoc.querySelector(".w_160.p_15.m_r_10").src),
+            img: playerDataDoc.querySelector(".w_160.p_15.m_r_10").src,
             text: playerDataDoc.querySelector('.w_160.p_15.m_r_10').src.match(/class_rank_l_(\d{2})/)[1],
             point: playerDataDoc.querySelector('.class_point_txt .f_29.f_b').textContent.trim()
         }
@@ -696,23 +693,22 @@
         const iconRes = await fetch(`${domain}/maimai-mobile/collection/`, { credentials: 'include' });
         const iconText = await iconRes.text();
         const iconDoc = new DOMParser().parseFromString(iconText, 'text/html');
-        const icon = await toBase64(iconDoc.querySelector('.w_80.m_r_10.f_l').src);
+        const icon = iconDoc.querySelector('.w_80.m_r_10.f_l').src;
 
         const nameplateRes = await fetch(`${domain}/maimai-mobile/collection/nameplate`, { credentials: 'include' });
         const nameplateText = await nameplateRes.text();
         const nameplateDoc = new DOMParser().parseFromString(nameplateText, 'text/html');
-        const nameplate = await toBase64(nameplateDoc.querySelector('.w_396.m_r_10').src);
+        const nameplate = nameplateDoc.querySelector('.w_396.m_r_10').src;
 
         const frameRes = await fetch(`${domain}/maimai-mobile/collection/frame`, { credentials: 'include' });
         const frameText = await frameRes.text();
         const frameDoc = new DOMParser().parseFromString(frameText, 'text/html');
-        const frame = await toBase64(frameDoc.querySelector('.w_396.m_r_10').src);
+        const frame = frameDoc.querySelector('.w_396.m_r_10').src;
 
         const characterRes = await fetch(`${domain}/maimai-mobile/collection/character`, { credentials: 'include' });
         const characterText = await characterRes.text();
         const characterDoc = new DOMParser().parseFromString(characterText, 'text/html');
-        const charImgs = Array.from(characterDoc.querySelectorAll('.collection_setting_block .chara_cycle_img')).map(img => img.src);
-        const characters = await Promise.all(charImgs.map(url => toBase64(url)));
+        const characters = Array.from(characterDoc.querySelectorAll('.collection_setting_block .chara_cycle_img')).map(img => img.src);
 
         const charactersLevel = Array.from(
             characterDoc.querySelectorAll('.see_through_block.collection_setting_block .collection_chara_img_block')
@@ -730,9 +726,9 @@
         const homeDoc = new DOMParser().parseFromString(homeText, 'text/html');
         const name = homeDoc.querySelector('.name_block.f_l.f_16').textContent;
         const rating = homeDoc.querySelector('.rating_block')?.textContent;
-        const ratingBase = await toBase64(homeDoc.querySelector('.h_30.f_r').src);
-        const courseRank = await toBase64(homeDoc.querySelector('.h_35.f_l')?.src);
-        const classRank = await toBase64(homeDoc.querySelector('.p_l_10.h_35.f_l')?.src);
+        const ratingBase = homeDoc.querySelector('.h_30.f_r').src;
+        const courseRank = homeDoc.querySelector('.h_35.f_l')?.src;
+        const classRank = homeDoc.querySelector('.p_l_10.h_35.f_l')?.src;
         const trophyBlock = homeDoc.querySelector('.trophy_block.p_3.t_c.f_0').className;
         const trophy = homeDoc.querySelector('.trophy_inner_block.f_13').textContent;
 

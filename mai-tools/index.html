@@ -24,14 +24,18 @@
     <script src="https://sgimera.github.io/mai_RatingAnalyzer/scripts_maimai/maidx_calc_sub.js"></script>
     <script src="https://sgimera.github.io/mai_RatingAnalyzer/scripts_maimai/maidx_calc_rating.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/main_feature/overview.js"></script>
     <script src="js/main_feature/rating.js"></script>
     <script src="js/main_feature/suggestion.js"></script>
     <script src="js/main_feature/plate.js"></script>
     <script src="js/main_feature/level.js"></script>
     <script src="js/main_feature/course.js"></script>
     <script src="js/main_feature/special.js"></script>
-    <script src="js/main_feature/for_axuan.js"></script>
-    <script src="js/main_feature/for_ayo.js"></script>
+    <script src="js/dist/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
+
 </head>
 
 <body>
@@ -74,55 +78,80 @@
                 <img id="palette" src="img/palette.svg">
             </div>
         </div>
-        <button id="test" onclick="LoadLocalJson('json/test_data/test_data.json')">測試資料1</button>
-        <button id="test2" onclick="LoadLocalJson('json/test_data/test_data2.json')">測試資料2</button>
+        <div id="div-test" class="row">
+            <div class="col-2 d-none">
+                <button id="test" class="w-100" onclick="LoadLocalJson('json/test_data/test_data.json')">測試資料1</button>
+            </div>
+            <div class="col-2">
+                <button id="btn-import" class="w-100" onclick="triggerImport()">匯入資料</button>
+                <input id="input-file" class="d-none" type="file" onchange="importData(this)" />
+            </div>
+        </div>
         <div id="output"></div>
         <textarea id="now-title" class="d-none"></textarea>
-        <div id="button-group" class="row d-none align-items-center">
-            <div class="col-2">
-                <button id="btn-rating" class="w-100" onclick="showTable('rating')">R値入選曲</button>
-            </div>
-            <div class="col-2">
-                <button id="btn-suggestion" class="w-100" onclick="showTable('suggestion')">R値候選曲</button>
-            </div>
-            <div class="col-2">
-                <button id="btn-plate" class="w-100" onclick="showTable('plate')">名牌版進度</button>
-            </div>
-            <div class="col-2">
-                <button id="btn-level" class="w-100" onclick="showTable('level')">等級進度</button>
-            </div>
-            <div class="col-2">
-                <button id="btn-course" class="w-100" onclick="showTable('course')">段位認定</button>
-            </div>
-            <div id="completion-filters" class="col-2 d-none">
-                <div class="checkbox-group">
-                    <input type="checkbox" id="completed-only" name="completion-filter" class="form-check-input">
-                    <label for="completed-only">只顯示已達成</label>
+        <div id="div-button-group" class="row d-none align-items-center">
+            <div id="self" class="row mb-2">
+                <div class="col-2">
+                    <button id="btn-overview" class="w-100" onclick="showTable('overview')">各項統計</button>
                 </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="non-completed-only" name="completion-filter" class="form-check-input">
-                    <label for="non-completed-only">只顯示未達成</label>
+                <div class="col-2">
+                    <button id="btn-upload-rating" class="w-100" onclick="uploadRating()">R値上傳</button>
+                </div>
+                <div class="col-2">
+                    <button id="btn-export" class="w-100" onclick="exportData()">匯出資料</button>
                 </div>
             </div>
-            <div id="play-filters" class="col-2 d-none">
-                <div class="checkbox-group">
-                    <input type="checkbox" id="played-only" name="play-filter" class="form-check-input">
-                    <label for="completed-only">只顯示已玩過</label>
+            <div class="row" style="height: 48px;">
+                <div class="col-2">
+                    <button id="btn-rating" class="w-100" onclick="showTable('rating')">R値入選曲</button>
                 </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="non-played-only" name="play-filter" class="form-check-input">
-                    <label for="non-completed-only">只顯示未玩過</label>
+                <div class="col-2">
+                    <button id="btn-suggestion" class="w-100" onclick="showTable('suggestion')">R値候選曲</button>
+                </div>
+                <div class="col-2">
+                    <button id="btn-plate" class="w-100" onclick="showTable('plate')">名牌版進度</button>
+                </div>
+                <div class="col-2">
+                    <button id="btn-level" class="w-100" onclick="showTable('level')">等級進度</button>
+                </div>
+                <div class="col-2">
+                    <button id="btn-course" class="w-100" onclick="showTable('course')">段位認定</button>
+                </div>
+                <div id="div-download-image" class="col-2 d-none">
+                    <button id="btn-download-image" class="w-100" onclick="downloadResultImage()">下載圖片</button>
+                </div>
+                <div id="div-completion-filters" class="col-2 d-none">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="completed-only" name="completion-filter" class="form-check-input">
+                        <label for="completed-only">只顯示已達成</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="non-completed-only" name="completion-filter"
+                            class="form-check-input">
+                        <label for="non-completed-only">只顯示未達成</label>
+                    </div>
+                </div>
+                <div id="div-play-filters" class="col-2 d-none">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="played-only" name="play-filter" class="form-check-input">
+                        <label for="completed-only">只顯示已玩過</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="non-played-only" name="play-filter" class="form-check-input">
+                        <label for="non-completed-only">只顯示未玩過</label>
+                    </div>
                 </div>
             </div>
 
         </div>
-        <div class="result-container">
+        <div id="result-container">
             <div class="row border-bottom border-secondary">
                 <div id="user-info" class="user-info col-6 d-none">
                 </div>
                 <div id="stat" class="col-6 row"></div>
             </div>
-            <div id="song-table" class="ms-1 mt-1"></div>
+            <div id="song-table" class="ms-1 mt-1">
+            </div>
         </div>
         <footer class="text-center">
             <hr>
@@ -133,7 +162,75 @@
                 ; inspired by <a href="https://github.com/myjian/">Ming-yuen Jien</a>.</p>
         </footer>
     </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            query,
+            where,
+            getDocs,
+            orderBy,
+            Timestamp,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+        const firebaseConfig = {
+            apiKey: "AIzaSyDCLc_eSevQS1UvxSrP7smqMDMX7vpRqwY",
+            authDomain: "mai-tools-1f4ac.firebaseapp.com",
+            projectId: "mai-tools-1f4ac",
+            storageBucket: "mai-tools-1f4ac.firebasestorage.app",
+            messagingSenderId: "798518415925",
+            appId: "1:798518415925:web:19073fbcc79a2e0e89d77c",
+            measurementId: "G-P2S8Z05HCF"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function uploadRating(userId, score, recordDate) {
+            try {
+                const colRef = collection(db, "ratings");
+                const docRef = await addDoc(colRef, {
+                    id: userId,
+                    rating: score,
+                    record_date: Timestamp.fromDate(new Date(recordDate)) || serverTimestamp()
+                });
+            } catch (e) {
+                console.error("Error uploading rating: ", e);
+            }
+        }
+
+        async function getUserHistory(userId) {
+            try {
+                const colRef = collection(db, "ratings");
+
+                const q = query(
+                    colRef,
+                    where("id", "==", userId),
+                    orderBy("record_date", "asc")
+                );
+
+                const querySnapshot = await getDocs(q);
+
+                let history = [];
+                querySnapshot.forEach((doc) => {
+                    history.push({
+                        id: doc.data().id,
+                        rating: doc.data().rating,
+                        record_date: doc.data().record_date.toDate()
+                    });
+                });
+
+                return history;
+            } catch (e) {
+                console.error("Error getting user history: ", e);
+            }
+        }
+
+        window.fbTools = { uploadRating, getUserHistory };
+    </script>
     <script>
 
         let versionList = [];
@@ -210,9 +307,13 @@
                 }
                 case "result": {
                     $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(data.payload, null, 2)}</textarea>`);
-                    $('#button-group').removeClass('d-none');
                     refreshData();
                     break;
+                }
+                case "result-friend":{
+                    $('#self').addClass("d-none");
+                    $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(data.payload, null, 2)}</textarea>`);
+                    refreshData();
                 }
                 case "jp": {
                     if (data.payload) {
@@ -222,7 +323,7 @@
                 }
                 case "special": {
                     if (data.payload === 'ayo') {
-                        $('#stat').html(`<div class="d-flex align-items-center"><p>恭喜橙將！啊你的星神、堇祭白雪熊將呢</p></div>`);
+                        $('#stat').html(`<div class="d-flex align-items-center"><p>恭喜橙堇將！啊你的星神、祭白雪熊將呢</p></div>`);
                     }
                     else if (data.payload === 'axun') {
                         $('#stat').html(`<div class="d-flex align-items-center"><p>你的超怪呢</p></div>`);
@@ -233,11 +334,9 @@
 
         // 取得本地json(測試資料)
         const LoadLocalJson = (filePath) => {
+            $('#div-test').addClass('d-none');
             window.postMessage({ type: 'init', payload: null }, '*');
             $.getJSON(filePath, (json) => {
-                $('#button-group').removeClass('d-none');
-                $('#test').addClass('d-none');
-                $('#test2').addClass('d-none');
                 $('#output').html(`<textarea id="json-data" class="d-none">${JSON.stringify(json, null, 2)}</textarea>`);
                 refreshData();
             });
@@ -251,8 +350,9 @@
             }
         };
 
-        const refreshData = () => {
+        const refreshData = async () => {
             data = JSON.parse($('#json-data').text());
+            data.ratingRecord = await fbTools.getUserHistory(data.userInfo.id);
 
             if (data.course == null) {
                 $('#btn-course').addClass('d-none');
@@ -265,9 +365,64 @@
             };
 
             initUserInfo();
+            $('#div-button-group').removeClass('d-none');
         };
 
+        const uploadRating = async () => {
+            if (data.ratingHistory == null || data.ratingHistory.length === 0) {
+                alert("沒有R值歷史紀錄，無法上傳");
+                return;
+            }
+            if (!confirm("上傳後紀錄為公開資料，確定繼續嗎？")) {
+                return;
+            }
+
+            const existingHistory = await fbTools.getUserHistory(data.userInfo.id);
+            let proposedData = data.ratingHistory.filter(r => {
+                return !existingHistory.some(e => e.rating === r.rating);
+            });
+
+            for (const r of proposedData) {
+                await fbTools.uploadRating(data.userInfo.id, r.rating, r.record_date);
+            }
+            refreshData();
+            alert("資料已更新");
+        };
+
+        const triggerImport = () => {
+            $('#input-file').click();
+        }
+        const importData = (file) => {
+            // 驗證檔案類型為JSON
+            if (file.files[0].type !== "application/json") {
+                alert("請上傳JSON格式的檔案");
+                return;
+            }
+            $('#div-test').addClass('d-none');
+            window.postMessage({ type: 'init', payload: null }, '*');
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const content = e.target.result;
+                $('#output').html(`<textarea id="json-data" class="d-none">${content}</textarea>`);
+                refreshData();
+            };
+            reader.readAsText(file.files[0]);
+        }
+
+        const exportData = () => {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `maimai-data-${data.userInfo.name}-${new Date().toLocaleString().replace(/[/:\s]/g, '-')}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
         $(init);
+
     </script>
     <style>
         .p_0 {
@@ -292,6 +447,19 @@
 
         body {
             overflow-y: scroll;
+        }
+
+        #div-rating-chart {
+            background: #203844;
+            border-radius: 20px;
+            border: 1px solid #ffffff;
+            padding-top: 10px;
+            padding: 20px;
+        }
+
+        #rating-chart-title {
+            color: #ffffff;
+            padding-top: 10px;
         }
     </style>
 </body>

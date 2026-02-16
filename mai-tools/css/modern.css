@@ -252,7 +252,7 @@ button {
 	position: absolute;
 	top: 0px;
 	width: 100px;
-	z-index: 0;
+	z-index: -5;
 }
 
 .square-song-grid {
@@ -572,11 +572,11 @@ button {
 }
 
 .trophy_Bronze {
-	background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_bronze.png)no-repeat;
+	background: url(https://wsrv.nl/?url=https://maimaidx-eng.com/maimai-mobile/img/trophy_bronze.png)no-repeat;
 }
 
 .trophy_Gold {
-	background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_gold.png)no-repeat;
+	background: url(https://wsrv.nl/?url=https://maimaidx-eng.com/maimai-mobile/img/trophy_gold.png)no-repeat;
 }
 
 .trophy_inner_block {
@@ -590,15 +590,15 @@ button {
 }
 
 .trophy_Normal {
-	background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_normal.png)no-repeat;
+	background: url(https://wsrv.nl/?url=https://maimaidx-eng.com/maimai-mobile/img/trophy_normal.png)no-repeat;
 }
 
 .trophy_Rainbow {
-	background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_rainbow.png)no-repeat;
+	background: url(https://wsrv.nl/?url=https://maimaidx-eng.com/maimai-mobile/img/trophy_rainbow.png)no-repeat;
 }
 
 .trophy_Silver {
-	background: url(https://maimaidx-eng.com/maimai-mobile/img/trophy_silver.png)no-repeat;
+	background: url(https://wsrv.nl/?url=https://maimaidx-eng.com/maimai-mobile/img/trophy_silver.png)no-repeat;
 }
 
 .user-info {

@@ -1,8 +1,8 @@
 
-const showRatingChart = () => {
-    const filteredData = recordData.filter((item, index, arr) => index === recordData.length - 1 || (arr[index + 1] != null && item.rating !== arr[index + 1].rating));
-    const labels = filteredData.map((song, i) => `${song.no}.${song.difficulty} : ${song.title} ${song.rating_plus}`);
-    const ratings = filteredData.map(song => parseInt(song.rating, 10));
+const showRatingChart = async (id=null) => {
+    const filteredData = (await fbTools.getUserHistory("5008034116853")).reverse();
+    const labels = filteredData.map(e => e.record_date.toLocaleString());
+    const ratings = filteredData.map(e => e.rating);
     const pointColors = ratings.map((_, i) => i === 0 ? 'white' : '#0b4670');
     const ctx = document.getElementById('rating-chart').getContext('2d');
 
@@ -136,14 +136,14 @@ const showSongRecord = () => {
         </thead>`);
     filteredData.forEach((song, index) => {
         $("#song-table").append(`
-            <tr class="tr-${song.difficulty} toggle-row" data-id="${index}" onclick="toggleRecordDetails(${index})">
+            <tr class="tr-${song.difficulty} toggle-row text-white" data-id="${index}" onclick="toggleRecordDetails(${index})">
                 <td><img src="${song.image}" width="30"></td>
-                <td>${song.internalLevel.toString().includes('?') ? song.internalLevel : Number.parseFloat(song.internalLevel).toFixed(1)}</td>
-                <td class="text-start"><span class="song-tag">${(song.difficulty == "utage" ? song.title.substring(0, 3) : "[" + song.type.toUpperCase() + "]")}</span> ${song.difficulty == "utage" ? song.title.substring(3, song.title.length) : song.title}</td>
-                <td class="text-end">${song.score_new_record ? ' <span class="new-record">NEW!</span>' : ''}${song.score}</td>
-                <td class="text-end">${song.dx_score_new_record ? '<span class="new-record">NEW!</span>' : ''}${song.dx_score}</td>
-                <td>${song.date}</td>
-                <td style="cursor: pointer;"><span id="toggle-status-${index}">＋</span></td>
+                <td><span class="text-drop-shadow">${song.internalLevel.toString().includes('?') ? song.internalLevel : Number.parseFloat(song.internalLevel).toFixed(1)}</span></td>
+                <td class="text-start"><span class="text-drop-shadow"><span class="song-tag">${(song.difficulty == "utage" ? song.title.substring(0, 3) : "[" + song.type.toUpperCase() + "]")}</span> ${song.difficulty == "utage" ? song.title.substring(3, song.title.length) : song.title}</span></td>
+                <td class="text-end"><span class="text-drop-shadow">${song.score_new_record ? ' <span class="new-record">NEW!</span>' : ''}${song.score}</span></td>
+                <td class="text-end"><span class="text-drop-shadow">${song.dx_score_new_record ? '<span class="new-record">NEW!</span>' : ''}${song.dx_score}</span></td>
+                <td><span class="text-drop-shadow">${song.date}</span></td>
+                <td style="cursor: pointer;"><span id="toggle-status-${index}" class="text-drop-shadow">＋</span></td>
             </tr>
             <tr class="detail-row" id="detail-${index}" style="display:none;">
                 <td colspan="7" style="background:#f9f9f9;width: 100%">

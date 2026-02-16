@@ -26,6 +26,82 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
     <script src="js/common.js"></script>
     <script src="js/others/record.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            query,
+            where,
+            getDocs,
+            orderBy,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDCLc_eSevQS1UvxSrP7smqMDMX7vpRqwY",
+            authDomain: "mai-tools-1f4ac.firebaseapp.com",
+            projectId: "mai-tools-1f4ac",
+            storageBucket: "mai-tools-1f4ac.firebasestorage.app",
+            messagingSenderId: "798518415925",
+            appId: "1:798518415925:web:19073fbcc79a2e0e89d77c",
+            measurementId: "G-P2S8Z05HCF"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function uploadRating(userId, score) {
+            try {
+                const colRef = collection(db, "ratings");
+                const docRef = await addDoc(colRef, {
+                    id: userId,
+                    rating: score,
+                    record_date: serverTimestamp()
+                });
+            } catch (e) {
+            }
+        }
+
+        async function getUserHistory(userId) {
+            try {
+                const colRef = collection(db, "ratings");
+
+                const q = query(
+                    colRef,
+                    where("id", "==", userId),
+                    orderBy("record_date", "asc")
+                );
+
+                const querySnapshot = await getDocs(q);
+
+                let historyItem = {
+                    id: userId,
+                    rating: 0,
+                    record_date: null
+                }
+                let history = [];
+                querySnapshot.forEach((doc) => {
+                    history.push({
+                        id: doc.data().id,
+                        rating: doc.data().rating,
+                        record_date: doc.data().record_date.toDate()
+                    });
+                });
+
+                console.log(`${userId} 的歷史紀錄:`, history);
+                return history;
+            } catch (e) {
+                console.error("查詢錯誤:", e);
+            }
+        }
+
+        window.fbTools = { uploadRating, getUserHistory };
+
+        $('#saveBtn').on('click', () => uploadRating("5008034116853", 14987));
+        $('#searchBtn').on('click', () => getUserHistory("5008034116853"));
+    </script>
 
 </head>
 
@@ -36,8 +112,8 @@
             <b id="msg" class="px-3 section-divider-title">如果看到這行字超過5秒，代表資料沒傳成功，請回maimai-net重整後再試一次</b>
             <div class="section-divider right"></div>
         </div>
-        <button id="test1" class="test" onclick="LoadLocalJson('json/test_data/test_data_record.json')">測試資料1</button>
-        <div class="result-container my-4 d-none">
+        <button id="test1" class="test d-none" onclick="LoadLocalJson('json/test_data/test_data_record.json')">測試資料1</button>
+        <div id="result-container" class="my-4 d-none">
             <div id="div-rating-chart" class="mb-4">
                 <div id="rating-chart-title" class="text-center mb-3">
                     <h5>近50首Rating變化</h5>
@@ -101,20 +177,20 @@
     };
 
     // 接到message事件(從maimai-net收到資料)
-    $(window).on('message', (event) => {
+    $(window).on('message', async (event) => {
         $('.test').addClass('d-none');
         const data = event.originalEvent.data;
         if (data.type === 'init') {
             $('#msg').text('連線中，請勿關閉maimai-net...曲數較多請耐心等候...');
         }
         else if (data.type === 'record') {
-            $('.result-container').removeClass('d-none');
+            $('#result-container').removeClass('d-none');
             $('#div-msg').addClass('d-none');
             recordData = data.payload;
             let dates = [...new Set(recordData.map(song => song.date.substring(0, 10)))];
             dates.sort((a, b) => new Date(b) - new Date(a));
             createDateButtons(dates);
-            showRatingChart();
+            await showRatingChart();
             showSongRecord();
         }
     });
@@ -276,5 +352,9 @@
 
     .tr-utage {
         background: #ff6ffd;
+    }
+
+    .text-drop-shadow{
+        filter: drop-shadow(0px 0px 1px black);
     }
 </style>

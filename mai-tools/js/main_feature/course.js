@@ -1,7 +1,7 @@
 const getCourseFilePath = () => {
     const formattedVersion = currentVersion.toLowerCase().replace(/ /g, '_').replace(/~/g, '').replace(/__+/g, '_');
     const suffix = $('#version-switch').is(':checked') ? '_jp.json' : '_intl.json';
-    return `json/course_${formattedVersion}${suffix}`;
+    return `json/course/course_${formattedVersion}${suffix}`;
 };
 
 const initCourseList = async () => {
@@ -16,7 +16,7 @@ const initCourseList = async () => {
     $('#stat').html(`
         <div id="course-info" class="d-flex align-items-center">
             <div>
-                <p>目前最高合格段位: ${getRecordCourseText(maxCourse)}</p>
+                <p>目前最高合格段位: ${getRecordCourseText(maxCourse)===undefined ? '尚無挑戰紀錄' : getRecordCourseText(maxCourse)}</p>
                 <p class="f_12">※十段合格後才能挑戰真段位認定<br/>　真皆伝合格後才能挑戰裏皆伝<br/>　(雙人遊玩時，一方可挑戰另一方就也可跳級挑戰)</p>
             </div>
         </div>

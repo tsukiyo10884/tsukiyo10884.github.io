@@ -27,22 +27,22 @@
 
 <body>
     <div class="main mb-5">
-        <div class="result-container">
+        <div id="result-container">
             <div id="gate" class="align-items-center mb-4">
                 <div class="col-12 d-flex align-items-center my-3">
                     <div class="section-divider left"></div>
                     <b id="msg" class="px-3 section-divider-title">如果看到這行字超過5秒，代表資料沒傳成功，請回maimai-net重整後再試一次</b>
                     <div class="section-divider right"></div>
                 </div>
-                <button id="test1" class="test"
+                <button id="test1" class="test d-none"
                     onclick="LoadLocalJson('json/test_data/test_data_gate1.json',1)">測試資料1</button>
-                <button id="test7" class="test"
+                <button id="test7" class="test d-none"
                     onclick="LoadLocalJson('json/test_data/test_data_gate6.json',6)">測試資料6</button>
-                <button id="test7" class="test"
+                <button id="test7" class="test d-none"
                     onclick="LoadLocalJson('json/test_data/test_data_gate7.json',7)">測試資料7</button>
-                <button id="test7" class="test"
+                <button id="test7" class="test d-none"
                     onclick="LoadLocalJson('json/test_data/test_data_gate9.json',9)">測試資料9</button>
-                <button id="test7" class="test"
+                <button id="test7" class="test d-none"
                     onclick="LoadLocalJson('json/test_data/test_data_gate10.json',10)">測試資料10</button>
             </div>
             <div id="map" class="w-100 mb-4"></div>

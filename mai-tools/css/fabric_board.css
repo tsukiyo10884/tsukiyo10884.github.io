@@ -40,7 +40,7 @@ button:not(#btn-search):hover {
     line-height: 14px;
 }
 
-#completion-filters {
+#div-completion-filters {
     background: #f9f2dc;
     border: 1px solid #d2b48c;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -115,7 +115,7 @@ button:not(#btn-search):hover {
     width: 10px;
 }
 
-#play-filters {
+#div-play-filters {
     background: #f9f2dc;
     border: 1px solid #d2b48c;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -614,7 +614,6 @@ button:not(#btn-search):hover {
     padding: 10px;
     position: relative;
     width: 118px !important;
-    contain: strict;
     transform: translateZ(0);
     backface-visibility: hidden;
     will-change: transform;
@@ -752,10 +751,11 @@ button:not(#btn-search):hover {
     padding: 10px;
     position: relative;
     width: 165px !important;
-    contain: strict;
     transform: translateZ(0);
     backface-visibility: hidden;
     will-change: transform;
+    display: flex;
+    flex-direction: column;
 }
 
 .song-card:hover {
