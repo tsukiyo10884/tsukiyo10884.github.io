@@ -299,6 +299,9 @@
                     break;
                 }
                 case "difficulty": {
+                    if (!$('#btn-import').hasClass("d-none")) {
+                        $('#btn-import').addClass("d-none");
+                    }
                     $output.html(`取得成績中(${data.payload})，請勿關閉maimai-net`);
                     break;
                 }
@@ -311,10 +314,11 @@
                     refreshData();
                     break;
                 }
-                case "result-friend":{
+                case "result-friend": {
                     $('#self').addClass("d-none");
                     $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(data.payload, null, 2)}</textarea>`);
                     refreshData();
+                    break;
                 }
                 case "jp": {
                     if (data.payload) {
