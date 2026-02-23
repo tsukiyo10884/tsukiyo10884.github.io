@@ -413,8 +413,7 @@
                 exportData = {
                     userInfo,
                     songs,
-                    course,
-                    ratingHistory
+                    course
                 };
             }
             // 好友資訊
