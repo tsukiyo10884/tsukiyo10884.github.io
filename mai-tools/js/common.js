@@ -58,20 +58,20 @@ const initUserInfo = () => {
             <div class="clearfix"></div>
         </div>
         `);
-    $('#user-trophy-block').attr('class', data.userInfo.userTrophyBlock + ' trophy_block p_3 t_c f_0');
-    $('#user-trophy').text(data.userInfo.trophy);
-    $('#user-name').text(data.userInfo.name);
-    $('#user-rating').text(data.userInfo.rating);
-    $('#user-rating-base').attr('src', "https://wsrv.nl/?url=" + encodeURIComponent(data.userInfo.ratingBase));
-    $('#user-course-rank').attr('src', "https://wsrv.nl/?url=" + encodeURIComponent(data.userInfo.courseRank));
-    $('#user-class-rank').attr('src', "https://wsrv.nl/?url=" + encodeURIComponent(data.userInfo.classRank));
-    $('#div-user-star-text span').text('☆' + data.userInfo.star);
-    $('#user-star').text(data.userInfo.star);
-    $('#user-icon').attr('src', "https://wsrv.nl/?url=" + encodeURIComponent(data.userInfo.icon));
+    $('#user-trophy-block').attr('class', generalData.userInfo.userTrophyBlock + ' trophy_block p_3 t_c f_0');
+    $('#user-trophy').text(generalData.userInfo.trophy);
+    $('#user-name').text(generalData.userInfo.name);
+    $('#user-rating').text(generalData.userInfo.rating);
+    $('#user-rating-base').attr('src', "https://wsrv.nl/?url=" + encodeURIComponent(generalData.userInfo.ratingBase));
+    $('#user-course-rank').attr('src', "https://wsrv.nl/?url=" + encodeURIComponent(generalData.userInfo.courseRank));
+    $('#user-class-rank').attr('src', "https://wsrv.nl/?url=" + encodeURIComponent(generalData.userInfo.classRank));
+    $('#div-user-star-text span').text('☆' + generalData.userInfo.star);
+    $('#user-star').text(generalData.userInfo.star);
+    $('#user-icon').attr('src', "https://wsrv.nl/?url=" + encodeURIComponent(generalData.userInfo.icon));
     $('#user-info').removeClass('d-none');
 
-    let courseRankText = getProfileCourseText(data.userInfo.courseRankText);
-    let classRankText = getProfileClassText(data.userInfo.classRankText);
+    let courseRankText = getProfileCourseText(generalData.userInfo.courseRankText);
+    let classRankText = getProfileClassText(generalData.userInfo.classRankText);
     $('#div-user-course-rank-text span').text(courseRankText);
     $('#div-user-class-rank-text span').text(classRankText);
 }
@@ -579,11 +579,73 @@ const captureAndDownload = () => {
     });
 };
 
-//Loading畫面
+// Loading畫面
 const showLoading = () => {
     $("#loadingOverlay").removeClass("d-none");
 }
-
 const hideLoading = () => {
     $("#loadingOverlay").addClass("d-none");
+}
+
+// 上傳R值紀錄
+const uploadRating = async () => {
+    if (generalData.ratingHistory == null || generalData.ratingHistory.length === 0) {
+        const toast = new bootstrap.Toast(document.getElementById('toast-no-data'), {
+            delay: 2500
+        });
+        toast.show();
+        return;
+    }
+    if (!confirm("上傳後紀錄為公開資料，確定繼續嗎？")) {
+        return;
+    }
+    showLoading();
+
+    const existingHistory = await fbTools.getUserHistory(generalData.userInfo.id);
+    let proposedData = generalData.ratingHistory.filter(r => {
+        return !existingHistory.some(e => e.rating === r.rating);
+    });
+
+    for (const r of proposedData) {
+        await fbTools.uploadRating(generalData.userInfo.id, r.rating, r.record_date);
+    }
+    refreshData();
+    hideLoading();
+    const toast = new bootstrap.Toast(document.getElementById('toast-updated'), {
+        delay: 2500
+    });
+    toast.show();
+};
+
+const triggerImport = () => {
+    $('#input-file').click();
+}
+const importData = (file) => {
+    // 驗證檔案類型為JSON
+    if (file.files[0].type !== "application/json") {
+        alert("請上傳JSON格式的檔案");
+        return;
+    }
+    $('#div-test').addClass('d-none');
+    window.postMessage({ type: 'init', payload: null }, '*');
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const content = e.target.result;
+        $('#output').html(`<textarea id="json-data" class="d-none">${content}</textarea>`);
+        refreshData();
+    };
+    reader.readAsText(file.files[0]);
+}
+
+// 將當前使用者資料匯出成JSON檔
+const exportData = () => {
+    const blob = new Blob([JSON.stringify(generalData, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `maimai-data-${generalData.userInfo.name}-${new Date().toLocaleString().replace(/[/:\s]/g, '-')}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
 }

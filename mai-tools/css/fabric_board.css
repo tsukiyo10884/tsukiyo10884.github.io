@@ -943,12 +943,16 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
     width: 158px;
 }
 
-.p_10 {
-    padding: 10px;
+.p_0 {
+	padding: 0 !important;
 }
 
 .p_3 {
-    padding: 3px;
+	padding: 3px;
+}
+
+.p_10 {
+	padding: 10px;
 }
 
 .p_l_10 {

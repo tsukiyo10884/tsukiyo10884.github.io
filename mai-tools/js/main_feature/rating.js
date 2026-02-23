@@ -1,5 +1,5 @@
 async function initRatingList() {
-    const { rating_new, rating_others } = data.ratingSongList;
+    const { rating_new, rating_others } = generalData.ratingSongList;
     const allRatingSongs = [...rating_new, ...rating_others];
 
     const [newSongs, others, all] = [rating_new, rating_others, allRatingSongs].map(calcRatings);
@@ -9,7 +9,7 @@ async function initRatingList() {
 }
 
 async function showRatingList() {
-    const { rating_new, rating_others } = data.ratingSongList;
+    const { rating_new, rating_others } = generalData.ratingSongList;
     return [
         await createRatingSection('new songs', rating_new),
         await createRatingSection('others', rating_others)
@@ -24,8 +24,8 @@ function getTop50Songs() {
     const targetVersions = getTargetVersions();
 
     const [oldSongs, newSongs] = [
-        data.songs.filter(s => !targetVersions.includes(s[versionField])),
-        data.songs.filter(s => targetVersions.includes(s[versionField]))
+        generalData.songs.filter(s => !targetVersions.includes(s[versionField])),
+        generalData.songs.filter(s => targetVersions.includes(s[versionField]))
     ].map(songs => songs.map(s => ({ ...s, rating: calculateSongRating(s) })));
 
     const sortByRating = (a, b) => b.rating - a.rating || parseFloat(b.score) - parseFloat(a.score);

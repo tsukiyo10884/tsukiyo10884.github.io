@@ -109,7 +109,7 @@ const randomMove = ($el) => {
 
 //阿瑄
 const initForAXuanList = () => {
-    gainChartList = rangeCanGainRating(data.songs, getTop50Songs());
+    gainChartList = rangeCanGainRating(generalData.songs, getTop50Songs());
     groupedNewSongs = groupSongs(true);
     groupedOldSongs = groupSongs(false);
     const $allSongsSection = createButtonSection('all songs');

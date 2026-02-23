@@ -494,12 +494,16 @@ button:not(:disabled):hover {
 	width: 158px;
 }
 
-.p_10 {
-	padding: 10px;
+.p_0 {
+	padding: 0 !important;
 }
 
 .p_3 {
 	padding: 3px;
+}
+
+.p_10 {
+	padding: 10px;
 }
 
 .p_l_10 {

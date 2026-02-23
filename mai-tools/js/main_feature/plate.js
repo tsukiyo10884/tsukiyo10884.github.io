@@ -266,7 +266,7 @@ const getDifficultyCounts = async (songs, versionName, filter = null) => {
 
 // 取得該版本的歌曲
 const getPlateSongs = async (versionName) => {
-    let songs = data.songs.filter(song => song.title !== '全世界共通リズム感テスト');
+    let songs = generalData.songs.filter(song => song.title !== '全世界共通リズム感テスト');
     const today = new Date();
 
     let removeList = [];

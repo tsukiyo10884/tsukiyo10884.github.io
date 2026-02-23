@@ -10,7 +10,7 @@ const initLevelList = () => {
     const levels = topSongs.map(song => song.internalLevel);
     const maxLevel = Math.max(...levels) === 0 ? 10 : Math.max(...levels);
     const minLevel = maxLevel - 1;
-    const songs = songFilter(data.songs, { minLevel: minLevel, maxLevel: maxLevel });
+    const songs = songFilter(generalData.songs, { minLevel: minLevel, maxLevel: maxLevel });
 
     $('#stat').html(`
         <div id="level-stat" class="d-flex flex-column align-items-center justify-content-center pt-2" style="min-height: 100px;">
@@ -56,7 +56,7 @@ const showLevelListByRange = () => {
         return;
     }
 
-    const songs = songFilter(data.songs, { minLevel: minLevel, maxLevel: maxLevel });
+    const songs = songFilter(generalData.songs, { minLevel: minLevel, maxLevel: maxLevel });
     updateStatistics(songs);
     updateSongGrid(songs, minLevel, maxLevel);
 }

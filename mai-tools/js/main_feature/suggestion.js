@@ -5,7 +5,7 @@ let groupedOldSongs = {};
 
 // 初始化候選曲列表
 async function initSuggestionList() {
-    gainChartList = rangeCanGainRating(data.songs, getTop50Songs());
+    gainChartList = rangeCanGainRating(generalData.songs, getTop50Songs());
     groupedNewSongs = groupSongs(true);
     groupedOldSongs = groupSongs(false);
     const $newSongsSection = createButtonSection('new songs');
@@ -230,17 +230,17 @@ const createSuggestionSongCard = (gainChart, isNewVersion) => {
         const minLevel = Math.min(...gainChartList.map(s => s.level));
         const maxLevel = Math.max(...gainChartList.map(s => s.level));
         if (isNewVersion === null || isNewVersion === undefined) {
-            songs = songFilter(data.songs, { minLevel: minLevel, maxLevel: maxLevel });
+            songs = songFilter(generalData.songs, { minLevel: minLevel, maxLevel: maxLevel });
         } else {
-            songs = songFilter(data.songs, { isNewVersion: isNewVersion, minLevel: minLevel, maxLevel: maxLevel });
+            songs = songFilter(generalData.songs, { isNewVersion: isNewVersion, minLevel: minLevel, maxLevel: maxLevel });
         }
     } else {
         const { minLevel, maxLevel } = calculateLevelRange(gainChart.level);
 
         if (isNewVersion == null) {
-            songs = songFilter(data.songs, { minLevel: minLevel, maxLevel: maxLevel });
+            songs = songFilter(generalData.songs, { minLevel: minLevel, maxLevel: maxLevel });
         } else {
-            songs = songFilter(data.songs, { isNewVersion: isNewVersion, minLevel: minLevel, maxLevel: maxLevel });
+            songs = songFilter(generalData.songs, { isNewVersion: isNewVersion, minLevel: minLevel, maxLevel: maxLevel });
         }
     }
 
@@ -279,7 +279,7 @@ const createSuggestionSongCard = (gainChart, isNewVersion) => {
                 let gain = rankGain.gain;
                 
                 // 如果已經在R表上的歌就要跟現有分數比
-                const allRatingSongs = [...data.ratingSongList.rating_new, ...data.ratingSongList.rating_others];
+                const allRatingSongs = [...generalData.ratingSongList.rating_new, ...generalData.ratingSongList.rating_others];
                 if (songFilter(allRatingSongs, { internalLevel: song.internalLevel, title: song.title }).length > 0) {
                     const existingSong = songFilter(allRatingSongs, { internalLevel: song.internalLevel, title: song.title })[0];
                     gain = '+' + (targetRating - existingSong.rating);
