@@ -22,7 +22,7 @@ const showRatingChart = async () => {
         return;
     }
     const filteredData = generalData.ratingRecord.toReversed();
-    const labels = filteredData.map(e => e.record_date.toLocaleString());
+    const labels = filteredData.map(e => formatDate(new Date(e.record_date), 'yyyy/MM/dd HH:mm'));
     const ratings = filteredData.map(e => e.rating);
     const pointColors = ratings.map((_, i) => i === 0 ? 'white' : '#0b4670');
     const ctx = document.getElementById('rating-chart').getContext('2d');
@@ -56,14 +56,13 @@ const showRatingChart = async () => {
             },
             scales: {
                 x: {
-                    ticks: { display: false },
+                    type:'category',
                     grid: { display: false },
                     reverse: true,
                 },
                 y: {
                     beginAtZero: false,
                     ticks: {
-                        callback: (value) => value.toLocaleString(),
                         color: '#203844',
                         font: {
                             size: 12
@@ -77,9 +76,6 @@ const showRatingChart = async () => {
                     display: false
                 },
                 datalabels: {
-                    formatter: (value, ctx) => {
-                        return value.toLocaleString();
-                    },
                     color: (ctx) => ctx.dataIndex === 0 ? 'red' : '#0b4670',
                     align: (ctx) => ctx.dataIndex === 0 ? 'right' : 'bottom',
                     offset: 2,
