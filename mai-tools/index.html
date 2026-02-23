@@ -226,6 +226,23 @@
             }
         }
 
+        async function deleteRating(userId, recordDate) {
+            try {
+                const colRef = collection(db, "ratings");
+                const q = query(
+                    colRef,
+                    where("id", "==", userId),
+                    where("record_date", "==", Timestamp.fromDate(new Date(recordDate)))
+                );
+                const querySnapshot = await getDocs(q);
+                querySnapshot.forEach(async (doc) => {
+                    await doc.ref.delete();
+                });
+            } catch (e) {
+                console.error("Error deleting rating: ", e);
+            }
+        }
+
         async function getUserHistory(userId) {
             try {
                 const colRef = collection(db, "ratings");
@@ -247,13 +264,19 @@
                     });
                 });
 
+                if (history.length > 50) {
+                    const excessEntries = history.length - 50;
+                    for (let i = 0; i < excessEntries; i++) {
+                        await deleteRating(userId, history[i].record_date);
+                    }
+                }
                 return history;
             } catch (e) {
                 console.error("Error getting user history: ", e);
             }
         }
 
-        window.fbTools = { uploadRating, getUserHistory };
+        window.fbTools = { uploadRating, deleteRating, getUserHistory };
     </script>
     <script>
         let versionList = [];
@@ -355,6 +378,7 @@
                     else if (messageData.payload === 'axun') {
                         $('#stat').html(`<div class="d-flex align-items-center"><p>你的超怪呢</p></div>`);
                     }
+                    break;
                 }
                 case "ratingHistory": {
                     generalData.ratingHistory = messageData.payload
