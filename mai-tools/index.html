@@ -167,11 +167,23 @@
         <div id="loadingOverlay"
             class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-none d-flex justify-content-center align-items-center"
             style="z-index:9999;">
-
             <div class="spinner-border text-light" style="width:3rem;height:3rem;" role="status">
             </div>
-            <span class="ms-2 text-white">圖片生成中</span>
-
+            <span class="ms-2 text-white">Loading...</span>
+        </div>
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="toast-updated" class="toast" style="background-color: #d4edda;" role="alert">
+                <div class="toast-body">
+                    資料已更新
+                </div>
+            </div>
+        </div>
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="toast-no-data" class="toast" style="background-color: #f8d7da;" role="alert">
+                <div class="toast-body">
+                    無資料可更新
+                </div>
+            </div>
         </div>
     </div>
     <script type="module">
@@ -244,11 +256,9 @@
         window.fbTools = { uploadRating, getUserHistory };
     </script>
     <script>
-
         let versionList = [];
-
         let versionOrder = [];
-        let data = "";
+        let generalData = "";
         let courseData = "";
         let currentVersion = "";
         let currentVersionJP = "";
@@ -291,18 +301,18 @@
         $(window).on('message', (event) => {
             $('#test').addClass('d-none');
             $('#test2').addClass('d-none');
-            const data = event.originalEvent.data;
-            if (!data || typeof data !== "object") return;
+            const messageData = event.originalEvent.data;
+            if (!messageData || typeof messageData !== "object") return;
 
             const $output = $('#output');
-            switch (data.type) {
+            switch (messageData.type) {
                 case "init": {
                     $('#btn-import').addClass("d-none");
                     $output.html(`取得成績中，請勿關閉maimai-net`);
-                    if (data.payload != null) {
-                        if (cssFiles.includes('css/' + data.payload + '.css')) {
-                            $('#theme').attr('href', 'css/' + data.payload + '.css');
-                            $('#palette').attr('title', data.payload);
+                    if (messageData.payload != null) {
+                        if (cssFiles.includes('css/' + messageData.payload + '.css')) {
+                            $('#theme').attr('href', 'css/' + messageData.payload + '.css');
+                            $('#palette').attr('title', messageData.payload);
                         } else {
                             $('#theme').attr('href', 'css/default.css');
                             $('#palette').attr('title', 'default');
@@ -314,41 +324,41 @@
                     if (!$('#btn-import').hasClass("d-none")) {
                         $('#btn-import').addClass("d-none");
                     }
-                    $output.html(`取得成績中(${data.payload})，請勿關閉maimai-net`);
+                    $output.html(`取得成績中(${messageData.payload})，請勿關閉maimai-net`);
                     break;
                 }
                 case "course": {
                     $output.html(`取得成績中(段位認定)，請勿關閉maimai-net`);
                     break;
                 }
-                case "ratingHistory": {
-                    $output.html(`取得歷史R值中，請勿關閉maimai-net`);
-                    break;
-                }
                 case "result": {
-                    $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(data.payload, null, 2)}</textarea>`);
+                    $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(messageData.payload, null, 2)}</textarea>`);
                     refreshData();
                     break;
                 }
                 case "result-friend": {
                     $('#self').addClass("d-none");
-                    $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(data.payload, null, 2)}</textarea>`);
+                    $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(messageData.payload, null, 2)}</textarea>`);
                     refreshData();
                     break;
                 }
                 case "jp": {
-                    if (data.payload) {
+                    if (messageData.payload) {
                         $('#version-switch').prop('checked', true);
                     }
                     break;
                 }
                 case "special": {
-                    if (data.payload === 'ayo') {
+                    if (messageData.payload === 'ayo') {
                         $('#stat').html(`<div class="d-flex align-items-center"><p>恭喜橙堇將！啊你的星神、祭白雪熊將呢</p></div>`);
                     }
-                    else if (data.payload === 'axun') {
+                    else if (messageData.payload === 'axun') {
                         $('#stat').html(`<div class="d-flex align-items-center"><p>你的超怪呢</p></div>`);
                     }
+                }
+                case "ratingHistory": {
+                    generalData.ratingHistory = messageData.payload
+                    break;
                 }
             }
         });
@@ -372,24 +382,24 @@
         };
 
         const refreshData = async () => {
-            data = JSON.parse($('#json-data').text());
-            data.ratingRecord = undefined;
-            fbTools.getUserHistory(data.userInfo.id).then(result => {
-                data.ratingRecord = result ?? null;
+            generalData = JSON.parse($('#json-data').text());
+            generalData.ratingRecord = undefined;
+            fbTools.getUserHistory(generalData.userInfo.id).then(result => {
+                generalData.ratingRecord = result ?? null;
                 if ($('#now-title').text() === 'overview') {
                     showTable('overview');
                 }
             }).catch(err => {
                 console.error(err);
-                data.ratingRecord = null;
+                generalData.ratingRecord = null;
             });;
 
-            if (data.course == null) {
+            if (generalData.course == null) {
                 $('#btn-course').addClass('d-none');
             }
 
             const topSongs = getTop50Songs();
-            data.ratingSongList = {
+            generalData.ratingSongList = {
                 rating_new: songFilter(topSongs, { isNewVersion: true }),
                 rating_others: songFilter(topSongs, { isNewVersion: false })
             };
@@ -398,67 +408,10 @@
             $('#div-button-group').removeClass('d-none');
         };
 
-        const uploadRating = async () => {
-            if (data.ratingHistory == null || data.ratingHistory.length === 0) {
-                alert("沒有R值歷史紀錄，無法上傳");
-                return;
-            }
-            if (!confirm("上傳後紀錄為公開資料，確定繼續嗎？")) {
-                return;
-            }
-
-            const existingHistory = await fbTools.getUserHistory(data.userInfo.id);
-            let proposedData = data.ratingHistory.filter(r => {
-                return !existingHistory.some(e => e.rating === r.rating);
-            });
-
-            for (const r of proposedData) {
-                await fbTools.uploadRating(data.userInfo.id, r.rating, r.record_date);
-            }
-            refreshData();
-            alert("資料已更新");
-        };
-
-        const triggerImport = () => {
-            $('#input-file').click();
-        }
-        const importData = (file) => {
-            // 驗證檔案類型為JSON
-            if (file.files[0].type !== "application/json") {
-                alert("請上傳JSON格式的檔案");
-                return;
-            }
-            $('#div-test').addClass('d-none');
-            window.postMessage({ type: 'init', payload: null }, '*');
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const content = e.target.result;
-                $('#output').html(`<textarea id="json-data" class="d-none">${content}</textarea>`);
-                refreshData();
-            };
-            reader.readAsText(file.files[0]);
-        }
-
-        const exportData = () => {
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `maimai-data-${data.userInfo.name}-${new Date().toLocaleString().replace(/[/:\s]/g, '-')}.json`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        }
-
         $(init);
 
     </script>
     <style>
-        .p_0 {
-            padding: 0 !important;
-        }
-
         #palette {
             cursor: pointer;
             height: 30px !important;

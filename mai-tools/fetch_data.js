@@ -94,7 +94,7 @@
                 .map(date => new Date(date))
                 .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '0000-00-00';
 
-            await new Promise(resolve => setTimeout(resolve, i * 200));
+            await new Promise(resolve => setTimeout(resolve, i * 100));
             return { title: song.title, songLastPlayedDate, type: song.type };
         }));
 
@@ -410,28 +410,6 @@
                     course.push({ type, courseRecord: courses });
                 }
 
-                // 取得歷史R值
-                childWin.postMessage({ type: "ratingHistory", payload: null }, siteOrigin);
-                const recordListDoc = await fetchHTML(`${domain}/maimai-mobile/record/`);
-                const idxs = [...recordListDoc.querySelectorAll('input[name="idx"]')].map(el => el.value);
-                let ratingHistory = await Promise.all(idxs.map((idx, i) => limit(async () => {
-                    const recordDoc = await fetchHTML(`${domain}/maimai-mobile/record/playlogDetail/?idx=${idx}`);
-
-                    const data = {
-                        record_date: recordDoc.querySelectorAll('.sub_title .v_b')[1].textContent.trim(),
-                        rating: recordDoc.querySelectorAll('.rating_block')[1]?.textContent.trim() ?? recordDoc.querySelectorAll('.rating_block')[0]?.textContent.trim()
-                    };
-                    await new Promise(resolve => setTimeout(resolve, i * 200));
-                    return data;
-                })));
-                const uniqeRating = new Map();
-                ratingHistory.toReversed().forEach(item => {
-                    if (!uniqeRating.has(item.rating)) {
-                        uniqeRating.set(item.rating, item);
-                    }
-                })
-                ratingHistory = Array.from(uniqeRating.values());
-
                 exportData = {
                     userInfo,
                     songs,
@@ -502,9 +480,33 @@
                 };
             }
 
-            setTimeout(() => {
+            setTimeout(async () => {
                 if (idx === '') {
                     childWin.postMessage({ type: "result", payload: exportData }, siteOrigin);
+
+                    // 取得歷史R值
+                    childWin.postMessage({ type: "ratingHistory", payload: null }, siteOrigin);
+                    const recordListDoc = await fetchHTML(`${domain}/maimai-mobile/record/`);
+                    const idxs = [...recordListDoc.querySelectorAll('input[name="idx"]')].map(el => el.value);
+                    let ratingHistory = await Promise.all(idxs.map((idx, i) => limit(async () => {
+                        const recordDoc = await fetchHTML(`${domain}/maimai-mobile/record/playlogDetail/?idx=${idx}`);
+
+                        const data = {
+                            record_date: recordDoc.querySelectorAll('.sub_title .v_b')[1]?.textContent.trim(),
+                            rating: recordDoc.querySelectorAll('.rating_block')[1]?.textContent.trim() ?? recordDoc.querySelectorAll('.rating_block')[0]?.textContent.trim()
+                        };
+                        await new Promise(resolve => setTimeout(resolve, i * 100));
+                        return data;
+                    })));
+                    const uniqeRating = new Map();
+                    ratingHistory.toReversed().forEach(item => {
+                        if (!uniqeRating.has(item.rating)) {
+                            uniqeRating.set(item.rating, item);
+                        }
+                    })
+                    ratingHistory = Array.from(uniqeRating.values());
+                    childWin.postMessage({ type: "ratingHistory", payload: ratingHistory });
+
                 } else {
                     childWin.postMessage({ type: "result-friend", payload: exportData }, siteOrigin);
                 }
@@ -667,7 +669,7 @@
                 max_combo: recordDoc.querySelectorAll('.col2 .white')[0].textContent.trim(),
                 max_sync: recordDoc.querySelectorAll('.col2 .white')[1].textContent.trim()
             };
-            await new Promise(resolve => setTimeout(resolve, i * 200));
+            await new Promise(resolve => setTimeout(resolve, i * 100));
             return data;
         })));
 
