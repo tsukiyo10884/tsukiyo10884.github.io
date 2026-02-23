@@ -9,10 +9,18 @@ const initOverview = async () => {
             <div class="heavy-hr"></div>
         </div>`
     $('#song-table').html(chartContent);
+    $('#now-title').text('overview');
     await showRatingChart();
 }
 
 const showRatingChart = async () => {
+    if(data.ratingRecord === undefined) {
+        $('#div-rating-chart').html('<p class="text-center my-4 text-white">資料仍在讀取中，請稍後...</p>');
+        return;
+    } else if(data.ratingRecord.length === 0) {
+        $('#div-rating-chart').html('<p class="text-center my-4 text-white">無R值紀錄</p>');
+        return;
+    }
     const filteredData = data.ratingRecord.toReversed();
     const labels = filteredData.map(e => e.record_date.toLocaleString());
     const ratings = filteredData.map(e => e.rating);

@@ -32,9 +32,12 @@
     <script src="js/main_feature/course.js"></script>
     <script src="js/main_feature/special.js"></script>
     <script src="js/dist/html2canvas.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@^4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
 
 </head>
 
@@ -161,6 +164,15 @@
                     href="https://www.instagram.com/aaaaaaaaaxiuan/" target="_blank">Axuan</a>
                 ; inspired by <a href="https://github.com/myjian/">Ming-yuen Jien</a>.</p>
         </footer>
+        <div id="loadingOverlay"
+            class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-none d-flex justify-content-center align-items-center"
+            style="z-index:9999;">
+
+            <div class="spinner-border text-light" style="width:3rem;height:3rem;" role="status">
+            </div>
+            <span class="ms-2 text-white">圖片生成中</span>
+
+        </div>
     </div>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -361,7 +373,16 @@
 
         const refreshData = async () => {
             data = JSON.parse($('#json-data').text());
-            data.ratingRecord = await fbTools.getUserHistory(data.userInfo.id);
+            data.ratingRecord = undefined;
+            fbTools.getUserHistory(data.userInfo.id).then(result => {
+                data.ratingRecord = result ?? null;
+                if ($('#now-title').text() === 'overview') {
+                    showTable('overview');
+                }
+            }).catch(err => {
+                console.error(err);
+                data.ratingRecord = null;
+            });;
 
             if (data.course == null) {
                 $('#btn-course').addClass('d-none');

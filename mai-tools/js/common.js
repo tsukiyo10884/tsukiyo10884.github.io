@@ -518,7 +518,15 @@ $(document).ready(function () {
 });
 
 // 下載圖片功能
-const downloadResultImage = async () => {
+const downloadResultImage = () => {
+    showLoading();
+
+    setTimeout(() => {
+        captureAndDownload();
+    }, 100);
+
+}
+const captureAndDownload = () => {
     const element = document.querySelector('#result-container');
     const clone = element.cloneNode(true);
 
@@ -562,9 +570,20 @@ const downloadResultImage = async () => {
         link.href = canvas.toDataURL('image/png');
         link.click();
         document.body.removeChild(clone);
+        hideLoading();
     }).catch(err => {
         console.error('Screenshot failed:', err);
         alert('圖片下載失敗，請稍後再試。');
         document.body.removeChild(clone);
+        hideLoading();
     });
 };
+
+//Loading畫面
+const showLoading = () => {
+    $("#loadingOverlay").removeClass("d-none");
+}
+
+const hideLoading = () => {
+    $("#loadingOverlay").addClass("d-none");
+}
