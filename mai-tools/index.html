@@ -192,6 +192,7 @@
             getFirestore,
             collection,
             addDoc,
+            deleteDoc,
             query,
             where,
             getDocs,
@@ -234,10 +235,15 @@
                     where("id", "==", userId),
                     where("record_date", "==", Timestamp.fromDate(new Date(recordDate)))
                 );
+
                 const querySnapshot = await getDocs(q);
-                querySnapshot.forEach(async (doc) => {
-                    await doc.ref.delete();
+
+                const deletePromises = [];
+                querySnapshot.forEach((doc) => {
+                    deletePromises.push(deleteDoc(doc.ref));
                 });
+
+                await Promise.all(deletePromises);
             } catch (e) {
                 console.error("Error deleting rating: ", e);
             }
