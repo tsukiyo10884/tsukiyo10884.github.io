@@ -484,7 +484,6 @@
                     childWin.postMessage({ type: "result", payload: exportData }, siteOrigin);
 
                     // 取得歷史R值
-                    childWin.postMessage({ type: "ratingHistory", payload: null }, siteOrigin);
                     const recordListDoc = await fetchHTML(`${domain}/maimai-mobile/record/`);
                     const idxs = [...recordListDoc.querySelectorAll('input[name="idx"]')].map(el => el.value);
                     let ratingHistory = await Promise.all(idxs.map((idx, i) => limit(async () => {
