@@ -605,6 +605,15 @@ const uploadRating = async () => {
     let proposedData = generalData.ratingHistory.filter(r => {
         return !existingHistory.some(e => e.rating === r.rating);
     });
+    proposedData = proposedData.reduce((acc, current) => {
+        const existing = acc.find(item => formatDate(new Date(item.record_date), 'yyyy/MM/dd') === formatDate(new Date(current.record_date), 'yyyy/MM/dd'));
+        if (!existing) {
+            acc.push(current);
+        } else if (existing.rating < current.rating) {
+            existing.rating = current.rating;
+        }
+        return acc;
+    }, []);
 
     for (const r of proposedData) {
         await fbTools.uploadRating(generalData.userInfo.id, r.rating, r.record_date);
@@ -621,7 +630,6 @@ const triggerImport = () => {
     $('#input-file').click();
 }
 const importData = (file) => {
-    // 驗證檔案類型為JSON
     if (file.files[0].type !== "application/json") {
         alert("請上傳JSON格式的檔案");
         return;
