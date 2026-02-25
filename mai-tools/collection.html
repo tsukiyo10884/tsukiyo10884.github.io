@@ -27,7 +27,7 @@
 
 <body>
     <div class="main mb-5">
-        <button id="test_data" class="test d-none"
+        <button id="test_data" class="test"
             onclick="LoadLocalJson('json/test_data/test_data_collection.json',1)">測試資料</button>
         <div id="result-container">
             <div id="tmp">
@@ -39,7 +39,7 @@
             </div>
             <div id="collection" class="d-none">
                 <div id="div-template">
-                    <img id="template" src="./img/collection_template.png" />
+                    <img id="template" src="./img/collection/template.png" />
                 </div>
                 <div id="div-icon">
                     <img id="icon" src="" />
@@ -70,40 +70,45 @@
                 <div id="div-frame">
                     <img id="frame" src="" />
                 </div>
+                <div id="div-circle">
+                    <img id="circle-bg" src="" />
+                    <img id="circle-pre" src="./img/collection/circle_pre.png">
+                    <span id="circle-name"></span>
+                </div>
                 <div id="div-members">
                     <div id="div-leader">
                         <img id="leader" src="" width="183" />
                         <img id="leader-bar" src="" />
                         <span class="level" id="leader-level"></span>
-                        <img id="leader-reborn" src="/mai-tools/img/member_bar_reborn.png" />
+                        <img id="leader-reborn" src="./img/collection/member_bar_reborn.png" />
                     </div>
                     <div id="div-member2">
                         <img id="member2" src="" />
                         <img id="member2-bg" src="" />
                         <img id="member2-layout" src="" />
                         <span class="level" id="member2-level"></span>
-                        <img class="reborn" id="member2-reborn" src="/mai-tools/img/member_layout_reborn.png" />
+                        <img class="reborn" id="member2-reborn" src="./img/collection/member_layout_reborn.png" />
                     </div>
                     <div id="div-member3">
                         <img id="member3" src="" />
                         <img id="member3-bg" src="" />
                         <img id="member3-layout" src="" />
                         <span class="level" id="member3-level"></span>
-                        <img class="reborn" id="member3-reborn" src="/mai-tools/img/member_layout_reborn.png" />
+                        <img class="reborn" id="member3-reborn" src="./img/collection/member_layout_reborn.png" />
                     </div>
                     <div id="div-member4">
                         <img id="member4" src="" />
                         <img id="member4-bg" src="" />
                         <img id="member4-layout" src="" />
                         <span class="level" id="member4-level"></span>
-                        <img class="reborn" id="member4-reborn" src="/mai-tools/img/member_layout_reborn.png" />
+                        <img class="reborn" id="member4-reborn" src="./img/collection/member_layout_reborn.png" />
                     </div>
                     <div id="div-member5">
                         <img id="member5" src="" />
                         <img id="member5-bg" src="" />
                         <img id="member5-layout" src="" />
                         <span class="level" id="member5-level"></span>
-                        <img class="reborn" id="member5-reborn" src="/mai-tools/img/member_layout_reborn.png" />
+                        <img class="reborn" id="member5-reborn" src="./img/collection/member_layout_reborn.png" />
                     </div>
                 </div>
             </div>
@@ -114,6 +119,8 @@
                 <label for="btn-class">顯示Class</label>
                 <input type="checkbox" id="btn-course" class="ms-2" onclick="toggleDisplay('course')" checked>
                 <label for="btn-course">顯示段位</label>
+                <input type="checkbox" id="btn-circle" class="ms-2" onclick="toggleDisplay('circle')" checked>
+                <label for="btn-circle">顯示Circle</label>
                 <input type="checkbox" id="btn-members" class="ms-2" onclick="toggleDisplay('members')" checked>
                 <label for="btn-members">顯示旅伴</label>
             </div>
@@ -136,7 +143,7 @@
             window.postMessage({ type: "collection", payload: json }, '*');
         });
     };
-    $('extra').html(createCreditSection());
+    $('.extra-credits').html(createCreditSection());
     let detailData = null;
     // 接到message事件(從maimai-net收到資料)
     $(window).on('message', (event) => {
@@ -195,7 +202,7 @@
         left: 0px;
         width: 640px;
         height: 264px;
-        z-index: 5;
+        z-index: 10;
     }
 
     #div-frame,
@@ -268,13 +275,20 @@
         white-space: nowrap;
     }
 
+    #div-frame {
+        background: url(./img/collection/default_frame.png);
+        background-size: cover;
+        width: 640px;
+        height: 264px;
+    }
+
     #frame {
         position: absolute;
         top: 0px;
         left: 0px;
         width: 640px;
         height: 264px;
-        z-index: -1;
+        z-index: 0;
     }
 
     #div-nameplate {
@@ -337,7 +351,7 @@
         top: 2px;
         font-size: 10px;
         color: #dbc03a;
-        z-index: 100;
+        z-index: 5;
         text-shadow: black 0.6px 0.6px 0, black -0.6px -0.6px 0, black -0.6px 0.6px 0, black 0.6px -0.6px 0, black 0px 0.6px 0, black 0 -0.6px 0, black -0.6px 0 0, black 0.6px 0 0;
         letter-spacing: 2px;
     }
@@ -383,7 +397,8 @@
     #member4,
     #member5 {
         width: 117px;
-        clip-path: polygon(20% 0, 80% 0, 80% 80%, 68% 94%, 50% 100%, 32% 94%, 20% 80%);
+        clip-path: polygon(20% 0, 80% 0, 80% 80%, 77% 94%, 67% 100%, 28% 99%, 19% 84%);
+        z-index: 1;
     }
 
     #leader-bar {
@@ -397,7 +412,7 @@
         position: absolute;
         top: 134px;
         left: 85px;
-        z-index: 99;
+        z-index: 5;
     }
 
     #member2-bg,
@@ -407,7 +422,7 @@
         position: absolute;
         left: 19px;
         bottom: -15px;
-        z-index: -1;
+        z-index: 0;
     }
 
     #member2-layout,
@@ -417,6 +432,7 @@
         position: absolute;
         left: 19px;
         bottom: -15px;
+        z-index: 2;
     }
 
     .level {
@@ -426,7 +442,7 @@
         color: white;
         position: absolute;
         top: -22px;
-        z-index: 150;
+        z-index: 5;
     }
 
     #leader-reborn {
@@ -439,5 +455,41 @@
         position: absolute;
         top: -4px;
         left: 19px;
+    }
+
+    #div-circle {
+        position: absolute;
+        top: 73px;
+        z-index: 5;
+    }
+
+    #circle-bg {
+        width: 138px;
+        position: relative;
+        left: 106px;
+        height: 17px;
+        z-index: 1;
+    }
+
+    #circle-pre {
+        position: absolute;
+        top: 6.75px;
+        left: 80px;
+        z-index: 0;
+    }
+
+    #circle-name {
+        font-family: 'Hiragino-Maru', sans-serif;
+        position: absolute;
+        white-space: nowrap;
+        font-size: 7px;
+        left: 106px;
+        top: 8.5px;
+        width: 138px;
+        text-align: center;
+        letter-spacing: 0.6px;
+        color: #3064c2;
+        z-index: 2;
+        text-shadow: white 0.6px 0.6px 0, white -0.6px -0.6px 0, white -0.6px 0.6px 0, white 0.6px -0.6px 0, white 0px 0.6px 0, white 0 -0.6px 0, white -0.6px 0 0, white 0.6px 0 0;
     }
 </style>

@@ -16,7 +16,7 @@ const createSpecialButtons = () => {
     const $col3 = $('<div class="special col-1 align-content-center">');
 
     const $button1 = $('<button>')
-        .html('<img src="img/axuan_icon.png" alt="阿瑄專屬" style="height: 50px;">')
+        .html('<img src="./img/special/axuan_icon.png" alt="阿瑄專屬" style="height: 50px;">')
         .css({
             'padding': '0px'
         })
@@ -27,7 +27,7 @@ const createSpecialButtons = () => {
 
 
     const $button2 = $('<button>')
-        .html('<img src="img/ayo_icon.png" alt="阿幽專屬" style="height: 50px;">')
+        .html('<img src="./img/special/ayo_icon.png" alt="阿幽專屬" style="height: 50px;">')
         .css({
             'padding': '0px'
         })
@@ -72,7 +72,7 @@ const initForAyoList = () => {
     $('#axuan_profile')?.remove();
     $('#ayo_profile')?.remove();
     const $profile = $('<img id="ayo_profile">')
-        .attr('src', 'img/ayo_profile.png')
+        .attr('src', './img/special/ayo_profile.png')
         .attr('style', 'position: relative;z-index:99;width: 422px;')
         .on('click', function () {
             $('.basic_block').show();
@@ -83,7 +83,7 @@ const initForAyoList = () => {
 
 const flys = () => {
     for (let i = 0; i < 3; i++) {
-        let $img = $('<img class="fly">').attr('src', `img/ayo_mini.png`);
+        let $img = $('<img class="fly">').attr('src', `./img/special/ayo_mini.png`);
         $('#result-container').append($img);
     }
 
@@ -121,7 +121,7 @@ const initForAXuanList = () => {
     $('#axuan_profile')?.remove();
     $('#ayo_profile')?.remove();
     const $profile = $('<img id="axuan_profile">')
-        .attr('src', 'img/axuan_profile.png')
+        .attr('src', './img/special/axuan_profile.png')
         .attr('style', 'position: relative;z-index:99;width: 422px;')
         .on('click', function () {
             $('.basic_block').show();

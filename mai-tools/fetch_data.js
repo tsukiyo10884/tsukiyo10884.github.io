@@ -696,24 +696,16 @@
     }
     // 收藏品排列模擬
     else if (type === "collection") {
-        const iconRes = await fetch(`${domain}/maimai-mobile/collection/`, { credentials: 'include' });
-        const iconText = await iconRes.text();
-        const iconDoc = new DOMParser().parseFromString(iconText, 'text/html');
+        const iconDoc = await fetchHTML(`${domain}/maimai-mobile/collection/`, { credentials: 'include' });
         const icon = iconDoc.querySelector('.w_80.m_r_10.f_l').src;
 
-        const nameplateRes = await fetch(`${domain}/maimai-mobile/collection/nameplate`, { credentials: 'include' });
-        const nameplateText = await nameplateRes.text();
-        const nameplateDoc = new DOMParser().parseFromString(nameplateText, 'text/html');
+        const nameplateDoc = await fetchHTML(`${domain}/maimai-mobile/collection/nameplate`, { credentials: 'include' });
         const nameplate = nameplateDoc.querySelector('.w_396.m_r_10').src;
 
-        const frameRes = await fetch(`${domain}/maimai-mobile/collection/frame`, { credentials: 'include' });
-        const frameText = await frameRes.text();
-        const frameDoc = new DOMParser().parseFromString(frameText, 'text/html');
+        const frameDoc = await fetchHTML(`${domain}/maimai-mobile/collection/frame`, { credentials: 'include' });
         const frame = frameDoc.querySelector('.w_396.m_r_10').src;
 
-        const characterRes = await fetch(`${domain}/maimai-mobile/collection/character`, { credentials: 'include' });
-        const characterText = await characterRes.text();
-        const characterDoc = new DOMParser().parseFromString(characterText, 'text/html');
+        const characterDoc = await fetchHTML(`${domain}/maimai-mobile/collection/character`, { credentials: 'include' });
         const characters = Array.from(characterDoc.querySelectorAll('.collection_setting_block .chara_cycle_img')).map(img => img.src);
 
         const charactersLevel = Array.from(
@@ -727,9 +719,7 @@
                 reborn: rebornEl ? rebornEl.textContent.trim() : ''
             };
         });
-        const homeRes = await fetch(`${domain}/maimai-mobile/home`, { credentials: 'include' });
-        const homeText = await homeRes.text();
-        const homeDoc = new DOMParser().parseFromString(homeText, 'text/html');
+        const homeDoc = await fetchHTML(`${domain}/maimai-mobile/home`, { credentials: 'include' });
         const name = homeDoc.querySelector('.name_block.f_l.f_16').textContent;
         const rating = homeDoc.querySelector('.rating_block')?.textContent;
         const ratingBase = homeDoc.querySelector('.h_30.f_r').src;
@@ -737,6 +727,11 @@
         const classRank = homeDoc.querySelector('.p_l_10.h_35.f_l')?.src;
         const trophyBlock = homeDoc.querySelector('.trophy_block.p_3.t_c.f_0').className;
         const trophy = homeDoc.querySelector('.trophy_inner_block.f_13').textContent;
+
+        const circleDoc = await fetchHTML(`${domain}/maimai-mobile/circle/`, { credentials: 'include' });
+        const circleName = circleDoc.querySelector('.circle_profile_circle_name span')?.textContent.trim() || '';
+        const circleImg = circleDoc.querySelector('.circle_profile_class img')?.src;
+
 
         const collections = {
             icon,
@@ -750,9 +745,12 @@
             rating,
             ratingBase,
             courseRank,
-            classRank
+            classRank,
+            circleName,
+            circleImg
         }
 
+        console.log(collections);
         setTimeout(() => {
             childWin.postMessage({ type: "collection", payload: collections }, siteOrigin);
         }, 1000);
