@@ -503,7 +503,7 @@
                         }
                     })
                     ratingHistory = Array.from(uniqeRating.values());
-                    childWin.postMessage({ type: "ratingHistory", payload: ratingHistory });
+                    childWin.postMessage({ type: "ratingHistory", payload: ratingHistory }, siteOrigin);
 
                 } else {
                     childWin.postMessage({ type: "result-friend", payload: exportData }, siteOrigin);
