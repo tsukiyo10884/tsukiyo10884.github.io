@@ -6,7 +6,7 @@ const getCourseFilePath = () => {
 
 const initCourseList = async () => {
     const maxCourse = Math.max(
-        ...data.course.flatMap(c =>
+        ...generalData.course.flatMap(c =>
             c.courseRecord
                 .filter(d => d.isClear === true)
                 .map(d => parseInt(d.courseName, 10))
@@ -53,7 +53,7 @@ const showCourseProgress = async (type) => {
         $('#now-title').text(`course|${type}`);
         let courseContent = '';
         courseData.find(x => x.type === type).course.forEach(course => {
-            const playedCourse = data.course.find(c => c.type === type);
+            const playedCourse = generalData.course.find(c => c.type === type);
             let currentCourse = null;
             if (playedCourse != null) {
                 currentCourse = playedCourse.courseRecord.find(c => getRecordCourseText(c.courseName) === course.courseName);
@@ -75,7 +75,7 @@ const showCourseProgress = async (type) => {
                     </div>
                     <div id="course-song-card" class="row justify-content-center gap-3">
                         ${course.songs.map((song, index) => {
-                let songData = data.songs.find(s => s.title === song.title && s.type === song.type && s.difficulty === song.difficulty);
+                let songData = generalData.songs.find(s => s.title === song.title && s.type === song.type && s.difficulty === song.difficulty);
                 if (!songData) {
                     songData = {
                         title: song.title,
@@ -88,7 +88,7 @@ const showCourseProgress = async (type) => {
                     };
                 }
                 let lastPlayedData = null;
-                if (currentCourse != null && currentCourse.songs.length >= index) {
+                if (currentCourse != null && currentCourse.songs.length > index) {
                     lastPlayedData = currentCourse.songs[index];
                 }
                 return `
