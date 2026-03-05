@@ -410,10 +410,32 @@
                     course.push({ type, courseRecord: courses });
                 }
 
+                // Circle資料
+                childWin.postMessage({ type: "circle", payload: null }, siteOrigin);
+                const circleDoc = await fetchHTML(`${domain}/maimai-mobile/circle/`);
+                const circleName = circleDoc.querySelector(".circle_profile_circle_name span")?.textContent.trim() || "";
+                const circlePt = circleDoc.querySelectorAll(".circle_totalpoint_point.f_29.f_b span")[0]?.textContent.trim() || "";
+                const circleRank = circleDoc.querySelectorAll(".circle_pointranking_point.f_29.f_b span")[1]?.textContent.trim() || "";
+
+                const circleRankingDoc = await fetchHTML(`${domain}/maimai-mobile/circle/circleRanking/`);
+                const rankingPeriod = circleRankingDoc.querySelector(".circle_ranking_season_bottom_txt")?.textContent.trim() || "";
+
+                const circleMemberDoc = await fetchHTML(`${domain}/maimai-mobile/circle/circleMember/`);
+
+                const members = [];
+                circleMemberDoc.querySelectorAll(".basic_block").forEach(member => {
+                    const name = member.querySelector(".name_block.f_l.f_16")?.textContent.trim() || "";    
+                    const pt = member.querySelector(".p_t_10.p_r_10.t_r")?.textContent.replace("PT", "").trim() || "";
+                    members.push({ name, pt });
+                });
+
+                const circle = { circleName, circlePt, circleRank, rankingPeriod, members: members.slice(1) };
+
                 exportData = {
                     userInfo,
                     songs,
-                    course
+                    course,
+                    circle
                 };
             }
             // 好友資訊

@@ -31,7 +31,7 @@
     <script src="js/main_feature/level.js"></script>
     <script src="js/main_feature/course.js"></script>
     <script src="js/main_feature/special.js"></script>
-    <script src="js/dist/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@^4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
@@ -147,13 +147,13 @@
             </div>
 
         </div>
-        <div id="result-container">
-            <div class="row border-bottom border-secondary">
-                <div id="user-info" class="user-info col-6 d-none">
+        <div style="margin-left: -20px;">
+            <div id="result-container" style="width: 955px;padding: 20px;">
+                <div class="row border-bottom border-secondary">
+                    <div id="user-info" class="user-info col-6 d-none"></div>
+                    <div id="stat" class="col-6 row"></div>
                 </div>
-                <div id="stat" class="col-6 row"></div>
-            </div>
-            <div id="song-table" class="ms-1 mt-1">
+                <div id="song-table" class="ms-1 mt-1"></div>
             </div>
         </div>
         <footer class="text-center">
@@ -360,6 +360,10 @@
                     $output.html(`取得成績中(段位認定)，請勿關閉maimai-net`);
                     break;
                 }
+                case "circle": {
+                    $output.html(`取得Circle資料中，請勿關閉maimai-net`);
+                    break;
+                }
                 case "result": {
                     $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(messageData.payload, null, 2)}</textarea>`);
                     refreshData();
@@ -474,6 +478,12 @@
             color: #ffffff;
             padding-top: 10px;
         }
+
+    .heavy-hr {
+        background: #fcd810;
+        height: 10px;
+        width: 100%;
+    }
     </style>
 </body>
 

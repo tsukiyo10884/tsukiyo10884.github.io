@@ -7,12 +7,23 @@ const initOverview = async () => {
             <div class="heavy-hr"></div>
             <canvas id="rating-chart" height="100" class="my-4"></canvas>
             <div class="heavy-hr"></div>
-        </div>`
+        </div>
+        
+        <div id="div-circle-chart" class="mb-4">
+            <div id="circle-chart-title" class="text-center mb-3">
+                <h5>Circle貢獻</h5>
+            </div>
+            <div class="heavy-hr"></div>
+            <canvas id="circle-chart" class="my-4"></canvas>
+        </div>
+        `
     $('#song-table').html(chartContent);
     $('#now-title').text('overview');
     await showRatingChart();
+    await showCircleChart();
 }
 
+// 顯示Rating變化圖表
 const showRatingChart = async () => {
     if (generalData.ratingRecord === undefined) {
         $('#div-rating-chart').html('<p class="text-center my-4 text-white">資料仍在讀取中，請稍後...</p>');
@@ -136,3 +147,66 @@ const showRatingChart = async () => {
     Chart.defaults.color = '#203844';
     ctx.canvas.style.backgroundColor = '#ffffff';
 };
+
+// 顯示Circle貢獻圖表
+const showCircleChart = async () => {
+    const ctx = document.getElementById('circle-chart').getContext('2d');
+    const circleData = generalData.circle;
+    if (circleData.circleName === undefined) {
+        $('#div-circle-chart').html('<p class="text-center my-4 text-white">無Circle資料</p>');
+        return;
+    }
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: circleData.members.map(m => m.name),
+            datasets: [{
+                label: 'PT',
+                data: circleData.members.map(m => m.pt),
+                backgroundColor: circleData.members.map(m =>
+                    m.name === generalData.userInfo.name ? '#ff42b4' : '#ffc7f0'
+                ),
+                datalabels: {
+                    anchor: 'end',
+                    align: 'top',
+                },
+            }]
+        },
+        options: {
+            layout: {
+                padding: { left: 20, right: 20, top: 20, bottom: 40 }
+            },
+            plugins: {
+                datalabels: {
+                    display: true,
+                    color: '#203844',
+                    font: { weight: 'bold' },
+                    formatter: (value) => value.toLocaleString()
+                },
+                legend: { display: false }, 
+                title: {
+                    display: true,
+                    text: `${circleData.circleName}`,
+                    font: { size: 22, weight: 'bold' },
+                    padding: { bottom: 5 }
+                },
+                subtitle: {
+                    display: true,
+                    text: [
+                        `PT: ${circleData.circlePt} | Rank: ${circleData.circleRank}`,
+                        `(${circleData.rankingPeriod})`
+                    ],
+                    font: { size: 14, weight: 'normal' },
+                    padding: { bottom: 20 }
+                },
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+    ctx.canvas.style.backgroundColor = '#ffffff';
+}

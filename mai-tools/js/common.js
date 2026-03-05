@@ -16,7 +16,7 @@ const difficulties = ['basic', 'advanced', 'expert', 'master', 'remaster'];
 const initUserInfo = () => {
     $('#user-info').html(`
         <div class="basic_block p_10 f_0">
-            <img id="user-icon" loading="lazy" class="w_112 f_l">
+            <img id="user-icon" loading="lazy" class="w_112 f_l" crossorigin="anonymous">
             <div class="p_l_10 f_l">
             <div id="user-trophy-block" class="trophy_block p_3 t_c f_0">
                 <div class="trophy_inner_block f_13">
@@ -27,7 +27,7 @@ const initUserInfo = () => {
                 <div id="user-name" class="name_block f_l f_16"></div>
                 <div class="f_r t_r f_0">
                 <div class="p_r p_3">
-                    <img id="user-rating-base" class="h_30 f_r">
+                    <img id="user-rating-base" class="h_30 f_r" crossorigin="anonymous">
                     <div id="user-rating" class="rating_block"></div>
                 </div>
                 </div>
@@ -49,10 +49,10 @@ const initUserInfo = () => {
                 <span></span>
                 </div>
             </div>
-            <img id="user-course-rank" class="h_35 f_l">
-            <img id="user-class-rank" class="p_l_10 h_35 f_l">
+            <img id="user-course-rank" class="h_35 f_l" crossorigin="anonymous">
+            <img id="user-class-rank" class="p_l_10 h_35 f_l" crossorigin="anonymous">
             <div class="p_l_10 f_l f_14">
-                <img class="h_30 m_3 v_m" src="https://wsrv.nl/?url=${encodeURIComponent("https://maimaidx-eng.com/maimai-mobile/img/icon_star.png")}"><span id="user-star"></span>
+                <img class="h_30 m_3 v_m" src="https://wsrv.nl/?url=${encodeURIComponent("https://maimaidx-eng.com/maimai-mobile/img/icon_star.png")}" crossorigin="anonymous"><span id="user-star"></span>
             </div>
             </div>
             <div class="clearfix"></div>
@@ -378,7 +378,7 @@ const createSquareSongCard = (song, {
     return `
         <div class="square-song-card difficulty-${song.difficulty.replace(" ", "-").toLowerCase()} ${isCompleted === true ? 'completed' : ''} deg${Math.floor(Math.random() * 5)}" 
                 onclick="showSongDetail('${song.title}', '${song.type}')">
-            <img src=${song.image} class="square-song-image" alt="${song.title}">
+            <img src=${song.image} class="square-song-image" alt="${song.title}" crossorigin="anonymous">
             <div class="song-overlay"></div>
             <div class="square-song-info-block">
                 <div class="song-content text-shadow-black square-song-title">${song.title}</div>
@@ -526,57 +526,53 @@ const downloadResultImage = () => {
     }, 100);
 
 }
+const forceReloadImages = (container) => {
+    container.querySelectorAll('img').forEach(img => {
+        const original = img.src.split('data:image')[0]
+        if (original) {
+            img.src = original + '&r=' + Date.now()
+        }
+    })
+}
 const captureAndDownload = () => {
-    const element = document.querySelector('#result-container');
-    const clone = element.cloneNode(true);
-
-    clone.style.position = 'absolute';
-    clone.style.left = '-9999px';
-    clone.style.top = '0';
-    clone.style.width = parseFloat(window.getComputedStyle(element).width) + 40 + 'px';
-    clone.style.padding = '20px';
-    clone.style.paddingTop = '5px';
-    clone.style.borderRadius = '10px';
-    document.body.appendChild(clone);
+    const node = document.getElementById('result-container');
+    let options = {};
 
     switch (cssFiles.indexOf($('#theme').attr('href'))) {
         case 0: // translucent
-            clone.style.background = 'linear-gradient(0deg, #7af4c3, #7c81ff)';
+            options.backgroundImage = 'linear-gradient(0deg, #7af4c3, #7c81ff)';
             break;
         case 1: // modern
-            clone.style.backgroundColor = '#232228';
+            options.backgroundColor = '#232228';
             break;
         case 2: // cute_pink
-            clone.style.backgroundColor = '#ffe4ec';
+            options.backgroundColor = '#ffe4ec';
             break;
         case 3: // cute_blue
-            clone.style.backgroundColor = '#e4f2ff';
+            options.backgroundColor = '#e4f2ff';
             break;
         case 4: // fabric_board
-            clone.style.background = 'url(../../mai-tools/img/fabric_board.jpg)';
-            clone.style.backgroundSize = '300px';
+            options.background = 'url(img/fabric_board.jpg)';
+            options.backgroundSize = 'cover';
             break;
         default:
-            clone.style.backgroundColor = '#51bcf3';
+            options.backgroundColor = '#51bcf3';
 
     }
-    html2canvas(clone, {
-        useCORS: true,
-        allowTaint: false,
-        backgroundColor: 'transparent',
-    }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'maimai-' + $('#user-name').text() + '-' + new Date().toLocaleString().replace(/[/:\s]/g, '-') + '.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        document.body.removeChild(clone);
-        hideLoading();
-    }).catch(err => {
-        console.error('Screenshot failed:', err);
-        alert('圖片下載失敗，請稍後再試。');
-        document.body.removeChild(clone);
-        hideLoading();
-    });
+    
+    htmlToImage.toPng(node, options)
+        .then((dataUrl) => {
+            const link = document.createElement('a');
+            link.download = `maimai-${generalData.userInfo.name}-${new Date().getTime()}.png`;
+            link.href = dataUrl;
+            link.click();
+            hideLoading();
+        })
+        .catch((error) => {
+            console.error(error);
+            hideLoading();
+            alert('圖片生成失敗，請稍後再試');
+        });
 };
 
 // Loading畫面
@@ -661,7 +657,7 @@ const exportData = () => {
 const formatDate = (inputDate, format) => {
     if (!inputDate) return '';
 
-    const padZero = (value) => (value < 10 ? `0${value}` : `${value}`);
+    const padZero = (value) => (value < 10 ? `0${value} ` : `${value} `);
     const parts = {
         yyyy: inputDate.getFullYear(),
         MM: padZero(inputDate.getMonth() + 1),
