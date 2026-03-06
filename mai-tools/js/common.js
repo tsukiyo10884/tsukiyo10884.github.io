@@ -526,52 +526,54 @@ const downloadResultImage = () => {
     }, 100);
 
 }
-const forceReloadImages = (container) => {
-    container.querySelectorAll('img').forEach(img => {
-        const original = img.src.split('data:image')[0]
-        if (original) {
-            img.src = original + '&r=' + Date.now()
-        }
-    })
-}
 const captureAndDownload = () => {
-    const node = document.getElementById('result-container');
-    let options = {};
+    let resultContainer = $('#result-container');
 
     switch (cssFiles.indexOf($('#theme').attr('href'))) {
         case 0: // translucent
-            options.backgroundImage = 'linear-gradient(0deg, #7af4c3, #7c81ff)';
+            resultContainer.css('background-image', 'linear-gradient(0deg, #7af4c3, #7c81ff)');
+            resultContainer.append(`
+                <div id="temp-waves">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                </div>
+            `);
+            $('#temp-waves .wave').css('top', resultContainer.height() - 50);
             break;
         case 1: // modern
-            options.backgroundColor = '#232228';
+            resultContainer.css('background-color', '#232228');
             break;
         case 2: // cute_pink
-            options.backgroundColor = '#ffe4ec';
+            resultContainer.css('background-color', '#ffe4ec');
             break;
         case 3: // cute_blue
-            options.backgroundColor = '#e4f2ff';
+            resultContainer.css('background-color', '#e4f2ff');
             break;
         case 4: // fabric_board
-            options.background = 'url(img/fabric_board.jpg)';
-            options.backgroundSize = 'cover';
+            resultContainer.css('background', 'url(img/fabric_board.jpg)');
+            resultContainer.css('background-repeat', 'repeat');
+            resultContainer.css('background-size', '300px');
             break;
         default:
-            options.backgroundColor = '#51bcf3';
+            resultContainer.css('background-color', '#51bcf3');
 
     }
-    
-    htmlToImage.toPng(node, options)
+    const node = document.getElementById('result-container');
+
+    htmlToImage.toPng(node)
         .then((dataUrl) => {
-            const link = document.createElement('a');
-            link.download = `maimai-${generalData.userInfo.name}-${new Date().getTime()}.png`;
-            link.href = dataUrl;
-            link.click();
-            hideLoading();
+            const newTab = window.open();
+            newTab.document.body.innerHTML = `<img src="${dataUrl}" style="width: 100%;">`;
         })
         .catch((error) => {
             console.error(error);
-            hideLoading();
             alert('圖片生成失敗，請稍後再試');
+        })
+        .finally(() => {
+            resultContainer.css('background', '');
+            resultContainer.find('#temp-waves').remove();
+            hideLoading();
         });
 };
 
@@ -658,7 +660,7 @@ const exportData = () => {
 // 格式化日期
 const formatDate = (inputDate, format) => {
     if (!inputDate) return '';
-    const pad = (n) => String(n).padStart(2, '0');    
+    const pad = (n) => String(n).padStart(2, '0');
     const h24 = inputDate.getHours();
     const h12 = h24 % 12 || 12;
 
