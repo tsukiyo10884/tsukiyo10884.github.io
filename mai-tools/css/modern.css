@@ -3,6 +3,7 @@ switch
 square cards
 rating cards
 user profile
+overview
 for fun
 */
 
@@ -10,7 +11,7 @@ for fun
 	--color-bg: #232228;
 	--color-text: #fff;
 
-	--color-btn-bg: #d1cde1;
+	--color-btn-bg: #413f4a;
 	--color-btn-text: #fff;
 	--color-btn-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
 
@@ -43,6 +44,7 @@ button {
 	box-shadow: var(--color-btn-shadow);
 	padding: 10px;
 	color: var(--color-btn-text);
+    border: 2px solid #ffffff22;
 }
 
 .section-divider {
@@ -457,6 +459,7 @@ button {
 	background-color: #413f4a;
 	border-radius: 5px;
 	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+    border: 2px solid #ffffff22;
 }
 
 .f_0 {
@@ -623,6 +626,41 @@ button {
 
 .w_112 {
 	width: 112px;
+}
+
+/**********/
+/*overview*/
+/**********/
+#div-rating-chart{
+    margin-top: 15px;
+}
+
+.div-chart {
+    background: #413f4a;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+    border: 2px solid #ffffff22;
+    width: 920px;
+    margin-left:-5px;
+}
+
+.chart {
+    background-color: #ffffff77 !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.chart-title {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.heavy-hr {
+    background: #ffffff77;
+    height: 5px;
+    width: 100%;
+    backdrop-filter: blur(10px);
 }
 
 /*********/

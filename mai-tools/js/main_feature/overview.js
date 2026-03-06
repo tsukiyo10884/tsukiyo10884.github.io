@@ -1,20 +1,21 @@
 const initOverview = async () => {
     const chartContent =
-        `<div id="div-rating-chart" class="mb-4">
+        `<div id="div-rating-chart" class="mb-4 div-chart">
             <div id="rating-chart-title" class="text-center mb-3">
-                <h5>Rating變化(近50筆)</h5>
+                <h5 class="chart-title">Rating變化(近50筆)</h5>
             </div>
-            <div class="heavy-hr"></div>
-            <canvas id="rating-chart" height="100" class="my-4"></canvas>
-            <div class="heavy-hr"></div>
+            <div class="heavy-hr hr-top"></div>
+            <canvas id="rating-chart" class="chart" height="100"></canvas>
+            <div class="heavy-hr hr-bottom"></div>
         </div>
         
-        <div id="div-circle-chart" class="mb-4">
+        <div id="div-circle-chart" class="mb-4 div-chart">
             <div id="circle-chart-title" class="text-center mb-3">
-                <h5>Circle貢獻</h5>
+                <h5 class="chart-title">Circle貢獻</h5>
             </div>
-            <div class="heavy-hr"></div>
-            <canvas id="circle-chart" class="my-4"></canvas>
+            <div class="heavy-hr hr-top"></div>
+            <canvas id="circle-chart" class="chart"></canvas>
+            <div class="heavy-hr hr-bottom"></div>
         </div>
         `
     $('#song-table').html(chartContent);

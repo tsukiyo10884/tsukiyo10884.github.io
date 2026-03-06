@@ -2,6 +2,7 @@
 square cards
 rating cards
 user profile
+overview
 for fun
 */
 
@@ -202,9 +203,26 @@ button:not(#btn-search):hover {
     background: #a7c7e7;
     border: 1px solid #999;
     filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.7));
-    padding: 0.4em 1em;
+    padding: 5px 20px;
     position: relative;
     z-index: 1;
+}
+
+.course-info .section-divider-title {
+    background: #a7c7e7;
+    border: 1px solid #999;
+    filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.7));
+    padding: 5px 20px 30px 20px;
+    position: relative;
+    z-index: 1;
+    transform: translateY(21px);
+    width: 400px;
+}
+
+.course-info p.mb-4 {
+    z-index: 5;
+    position: relative;
+    top: -10px;
 }
 
 .section-divider-title::after {
@@ -944,15 +962,15 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 }
 
 .p_0 {
-	padding: 0 !important;
+    padding: 0 !important;
 }
 
 .p_3 {
-	padding: 3px;
+    padding: 3px;
 }
 
 .p_10 {
-	padding: 10px;
+    padding: 10px;
 }
 
 .p_l_10 {
@@ -1065,6 +1083,59 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 
 .w_112 {
     width: 112px;
+}
+
+/**********/
+/*overview*/
+/**********/
+#div-rating-chart {
+	margin-top: 15px;
+}
+
+.div-chart {
+	background-color: #fff;
+	padding: 20px;
+    filter: drop-shadow(0px 5px 3px rgba(0, 0, 0, 0.7));
+}
+
+.chart-title {
+	color: #7a7a7a;
+	font-weight: bold;
+}
+
+.heavy-hr.hr-top{
+	background: #7a7a7a;
+	height: 1px;
+	width: 100%;
+}
+
+.heavy-hr.hr-bottom{
+	display: none;
+}
+
+
+.div-chart::after {
+    background: linear-gradient(135deg, #496582 0%, #1a242f 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    content: "";
+    height: 16px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 16px;
+}
+
+.div-chart::before {
+    background: linear-gradient(135deg, #496582 0%, #1a242f 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    content: "";
+    height: 16px;
+    left: 5px;
+    position: absolute;
+    top: 5px;
+    width: 16px;
 }
 
 /*********/

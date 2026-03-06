@@ -622,6 +622,7 @@ const uploadRating = async () => {
     toast.show();
 };
 
+// 匯入使用者資料
 const triggerImport = () => {
     $('#input-file').click();
 }
@@ -654,19 +655,22 @@ const exportData = () => {
     URL.revokeObjectURL(url);
 }
 
+// 格式化日期
 const formatDate = (inputDate, format) => {
     if (!inputDate) return '';
+    const pad = (n) => String(n).padStart(2, '0');    
+    const h24 = inputDate.getHours();
+    const h12 = h24 % 12 || 12;
 
-    const padZero = (value) => (value < 10 ? `0${value} ` : `${value} `);
     const parts = {
         yyyy: inputDate.getFullYear(),
-        MM: padZero(inputDate.getMonth() + 1),
-        dd: padZero(inputDate.getDate()),
-        HH: padZero(inputDate.getHours()),
-        hh: padZero(inputDate.getHours() > 12 ? inputDate.getHours() - 12 : inputDate.getHours()),
-        mm: padZero(inputDate.getMinutes()),
-        ss: padZero(inputDate.getSeconds()),
-        tt: inputDate.getHours() < 12 ? 'AM' : 'PM'
+        MM: pad(inputDate.getMonth() + 1),
+        dd: pad(inputDate.getDate()),
+        HH: pad(h24),
+        hh: pad(h12),
+        mm: pad(inputDate.getMinutes()),
+        ss: pad(inputDate.getSeconds()),
+        tt: h24 < 12 ? 'AM' : 'PM'
     };
 
     return format.replace(/yyyy|MM|dd|HH|hh|mm|ss|tt/g, (match) => parts[match]);

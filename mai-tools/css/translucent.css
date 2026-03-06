@@ -3,6 +3,7 @@ switch
 square cards
 rating cards
 user profile
+overview
 for fun
 */
 @font-face {
@@ -11,7 +12,7 @@ for fun
 }
 
 a {
-    color: #ccffff !important;
+    color: #00ff39 !important;
 }
 
 body {
@@ -56,7 +57,7 @@ button {
 
 .wave {
     animation: wave 10s -3s linear infinite;
-    background: rgb(255 255 255 / 25%);
+    background: rgba(255, 255, 255, 0.25);
     border-radius: 1000% 1000% 0 0;
     bottom: 0;
     height: 12em;
@@ -605,15 +606,15 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 }
 
 .p_0 {
-	padding: 0 !important;
+    padding: 0 !important;
 }
 
 .p_3 {
-	padding: 3px;
+    padding: 3px;
 }
 
 .p_10 {
-	padding: 10px;
+    padding: 10px;
 }
 
 .p_l_10 {
@@ -729,6 +730,43 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 
 .w_112 {
     width: 112px;
+}
+
+/**********/
+/*overview*/
+/**********/
+#div-rating-chart{
+    margin-top: 15px;
+}
+
+.div-chart {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    margin-left:-5px;
+    width: 920px;
+}
+
+.chart {
+    background-color: #ffffff77 !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.chart-title {
+    color: #4a4a4a;
+    font-weight: bold;
+}
+
+.heavy-hr {
+    background: #ffffff77;
+    height: 5px;
+    width: 100%;
+    backdrop-filter: blur(10px);
 }
 
 /*********/

@@ -3,6 +3,7 @@ switch
 square cards
 rating cards
 user profile
+overview
 for fun
 */
 
@@ -594,6 +595,46 @@ img {
 
 .w_112 {
 	width: 112px;
+}
+
+/**********/
+/*overview*/
+/**********/
+#div-rating-chart {
+	background: #203844;
+	border-radius: 20px;
+	border: 1px solid #ffffff;
+	padding-top: 10px;
+	padding: 20px;
+}
+
+#rating-chart-title {
+	color: #ffffff;
+	padding-top: 10px;
+}
+
+#div-circle-chart {
+	background: #203844;
+	border-radius: 20px;
+	border: 1px solid #ffffff;
+	padding-top: 10px;
+	padding: 20px;
+}
+
+#circle-chart-title {
+	color: #ffffff;
+	padding-top: 10px;
+}
+
+.chart {
+	margin-top: 1.5rem !important;
+	margin-bottom: 1.5rem !important;
+}
+
+.heavy-hr {
+	background: #fcd810;
+	height: 10px;
+	width: 100%;
 }
 
 /*********/

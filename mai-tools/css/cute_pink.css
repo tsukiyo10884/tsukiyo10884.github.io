@@ -2,6 +2,7 @@
 square cards
 rating cards
 user profile
+overview
 for fun
 */
 :root {
@@ -590,6 +591,31 @@ button:not(:disabled):hover {
 
 .w_112 {
 	width: 112px;
+}
+
+/**********/
+/*overview*/
+/**********/
+#div-rating-chart {
+	margin-top: 15px;
+}
+
+.div-chart {
+	background-color: #fff;
+	border-radius: 20px;
+	box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
+	padding: 20px;
+}
+
+.chart-title {
+	color: #333333;
+	font-weight: bold;
+}
+
+.heavy-hr {
+	background: var(--color-accent);
+	height: 3px;
+	width: 100%;
 }
 
 /*********/
