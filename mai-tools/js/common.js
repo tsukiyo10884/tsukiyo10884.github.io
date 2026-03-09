@@ -16,7 +16,7 @@ const difficulties = ['basic', 'advanced', 'expert', 'master', 'remaster'];
 const initUserInfo = () => {
     $('#user-info').html(`
         <div class="basic_block p_10 f_0">
-            <img id="user-icon" loading="lazy" class="w_112 f_l" crossorigin="anonymous">
+            <img id="user-icon" loading="lazy" class="w_112 f_l">
             <div class="p_l_10 f_l">
             <div id="user-trophy-block" class="trophy_block p_3 t_c f_0">
                 <div class="trophy_inner_block f_13">
@@ -27,7 +27,7 @@ const initUserInfo = () => {
                 <div id="user-name" class="name_block f_l f_16"></div>
                 <div class="f_r t_r f_0">
                 <div class="p_r p_3">
-                    <img id="user-rating-base" class="h_30 f_r" crossorigin="anonymous">
+                    <img id="user-rating-base" class="h_30 f_r">
                     <div id="user-rating" class="rating_block"></div>
                 </div>
                 </div>
@@ -49,10 +49,10 @@ const initUserInfo = () => {
                 <span></span>
                 </div>
             </div>
-            <img id="user-course-rank" class="h_35 f_l" crossorigin="anonymous">
-            <img id="user-class-rank" class="p_l_10 h_35 f_l" crossorigin="anonymous">
+            <img id="user-course-rank" class="h_35 f_l">
+            <img id="user-class-rank" class="p_l_10 h_35 f_l">
             <div class="p_l_10 f_l f_14">
-                <img class="h_30 m_3 v_m" src="https://wsrv.nl/?url=${encodeURIComponent("https://maimaidx-eng.com/maimai-mobile/img/icon_star.png")}" crossorigin="anonymous"><span id="user-star"></span>
+                <img class="h_30 m_3 v_m" src="https://wsrv.nl/?url=${encodeURIComponent("https://maimaidx-eng.com/maimai-mobile/img/icon_star.png")}"><span id="user-star"></span>
             </div>
             </div>
             <div class="clearfix"></div>
@@ -345,7 +345,7 @@ function createSongCard(song) {
 
     return `
     <div class="song-card difficulty-${diffClass} deg${deg}" onclick="showSongDetail('${song.title}', '${song.type}')">
-        <img src="${image}" class="song-image" alt="${title}" crossorigin="anonymous" />
+        <img src="${image}" class="song-image" alt="${title}" />
         <div class="song-overlay"></div>
         <div class="song-info-block">
             <div class="rating-block-song-title song-content text-shadow-black">${title}</div>
@@ -378,7 +378,7 @@ const createSquareSongCard = (song, {
     return `
         <div class="square-song-card difficulty-${song.difficulty.replace(" ", "-").toLowerCase()} ${isCompleted === true ? 'completed' : ''} deg${Math.floor(Math.random() * 5)}" 
                 onclick="showSongDetail('${song.title}', '${song.type}')">
-            <img src=${song.image} class="square-song-image" alt="${song.title}" crossorigin="anonymous">
+            <img src=${song.image} class="square-song-image" alt="${song.title}">
             <div class="song-overlay"></div>
             <div class="square-song-info-block">
                 <div class="song-content text-shadow-black square-song-title">${song.title}</div>
@@ -561,7 +561,7 @@ const captureAndDownload = () => {
     }
     const node = document.getElementById('result-container');
 
-    htmlToImage.toPng(node)
+    htmlToImage.toPng(node, { includeQueryParams:true })
         .then((dataUrl) => {
             const newTab = window.open();
             newTab.document.body.innerHTML = `<img src="${dataUrl}" style="width: 100%;">`;
