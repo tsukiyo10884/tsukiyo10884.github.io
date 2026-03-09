@@ -752,10 +752,6 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 /**********/
 /*overview*/
 /**********/
-#div-rating-chart {
-    margin-top: 15px;
-}
-
 .div-chart {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);

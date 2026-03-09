@@ -1,31 +1,34 @@
 const initOverview = async () => {
     const chartContent =
-        `<div id="div-rating-chart" class="mb-4 div-chart">
-            <div id="rating-chart-title" class="text-center mb-3">
-                <h5 class="chart-title">Rating變化(近50筆)</h5>
+        `
+        <div class="mt-3">
+            <div id="div-rating-chart" class="mb-4 div-chart">
+                <div id="rating-chart-title" class="text-center mb-3">
+                    <h5 class="chart-title">Rating變化(近50筆)</h5>
+                </div>
+                <div class="heavy-hr hr-top"></div>
+                <canvas id="rating-chart" class="chart" height="100"></canvas>
+                <div class="heavy-hr hr-bottom"></div>
             </div>
-            <div class="heavy-hr hr-top"></div>
-            <canvas id="rating-chart" class="chart" height="100"></canvas>
-            <div class="heavy-hr hr-bottom"></div>
-        </div>
-        
-        <div id="div-circle-chart" class="mb-4 div-chart">
-            <div id="circle-chart-title" class="text-center mb-3">
-                <h5 class="chart-title">Circle貢獻</h5>
+            
+            <div id="div-circle-chart" class="mb-4 div-chart">
+                <div id="circle-chart-title" class="text-center mb-3">
+                    <h5 class="chart-title">Circle貢獻</h5>
+                </div>
+                <div class="heavy-hr hr-top"></div>
+                <canvas id="circle-chart" class="chart"></canvas>
+                <div class="heavy-hr hr-bottom"></div>
             </div>
-            <div class="heavy-hr hr-top"></div>
-            <canvas id="circle-chart" class="chart"></canvas>
-            <div class="heavy-hr hr-bottom"></div>
         </div>
         `
     $('#song-table').html(chartContent);
     $('#now-title').text('overview');
-    await showRatingChart();
-    await showCircleChart();
+    await showRatingTrendChart();
+    await showCircleContributionChart();
 }
 
 // 顯示Rating變化圖表
-const showRatingChart = async () => {
+const showRatingTrendChart = async () => {
     if (generalData.ratingRecord === undefined) {
         $('#div-rating-chart').html('<p class="text-center my-4 text-white">資料仍在讀取中，請稍後...</p>');
         return;
@@ -150,7 +153,7 @@ const showRatingChart = async () => {
 };
 
 // 顯示Circle貢獻圖表
-const showCircleChart = async () => {
+const showCircleContributionChart = async () => {
     const ctx = document.getElementById('circle-chart').getContext('2d');
     const circleData = generalData.circle;
     if (circleData.circleName === undefined) {

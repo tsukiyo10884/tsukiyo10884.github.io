@@ -1088,10 +1088,6 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 /**********/
 /*overview*/
 /**********/
-#div-rating-chart {
-	margin-top: 15px;
-}
-
 .div-chart {
 	background-color: #fff;
 	padding: 20px;
