@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<svg width="0" height="0">
+    <filter id="crayon-effect">
+        <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+</svg>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=915">
+    <link rel="icon" href="img/favicon.ico">
+    <title>maimai小工具</title>
+    <link rel="stylesheet" href="css/base_variables.css" />
+    <link id="theme" rel="stylesheet" href="css/default.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://sgimera.github.io/mai_RatingAnalyzer/scripts_maimai/maidx_calc_sub.js"></script>
+    <script src="https://sgimera.github.io/mai_RatingAnalyzer/scripts_maimai/maidx_calc_rating.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/main_feature/overview.js"></script>
+    <script src="js/main_feature/rating.js"></script>
+    <script src="js/main_feature/suggestion.js"></script>
+    <script src="js/main_feature/plate.js"></script>
+    <script src="js/main_feature/level.js"></script>
+    <script src="js/main_feature/course.js"></script>
+    <script src="js/main_feature/special.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@^4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+
+</head>
+
+<body>
+    <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+    <div class="main mb-5">
+
+        <div id="info" class="row justify-content-start ms-1">
+
+            <!-- From Uiverse.io by Bodyhc -->
+            <div class="checkbox-wrapper-35 p-0">
+                <input value="private" name="switch" id="version-switch" type="checkbox" class="switch">
+                <label for="version-switch" style="width: fit-content;">
+                    <span class="switch-x-text">歌曲版本：</span>
+                    <span class="switch-x-toggletext">
+                        <span class="switch-x-unchecked"><span class="switch-x-hiddenlabel">Unchecked:
+                            </span>International
+                            Ver.</span>
+                        <span class="switch-x-checked"><span class="switch-x-hiddenlabel">Checked: </span>Japanese
+                            Ver.</span>
+                    </span>
+                </label>
+            </div>
+
+            <p class="f_14 p_0" style="width: fit-content;">譜面定數： <a
+                    href="https://arcade-songs.zetaraku.dev/maimai/about/" target="_blank">arcade-songs</a></p>
+            <p class="f_14 p_0" style="width: fit-content;">　|　刪除曲：
+                <a href="https://maimai.fandom.com/zh/wiki/%E5%88%AA%E9%99%A4%E6%9B%B2%E4%B8%80%E8%A6%BD"
+                    target="_blank">maimai中文維基</a>
+            </p>
+            <p class="f_14 p_0" style="width: fit-content;">　|　rating計算方法： <a
+                    href="https://sgimera.github.io/mai_RatingAnalyzer/maidx_calc.html" target="_blank">sgimera</a>
+            </p>
+            <div class="col">
+            </div>
+            <div class="col-1">
+                <img id="palette" src="img/palette.svg">
+            </div>
+        </div>
+        <div id="div-test" class="row">
+            <div class="col-2 d-none">
+                <button id="test" class="w-100" onclick="LoadLocalJson('json/test_data/test_data.json')">測試資料1</button>
+            </div>
+            <div class="col-2">
+                <button id="btn-import" class="w-100" onclick="triggerImport()">匯入資料</button>
+                <input id="input-file" class="d-none" type="file" onchange="importData(this)" />
+            </div>
+        </div>
+        <div id="output"></div>
+        <textarea id="now-title" class="d-none"></textarea>
+        <div id="div-button-group" class="row d-none align-items-center">
+            <div id="self" class="row mb-2">
+                <div class="col-2">
+                    <button id="btn-overview" class="w-100" onclick="showTable('overview')">各項統計</button>
+                </div>
+                <div class="col-2">
+                    <button id="btn-upload-rating" class="w-100" onclick="uploadRating()">R値上傳</button>
+                </div>
+                <div class="col-2">
+                    <button id="btn-export" class="w-100" onclick="exportData()">匯出資料</button>
+                </div>
+            </div>
+            <div class="row" style="height: 48px;">
+                <div class="col-2">
+                    <button id="btn-rating" class="w-100" onclick="showTable('rating')">R値入選曲</button>
+                </div>
+                <div class="col-2">
+                    <button id="btn-suggestion" class="w-100" onclick="showTable('suggestion')">R値候選曲</button>
+                </div>
+                <div class="col-2">
+                    <button id="btn-plate" class="w-100" onclick="showTable('plate')">名牌版進度</button>
+                </div>
+                <div class="col-2">
+                    <button id="btn-level" class="w-100" onclick="showTable('level')">等級進度</button>
+                </div>
+                <div class="col-2">
+                    <button id="btn-course" class="w-100" onclick="showTable('course')">段位認定</button>
+                </div>
+                <div id="div-download-image" class="col-2 d-none">
+                    <button id="btn-download-image" class="w-100" onclick="downloadResultImage()">下載圖片</button>
+                </div>
+                <div id="div-completion-filters" class="col-2 d-none">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="completed-only" name="completion-filter" class="form-check-input">
+                        <label for="completed-only">只顯示已達成</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="non-completed-only" name="completion-filter"
+                            class="form-check-input">
+                        <label for="non-completed-only">只顯示未達成</label>
+                    </div>
+                </div>
+                <div id="div-play-filters" class="col-2 d-none">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="played-only" name="play-filter" class="form-check-input">
+                        <label for="completed-only">只顯示已玩過</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="non-played-only" name="play-filter" class="form-check-input">
+                        <label for="non-completed-only">只顯示未玩過</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div style="margin-left: -20px;">
+            <div id="result-container" style="width: 955px;padding: 20px;">
+                <div class="row border-bottom border-secondary">
+                    <div id="user-info" class="user-info col-6 d-none">
+                    </div>
+                    <div id="stat" class="col-6 row"></div>
+                </div>
+                <div id="song-table" class="ms-1 mt-1">
+                </div>
+            </div>
+        </div>
+        <footer class="text-center">
+            <hr>
+            <p id="credit">
+                Made by <a href="https://github.com/tsukiyo10884/" target="_blank">Tsukiyo</a>, in
+                collaboration with <a href="https://www.instagram.com/mua_2110/" target="_blank">Ayo</a> and <a
+                    href="https://www.instagram.com/aaaaaaaaaxiuan/" target="_blank">Axuan</a>
+                ; inspired by <a href="https://github.com/myjian/">Ming-yuen Jien</a>.</p>
+        </footer>
+        <div id="loadingOverlay"
+            class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-none d-flex justify-content-center align-items-center"
+            style="z-index:9999;">
+            <div class="spinner-border text-light" style="width:3rem;height:3rem;" role="status">
+            </div>
+            <span class="ms-2 text-white">Loading...</span>
+        </div>
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="toast-updated" class="toast" style="background-color: #d4edda;" role="alert">
+                <div class="toast-body">
+                    資料已更新
+                </div>
+            </div>
+        </div>
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="toast-no-data" class="toast" style="background-color: #f8d7da;" role="alert">
+                <div class="toast-body">
+                    無資料可更新
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="export-container" style="position:fixed;left:-9999px;"></div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            deleteDoc,
+            query,
+            where,
+            getDocs,
+            orderBy,
+            Timestamp,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDCLc_eSevQS1UvxSrP7smqMDMX7vpRqwY",
+            authDomain: "mai-tools-1f4ac.firebaseapp.com",
+            projectId: "mai-tools-1f4ac",
+            storageBucket: "mai-tools-1f4ac.firebasestorage.app",
+            messagingSenderId: "798518415925",
+            appId: "1:798518415925:web:19073fbcc79a2e0e89d77c",
+            measurementId: "G-P2S8Z05HCF"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function uploadRating(userId, score, recordDate) {
+            try {
+                const colRef = collection(db, "ratings");
+                const docRef = await addDoc(colRef, {
+                    id: userId,
+                    rating: score,
+                    record_date: Timestamp.fromDate(new Date(recordDate)) || serverTimestamp()
+                });
+            } catch (e) {
+                console.error("Error uploading rating: ", e);
+            }
+        }
+
+        async function deleteRating(userId, recordDate) {
+            try {
+                const colRef = collection(db, "ratings");
+                const q = query(
+                    colRef,
+                    where("id", "==", userId),
+                    where("record_date", "==", Timestamp.fromDate(new Date(recordDate)))
+                );
+
+                const querySnapshot = await getDocs(q);
+
+                const deletePromises = [];
+                querySnapshot.forEach((doc) => {
+                    deletePromises.push(deleteDoc(doc.ref));
+                });
+
+                await Promise.all(deletePromises);
+            } catch (e) {
+                console.error("Error deleting rating: ", e);
+            }
+        }
+
+        async function getUserHistory(userId) {
+            try {
+                const colRef = collection(db, "ratings");
+
+                const q = query(
+                    colRef,
+                    where("id", "==", userId),
+                    orderBy("record_date", "asc")
+                );
+
+                const querySnapshot = await getDocs(q);
+
+                let history = [];
+                querySnapshot.forEach((doc) => {
+                    history.push({
+                        id: doc.data().id,
+                        rating: doc.data().rating,
+                        record_date: doc.data().record_date.toDate()
+                    });
+                });
+
+                if (history.length > 50) {
+                    const excessEntries = history.length - 50;
+                    for (let i = 0; i < excessEntries; i++) {
+                        await deleteRating(userId, history[i].record_date);
+                    }
+                }
+                return history;
+            } catch (e) {
+                console.error("Error getting user history: ", e);
+            }
+        }
+
+        window.fbTools = { uploadRating, deleteRating, getUserHistory };
+    </script>
+    <script>
+        let versionList = [];
+        let versionOrder = [];
+        let generalData = "";
+        let courseData = "";
+        let currentVersion = "";
+        let currentVersionJP = "";
+        let currentVersionIntl = "";
+
+        const init = async () => {
+            versionList = await $.getJSON('json/version.json');
+
+            const today = new Date().toISOString().split('T')[0];
+            const jpVersions = versionList.filter(v => v.startDateJP && v.startDateJP <= today);
+            currentVersionJP = jpVersions.length > 0 ? jpVersions[jpVersions.length - 1].versionName : "PRiSM PLUS";
+
+            const intlVersions = versionList.filter(v => v.startDateIntl && v.startDateIntl <= today);
+            currentVersionIntl = intlVersions.length > 0 ? intlVersions[intlVersions.length - 1].versionName : "BUDDiES PLUS";
+
+            updateCurrentVersion();
+            versionOrder = [...new Set(
+                versionList
+                    .map(v => v.versionName)
+                    .filter(name => !name.includes('~'))
+            )];
+            initPalette();
+            $('#version-switch').on('change', () => {
+                updateCurrentVersion();
+                handleFilterChange();
+            });
+            setupEventListeners();
+        };
+
+        const setupEventListeners = () => {
+            bindCompletionEventListeners();
+            bindPlayedEventListeners();
+
+            $(window).on('load', () => {
+                $('#json-data').text() && refreshData();
+            });
+        };
+
+        // 接到message事件(從maimai-net收到資料)
+        $(window).on('message', (event) => {
+            $('#test').addClass('d-none');
+            $('#test2').addClass('d-none');
+            const messageData = event.originalEvent.data;
+            if (!messageData || typeof messageData !== "object") return;
+
+            const $output = $('#output');
+            switch (messageData.type) {
+                case "init": {
+                    $('#btn-import').addClass("d-none");
+                    $output.html(`取得成績中，請勿關閉maimai-net`);
+                    if (messageData.payload != null) {
+                        if (cssFiles.includes('css/' + messageData.payload + '.css')) {
+                            $('#theme').attr('href', 'css/' + messageData.payload + '.css');
+                            $('#palette').attr('title', messageData.payload);
+                        } else {
+                            $('#theme').attr('href', 'css/default.css');
+                            $('#palette').attr('title', 'default');
+                        }
+                    }
+                    break;
+                }
+                case "difficulty": {
+                    if (!$('#btn-import').hasClass("d-none")) {
+                        $('#btn-import').addClass("d-none");
+                    }
+                    $output.html(`取得成績中(${messageData.payload})，請勿關閉maimai-net`);
+                    break;
+                }
+                case "course": {
+                    $output.html(`取得成績中(段位認定)，請勿關閉maimai-net`);
+                    break;
+                }
+                case "circle": {
+                    $output.html(`取得Circle資料中，請勿關閉maimai-net`);
+                    break;
+                }
+                case "result": {
+                    $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(messageData.payload, null, 2)}</textarea>`);
+                    refreshData();
+                    break;
+                }
+                case "result-friend": {
+                    $('#self').addClass("d-none");
+                    $output.html(`<textarea id="json-data" class="d-none">${JSON.stringify(messageData.payload, null, 2)}</textarea>`);
+                    refreshData();
+                    break;
+                }
+                case "jp": {
+                    if (messageData.payload) {
+                        $('#version-switch').prop('checked', true);
+                    }
+                    break;
+                }
+                case "special": {
+                    if (messageData.payload === 'ayo') {
+                        $('#stat').html(`<div class="d-flex align-items-center"><p>恭喜橙堇將！啊你的星神、祭白雪熊將呢</p></div>`);
+                    }
+                    else if (messageData.payload === 'axun') {
+                        $('#stat').html(`<div class="d-flex align-items-center"><p>你的超怪呢</p></div>`);
+                    }
+                    break;
+                }
+                case "ratingHistory": {
+                    generalData.ratingHistory = messageData.payload
+                    break;
+                }
+            }
+        });
+
+        // 取得本地json(測試資料)
+        const LoadLocalJson = (filePath) => {
+            $('#div-test').addClass('d-none');
+            window.postMessage({ type: 'init', payload: null }, '*');
+            $.getJSON(filePath, (json) => {
+                $('#output').html(`<textarea id="json-data" class="d-none">${JSON.stringify(json, null, 2)}</textarea>`);
+                refreshData();
+            });
+        };
+
+        const updateCurrentVersion = () => {
+            if ($('#version-switch').is(':checked')) {
+                currentVersion = currentVersionJP;
+            } else {
+                currentVersion = currentVersionIntl;
+            }
+        };
+
+        const refreshData = async () => {
+            generalData = JSON.parse($('#json-data').text());
+            generalData.ratingRecord = undefined;
+            fbTools.getUserHistory(generalData.userInfo.id).then(result => {
+                generalData.ratingRecord = result ?? null;
+                if ($('#now-title').text() === 'overview') {
+                    showTable('overview');
+                }
+            }).catch(err => {
+                console.error(err);
+                generalData.ratingRecord = null;
+            });;
+
+            if (generalData.course == null) {
+                $('#btn-course').addClass('d-none');
+            }
+
+            const topSongs = getTop50Songs();
+            generalData.ratingSongList = {
+                rating_new: songFilter(topSongs, { isNewVersion: true }),
+                rating_others: songFilter(topSongs, { isNewVersion: false })
+            };
+
+            initUserInfo();
+            $('#div-button-group').removeClass('d-none');
+        };
+
+        $(init);
+        LoadLocalJson('json/test_data/test_data.json');
+
+    </script>
+    <style>
+        #palette {
+            cursor: pointer;
+            height: 30px !important;
+            z-index: 1000;
+        }
+
+        .main {
+            --bs-gutter-x: 1.5rem;
+            --bs-gutter-y: 0;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: calc(var(--bs-gutter-x) * .5);
+            padding-right: calc(var(--bs-gutter-x) * .5);
+            width: 915px;
+        }
+
+        body {
+            overflow-y: scroll;
+        }
+    </style>
+</body>
+
+</html>

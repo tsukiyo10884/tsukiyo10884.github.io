@@ -1,342 +1,337 @@
 [
     {
         "no": 1,
-        "date": "2025/10/04 19:28",
+        "date": "2026/03/08 18:04",
         "track": "TRACK 03",
-        "title": "一か罰",
-        "type": "dx",
-        "internalLevel": 14,
-        "difficulty": "remaster",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/1873c61115b01c98.png",
-        "score": "99.1337%",
-        "score_new_record": true,
-        "dx_score": "2,437 / 2,784",
-        "dx_score_new_record": true,
-        "fast": "132",
-        "late": "145",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
+        "title": "麒麟",
+        "type": "std",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/88185a61da17d947.png",
+        "score": "97.9282%",
+        "score_new_record": false,
+        "dx_score": "2,112 / 2,511",
+        "dx_score_new_record": false,
+        "fast": "126",
+        "late": "171",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15123",
         "rating_plus": "(+0)",
         "notes": {
             "tap": {
-                "critical_perfect": "319",
-                "perfect": "183",
-                "great": "26",
-                "good": "4",
-                "miss": "6"
+                "critical_perfect": "356",
+                "perfect": "238",
+                "great": "36",
+                "good": "5",
+                "miss": "17"
             },
             "hold": {
-                "critical_perfect": "61",
-                "perfect": "27",
-                "great": "5",
-                "good": "1",
+                "critical_perfect": "15",
+                "perfect": "11",
+                "great": "0",
+                "good": "0",
                 "miss": "0"
             },
             "slide": {
-                "critical_perfect": "111",
+                "critical_perfect": "149",
                 "perfect": "0",
-                "great": "0",
-                "good": "1",
+                "great": "1",
+                "good": "0",
                 "miss": "0"
             },
             "touch": {
-                "critical_perfect": "75",
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
+            },
+            "break": {
+                "critical_perfect": "3",
+                "perfect": "4",
+                "great": "0",
+                "good": "2",
+                "miss": "0"
+            }
+        },
+        "max_combo": "594/837",
+        "max_sync": "―"
+    },
+    {
+        "no": 2,
+        "date": "2026/03/08 18:01",
+        "track": "TRACK 02",
+        "title": "NAGAREBOSHI☆ROCKET",
+        "type": "dx",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/db0eec06b051299f.png",
+        "score": "98.7154%",
+        "score_new_record": true,
+        "dx_score": "2,072 / 2,463",
+        "dx_score_new_record": true,
+        "fast": "64",
+        "late": "236",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15123",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "260",
+                "perfect": "203",
+                "great": "41",
+                "good": "4",
+                "miss": "8"
+            },
+            "hold": {
+                "critical_perfect": "27",
+                "perfect": "31",
+                "great": "3",
+                "good": "1",
+                "miss": "1"
+            },
+            "slide": {
+                "critical_perfect": "104",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "98",
+                "perfect": "1",
+                "great": "0",
+                "good": "0",
+                "miss": "3"
+            },
+            "break": {
+                "critical_perfect": "20",
+                "perfect": "15",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "195/821",
+        "max_sync": "―"
+    },
+    {
+        "no": 3,
+        "date": "2026/03/08 17:59",
+        "track": "TRACK 01",
+        "title": "NAGAREBOSHI☆ROCKET",
+        "type": "dx",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/db0eec06b051299f.png",
+        "score": "96.4148%",
+        "score_new_record": true,
+        "dx_score": "2,009 / 2,463",
+        "dx_score_new_record": true,
+        "fast": "76",
+        "late": "229",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15123",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "256",
+                "perfect": "182",
+                "great": "58",
+                "good": "9",
+                "miss": "11"
+            },
+            "hold": {
+                "critical_perfect": "26",
+                "perfect": "25",
+                "great": "5",
+                "good": "3",
+                "miss": "4"
+            },
+            "slide": {
+                "critical_perfect": "101",
+                "perfect": "0",
+                "great": "0",
+                "good": "3",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "99",
+                "perfect": "1",
+                "great": "0",
+                "good": "0",
+                "miss": "2"
+            },
+            "break": {
+                "critical_perfect": "16",
+                "perfect": "17",
+                "great": "2",
+                "good": "0",
+                "miss": "1"
+            }
+        },
+        "max_combo": "221/821",
+        "max_sync": "―"
+    },
+    {
+        "no": 4,
+        "date": "2026/03/08 17:28",
+        "track": "TRACK 03",
+        "title": "Unwelcome School",
+        "type": "dx",
+        "internalLevel": 14,
+        "difficulty": "remaster",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/ba639bf8d279f397.png",
+        "score": "95.5640%",
+        "score_new_record": false,
+        "dx_score": "2,362 / 2,880",
+        "dx_score_new_record": false,
+        "fast": "75",
+        "late": "240",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15123",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "389",
+                "perfect": "222",
+                "great": "39",
+                "good": "25",
+                "miss": "31"
+            },
+            "hold": {
+                "critical_perfect": "5",
+                "perfect": "11",
+                "great": "0",
+                "good": "0",
+                "miss": "1"
+            },
+            "slide": {
+                "critical_perfect": "149",
+                "perfect": "0",
+                "great": "0",
+                "good": "1",
+                "miss": "2"
+            },
+            "touch": {
+                "critical_perfect": "36",
                 "perfect": "1",
                 "great": "0",
                 "good": "0",
                 "miss": "0"
             },
             "break": {
-                "critical_perfect": "79",
-                "perfect": "22",
-                "great": "5",
-                "good": "2",
-                "miss": "0"
-            }
-        },
-        "max_combo": "581/928",
-        "max_sync": "―"
-    },
-    {
-        "no": 2,
-        "date": "2025/10/04 19:25",
-        "track": "TRACK 02",
-        "title": "猫祭り",
-        "type": "std",
-        "internalLevel": 13.4,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/0ae6e1de73fd6d84.png",
-        "score": "100.4752%",
-        "score_new_record": true,
-        "dx_score": "2,108 / 2,355",
-        "dx_score_new_record": true,
-        "fast": "167",
-        "late": "61",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "274",
-                "perfect": "160",
-                "great": "10",
-                "good": "0",
-                "miss": "2"
-            },
-            "hold": {
-                "critical_perfect": "36",
-                "perfect": "9",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "191",
-                "perfect": "0",
+                "critical_perfect": "30",
+                "perfect": "13",
                 "great": "2",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "",
-                "perfect": "",
-                "great": "",
-                "good": "",
-                "miss": ""
-            },
-            "break": {
-                "critical_perfect": "54",
-                "perfect": "46",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "438/785",
-        "max_sync": "―"
-    },
-    {
-        "no": 3,
-        "date": "2025/10/04 19:22",
-        "track": "TRACK 01",
-        "title": "きゅうくらりん",
-        "type": "dx",
-        "internalLevel": 13.7,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/89a9a20b498524c9.png",
-        "score": "100.2662%",
-        "score_new_record": false,
-        "dx_score": "2,294 / 2,577",
-        "dx_score_new_record": false,
-        "fast": "125",
-        "late": "128",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "301",
-                "perfect": "167",
-                "great": "12",
-                "good": "3",
-                "miss": "1"
-            },
-            "hold": {
-                "critical_perfect": "132",
-                "perfect": "59",
-                "great": "3",
                 "good": "1",
-                "miss": "1"
-            },
-            "slide": {
-                "critical_perfect": "114",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "17",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "40",
-                "perfect": "7",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
+                "miss": "2"
             }
         },
-        "max_combo": "476/859",
-        "max_sync": "―"
-    },
-    {
-        "no": 4,
-        "date": "2025/10/04 19:09",
-        "track": "TRACK 03",
-        "title": "How To Make 音ゲ～曲！",
-        "type": "dx",
-        "internalLevel": 13.8,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/f14e167e89e6ab22.png",
-        "score": "100.4425%",
-        "score_new_record": true,
-        "dx_score": "2,307 / 2,562",
-        "dx_score_new_record": true,
-        "fast": "100",
-        "late": "134",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "394",
-                "perfect": "179",
-                "great": "15",
-                "good": "0",
-                "miss": "1"
-            },
-            "hold": {
-                "critical_perfect": "37",
-                "perfect": "15",
-                "great": "2",
-                "good": "0",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "72",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "76",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "40",
-                "perfect": "22",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "588/854",
+        "max_combo": "285/960",
         "max_sync": "―"
     },
     {
         "no": 5,
-        "date": "2025/10/04 19:06",
+        "date": "2026/03/08 17:25",
         "track": "TRACK 02",
-        "title": "How To Make 音ゲ～曲！",
-        "type": "dx",
-        "internalLevel": 13.8,
+        "title": "閃鋼のブリューナク",
+        "type": "std",
+        "internalLevel": 13.9,
         "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/f14e167e89e6ab22.png",
-        "score": "98.9984%",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/a53a18178b2d9ea7.png",
+        "score": "97.7260%",
         "score_new_record": false,
-        "dx_score": "2,208 / 2,562",
+        "dx_score": "2,403 / 3,003",
         "dx_score_new_record": false,
-        "fast": "106",
-        "late": "170",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
+        "fast": "156",
+        "late": "317",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15123",
         "rating_plus": "(+0)",
         "notes": {
             "tap": {
-                "critical_perfect": "344",
-                "perfect": "205",
-                "great": "22",
-                "good": "5",
-                "miss": "13"
+                "critical_perfect": "446",
+                "perfect": "377",
+                "great": "74",
+                "good": "8",
+                "miss": "10"
             },
             "hold": {
-                "critical_perfect": "36",
-                "perfect": "15",
-                "great": "2",
-                "good": "1",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "71",
-                "perfect": "0",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "76",
-                "perfect": "0",
+                "critical_perfect": "16",
+                "perfect": "7",
                 "great": "0",
                 "good": "0",
                 "miss": "0"
             },
+            "slide": {
+                "critical_perfect": "49",
+                "perfect": "0",
+                "great": "1",
+                "good": "1",
+                "miss": "1"
+            },
+            "touch": {
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
+            },
             "break": {
-                "critical_perfect": "38",
-                "perfect": "23",
-                "great": "2",
+                "critical_perfect": "6",
+                "perfect": "4",
+                "great": "1",
                 "good": "0",
                 "miss": "0"
             }
         },
-        "max_combo": "224/854",
+        "max_combo": "227/1001",
         "max_sync": "―"
     },
     {
         "no": 6,
-        "date": "2025/10/04 19:03",
+        "date": "2026/03/08 17:21",
         "track": "TRACK 01",
-        "title": "Xevel",
+        "title": "Jack-the-Ripper◆",
         "type": "std",
-        "internalLevel": 14.3,
+        "internalLevel": 14.1,
         "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/a1a92cb034053e70.png",
-        "score": "97.3367%",
-        "score_new_record": false,
-        "dx_score": "2,786 / 3,507",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/face36da229c0923.png",
+        "score": "99.0206%",
+        "score_new_record": true,
+        "dx_score": "2,378 / 2,799",
         "dx_score_new_record": false,
-        "fast": "302",
-        "late": "222",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
+        "fast": "121",
+        "late": "232",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15123",
         "rating_plus": "(+0)",
         "notes": {
             "tap": {
-                "critical_perfect": "452",
-                "perfect": "375",
-                "great": "63",
-                "good": "23",
-                "miss": "25"
+                "critical_perfect": "422",
+                "perfect": "274",
+                "great": "32",
+                "good": "9",
+                "miss": "4"
             },
             "hold": {
-                "critical_perfect": "19",
-                "perfect": "9",
+                "critical_perfect": "54",
+                "perfect": "30",
                 "great": "1",
                 "good": "0",
-                "miss": "1"
+                "miss": "0"
             },
             "slide": {
-                "critical_perfect": "108",
+                "critical_perfect": "93",
                 "perfect": "0",
-                "great": "2",
+                "great": "1",
                 "good": "0",
                 "miss": "0"
             },
@@ -348,55 +343,291 @@
                 "miss": ""
             },
             "break": {
-                "critical_perfect": "40",
-                "perfect": "44",
-                "great": "7",
+                "critical_perfect": "6",
+                "perfect": "5",
+                "great": "1",
                 "good": "0",
-                "miss": "0"
+                "miss": "1"
             }
         },
-        "max_combo": "462/1169",
+        "max_combo": "423/933",
         "max_sync": "―"
     },
     {
         "no": 7,
-        "date": "2025/10/04 18:49",
+        "date": "2026/03/08 17:00",
         "track": "TRACK 03",
-        "title": "アージェントシンメトリー",
+        "title": "Jack-the-Ripper◆",
         "type": "std",
-        "internalLevel": 14,
-        "difficulty": "remaster",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/4f526bd3f2d19ef2.png",
-        "score": "97.6262%",
-        "score_new_record": false,
-        "dx_score": "2,237 / 2,868",
-        "dx_score_new_record": false,
-        "fast": "312",
-        "late": "166",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/face36da229c0923.png",
+        "score": "98.9668%",
+        "score_new_record": true,
+        "dx_score": "2,379 / 2,799",
+        "dx_score_new_record": true,
+        "fast": "127",
+        "late": "225",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15123",
         "rating_plus": "(+0)",
         "notes": {
             "tap": {
-                "critical_perfect": "326",
-                "perfect": "324",
-                "great": "73",
-                "good": "10",
-                "miss": "18"
+                "critical_perfect": "424",
+                "perfect": "273",
+                "great": "33",
+                "good": "8",
+                "miss": "3"
             },
             "hold": {
-                "critical_perfect": "58",
-                "perfect": "52",
-                "great": "5",
+                "critical_perfect": "53",
+                "perfect": "29",
+                "great": "3",
                 "good": "0",
                 "miss": "0"
             },
             "slide": {
-                "critical_perfect": "67",
+                "critical_perfect": "92",
                 "perfect": "0",
+                "great": "1",
+                "good": "0",
+                "miss": "1"
+            },
+            "touch": {
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
+            },
+            "break": {
+                "critical_perfect": "7",
+                "perfect": "5",
                 "great": "0",
                 "good": "0",
+                "miss": "1"
+            }
+        },
+        "max_combo": "418/933",
+        "max_sync": "―"
+    },
+    {
+        "no": 8,
+        "date": "2026/03/08 16:57",
+        "track": "TRACK 02",
+        "title": "Jack-the-Ripper◆",
+        "type": "std",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/face36da229c0923.png",
+        "score": "98.7955%",
+        "score_new_record": true,
+        "dx_score": "2,351 / 2,799",
+        "dx_score_new_record": true,
+        "fast": "128",
+        "late": "237",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15123",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "412",
+                "perfect": "274",
+                "great": "41",
+                "good": "9",
+                "miss": "5"
+            },
+            "hold": {
+                "critical_perfect": "51",
+                "perfect": "33",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "91",
+                "perfect": "0",
+                "great": "1",
+                "good": "0",
+                "miss": "2"
+            },
+            "touch": {
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
+            },
+            "break": {
+                "critical_perfect": "7",
+                "perfect": "5",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "408/933",
+        "max_sync": "―"
+    },
+    {
+        "no": 9,
+        "date": "2026/03/08 16:54",
+        "track": "TRACK 01",
+        "title": "Jack-the-Ripper◆",
+        "type": "std",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/face36da229c0923.png",
+        "score": "97.7042%",
+        "score_new_record": false,
+        "dx_score": "2,316 / 2,799",
+        "dx_score_new_record": true,
+        "fast": "125",
+        "late": "250",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15123",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "387",
+                "perfect": "292",
+                "great": "46",
+                "good": "3",
+                "miss": "13"
+            },
+            "hold": {
+                "critical_perfect": "60",
+                "perfect": "23",
+                "great": "1",
+                "good": "1",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "88",
+                "perfect": "0",
+                "great": "2",
+                "good": "3",
+                "miss": "1"
+            },
+            "touch": {
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
+            },
+            "break": {
+                "critical_perfect": "8",
+                "perfect": "4",
+                "great": "0",
+                "good": "0",
+                "miss": "1"
+            }
+        },
+        "max_combo": "370/933",
+        "max_sync": "―"
+    },
+    {
+        "no": 10,
+        "date": "2026/03/08 16:34",
+        "track": "TRACK 03",
+        "title": "Jack-the-Ripper◆",
+        "type": "std",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/face36da229c0923.png",
+        "score": "97.5888%",
+        "score_new_record": false,
+        "dx_score": "2,308 / 2,799",
+        "dx_score_new_record": false,
+        "fast": "131",
+        "late": "258",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15123",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "385",
+                "perfect": "298",
+                "great": "39",
+                "good": "9",
+                "miss": "10"
+            },
+            "hold": {
+                "critical_perfect": "52",
+                "perfect": "31",
+                "great": "2",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "90",
+                "perfect": "0",
+                "great": "2",
+                "good": "1",
+                "miss": "1"
+            },
+            "touch": {
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
+            },
+            "break": {
+                "critical_perfect": "4",
+                "perfect": "7",
+                "great": "0",
+                "good": "0",
+                "miss": "2"
+            }
+        },
+        "max_combo": "419/933",
+        "max_sync": "―"
+    },
+    {
+        "no": 11,
+        "date": "2026/03/08 16:31",
+        "track": "TRACK 02",
+        "title": "Jack-the-Ripper◆",
+        "type": "std",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/face36da229c0923.png",
+        "score": "98.0672%",
+        "score_new_record": true,
+        "dx_score": "2,309 / 2,799",
+        "dx_score_new_record": true,
+        "fast": "116",
+        "late": "258",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15123",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "392",
+                "perfect": "273",
+                "great": "57",
+                "good": "7",
+                "miss": "12"
+            },
+            "hold": {
+                "critical_perfect": "53",
+                "perfect": "29",
+                "great": "3",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "92",
+                "perfect": "0",
+                "great": "1",
+                "good": "1",
                 "miss": "0"
             },
             "touch": {
@@ -408,1840 +639,114 @@
             },
             "break": {
                 "critical_perfect": "9",
-                "perfect": "13",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "271/956",
-        "max_sync": "―"
-    },
-    {
-        "no": 8,
-        "date": "2025/10/04 18:44",
-        "track": "TRACK 02",
-        "title": "スピカの天秤",
-        "type": "dx",
-        "internalLevel": 14.4,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/b81925a4285c4ce1.png",
-        "score": "96.5746%",
-        "score_new_record": false,
-        "dx_score": "2,455 / 3,033",
-        "dx_score_new_record": false,
-        "fast": "176",
-        "late": "224",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "384",
-                "perfect": "274",
-                "great": "76",
-                "good": "16",
-                "miss": "18"
-            },
-            "hold": {
-                "critical_perfect": "46",
-                "perfect": "15",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "84",
-                "perfect": "0",
+                "perfect": "3",
                 "great": "0",
-                "good": "2",
-                "miss": "1"
-            },
-            "touch": {
-                "critical_perfect": "60",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "1"
-            },
-            "break": {
-                "critical_perfect": "17",
-                "perfect": "11",
-                "great": "5",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "217/1011",
-        "max_sync": "―"
-    },
-    {
-        "no": 9,
-        "date": "2025/10/04 18:40",
-        "track": "TRACK 01",
-        "title": "スピカの天秤",
-        "type": "dx",
-        "internalLevel": 14.4,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/b81925a4285c4ce1.png",
-        "score": "96.0502%",
-        "score_new_record": false,
-        "dx_score": "2,402 / 3,033",
-        "dx_score_new_record": false,
-        "fast": "193",
-        "late": "219",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "367",
-                "perfect": "269",
-                "great": "85",
-                "good": "18",
-                "miss": "29"
-            },
-            "hold": {
-                "critical_perfect": "39",
-                "perfect": "23",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "84",
-                "perfect": "0",
-                "great": "0",
-                "good": "2",
-                "miss": "1"
-            },
-            "touch": {
-                "critical_perfect": "60",
-                "perfect": "1",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "19",
-                "perfect": "11",
-                "great": "2",
-                "good": "1",
-                "miss": "0"
-            }
-        },
-        "max_combo": "195/1011",
-        "max_sync": "―"
-    },
-    {
-        "no": 10,
-        "date": "2025/10/04 18:18",
-        "track": "TRACK 03",
-        "title": "スナネコのうた",
-        "type": "dx",
-        "internalLevel": 13.4,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/358706b964277c8b.png",
-        "score": "99.4975%",
-        "score_new_record": true,
-        "dx_score": "1,551 / 1,698",
-        "dx_score_new_record": false,
-        "fast": "53",
-        "late": "65",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "196",
-                "perfect": "77",
-                "great": "2",
-                "good": "3",
-                "miss": "2"
-            },
-            "hold": {
-                "critical_perfect": "18",
-                "perfect": "14",
-                "great": "0",
-                "good": "2",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "57",
-                "perfect": "0",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "116",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "2"
-            },
-            "break": {
-                "critical_perfect": "57",
-                "perfect": "15",
-                "great": "4",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "301/566",
-        "max_sync": "―"
-    },
-    {
-        "no": 11,
-        "date": "2025/10/04 18:15",
-        "track": "TRACK 02",
-        "title": "Ether Second",
-        "type": "dx",
-        "internalLevel": 13.9,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/1572e3183f426fc0.png",
-        "score": "97.6546%",
-        "score_new_record": false,
-        "dx_score": "2,142 / 2,565",
-        "dx_score_new_record": false,
-        "fast": "145",
-        "late": "169",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "363",
-                "perfect": "218",
-                "great": "37",
-                "good": "8",
-                "miss": "10"
-            },
-            "hold": {
-                "critical_perfect": "50",
-                "perfect": "21",
-                "great": "2",
-                "good": "2",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "52",
-                "perfect": "0",
-                "great": "2",
-                "good": "4",
-                "miss": "1"
-            },
-            "touch": {
-                "critical_perfect": "23",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "1"
-            },
-            "break": {
-                "critical_perfect": "40",
-                "perfect": "19",
-                "great": "1",
                 "good": "0",
                 "miss": "1"
             }
         },
-        "max_combo": "210/855",
+        "max_combo": "516/933",
         "max_sync": "―"
     },
     {
         "no": 12,
-        "date": "2025/10/04 18:12",
+        "date": "2026/03/08 16:28",
         "track": "TRACK 01",
-        "title": "ラビットホール",
+        "title": "六兆年と一夜物語",
         "type": "dx",
-        "internalLevel": 13.3,
-        "difficulty": "remaster",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/463ca52e854f4869.png",
-        "score": "99.8762%",
+        "internalLevel": 13.8,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/0950cc45432555fe.png",
+        "score": "100.5298%",
         "score_new_record": true,
-        "dx_score": "2,566 / 2,766",
+        "dx_score": "1,891 / 2,112",
         "dx_score_new_record": false,
-        "fast": "99",
-        "late": "76",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
+        "fast": "49",
+        "late": "160",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15123",
+        "rating_plus": "(+11)",
         "notes": {
             "tap": {
-                "critical_perfect": "501",
-                "perfect": "150",
-                "great": "6",
+                "critical_perfect": "357",
+                "perfect": "191",
+                "great": "2",
                 "good": "2",
-                "miss": "3"
+                "miss": "2"
             },
             "hold": {
-                "critical_perfect": "42",
-                "perfect": "6",
-                "great": "1",
+                "critical_perfect": "18",
+                "perfect": "7",
+                "great": "0",
                 "good": "0",
                 "miss": "0"
             },
             "slide": {
-                "critical_perfect": "157",
+                "critical_perfect": "47",
                 "perfect": "0",
-                "great": "1",
+                "great": "0",
                 "good": "0",
                 "miss": "0"
             },
             "touch": {
-                "critical_perfect": "28",
+                "critical_perfect": "57",
                 "perfect": "0",
                 "great": "0",
                 "good": "0",
                 "miss": "0"
             },
             "break": {
-                "critical_perfect": "16",
-                "perfect": "6",
-                "great": "2",
-                "good": "1",
+                "critical_perfect": "14",
+                "perfect": "7",
+                "great": "0",
+                "good": "0",
                 "miss": "0"
             }
         },
-        "max_combo": "629/922",
+        "max_combo": "642/704",
         "max_sync": "―"
     },
     {
         "no": 13,
-        "date": "2025/10/04 18:08",
+        "date": "2026/03/08 15:51",
         "track": "TRACK 03",
-        "title": "Ether Second",
-        "type": "dx",
-        "internalLevel": 13.9,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/1572e3183f426fc0.png",
-        "score": "98.2481%",
-        "score_new_record": false,
-        "dx_score": "2,230 / 2,565",
-        "dx_score_new_record": true,
-        "fast": "123",
-        "late": "141",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "406",
-                "perfect": "196",
-                "great": "22",
-                "good": "5",
-                "miss": "7"
-            },
-            "hold": {
-                "critical_perfect": "57",
-                "perfect": "13",
-                "great": "4",
-                "good": "1",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "56",
-                "perfect": "0",
-                "great": "2",
-                "good": "1",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "24",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "40",
-                "perfect": "15",
-                "great": "5",
-                "good": "0",
-                "miss": "1"
-            }
-        },
-        "max_combo": "340/855",
-        "max_sync": "―"
-    },
-    {
-        "no": 14,
-        "date": "2025/10/04 18:06",
-        "track": "TRACK 02",
-        "title": "Ether Second",
-        "type": "dx",
-        "internalLevel": 13.9,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/1572e3183f426fc0.png",
-        "score": "96.9886%",
-        "score_new_record": false,
-        "dx_score": "2,156 / 2,565",
-        "dx_score_new_record": false,
-        "fast": "154",
-        "late": "137",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "380",
-                "perfect": "203",
-                "great": "33",
-                "good": "7",
-                "miss": "13"
-            },
-            "hold": {
-                "critical_perfect": "53",
-                "perfect": "18",
-                "great": "1",
-                "good": "3",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "52",
-                "perfect": "0",
-                "great": "1",
-                "good": "4",
-                "miss": "2"
-            },
-            "touch": {
-                "critical_perfect": "23",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "1"
-            },
-            "break": {
-                "critical_perfect": "39",
-                "perfect": "17",
-                "great": "4",
-                "good": "0",
-                "miss": "1"
-            }
-        },
-        "max_combo": "297/855",
-        "max_sync": "―"
-    },
-    {
-        "no": 15,
-        "date": "2025/10/04 18:03",
-        "track": "TRACK 01",
-        "title": "Ether Second",
-        "type": "dx",
-        "internalLevel": 13.9,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/1572e3183f426fc0.png",
-        "score": "98.6107%",
-        "score_new_record": true,
-        "dx_score": "2,203 / 2,565",
-        "dx_score_new_record": true,
-        "fast": "142",
-        "late": "147",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "383",
-                "perfect": "219",
-                "great": "22",
-                "good": "8",
-                "miss": "4"
-            },
-            "hold": {
-                "critical_perfect": "50",
-                "perfect": "20",
-                "great": "3",
-                "good": "1",
-                "miss": "1"
-            },
-            "slide": {
-                "critical_perfect": "54",
-                "perfect": "0",
-                "great": "2",
-                "good": "2",
-                "miss": "1"
-            },
-            "touch": {
-                "critical_perfect": "23",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "1"
-            },
-            "break": {
-                "critical_perfect": "49",
-                "perfect": "10",
-                "great": "1",
-                "good": "1",
-                "miss": "0"
-            }
-        },
-        "max_combo": "286/855",
-        "max_sync": "―"
-    },
-    {
-        "no": 16,
-        "date": "2025/10/04 17:45",
-        "track": "TRACK 03",
-        "title": "Ether Second",
-        "type": "dx",
-        "internalLevel": 13.9,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/1572e3183f426fc0.png",
-        "score": "95.8008%",
-        "score_new_record": false,
-        "dx_score": "2,107 / 2,565",
-        "dx_score_new_record": true,
-        "fast": "189",
-        "late": "133",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "352",
-                "perfect": "223",
-                "great": "32",
-                "good": "15",
-                "miss": "14"
-            },
-            "hold": {
-                "critical_perfect": "47",
-                "perfect": "19",
-                "great": "8",
-                "good": "1",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "58",
-                "perfect": "0",
-                "great": "0",
-                "good": "1",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "24",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "36",
-                "perfect": "12",
-                "great": "8",
-                "good": "3",
-                "miss": "2"
-            }
-        },
-        "max_combo": "212/855",
-        "max_sync": "―"
-    },
-    {
-        "no": 17,
-        "date": "2025/10/04 17:42",
-        "track": "TRACK 02",
-        "title": "Ether Second",
-        "type": "dx",
-        "internalLevel": 13.9,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/1572e3183f426fc0.png",
-        "score": "96.3191%",
-        "score_new_record": true,
-        "dx_score": "2,064 / 2,565",
-        "dx_score_new_record": false,
-        "fast": "181",
-        "late": "167",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "329",
-                "perfect": "226",
-                "great": "54",
-                "good": "11",
-                "miss": "16"
-            },
-            "hold": {
-                "critical_perfect": "48",
-                "perfect": "14",
-                "great": "12",
-                "good": "1",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "56",
-                "perfect": "0",
-                "great": "1",
-                "good": "2",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "24",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "34",
-                "perfect": "20",
-                "great": "4",
-                "good": "3",
-                "miss": "0"
-            }
-        },
-        "max_combo": "239/855",
-        "max_sync": "―"
-    },
-    {
-        "no": 18,
-        "date": "2025/10/04 17:38",
-        "track": "TRACK 01",
-        "title": "華の集落、秋のお届け",
+        "title": "麒麟",
         "type": "std",
-        "internalLevel": 13.9,
+        "internalLevel": 14.1,
         "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/b95d6cec3fbbb04c.png",
-        "score": "97.0611%",
-        "score_new_record": true,
-        "dx_score": "1,998 / 2,508",
-        "dx_score_new_record": true,
-        "fast": "179",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/88185a61da17d947.png",
+        "score": "98.1644%",
+        "score_new_record": false,
+        "dx_score": "2,113 / 2,511",
+        "dx_score_new_record": false,
+        "fast": "131",
         "late": "165",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "338",
-                "perfect": "232",
-                "great": "63",
-                "good": "21",
-                "miss": "19"
-            },
-            "hold": {
-                "critical_perfect": "40",
-                "perfect": "17",
-                "great": "3",
-                "good": "0",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "77",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "",
-                "perfect": "",
-                "great": "",
-                "good": "",
-                "miss": ""
-            },
-            "break": {
-                "critical_perfect": "18",
-                "perfect": "7",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "185/836",
-        "max_sync": "―"
-    },
-    {
-        "no": 19,
-        "date": "2025/10/04 17:16",
-        "track": "TRACK 03",
-        "title": "ビビデバ",
-        "type": "dx",
-        "internalLevel": 13.2,
-        "difficulty": "remaster",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/c518067f022fa72b.png",
-        "score": "100.1035%",
-        "score_new_record": true,
-        "dx_score": "2,168 / 2,475",
-        "dx_score_new_record": false,
-        "fast": "172",
-        "late": "103",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14987",
-        "rating_plus": "(+2)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "371",
-                "perfect": "220",
-                "great": "23",
-                "good": "2",
-                "miss": "0"
-            },
-            "hold": {
-                "critical_perfect": "21",
-                "perfect": "18",
-                "great": "0",
-                "good": "1",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "104",
-                "perfect": "0",
-                "great": "3",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "44",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "10",
-                "perfect": "8",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "825/825",
-        "max_sync": "―"
-    },
-    {
-        "no": 20,
-        "date": "2025/10/04 17:13",
-        "track": "TRACK 02",
-        "title": "Ether Second",
-        "type": "dx",
-        "internalLevel": 13.9,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/1572e3183f426fc0.png",
-        "score": "95.8940%",
-        "score_new_record": true,
-        "dx_score": "2,097 / 2,565",
-        "dx_score_new_record": true,
-        "fast": "156",
-        "late": "155",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14985",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "366",
-                "perfect": "198",
-                "great": "44",
-                "good": "7",
-                "miss": "21"
-            },
-            "hold": {
-                "critical_perfect": "47",
-                "perfect": "15",
-                "great": "8",
-                "good": "5",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "53",
-                "perfect": "0",
-                "great": "3",
-                "good": "3",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "24",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "32",
-                "perfect": "22",
-                "great": "6",
-                "good": "0",
-                "miss": "1"
-            }
-        },
-        "max_combo": "242/855",
-        "max_sync": "―"
-    },
-    {
-        "no": 21,
-        "date": "2025/10/04 17:10",
-        "track": "TRACK 01",
-        "title": "あいたい星人",
-        "type": "dx",
-        "internalLevel": 13.2,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/1bc129c66ee45843.png",
-        "score": "100.7710%",
-        "score_new_record": true,
-        "dx_score": "2,072 / 2,256",
-        "dx_score_new_record": true,
-        "fast": "123",
-        "late": "53",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14985",
-        "rating_plus": "(+16)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "371",
-                "perfect": "143",
-                "great": "3",
-                "good": "2",
-                "miss": "0"
-            },
-            "hold": {
-                "critical_perfect": "47",
-                "perfect": "15",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "102",
-                "perfect": "0",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "11",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "45",
-                "perfect": "12",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "752/752",
-        "max_sync": "―"
-    },
-    {
-        "no": 22,
-        "date": "2025/10/04 16:50",
-        "track": "TRACK 03",
-        "title": "[X]",
-        "type": "dx",
-        "internalLevel": 13.7,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/f712ee022ae3e620.png",
-        "score": "100.1380%",
-        "score_new_record": false,
-        "dx_score": "2,669 / 2,997",
-        "dx_score_new_record": false,
-        "fast": "221",
-        "late": "71",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "371",
-                "perfect": "238",
-                "great": "12",
-                "good": "3",
-                "miss": "4"
-            },
-            "hold": {
-                "critical_perfect": "41",
-                "perfect": "21",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "108",
-                "perfect": "0",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "110",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "1"
-            },
-            "break": {
-                "critical_perfect": "72",
-                "perfect": "15",
-                "great": "2",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "539/999",
-        "max_sync": "―"
-    },
-    {
-        "no": 23,
-        "date": "2025/10/04 16:46",
-        "track": "TRACK 02",
-        "title": "モエチャッカファイア",
-        "type": "dx",
-        "internalLevel": 13.8,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/9eb45829c19ecb95.png",
-        "score": "99.0125%",
-        "score_new_record": false,
-        "dx_score": "2,552 / 2,952",
-        "dx_score_new_record": false,
-        "fast": "233",
-        "late": "91",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "379",
-                "perfect": "249",
-                "great": "36",
-                "good": "6",
-                "miss": "5"
-            },
-            "hold": {
-                "critical_perfect": "38",
-                "perfect": "15",
-                "great": "0",
-                "good": "1",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "129",
-                "perfect": "0",
-                "great": "0",
-                "good": "2",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "68",
-                "perfect": "0",
-                "great": "2",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "40",
-                "perfect": "11",
-                "great": "2",
-                "good": "0",
-                "miss": "1"
-            }
-        },
-        "max_combo": "399/984",
-        "max_sync": "―"
-    },
-    {
-        "no": 24,
-        "date": "2025/10/04 16:43",
-        "track": "TRACK 01",
-        "title": "Everybody Say HARDCORE TANO*C",
-        "type": "dx",
-        "internalLevel": 13.6,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/23b599302f289981.png",
-        "score": "99.3075%",
-        "score_new_record": true,
-        "dx_score": "2,420 / 2,763",
-        "dx_score_new_record": true,
-        "fast": "149",
-        "late": "127",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "410",
-                "perfect": "193",
-                "great": "31",
-                "good": "7",
-                "miss": "3"
-            },
-            "hold": {
-                "critical_perfect": "38",
-                "perfect": "15",
-                "great": "1",
-                "good": "1",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "98",
-                "perfect": "0",
-                "great": "1",
-                "good": "2",
-                "miss": "1"
-            },
-            "touch": {
-                "critical_perfect": "54",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "41",
-                "perfect": "23",
-                "great": "2",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "626/921",
-        "max_sync": "―"
-    },
-    {
-        "no": 25,
-        "date": "2025/09/20 17:50",
-        "track": "TRACK 03",
-        "title": "METATRON",
-        "type": "std",
-        "internalLevel": 14.1,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/1a95ad12ccd7eb13.png",
-        "score": "98.3180%",
-        "score_new_record": false,
-        "dx_score": "2,331 / 2,775",
-        "dx_score_new_record": false,
-        "fast": "161",
-        "late": "201",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "445",
-                "perfect": "311",
-                "great": "39",
-                "good": "3",
-                "miss": "9"
-            },
-            "hold": {
-                "critical_perfect": "16",
-                "perfect": "3",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "80",
-                "perfect": "0",
-                "great": "0",
-                "good": "1",
-                "miss": "1"
-            },
-            "touch": {
-                "critical_perfect": "",
-                "perfect": "",
-                "great": "",
-                "good": "",
-                "miss": ""
-            },
-            "break": {
-                "critical_perfect": "12",
-                "perfect": "1",
-                "great": "2",
-                "good": "1",
-                "miss": "0"
-            }
-        },
-        "max_combo": "274/925",
-        "max_sync": "―"
-    },
-    {
-        "no": 26,
-        "date": "2025/09/20 17:47",
-        "track": "TRACK 02",
-        "title": "天火明命",
-        "type": "std",
-        "internalLevel": 14,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/44a824b696e80c18.png",
-        "score": "99.1383%",
-        "score_new_record": true,
-        "dx_score": "2,401 / 2,889",
-        "dx_score_new_record": false,
-        "fast": "206",
-        "late": "190",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "407",
-                "perfect": "305",
-                "great": "53",
-                "good": "6",
-                "miss": "7"
-            },
-            "hold": {
-                "critical_perfect": "29",
-                "perfect": "17",
-                "great": "3",
-                "good": "0",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "104",
-                "perfect": "0",
-                "great": "1",
-                "good": "1",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "",
-                "perfect": "",
-                "great": "",
-                "good": "",
-                "miss": ""
-            },
-            "break": {
-                "critical_perfect": "20",
-                "perfect": "10",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "410/963",
-        "max_sync": "―"
-    },
-    {
-        "no": 27,
-        "date": "2025/09/20 17:45",
-        "track": "TRACK 01",
-        "title": "スナネコのうた",
-        "type": "dx",
-        "internalLevel": 13.4,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/358706b964277c8b.png",
-        "score": "98.5515%",
-        "score_new_record": false,
-        "dx_score": "1,549 / 1,698",
-        "dx_score_new_record": false,
-        "fast": "30",
-        "late": "80",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "203",
-                "perfect": "68",
-                "great": "6",
-                "good": "0",
-                "miss": "3"
-            },
-            "hold": {
-                "critical_perfect": "18",
-                "perfect": "11",
-                "great": "4",
-                "good": "1",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "57",
-                "perfect": "0",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "115",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "3"
-            },
-            "break": {
-                "critical_perfect": "56",
-                "perfect": "15",
-                "great": "3",
-                "good": "1",
-                "miss": "1"
-            }
-        },
-        "max_combo": "172/566",
-        "max_sync": "―"
-    },
-    {
-        "no": 28,
-        "date": "2025/09/20 17:39",
-        "track": "TRACK 04",
-        "title": "抜錨",
-        "type": "dx",
-        "internalLevel": 13,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/e2995fcfaec824da.png",
-        "score": "100.5493%",
-        "score_new_record": false,
-        "dx_score": "2,100 / 2,295",
-        "dx_score_new_record": true,
-        "fast": "98",
-        "late": "85",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "391",
-                "perfect": "155",
-                "great": "7",
-                "good": "1",
-                "miss": "0"
-            },
-            "hold": {
-                "critical_perfect": "34",
-                "perfect": "8",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "105",
-                "perfect": "0",
-                "great": "0",
-                "good": "1",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "23",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "29",
-                "perfect": "10",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "765/765",
-        "max_sync": "480/1087"
-    },
-    {
-        "no": 29,
-        "date": "2025/09/20 17:35",
-        "track": "TRACK 03",
-        "title": "テオ",
-        "type": "dx",
-        "internalLevel": 13.2,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/d315e6c1c6b44779.png",
-        "score": "100.2498%",
-        "score_new_record": true,
-        "dx_score": "2,645 / 2,895",
-        "dx_score_new_record": true,
-        "fast": "169",
-        "late": "49",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "464",
-                "perfect": "177",
-                "great": "11",
-                "good": "4",
-                "miss": "1"
-            },
-            "hold": {
-                "critical_perfect": "38",
-                "perfect": "13",
-                "great": "2",
-                "good": "1",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "95",
-                "perfect": "0",
-                "great": "0",
-                "good": "1",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "46",
-                "perfect": "2",
-                "great": "0",
-                "good": "0",
-                "miss": "1"
-            },
-            "break": {
-                "critical_perfect": "102",
-                "perfect": "6",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "482/965",
-        "max_sync": "84/1329"
-    },
-    {
-        "no": 30,
-        "date": "2025/09/20 17:32",
-        "track": "TRACK 02",
-        "title": "[X]",
-        "type": "dx",
-        "internalLevel": 13.7,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/f712ee022ae3e620.png",
-        "score": "100.2624%",
-        "score_new_record": false,
-        "dx_score": "2,731 / 2,997",
-        "dx_score_new_record": false,
-        "fast": "151",
-        "late": "85",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "431",
-                "perfect": "183",
-                "great": "11",
-                "good": "1",
-                "miss": "2"
-            },
-            "hold": {
-                "critical_perfect": "43",
-                "perfect": "17",
-                "great": "0",
-                "good": "2",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "107",
-                "perfect": "0",
-                "great": "1",
-                "good": "1",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "110",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "1"
-            },
-            "break": {
-                "critical_perfect": "69",
-                "perfect": "19",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "775/999",
-        "max_sync": "71/1632"
-    },
-    {
-        "no": 31,
-        "date": "2025/09/20 17:28",
-        "track": "TRACK 01",
-        "title": "[回]回る空うさぎ",
-        "type": "std",
-        "internalLevel": "11?",
-        "difficulty": "utage",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/dd2686a8aa23107f.png",
-        "score": "99.6335%",
-        "score_new_record": true,
-        "dx_score": "732 / 762",
-        "dx_score_new_record": true,
-        "fast": "0",
-        "late": "14",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_4.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "",
-                "perfect": "",
-                "great": "",
-                "good": "",
-                "miss": ""
-            },
-            "hold": {
-                "critical_perfect": "",
-                "perfect": "",
-                "great": "",
-                "good": "",
-                "miss": ""
-            },
-            "slide": {
-                "critical_perfect": "32",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "204",
-                "perfect": "7",
-                "great": "7",
-                "good": "0",
-                "miss": "3"
-            },
-            "break": {
-                "critical_perfect": "1",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "172/254",
-        "max_sync": "29/508"
-    },
-    {
-        "no": 32,
-        "date": "2025/09/20 16:51",
-        "track": "TRACK 03",
-        "title": "Synthesis.",
-        "type": "dx",
-        "internalLevel": 14.1,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/27619d6525a81f92.png",
-        "score": "98.6636%",
-        "score_new_record": false,
-        "dx_score": "2,871 / 3,309",
-        "dx_score_new_record": false,
-        "fast": "182",
-        "late": "160",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "443",
-                "perfect": "240",
-                "great": "39",
-                "good": "4",
-                "miss": "12"
-            },
-            "hold": {
-                "critical_perfect": "60",
-                "perfect": "23",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "72",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "125",
-                "perfect": "1",
-                "great": "0",
-                "good": "0",
-                "miss": "1"
-            },
-            "break": {
-                "critical_perfect": "48",
-                "perfect": "29",
-                "great": "1",
-                "good": "4",
-                "miss": "0"
-            }
-        },
-        "max_combo": "436/1103",
-        "max_sync": "―"
-    },
-    {
-        "no": 33,
-        "date": "2025/09/20 16:48",
-        "track": "TRACK 02",
-        "title": "RondeauX of RagnaroQ",
-        "type": "dx",
-        "internalLevel": 14.5,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/2741f6c344272eb8.png",
-        "score": "90.9067%",
-        "score_new_record": true,
-        "dx_score": "2,421 / 3,348",
-        "dx_score_new_record": true,
-        "fast": "297",
-        "late": "231",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "339",
-                "perfect": "289",
-                "great": "125",
-                "good": "29",
-                "miss": "49"
-            },
-            "hold": {
-                "critical_perfect": "25",
-                "perfect": "30",
-                "great": "2",
-                "good": "1",
-                "miss": "2"
-            },
-            "slide": {
-                "critical_perfect": "91",
-                "perfect": "0",
-                "great": "3",
-                "good": "1",
-                "miss": "2"
-            },
-            "touch": {
-                "critical_perfect": "32",
-                "perfect": "2",
-                "great": "5",
-                "good": "0",
-                "miss": "1"
-            },
-            "break": {
-                "critical_perfect": "43",
-                "perfect": "18",
-                "great": "18",
-                "good": "5",
-                "miss": "4"
-            }
-        },
-        "max_combo": "112/1116",
-        "max_sync": "―"
-    },
-    {
-        "no": 34,
-        "date": "2025/09/20 16:45",
-        "track": "TRACK 01",
-        "title": "華の集落、秋のお届け",
-        "type": "dx",
-        "internalLevel": 13.9,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/b95d6cec3fbbb04c.png",
-        "score": "90.6961%",
-        "score_new_record": true,
-        "dx_score": "1,965 / 2,670",
-        "dx_score_new_record": true,
-        "fast": "144",
-        "late": "194",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "220",
-                "perfect": "161",
-                "great": "93",
-                "good": "26",
-                "miss": "30"
-            },
-            "hold": {
-                "critical_perfect": "16",
-                "perfect": "13",
-                "great": "1",
-                "good": "6",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "61",
-                "perfect": "0",
-                "great": "3",
-                "good": "2",
-                "miss": "1"
-            },
-            "touch": {
-                "critical_perfect": "185",
-                "perfect": "19",
-                "great": "8",
-                "good": "2",
-                "miss": "32"
-            },
-            "break": {
-                "critical_perfect": "7",
-                "perfect": "3",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "130/890",
-        "max_sync": "―"
-    },
-    {
-        "no": 35,
-        "date": "2025/09/20 16:26",
-        "track": "TRACK 04",
-        "title": "VIIIbit Explorer",
-        "type": "std",
-        "internalLevel": 14.5,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/511f76bc9e72ec56.png",
-        "score": "94.3466%",
-        "score_new_record": true,
-        "dx_score": "2,525 / 3,333",
-        "dx_score_new_record": true,
-        "fast": "277",
-        "late": "264",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "357",
-                "perfect": "335",
-                "great": "94",
-                "good": "23",
-                "miss": "22"
-            },
-            "hold": {
-                "critical_perfect": "27",
-                "perfect": "23",
-                "great": "6",
-                "good": "3",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "114",
-                "perfect": "0",
-                "great": "1",
-                "good": "4",
-                "miss": "3"
-            },
-            "touch": {
-                "critical_perfect": "",
-                "perfect": "",
-                "great": "",
-                "good": "",
-                "miss": ""
-            },
-            "break": {
-                "critical_perfect": "46",
-                "perfect": "27",
-                "great": "22",
-                "good": "3",
-                "miss": "1"
-            }
-        },
-        "max_combo": "166/1111",
-        "max_sync": "332/2222"
-    },
-    {
-        "no": 36,
-        "date": "2025/09/20 16:23",
-        "track": "TRACK 03",
-        "title": "Scarlet Lance",
-        "type": "std",
-        "internalLevel": 14.2,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/bd702cd7e2582905.png",
-        "score": "93.4172%",
-        "score_new_record": true,
-        "dx_score": "2,241 / 3,108",
-        "dx_score_new_record": true,
-        "fast": "213",
-        "late": "318",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.50",
-        "rating": "14969",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15112",
         "rating_plus": "(+0)",
         "notes": {
             "tap": {
                 "critical_perfect": "363",
-                "perfect": "312",
-                "great": "128",
-                "good": "39",
-                "miss": "33"
+                "perfect": "222",
+                "great": "52",
+                "good": "3",
+                "miss": "12"
             },
             "hold": {
                 "critical_perfect": "16",
-                "perfect": "16",
-                "great": "10",
-                "good": "4",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "68",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "2"
-            },
-            "touch": {
-                "critical_perfect": "",
-                "perfect": "",
-                "great": "",
-                "good": "",
-                "miss": ""
-            },
-            "break": {
-                "critical_perfect": "23",
-                "perfect": "17",
-                "great": "3",
-                "good": "2",
-                "miss": "0"
-            }
-        },
-        "max_combo": "225/1036",
-        "max_sync": "403/1737"
-    },
-    {
-        "no": 37,
-        "date": "2025/09/20 16:20",
-        "track": "TRACK 02",
-        "title": "FFT",
-        "type": "std",
-        "internalLevel": 14,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/866ca42598db8c01.png",
-        "score": "94.9020%",
-        "score_new_record": true,
-        "dx_score": "2,033 / 2,547",
-        "dx_score_new_record": true,
-        "fast": "193",
-        "late": "141",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "293",
-                "perfect": "196",
-                "great": "58",
-                "good": "20",
-                "miss": "13"
-            },
-            "hold": {
-                "critical_perfect": "32",
-                "perfect": "25",
-                "great": "3",
-                "good": "1",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "161",
-                "perfect": "0",
-                "great": "8",
-                "good": "4",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "",
-                "perfect": "",
-                "great": "",
-                "good": "",
-                "miss": ""
-            },
-            "break": {
-                "critical_perfect": "14",
                 "perfect": "10",
-                "great": "2",
-                "good": "7",
-                "miss": "2"
-            }
-        },
-        "max_combo": "177/849",
-        "max_sync": "367/1796"
-    },
-    {
-        "no": 38,
-        "date": "2025/09/20 16:17",
-        "track": "TRACK 01",
-        "title": "終点",
-        "type": "std",
-        "internalLevel": 13.7,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/56c793d08494cafe.png",
-        "score": "98.5956%",
-        "score_new_record": true,
-        "dx_score": "1,840 / 2,130",
-        "dx_score_new_record": true,
-        "fast": "157",
-        "late": "89",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "339",
-                "perfect": "187",
-                "great": "20",
-                "good": "5",
-                "miss": "2"
-            },
-            "hold": {
-                "critical_perfect": "24",
-                "perfect": "15",
                 "great": "0",
                 "good": "0",
                 "miss": "0"
             },
             "slide": {
-                "critical_perfect": "79",
+                "critical_perfect": "147",
                 "perfect": "0",
                 "great": "0",
-                "good": "0",
+                "good": "3",
                 "miss": "0"
             },
             "touch": {
@@ -2252,469 +757,108 @@
                 "miss": ""
             },
             "break": {
-                "critical_perfect": "20",
-                "perfect": "13",
-                "great": "4",
-                "good": "2",
+                "critical_perfect": "3",
+                "perfect": "5",
+                "great": "0",
+                "good": "1",
                 "miss": "0"
             }
         },
-        "max_combo": "630/710",
-        "max_sync": "763/1241"
+        "max_combo": "603/837",
+        "max_sync": "―"
     },
     {
-        "no": 39,
-        "date": "2025/09/20 15:58",
-        "track": "TRACK 03",
-        "title": "モエチャッカファイア",
-        "type": "dx",
-        "internalLevel": 13.8,
+        "no": 14,
+        "date": "2026/03/08 15:48",
+        "track": "TRACK 02",
+        "title": "麒麟",
+        "type": "std",
+        "internalLevel": 14.1,
         "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/9eb45829c19ecb95.png",
-        "score": "99.5040%",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/88185a61da17d947.png",
+        "score": "98.1756%",
         "score_new_record": false,
-        "dx_score": "2,623 / 2,952",
-        "dx_score_new_record": true,
-        "fast": "187",
-        "late": "84",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14969",
+        "dx_score": "2,113 / 2,511",
+        "dx_score_new_record": false,
+        "fast": "97",
+        "late": "207",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15112",
         "rating_plus": "(+0)",
         "notes": {
             "tap": {
-                "critical_perfect": "426",
-                "perfect": "214",
-                "great": "23",
-                "good": "7",
-                "miss": "5"
+                "critical_perfect": "354",
+                "perfect": "245",
+                "great": "35",
+                "good": "6",
+                "miss": "12"
             },
             "hold": {
-                "critical_perfect": "36",
-                "perfect": "17",
-                "great": "1",
+                "critical_perfect": "20",
+                "perfect": "6",
+                "great": "0",
                 "good": "0",
                 "miss": "0"
             },
             "slide": {
-                "critical_perfect": "131",
+                "critical_perfect": "145",
                 "perfect": "0",
-                "great": "0",
-                "good": "0",
+                "great": "1",
+                "good": "4",
                 "miss": "0"
             },
             "touch": {
-                "critical_perfect": "70",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
             },
             "break": {
-                "critical_perfect": "44",
-                "perfect": "7",
+                "critical_perfect": "2",
+                "perfect": "5",
                 "great": "2",
                 "good": "0",
-                "miss": "1"
-            }
-        },
-        "max_combo": "399/984",
-        "max_sync": "―"
-    },
-    {
-        "no": 40,
-        "date": "2025/09/20 15:55",
-        "track": "TRACK 02",
-        "title": "Drivessover",
-        "type": "dx",
-        "internalLevel": 13.6,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/d9edba9ca1933abc.png",
-        "score": "100.1641%",
-        "score_new_record": true,
-        "dx_score": "2,153 / 2,361",
-        "dx_score_new_record": true,
-        "fast": "79",
-        "late": "101",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14969",
-        "rating_plus": "(+13)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "370",
-                "perfect": "126",
-                "great": "10",
-                "good": "6",
-                "miss": "0"
-            },
-            "hold": {
-                "critical_perfect": "65",
-                "perfect": "24",
-                "great": "1",
-                "good": "1",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "97",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "1"
-            },
-            "touch": {
-                "critical_perfect": "42",
-                "perfect": "1",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "32",
-                "perfect": "11",
-                "great": "0",
-                "good": "0",
                 "miss": "0"
             }
         },
-        "max_combo": "613/787",
+        "max_combo": "306/837",
         "max_sync": "―"
     },
     {
-        "no": 41,
-        "date": "2025/09/20 15:52",
+        "no": 15,
+        "date": "2026/03/08 15:45",
         "track": "TRACK 01",
-        "title": "物凄いヴァイブスで魔理沙が物凄いラップ",
-        "type": "dx",
-        "internalLevel": 13.4,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/33a4ed61c2911c40.png",
-        "score": "98.3198%",
-        "score_new_record": true,
-        "dx_score": "2,039 / 2,331",
-        "dx_score_new_record": true,
-        "fast": "145",
-        "late": "84",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14956",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "313",
-                "perfect": "160",
-                "great": "19",
-                "good": "3",
-                "miss": "4"
-            },
-            "hold": {
-                "critical_perfect": "36",
-                "perfect": "17",
-                "great": "4",
-                "good": "2",
-                "miss": "1"
-            },
-            "slide": {
-                "critical_perfect": "99",
-                "perfect": "0",
-                "great": "1",
-                "good": "2",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "70",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "1"
-            },
-            "break": {
-                "critical_perfect": "24",
-                "perfect": "15",
-                "great": "5",
-                "good": "1",
-                "miss": "0"
-            }
-        },
-        "max_combo": "255/777",
-        "max_sync": "―"
-    },
-    {
-        "no": 42,
-        "date": "2025/09/20 13:24",
-        "track": "TRACK 03",
-        "title": "Synthesis.",
-        "type": "dx",
-        "internalLevel": 14.1,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/27619d6525a81f92.png",
-        "score": "99.7063%",
-        "score_new_record": false,
-        "dx_score": "2,902 / 3,309",
-        "dx_score_new_record": false,
-        "fast": "247",
-        "late": "110",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14956",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "424",
-                "perfect": "282",
-                "great": "25",
-                "good": "3",
-                "miss": "4"
-            },
-            "hold": {
-                "critical_perfect": "62",
-                "perfect": "22",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "72",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "127",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "57",
-                "perfect": "19",
-                "great": "5",
-                "good": "1",
-                "miss": "0"
-            }
-        },
-        "max_combo": "767/1103",
-        "max_sync": "―"
-    },
-    {
-        "no": 43,
-        "date": "2025/09/20 13:21",
-        "track": "TRACK 02",
-        "title": "Synthesis.",
-        "type": "dx",
-        "internalLevel": 14.1,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/27619d6525a81f92.png",
-        "score": "99.7741%",
-        "score_new_record": false,
-        "dx_score": "2,887 / 3,309",
-        "dx_score_new_record": false,
-        "fast": "239",
-        "late": "121",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14956",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "416",
-                "perfect": "280",
-                "great": "32",
-                "good": "6",
-                "miss": "4"
-            },
-            "hold": {
-                "critical_perfect": "66",
-                "perfect": "16",
-                "great": "1",
-                "good": "1",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "71",
-                "perfect": "0",
-                "great": "0",
-                "good": "1",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "127",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "59",
-                "perfect": "22",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "542/1103",
-        "max_sync": "―"
-    },
-    {
-        "no": 44,
-        "date": "2025/09/20 13:18",
-        "track": "TRACK 01",
-        "title": "Synthesis.",
-        "type": "dx",
-        "internalLevel": 14.1,
-        "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/27619d6525a81f92.png",
-        "score": "98.7801%",
-        "score_new_record": false,
-        "dx_score": "2,822 / 3,309",
-        "dx_score_new_record": false,
-        "fast": "284",
-        "late": "109",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14956",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "390",
-                "perfect": "287",
-                "great": "49",
-                "good": "4",
-                "miss": "8"
-            },
-            "hold": {
-                "critical_perfect": "60",
-                "perfect": "20",
-                "great": "4",
-                "good": "0",
-                "miss": "0"
-            },
-            "slide": {
-                "critical_perfect": "71",
-                "perfect": "0",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "127",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "53",
-                "perfect": "24",
-                "great": "3",
-                "good": "1",
-                "miss": "1"
-            }
-        },
-        "max_combo": "356/1103",
-        "max_sync": "―"
-    },
-    {
-        "no": 45,
-        "date": "2025/09/20 12:47",
-        "track": "TRACK 03",
-        "title": "シリウスの輝きのように",
-        "type": "dx",
-        "internalLevel": 14,
-        "difficulty": "remaster",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/e855318fd3b94fc0.png",
-        "score": "99.0631%",
-        "score_new_record": true,
-        "dx_score": "2,084 / 2,445",
-        "dx_score_new_record": false,
-        "fast": "182",
-        "late": "99",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14956",
-        "rating_plus": "(+0)",
-        "notes": {
-            "tap": {
-                "critical_perfect": "386",
-                "perfect": "220",
-                "great": "32",
-                "good": "10",
-                "miss": "8"
-            },
-            "hold": {
-                "critical_perfect": "8",
-                "perfect": "1",
-                "great": "0",
-                "good": "0",
-                "miss": "1"
-            },
-            "slide": {
-                "critical_perfect": "98",
-                "perfect": "0",
-                "great": "1",
-                "good": "0",
-                "miss": "0"
-            },
-            "touch": {
-                "critical_perfect": "4",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            },
-            "break": {
-                "critical_perfect": "29",
-                "perfect": "17",
-                "great": "0",
-                "good": "0",
-                "miss": "0"
-            }
-        },
-        "max_combo": "186/815",
-        "max_sync": "―"
-    },
-    {
-        "no": 46,
-        "date": "2025/09/20 12:43",
-        "track": "TRACK 02",
         "title": "[X]",
         "type": "dx",
         "internalLevel": 13.7,
         "difficulty": "master",
         "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/f712ee022ae3e620.png",
-        "score": "100.4188%",
-        "score_new_record": true,
-        "dx_score": "2,717 / 2,997",
+        "score": "99.9615%",
+        "score_new_record": false,
+        "dx_score": "2,691 / 2,997",
         "dx_score_new_record": false,
-        "fast": "149",
-        "late": "98",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14956",
+        "fast": "96",
+        "late": "174",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15112",
         "rating_plus": "(+0)",
         "notes": {
             "tap": {
-                "critical_perfect": "412",
-                "perfect": "194",
-                "great": "17",
-                "good": "2",
+                "critical_perfect": "408",
+                "perfect": "208",
+                "great": "8",
+                "good": "1",
                 "miss": "3"
             },
             "hold": {
-                "critical_perfect": "50",
-                "perfect": "12",
-                "great": "0",
-                "good": "0",
+                "critical_perfect": "35",
+                "perfect": "24",
+                "great": "1",
+                "good": "2",
                 "miss": "0"
             },
             "slide": {
@@ -2725,53 +869,1367 @@
                 "miss": "0"
             },
             "touch": {
-                "critical_perfect": "110",
+                "critical_perfect": "108",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "3"
+            },
+            "break": {
+                "critical_perfect": "63",
+                "perfect": "24",
+                "great": "1",
+                "good": "1",
+                "miss": "0"
+            }
+        },
+        "max_combo": "522/999",
+        "max_sync": "―"
+    },
+    {
+        "no": 16,
+        "date": "2026/03/04 19:06",
+        "track": "TRACK 04",
+        "title": "Xevel",
+        "type": "std",
+        "internalLevel": 14.3,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/a1a92cb034053e70.png",
+        "score": "95.9142%",
+        "score_new_record": false,
+        "dx_score": "2,834 / 3,507",
+        "dx_score_new_record": true,
+        "fast": "227",
+        "late": "260",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.60",
+        "rating": "15112",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "487",
+                "perfect": "357",
+                "great": "57",
+                "good": "15",
+                "miss": "22"
+            },
+            "hold": {
+                "critical_perfect": "18",
+                "perfect": "9",
+                "great": "1",
+                "good": "0",
+                "miss": "2"
+            },
+            "slide": {
+                "critical_perfect": "109",
+                "perfect": "0",
+                "great": "0",
+                "good": "1",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
+            },
+            "break": {
+                "critical_perfect": "38",
+                "perfect": "41",
+                "great": "6",
+                "good": "0",
+                "miss": "6"
+            }
+        },
+        "max_combo": "269/1169",
+        "max_sync": "425/1890"
+    },
+    {
+        "no": 17,
+        "date": "2026/03/04 19:03",
+        "track": "TRACK 03",
+        "title": "Synthesis.",
+        "type": "dx",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/27619d6525a81f92.png",
+        "score": "99.4924%",
+        "score_new_record": false,
+        "dx_score": "2,879 / 3,309",
+        "dx_score_new_record": false,
+        "fast": "160",
+        "late": "203",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.60",
+        "rating": "15112",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "435",
+                "perfect": "263",
+                "great": "27",
+                "good": "6",
+                "miss": "7"
+            },
+            "hold": {
+                "critical_perfect": "44",
+                "perfect": "38",
+                "great": "2",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "72",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "127",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "54",
+                "perfect": "25",
+                "great": "2",
+                "good": "0",
+                "miss": "1"
+            }
+        },
+        "max_combo": "448/1103",
+        "max_sync": "289/1748"
+    },
+    {
+        "no": 18,
+        "date": "2026/03/04 19:00",
+        "track": "TRACK 02",
+        "title": "麒麟",
+        "type": "std",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/88185a61da17d947.png",
+        "score": "98.9929%",
+        "score_new_record": true,
+        "dx_score": "2,141 / 2,511",
+        "dx_score_new_record": true,
+        "fast": "150",
+        "late": "136",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.60",
+        "rating": "15112",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "375",
+                "perfect": "222",
+                "great": "35",
+                "good": "12",
+                "miss": "8"
+            },
+            "hold": {
+                "critical_perfect": "14",
+                "perfect": "11",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "150",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
+            },
+            "break": {
+                "critical_perfect": "4",
+                "perfect": "5",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "649/837",
+        "max_sync": "474/1419"
+    },
+    {
+        "no": 19,
+        "date": "2026/03/04 18:56",
+        "track": "TRACK 01",
+        "title": "Fraq",
+        "type": "dx",
+        "internalLevel": 13.7,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/ab757f2eed76db43.png",
+        "score": "99.4436%",
+        "score_new_record": false,
+        "dx_score": "2,131 / 2,418",
+        "dx_score_new_record": false,
+        "fast": "81",
+        "late": "151",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.60",
+        "rating": "15112",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "328",
+                "perfect": "167",
+                "great": "15",
+                "good": "5",
+                "miss": "6"
+            },
+            "hold": {
+                "critical_perfect": "59",
+                "perfect": "21",
+                "great": "2",
+                "good": "0",
+                "miss": "1"
+            },
+            "slide": {
+                "critical_perfect": "106",
+                "perfect": "0",
+                "great": "3",
+                "good": "0",
+                "miss": "1"
+            },
+            "touch": {
+                "critical_perfect": "26",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "47",
+                "perfect": "18",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "321/806",
+        "max_sync": "569/1483"
+    },
+    {
+        "no": 20,
+        "date": "2026/03/04 18:36",
+        "track": "TRACK 04",
+        "title": "CiRCLE CAMPAiGN",
+        "type": "dx",
+        "internalLevel": 13.7,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/ec439357b2e17145.png",
+        "score": "100.5583%",
+        "score_new_record": true,
+        "dx_score": "2,642 / 2,895",
+        "dx_score_new_record": true,
+        "fast": "76",
+        "late": "160",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.60",
+        "rating": "15112",
+        "rating_plus": "(+11)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "452",
+                "perfect": "197",
+                "great": "10",
+                "good": "2",
+                "miss": "0"
+            },
+            "hold": {
+                "critical_perfect": "21",
+                "perfect": "19",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "187",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "1"
+            },
+            "touch": {
+                "critical_perfect": "37",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "31",
+                "perfect": "8",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "868/965",
+        "max_sync": "1169/1584"
+    },
+    {
+        "no": 21,
+        "date": "2026/03/04 18:33",
+        "track": "TRACK 03",
+        "title": "Unwelcome School",
+        "type": "dx",
+        "internalLevel": 14,
+        "difficulty": "remaster",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/ba639bf8d279f397.png",
+        "score": "97.7420%",
+        "score_new_record": true,
+        "dx_score": "2,401 / 2,880",
+        "dx_score_new_record": true,
+        "fast": "127",
+        "late": "185",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.60",
+        "rating": "15101",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "391",
+                "perfect": "218",
+                "great": "56",
+                "good": "22",
+                "miss": "19"
+            },
+            "hold": {
+                "critical_perfect": "12",
+                "perfect": "5",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "151",
+                "perfect": "0",
+                "great": "0",
+                "good": "1",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "35",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "2"
+            },
+            "break": {
+                "critical_perfect": "38",
+                "perfect": "8",
+                "great": "2",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "222/960",
+        "max_sync": "326/1705"
+    },
+    {
+        "no": 22,
+        "date": "2026/03/04 18:29",
+        "track": "TRACK 02",
+        "title": "麒麟",
+        "type": "std",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/88185a61da17d947.png",
+        "score": "98.1700%",
+        "score_new_record": true,
+        "dx_score": "2,117 / 2,511",
+        "dx_score_new_record": true,
+        "fast": "128",
+        "late": "163",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.60",
+        "rating": "15101",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "367",
+                "perfect": "222",
+                "great": "40",
+                "good": "12",
+                "miss": "11"
+            },
+            "hold": {
+                "critical_perfect": "17",
+                "perfect": "9",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "148",
+                "perfect": "0",
+                "great": "0",
+                "good": "2",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
+            },
+            "break": {
+                "critical_perfect": "3",
+                "perfect": "5",
+                "great": "0",
+                "good": "1",
+                "miss": "0"
+            }
+        },
+        "max_combo": "646/837",
+        "max_sync": "371/1419"
+    },
+    {
+        "no": 23,
+        "date": "2026/03/04 18:26",
+        "track": "TRACK 01",
+        "title": "テトリス",
+        "type": "dx",
+        "internalLevel": 13.7,
+        "difficulty": "remaster",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/9bba8b74ff4eab24.png",
+        "score": "100.0374%",
+        "score_new_record": false,
+        "dx_score": "2,595 / 2,823",
+        "dx_score_new_record": false,
+        "fast": "42",
+        "late": "151",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync.png?ver=1.60",
+        "rating": "15101",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "437",
+                "perfect": "160",
+                "great": "16",
+                "good": "5",
+                "miss": "0"
+            },
+            "hold": {
+                "critical_perfect": "33",
+                "perfect": "4",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "169",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "2"
+            },
+            "touch": {
+                "critical_perfect": "54",
+                "perfect": "0",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "53",
+                "perfect": "5",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "702/941",
+        "max_sync": "348/1682"
+    },
+    {
+        "no": 24,
+        "date": "2026/03/04 17:22",
+        "track": "TRACK 03",
+        "title": "麒麟",
+        "type": "std",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/88185a61da17d947.png",
+        "score": "97.1303%",
+        "score_new_record": false,
+        "dx_score": "2,074 / 2,511",
+        "dx_score_new_record": false,
+        "fast": "144",
+        "late": "162",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15101",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "341",
+                "perfect": "242",
+                "great": "37",
+                "good": "10",
+                "miss": "22"
+            },
+            "hold": {
+                "critical_perfect": "18",
+                "perfect": "8",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "147",
+                "perfect": "0",
+                "great": "1",
+                "good": "2",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
+            },
+            "break": {
+                "critical_perfect": "3",
+                "perfect": "4",
+                "great": "1",
+                "good": "1",
+                "miss": "0"
+            }
+        },
+        "max_combo": "559/837",
+        "max_sync": "―"
+    },
+    {
+        "no": 25,
+        "date": "2026/03/04 17:20",
+        "track": "TRACK 02",
+        "title": "麒麟",
+        "type": "std",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/88185a61da17d947.png",
+        "score": "98.0116%",
+        "score_new_record": false,
+        "dx_score": "2,109 / 2,511",
+        "dx_score_new_record": true,
+        "fast": "95",
+        "late": "212",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15101",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "350",
+                "perfect": "249",
+                "great": "30",
+                "good": "12",
+                "miss": "11"
+            },
+            "hold": {
+                "critical_perfect": "18",
+                "perfect": "7",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "147",
+                "perfect": "0",
+                "great": "2",
+                "good": "1",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
+            },
+            "break": {
+                "critical_perfect": "4",
+                "perfect": "2",
+                "great": "3",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "559/837",
+        "max_sync": "―"
+    },
+    {
+        "no": 26,
+        "date": "2026/03/04 17:16",
+        "track": "TRACK 01",
+        "title": "CiRCLE CAMPAiGN",
+        "type": "dx",
+        "internalLevel": 13.7,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/ec439357b2e17145.png",
+        "score": "100.2393%",
+        "score_new_record": false,
+        "dx_score": "2,612 / 2,895",
+        "dx_score_new_record": false,
+        "fast": "58",
+        "late": "196",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15101",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "432",
+                "perfect": "211",
+                "great": "15",
+                "good": "3",
+                "miss": "0"
+            },
+            "hold": {
+                "critical_perfect": "24",
+                "perfect": "16",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "184",
+                "perfect": "0",
+                "great": "1",
+                "good": "2",
+                "miss": "1"
+            },
+            "touch": {
+                "critical_perfect": "37",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "33",
+                "perfect": "6",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "848/965",
+        "max_sync": "―"
+    },
+    {
+        "no": 27,
+        "date": "2026/03/04 16:47",
+        "track": "TRACK 03",
+        "title": "CiRCLE CAMPAiGN",
+        "type": "dx",
+        "internalLevel": 13.7,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/ec439357b2e17145.png",
+        "score": "99.0508%",
+        "score_new_record": false,
+        "dx_score": "2,563 / 2,895",
+        "dx_score_new_record": false,
+        "fast": "86",
+        "late": "165",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15101",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "433",
+                "perfect": "190",
+                "great": "23",
+                "good": "9",
+                "miss": "6"
+            },
+            "hold": {
+                "critical_perfect": "23",
+                "perfect": "16",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "186",
+                "perfect": "0",
+                "great": "0",
+                "good": "1",
+                "miss": "1"
+            },
+            "touch": {
+                "critical_perfect": "32",
+                "perfect": "0",
+                "great": "0",
+                "good": "1",
+                "miss": "4"
+            },
+            "break": {
+                "critical_perfect": "29",
+                "perfect": "8",
+                "great": "2",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "451/965",
+        "max_sync": "―"
+    },
+    {
+        "no": 28,
+        "date": "2026/03/04 16:44",
+        "track": "TRACK 02",
+        "title": "CiRCLE CAMPAiGN",
+        "type": "dx",
+        "internalLevel": 13.7,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/ec439357b2e17145.png",
+        "score": "100.1074%",
+        "score_new_record": false,
+        "dx_score": "2,607 / 2,895",
+        "dx_score_new_record": false,
+        "fast": "84",
+        "late": "171",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15101",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "434",
+                "perfect": "208",
+                "great": "16",
+                "good": "2",
+                "miss": "1"
+            },
+            "hold": {
+                "critical_perfect": "24",
+                "perfect": "16",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "185",
+                "perfect": "0",
+                "great": "1",
+                "good": "1",
+                "miss": "1"
+            },
+            "touch": {
+                "critical_perfect": "36",
                 "perfect": "0",
                 "great": "0",
                 "good": "0",
                 "miss": "1"
             },
             "break": {
-                "critical_perfect": "67",
-                "perfect": "22",
+                "critical_perfect": "28",
+                "perfect": "10",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "530/965",
+        "max_sync": "―"
+    },
+    {
+        "no": 29,
+        "date": "2026/03/04 16:41",
+        "track": "TRACK 01",
+        "title": "CiRCLE CAMPAiGN",
+        "type": "dx",
+        "internalLevel": 13.7,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/ec439357b2e17145.png",
+        "score": "100.4065%",
+        "score_new_record": true,
+        "dx_score": "2,625 / 2,895",
+        "dx_score_new_record": false,
+        "fast": "108",
+        "late": "131",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15101",
+        "rating_plus": "(+1)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "443",
+                "perfect": "194",
+                "great": "19",
+                "good": "5",
+                "miss": "0"
+            },
+            "hold": {
+                "critical_perfect": "30",
+                "perfect": "10",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "187",
+                "perfect": "0",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "37",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "29",
+                "perfect": "9",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "965/965",
+        "max_sync": "―"
+    },
+    {
+        "no": 30,
+        "date": "2026/03/04 16:10",
+        "track": "TRACK 03",
+        "title": "CiRCLE CAMPAiGN",
+        "type": "dx",
+        "internalLevel": 13.7,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/ec439357b2e17145.png",
+        "score": "99.6777%",
+        "score_new_record": false,
+        "dx_score": "2,588 / 2,895",
+        "dx_score_new_record": false,
+        "fast": "78",
+        "late": "168",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15100",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "436",
+                "perfect": "188",
+                "great": "24",
+                "good": "9",
+                "miss": "4"
+            },
+            "hold": {
+                "critical_perfect": "28",
+                "perfect": "12",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "183",
+                "perfect": "0",
+                "great": "4",
+                "good": "1",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "37",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "31",
+                "perfect": "7",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "377/965",
+        "max_sync": "―"
+    },
+    {
+        "no": 31,
+        "date": "2026/03/04 16:06",
+        "track": "TRACK 02",
+        "title": "しゅ～しん？変身☆ハカイシンzzZ",
+        "type": "dx",
+        "internalLevel": 13.8,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/3b49138ef5b78f8b.png",
+        "score": "99.3222%",
+        "score_new_record": true,
+        "dx_score": "2,394 / 2,709",
+        "dx_score_new_record": true,
+        "fast": "73",
+        "late": "186",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15100",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "316",
+                "perfect": "176",
+                "great": "26",
+                "good": "2",
+                "miss": "4"
+            },
+            "hold": {
+                "critical_perfect": "33",
+                "perfect": "23",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "88",
+                "perfect": "0",
+                "great": "1",
+                "good": "1",
+                "miss": "2"
+            },
+            "touch": {
+                "critical_perfect": "104",
+                "perfect": "1",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "96",
+                "perfect": "27",
+                "great": "2",
+                "good": "0",
+                "miss": "1"
+            }
+        },
+        "max_combo": "344/903",
+        "max_sync": "―"
+    },
+    {
+        "no": 32,
+        "date": "2026/03/04 16:03",
+        "track": "TRACK 01",
+        "title": "Beginning together!",
+        "type": "dx",
+        "internalLevel": 13.7,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/091204c68ec374bc.png",
+        "score": "99.7949%",
+        "score_new_record": true,
+        "dx_score": "2,033 / 2,370",
+        "dx_score_new_record": true,
+        "fast": "74",
+        "late": "208",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15100",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "300",
+                "perfect": "197",
+                "great": "25",
+                "good": "5",
+                "miss": "4"
+            },
+            "hold": {
+                "critical_perfect": "48",
+                "perfect": "36",
+                "great": "3",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "62",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "34",
+                "perfect": "1",
+                "great": "1",
+                "good": "0",
+                "miss": "1"
+            },
+            "break": {
+                "critical_perfect": "59",
+                "perfect": "13",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "485/790",
+        "max_sync": "―"
+    },
+    {
+        "no": 33,
+        "date": "2026/03/04 15:14",
+        "track": "TRACK 03",
+        "title": "NAGAREBOSHI☆ROCKET",
+        "type": "dx",
+        "internalLevel": 14.1,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/db0eec06b051299f.png",
+        "score": "93.3346%",
+        "score_new_record": false,
+        "dx_score": "1,913 / 2,463",
+        "dx_score_new_record": false,
+        "fast": "70",
+        "late": "251",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15100",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "221",
+                "perfect": "187",
+                "great": "65",
+                "good": "18",
+                "miss": "25"
+            },
+            "hold": {
+                "critical_perfect": "27",
+                "perfect": "20",
+                "great": "5",
+                "good": "5",
+                "miss": "6"
+            },
+            "slide": {
+                "critical_perfect": "101",
+                "perfect": "0",
+                "great": "1",
+                "good": "2",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "96",
+                "perfect": "5",
+                "great": "0",
+                "good": "1",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "22",
+                "perfect": "7",
+                "great": "3",
+                "good": "2",
+                "miss": "2"
+            }
+        },
+        "max_combo": "220/821",
+        "max_sync": "―"
+    },
+    {
+        "no": 34,
+        "date": "2026/03/04 15:11",
+        "track": "TRACK 02",
+        "title": "Last Kingdom",
+        "type": "dx",
+        "internalLevel": 13.8,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/0f5e140d7b059b50.png",
+        "score": "98.7044%",
+        "score_new_record": false,
+        "dx_score": "2,172 / 2,553",
+        "dx_score_new_record": false,
+        "fast": "55",
+        "late": "223",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15100",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "330",
+                "perfect": "175",
+                "great": "38",
+                "good": "8",
+                "miss": "11"
+            },
+            "hold": {
+                "critical_perfect": "66",
+                "perfect": "30",
+                "great": "1",
+                "good": "0",
+                "miss": "1"
+            },
+            "slide": {
+                "critical_perfect": "63",
+                "perfect": "0",
+                "great": "0",
+                "good": "1",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "48",
+                "perfect": "1",
+                "great": "1",
+                "good": "1",
+                "miss": "2"
+            },
+            "break": {
+                "critical_perfect": "52",
+                "perfect": "21",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "346/851",
+        "max_sync": "―"
+    },
+    {
+        "no": 35,
+        "date": "2026/03/04 15:08",
+        "track": "TRACK 01",
+        "title": "モニタリング",
+        "type": "dx",
+        "internalLevel": 13.4,
+        "difficulty": "remaster",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/fe60aa61adb158a1.png",
+        "score": "96.5414%",
+        "score_new_record": false,
+        "dx_score": "1,659 / 1,938",
+        "dx_score_new_record": false,
+        "fast": "61",
+        "late": "121",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15100",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "265",
+                "perfect": "137",
+                "great": "13",
+                "good": "6",
+                "miss": "18"
+            },
+            "hold": {
+                "critical_perfect": "25",
+                "perfect": "15",
+                "great": "2",
+                "good": "0",
+                "miss": "1"
+            },
+            "slide": {
+                "critical_perfect": "100",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "2"
+            },
+            "touch": {
+                "critical_perfect": "31",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "21",
+                "perfect": "6",
+                "great": "2",
+                "good": "1",
+                "miss": "1"
+            }
+        },
+        "max_combo": "338/646",
+        "max_sync": "―"
+    },
+    {
+        "no": 36,
+        "date": "2026/03/04 14:35",
+        "track": "TRACK 03",
+        "title": "モニタリング",
+        "type": "dx",
+        "internalLevel": 13.4,
+        "difficulty": "remaster",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/fe60aa61adb158a1.png",
+        "score": "100.4375%",
+        "score_new_record": true,
+        "dx_score": "1,768 / 1,938",
+        "dx_score_new_record": true,
+        "fast": "85",
+        "late": "65",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15100",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "311",
+                "perfect": "114",
+                "great": "10",
+                "good": "3",
+                "miss": "1"
+            },
+            "hold": {
+                "critical_perfect": "28",
+                "perfect": "14",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "102",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "31",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "23",
+                "perfect": "8",
                 "great": "0",
                 "good": "0",
                 "miss": "0"
             }
         },
-        "max_combo": "614/999",
+        "max_combo": "619/646",
         "max_sync": "―"
     },
     {
-        "no": 47,
-        "date": "2025/09/20 12:41",
+        "no": 37,
+        "date": "2026/03/04 14:32",
+        "track": "TRACK 02",
+        "title": "モニタリング",
+        "type": "dx",
+        "internalLevel": 13.4,
+        "difficulty": "remaster",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/fe60aa61adb158a1.png",
+        "score": "98.0673%",
+        "score_new_record": false,
+        "dx_score": "1,716 / 1,938",
+        "dx_score_new_record": false,
+        "fast": "60",
+        "late": "97",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15100",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "298",
+                "perfect": "111",
+                "great": "18",
+                "good": "3",
+                "miss": "9"
+            },
+            "hold": {
+                "critical_perfect": "27",
+                "perfect": "11",
+                "great": "3",
+                "good": "2",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "102",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "31",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "21",
+                "perfect": "6",
+                "great": "2",
+                "good": "1",
+                "miss": "1"
+            }
+        },
+        "max_combo": "127/646",
+        "max_sync": "―"
+    },
+    {
+        "no": 38,
+        "date": "2026/03/04 14:29",
         "track": "TRACK 01",
-        "title": "ネコ日和。",
+        "title": "壱雫空",
         "type": "dx",
         "internalLevel": 13.7,
         "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/30eb032b16877275.png",
-        "score": "99.3677%",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/565cf956baa7ffe8.png",
+        "score": "98.5720%",
         "score_new_record": true,
-        "dx_score": "1,682 / 1,893",
+        "dx_score": "1,629 / 1,902",
         "dx_score_new_record": true,
-        "fast": "113",
-        "late": "60",
+        "fast": "86",
+        "late": "128",
         "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14956",
-        "rating_plus": "(+6)",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15100",
+        "rating_plus": "(+0)",
         "notes": {
             "tap": {
-                "critical_perfect": "268",
-                "perfect": "128",
-                "great": "16",
-                "good": "2",
-                "miss": "3"
+                "critical_perfect": "290",
+                "perfect": "181",
+                "great": "20",
+                "good": "5",
+                "miss": "6"
             },
             "hold": {
-                "critical_perfect": "6",
+                "critical_perfect": "9",
                 "perfect": "2",
                 "great": "0",
                 "good": "0",
@@ -2780,206 +2238,744 @@
             "slide": {
                 "critical_perfect": "87",
                 "perfect": "0",
-                "great": "4",
-                "good": "0",
-                "miss": "0"
+                "great": "0",
+                "good": "4",
+                "miss": "1"
             },
             "touch": {
-                "critical_perfect": "41",
+                "critical_perfect": "11",
                 "perfect": "0",
                 "great": "0",
                 "good": "0",
                 "miss": "0"
             },
             "break": {
-                "critical_perfect": "53",
-                "perfect": "16",
-                "great": "5",
+                "critical_perfect": "16",
+                "perfect": "2",
+                "great": "0",
                 "good": "0",
                 "miss": "0"
             }
         },
-        "max_combo": "208/631",
+        "max_combo": "191/634",
+        "max_sync": "―"
+    },
+    {
+        "no": 39,
+        "date": "2026/03/01 18:00",
+        "track": "TRACK 03",
+        "title": "CiRCLE CAMPAiGN",
+        "type": "dx",
+        "internalLevel": 13.7,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/ec439357b2e17145.png",
+        "score": "100.3045%",
+        "score_new_record": true,
+        "dx_score": "2,632 / 2,895",
+        "dx_score_new_record": true,
+        "fast": "118",
+        "late": "115",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15100",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "442",
+                "perfect": "201",
+                "great": "12",
+                "good": "4",
+                "miss": "2"
+            },
+            "hold": {
+                "critical_perfect": "31",
+                "perfect": "9",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "186",
+                "perfect": "0",
+                "great": "1",
+                "good": "0",
+                "miss": "1"
+            },
+            "touch": {
+                "critical_perfect": "37",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "33",
+                "perfect": "6",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "803/965",
+        "max_sync": "―"
+    },
+    {
+        "no": 40,
+        "date": "2026/03/01 17:56",
+        "track": "TRACK 02",
+        "title": "CiRCLE CAMPAiGN",
+        "type": "dx",
+        "internalLevel": 13.7,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/ec439357b2e17145.png",
+        "score": "100.2918%",
+        "score_new_record": true,
+        "dx_score": "2,622 / 2,895",
+        "dx_score_new_record": true,
+        "fast": "149",
+        "late": "88",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15100",
+        "rating_plus": "(+4)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "442",
+                "perfect": "196",
+                "great": "14",
+                "good": "7",
+                "miss": "2"
+            },
+            "hold": {
+                "critical_perfect": "31",
+                "perfect": "9",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "187",
+                "perfect": "0",
+                "great": "0",
+                "good": "1",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "37",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "29",
+                "perfect": "10",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "492/965",
+        "max_sync": "―"
+    },
+    {
+        "no": 41,
+        "date": "2026/03/01 17:53",
+        "track": "TRACK 01",
+        "title": "CiRCLE CAMPAiGN",
+        "type": "dx",
+        "internalLevel": 13.7,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/ec439357b2e17145.png",
+        "score": "99.3595%",
+        "score_new_record": true,
+        "dx_score": "2,527 / 2,895",
+        "dx_score_new_record": false,
+        "fast": "186",
+        "late": "107",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15096",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "391",
+                "perfect": "226",
+                "great": "28",
+                "good": "10",
+                "miss": "6"
+            },
+            "hold": {
+                "critical_perfect": "25",
+                "perfect": "13",
+                "great": "1",
+                "good": "1",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "186",
+                "perfect": "0",
+                "great": "0",
+                "good": "1",
+                "miss": "1"
+            },
+            "touch": {
+                "critical_perfect": "37",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "26",
+                "perfect": "12",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "428/965",
+        "max_sync": "―"
+    },
+    {
+        "no": 42,
+        "date": "2026/03/01 17:38",
+        "track": "TRACK 03",
+        "title": "Spring of Dreams",
+        "type": "dx",
+        "internalLevel": 12.8,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/25bcb2696dfcef90.png",
+        "score": "100.5750%",
+        "score_new_record": true,
+        "dx_score": "2,046 / 2,241",
+        "dx_score_new_record": true,
+        "fast": "73",
+        "late": "104",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15096",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "395",
+                "perfect": "143",
+                "great": "13",
+                "good": "2",
+                "miss": "0"
+            },
+            "hold": {
+                "critical_perfect": "60",
+                "perfect": "16",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "48",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "49",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "18",
+                "perfect": "2",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "747/747",
+        "max_sync": "―"
+    },
+    {
+        "no": 43,
+        "date": "2026/03/01 17:35",
+        "track": "TRACK 02",
+        "title": "ヒステリックナイトガール",
+        "type": "dx",
+        "internalLevel": 13,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/b48907e41b1a0e45.png",
+        "score": "100.5534%",
+        "score_new_record": true,
+        "dx_score": "1,932 / 2,085",
+        "dx_score_new_record": true,
+        "fast": "71",
+        "late": "70",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15096",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "375",
+                "perfect": "123",
+                "great": "4",
+                "good": "0",
+                "miss": "2"
+            },
+            "hold": {
+                "critical_perfect": "26",
+                "perfect": "9",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "126",
+                "perfect": "0",
+                "great": "0",
+                "good": "1",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "7",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "18",
+                "perfect": "4",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "354/695",
+        "max_sync": "―"
+    },
+    {
+        "no": 44,
+        "date": "2026/03/01 17:31",
+        "track": "TRACK 01",
+        "title": "へべれけジャンキー",
+        "type": "dx",
+        "internalLevel": 13.2,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/d40c1ce72043c066.png",
+        "score": "98.9507%",
+        "score_new_record": true,
+        "dx_score": "1,946 / 2,205",
+        "dx_score_new_record": true,
+        "fast": "121",
+        "late": "89",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15096",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "328",
+                "perfect": "161",
+                "great": "16",
+                "good": "7",
+                "miss": "3"
+            },
+            "hold": {
+                "critical_perfect": "45",
+                "perfect": "16",
+                "great": "2",
+                "good": "1",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "45",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "71",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "32",
+                "perfect": "5",
+                "great": "1",
+                "good": "1",
+                "miss": "1"
+            }
+        },
+        "max_combo": "354/735",
+        "max_sync": "―"
+    },
+    {
+        "no": 45,
+        "date": "2026/03/01 17:16",
+        "track": "TRACK 03",
+        "title": "Xenovcipher",
+        "type": "dx",
+        "internalLevel": 14.3,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/9a806edb5b8a642e.png",
+        "score": "93.8053%",
+        "score_new_record": false,
+        "dx_score": "2,263 / 2,946",
+        "dx_score_new_record": true,
+        "fast": "108",
+        "late": "296",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15096",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "299",
+                "perfect": "230",
+                "great": "81",
+                "good": "19",
+                "miss": "36"
+            },
+            "hold": {
+                "critical_perfect": "39",
+                "perfect": "25",
+                "great": "9",
+                "good": "2",
+                "miss": "2"
+            },
+            "slide": {
+                "critical_perfect": "108",
+                "perfect": "0",
+                "great": "1",
+                "good": "2",
+                "miss": "2"
+            },
+            "touch": {
+                "critical_perfect": "69",
+                "perfect": "1",
+                "great": "2",
+                "good": "2",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "22",
+                "perfect": "21",
+                "great": "5",
+                "good": "4",
+                "miss": "1"
+            }
+        },
+        "max_combo": "167/982",
+        "max_sync": "―"
+    },
+    {
+        "no": 46,
+        "date": "2026/03/01 17:13",
+        "track": "TRACK 02",
+        "title": "拝啓、最高の思い出たち",
+        "type": "dx",
+        "internalLevel": 13,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/a7bd6ceaeb20ea10.png",
+        "score": "100.0279%",
+        "score_new_record": true,
+        "dx_score": "1,905 / 2,151",
+        "dx_score_new_record": true,
+        "fast": "121",
+        "late": "90",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15096",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "339",
+                "perfect": "163",
+                "great": "24",
+                "good": "1",
+                "miss": "1"
+            },
+            "hold": {
+                "critical_perfect": "29",
+                "perfect": "17",
+                "great": "1",
+                "good": "1",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "73",
+                "perfect": "0",
+                "great": "1",
+                "good": "1",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "38",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "break": {
+                "critical_perfect": "26",
+                "perfect": "2",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "504/717",
+        "max_sync": "―"
+    },
+    {
+        "no": 47,
+        "date": "2026/03/01 17:10",
+        "track": "TRACK 01",
+        "title": "はじまりの未来",
+        "type": "dx",
+        "internalLevel": 13,
+        "difficulty": "master",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/0f8294359ea35f03.png",
+        "score": "100.4053%",
+        "score_new_record": true,
+        "dx_score": "1,727 / 1,869",
+        "dx_score_new_record": true,
+        "fast": "50",
+        "late": "74",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15096",
+        "rating_plus": "(+0)",
+        "notes": {
+            "tap": {
+                "critical_perfect": "241",
+                "perfect": "86",
+                "great": "5",
+                "good": "0",
+                "miss": "3"
+            },
+            "hold": {
+                "critical_perfect": "37",
+                "perfect": "12",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
+            },
+            "slide": {
+                "critical_perfect": "62",
+                "perfect": "0",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            },
+            "touch": {
+                "critical_perfect": "112",
+                "perfect": "8",
+                "great": "0",
+                "good": "0",
+                "miss": "1"
+            },
+            "break": {
+                "critical_perfect": "43",
+                "perfect": "12",
+                "great": "0",
+                "good": "0",
+                "miss": "0"
+            }
+        },
+        "max_combo": "342/623",
         "max_sync": "―"
     },
     {
         "no": 48,
-        "date": "2025/09/20 12:23",
+        "date": "2026/03/01 16:53",
         "track": "TRACK 03",
-        "title": "スナネコのうた",
-        "type": "dx",
-        "internalLevel": 13.4,
+        "title": "AFTER PANDORA",
+        "type": "std",
+        "internalLevel": 14.2,
         "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/358706b964277c8b.png",
-        "score": "99.2536%",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/337975e1e775a059.png",
+        "score": "96.0441%",
         "score_new_record": true,
-        "dx_score": "1,543 / 1,698",
-        "dx_score_new_record": false,
-        "fast": "49",
-        "late": "60",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_2.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14950",
+        "dx_score": "1,389 / 1,728",
+        "dx_score_new_record": true,
+        "fast": "107",
+        "late": "133",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15096",
         "rating_plus": "(+0)",
         "notes": {
             "tap": {
-                "critical_perfect": "198",
-                "perfect": "67",
-                "great": "6",
-                "good": "3",
-                "miss": "6"
+                "critical_perfect": "222",
+                "perfect": "156",
+                "great": "35",
+                "good": "10",
+                "miss": "5"
             },
             "hold": {
-                "critical_perfect": "22",
-                "perfect": "11",
+                "critical_perfect": "10",
+                "perfect": "10",
                 "great": "0",
                 "good": "1",
                 "miss": "0"
             },
             "slide": {
-                "critical_perfect": "56",
+                "critical_perfect": "89",
                 "perfect": "0",
-                "great": "2",
-                "good": "0",
+                "great": "4",
+                "good": "9",
                 "miss": "0"
             },
             "touch": {
-                "critical_perfect": "115",
-                "perfect": "0",
-                "great": "0",
-                "good": "0",
-                "miss": "3"
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
             },
             "break": {
-                "critical_perfect": "57",
-                "perfect": "16",
+                "critical_perfect": "10",
+                "perfect": "11",
                 "great": "3",
-                "good": "0",
+                "good": "1",
                 "miss": "0"
             }
         },
-        "max_combo": "215/566",
+        "max_combo": "261/576",
         "max_sync": "―"
     },
     {
         "no": 49,
-        "date": "2025/09/20 12:20",
+        "date": "2026/03/01 16:50",
         "track": "TRACK 02",
-        "title": "Feel The Luv",
+        "title": "Believe the Rainbow",
         "type": "dx",
-        "internalLevel": 13.8,
+        "internalLevel": 13,
         "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/0ad8bc668121b1cf.png",
-        "score": "97.6568%",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/8cba62be80c4af2d.png",
+        "score": "99.9954%",
         "score_new_record": true,
-        "dx_score": "2,374 / 2,781",
+        "dx_score": "1,500 / 1,593",
         "dx_score_new_record": true,
-        "fast": "141",
-        "late": "136",
-        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14950",
+        "fast": "40",
+        "late": "33",
+        "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_3.png",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15096",
         "rating_plus": "(+0)",
         "notes": {
             "tap": {
-                "critical_perfect": "356",
-                "perfect": "196",
-                "great": "36",
-                "good": "13",
-                "miss": "10"
+                "critical_perfect": "203",
+                "perfect": "50",
+                "great": "3",
+                "good": "0",
+                "miss": "3"
             },
             "hold": {
-                "critical_perfect": "26",
-                "perfect": "11",
-                "great": "3",
-                "good": "2",
+                "critical_perfect": "16",
+                "perfect": "8",
+                "great": "0",
+                "good": "1",
                 "miss": "0"
             },
             "slide": {
-                "critical_perfect": "88",
+                "critical_perfect": "113",
                 "perfect": "0",
-                "great": "0",
+                "great": "2",
                 "good": "1",
-                "miss": "1"
+                "miss": "0"
             },
             "touch": {
-                "critical_perfect": "116",
-                "perfect": "3",
-                "great": "0",
-                "good": "3",
-                "miss": "5"
+                "critical_perfect": "95",
+                "perfect": "0",
+                "great": "1",
+                "good": "0",
+                "miss": "0"
             },
             "break": {
-                "critical_perfect": "47",
-                "perfect": "7",
-                "great": "2",
+                "critical_perfect": "28",
+                "perfect": "6",
+                "great": "1",
                 "good": "0",
-                "miss": "1"
+                "miss": "0"
             }
         },
-        "max_combo": "266/927",
+        "max_combo": "287/531",
         "max_sync": "―"
     },
     {
         "no": 50,
-        "date": "2025/09/20 12:17",
+        "date": "2026/03/01 16:47",
         "track": "TRACK 01",
-        "title": "Rush-Hour",
-        "type": "dx",
-        "internalLevel": 13.8,
+        "title": "プリズム△▽リズム",
+        "type": "std",
+        "internalLevel": 13.2,
         "difficulty": "master",
-        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/72add6e11afd6c5a.png",
-        "score": "97.9887%",
+        "image": "https://maimaidx-eng.com/maimai-mobile/img/Music/0357191a14ae5114.png",
+        "score": "98.6284%",
         "score_new_record": true,
-        "dx_score": "2,341 / 2,682",
+        "dx_score": "1,797 / 2,055",
         "dx_score_new_record": true,
-        "fast": "121",
-        "late": "114",
+        "fast": "74",
+        "late": "122",
         "star": "https://maimaidx-eng.com/maimai-mobile/img/playlog/dxstar_1.png",
-        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.50",
-        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.50",
-        "rating": "14950",
+        "achive_1": "https://maimaidx-eng.com/maimai-mobile/img/playlog/fc_dummy.png?ver=1.60",
+        "achive_2": "https://maimaidx-eng.com/maimai-mobile/img/playlog/sync_dummy.png?ver=1.60",
+        "rating": "15096",
         "rating_plus": "(+0)",
         "notes": {
             "tap": {
-                "critical_perfect": "355",
-                "perfect": "162",
-                "great": "43",
-                "good": "6",
-                "miss": "12"
+                "critical_perfect": "325",
+                "perfect": "145",
+                "great": "14",
+                "good": "8",
+                "miss": "6"
             },
             "hold": {
-                "critical_perfect": "69",
+                "critical_perfect": "42",
                 "perfect": "13",
-                "great": "0",
-                "good": "0",
-                "miss": "1"
-            },
-            "slide": {
-                "critical_perfect": "106",
-                "perfect": "0",
-                "great": "0",
+                "great": "2",
                 "good": "0",
                 "miss": "0"
             },
+            "slide": {
+                "critical_perfect": "109",
+                "perfect": "0",
+                "great": "5",
+                "good": "2",
+                "miss": "1"
+            },
             "touch": {
-                "critical_perfect": "92",
-                "perfect": "1",
-                "great": "0",
-                "good": "0",
-                "miss": "2"
+                "critical_perfect": "",
+                "perfect": "",
+                "great": "",
+                "good": "",
+                "miss": ""
             },
             "break": {
-                "critical_perfect": "20",
-                "perfect": "10",
+                "critical_perfect": "6",
+                "perfect": "7",
                 "great": "0",
                 "good": "0",
-                "miss": "2"
+                "miss": "0"
             }
         },
-        "max_combo": "158/894",
+        "max_combo": "181/685",
         "max_sync": "―"
     }
 ]
