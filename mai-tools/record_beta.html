@@ -23,8 +23,12 @@
 
 <body>
     <div class="main">
-        <nav class="side-panel">
-            <h4 style="color: #eee;">最近遊玩曲目</h4>
+        <button id="btn-expand" class="btn btn-dark" style="position: absolute; left: 0; top: 15px; z-index: 100; border-radius: 0 5px 5px 0; display: none;">&gt;</button>
+        <nav class="side-panel" id="side-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h4 style="color: #eee; margin: 0;">最近遊玩曲目</h4>
+                <button id="btn-collapse" class="btn btn-sm" style="color: #ccc; border: none; background: transparent; font-size: 1.5rem; line-height: 1; padding: 0;">&lt;</button>
+            </div>
             <div class="controls">
                 <button id="btn-all" class="secondary-btn">全選</button>
                 <button id="btn-clear" class="secondary-btn">清空選擇</button>
@@ -91,6 +95,16 @@
             $('#display-board').toggleClass('hide-notes');
             const isHidden = $('#display-board').hasClass('hide-notes');
             $(this).text(isHidden ? '顯示詳細數據' : '隱藏詳細數據');
+        });
+
+        $('#btn-collapse').click(function () {
+            $('#side-panel').addClass('collapsed');
+            $('#btn-expand').fadeIn(200);
+        });
+
+        $('#btn-expand').click(function () {
+            $('#side-panel').removeClass('collapsed');
+            $('#btn-expand').fadeOut(200);
         });
 
     }
@@ -251,10 +265,10 @@
     }
 
     .card-score {
-        color: var(--neon-purple);
+        color: white;
         font-size: 1.2em;
         font-weight: 900;
-        text-shadow: 0 0 5px rgba(187, 102, 255, 0.4);
+        text-shadow: 0 0 3px rgb(255 253 0);
     }
 
     .card-title {
@@ -429,6 +443,15 @@
         padding: 20px;
         width: 250px;
         width: 280px;
+        transition: width 0.3s ease, padding 0.3s ease;
+    }
+
+    .side-panel.collapsed {
+        width: 0;
+        padding-left: 0;
+        padding-right: 0;
+        border-right: none;
+        overflow: hidden;
     }
 
     .side-panel h3 {

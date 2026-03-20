@@ -1,3 +1,8 @@
+// 測試用
+const test = () => {
+    $('.test').removeClass('d-none');
+}
+
 // 成就對應門檻
 const SCORE_THRESHOLDS = [
     { name: 'clear', score: 80.00 },
@@ -561,7 +566,7 @@ const captureAndDownload = () => {
     }
     const node = document.getElementById('result-container');
 
-    htmlToImage.toPng(node, { includeQueryParams:true })
+    htmlToImage.toPng(node, { includeQueryParams: true })
         .then((dataUrl) => {
             const newTab = window.open();
             newTab.document.body.innerHTML = `<img src="${dataUrl}" style="width: 100%;">`;
