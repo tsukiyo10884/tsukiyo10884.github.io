@@ -1,5 +1,5 @@
 // 測試用
-const test = () => {
+const showTest = () => {
     $('.test').removeClass('d-none');
 }
 
