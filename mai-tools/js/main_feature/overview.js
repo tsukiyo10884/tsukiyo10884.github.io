@@ -163,10 +163,14 @@ const showCircleContributionChart = async () => {
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: circleData.members.map(m => m.name),
+            labels: circleData.members.sort(function (a, b) {
+                return parseInt(b.pt) - parseInt(a.pt)
+            }).map(m => m.name),
             datasets: [{
                 label: 'PT',
-                data: circleData.members.map(m => m.pt),
+                data: circleData.members.sort(function (a, b) {
+                    return parseInt(b.pt) - parseInt(a.pt)
+                }).map(m => m.pt),
                 backgroundColor: circleData.members.map(m =>
                     m.name === generalData.userInfo.name ? '#ff42b4' : '#ffc7f0'
                 ),
@@ -187,7 +191,7 @@ const showCircleContributionChart = async () => {
                     font: { weight: 'bold' },
                     formatter: (value) => value.toLocaleString()
                 },
-                legend: { display: false }, 
+                legend: { display: false },
                 title: {
                     display: true,
                     text: `${circleData.circleName}`,
