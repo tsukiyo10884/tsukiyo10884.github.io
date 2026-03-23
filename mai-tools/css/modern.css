@@ -637,7 +637,7 @@ button {
     padding: 20px;
     box-shadow: 1px 3px 0px rgba(0, 0, 0, 0.4);
     border: 2px solid #ffffff22;
-    width: 920px;
+    width: fit-content;
     margin-left:-5px;
 }
 

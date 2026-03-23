@@ -7,7 +7,9 @@ const initOverview = async () => {
                     <h5 class="chart-title">Rating變化(近50筆)</h5>
                 </div>
                 <div class="heavy-hr hr-top"></div>
-                <canvas id="rating-chart" class="chart" height="100"></canvas>
+                <div style="width:850px">
+                    <canvas id="rating-chart" class="chart"></canvas>
+                </div>
                 <div class="heavy-hr hr-bottom"></div>
             </div>
             
@@ -16,7 +18,9 @@ const initOverview = async () => {
                     <h5 class="chart-title">Circle貢獻</h5>
                 </div>
                 <div class="heavy-hr hr-top"></div>
-                <canvas id="circle-chart" class="chart"></canvas>
+                <div style="width:850px">
+                    <canvas id="circle-chart" class="chart"></canvas>
+                </div>
                 <div class="heavy-hr hr-bottom"></div>
             </div>
         </div>

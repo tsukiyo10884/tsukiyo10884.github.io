@@ -604,8 +604,9 @@ img {
 	background: #203844;
 	border-radius: 20px;
 	border: 1px solid #ffffff;
-	padding-top: 10px;
 	padding: 20px;
+	padding-top: 10px;
+    width: fit-content;
 }
 
 #rating-chart-title {
@@ -617,8 +618,9 @@ img {
 	background: #203844;
 	border-radius: 20px;
 	border: 1px solid #ffffff;
-	padding-top: 10px;
 	padding: 20px;
+	padding-top: 10px;
+    width: fit-content;
 }
 
 #circle-chart-title {

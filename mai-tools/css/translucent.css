@@ -761,7 +761,7 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
     padding: 20px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     margin-left: -5px;
-    width: 920px;
+    width: fit-content;
 }
 
 .chart {
