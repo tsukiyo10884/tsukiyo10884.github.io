@@ -23,11 +23,11 @@
 
 <body>
     <div class="main">
-        <button id="btn-expand" class="btn btn-dark" style="position: absolute; left: 0; top: 15px; z-index: 100; border-radius: 0 5px 5px 0; display: none;">&gt;</button>
+        <button id="btn-expand" class="btn btn-dark">&gt;</button>
         <nav class="side-panel" id="side-panel">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h4 style="color: #eee; margin: 0;">最近遊玩曲目</h4>
-                <button id="btn-collapse" class="btn btn-sm" style="color: #ccc; border: none; background: transparent; font-size: 1.5rem; line-height: 1; padding: 0;">&lt;</button>
+                <button id="btn-collapse" class="btn btn-sm">&lt;</button>
             </div>
             <div class="controls">
                 <button id="btn-all" class="secondary-btn">全選</button>
@@ -201,6 +201,27 @@
 
     body {
         background: linear-gradient(145deg, #1a1a2e 0%, #0f0f1a 100%);
+    }
+
+    #btn-collapse {
+        color: #ccc;
+        border: none;
+        background: transparent;
+        font-size: 16px;
+        line-height: 1;
+        padding: 0;
+        position: absolute;
+        right: 5px;
+        top: 0px;
+    }
+
+    #btn-expand {
+        display: none;
+        position: absolute;
+        left: 0px;
+        top: 5px;
+        z-index: 100;
+        border-radius: 0px 5px 5px 0px;
     }
 
     #display-board {
