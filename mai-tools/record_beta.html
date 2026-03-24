@@ -166,16 +166,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                ${types.map(type => `
-                                    <tr>
-                                        <td class="row-label">${type.toUpperCase()}</td>
-                                        <td style="${n[type].critical_perfect > 0 ? 'color:#f39c12; font-weight:bold' : 'color:#ccc'}">${n[type].critical_perfect || '0'}</td>
-                                        <td style="${n[type].perfect > 0 ? 'color:#f1c40f; font-weight:bold' : 'color:#ccc'}">${n[type].perfect || '0'}</td>
-                                        <td style="${n[type].great > 0 ? 'color:#ff6ffd; font-weight:bold' : 'color:#ccc'}">${n[type].great || '0'}</td>
-                                        <td style="${n[type].good > 0 ? 'color:#2ecc71; font-weight:bold' : 'color:#ccc'}">${n[type].good || '0'}</td>
-                                        <td style="${n[type].miss > 0 ? 'color:#e74c3c; font-weight:bold' : 'color:#ccc'}">${n[type].miss || '0'}</td>
-                                    </tr>
-                                `).join('')}
+                                ${types.map(type => {
+                                    let str = ''
+                                    if (type == 'touch' && n[type].critical_perfect == 0 && n[type].perfect == 0 && n[type].great == 0 && n[type].good == 0 && n[type].miss == 0) {
+                                        str = `
+                                                <tr>
+                                                    <td class="row-label">${type.toUpperCase()}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            `;
+                                    } else {
+                                        str = `
+                                                <tr>
+                                                    <td class="row-label">${type.toUpperCase()}</td>
+                                                    <td style="${n[type].critical_perfect > 0 ? 'color:#f39c12; font-weight:bold' : 'color:#ccc'}">${n[type].critical_perfect || '0'}</td>
+                                                    <td style="${n[type].perfect > 0 ? 'color:#f1c40f; font-weight:bold' : 'color:#ccc'}">${n[type].perfect || '0'}</td>
+                                                    <td style="${n[type].great > 0 ? 'color:#ff6ffd; font-weight:bold' : 'color:#ccc'}">${n[type].great || '0'}</td>
+                                                    <td style="${n[type].good > 0 ? 'color:#2ecc71; font-weight:bold' : 'color:#ccc'}">${n[type].good || '0'}</td>
+                                                    <td style="${n[type].miss > 0 ? 'color:#e74c3c; font-weight:bold' : 'color:#ccc'}">${n[type].miss || '0'}</td>
+                                                </tr>
+                                            `;
+                                    }
+                                    return str;
+                                }).join('')}
                             </tbody>
                         </table>
                     </div>
