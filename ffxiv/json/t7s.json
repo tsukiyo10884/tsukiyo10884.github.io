@@ -1,0 +1,352 @@
+[
+    {
+        "label": "L1",
+        "group": "group1",
+        "offset": 10,
+        "events": [
+            {
+                "time": 25,
+                "event": "雷諾"
+            },
+            {
+                "time": 65,
+                "event": "雷諾"
+            },
+            {
+                "time": 105,
+                "event": "雷諾"
+            },
+            {
+                "time": 145,
+                "event": "雷諾"
+            },
+            {
+                "time": 185,
+                "event": "雷諾"
+            },
+            {
+                "time": 225,
+                "event": "雷諾"
+            },
+            {
+                "time": 265,
+                "event": "雷諾"
+            },
+            {
+                "time": 305,
+                "event": "雷諾"
+            },
+            {
+                "time": 345,
+                "event": "雷諾"
+            }
+        ]
+    },
+    {
+        "label": "P1",
+        "group": "group1",
+        "offset": 10,
+        "events": [
+            {
+                "time": 0,
+                "event": "開始"
+            },
+            {
+                "time": 12,
+                "event": "聲"
+            },
+            {
+                "time": 14,
+                "event": "火球"
+            },
+            {
+                "time": 24,
+                "event": "迴旋斬"
+            }
+        ]
+    },
+    {
+        "label": "P2",
+        "offset": 39,
+        "events": [
+            {
+                "time": 0,
+                "event": "石化讀條"
+            },
+            {
+                "time": 3,
+                "event": "石化"
+            },
+            {
+                "time": 12,
+                "event": "聲"
+            },
+            {
+                "time": 14,
+                "event": "火球"
+            },
+            {
+                "time": 18,
+                "event": "嚎"
+            },
+            {
+                "time": 27,
+                "event": "迴旋斬"
+            },
+            {
+                "time": 30,
+                "event": "火球+舞獅2"
+            },
+            {
+                "time": 36,
+                "event": "聲"
+            },
+            {
+                "time": 46,
+                "event": "火球"
+            },
+            {
+                "time": 48,
+                "event": "石化讀條"
+            },
+            {
+                "time": 51,
+                "event": "石化"
+            },
+            {
+                "time": 60,
+                "event": "聲+舞獅3"
+            },
+            {
+                "time": 62,
+                "event": "火球"
+            },
+            {
+                "time": 66,
+                "event": "嚎"
+            },
+            {
+                "time": 73,
+                "event": "迴旋斬"
+            },
+            {
+                "time": 78,
+                "event": "火球"
+            },
+            {
+                "time": 84,
+                "event": "聲"
+            },
+            {
+                "time": 94,
+                "event": "火球"
+            },
+            {
+                "time": 96,
+                "event": "石化讀條"
+            },
+            {
+                "time": 99,
+                "event": "石化"
+            }
+        ]
+    },
+    {
+        "label": "L2",
+        "group": "group2",
+        "offset": 140,
+        "events": [
+            {
+                "time": 0,
+                "event": "毒圈(內)"
+            },
+            {
+                "time": 15,
+                "event": "毒圈爆炸"
+            },
+            {
+                "time": 30,
+                "event": "毒圈(中)"
+            },
+            {
+                "time": 45,
+                "event": "毒圈爆炸"
+            },
+            {
+                "time": 60,
+                "event": "毒圈(外)"
+            },
+            {
+                "time": 75,
+                "event": "毒圈爆炸"
+            },
+            {
+                "time": 90,
+                "event": "毒圈(中)"
+            },
+            {
+                "time": 105,
+                "event": "毒圈爆炸"
+            },
+            {
+                "time": 120,
+                "event": "毒圈(內)"
+            },
+            {
+                "time": 135,
+                "event": "毒圈爆炸"
+            },
+            {
+                "time": 150,
+                "event": "毒圈(中)"
+            },
+            {
+                "time": 165,
+                "event": "毒圈爆炸"
+            },
+            {
+                "time": 180,
+                "event": "毒圈(外)"
+            },
+            {
+                "time": 195,
+                "event": "毒圈爆炸"
+            },
+            {
+                "time": 210,
+                "event": "毒圈(外)"
+            },
+            {
+                "time": 225,
+                "event": "毒圈爆炸"
+            }
+        ]
+    },
+    {
+        "label": "P3",
+        "group": "group2",
+        "offset": 140,
+        "events": [
+            {
+                "time": 3,
+                "event": "猛毒"
+            },
+            {
+                "time": 14,
+                "event": "聲"
+            },
+            {
+                "time": 20,
+                "event": "嚎"
+            },
+            {
+                "time": 23,
+                "event": "火球"
+            },
+            {
+                "time": 38,
+                "event": "聲"
+            },
+            {
+                "time": 39,
+                "event": "火球"
+            },
+            {
+                "time": 43,
+                "event": "石化讀條"
+            },
+            {
+                "time": 46,
+                "event": "石化"
+            },
+            {
+                "time": 51,
+                "event": "猛毒"
+            },
+            {
+                "time": 55,
+                "event": "火球"
+            },
+            {
+                "time": 62,
+                "event": "聲"
+            },
+            {
+                "time": 67,
+                "event": "嚎"
+            },
+            {
+                "time": 72,
+                "event": "火球"
+            }
+        ]
+    },
+    {
+        "label": "P4",
+        "offset": 218,
+        "events": [
+            {
+                "time": 0,
+                "event": "女王"
+            },
+            {
+                "time": 7,
+                "event": "聲"
+            },
+            {
+                "time": 9,
+                "event": "火球"
+            },
+            {
+                "time": 16,
+                "event": "石化"
+            },
+            {
+                "time": 19,
+                "event": "女王石化"
+            },
+            {
+                "time": 21,
+                "event": "猛毒"
+            },
+            {
+                "time": 24,
+                "event": "火球"
+            },
+            {
+                "time": 31,
+                "event": "聲"
+            },
+            {
+                "time": 35,
+                "event": "嚎"
+            },
+            {
+                "time": 40,
+                "event": "女王石化"
+            },
+            {
+                "time": 42,
+                "event": "火球"
+            }
+        ]
+    },
+    {
+        "label": "P5",
+        "offset": 261,
+        "events": [
+            {
+                "time": 13,
+                "event": "聲+火球"
+            },
+            {
+                "time": 18,
+                "event": "石化讀條"
+            },
+            {
+                "time": 22,
+                "event": "石化"
+            }
+        ]
+    }
+]

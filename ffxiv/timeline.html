@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <title>時間軸</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="controls">
+        <div style="font-weight: bold; color: #f39c12;">時間軸</div>
+        <div class="zoom-control">
+            <label>顯示比例 (拉寬/拉窄):</label>
+            <input type="range" id="zoomRange" min="2" max="30" value="8">
+            <span id="zoomVal">8px/s</span>
+        </div>
+        <div id="btn-group" class="ms-auto">
+            <button id="t7s" class="btn btn-primary" onclick="loadTimeline('json/t7s.json')">t7s</button>
+        </div>
+    </div>
+
+    <div id="timelineContainer">
+        <div class="master-axis" id="masterAxis"></div>
+        <div id="tracksArea"></div>
+    </div>
+
+    <script>
+        let unit = 8; // 預設 1秒 = 8px
+        const tracksArea = document.getElementById('tracksArea');
+        const masterAxis = document.getElementById('masterAxis');
+        const zoomRange = document.getElementById('zoomRange');
+        const zoomVal = document.getElementById('zoomVal');
+        let rawData;
+        let trackOffsets;
+
+        const loadTimeline = (jsonPath) => {
+            $.getJSON(jsonPath, (json) => {
+                rawData = json;
+                trackOffsets = rawData.map(d => d.offset);
+                zoomRange.oninput = (e) => {
+                    unit = parseInt(e.target.value);
+                    zoomVal.innerText = unit + "px/s";
+                    renderTimeline();
+                };
+
+                renderTimeline();
+            })
+        };
+
+        const formatTime = (totalSeconds) => {
+            const s = Math.abs(totalSeconds);
+            const m = Math.floor(s / 60);
+            const sec = s % 60;
+            return (totalSeconds < 0 ? "-" : "") + m + ":" + sec.toString().padStart(2, '0');
+        }
+
+        const renderTimeline = () => {
+            masterAxis.innerHTML = '';
+            tracksArea.innerHTML = '';
+
+            const trackUpdaters = [];
+
+            for (let i = -10; i <= 900; i += 5) {
+                const tick = document.createElement('div');
+                const isMajor = i % 30 === 0;
+                tick.className = 'tick' + (isMajor ? ' major' : '');
+                tick.style.left = ((i + 10) * unit) + 'px';
+                if (i % 10 === 0) tick.innerText = formatTime(i);
+                masterAxis.appendChild(tick);
+            }
+
+            rawData.forEach((item, index) => {
+                const currentOffset = trackOffsets[index];
+                const track = document.createElement('div');
+                track.className = 'track';
+                track.style.left = ((currentOffset + 10) * unit) + 'px';
+
+                const header = document.createElement('div');
+                header.className = 'track-header';
+                header.innerHTML = `${item.label} <span class="offset-hint">${formatTime(currentOffset)}</span>`;
+                track.appendChild(header);
+
+                let maxTime = 0;
+                const eventEls = [];
+                item.events.forEach((ev, idx) => {
+                    if (ev.time > maxTime) maxTime = ev.time;
+                    const evEl = document.createElement('div');
+                    const level = idx % 2;
+                    evEl.className = 'event level-' + level;
+                    evEl.style.left = (ev.time * unit) + 'px';
+                    evEl.innerHTML = `
+                        <div class="rel-time">${ev.time}s</div>
+                        <div class="line"></div>
+                        <div class="name">${ev.event}</div>
+                        <div class="abs-time">${formatTime(currentOffset + ev.time)}</div>
+                    `;
+                    track.appendChild(evEl);
+                    eventEls.push({ el: evEl.querySelector('.abs-time'), relT: ev.time });
+                });
+
+                const trackDuration = Math.max(60, maxTime + 15);
+                track.style.width = (trackDuration * unit) + 'px';
+
+                trackUpdaters.push((newOffset) => {
+                    header.querySelector('.offset-hint').innerText = formatTime(newOffset);
+                    eventEls.forEach(obj => {
+                        obj.el.innerText = formatTime(newOffset + obj.relT);
+                    });
+                });
+
+                track.onmousedown = (e) => {
+                    if (e.target !== track && !e.target.classList.contains('track-header') && !e.target.classList.contains('offset-hint')) return;
+
+                    const startX = e.pageX;
+                    const myGroup = item.syncGroup;
+                    const indicesToMove = myGroup ? rawData.map((d, i) => d.syncGroup === myGroup ? i : -1).filter(i => i !== -1) : [index];
+                    const groupStartLefts = indicesToMove.map(i => tracksArea.children[i].offsetLeft);
+                    indicesToMove.forEach(i => tracksArea.children[i].style.zIndex = 100);
+
+                    const onMouseMove = (moveEvent) => {
+                        const diffX = moveEvent.pageX - startX;
+
+                        indicesToMove.forEach((trackIdx, arrayIdx) => {
+                            const newLeft = groupStartLefts[arrayIdx] + diffX;
+                            const targetTrack = tracksArea.children[trackIdx];
+
+                            targetTrack.style.left = newLeft + 'px';
+                            const newOffset = Math.round(newLeft / unit) - 10;
+                            trackOffsets[trackIdx] = newOffset;
+                            trackUpdaters[trackIdx](newOffset);
+                        });
+                    };
+
+                    const onMouseUp = () => {
+                        indicesToMove.forEach(i => tracksArea.children[i].style.zIndex = 1);
+                        window.removeEventListener('mousemove', onMouseMove);
+                        window.removeEventListener('mouseup', onMouseUp);
+                    };
+
+                    window.addEventListener('mousemove', onMouseMove);
+                    window.addEventListener('mouseup', onMouseUp);
+                };
+
+                tracksArea.appendChild(track);
+            });
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+            padding: 20px;
+            user-select: none;
+            margin: 0;
+        }
+
+        .controls {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 1000;
+            border-bottom: 1px solid #444;
+            gap: 20px;
+        }
+
+        .zoom-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #timelineContainer {
+            position: relative;
+            margin-top: 80px;
+            padding-bottom: 100px;
+            min-height: 800px;
+        }
+
+        .master-axis {
+            position: sticky;
+            top: 60px;
+            height: 50px;
+            border-bottom: 2px solid #f39c12;
+            background: #121212;
+            z-index: 500;
+            display: flex;
+        }
+
+        .tick {
+            position: absolute;
+            border-left: 1px solid #333;
+            height: 15px;
+            font-size: 11px;
+            padding-left: 3px;
+            color: #888;
+        }
+
+        .tick.major {
+            border-left: 1px solid #666;
+            height: 25px;
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        .track {
+            position: relative;
+            height: 120px;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border: 1px solid #333;
+            cursor: grab;
+            white-space: nowrap;
+        }
+
+        .track:active {
+            cursor: grabbing;
+            background: rgba(255, 255, 255, 0.07);
+            border-color: #f39c12;
+        }
+
+        .track-header {
+            position: absolute;
+            left: -82px;
+            z-index: 10;
+            background: #333;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            width: fit-content;
+            border: 1px solid #555;
+            font-size: 14px;
+        }
+
+        .event {
+            position: absolute;
+            top: 10px;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .event.level-0 .line {
+            width: 2px;
+            height: 15px;
+            background: #00d2ff;
+        }
+
+        .event.level-1 .line {
+            width: 2px;
+            height: 50px;
+            background: #00ffcc;
+        }
+
+        .event .name {
+            font-size: 12px;
+            margin-top: 4px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .event .abs-time {
+            font-size: 11px;
+            color: #ffcc00;
+            font-family: monospace;
+            margin-top: 2px;
+            font-weight: bold;
+        }
+
+        .event .rel-time {
+            font-size: 10px;
+            color: #777;
+            margin-bottom: 2px;
+        }
+
+        .offset-hint {
+            font-size: 11px;
+            color: #aaa;
+            margin-left: 10px;
+            font-weight: normal;
+        }
+    </style>
+</body>
+
+</html>
