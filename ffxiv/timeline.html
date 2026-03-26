@@ -79,8 +79,13 @@
             rawData.forEach((item, index) => {
                 const currentOffset = trackOffsets[index];
                 const track = document.createElement('div');
-                track.className = 'track';
+                if (item.type == "loop") {
+                    track.className = 'track track-loop';
+                } else {
+                    track.className = 'track track-phase';
+                }
                 track.style.left = ((currentOffset + 10) * unit) + 'px';
+                track.style.top = (90 + (item.track - 1) * 170) + 'px';
 
                 const header = document.createElement('div');
                 header.className = 'track-header';
@@ -92,13 +97,13 @@
                 item.events.forEach((ev, idx) => {
                     if (ev.time > maxTime) maxTime = ev.time;
                     const evEl = document.createElement('div');
-                    const level = idx % 2;
-                    evEl.className = 'event level-' + level;
+                    evEl.className = 'event';
                     evEl.style.left = (ev.time * unit) + 'px';
                     evEl.innerHTML = `
                         <div class="rel-time">${ev.time}s</div>
-                        <div class="line"></div>
-                        <div class="name">${ev.event}</div>
+                        <div class="line" style="background:${ev.color == null ? '#00d2ff' : ev.color}"></div>
+                        ${ev.important == true ? '<div class="name">' + ev.eventName + '</div>' : ''}
+                        <div class="tips text-center">${ev.eventName}<br/>${formatTime(currentOffset + ev.time)}</div>
                         <div class="abs-time">${formatTime(currentOffset + ev.time)}</div>
                     `;
                     track.appendChild(evEl);
@@ -116,13 +121,12 @@
                 });
 
                 track.onmousedown = (e) => {
-                    if (e.target !== track && !e.target.classList.contains('track-header') && !e.target.classList.contains('offset-hint')) return;
+                    if (e.target !== track && !e.target.closest('.track-header') && !e.target.closest('.event')) return;
 
                     const startX = e.pageX;
-                    const myGroup = item.syncGroup;
-                    const indicesToMove = myGroup ? rawData.map((d, i) => d.syncGroup === myGroup ? i : -1).filter(i => i !== -1) : [index];
+                    const myGroup = item.group;
+                    const indicesToMove = myGroup ? rawData.map((d, i) => d.group === myGroup ? i : -1).filter(i => i !== -1) : [index];
                     const groupStartLefts = indicesToMove.map(i => tracksArea.children[i].offsetLeft);
-                    indicesToMove.forEach(i => tracksArea.children[i].style.zIndex = 100);
 
                     const onMouseMove = (moveEvent) => {
                         const diffX = moveEvent.pageX - startX;
@@ -139,7 +143,6 @@
                     };
 
                     const onMouseUp = () => {
-                        indicesToMove.forEach(i => tracksArea.children[i].style.zIndex = 1);
                         window.removeEventListener('mousemove', onMouseMove);
                         window.removeEventListener('mouseup', onMouseUp);
                     };
@@ -151,6 +154,8 @@
                 tracksArea.appendChild(track);
             });
         }
+
+        $('#t7s').click();
     </script>
 
     <style>
@@ -217,14 +222,20 @@
             font-weight: bold;
         }
 
+        .track-loop {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .track-phase {
+            background: rgb(48 48 48);
+        }
+
         .track {
-            position: relative;
+            position: absolute;
             height: 120px;
             margin: 10px 0;
-            background: rgba(255, 255, 255, 0.03);
             border-radius: 8px;
             border: 1px solid #333;
-            cursor: grab;
             white-space: nowrap;
         }
 
@@ -236,8 +247,6 @@
 
         .track-header {
             position: absolute;
-            left: -82px;
-            z-index: 10;
             background: #333;
             padding: 5px 12px;
             border-radius: 4px;
@@ -245,6 +254,7 @@
             width: fit-content;
             border: 1px solid #555;
             font-size: 14px;
+            top: -31px;
         }
 
         .event {
@@ -254,28 +264,42 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            pointer-events: none;
+            pointer-events: auto;
         }
 
-        .event.level-0 .line {
-            width: 2px;
-            height: 15px;
-            background: #00d2ff;
+        .event:hover {
+            z-index: 9999;
         }
 
-        .event.level-1 .line {
+        .event .line {
             width: 2px;
-            height: 50px;
-            background: #00ffcc;
+            height: 35px;
         }
 
         .event .name {
             font-size: 12px;
-            margin-top: 4px;
+            margin-top: 10px;
             color: #fff;
             background: rgba(0, 0, 0, 0.6);
             padding: 2px 4px;
             border-radius: 3px;
+        }
+
+        .event .tips {
+            position: absolute;
+            font-size: 12px;
+            margin-top: 25px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 2px 4px;
+            border-radius: 3px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+
+        .event:hover .tips {
+            opacity: 1;
         }
 
         .event .abs-time {
