@@ -3,7 +3,7 @@
         "label": "L1",
         "type": "loop",
         "track": 1,
-        "group": "group1",
+        "group": "groupP1",
         "offset": 17,
         "events": [
             {
@@ -65,6 +65,24 @@
                 "eventName": "[10]雷諾",
                 "color": "#3ce46c",
                 "important": true
+            },
+            {
+                "time": 425,
+                "eventName": "[11]雷諾",
+                "color": "#3ce46c",
+                "important": true
+            },
+            {
+                "time": 465,
+                "eventName": "[12]雷諾",
+                "color": "#3ce46c",
+                "important": true
+            },
+            {
+                "time": 505,
+                "eventName": "[13]雷諾",
+                "color": "#3ce46c",
+                "important": true
             }
         ]
     },
@@ -72,7 +90,7 @@
         "label": "P1",
         "type": "phase",
         "track": 2,
-        "group": "group1",
+        "group": "groupP1",
         "offset": 17,
         "events": [
             {
@@ -114,6 +132,7 @@
     {
         "label": "P2",
         "type": "phase",
+        "group":"groupP2",
         "track": 2,
         "offset": 71,
         "events": [
@@ -151,7 +170,7 @@
             },
             {
                 "time": 30,
-                "eventName": "火球+舞獅2"
+                "eventName": "火球"
             },
             {
                 "time": 36,
@@ -173,7 +192,7 @@
             },
             {
                 "time": 60,
-                "eventName": "聲+舞獅3",
+                "eventName": "聲",
                 "important": true
             },
             {
@@ -242,10 +261,34 @@
         ]
     },
     {
+        "label": "P2",
+        "type": "phase",
+        "group":"groupP2",
+        "track": 3,
+        "offset": 71,
+        "events": [
+            {
+                "time": 0,
+                "eventName": "舞獅1",
+                "important": true
+            },
+            {
+                "time": 30,
+                "eventName": "舞獅2",
+                "important": true
+            },
+            {
+                "time": 60,
+                "eventName": "舞獅3",
+                "important": true
+            }
+        ]
+    },
+    {
         "label": "L2",
         "type": "loop",
         "track": 1,
-        "group": "group2",
+        "group": "groupP3",
         "offset": 188,
         "events": [
             {
@@ -343,6 +386,54 @@
                 "eventName": "毒圈爆炸",
                 "color": "#da22ff",
                 "important": true
+            },
+            {
+                "time": 240,
+                "eventName": "毒圈(內)",
+                "color": "#da22ff",
+                "important": true
+            },
+            {
+                "time": 255,
+                "eventName": "毒圈爆炸",
+                "color": "#da22ff",
+                "important": true
+            },
+            {
+                "time": 270,
+                "eventName": "毒圈(中)",
+                "color": "#da22ff",
+                "important": true
+            },
+            {
+                "time": 285,
+                "eventName": "毒圈爆炸",
+                "color": "#da22ff",
+                "important": true
+            },
+            {
+                "time": 300,
+                "eventName": "毒圈(外)",
+                "color": "#da22ff",
+                "important": true
+            },
+            {
+                "time": 315,
+                "eventName": "毒圈爆炸",
+                "color": "#da22ff",
+                "important": true
+            },
+            {
+                "time": 330,
+                "eventName": "毒圈(中)",
+                "color": "#da22ff",
+                "important": true
+            },
+            {
+                "time": 345,
+                "eventName": "毒圈爆炸",
+                "color": "#da22ff",
+                "important": true
             }
         ]
     },
@@ -350,7 +441,7 @@
         "label": "P3",
         "type": "phase",
         "track": 2,
-        "group": "group2",
+        "group": "groupP3",
         "offset": 188,
         "events": [
             {
@@ -535,6 +626,106 @@
                 "time": 222,
                 "eventName": "嚎發動",
                 "important": true
+            },
+            {
+                "time": 232,
+                "eventName": "聲",
+                "important": true
+            },
+            {
+                "time": 233,
+                "eventName": "火球"
+            },
+            {
+                "time": 239,
+                "eventName": "石化讀條"
+            },
+            {
+                "time": 242,
+                "eventName": "石化",
+                "important": true
+            },
+            {
+                "time": 252,
+                "eventName": "火球"
+            },
+            {
+                "time": 257,
+                "eventName": "聲",
+                "important": true
+            },
+            {
+                "time": 260,
+                "eventName": "嚎",
+                "important": true
+            },
+            {
+                "time": 270,
+                "eventName": "嚎發動",
+                "important": true
+            },
+            {
+                "time": 281,
+                "eventName": "聲",
+                "important": true
+            },
+            {
+                "time": 282,
+                "eventName": "火球"
+            },
+            {
+                "time": 286,
+                "eventName": "石化讀條"
+            },
+            {
+                "time": 289,
+                "eventName": "石化",
+                "important": true
+            },
+            {
+                "time": 298,
+                "eventName": "火球"
+            },
+            {
+                "time": 305,
+                "eventName": "聲",
+                "important": true
+            },
+            {
+                "time": 309,
+                "eventName": "嚎",
+                "important": true
+            },
+            {
+                "time": 314,
+                "eventName": "火球"
+            },
+            {
+                "time": 319,
+                "eventName": "嚎發動",
+                "important": true
+            },
+            {
+                "time": 328,
+                "eventName": "聲",
+                "important": true
+            },
+            {
+                "time": 330,
+                "eventName": "火球"
+            },
+            {
+                "time": 334,
+                "eventName": "石化讀條"
+            },
+            {
+                "time": 337,
+                "eventName": "石化",
+                "important": true
+            },
+            {
+                "time": 346,
+                "eventName": "火球"
             }
         ]
     },
@@ -568,6 +759,21 @@
                 "time": 192,
                 "eventName": "猛毒",
                 "color": "#ff0000"
+            },
+            {
+                "time": 242,
+                "eventName": "猛毒",
+                "color": "#ff0000"
+            },
+            {
+                "time": 289,
+                "eventName": "猛毒",
+                "color": "#ff0000"
+            },
+            {
+                "time": 338,
+                "eventName": "猛毒",
+                "color": "#ff0000"
             }
         ]
     },
@@ -590,28 +796,6 @@
             {
                 "time": 40,
                 "eventName": "女王石化",
-                "important": true
-            }
-        ]
-    },
-    {
-        "label": "P5",
-        "type": "phase",
-        "track": 3,
-        "offset": 500,
-        "events": [
-            {
-                "time": 13,
-                "eventName": "聲+火球",
-                "important": true
-            },
-            {
-                "time": 18,
-                "eventName": "石化讀條"
-            },
-            {
-                "time": 22,
-                "eventName": "石化",
                 "important": true
             }
         ]
