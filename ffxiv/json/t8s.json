@@ -1,0 +1,154 @@
+{
+    "notes": "DR：擴散射線，1仇270°AOE\nHM：自控導彈，隨機連線AOE\nGB：氣化炸彈，隨機紅線分傷\nBM：彈道導彈，大小圈\nAF：亞拉戈領域，傷害在30秒後乘以5倍全場AOE(盾抵銷的傷害不算)\n原子射線(團滅招)\n\n方形塔：集滿會長出恐慌裝甲，要先集火打掉，太靠近boss會上減傷\n圓形塔：集滿會丟地雷3顆，踩一下1600小AOE，沒踩光10秒後全場16000AOE\n三角塔：全場最大HP減少1000，30秒\n十字塔：集滿全場3000AOE\n※踩一次塔集滿時間-15秒，踩的人會受1500傷害+90秒生命衰弱(下次踩塔傷害加重)",
+    "timeline": [
+        {
+            "label": "L1",
+            "type": "loop",
+            "track": 1,
+            "group": "groupP1",
+            "offset": 0,
+            "events": [
+                {
+                    "time": 15,
+                    "eventName": "塔1",
+                    "important": true
+                },
+                {
+                    "time": 87,
+                    "eventName": "塔2",
+                    "important": true
+                }
+            ]
+        },
+        {
+            "label": "P1",
+            "type": "phase",
+            "track": 2,
+            "group": "groupP1",
+            "offset": 0,
+            "events": [
+                {
+                    "time": 6,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 20,
+                    "eventName": "HM讀條"
+                },
+                {
+                    "time": 26,
+                    "eventName": "HM",
+                    "important": true
+                },
+                {
+                    "time": 27,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 30,
+                    "eventName": "GB讀條"
+                },
+                {
+                    "time": 35,
+                    "eventName": "GB",
+                    "important": true
+                },
+                {
+                    "time": 42,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 57,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 60,
+                    "eventName": "HM讀條"
+                },
+                {
+                    "time": 66,
+                    "eventName": "HM",
+                    "important": true
+                },
+                {
+                    "time": 70,
+                    "eventName": "GB讀條"
+                },
+                {
+                    "time": 75,
+                    "eventName": "GB",
+                    "important": true
+                },
+                {
+                    "time": 76,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 82,
+                    "eventName": "BM讀條"
+                },
+                {
+                    "time": 89,
+                    "eventName": "BM",
+                    "important": true
+                }
+            ]
+        },
+        {
+            "label": "P2",
+            "type": "phase",
+            "track": 2,
+            "group": "groupP2",
+            "offset": 93,
+            "events": [
+                {
+                    "time": 0,
+                    "eventName": "AF",
+                    "important": true
+                },
+                {
+                    "time": 3,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 4,
+                    "eventName": "HM讀條"
+                },
+                {
+                    "time": 10,
+                    "eventName": "HM",
+                    "important": true
+                },
+                {
+                    "time": 13,
+                    "eventName": "GB讀條"
+                },
+                {
+                    "time": 18,
+                    "eventName": "GB",
+                    "important": true
+                },
+                {
+                    "time": 19,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 25,
+                    "eventName": "HM讀條"
+                },
+                {
+                    "time": 30,
+                    "eventName": "HM+AF發動",
+                    "important": true
+                }
+            ]
+        }
+    ]
+}
