@@ -153,7 +153,7 @@
             return;
         }
 
-        if($('#toggle-notes-switch').is(':checked')) {
+        if ($('#toggle-notes-switch').is(':checked')) {
             filteredData.forEach(item => {
                 const n = item.notes;
                 const types = ['tap', 'hold', 'slide', 'touch', 'break'];
@@ -186,9 +186,9 @@
                                 </thead>
                                 <tbody>
                                     ${types.map(type => {
-                                        let str = ''
-                                        if (type == 'touch' && n[type].critical_perfect == 0 && n[type].perfect == 0 && n[type].great == 0 && n[type].good == 0 && n[type].miss == 0) {
-                                            str = `
+                    let str = ''
+                    if (type == 'touch' && n[type].critical_perfect == 0 && n[type].perfect == 0 && n[type].great == 0 && n[type].good == 0 && n[type].miss == 0) {
+                        str = `
                                                     <tr>
                                                         <td class="row-label">${type.toUpperCase()}</td>
                                                         <td></td>
@@ -198,8 +198,8 @@
                                                         <td></td>
                                                     </tr>
                                                 `;
-                                        } else {
-                                            str = `
+                    } else {
+                        str = `
                                                     <tr>
                                                         <td class="row-label">${type.toUpperCase()}</td>
                                                         <td style="${n[type].critical_perfect > 0 ? 'color:#f39c12; font-weight:bold' : 'color:#ccc'}">${n[type].critical_perfect || '0'}</td>
@@ -209,9 +209,9 @@
                                                         <td style="${n[type].miss > 0 ? 'color:#e74c3c; font-weight:bold' : 'color:#ccc'}">${n[type].miss || '0'}</td>
                                                     </tr>
                                                 `;
-                                        }
-                                        return str;
-                                    }).join('')}
+                    }
+                    return str;
+                }).join('')}
                                 </tbody>
                             </table>
                         </div>
@@ -226,12 +226,12 @@
                 $board.append(cardHtml);
             });
         } else {
-            let totalNotes = { critical_perfect: 0, perfect: 0, great: 0, good: 0, miss: 0 };
 
             filteredData.forEach(item => {
                 const n = item.notes;
                 const types = ['tap', 'hold', 'slide', 'touch', 'break'];
 
+                let totalNotes = { critical_perfect: 0, perfect: 0, great: 0, good: 0, miss: 0 };
                 types.forEach(type => {
                     totalNotes.critical_perfect += parseInt(n[type].critical_perfect) || 0;
                     totalNotes.perfect += parseInt(n[type].perfect) || 0;
