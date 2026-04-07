@@ -47,7 +47,8 @@
                 <label for="toggle-notes-switch" style="width: fit-content;">
                     <span class="switch-x-text"></span>
                     <span class="switch-x-toggletext">
-                        <span class="switch-x-unchecked"><span class="switch-x-hiddenlabel">Unchecked: </span>隱藏詳細資料</span>
+                        <span class="switch-x-unchecked"><span class="switch-x-hiddenlabel">Unchecked:
+                            </span>隱藏詳細資料</span>
                         <span class="switch-x-checked"><span class="switch-x-hiddenlabel">Checked: </span>顯示詳細資料</span>
                     </span>
                 </label>
@@ -111,6 +112,7 @@
             $('#display-board').toggleClass('hide-notes');
             const isHidden = $('#display-board').hasClass('hide-notes');
             $(this).text(isHidden ? '顯示詳細數據' : '隱藏詳細數據');
+            renderBoard();
         });
 
         $('#btn-collapse').click(function () {
@@ -151,76 +153,141 @@
             return;
         }
 
-        filteredData.forEach(item => {
-            const n = item.notes;
-            const types = ['tap', 'hold', 'slide', 'touch', 'break'];
+        if($('#toggle-notes-switch').is(':checked')) {
+            filteredData.forEach(item => {
+                const n = item.notes;
+                const types = ['tap', 'hold', 'slide', 'touch', 'break'];
 
-            const cardHtml = `
-                <div class="card ${item.difficulty}">
-                    <div class="card-header">
-                        <img class="card-image" src="${item.image}">
-                        <div style="flex: 1; overflow: hidden;">
-                            <div class="card-title">${item.title}</div>
-                            <div class="meta-info">
-                                <span class="badge diff-${item.difficulty}">${item.difficulty.toUpperCase()}</span>
-                                <span class="badge level">${item.internalLevel}</span>
+                const cardHtml = `
+                    <div class="card ${item.difficulty}">
+                        <div class="card-header">
+                            <img class="card-image" src="${item.image}">
+                            <div style="flex: 1; overflow: hidden;">
+                                <div class="card-title">${item.title}</div>
+                                <div class="meta-info">
+                                    <span class="badge diff-${item.difficulty}">${item.difficulty.toUpperCase()}</span>
+                                    <span class="badge level">${item.internalLevel}</span>
+                                </div>
+                                <div class="card-score">${item.score}</div>
                             </div>
-                            <div class="card-score">${item.score}</div>
+                        </div>
+
+                        <div class="card-body">
+                            <table class="note-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="note-header cp">CRITICAL</th>
+                                        <th class="note-header p">PERFECT</th>
+                                        <th class="note-header gr">GREAT</th>
+                                        <th class="note-header gd">GOOD</th>
+                                        <th class="note-header ms">MISS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${types.map(type => {
+                                        let str = ''
+                                        if (type == 'touch' && n[type].critical_perfect == 0 && n[type].perfect == 0 && n[type].great == 0 && n[type].good == 0 && n[type].miss == 0) {
+                                            str = `
+                                                    <tr>
+                                                        <td class="row-label">${type.toUpperCase()}</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                `;
+                                        } else {
+                                            str = `
+                                                    <tr>
+                                                        <td class="row-label">${type.toUpperCase()}</td>
+                                                        <td style="${n[type].critical_perfect > 0 ? 'color:#f39c12; font-weight:bold' : 'color:#ccc'}">${n[type].critical_perfect || '0'}</td>
+                                                        <td style="${n[type].perfect > 0 ? 'color:#f1c40f; font-weight:bold' : 'color:#ccc'}">${n[type].perfect || '0'}</td>
+                                                        <td style="${n[type].great > 0 ? 'color:#ff6ffd; font-weight:bold' : 'color:#ccc'}">${n[type].great || '0'}</td>
+                                                        <td style="${n[type].good > 0 ? 'color:#2ecc71; font-weight:bold' : 'color:#ccc'}">${n[type].good || '0'}</td>
+                                                        <td style="${n[type].miss > 0 ? 'color:#e74c3c; font-weight:bold' : 'color:#ccc'}">${n[type].miss || '0'}</td>
+                                                    </tr>
+                                                `;
+                                        }
+                                        return str;
+                                    }).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-bottom-info">
+                            <span>FAST <b style="color:#34a3ff">${item.fast}</b></span>
+                            <span>LATE <b style="color:#ff5b5b">${item.late}</b></span>
+                            <span>Rating <b style="color:#ffffe0">${item.rating}</b></span>
                         </div>
                     </div>
+                `;
+                $board.append(cardHtml);
+            });
+        } else {
+            let totalNotes = { critical_perfect: 0, perfect: 0, great: 0, good: 0, miss: 0 };
 
-                    <div class="card-body">
-                        <table class="note-table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th class="note-header cp">CRITICAL</th>
-                                    <th class="note-header p">PERFECT</th>
-                                    <th class="note-header gr">GREAT</th>
-                                    <th class="note-header gd">GOOD</th>
-                                    <th class="note-header ms">MISS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${types.map(type => {
-                let str = ''
-                if (type == 'touch' && n[type].critical_perfect == 0 && n[type].perfect == 0 && n[type].great == 0 && n[type].good == 0 && n[type].miss == 0) {
-                    str = `
-                                                <tr>
-                                                    <td class="row-label">${type.toUpperCase()}</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            `;
-                } else {
-                    str = `
-                                                <tr>
-                                                    <td class="row-label">${type.toUpperCase()}</td>
-                                                    <td style="${n[type].critical_perfect > 0 ? 'color:#f39c12; font-weight:bold' : 'color:#ccc'}">${n[type].critical_perfect || '0'}</td>
-                                                    <td style="${n[type].perfect > 0 ? 'color:#f1c40f; font-weight:bold' : 'color:#ccc'}">${n[type].perfect || '0'}</td>
-                                                    <td style="${n[type].great > 0 ? 'color:#ff6ffd; font-weight:bold' : 'color:#ccc'}">${n[type].great || '0'}</td>
-                                                    <td style="${n[type].good > 0 ? 'color:#2ecc71; font-weight:bold' : 'color:#ccc'}">${n[type].good || '0'}</td>
-                                                    <td style="${n[type].miss > 0 ? 'color:#e74c3c; font-weight:bold' : 'color:#ccc'}">${n[type].miss || '0'}</td>
-                                                </tr>
-                                            `;
-                }
-                return str;
-            }).join('')}
-                            </tbody>
-                        </table>
-                    </div>
+            filteredData.forEach(item => {
+                const n = item.notes;
+                const types = ['tap', 'hold', 'slide', 'touch', 'break'];
 
-                    <div class="card-bottom-info">
-                        <span>FAST <b style="color:#34a3ff">${item.fast}</b></span>
-                        <span>LATE <b style="color:#ff5b5b">${item.late}</b></span>
-                        <span>Rating <b style="color:#ffffe0">${item.rating}</b></span>
+                types.forEach(type => {
+                    totalNotes.critical_perfect += parseInt(n[type].critical_perfect) || 0;
+                    totalNotes.perfect += parseInt(n[type].perfect) || 0;
+                    totalNotes.great += parseInt(n[type].great) || 0;
+                    totalNotes.good += parseInt(n[type].good) || 0;
+                    totalNotes.miss += parseInt(n[type].miss) || 0;
+                });
+
+                const cardHtml = `
+                    <div class="card ${item.difficulty}">
+                        <div class="card-header">
+                            <img class="card-image" src="${item.image}">
+                            <div style="flex: 1; overflow: hidden;">
+                                <div class="card-title">${item.title}</div>
+                                <div class="meta-info">
+                                    <span class="badge diff-${item.difficulty}">${item.difficulty.toUpperCase()}</span>
+                                    <span class="badge level">${item.internalLevel}</span>
+                                </div>
+                                <div class="card-score">${item.score}</div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <table class="note-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="note-header cp">CRITICAL</th>
+                                        <th class="note-header p">PERFECT</th>
+                                        <th class="note-header gr">GREAT</th>
+                                        <th class="note-header gd">GOOD</th>
+                                        <th class="note-header ms">MISS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="row-label">TOTAL</td>
+                                        <td style="${totalNotes.critical_perfect > 0 ? 'color:#f39c12; font-weight:bold' : 'color:#ccc'}">${totalNotes.critical_perfect || '0'}</td>
+                                        <td style="${totalNotes.perfect > 0 ? 'color:#f1c40f; font-weight:bold' : 'color:#ccc'}">${totalNotes.perfect || '0'}</td>
+                                        <td style="${totalNotes.great > 0 ? 'color:#ff6ffd; font-weight:bold' : 'color:#ccc'}">${totalNotes.great || '0'}</td>
+                                        <td style="${totalNotes.good > 0 ? 'color:#2ecc71; font-weight:bold' : 'color:#ccc'}">${totalNotes.good || '0'}</td>
+                                        <td style="${totalNotes.miss > 0 ? 'color:#e74c3c; font-weight:bold' : 'color:#ccc'}">${totalNotes.miss || '0'}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-bottom-info">
+                            <span>FAST <b style="color:#34a3ff">${item.fast}</b></span>
+                            <span>LATE <b style="color:#ff5b5b">${item.late}</b></span>
+                            <span>Rating <b style="color:#ffffe0">${item.rating}</b></span>
+                        </div>
                     </div>
-                </div>
-            `;
-            $board.append(cardHtml);
-        });
+                `;
+                $board.append(cardHtml);
+            });
+        }
     }
 </script>

@@ -87,7 +87,7 @@ body {
 }
 
 .card-body {
-	padding: 15px;
+	padding: 8px 15px !important;
 }
 
 .card-bottom-info {
@@ -323,10 +323,6 @@ body {
 
 .hide-notes .card {
 	min-height: auto;
-}
-
-.hide-notes .card-body, .hide-notes .note-table {
-	display: none;
 }
 
 .label-level {
