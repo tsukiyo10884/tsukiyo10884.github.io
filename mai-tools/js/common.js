@@ -536,15 +536,17 @@ const captureAndDownload = () => {
 
     switch (cssFiles.indexOf($('#theme').attr('href'))) {
         case 0: // translucent
-            resultContainer.css('background-image', 'linear-gradient(0deg, #7af4c3, #7c81ff)');
+            resultContainer.css('background-color', '#f0f7ff');
             resultContainer.append(`
-                <div id="temp-waves">
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
+                <div id="temp-decos">
+                    <div class="deco"></div>
+                    <div class="deco"></div>
+                    <div class="deco"></div>
+                    <div class="deco"></div>
+                    <div class="deco"></div>
                 </div>
             `);
-            $('#temp-waves .wave').css('top', resultContainer.height() - 50);
+            $('#temp-decos .deco').css('top', resultContainer.height() - 50);
             break;
         case 1: // modern
             resultContainer.css('background-color', '#232228');
@@ -577,7 +579,7 @@ const captureAndDownload = () => {
         })
         .finally(() => {
             resultContainer.css('background', '');
-            resultContainer.find('#temp-waves').remove();
+            resultContainer.find('#temp-decos').remove();
             hideLoading();
         });
 };
