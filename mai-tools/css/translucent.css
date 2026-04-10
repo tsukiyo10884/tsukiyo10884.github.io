@@ -20,7 +20,8 @@ body {
     overflow-x: hidden;
 }
 
-#deco-group {
+#decos,
+#temp-decos {
     position: fixed;
     top: 0;
     left: 0;
