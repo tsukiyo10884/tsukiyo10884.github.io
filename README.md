@@ -46,4 +46,10 @@ javascript:(function(){
 
 ---
 
+### [FFXIV副本時間軸](https://tsukiyo10884.github.io/ffxiv/timeline)
+
+拓荒階段參考用
+
+---
+
 Made by [tsukiyo](https://github.com/tsukiyo10884/), in collaboration with [Ayo](https://www.instagram.com/mua_2110/) and [Axuan](https://www.instagram.com/aaaaaaaaaxiuan/).
