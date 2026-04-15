@@ -1,12 +1,12 @@
 {
-    "notes": "DR：擴散射線，1仇270°AOE\nHM：自控導彈，隨機連線AOE\nGB：氣化炸彈，隨機紅線分傷\nBM：彈道導彈，大小圈\nAF：亞拉戈領域，傷害在30秒後乘以5倍全場AOE(盾抵銷的傷害不算)\n原子射線(團滅招)\n\n方形塔：集滿會長出恐慌裝甲，要先集火打掉，太靠近boss會上減傷\n圓形塔：集滿會丟地雷3顆，踩一下1600小AOE，沒踩光10秒後全場16000AOE\n三角塔：全場最大HP減少1000，30秒\n十字塔：集滿全場3000AOE\n※踩一次塔集滿時間-15秒，踩的人會受1500傷害+90秒生命衰弱(下次踩塔傷害加重)",
+    "notes": "DR：擴散射線，1仇270°AOE\nHM：自控導彈，隨機連線AOE\nGB：氣化炸彈，隨機紅線分傷\nBM：彈道導彈，大小圈要在轟第二下的瞬間站對人數(大圈3人，小圈2人，重疊部分站人的話兩邊都算)\nAF：亞拉戈領域，受到的傷害在30秒後乘以5倍全場AOE(盾抵銷的傷害不算)\n原子射線(團滅招)\n\n方形塔：集滿會長出恐慌裝甲，要先集火打掉，太靠近boss會上減傷\n圓形塔：集滿會丟地雷3顆，踩一下1600小AOE，沒踩光10秒後全場16000AOE\n三角塔：全場最大HP減少1000，30秒\n十字塔：集滿全場3000AOE\n※踩一次塔集滿時間-15秒，踩的人會受1500傷害+90秒生命衰弱(下次踩塔傷害加重)",
     "timeline": [
         {
             "label": "L1",
             "type": "loop",
             "track": 1,
             "group": "groupP1",
-            "offset": 0,
+            "offset": 8,
             "events": [
                 {
                     "time": 15,
@@ -17,6 +17,21 @@
                     "time": 87,
                     "eventName": "塔2",
                     "important": true
+                },
+                {
+                    "time": 165,
+                    "eventName": "塔3",
+                    "important": true
+                },
+                {
+                    "time": 244,
+                    "eventName": "塔4",
+                    "important": true
+                },
+                {
+                    "time": 354,
+                    "eventName": "塔5",
+                    "important": true
                 }
             ]
         },
@@ -25,16 +40,12 @@
             "type": "phase",
             "track": 2,
             "group": "groupP1",
-            "offset": 0,
+            "offset": 8,
             "events": [
                 {
                     "time": 6,
                     "eventName": "DR",
                     "important": true
-                },
-                {
-                    "time": 20,
-                    "eventName": "HM讀條"
                 },
                 {
                     "time": 26,
@@ -47,16 +58,12 @@
                     "important": true
                 },
                 {
-                    "time": 30,
-                    "eventName": "GB讀條"
-                },
-                {
                     "time": 35,
                     "eventName": "GB",
                     "important": true
                 },
                 {
-                    "time": 42,
+                    "time": 43,
                     "eventName": "DR",
                     "important": true
                 },
@@ -66,17 +73,9 @@
                     "important": true
                 },
                 {
-                    "time": 60,
-                    "eventName": "HM讀條"
-                },
-                {
                     "time": 66,
                     "eventName": "HM",
                     "important": true
-                },
-                {
-                    "time": 70,
-                    "eventName": "GB讀條"
                 },
                 {
                     "time": 75,
@@ -89,11 +88,7 @@
                     "important": true
                 },
                 {
-                    "time": 82,
-                    "eventName": "BM讀條"
-                },
-                {
-                    "time": 89,
+                    "time": 83,
                     "eventName": "BM",
                     "important": true
                 }
@@ -104,48 +99,320 @@
             "type": "phase",
             "track": 2,
             "group": "groupP2",
-            "offset": 93,
+            "offset": 98,
             "events": [
                 {
                     "time": 0,
+                    "eventName": "AF讀條"
+                },
+                {
+                    "time": 3,
                     "eventName": "AF",
                     "important": true
                 },
                 {
-                    "time": 3,
+                    "time": 6,
                     "eventName": "DR",
-                    "important": true
-                },
-                {
-                    "time": 4,
-                    "eventName": "HM讀條"
-                },
-                {
-                    "time": 10,
-                    "eventName": "HM",
                     "important": true
                 },
                 {
                     "time": 13,
-                    "eventName": "GB讀條"
+                    "eventName": "HM",
+                    "important": true
                 },
                 {
-                    "time": 18,
+                    "time": 21,
                     "eventName": "GB",
                     "important": true
                 },
                 {
-                    "time": 19,
+                    "time": 22,
                     "eventName": "DR",
                     "important": true
                 },
                 {
-                    "time": 25,
-                    "eventName": "HM讀條"
+                    "time": 33,
+                    "eventName": "HM+AF發動",
+                    "important": true
                 },
                 {
-                    "time": 30,
+                    "time": 37,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 38,
+                    "eventName": "AF讀條"
+                },
+                {
+                    "time": 43,
+                    "eventName": "AF",
+                    "important": true
+                },
+                {
+                    "time": 53,
+                    "eventName": "HM",
+                    "important": true
+                },
+                {
+                    "time": 54,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 61,
+                    "eventName": "GB",
+                    "important": true
+                },
+                {
+                    "time": 73,
                     "eventName": "HM+AF發動",
+                    "important": true
+                },
+                {
+                    "time": 74,
+                    "eventName": "BM",
+                    "important": true
+                },
+                {
+                    "time": 81,
+                    "eventName": "AF讀條"
+                },
+                {
+                    "time": 84,
+                    "eventName": "AF",
+                    "important": true
+                },
+                {
+                    "time": 85,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 93,
+                    "eventName": "GB",
+                    "important": true
+                },
+                {
+                    "time": 101,
+                    "eventName": "GB",
+                    "important": true
+                },
+                {
+                    "time": 102,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 113,
+                    "eventName": "GB",
+                    "important": true
+                },
+                {
+                    "time": 115,
+                    "eventName": "AF發動",
+                    "important": true
+                },
+                {
+                    "time": 117,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 121,
+                    "eventName": "AF讀條"
+                },
+                {
+                    "time": 124,
+                    "eventName": "AF",
+                    "important": true
+                },
+                {
+                    "time": 133,
+                    "eventName": "HM",
+                    "important": true
+                },
+                {
+                    "time": 134,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 141,
+                    "eventName": "GB",
+                    "important": true
+                },
+                {
+                    "time": 153,
+                    "eventName": "HM",
+                    "important": true
+                },
+                {
+                    "time": 154,
+                    "eventName": "BM+AF發動",
+                    "important": true
+                },
+                {
+                    "time": 161,
+                    "eventName": "AF讀條"
+                },
+                {
+                    "time": 164,
+                    "eventName": "AF",
+                    "important": true
+                },
+                {
+                    "time": 165,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 173,
+                    "eventName": "HM",
+                    "important": true
+                },
+                {
+                    "time": 181,
+                    "eventName": "GB",
+                    "important": true
+                },
+                {
+                    "time": 182,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 193,
+                    "eventName": "HM",
+                    "important": true
+                },
+                {
+                    "time": 194,
+                    "eventName": "AF發動",
+                    "important": true
+                },
+                {
+                    "time": 197,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 201,
+                    "eventName": "AF讀條"
+                },
+                {
+                    "time": 204,
+                    "eventName": "AF",
+                    "important": true
+                },
+                {
+                    "time": 213,
+                    "eventName": "HM",
+                    "important": true
+                },
+                {
+                    "time": 214,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 221,
+                    "eventName": "GB",
+                    "important": true
+                },
+                {
+                    "time": 227,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 234,
+                    "eventName": "AF發動",
+                    "important": true
+                }
+            ]
+        },
+        {
+            "label": "P3",
+            "type": "phase",
+            "track": 2,
+            "group": "groupP3",
+            "offset": 334,
+            "events": [
+                {
+                    "time": 0,
+                    "eventName": "AF讀條"
+                },
+                {
+                    "time": 4,
+                    "eventName": "AF",
+                    "important": true
+                },
+                {
+                    "time": 5,
+                    "eventName": "AF讀條"
+                },
+                {
+                    "time": 8,
+                    "eventName": "AF",
+                    "important": true
+                },
+                {
+                    "time": 14,
+                    "eventName": "HM",
+                    "important": true
+                },
+                {
+                    "time": 15,
+                    "eventName": "HM",
+                    "important": true
+                },
+                {
+                    "time": 19,
+                    "eventName": "BM",
+                    "important": true
+                },
+                {
+                    "time": 31,
+                    "eventName": "DR",
+                    "important": true
+                },
+                {
+                    "time": 34,
+                    "eventName": "AF發動",
+                    "important": true
+                },
+                {
+                    "time": 38,
+                    "eventName": "AF發動",
+                    "important": true
+                },
+                {
+                    "time": 40,
+                    "eventName": "AF讀條"
+                },
+                {
+                    "time": 44,
+                    "eventName": "AF",
+                    "important": true
+                },
+                {
+                    "time": 45,
+                    "eventName": "AF讀條"
+                },
+                {
+                    "time": 48,
+                    "eventName": "AF",
+                    "important": true
+                },
+                {
+                    "time": 54,
+                    "eventName": "HM",
+                    "important": true
+                },
+                {
+                    "time": 55,
+                    "eventName": "HM",
                     "important": true
                 }
             ]

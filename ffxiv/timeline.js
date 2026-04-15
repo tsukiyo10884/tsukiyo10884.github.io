@@ -73,13 +73,15 @@ const renderTimeline = () => {
         let maxTime = 0;
         const eventEls = [];
         item.events.forEach((ev, idx) => {
+            const currentEventTime = currentOffset + ev.time;
+            const prevEventTime = idx > 0 ? currentOffset + item.events[idx - 1].time : null;
             if (ev.time > maxTime) maxTime = ev.time;
             const evEl = document.createElement('div');
             evEl.className = 'event';
             evEl.style.left = (ev.time * unit) + 'px';
             evEl.innerHTML = `
                         <div class="rel-time">${ev.time}s</div>
-                        <div class="line" style="background:${ev.color == null ? '#00d2ff' : ev.color}"></div>
+                        <div class="${(currentEventTime - prevEventTime < 2 && ev.important === true) ? 'line-short' : 'line'}" style="background:${ev.color == null ? '#00d2ff' : ev.color}"></div>
                         ${ev.important == true ? '<div class="name">' + ev.eventName + '</div>' : ''}
                         <div class="tips text-center">${ev.eventName}<br/>${formatTime(currentOffset + ev.time)}</div>
                         <div class="abs-time">${formatTime(currentOffset + ev.time)}</div>
