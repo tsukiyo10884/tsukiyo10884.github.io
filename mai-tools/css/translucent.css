@@ -137,7 +137,7 @@ body {
 button {
     -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
-    background: rgba(255, 255, 255, 0.2) !important;
+    background: rgba(255, 255, 255, 0.4) !important;
     border-radius: 5px !important;
     border: none;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -157,6 +157,10 @@ button::before {
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
+}
+
+button:disabled {
+    background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 #info {
