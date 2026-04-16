@@ -140,7 +140,6 @@ body {
 }
 
 button {
-    -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
     background: rgba(255, 255, 255, 0.4) !important;
     border-radius: 5px !important;
@@ -158,9 +157,7 @@ button::before {
     border-radius: inherit;
     padding: 1px;
     background: linear-gradient(163deg, transparent 20%, rgba(255, 255, 255, 0.4), transparent 80%);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
 }
@@ -356,9 +353,7 @@ button:disabled {
     border-radius: inherit;
     padding: 1px;
     background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.4), transparent 80%);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
 }
@@ -446,7 +441,6 @@ button:disabled {
     backface-visibility: hidden;
     will-change: transform;
     backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
     contain:strict;
 }
 
@@ -457,9 +451,7 @@ button:disabled {
     border-radius: inherit;
     padding: 1px;
     background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.4), transparent 80%);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
 }
@@ -656,7 +648,6 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
     background: rgba(255, 255, 255, 0.4) !important;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
 }
 
 .basic_block::before {
@@ -666,9 +657,7 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
     border-radius: inherit;
     padding: 1px;
     background: linear-gradient(153deg, transparent 20%, rgba(255, 255, 255, 0.4), transparent 80%);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
 }
@@ -871,7 +860,6 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 .div-chart {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
     border-radius: 5px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 20px;
