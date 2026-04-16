@@ -446,7 +446,9 @@
         };
 
         $(init);
-        LoadLocalJson('json/test_data/test_data.json');
+        setTimeout(() => {
+            LoadLocalJson('json/test_data/test_data.json');
+        }, 1500);
 
     </script>
     <style>

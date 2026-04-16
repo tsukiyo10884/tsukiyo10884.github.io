@@ -536,6 +536,7 @@ const captureAndDownload = () => {
 
     switch (cssFiles.indexOf($('#theme').attr('href'))) {
         case 0: // translucent
+            document.documentElement.style.setProperty('--card-shadow', 'none');
             resultContainer.css('background-color', '#f0f7ff');
             resultContainer.append(`
                 <div id="temp-decos">
@@ -547,6 +548,7 @@ const captureAndDownload = () => {
                 </div>
             `);
             $('#temp-decos .deco').css('top', resultContainer.height() - 50);
+            $('#temp-decos').css('height', resultContainer.outerHeight());
             break;
         case 1: // modern
             resultContainer.css('background-color', '#232228');
@@ -579,6 +581,7 @@ const captureAndDownload = () => {
         })
         .finally(() => {
             resultContainer.css('background', '');
+            document.documentElement.style.setProperty('--card-shadow', '0 4px 30px rgba(0, 0, 0, 0.1)');
             resultContainer.find('#temp-decos').remove();
             hideLoading();
         });

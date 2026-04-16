@@ -6,6 +6,11 @@ user profile
 overview
 for fun
 */
+
+:root{
+    --card-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
 @font-face {
     font-family: 'heavy-font';
     src: url('../font/ResourceHanRoundedCN-Regular.woff2') format('woff2');
@@ -154,6 +159,7 @@ button::before {
     padding: 1px;
     background: linear-gradient(163deg, transparent 20%, rgba(255, 255, 255, 0.4), transparent 80%);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
@@ -351,6 +357,7 @@ button:disabled {
     padding: 1px;
     background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.4), transparent 80%);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
@@ -431,16 +438,16 @@ button:disabled {
     position: relative;
     display: flex;
     width: 289px !important;
+    box-shadow: var(--card-shadow);
     height: 90px;
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.4) !important;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    contain: strict;
     transform: translateZ(0);
     backface-visibility: hidden;
     will-change: transform;
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
+    contain:strict;
 }
 
 .song-card::before {
@@ -451,6 +458,7 @@ button:disabled {
     padding: 1px;
     background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.4), transparent 80%);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
@@ -659,6 +667,7 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
     padding: 1px;
     background: linear-gradient(153deg, transparent 20%, rgba(255, 255, 255, 0.4), transparent 80%);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
