@@ -474,7 +474,7 @@ const createCreditSection = () => {
                         <p class="f_10">Also the promoter</p>
                         沒有給她Credit她會森77
                         <p class="f_10">If I don't give her credit, she will be angy</p>
-                        <img src="img/ayo_angy.png" class="w-100"><br><br>
+                        <img src="img/ayo_angy.webp" class="w-100"><br><br>
                         所以給她大大的Credit
                         <p class="f_10">So I give her a big credit</p>
                         她很棒，跟她說謝謝

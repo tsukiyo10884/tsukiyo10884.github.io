@@ -890,14 +890,14 @@ img[src*="rating_base_silver.png"]+.rating_block::after {
 /*for fun*/
 /*********/
 .axuan {
-    background-image: url(../img/axuan_bg.png);
+    background-image: url(../img/axuan_bg.webp);
     background-position-x: right;
     background-repeat: no-repeat;
     background-size: contain;
 }
 
 .ayo {
-    background-image: url(../img/ayo_bg.png);
+    background-image: url(../img/ayo_bg.webp);
     background-position-x: right;
     background-repeat: no-repeat;
     background-size: contain;
