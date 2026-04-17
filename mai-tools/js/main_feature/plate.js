@@ -27,7 +27,7 @@ const showVersionButton = () => {
     }).join('')}</div>`;
 }
 
-// 顯示名牌版按鈕
+// 顯示名牌板按鈕
 const showPlateButton = async (versionName, plateName) => {
     const buttons = [
         `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '極', '${plateName}')">${plateName}極</button></div>`,
@@ -73,16 +73,16 @@ const showPlateButton = async (versionName, plateName) => {
 
                     <tbody>
                         ${difficulties.map(diff => {
-        if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
-        const isRemaster = diff === 'remaster' ? `text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;` : ``;
-        return `<tr>
-            <td class="text-shadow-black difficulty-label" style="color:${colors[diff]};${isRemaster}">${diff.toUpperCase().slice(0, 3)}</td>
-            ${allCounts.map(counts => {
-            const c = counts[diff];
-            return `${c ? `<td class="ps-2">${c.completed}</td><td>/</td><td>${c.total}</td>` : '-'}`;
-        }).join('')}
-            </tr>`;
-    }).join('')}
+                            if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
+                            const isRemaster = diff === 'remaster' ? `text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;` : ``;
+                            return `<tr>
+                                <td class="text-shadow-black difficulty-label" style="color:${colors[diff]};${isRemaster}">${diff.toUpperCase().slice(0, 3)}</td>
+                                ${allCounts.map(counts => {
+                                const c = counts[diff];
+                                return `${c ? `<td class="ps-2">${c.completed}</td><td>/</td><td>${c.total}</td>` : '-'}`;
+                            }).join('')}
+                                </tr>`;
+                        }).join('')}
                     </tbody>
                 </table>
             </div>
