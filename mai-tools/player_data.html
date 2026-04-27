@@ -87,7 +87,7 @@
             $('#div-msg').addClass('d-none');
             const playerData = data.payload;
             showClassProgress(playerData);
-            currentClass = getClassRank(playerData.text);
+            currentClass = getProfileClassText(playerData.text);
             currentCP = playerData.point;
 
             // 建立下拉(過濾id低於現在階級id的選項) 
