@@ -168,7 +168,7 @@
                                     <span class="badge diff-${item.difficulty}">${item.difficulty.toUpperCase()}</span>
                                     <span class="badge level">${item.internalLevel}</span>
                                 </div>
-                                <div class="card-score">${item.score}</div>
+                                <span class="card-score">${item.score}</span>${item.score_new_record ? '<span class="new-record">New Record!</span>' : ''}
                             </div>
                         </div>
 
@@ -186,9 +186,9 @@
                                 </thead>
                                 <tbody>
                                     ${types.map(type => {
-                                        let str = ''
-                                        if (type == 'touch' && n[type].critical_perfect == 0 && n[type].perfect == 0 && n[type].great == 0 && n[type].good == 0 && n[type].miss == 0) {
-                                            str = `
+                    let str = ''
+                    if (type == 'touch' && n[type].critical_perfect == 0 && n[type].perfect == 0 && n[type].great == 0 && n[type].good == 0 && n[type].miss == 0) {
+                        str = `
                                                     <tr>
                                                         <td class="row-label">${type.toUpperCase()}</td>
                                                         <td></td>
@@ -198,8 +198,8 @@
                                                         <td></td>
                                                     </tr>
                                                 `;
-                                        } else {
-                                            str = `
+                    } else {
+                        str = `
                                                     <tr>
                                                         <td class="row-label">${type.toUpperCase()}</td>
                                                         <td style="${n[type].critical_perfect > 0 ? 'color:#f39c12; font-weight:bold' : 'color:#ccc'}">${n[type].critical_perfect || '0'}</td>
@@ -209,9 +209,9 @@
                                                         <td style="${n[type].miss > 0 ? 'color:#e74c3c; font-weight:bold' : 'color:#ccc'}">${n[type].miss || '0'}</td>
                                                     </tr>
                                                 `;
-                                        }
-                                        return str;
-                                    }).join('')}
+                    }
+                    return str;
+                }).join('')}
                                 </tbody>
                             </table>
                         </div>
