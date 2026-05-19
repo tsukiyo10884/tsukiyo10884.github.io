@@ -160,5 +160,11 @@
         "plateName": "丸",
         "startDateJP": "2025-09-18",
         "startDateIntl": "2026-01-22"
+    },
+    {
+        "versionName": "CiRCLE PLUS",
+        "plateName": "",
+        "startDateJP": "2026-03-19",
+        "startDateIntl": null
     }
 ]
