@@ -1,0 +1,225 @@
+{
+    "notes": "雷電的反向只有十字交叉區域是安全區",
+    "timeline": [
+        {
+            "label": "Door Boss",
+            "type": "phase",
+            "track": 1,
+            "group": "groupP1",
+            "offset": 11,
+            "events": [
+                {
+                    "time": 0,
+                    "eventName": "開始"
+                },
+                {
+                    "time": 10,
+                    "eventName": "魔法儲存"
+                },
+                {
+                    "time": 15,
+                    "eventName": "大火焰",
+                    "important": true
+                },
+                {
+                    "time": 24,
+                    "eventName": "超驅動",
+                    "important": true
+                },
+                {
+                    "time": 33,
+                    "eventName": "魔法放出"
+                },
+                {
+                    "time": 38,
+                    "eventName": "大火焰",
+                    "important": true
+                },
+                {
+                    "time": 40,
+                    "eventName": "大雷電",
+                    "important": true
+                },
+                {
+                    "time": 46,
+                    "eventName": "究極(AOE)",
+                    "important": true
+                },
+                {
+                    "time": 67,
+                    "eventName": "眾神之像(排毒+光束+擊退線)",
+                    "important": true
+                },
+                {
+                    "time": 87,
+                    "eventName": "分攤傷害計算",
+                    "important": true
+                },
+                {
+                    "time": 91,
+                    "eventName": "扇形AOE",
+                    "important": true
+                },
+                {
+                    "time": 94,
+                    "eventName": "制裁之光(AOE)",
+                    "important": true
+                },
+                {
+                    "time": 107,
+                    "eventName": "魔法儲存"
+                },
+                {
+                    "time": 112,
+                    "eventName": "大雷電",
+                    "important": true
+                },
+                {
+                    "time": 119,
+                    "eventName": "大暴雪",
+                    "important": true
+                },
+                {
+                    "time": 126,
+                    "eventName": "眾神之像(擊退球)",
+                    "important": true
+                },
+                {
+                    "time": 137,
+                    "eventName": "魔法放出"
+                },
+                {
+                    "time": 141,
+                    "eventName": "大雷電+大暴雪",
+                    "important": true
+                },
+                {
+                    "time": 155,
+                    "eventName": "究極(AOE)",
+                    "important": true
+                },
+                {
+                    "time": 161,
+                    "eventName": "超驅動",
+                    "important": true
+                },
+                {
+                    "time": 175,
+                    "eventName": "眾神之像(黑洞+半場+丟石頭)",
+                    "important": true
+                },
+                {
+                    "time": 203,
+                    "eventName": "擊退",
+                    "important": true
+                },
+                {
+                    "time": 205,
+                    "eventName": "制裁之光(AOE)",
+                    "important": true
+                },
+                {
+                    "time": 219,
+                    "eventName": "魔法儲存"
+                },
+                {
+                    "time": 224,
+                    "eventName": "大火焰",
+                    "important": true
+                },
+                {
+                    "time": 232,
+                    "eventName": "究極(AOE)",
+                    "important": true
+                },
+                {
+                    "time": 239,
+                    "eventName": "眾神之像(半場)",
+                    "important": true
+                },
+                {
+                    "time": 246,
+                    "eventName": "魔法放出"
+                },
+                {
+                    "time": 250,
+                    "eventName": "大火焰",
+                    "important": true
+                },
+                {
+                    "time": 253,
+                    "eventName": "大雷電",
+                    "important": true
+                },
+                {
+                    "time": 261,
+                    "eventName": "究極(AOE)",
+                    "important": true
+                },
+                {
+                    "time": 268,
+                    "eventName": "超驅動",
+                    "important": true
+                },
+                {
+                    "time": 287,
+                    "eventName": "眾神之像(排毒+眼睛)",
+                    "important": true
+                },
+                {
+                    "time": 300,
+                    "eventName": "高低線",
+                    "important": true
+                },
+                {
+                    "time": 308,
+                    "eventName": "眼睛",
+                    "important": true
+                },
+                {
+                    "time": 317,
+                    "eventName": "扇形AOE",
+                    "important": true
+                },
+                {
+                    "time": 320,
+                    "eventName": "制裁之光(AOE)",
+                    "important": true
+                },
+                {
+                    "time": 329,
+                    "eventName": "究極(AOE)",
+                    "important": true
+                },
+                {
+                    "time": 338,
+                    "eventName": "魔法儲存"
+                },
+                {
+                    "time": 342,
+                    "eventName": "大雷電",
+                    "important": true
+                },
+                {
+                    "time": 350,
+                    "eventName": "大暴雪",
+                    "important": true
+                },
+                {
+                    "time": 357,
+                    "eventName": "眾神之像(眼睛)",
+                    "important": true
+                },
+                {
+                    "time": 365,
+                    "eventName": "魔法放出"
+                },
+                {
+                    "time": 369,
+                    "eventName": "大雷電+大暴雪",
+                    "important": true
+                }
+            ]
+        }
+    ]
+}
