@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pandoc -t markdown \"EIAP交接文件.docx\")",
+      "Bash(where pandoc *)",
+      "Bash(python3 -c \"import docx; print\\('ok'\\)\")",
+      "Bash(/c/Python314/python.exe -c \"import docx; print\\('ok'\\)\")",
+      "Bash(/c/Python314/python.exe C:/Users/user/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/c9ade3d3-eda0-46f7-b046-35e7af4593f3/47520197-d70e-4df2-912e-7742b83e78c1/skills/docx/scripts/merge_runs.py C:/Users/user/AppData/Local/Temp/claude/C--Users-user-Desktop-RaidPlanner/b88bbe8f-ce76-4c41-bf04-f309e9db1ad4/scratchpad/docx_extract/)",
+      "Bash(/c/Python314/python.exe -m pip install defusedxml lxml)"
+    ]
+  }
+}

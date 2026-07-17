@@ -92,8 +92,8 @@ const showPlateButton = async (versionName, plateName) => {
     if (versionName === 'maimai ~ maimai PLUS') {
         tip = `<div class="col-9 text-center">※初代100%就AP，因此沒有真将</div>`;
     }
-    $('#song-table').html(`${tip}<div class="row">${buttons.join('')}</div>`);
-    $('#stat').html(`${summary}`);
+    $('#song-table').html(`${summary}<hr/>${tip}<div class="row">${buttons.join('')}</div>`);
+    $('#stat').html(``);
 }
 
 // 顯示進度

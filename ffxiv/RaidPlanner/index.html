@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FF14 出團時間規劃</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="app-header">
+  <div>
+    <h1>FF14 出團時間規劃</h1>
+    <p>建立角色卡，準備好之後就能發起或響應招募。</p>
+  </div>
+  <div class="header-actions">
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="切換淺色/深色模式"></button>
+    <div id="auth-area"></div>
+  </div>
+</header>
+
+<nav id="app-nav" class="top-nav hidden" style="margin-left: 2rem;">
+  <button class="tab-button active" data-tab="characters-panel">我的角色卡</button>
+  <button id="dungeons-tab-button" class="tab-button hidden" data-tab="dungeons-panel">副本管理</button>
+  <button class="tab-button" data-tab="recruitments-panel">招募</button>
+</nav>
+
+<main class="app-main">
+  <section id="login-panel" class="panel active-panel">
+    <div class="card">
+      <h2>請先登入</h2>
+      <p class="muted-text">使用 Google 帳號登入後即可建立角色卡。</p>
+      <button id="login-button" class="primary-button">使用 Google 登入</button>
+    </div>
+  </section>
+
+  <section id="characters-panel" class="panel hidden">
+    <div class="panel-row split-layout">
+      <div class="card">
+        <h2>我的角色卡</h2>
+        <div id="character-list" class="player-list"></div>
+        <button id="add-character-button" class="primary-button button-full">+ 新增角色卡</button>
+      </div>
+      <div class="card" id="character-detail">
+        <p class="muted-text">選擇左側角色卡查看詳細內容，或新增一張角色卡。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="dungeons-panel" class="panel hidden">
+    <div class="panel-row split-layout">
+      <div class="card">
+        <h2>副本列表</h2>
+        <div id="dungeon-list" class="player-list"></div>
+        <button id="add-dungeon-button" class="primary-button button-full hidden">+ 新增副本</button>
+      </div>
+      <div class="card" id="dungeon-detail">
+        <p class="muted-text">選擇左側副本查看詳細內容。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="recruitments-panel" class="panel hidden">
+    <div class="panel-row split-layout">
+      <div class="card">
+        <h2>招募列表</h2>
+        <div id="recruitment-list" class="player-list"></div>
+        <button id="add-recruitment-button" class="primary-button button-full">+ 建立招募</button>
+      </div>
+      <div class="card" id="recruitment-detail">
+        <p class="muted-text">選擇左側招募查看詳細內容。</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="dungeon-modal" class="modal hidden">
+  <div class="modal-content">
+    <button id="dungeon-modal-close" class="close-button" type="button">✕</button>
+    <h2 id="dungeon-modal-title">新增副本</h2>
+    <form id="dungeon-form" class="card-form">
+      <label>副本類型
+        <select id="dungeon-type" required></select>
+      </label>
+      <label>副本名稱
+        <input type="text" id="dungeon-name" required maxlength="60" />
+      </label>
+      <label>副本版本
+        <input type="text" id="dungeon-version" required maxlength="10" placeholder="例如：7.2" />
+      </label>
+      <label>英文縮寫（選填）
+        <input type="text" id="dungeon-abbr" maxlength="20" placeholder="例如：M1S" />
+      </label>
+      <label>需求等級
+        <input type="number" id="dungeon-level" required min="1" max="100" />
+      </label>
+      <label>最低裝備等級（選填）
+        <input type="number" id="dungeon-ilvl" min="1" />
+      </label>
+      <label>品級同步（選填）
+        <input type="number" id="dungeon-ilvl-sync" min="1" />
+      </label>
+      <label>所需人數
+        <select id="dungeon-size" required>
+          <option value="" disabled selected>請選擇人數</option>
+          <option value="4">4 人</option>
+          <option value="8">8 人</option>
+          <option value="12">12 人</option>
+          <option value="24">24 人</option>
+        </select>
+      </label>
+      <div class="form-actions">
+        <button type="button" id="dungeon-cancel" class="secondary-button">取消</button>
+        <button type="submit" class="primary-button">儲存</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="recruitment-modal" class="modal hidden">
+  <div class="modal-content">
+    <button id="recruitment-modal-close" class="close-button" type="button">✕</button>
+    <h2 id="recruitment-modal-title">建立招募</h2>
+    <form id="recruitment-form" class="card-form">
+      <label>目標副本
+        <select id="recruitment-dungeon" required></select>
+      </label>
+
+      <h3>所需陣容</h3>
+      <div class="checkbox-grid">
+        <label>坦克（T）
+          <input type="number" id="comp-t" min="0" value="0" />
+        </label>
+        <label>治療（H）
+          <input type="number" id="comp-h" min="0" value="0" />
+        </label>
+        <label>輸出（D）
+          <input type="number" id="comp-d" min="0" value="0" />
+        </label>
+        <label>自由位
+          <input type="number" id="comp-free" min="0" value="0" />
+        </label>
+      </div>
+
+      <label>品級要求（選填）
+        <input type="number" id="recruitment-ilvl" min="1" />
+      </label>
+
+      <h3>特殊規則</h3>
+      <div class="checkbox-grid">
+        <label><input type="checkbox" id="rule-unrestricted" /> 解除限制</label>
+        <label><input type="checkbox" id="rule-echo-disabled" /> 超越之力無效化</label>
+        <label><input type="checkbox" id="rule-min-ilvl" /> 最低品級</label>
+        <label><input type="checkbox" id="rule-level-sync" /> 等級同步</label>
+      </div>
+
+      <h3>出團時間</h3>
+      <label>日期區間
+        <div style="display:flex; gap:8px;">
+          <input type="date" id="recruitment-date-start" required style="flex:1" />
+          <input type="date" id="recruitment-date-end" required style="flex:1" />
+        </div>
+      </label>
+      <label>每日時段（結束時間可早於開始時間，代表跨日，例如 20:00~03:00）
+        <div style="display:flex; gap:8px;">
+          <input type="time" id="recruitment-time-start" required style="flex:1" />
+          <input type="time" id="recruitment-time-end" required style="flex:1" />
+        </div>
+      </label>
+
+      <label>備註
+        <textarea id="recruitment-notes" rows="3" maxlength="300"></textarea>
+      </label>
+
+      <div class="form-actions">
+        <button type="button" id="recruitment-cancel" class="secondary-button">取消</button>
+        <button type="submit" class="primary-button">儲存</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="character-modal" class="modal hidden">
+  <div class="modal-content">
+    <button id="character-modal-close" class="close-button" type="button">✕</button>
+    <h2 id="character-modal-title">新增角色卡</h2>
+    <form id="character-form" class="card-form">
+      <label>角色名稱
+        <input type="text" id="character-name" required maxlength="40" />
+      </label>
+      <label>伺服器
+        <select id="character-server" required>
+          <option value="" disabled selected>請選擇伺服器</option>
+          <option value="伊弗利特">伊弗利特</option>
+          <option value="迦樓羅">迦樓羅</option>
+          <option value="利維坦">利維坦</option>
+          <option value="鳳凰">鳳凰</option>
+          <option value="奧汀">奧汀</option>
+          <option value="巴哈姆特">巴哈姆特</option>
+          <option value="泰坦">泰坦</option>
+        </select>
+      </label>
+      <h3>可用職業與等級</h3>
+      <div id="job-grid" class="job-group-grid"></div>
+      <div class="form-actions">
+        <button type="button" id="character-cancel" class="secondary-button">取消</button>
+        <button type="submit" class="primary-button">儲存</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
