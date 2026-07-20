@@ -46,7 +46,7 @@ javascript:(function(){
 
 ---
 
-### [FFXIV副本時間軸](https://tsukiyo10884.github.io/ffxiv/timeline)
+### [FFXIV副本時間軸](https://tsukiyo10884.github.io/ffxiv/timeline/index)
 
 拓荒階段參考用
 

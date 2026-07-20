@@ -40,7 +40,11 @@ service cloud.firestore {
 
       match /responses/{uid} {
         allow read: if isSignedIn();
-        allow write: if isSignedIn() && request.auth.uid == uid;
+        allow create, update: if isSignedIn() && request.auth.uid == uid;
+        // The recruitment creator can also remove a responder's entry (e.g. to
+        // free up a slot for someone else), in addition to the responder themself.
+        allow delete: if isSignedIn() && (request.auth.uid == uid ||
+          get(/databases/$(database)/documents/recruitments/$(recruitmentId)).data.creatorId == request.auth.uid);
       }
     }
   }

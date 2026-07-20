@@ -4,6 +4,7 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  signInAnonymously,
   signOut,
   onAuthStateChanged
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
@@ -117,6 +118,7 @@ const authArea = document.getElementById('auth-area');
 const loginPanel = document.getElementById('login-panel');
 const charactersPanel = document.getElementById('characters-panel');
 const loginButton = document.getElementById('login-button');
+const anonymousLoginButton = document.getElementById('anonymous-login-button');
 const characterListEl = document.getElementById('character-list');
 const characterDetailEl = document.getElementById('character-detail');
 const addCharacterButton = document.getElementById('add-character-button');
@@ -127,8 +129,12 @@ const characterCancel = document.getElementById('character-cancel');
 const characterForm = document.getElementById('character-form');
 const characterNameInput = document.getElementById('character-name');
 const characterServerInput = document.getElementById('character-server');
-const jobGridEl = document.getElementById('job-grid');
+const characterNotesInput = document.getElementById('character-notes');
 const toastEl = document.getElementById('toast');
+const characterNoteModal = document.getElementById('character-note-modal');
+const characterNoteModalTitle = document.getElementById('character-note-modal-title');
+const characterNoteModalText = document.getElementById('character-note-modal-text');
+const characterNoteModalClose = document.getElementById('character-note-modal-close');
 
 const appNav = document.getElementById('app-nav');
 const dungeonsTabButton = document.getElementById('dungeons-tab-button');
@@ -204,6 +210,13 @@ let responses = [];
 let selectedSlotId = null;
 let isRespondingToRecruitment = false;
 
+// Which role (T/H/D) each responder is currently shown under as "主選" in the
+// "可參加" role table for the selected slot — keyed by response uid. This is a pure
+// front-end simulation (never written to Firestore): defaults to the category of the
+// responder's jobPriority[0], and clicking one of their "備選" entries moves them to
+// that role instead. Reset whenever a different slot or recruitment is selected.
+let slotRoleActiveOverride = {};
+
 let draftRecruitmentId = null;
 let draftCharacterId = '';
 let draftJobPriority = [];
@@ -253,7 +266,9 @@ function renderAuthArea() {
   wrap.appendChild(avatar);
 
   const name = document.createElement('span');
-  name.textContent = currentUser.displayName || currentUser.email || '玩家';
+  name.textContent = currentUser.isAnonymous
+    ? '匿名玩家'
+    : currentUser.displayName || currentUser.email || '玩家';
   wrap.appendChild(name);
 
   const logoutButton = document.createElement('button');
@@ -265,116 +280,12 @@ function renderAuthArea() {
   authArea.appendChild(wrap);
 }
 
-function createJobFormCard(job, existingLevel) {
-  const card = document.createElement('div');
-  card.className = 'job-card';
-  card.dataset.job = job.key;
-
-  const label = document.createElement('label');
-
-  const headerRow = document.createElement('span');
-  headerRow.style.display = 'flex';
-  headerRow.style.alignItems = 'center';
-  headerRow.style.gap = '8px';
-
-  const checkbox = document.createElement('input');
-  checkbox.type = 'checkbox';
-  checkbox.className = 'job-checkbox';
-
-  const icon = document.createElement('img');
-  icon.src = JOB_ICON_PATH(job.key);
-  icon.alt = job.name;
-  icon.width = 24;
-  icon.height = 24;
-
-  const nameBlock = document.createElement('span');
-  nameBlock.style.display = 'flex';
-  nameBlock.style.flexDirection = 'column';
-
-  const nameSpan = document.createElement('span');
-  nameSpan.textContent = job.name;
-
-  const keySpan = document.createElement('span');
-  keySpan.className = 'job-key-label';
-  keySpan.textContent = job.key;
-
-  nameBlock.appendChild(nameSpan);
-  nameBlock.appendChild(keySpan);
-
-  headerRow.appendChild(checkbox);
-  headerRow.appendChild(icon);
-  headerRow.appendChild(nameBlock);
-  label.appendChild(headerRow);
-  card.appendChild(label);
-
-  const levelInput = document.createElement('input');
-  levelInput.type = 'number';
-  levelInput.className = 'job-level';
-  levelInput.min = '1';
-  levelInput.max = '100';
-  levelInput.placeholder = '等級';
-  levelInput.disabled = true;
-  card.appendChild(levelInput);
-
-  checkbox.addEventListener('change', () => {
-    levelInput.disabled = !checkbox.checked;
-    if (!checkbox.checked) levelInput.value = '';
-  });
-
-  if (existingLevel) {
-    checkbox.checked = true;
-    levelInput.disabled = false;
-    levelInput.value = existingLevel;
-  }
-
-  return card;
-}
-
-function buildJobGrid(existingJobs = {}) {
-  jobGridEl.innerHTML = '';
-  JOB_GROUPS.forEach((group) => {
-    const jobsInGroup = JOBS.filter((job) => job.group === group.key);
-    if (jobsInGroup.length === 0) return;
-
-    const section = document.createElement('div');
-    section.className = 'job-group';
-
-    const heading = document.createElement('h4');
-    heading.textContent = group.label;
-    section.appendChild(heading);
-
-    const grid = document.createElement('div');
-    grid.className = 'job-grid';
-    jobsInGroup.forEach((job) => {
-      grid.appendChild(createJobFormCard(job, existingJobs[job.key]));
-    });
-    section.appendChild(grid);
-
-    jobGridEl.appendChild(section);
-  });
-}
-
-function readJobGrid() {
-  const jobs = {};
-  jobGridEl.querySelectorAll('.job-card').forEach((card) => {
-    const checkbox = card.querySelector('.job-checkbox');
-    const levelInput = card.querySelector('.job-level');
-    if (checkbox.checked) {
-      const level = Number(levelInput.value);
-      if (level >= 1 && level <= 100) {
-        jobs[card.dataset.job] = level;
-      }
-    }
-  });
-  return jobs;
-}
-
 function openCharacterModal(character = null) {
   editingCharacterId = character ? character.id : null;
   characterModalTitle.textContent = character ? '編輯角色卡' : '新增角色卡';
   characterNameInput.value = character ? character.name : '';
   characterServerInput.value = character ? character.server : '';
-  buildJobGrid(character ? character.jobs : {});
+  characterNotesInput.value = character ? character.notes || '' : '';
   characterModal.classList.remove('hidden');
 }
 
@@ -392,14 +303,10 @@ characterForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   const name = characterNameInput.value.trim();
   const server = characterServerInput.value.trim();
-  const jobs = readJobGrid();
+  const notes = characterNotesInput.value.trim();
 
   if (!name || !server) {
     showToast('請填寫角色名稱與伺服器');
-    return;
-  }
-  if (Object.keys(jobs).length === 0) {
-    showToast('請至少選擇一個職業並填寫等級');
     return;
   }
 
@@ -408,7 +315,7 @@ characterForm.addEventListener('submit', async (event) => {
       await updateDoc(doc(db, 'characters', editingCharacterId), {
         name,
         server,
-        jobs,
+        notes,
         updatedAt: serverTimestamp()
       });
       showToast('角色卡已更新');
@@ -417,7 +324,7 @@ characterForm.addEventListener('submit', async (event) => {
         ownerId: currentUser.uid,
         name,
         server,
-        jobs,
+        notes,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp()
       });
@@ -499,69 +406,15 @@ function renderCharacterDetail() {
 
   characterDetailEl.appendChild(header);
 
-  const jobGroupGrid = document.createElement('div');
-  jobGroupGrid.className = 'job-group-grid';
-  JOB_GROUPS.forEach((group) => {
-    const jobsInGroup = JOBS.filter(
-      (job) => job.group === group.key && character.jobs && character.jobs[job.key]
-    );
-    if (jobsInGroup.length === 0) return;
+  const notesHeader = document.createElement('h4');
+  notesHeader.textContent = '備註';
+  characterDetailEl.appendChild(notesHeader);
 
-    const section = document.createElement('div');
-    section.className = 'job-group';
-
-    const heading = document.createElement('h4');
-    heading.textContent = group.label;
-    section.appendChild(heading);
-
-    const jobGrid = document.createElement('div');
-    jobGrid.className = 'job-grid';
-    jobsInGroup.forEach((job) => {
-      const level = character.jobs[job.key];
-      const card = document.createElement('div');
-      card.className = 'job-card';
-
-      const row = document.createElement('span');
-      row.style.display = 'flex';
-      row.style.alignItems = 'center';
-      row.style.gap = '8px';
-
-      const icon = document.createElement('img');
-      icon.src = JOB_ICON_PATH(job.key);
-      icon.alt = job.name;
-      icon.width = 30;
-      icon.height = 30;
-
-      const nameBlock = document.createElement('span');
-      nameBlock.style.display = 'flex';
-      nameBlock.style.flexDirection = 'column';
-
-      const nameSpan = document.createElement('span');
-      nameSpan.textContent = `${job.name}`;
-
-      const keySpan = document.createElement('span');
-      keySpan.className = 'job-key-label';
-      keySpan.textContent = job.key;
-
-      nameBlock.appendChild(nameSpan);
-      nameBlock.appendChild(keySpan);
-
-      const levelSpan = document.createElement('span');
-      levelSpan.style.fontWeight = 'bold';
-      levelSpan.style.fontSize = '20px';
-      levelSpan.className = 'job-level-label';
-      levelSpan.textContent = `${level}`;
-
-      row.appendChild(icon);
-      row.appendChild(levelSpan);
-      row.appendChild(nameBlock);
-      card.appendChild(row);
-      jobGrid.appendChild(card);
-    });
-    section.appendChild(jobGrid);
-    jobGroupGrid.appendChild(section);
-  });
-  characterDetailEl.appendChild(jobGroupGrid);
+  const notes = document.createElement('p');
+  notes.className = 'muted-text';
+  notes.style.whiteSpace = 'pre-wrap';
+  notes.textContent = character.notes || '（未填寫）';
+  characterDetailEl.appendChild(notes);
 }
 
 function populateDungeonTypeSelect() {
@@ -1077,6 +930,7 @@ function selectRecruitment(recruitmentId) {
   selectedRecruitmentId = recruitmentId;
   selectedSlotId = null;
   isRespondingToRecruitment = false;
+  slotRoleActiveOverride = {};
   subscribeResponses(recruitmentId);
   renderRecruitmentList();
   renderRecruitmentDetail();
@@ -1307,6 +1161,10 @@ function renderRecruitmentDetail() {
     recruitmentDetailEl.appendChild(notes);
   }
 
+  if (isCreator) {
+    renderResponderList(recruitmentDetailEl, recruitment);
+  }
+
   const canRespond = recruitment.status === 'recruiting';
 
   if (dungeon) {
@@ -1317,7 +1175,7 @@ function renderRecruitmentDetail() {
       note.textContent = `此招募目前狀態為「${RECRUITMENT_STATUS_LABELS[recruitment.status] || recruitment.status}」，無法回應。`;
       recruitmentDetailEl.appendChild(note);
     } else if (isRespondingToRecruitment) {
-      renderResponseForm(recruitmentDetailEl, recruitment, dungeon);
+      renderResponseForm(recruitmentDetailEl, recruitment);
     } else if (characters.length === 0) {
       const empty = document.createElement('p');
       empty.className = 'muted-text';
@@ -1325,11 +1183,12 @@ function renderRecruitmentDetail() {
       empty.textContent = '請先建立角色卡才能回應這個招募。';
       recruitmentDetailEl.appendChild(empty);
     } else {
+      const hasResponded = responses.some((r) => r.id === currentUser.uid);
       const respondButton = document.createElement('button');
       respondButton.type = 'button';
       respondButton.className = 'primary-button';
       respondButton.style.marginTop = '20px';
-      respondButton.textContent = '響應招募';
+      respondButton.textContent = hasResponded ? '修改響應內容' : '響應招募';
       respondButton.addEventListener('click', () => {
         isRespondingToRecruitment = true;
         renderRecruitmentDetail();
@@ -1340,7 +1199,64 @@ function renderRecruitmentDetail() {
   }
 }
 
-function renderResponseForm(container, recruitment, dungeon) {
+async function removeResponseAsCreator(recruitmentId, uid) {
+  try {
+    await deleteDoc(doc(db, 'recruitments', recruitmentId, 'responses', uid));
+    showToast('已移除該回應');
+  } catch (err) {
+    showToast(`移除失敗：${err.message}`);
+  }
+}
+
+function renderResponderList(container, recruitment) {
+  const section = document.createElement('div');
+  section.className = 'card-form';
+  section.style.marginTop = '20px';
+
+  const heading = document.createElement('h4');
+  heading.style.marginTop = '0';
+  heading.textContent = `回應名單（${responses.length} 人）`;
+  section.appendChild(heading);
+
+  if (responses.length === 0) {
+    const empty = document.createElement('p');
+    empty.className = 'muted-text';
+    empty.textContent = '目前還沒有人回應。';
+    section.appendChild(empty);
+  } else {
+    const list = document.createElement('div');
+    list.className = 'player-list';
+    responses.forEach((r) => {
+      const row = document.createElement('div');
+      row.className = 'player-item responder-item';
+
+      const info = document.createElement('span');
+      const jobNames = (r.jobPriority || [])
+        .map((k) => (JOBS.find((j) => j.key === k) || {}).name || k)
+        .join('/');
+      const slotCount = r.availability ? Object.keys(r.availability).length : 0;
+      info.textContent = `${r.characterName || '未知角色'}＠${r.characterServer || '?'}（${jobNames || '未選職業'}）· ${slotCount} 個時段`;
+      row.appendChild(info);
+
+      const removeButton = document.createElement('button');
+      removeButton.type = 'button';
+      removeButton.className = 'secondary-button';
+      removeButton.textContent = '移除';
+      removeButton.addEventListener('click', () => {
+        if (!confirm(`確定要移除「${r.characterName || '這位玩家'}」的回應嗎？`)) return;
+        removeResponseAsCreator(recruitment.id, r.id);
+      });
+      row.appendChild(removeButton);
+
+      list.appendChild(row);
+    });
+    section.appendChild(list);
+  }
+
+  container.appendChild(section);
+}
+
+function renderResponseForm(container, recruitment) {
   const section = document.createElement('div');
   section.className = 'card-form';
   section.style.marginTop = '20px';
@@ -1380,26 +1296,26 @@ function renderResponseForm(container, recruitment, dungeon) {
   charLabel.appendChild(charSelect);
   section.appendChild(charLabel);
 
-  const selectedCharacter = characters.find((c) => c.id === draftCharacterId);
-  const eligibleJobs = selectedCharacter
-    ? JOBS.filter((job) => (selectedCharacter.jobs || {})[job.key] >= dungeon.levelRequirement)
-    : [];
-
   const jobsLabel = document.createElement('p');
   jobsLabel.className = 'muted-text';
   jobsLabel.style.margin = '10px 0 6px';
-  jobsLabel.textContent = `可用職業（需求等級 ${dungeon.levelRequirement}，勾選順序＝優先度，第一個為主要職業）`;
+  jobsLabel.textContent = '選擇職業（勾選順序＝優先度，第一個為主要職業）';
   section.appendChild(jobsLabel);
 
-  if (eligibleJobs.length === 0) {
-    const noneMsg = document.createElement('p');
-    noneMsg.className = 'muted-text';
-    noneMsg.textContent = '這個角色沒有職業達到需求等級。';
-    section.appendChild(noneMsg);
-  } else {
+  JOB_GROUPS.forEach((group) => {
+    const jobsInGroup = JOBS.filter((job) => job.group === group.key);
+    if (jobsInGroup.length === 0) return;
+
+    const groupHeading = document.createElement('p');
+    groupHeading.className = 'muted-text';
+    groupHeading.style.margin = '10px 0 4px';
+    groupHeading.style.fontWeight = 'bold';
+    groupHeading.textContent = group.label;
+    section.appendChild(groupHeading);
+
     const checklist = document.createElement('div');
     checklist.className = 'checkbox-grid';
-    eligibleJobs.forEach((job) => {
+    jobsInGroup.forEach((job) => {
       const label = document.createElement('label');
       label.style.display = 'flex';
       label.style.alignItems = 'center';
@@ -1433,10 +1349,201 @@ function renderResponseForm(container, recruitment, dungeon) {
       checklist.appendChild(label);
     });
     section.appendChild(checklist);
-  }
+  });
 
   container.appendChild(section);
 }
+
+// Appends one small icon per job key (with the job name as a hover title) to `container`;
+// falls back to a muted "未選職業" label if there are no jobs to show.
+function appendJobIcons(container, jobKeys) {
+  if (!jobKeys || jobKeys.length === 0) {
+    const empty = document.createElement('span');
+    empty.className = 'muted-text';
+    empty.textContent = '未選職業';
+    container.appendChild(empty);
+    return;
+  }
+  jobKeys.forEach((key) => {
+    const job = JOBS.find((j) => j.key === key);
+    const icon = document.createElement('img');
+    icon.src = JOB_ICON_PATH(key);
+    icon.alt = job ? job.name : key;
+    icon.title = job ? job.name : key;
+    icon.className = 'chip-job-icon';
+    icon.width = 20;
+    icon.height = 20;
+    container.appendChild(icon);
+  });
+}
+
+// entries: [{ response, jobKeys }]. Clicking a chip shows that character's notes — used
+// for the 主選／自由 cells, where the person is already "confirmed" in that role.
+function renderNoteChips(entries) {
+  const list = document.createElement('div');
+  list.className = 'slot-summary';
+  entries.forEach(({ response, jobKeys }) => {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'chip-button';
+    const nameSpan = document.createElement('span');
+    nameSpan.textContent = response.characterName || '未知角色';
+    chip.appendChild(nameSpan);
+    appendJobIcons(chip, jobKeys);
+    chip.addEventListener('click', () => showCharacterNote(response));
+    list.appendChild(chip);
+  });
+  return list;
+}
+
+// entries: [{ response, jobKeys }]. Clicking a chip makes `roleKey` this responder's
+// active role (moving them into that row's 主選 cell) — a pure front-end simulation,
+// see `slotRoleActiveOverride`.
+function renderBackupChips(entries, roleKey) {
+  const list = document.createElement('div');
+  list.className = 'slot-summary';
+  entries.forEach(({ response, jobKeys }) => {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'chip-button chip-button-backup';
+    chip.title = '模擬這個人改頂這個位置';
+    const nameSpan = document.createElement('span');
+    nameSpan.textContent = response.characterName || '未知角色';
+    chip.appendChild(nameSpan);
+    appendJobIcons(chip, jobKeys);
+    chip.addEventListener('click', () => {
+      slotRoleActiveOverride[response.id] = roleKey;
+      renderRecruitmentDetail();
+    });
+    list.appendChild(chip);
+  });
+  return list;
+}
+
+// Renders the "可參加" group for a time slot as a 主選／備選 table: one row per
+// composition role (T/H/D), split into two columns. A responder's jobPriority[0]
+// decides which role's 主選 column they start in by default; every other role they
+// also have a job for shows them in that role's 備選 column instead. Clicking a 備選
+// chip swaps that responder's active role (see `slotRoleActiveOverride`) so their old
+// 主選 role becomes a 備選 elsewhere — purely a front-end "what if" simulation, never
+// written to Firestore. The 自由 row (when the composition has free slots) isn't split
+// since a free slot accepts any job — it just lists everyone with their full job
+// priority. If the recruitment has no composition requirement at all, falls back to a
+// flat chip list. Every 主選／自由 name is clickable to view that character's notes.
+function renderAvailableRoleList(composition, availableGroup) {
+  const wrap = document.createElement('div');
+  wrap.className = 'slot-role-list';
+
+  const hasComposition = composition.T > 0 || composition.H > 0 || composition.D > 0 || composition.FREE > 0;
+  if (!hasComposition) {
+    wrap.appendChild(
+      renderNoteChips(availableGroup.map((r) => ({ response: r, jobKeys: r.jobPriority || [] })))
+    );
+    return wrap;
+  }
+
+  const table = document.createElement('table');
+  table.className = 'slot-role-table';
+
+  const thead = document.createElement('thead');
+  const headRow = document.createElement('tr');
+  headRow.appendChild(document.createElement('th'));
+  const mainTh = document.createElement('th');
+  mainTh.textContent = '主選';
+  const backupTh = document.createElement('th');
+  backupTh.textContent = '備選';
+  headRow.appendChild(mainTh);
+  headRow.appendChild(backupTh);
+  thead.appendChild(headRow);
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+
+  function roleIconCell(roleKey) {
+    const td = document.createElement('td');
+    td.className = 'slot-role-icon-cell';
+    const icon = document.createElement('img');
+    icon.src = ROLE_ICON_PATH(roleKey);
+    icon.alt = roleKey;
+    icon.width = 24;
+    icon.height = 24;
+    td.appendChild(icon);
+    return td;
+  }
+
+  ['T', 'H', 'D'].forEach((roleKey) => {
+    if (!composition[roleKey]) return;
+
+    const candidates = availableGroup
+      .map((r) => ({ response: r, jobKeys: (r.jobPriority || []).filter((k) => jobRole(k) === roleKey) }))
+      .filter((c) => c.jobKeys.length > 0);
+
+    const mainEntries = [];
+    const backupEntries = [];
+    candidates.forEach(({ response, jobKeys }) => {
+      const defaultRole = jobRole((response.jobPriority || [])[0]);
+      const activeRole = slotRoleActiveOverride[response.id] || defaultRole;
+      const entry = { response, jobKeys };
+      if (activeRole === roleKey) mainEntries.push(entry);
+      else backupEntries.push(entry);
+    });
+
+    const tr = document.createElement('tr');
+    tr.appendChild(roleIconCell(roleKey));
+
+    const mainTd = document.createElement('td');
+    if (mainEntries.length > 0) mainTd.appendChild(renderNoteChips(mainEntries));
+    tr.appendChild(mainTd);
+
+    const backupTd = document.createElement('td');
+    if (backupEntries.length > 0) backupTd.appendChild(renderBackupChips(backupEntries, roleKey));
+    tr.appendChild(backupTd);
+
+    tbody.appendChild(tr);
+  });
+
+  if (composition.FREE > 0) {
+    const tr = document.createElement('tr');
+    tr.appendChild(roleIconCell('FREE'));
+
+    const freeTd = document.createElement('td');
+    freeTd.colSpan = 2;
+    if (availableGroup.length > 0) {
+      freeTd.appendChild(
+        renderNoteChips(availableGroup.map((r) => ({ response: r, jobKeys: r.jobPriority || [] })))
+      );
+    }
+    tr.appendChild(freeTd);
+    tbody.appendChild(tr);
+  }
+
+  table.appendChild(tbody);
+  wrap.appendChild(table);
+  return wrap;
+}
+
+function openCharacterNoteModal(name, text) {
+  characterNoteModalTitle.textContent = name;
+  characterNoteModalText.textContent = text;
+  characterNoteModal.classList.remove('hidden');
+}
+
+async function showCharacterNote(response) {
+  openCharacterNoteModal(response.characterName || '未知角色', '載入中…');
+  if (!response.characterId) {
+    characterNoteModalText.textContent = '（找不到角色資料）';
+    return;
+  }
+  try {
+    const snap = await getDoc(doc(db, 'characters', response.characterId));
+    const notes = snap.exists() ? (snap.data().notes || '').trim() : '';
+    characterNoteModalText.textContent = notes || '（這個角色沒有填寫備註）';
+  } catch (err) {
+    characterNoteModalText.textContent = `讀取備註失敗：${err.message}`;
+  }
+}
+
+characterNoteModalClose.addEventListener('click', () => characterNoteModal.classList.add('hidden'));
 
 function renderSlotTable(container, recruitment, dungeon) {
   const respondingActive = recruitment.status === 'recruiting' && isRespondingToRecruitment;
@@ -1581,15 +1688,23 @@ function renderSlotTable(container, recruitment, dungeon) {
       else if (result.status === 'potential') td.classList.add('status-potential');
       if (slot.slotId === selectedSlotId) td.classList.add('status-selected');
 
-      const myStatus = draftAvailability[slot.slotId];
-      if (myStatus) {
-        const marker = document.createElement('span');
-        marker.className = `slot-mine-${myStatus}`;
-        marker.textContent = myStatus === 'available' ? '✓' : myStatus === 'tentative' ? '？' : '×';
-        td.appendChild(marker);
+      if (respondingActive) {
+        const myStatus = draftAvailability[slot.slotId];
+        if (myStatus) {
+          const marker = document.createElement('span');
+          marker.className = `slot-mine-${myStatus}`;
+          marker.textContent = myStatus === 'available' ? '✓' : myStatus === 'tentative' ? '？' : '×';
+          td.appendChild(marker);
+        }
+      } else if (result.assignedCount > 0) {
+        const countEl = document.createElement('span');
+        countEl.className = 'slot-count';
+        countEl.textContent = `${result.assignedCount}人`;
+        td.appendChild(countEl);
       }
 
       td.addEventListener('click', () => {
+        if (selectedSlotId !== slot.slotId) slotRoleActiveOverride = {};
         selectedSlotId = slot.slotId;
         if (respondingActive) {
           const order = [undefined, 'available', 'tentative', 'unavailable'];
@@ -1629,10 +1744,20 @@ function renderSlotTable(container, recruitment, dungeon) {
       summary.textContent =
         result.total === 0
           ? '此招募未設定陣容需求'
-          : `已媒合 ${result.total - result.remaining} / ${result.total} 人`;
+          : `已響應 ${result.total - result.remaining} / ${result.total} 人`;
       detail.appendChild(summary);
 
-      ['available', 'tentative', 'unavailable'].forEach((statusKey) => {
+      const availableGroup = responses.filter((r) => r.availability && r.availability[selectedSlotId] === 'available');
+      if (availableGroup.length > 0) {
+        const groupTitle = document.createElement('p');
+        groupTitle.style.marginBottom = '4px';
+        groupTitle.style.fontWeight = 'bold';
+        groupTitle.textContent = AVAILABILITY_LABELS.available;
+        detail.appendChild(groupTitle);
+        detail.appendChild(renderAvailableRoleList(recruitment.composition, availableGroup));
+      }
+
+      ['tentative', 'unavailable'].forEach((statusKey) => {
         const group = responses.filter((r) => r.availability && r.availability[selectedSlotId] === statusKey);
         if (group.length === 0) return;
 
@@ -1666,6 +1791,25 @@ function renderSlotTable(container, recruitment, dungeon) {
     saveButton.style.marginTop = '14px';
     saveButton.textContent = '儲存我的回應';
     saveButton.addEventListener('click', async () => {
+      const hasExistingResponse = responses.some((r) => r.id === currentUser.uid);
+      if (Object.keys(draftAvailability).length === 0) {
+        if (!hasExistingResponse) {
+          showToast('請至少選擇一個時段');
+          return;
+        }
+        // Clearing every slot on an existing response removes them from the
+        // responder count entirely, rather than leaving behind an empty response.
+        try {
+          await deleteDoc(doc(db, 'recruitments', recruitment.id, 'responses', currentUser.uid));
+          showToast('已清除所有時段，回應已移除');
+        } catch (err) {
+          showToast(`移除回應失敗：${err.message}`);
+          return;
+        }
+        isRespondingToRecruitment = false;
+        renderRecruitmentDetail();
+        return;
+      }
       if (!draftCharacterId || draftJobPriority.length === 0) {
         showToast('請選擇角色並至少勾選一個職業');
         return;
@@ -1735,6 +1879,14 @@ async function ensureUserDoc(user) {
 loginButton.addEventListener('click', async () => {
   try {
     await signInWithPopup(auth, provider);
+  } catch (err) {
+    showToast(`登入失敗：${err.message}`);
+  }
+});
+
+anonymousLoginButton.addEventListener('click', async () => {
+  try {
+    await signInAnonymously(auth);
   } catch (err) {
     showToast(`登入失敗：${err.message}`);
   }

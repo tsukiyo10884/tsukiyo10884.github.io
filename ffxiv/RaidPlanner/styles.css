@@ -162,6 +162,7 @@ select {
 .top-nav {
   display: flex;
   gap: 12px;
+  padding-top: 1rem;
 }
 
 .tab-button {
@@ -266,6 +267,93 @@ select {
 
 .button-full {
   width: 100%;
+}
+
+.login-warning {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.responder-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  cursor: default;
+}
+
+.responder-item .secondary-button {
+  flex-shrink: 0;
+  padding: 6px 14px;
+}
+
+.slot-count {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.slot-role-list {
+  margin-top: 4px;
+}
+
+.slot-role-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.slot-role-table th,
+.slot-role-table td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border-soft);
+  vertical-align: top;
+}
+
+.slot-role-table th {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.slot-role-icon-cell {
+  width: 32px;
+}
+
+.chip-button {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.chip-job-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.chip-button:hover {
+  background: var(--chip-bg-strong);
+}
+
+.chip-button-backup {
+  background: transparent;
+  border: 1px dashed var(--border);
+  color: var(--muted);
+}
+
+.chip-button-backup:hover {
+  background: var(--chip-bg);
+  color: var(--text);
 }
 
 .job-grid,

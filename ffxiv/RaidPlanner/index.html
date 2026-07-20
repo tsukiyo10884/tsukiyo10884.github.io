@@ -30,7 +30,9 @@
     <div class="card">
       <h2>請先登入</h2>
       <p class="muted-text">使用 Google 帳號登入後即可建立角色卡。</p>
-      <button id="login-button" class="primary-button">使用 Google 登入</button>
+      <button id="login-button" class="primary-button button-full">使用 Google 登入</button>
+      <button id="anonymous-login-button" class="secondary-button button-full" style="margin-top: 10px;">以匿名身分登入</button>
+      <p class="muted-text login-warning">匿名登入的資料只綁定在目前這個瀏覽器，若切換瀏覽器、清除 Cookie 或使用無痕模式，將無法再找回這個帳號的角色卡與招募紀錄，請自行斟酌使用。</p>
     </div>
   </section>
 
@@ -200,13 +202,22 @@
           <option value="泰坦">泰坦</option>
         </select>
       </label>
-      <h3>可用職業與等級</h3>
-      <div id="job-grid" class="job-group-grid"></div>
+      <label>備註（選填）
+        <textarea id="character-notes" rows="3" maxlength="200"></textarea>
+      </label>
       <div class="form-actions">
         <button type="button" id="character-cancel" class="secondary-button">取消</button>
         <button type="submit" class="primary-button">儲存</button>
       </div>
     </form>
+  </div>
+</div>
+
+<div id="character-note-modal" class="modal hidden">
+  <div class="modal-content" style="width: min(480px, 100%);">
+    <button id="character-note-modal-close" class="close-button" type="button">✕</button>
+    <h2 id="character-note-modal-title">角色備註</h2>
+    <p id="character-note-modal-text" class="muted-text" style="white-space: pre-wrap;"></p>
   </div>
 </div>
 

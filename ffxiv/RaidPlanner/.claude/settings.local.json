@@ -6,7 +6,12 @@
       "Bash(python3 -c \"import docx; print\\('ok'\\)\")",
       "Bash(/c/Python314/python.exe -c \"import docx; print\\('ok'\\)\")",
       "Bash(/c/Python314/python.exe C:/Users/user/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/c9ade3d3-eda0-46f7-b046-35e7af4593f3/47520197-d70e-4df2-912e-7742b83e78c1/skills/docx/scripts/merge_runs.py C:/Users/user/AppData/Local/Temp/claude/C--Users-user-Desktop-RaidPlanner/b88bbe8f-ce76-4c41-bf04-f309e9db1ad4/scratchpad/docx_extract/)",
-      "Bash(/c/Python314/python.exe -m pip install defusedxml lxml)"
+      "Bash(/c/Python314/python.exe -m pip install defusedxml lxml)",
+      "Bash(node --check app.js)",
+      "Bash(git -C \"D:/_IreneLi/tsukiyo10884.github.io\" diff --stat -- ffxiv/RaidPlanner)",
+      "Bash(git -C \"D:/_IreneLi/tsukiyo10884.github.io\" diff -- ffxiv/RaidPlanner/app.js ffxiv/RaidPlanner/firestore.rules ffxiv/RaidPlanner/index.html ffxiv/RaidPlanner/styles.css)",
+      "Bash(ls \"/d/_IreneLi/tsukiyo10884.github.io\" | head -30; echo \"---\"; find \"/d/_IreneLi/tsukiyo10884.github.io\" -maxdepth 1 -iname \"index.html\")",
+      "Bash(git -C \"D:/_IreneLi/tsukiyo10884.github.io\" diff -- ffxiv/RaidPlanner/app.js)"
     ]
   }
 }
