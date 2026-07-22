@@ -428,6 +428,26 @@ function populateDungeonTypeSelect() {
 }
 populateDungeonTypeSelect();
 
+// Every-30-minutes option list for the recruitment daily time range selects — native
+// <input type="time"> only enforces a step on submit, not while picking a value (mouse
+// wheel / arrow keys on the native control still move minute-by-minute in every
+// browser), so a plain <select> is used instead to make it impossible to pick anything
+// else. 30 minutes also matches `slotMinutes`, so start/end always land on a slot edge.
+function populateTimeOptions(selectEl) {
+  selectEl.innerHTML = '';
+  for (let h = 0; h < 24; h++) {
+    for (let m = 0; m < 60; m += 30) {
+      const value = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = value;
+      selectEl.appendChild(option);
+    }
+  }
+}
+populateTimeOptions(recruitmentTimeStartInput);
+populateTimeOptions(recruitmentTimeEndInput);
+
 function dungeonTypeLabel(key) {
   const type = DUNGEON_TYPES.find((t) => t.key === key);
   return type ? type.label : key;
