@@ -13,7 +13,7 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="timeline.js"></script>
+    <script src="/Timeline/timeline.js"></script>
 </head>
 
 <body>
@@ -24,19 +24,22 @@
             <input type="range" id="zoomRange" min="2" max="30" value="8">
             <span id="zoomVal">8px/s</span>
         </div>
-        <div style="margin-left: auto;">
+        <div id="raidSelectWrapper" style="margin-left: auto;">
             <select id="select-raid">
                 <option></option>
                 <option value="t7s"> 　　T7S　　 | 巴哈姆特零式大迷宮 入侵之章2</option>
                 <option value="t7s_min_ilvl"> T7S (min ilvl) | 巴哈姆特零式大迷宮 入侵之章2 (低品)</option>
                 <option value="t8s"> 　　T8S　　 | 巴哈姆特零式大迷宮 入侵之章3</option>
-                <option value="o8s_min_ilvl"> O8S (min ilvl)| 歐米茄零式時空狹縫 西格瑪幻境4 (低品)</option>
             </select>
         </div>
 
     </div>
 
     <div id="main-container">
+        <div id="emptyState" class="empty-state">
+            <div class="empty-state-arrow">↗</div>
+            <div class="empty-state-text">請先從右上角下拉選單選擇要查看的關卡</div>
+        </div>
         <div id="notesContainer" class="notes-container"></div>
         <div id="timelineContainer">
             <div class="master-axis" id="masterAxis"></div>
@@ -59,8 +62,17 @@
             width: 500
         });
         $('#select-raid').on('change', function (e) {
-            loadTimeline('json/' + $(this).val() + '.json');
-            window.history.pushState({}, '', '?raid=' + $(this).val());
+            const val = $(this).val();
+            $('#raidSelectWrapper').removeClass('pulse-highlight');
+            if (!val) {
+                $('#emptyState').show();
+                $('#timelineContainer').hide();
+                return;
+            }
+            $('#emptyState').hide();
+            $('#timelineContainer').show();
+            loadTimeline('json/' + val + '.json');
+            window.history.pushState({}, '', '?raid=' + val);
         })
 
         const queryString = window.location.search;
@@ -68,6 +80,8 @@
         const raid = urlParams.get('raid');
         if (raid) {
             $('#select-raid').val(raid).trigger('change');
+        } else {
+            $('#raidSelectWrapper').addClass('pulse-highlight');
         }
     </script>
 
@@ -78,6 +92,65 @@
 
         #notesContainer {
             user-select: text;
+        }
+
+        #timelineContainer,
+        #notesContainer {
+            display: none;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 65vh;
+            text-align: center;
+            gap: 12px;
+        }
+
+        .empty-state-arrow {
+            font-size: 56px;
+            line-height: 1;
+            color: #f39c12;
+            align-self: flex-end;
+            margin-right: 8%;
+            animation: empty-state-bounce 1.4s ease-in-out infinite;
+        }
+
+        .empty-state-text {
+            font-size: 20px;
+            color: #ddd;
+        }
+
+        @keyframes empty-state-bounce {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: translate(8px, -8px);
+                opacity: 1;
+            }
+        }
+
+        #raidSelectWrapper.pulse-highlight .select2-selection--single {
+            animation: raid-select-pulse 1.6s ease-in-out infinite;
+        }
+
+        @keyframes raid-select-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.6);
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(243, 156, 18, 0);
+            }
         }
 
         body {

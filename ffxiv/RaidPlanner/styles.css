@@ -100,9 +100,14 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   color: var(--text);
   background: radial-gradient(circle at top, var(--accent-glow), transparent 28%),
@@ -201,6 +206,14 @@ select {
   grid-template-columns: minmax(300px, 420px) 1fr;
 }
 
+/* Grid/flex items default to min-width:auto, which lets wide content (like the time
+   slot table) force its column — and the whole page — wider instead of scrolling
+   inside its own box. Resetting it here is what makes `.detail-table`'s overflow-x:
+   auto actually contain the table instead of stretching everything around it. */
+.split-layout > * {
+  min-width: 0;
+}
+
 .card,
 .card-form,
 .info-box,
@@ -231,6 +244,8 @@ select {
 .card-form input[type='date'],
 .card-form input[type='time'],
 .card-form input[type='number'],
+.card-form input[type='email'],
+.card-form input[type='password'],
 .card-form select,
 .card-form textarea {
   width: 100%;
@@ -269,14 +284,26 @@ select {
   width: 100%;
 }
 
-.login-warning {
-  margin-top: 10px;
+.text-link-button {
+  appearance: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: block;
+  margin: 8px auto 0;
+  padding: 0;
+  color: var(--muted);
+  text-decoration: underline;
   font-size: 0.85rem;
-  line-height: 1.5;
+}
+
+.text-link-button:hover {
+  color: var(--text);
 }
 
 .responder-item {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
@@ -411,11 +438,13 @@ select {
 
 .form-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
 .form-actions button {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 100px;
 }
 
 
@@ -446,8 +475,14 @@ select {
   margin-bottom: 14px;
 }
 
+.field-row {
+  display: flex;
+  gap: 8px;
+}
+
 .detail-header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: start;
   gap: 12px;
@@ -689,6 +724,52 @@ select {
 
 @media (max-width: 980px) {
   .split-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    padding: 16px;
+  }
+
+  .app-main {
+    padding: 16px 16px 32px;
+  }
+
+  .top-nav {
+    flex-wrap: wrap;
+  }
+
+  .card,
+  .card-form,
+  .info-box,
+  .detail-info,
+  .detail-table,
+  .slot-list,
+  .admin-form {
+    padding: 14px;
+  }
+
+  .detail-info .info-row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .modal {
+    padding: 10px;
+  }
+
+  .modal-content {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .field-row {
+    flex-direction: column;
+  }
+
+  .radio-group {
     grid-template-columns: 1fr;
   }
 }

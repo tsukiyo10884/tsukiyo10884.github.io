@@ -182,7 +182,7 @@
 ## 已確認的決定
 
 1. **管理員身分**：以 `users/{uid}.isAdmin` 判斷，後台手動設定。
-2. **登入方式**：Google 登入，或匿名登入（資料綁定在當下瀏覽器，換瀏覽器/清 cookie 會遺失，登入畫面會提示這點）。
+2. **登入方式**：Google 登入，或本平台的 Email/密碼帳號（`createUserWithEmailAndPassword`/`signInWithEmailAndPassword`，附「忘記密碼」寄重設信）。原本有匿名登入，但匿名帳號無法從介面清除、容易在 Firestore 留下清不掉的空文件，已經移除；`firebase-config.js` 對應的 Firebase 專案需要在 Authentication → Sign-in method 手動啟用 Email/Password provider（Console 設定，不在程式碼裡）。
 3. **`jobPriority` 語意**：有序清單，`[0]` 為主要職業，其餘為依序替補；名額比對採「主要職業 → 替補職業 → 自由位遞補」三輪貪婪法（見上方第 6 節）。
 4. **時段表產生方式**：建立招募時輸入日期區間 + 每日時間區間（如 7/10~7/15、15:00~23:00），系統自動以每 30 分鐘展開時段，不支援手動增刪個別時段。
 5. **陣容模型**：從「role/jobKey 陣列」簡化成固定的 `{T, H, D, FREE}` 四個數字欄位（見第 4 節），未勾選「解除限制」時總和必須等於副本 `maxParticipants`。

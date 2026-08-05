@@ -4,7 +4,9 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
-  signInAnonymously,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
   signOut,
   onAuthStateChanged
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
@@ -12,6 +14,7 @@ import {
   getFirestore,
   doc,
   getDoc,
+  getDocs,
   setDoc,
   updateDoc,
   deleteDoc,
@@ -20,7 +23,8 @@ import {
   query,
   where,
   onSnapshot,
-  serverTimestamp
+  serverTimestamp,
+  writeBatch
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
 const JOB_GROUPS = [
@@ -118,7 +122,11 @@ const authArea = document.getElementById('auth-area');
 const loginPanel = document.getElementById('login-panel');
 const charactersPanel = document.getElementById('characters-panel');
 const loginButton = document.getElementById('login-button');
-const anonymousLoginButton = document.getElementById('anonymous-login-button');
+const emailAuthForm = document.getElementById('email-auth-form');
+const emailAuthEmailInput = document.getElementById('email-auth-email');
+const emailAuthPasswordInput = document.getElementById('email-auth-password');
+const emailRegisterButton = document.getElementById('email-register-button');
+const emailForgotPasswordButton = document.getElementById('email-forgot-password-button');
 const characterListEl = document.getElementById('character-list');
 const characterDetailEl = document.getElementById('character-detail');
 const addCharacterButton = document.getElementById('add-character-button');
@@ -585,6 +593,7 @@ function renderDungeonDetail() {
 
   const titleWrap = document.createElement('div');
   titleWrap.style.display = 'flex';
+  titleWrap.style.flexWrap = 'wrap';
   titleWrap.style.alignItems = 'center';
   titleWrap.style.gap = '10px';
 
@@ -904,9 +913,17 @@ recruitmentForm.addEventListener('submit', async (event) => {
 });
 
 async function deleteRecruitment(recruitmentId) {
-  if (!confirm('確定要刪除這個招募嗎？此動作無法復原。')) return;
+  if (!confirm('確定要刪除這個招募嗎？此動作無法復原，所有人的回應也會一併刪除。')) return;
   try {
-    await deleteDoc(doc(db, 'recruitments', recruitmentId));
+    // deleteDoc() only removes the recruitment document itself — Firestore never
+    // cascades deletes into subcollections, so the responses/{uid} docs underneath it
+    // have to be deleted one by one (batched together for atomicity) or they'd be left
+    // behind as orphaned data, showing up as an empty phantom document in the console.
+    const responsesSnapshot = await getDocs(collection(db, 'recruitments', recruitmentId, 'responses'));
+    const batch = writeBatch(db);
+    responsesSnapshot.forEach((responseDoc) => batch.delete(responseDoc.ref));
+    batch.delete(doc(db, 'recruitments', recruitmentId));
+    await batch.commit();
     if (selectedRecruitmentId === recruitmentId) selectedRecruitmentId = null;
     showToast('招募已刪除');
   } catch (err) {
@@ -1006,6 +1023,7 @@ function renderRecruitmentDetail() {
 
   const titleWrap = document.createElement('div');
   titleWrap.style.display = 'flex';
+  titleWrap.style.flexWrap = 'wrap';
   titleWrap.style.alignItems = 'center';
   titleWrap.style.gap = '10px';
 
@@ -1904,11 +1922,62 @@ loginButton.addEventListener('click', async () => {
   }
 });
 
-anonymousLoginButton.addEventListener('click', async () => {
+const AUTH_ERROR_MESSAGES = {
+  'auth/invalid-email': 'Email 格式不正確',
+  'auth/missing-password': '請輸入密碼',
+  'auth/weak-password': '密碼至少需要 6 碼',
+  'auth/email-already-in-use': '這個 Email 已經註冊過了，請直接登入',
+  'auth/invalid-credential': 'Email 或密碼不正確',
+  'auth/wrong-password': 'Email 或密碼不正確',
+  'auth/user-not-found': '找不到這個帳號，請先註冊',
+  'auth/too-many-requests': '嘗試次數過多，請稍後再試'
+};
+
+function authErrorMessage(err) {
+  return AUTH_ERROR_MESSAGES[err.code] || err.message;
+}
+
+emailAuthForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const email = emailAuthEmailInput.value.trim();
+  const password = emailAuthPasswordInput.value;
+  if (!email || !password) {
+    showToast('請輸入 Email 與密碼');
+    return;
+  }
   try {
-    await signInAnonymously(auth);
+    await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
-    showToast(`登入失敗：${err.message}`);
+    showToast(`登入失敗：${authErrorMessage(err)}`);
+  }
+});
+
+emailRegisterButton.addEventListener('click', async () => {
+  const email = emailAuthEmailInput.value.trim();
+  const password = emailAuthPasswordInput.value;
+  if (!email || !password) {
+    showToast('請輸入 Email 與密碼');
+    return;
+  }
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    showToast('註冊成功，已自動登入');
+  } catch (err) {
+    showToast(`註冊失敗：${authErrorMessage(err)}`);
+  }
+});
+
+emailForgotPasswordButton.addEventListener('click', async () => {
+  const email = emailAuthEmailInput.value.trim();
+  if (!email) {
+    showToast('請先在上面填寫 Email，再點忘記密碼');
+    return;
+  }
+  try {
+    await sendPasswordResetEmail(auth, email);
+    showToast('已寄出重設密碼信件，請查看信箱');
+  } catch (err) {
+    showToast(`寄送失敗：${authErrorMessage(err)}`);
   }
 });
 
