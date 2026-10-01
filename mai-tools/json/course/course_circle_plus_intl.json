@@ -1,0 +1,716 @@
+[
+    {
+        "type": "段位認定",
+        "course": [
+            {
+                "courseName": "初段",
+                "totalLives": 350,
+                "lifeLossPerJudgement": {
+                    "great": 0,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 20,
+                "songs": [
+                    {
+                        "title": "＊ハロー、プラネット。",
+                        "type": "dx",
+                        "difficulty": "basic"
+                    },
+                    {
+                        "title": "シャルル",
+                        "type": "dx",
+                        "difficulty": "basic"
+                    },
+                    {
+                        "title": "ゆけむり魂温泉 II",
+                        "type": "dx",
+                        "difficulty": "basic"
+                    },
+                    {
+                        "title": "オトヒメモリー☆ウタゲーション",
+                        "type": "std",
+                        "difficulty": "basic"
+                    }
+                ]
+            },
+            {
+                "courseName": "二段",
+                "totalLives": 350,
+                "lifeLossPerJudgement": {
+                    "great": 0,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 20,
+                "songs": [
+                    {
+                        "title": "もういいよ",
+                        "type": "dx",
+                        "difficulty": "advanced"
+                    },
+                    {
+                        "title": "Witches night",
+                        "type": "dx",
+                        "difficulty": "advanced"
+                    },
+                    {
+                        "title": "Worlders",
+                        "type": "dx",
+                        "difficulty": "advanced"
+                    },
+                    {
+                        "title": "コンティニュー！ feat. 藍月なくる",
+                        "type": "dx",
+                        "difficulty": "advanced"
+                    }
+                ]
+            },
+            {
+                "courseName": "三段",
+                "totalLives": 600,
+                "lifeLossPerJudgement": {
+                    "great": 1,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 50,
+                "songs": [
+                    {
+                        "title": "蒼空に舞え、墨染の桜",
+                        "type": "std",
+                        "difficulty": "advanced"
+                    },
+                    {
+                        "title": "死ぬな！",
+                        "type": "dx",
+                        "difficulty": "advanced"
+                    },
+                    {
+                        "title": "色は匂へど散りぬるを",
+                        "type": "std",
+                        "difficulty": "advanced"
+                    },
+                    {
+                        "title": "エイリアンエイリアン",
+                        "type": "std",
+                        "difficulty": "advanced"
+                    }
+                ]
+            },
+            {
+                "courseName": "四段",
+                "totalLives": 700,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 50,
+                "songs": [
+                    {
+                        "title": "独りんぼエンヴィー",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "シアワセうさぎ",
+                        "type": "std",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "HOT LIMIT",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "空回りライブラリ",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    }
+                ]
+            },
+            {
+                "courseName": "五段",
+                "totalLives": 700,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 50,
+                "songs": [
+                    {
+                        "title": "フリィダム ロリィタ",
+                        "type": "std",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "でらっくmaimai♪てんてこまい!",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "まっすぐ→→→ストリーム！",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "蒼空に舞え、墨染の桜",
+                        "type": "std",
+                        "difficulty": "expert"
+                    }
+                ]
+            },
+            {
+                "courseName": "六段",
+                "totalLives": 700,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 50,
+                "songs": [
+                    {
+                        "title": "ULTRA SYNERGY MATRIX",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "終点",
+                        "type": "std",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "超最終鬼畜妹フランドール・S",
+                        "type": "dx",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "約束",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "七段",
+                "totalLives": 700,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 50,
+                "songs": [
+                    {
+                        "title": "再会",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "アマツキツネ",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "エイリアンエイリアン",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "チルノのパーフェクトさんすう教室",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "八段",
+                "totalLives": 700,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 20,
+                "songs": [
+                    {
+                        "title": "アンビバレンス",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "ミラクルペイント",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "パラドクスイヴ",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "進め！イッスン軍団 -Rebellion of the Dwarfs-",
+                        "type": "std",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "九段",
+                "totalLives": 800,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 30,
+                "songs": [
+                    {
+                        "title": "ウルトラトレーラー",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "snooze",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Little \"Sister\" Bitch",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Comet Panto Men!",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "十段",
+                "totalLives": 900,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 2,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 30,
+                "songs": [
+                    {
+                        "title": "頓珍漢の宴",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "LiftOff",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Yakumo >>JOINT STRUGGLE (2019 Update)",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Caliburne ～Story of the Legendary sword～",
+                        "type": "std",
+                        "difficulty": "master"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "真段位認定",
+        "course": [
+            {
+                "courseName": "真初段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "STARTLINER",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "乙女解剖",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "華鳥風月",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Streak",
+                        "type": "std",
+                        "difficulty": "expert"
+                    }
+                ]
+            },
+            {
+                "courseName": "真二段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "さくゆいたいそう",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "にっこり^^調査隊のテーマ",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "脳漿炸裂ガール",
+                        "type": "std",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "宿題が終わらないっ！",
+                        "type": "std",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "真三段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "ネガティブ進化論",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "うぇいびー",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "System “Z”",
+                        "type": "std",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "橙の幻想郷音頭",
+                        "type": "std",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "真四段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "フィクサー",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Bad Apple!! feat.nomico (Tetsuya Komuro Remix)",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "怒槌",
+                        "type": "std",
+                        "difficulty": "expert"
+                    },
+                    {
+                        "title": "Garden Of The Dragon",
+                        "type": "std",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "真五段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "Splash Dance!!",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "ULTRA POWER",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "ありふれたせかいせいふく",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "HANIPAGANDA",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "真六段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "The Cursed Doll",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "M@GICAL☆CURE! LOVE ♥ SHOT!",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "レーイレーイ",
+                        "type": "dx",
+                        "difficulty": "remaster"
+                    },
+                    {
+                        "title": "疾走あんさんぶる",
+                        "type": "std",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "真七段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "Never Give Up!",
+                        "type": "dx",
+                        "difficulty": "remaster"
+                    },
+                    {
+                        "title": "六兆年と一夜物語",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "星見草",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Armageddon",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "真八段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "Magical Paradox",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Sakura Fubuki",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Sun Dance",
+                        "type": "std",
+                        "difficulty": "remaster"
+                    },
+                    {
+                        "title": "砂の函",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "真九段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "NAGAREBOSHI☆ROCKET",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Xevel",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "有明/Ariake",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "FFT",
+                        "type": "std",
+                        "difficulty": "remaster"
+                    }
+                ]
+            },
+            {
+                "courseName": "真十段",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 10,
+                "songs": [
+                    {
+                        "title": "AMABIE",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "ガラテアの螺旋",
+                        "type": "std",
+                        "difficulty": "remaster"
+                    },
+                    {
+                        "title": "Apollo",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "Divide et impera!",
+                        "type": "dx",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "真皆伝",
+                "totalLives": 50,
+                "lifeLossPerJudgement": {
+                    "great": 2,
+                    "good": 3,
+                    "miss": 5
+                },
+                "lifeRecoveryPerSong": 5,
+                "songs": [
+                    {
+                        "title": "Customized Justice",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "the EmpErroR",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "躯樹の墓守",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "PANDORA PARADOXXX",
+                        "type": "std",
+                        "difficulty": "master"
+                    }
+                ]
+            },
+            {
+                "courseName": "裏皆伝",
+                "totalLives": 10,
+                "lifeLossPerJudgement": {
+                    "great": 1,
+                    "good": 3,
+                    "miss": 10
+                },
+                "lifeRecoveryPerSong": 0,
+                "songs": [
+                    {
+                        "title": "PANDORA PARADOXXX",
+                        "type": "std",
+                        "difficulty": "remaster"
+                    },
+                    {
+                        "title": "World's end BLACKBOX",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "raputa",
+                        "type": "dx",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "系ぎて",
+                        "type": "dx",
+                        "difficulty": "remaster"
+                    }
+                ]
+            }
+        ]
+    }
+]
