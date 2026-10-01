@@ -23,7 +23,7 @@
                         "difficulty": "basic"
                     },
                     {
-                        "title": "物凄いヴァイブスで魔理沙が物凄いラップ",
+                        "title": "ゆけむり魂温泉 II",
                         "type": "dx",
                         "difficulty": "basic"
                     },
@@ -45,22 +45,22 @@
                 "lifeRecoveryPerSong": 20,
                 "songs": [
                     {
-                        "title": "唱",
+                        "title": "もういいよ",
                         "type": "dx",
                         "difficulty": "advanced"
                     },
                     {
-                        "title": "ゆけむり魂温泉 II",
+                        "title": "Witches night",
                         "type": "dx",
                         "difficulty": "advanced"
                     },
                     {
-                        "title": "寝起きヤシの木",
+                        "title": "Worlders",
                         "type": "dx",
                         "difficulty": "advanced"
                     },
                     {
-                        "title": "Trust",
+                        "title": "コンティニュー！ feat. 藍月なくる",
                         "type": "dx",
                         "difficulty": "advanced"
                     }
@@ -77,12 +77,12 @@
                 "lifeRecoveryPerSong": 50,
                 "songs": [
                     {
-                        "title": "さよならヒストリー",
-                        "type": "dx",
+                        "title": "蒼空に舞え、墨染の桜",
+                        "type": "std",
                         "difficulty": "advanced"
                     },
                     {
-                        "title": "きゅびずむ",
+                        "title": "死ぬな！",
                         "type": "dx",
                         "difficulty": "advanced"
                     },
@@ -109,7 +109,7 @@
                 "lifeRecoveryPerSong": 50,
                 "songs": [
                     {
-                        "title": "酔いどれ知らず",
+                        "title": "独りんぼエンヴィー",
                         "type": "dx",
                         "difficulty": "expert"
                     },
@@ -119,13 +119,13 @@
                         "difficulty": "expert"
                     },
                     {
-                        "title": "愛包ダンスホール",
+                        "title": "HOT LIMIT",
                         "type": "dx",
                         "difficulty": "expert"
                     },
                     {
-                        "title": "ウミユリ海底譚",
-                        "type": "std",
+                        "title": "空回りライブラリ",
+                        "type": "dx",
                         "difficulty": "expert"
                     }
                 ]
@@ -141,7 +141,7 @@
                 "lifeRecoveryPerSong": 50,
                 "songs": [
                     {
-                        "title": "踊れオーケストラ",
+                        "title": "フリィダム ロリィタ",
                         "type": "std",
                         "difficulty": "expert"
                     },
@@ -156,8 +156,8 @@
                         "difficulty": "expert"
                     },
                     {
-                        "title": "インターネットサバイバー",
-                        "type": "dx",
+                        "title": "蒼空に舞え、墨染の桜",
+                        "type": "std",
                         "difficulty": "expert"
                     }
                 ]
@@ -178,13 +178,13 @@
                         "difficulty": "expert"
                     },
                     {
-                        "title": "初音ミクの激唱",
+                        "title": "終点",
                         "type": "std",
                         "difficulty": "expert"
                     },
                     {
-                        "title": "Scream out! -maimai SONIC WASHER Edit-",
-                        "type": "std",
+                        "title": "超最終鬼畜妹フランドール・S",
+                        "type": "dx",
                         "difficulty": "expert"
                     },
                     {
@@ -210,17 +210,17 @@
                         "difficulty": "master"
                     },
                     {
-                        "title": "雨とペトラ",
+                        "title": "アマツキツネ",
                         "type": "dx",
                         "difficulty": "master"
                     },
                     {
-                        "title": "LOVE EAST",
+                        "title": "エイリアンエイリアン",
                         "type": "std",
                         "difficulty": "master"
                     },
                     {
-                        "title": "ラヴィ",
+                        "title": "チルノのパーフェクトさんすう教室",
                         "type": "dx",
                         "difficulty": "master"
                     }
@@ -242,18 +242,18 @@
                         "difficulty": "master"
                     },
                     {
-                        "title": "ナイト・オブ・ナイツ",
+                        "title": "Catch Me If You Can",
                         "type": "dx",
                         "difficulty": "master"
                     },
                     {
-                        "title": "隠密あんみつDX",
+                        "title": "パラドクスイヴ",
                         "type": "dx",
                         "difficulty": "master"
                     },
                     {
-                        "title": "きゅうくらりん",
-                        "type": "dx",
+                        "title": "進め！イッスン軍団 -Rebellion of the Dwarfs-",
+                        "type": "std",
                         "difficulty": "master"
                     }
                 ]
@@ -274,18 +274,18 @@
                         "difficulty": "master"
                     },
                     {
-                        "title": "energy trixxx",
+                        "title": "snooze",
                         "type": "dx",
                         "difficulty": "master"
                     },
                     {
-                        "title": "ゆけむり魂温泉 II",
+                        "title": "Little \"Sister\" Bitch",
                         "type": "dx",
                         "difficulty": "master"
                     },
                     {
-                        "title": "GEMINI -M-",
-                        "type": "std",
+                        "title": "Comet Panto Men!",
+                        "type": "dx",
                         "difficulty": "master"
                     }
                 ]
@@ -301,17 +301,17 @@
                 "lifeRecoveryPerSong": 30,
                 "songs": [
                     {
-                        "title": "人生リセットボタン",
+                        "title": "頓珍漢の宴",
                         "type": "std",
                         "difficulty": "master"
                     },
                     {
-                        "title": "Ether Second",
+                        "title": "LiftOff",
                         "type": "dx",
                         "difficulty": "master"
                     },
                     {
-                        "title": "taboo tears you up",
+                        "title": "Yakumo >>JOINT STRUGGLE (2019 Update)",
                         "type": "dx",
                         "difficulty": "master"
                     },
@@ -343,13 +343,13 @@
                         "difficulty": "master"
                     },
                     {
-                        "title": "つるぺったん",
+                        "title": "乙女解剖",
                         "type": "dx",
                         "difficulty": "master"
                     },
                     {
-                        "title": "ももいろの鍵",
-                        "type": "dx",
+                        "title": "華鳥風月",
+                        "type": "std",
                         "difficulty": "master"
                     },
                     {
@@ -370,12 +370,12 @@
                 "lifeRecoveryPerSong": 10,
                 "songs": [
                     {
-                        "title": "ロールプレイングゲーム",
-                        "type": "std",
+                        "title": "さくゆいたいそう",
+                        "type": "dx",
                         "difficulty": "master"
                     },
                     {
-                        "title": "響け！CHIREI MY WAY!",
+                        "title": "にっこり^^調査隊のテーマ",
                         "type": "dx",
                         "difficulty": "master"
                     },
@@ -385,8 +385,8 @@
                         "difficulty": "expert"
                     },
                     {
-                        "title": "アスノヨゾラ哨戒班",
-                        "type": "dx",
+                        "title": "宿題が終わらないっ！",
+                        "type": "std",
                         "difficulty": "master"
                     }
                 ]
@@ -407,8 +407,8 @@
                         "difficulty": "master"
                     },
                     {
-                        "title": "Money Money",
-                        "type": "std",
+                        "title": "うぇいびー",
+                        "type": "dx",
                         "difficulty": "master"
                     },
                     {
@@ -417,7 +417,7 @@
                         "difficulty": "expert"
                     },
                     {
-                        "title": "アンノウン・マザーグース",
+                        "title": "橙の幻想郷音頭",
                         "type": "std",
                         "difficulty": "master"
                     }
@@ -444,7 +444,7 @@
                         "difficulty": "master"
                     },
                     {
-                        "title": "ねぇ、壊れタ人形ハ何処へ棄テらレるノ？",
+                        "title": "怒槌",
                         "type": "std",
                         "difficulty": "expert"
                     },
@@ -466,7 +466,7 @@
                 "lifeRecoveryPerSong": 10,
                 "songs": [
                     {
-                        "title": "響縁",
+                        "title": "Splash Dance!!",
                         "type": "dx",
                         "difficulty": "master"
                     },
@@ -481,7 +481,7 @@
                         "difficulty": "master"
                     },
                     {
-                        "title": "Everybody Say HARDCORE TANO*C",
+                        "title": "HANIPAGANDA",
                         "type": "dx",
                         "difficulty": "master"
                     }
@@ -498,22 +498,22 @@
                 "lifeRecoveryPerSong": 10,
                 "songs": [
                     {
-                        "title": "ダーリンダンス",
+                        "title": "The Cursed Doll",
                         "type": "dx",
                         "difficulty": "master"
                     },
                     {
-                        "title": "Ultimate taste",
+                        "title": "M@GICAL☆CURE! LOVE ♥ SHOT!",
                         "type": "dx",
                         "difficulty": "master"
                     },
                     {
                         "title": "レーイレーイ",
                         "type": "dx",
-                        "difficulty": "master"
+                        "difficulty": "remaster"
                     },
                     {
-                        "title": "DO RORO DERODERO ON DO RORO",
+                        "title": "疾走あんさんぶる",
                         "type": "std",
                         "difficulty": "master"
                     }
@@ -535,12 +535,12 @@
                         "difficulty": "remaster"
                     },
                     {
-                        "title": "夜咄ディセイブ",
+                        "title": "六兆年と一夜物語",
                         "type": "std",
                         "difficulty": "master"
                     },
                     {
-                        "title": "ウタヒメナイトストーム",
+                        "title": "星見草",
                         "type": "dx",
                         "difficulty": "master"
                     },
@@ -562,8 +562,8 @@
                 "lifeRecoveryPerSong": 10,
                 "songs": [
                     {
-                        "title": "アマノジャクリバース feat. ｙｔｒ",
-                        "type": "std",
+                        "title": "Magical Paradox",
+                        "type": "dx",
                         "difficulty": "master"
                     },
                     {
@@ -577,8 +577,8 @@
                         "difficulty": "remaster"
                     },
                     {
-                        "title": "脳漿炸裂ガール",
-                        "type": "std",
+                        "title": "砂の函",
+                        "type": "dx",
                         "difficulty": "master"
                     }
                 ]
@@ -599,19 +599,19 @@
                         "difficulty": "master"
                     },
                     {
-                        "title": "Energizing Flame",
+                        "title": "Xevel",
+                        "type": "std",
+                        "difficulty": "master"
+                    },
+                    {
+                        "title": "有明/Ariake",
                         "type": "dx",
                         "difficulty": "master"
                     },
                     {
-                        "title": "Panopticon",
+                        "title": "FFT",
                         "type": "std",
                         "difficulty": "remaster"
-                    },
-                    {
-                        "title": "Falsum Atlantis.",
-                        "type": "dx",
-                        "difficulty": "master"
                     }
                 ]
             },
@@ -626,7 +626,7 @@
                 "lifeRecoveryPerSong": 10,
                 "songs": [
                     {
-                        "title": "Yorugao",
+                        "title": "AMABIE",
                         "type": "dx",
                         "difficulty": "master"
                     },
@@ -636,13 +636,13 @@
                         "difficulty": "remaster"
                     },
                     {
-                        "title": "康莊大道",
+                        "title": "Apollo",
                         "type": "dx",
                         "difficulty": "master"
                     },
                     {
-                        "title": "larva",
-                        "type": "std",
+                        "title": "Divide et impera!",
+                        "type": "dx",
                         "difficulty": "master"
                     }
                 ]
@@ -651,20 +651,20 @@
                 "courseName": "真皆伝",
                 "totalLives": 50,
                 "lifeLossPerJudgement": {
-                    "great": 1,
+                    "great": 2,
                     "good": 3,
-                    "miss": 10
+                    "miss": 5
                 },
                 "lifeRecoveryPerSong": 5,
                 "songs": [
                     {
-                        "title": "SILENT BLUE",
-                        "type": "std",
+                        "title": "Customized Justice",
+                        "type": "dx",
                         "difficulty": "master"
                     },
                     {
-                        "title": "氷滅の135小節",
-                        "type": "dx",
+                        "title": "the EmpErroR",
+                        "type": "std",
                         "difficulty": "master"
                     },
                     {
@@ -673,8 +673,8 @@
                         "difficulty": "master"
                     },
                     {
-                        "title": "宙天",
-                        "type": "dx",
+                        "title": "PANDORA PARADOXXX",
+                        "type": "std",
                         "difficulty": "master"
                     }
                 ]
