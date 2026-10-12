@@ -65,7 +65,6 @@
             window.postMessage({ type: "gate" + no, payload: json }, '*');
         });
     };
-    $('extra').html(createCreditSection());
     let detailData = null;
     // 接到message事件(從maimai-net收到資料)
     $(window).on('message', (event) => {

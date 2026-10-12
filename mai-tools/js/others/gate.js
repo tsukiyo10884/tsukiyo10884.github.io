@@ -1,107 +1,47 @@
-const showGateData = (data) => {
-    if (data.type === 'gate1') {
-        const gate = data.payload;
-        const res = []
-        gate.keySongs.forEach(song => {
-            const songEntry = detailData.songs.find(s => s.songId === song.title);
-            res.push(createKeySongCard({
-                title: song.title,
-                type: 'dx',
-                image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
-            }, {
-                isCompleted: song.songLastPlayedDate > (data.domain === 'jp' ? '2024/09/12' : '2025/01/16')
-            }));
-        });
-
-        const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
-        $('#gate').html([headerImg, gate.gateImgHTML].join(''));
-        $('#map').html([`
+// 共用：區塊標題
+const gateSectionTitle = (title) => `
                 <div class="col-12 d-flex align-items-center my-3">
                     <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Gate</b>
+                        <b class="px-3 section-divider-title">${title}</b>
                     <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4">青門發現條件：走完地圖「スカイストリートちほー6」</div>
+                </div>`;
+
+// 共用：門的圖片
+const renderGateHeader = (gate) => {
+    const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
+    $('#gate').html([headerImg, gate.gateImgHTML].join(''));
+};
+
+// 共用：地圖與發現條件
+const renderGateMap = (condition, gate) => {
+    $('#map').html([`
+                ${gateSectionTitle('Gate')}
+                <div class="d-flex justify-content-center mb-4">${condition}</div>
             `, gate.mapHTML].join(''));
-        $('#song-table').html(`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Key</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="mb-4 text-center">青鑰匙獲得條件：在青門開放後(日版:2024年9月12日 | 國際版:2025年1月16日)，打過所有青春區域的歌曲<br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
-                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
-                    ${res.join('')}
-                </div>
-            ` );
-    }
-    else if (data.type === 'gate2') {
-        const gate = data.payload;
-        const res = []
-        gate.keySongs.forEach(song => {
-            const songEntry = detailData.songs.find(s => s.songId === song.title);
-            res.push(createKeySongCard({
-                title: song.title,
-                type: 'dx',
-                image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
-            }));
-        });
+};
 
-        const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
-        $('#gate').html([headerImg, gate.gateImgHTML].join(''));
-        $('#map').html([`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Gate</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4">白門發現條件：走完地圖「天界ちほー8」</div>
-            `, gate.mapHTML].join(''));
-        $('#song-table').html(`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Key</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="mb-4 text-center">白鑰匙獲得條件：設定底板為「Latent Kingdom」的狀態下，一道內遊玩作曲家大国奏音的歌曲，該道內不可重複選曲，雙人時需遊玩4曲<br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
-                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
-                    ${res.join('')}
-                </div>
-            ` );
+const KEY_NOTE = '(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)';
 
-    }
-    else if (data.type === 'gate3') {
-        const gate = data.payload;
-        const res = []
-        gate.keySongs.forEach(song => {
-            const songEntry = detailData.songs.find(s => s.songId === song.title);
-            res.push(createKeySongCard({
-                title: song.title,
-                type: song.type,
-                image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
-            }));
-        });
-
-        const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
-        $('#gate').html([headerImg, gate.gateImgHTML].join(''));
-        $('#map').html([`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Gate</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4">紫門發現條件：走完地圖「BLACK ROSEちほー10」</div>
-            `, gate.mapHTML].join(''));
-        $('#song-table').html(`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Key</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="mb-4 text-center">紫鑰匙(國際版)獲得條件：<br>設定アウル（BLACK ROSEちほー)或アウル（BLACK ROSEちほー4)作為隊長的狀態下，一道內遊玩黑薔薇或言葉系列歌曲，該道內不可重複選曲，雙人時需遊玩4曲<br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
-                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
-                    ${res.join('')}
-                </div>
+// 以「鑰匙歌曲」為主的門(gate1~gate6)
+//   mapCondition: 發現條件 / keyCondition: 鑰匙獲得條件
+//   useSongType : 卡片是否使用歌曲本身的type(否則一律dx)
+//   completedAfter(domain): 遊玩日期晚於此日才算達成(不需要時省略)
+//   extraHTML   : 鑰匙歌曲之後額外顯示的內容
+const KEY_SONG_GATES = {
+    gate1: {
+        mapCondition: '青門發現條件：走完地圖「スカイストリートちほー6」',
+        keyCondition: `青鑰匙獲得條件：在青門開放後(日版:2024年9月12日 | 國際版:2025年1月16日)，打過所有青春區域的歌曲<br/>${KEY_NOTE}`,
+        completedAfter: (domain) => domain === 'jp' ? '2024/09/12' : '2025/01/16'
+    },
+    gate2: {
+        mapCondition: '白門發現條件：走完地圖「天界ちほー8」',
+        keyCondition: `白鑰匙獲得條件：設定底板為「Latent Kingdom」的狀態下，一道內遊玩作曲家大国奏音的歌曲，該道內不可重複選曲，雙人時需遊玩4曲<br/>${KEY_NOTE}`
+    },
+    gate3: {
+        mapCondition: '紫門發現條件：走完地圖「BLACK ROSEちほー10」',
+        keyCondition: `紫鑰匙(國際版)獲得條件：<br>設定アウル（BLACK ROSEちほー)或アウル（BLACK ROSEちほー4)作為隊長的狀態下，一道內遊玩黑薔薇或言葉系列歌曲，該道內不可重複選曲，雙人時需遊玩4曲<br/>${KEY_NOTE}`,
+        useSongType: true,
+        extraHTML: `
                 <div class="col-12 d-flex align-items-center my-3">
                     <div class="section-divider left"></div>
                         <b class="px-3 section-divider-title">Key(JP)</b>
@@ -113,116 +53,56 @@ const showGateData = (data) => {
                     URLに含まれる「factorial（階乗）」をヒントに、<br>
                     「21の階乗」を計算して、20ケタの数字<span style="color: rgb(255, 0, 0);">「51090942171709440000」<span style="color: rgb(0, 0, 0);">を得る。</span></span></td></tr> <tr style="height: 21px;"><td style="border-color: rgb(255, 255, 255); height: 21px; width: 5%; vertical-align: top;">5.</td> <td style="border-color: rgb(255, 255, 255); height: 21px; width: 95%; vertical-align: top;"><a href="https://maimaidx.jp/" target="_blank" rel="noopener">maimaiでらっくすNET</a> の「シリアルコード」のページに、上記の数字を入力する。</td></tr></tbody></table>
                 </div>
-            ` );
-
+            `
+    },
+    gate4: {
+        mapCondition: '黑門發現條件：走完地圖「メトロポリスちほー9」',
+        keyCondition: `黑鑰匙獲得條件：在黑門開放後(日版&國際版:2025年2月27日)，打過所有「KING of Performai 2019」～「KING of Performai The 6th」的maimai でらっくす部門中，線上預選(包含新增Re:MASTER譜面)、決賽課題(不含第6屆)及表演賽歌曲<br/>${KEY_NOTE}`,
+        completedAfter: () => '2025/02/27'
+    },
+    gate5: {
+        mapCondition: '黃門發現條件：走完地圖「なないろちほー」',
+        keyCondition: `黃鑰匙獲得條件：使用隨機選曲功能抽中「maimai でらっくす」至「maimai でらっくす PRiSM PLUS」之間任一版本的主題曲並遊玩一首(可在我的最愛抽)<br/>${KEY_NOTE}`
+    },
+    gate6: {
+        mapCondition: '紅門發現條件：走完地圖「ドラゴンちほー4」',
+        keyCondition: `紅鑰匙獲得條件：在紅門開放後(日版:2025年5月9日 | 國際版:2025年9月26日)，打過所有樂曲名稱中包含「ドラゴン」、「DRAGON」、「Dragon」或收錄於遊戲《人中之龍》系列的歌曲<br/>${KEY_NOTE}`,
+        useSongType: true,
+        completedAfter: (domain) => domain === 'jp' ? '2025/05/09' : '2025/09/26'
     }
-    else if (data.type === 'gate4') {
-        const gate = data.payload;
-        const res = []
-        gate.keySongs.forEach(song => {
-            const songEntry = detailData.songs.find(s => s.songId === song.title);
-            res.push(createKeySongCard({
-                title: song.title,
-                type: 'dx',
-                image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
-            }, {
-                isCompleted: song.songLastPlayedDate > '2025/02/27'
-            }));
-        });
+};
 
-        const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
-        $('#gate').html([headerImg, gate.gateImgHTML].join(''));
-        $('#map').html([`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Gate</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4">黑門發現條件：走完地圖「メトロポリスちほー9」</div>
-            `, gate.mapHTML].join(''));
-        $('#song-table').html(`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Key</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="mb-4 text-center">黑鑰匙獲得條件：在黑門開放後(日版&國際版:2025年2月27日)，打過所有「KING of Performai 2019」～「KING of Performai The 6th」的maimai でらっくす部門中，線上預選(包含新增Re:MASTER譜面)、決賽課題(不含第6屆)及表演賽歌曲
-                    <br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
-                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
-                    ${res.join('')}
-                </div>
-            ` );
-    }
-    else if (data.type === 'gate5') {
-        const gate = data.payload;
-        const res = []
-        gate.keySongs.forEach(song => {
-            const songEntry = detailData.songs.find(s => s.songId === song.title);
-            res.push(createKeySongCard({
-                title: song.title,
-                type: 'dx',
-                image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
-            }));
-        });
+const showKeySongGate = (data, config) => {
+    const gate = data.payload;
+    const cards = gate.keySongs.map(song => {
+        const songEntry = detailData.songs.find(s => s.songId === song.title);
+        const card = {
+            title: song.title,
+            type: config.useSongType ? song.type : 'dx',
+            image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
+        };
+        const options = config.completedAfter
+            ? { isCompleted: song.songLastPlayedDate > config.completedAfter(gate.domain ?? data.domain) }
+            : {};
+        return createKeySongCard(card, options);
+    });
 
-        const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
-        $('#gate').html([headerImg, gate.gateImgHTML].join(''));
-        $('#map').html([`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Gate</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4">黃門發現條件：走完地圖「なないろちほー」</div>
-            `, gate.mapHTML].join(''));
-        $('#song-table').html(`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Key</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="mb-4 text-center">黃鑰匙獲得條件：使用隨機選曲功能抽中「maimai でらっくす」至「maimai でらっくす PRiSM PLUS」之間任一版本的主題曲並遊玩一首(可在我的最愛抽)<br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
+    renderGateHeader(gate);
+    renderGateMap(config.mapCondition, gate);
+    $('#song-table').html(`
+                ${gateSectionTitle('Key')}
+                <div class="mb-4 text-center">${config.keyCondition}</div>
                 <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
-                    ${res.join('')}
+                    ${cards.join('')}
                 </div>
-            ` );
-    }
-    else if (data.type === 'gate6') {
-        const gate = data.payload;
-        const res = []
-        gate.keySongs.forEach(song => {
-            const songEntry = detailData.songs.find(s => s.songId === song.title);
-            res.push(createKeySongCard({
-                title: song.title,
-                type: song.type,
-                image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`
-            }, {
-                isCompleted: song.songLastPlayedDate > (data.domain === 'jp' ? '2025/05/09' : '2025/09/26')
-            }));
-        });
+                ${config.extraHTML ?? ''}
+            `);
+};
 
-        const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
-        $('#gate').html([headerImg, gate.gateImgHTML].join(''));
-        $('#map').html([`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Gate</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4">紅門發現條件：走完地圖「ドラゴンちほー4」</div>
-            `, gate.mapHTML].join(''));
-        $('#song-table').html(`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Key</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="mb-4 text-center">紅鑰匙獲得條件：在紅門開放後(日版:2025年5月9日 | 國際版:2025年9月26日)，打過所有樂曲名稱中包含「ドラゴン」、「DRAGON」、「Dragon」或收錄於遊戲《人中之龍》系列的歌曲
-                    <br/>(任意難度、不限成績、可跳過，不可宴譜面、不可用段位認定模式)</div>
-                <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
-                    ${res.join('')}
-                </div>
-            ` );
+const showGateData = (data) => {
+    const keySongGate = KEY_SONG_GATES[data.type];
+    if (keySongGate) {
+        showKeySongGate(data, keySongGate);
     }
     else if (data.type === 'gate7') {
         const gate = data.payload;
@@ -236,16 +116,8 @@ const showGateData = (data) => {
                 `)
         })
 
-        const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
-        $('#gate').html([headerImg, gate.gateImgHTML].join(''));
-        $('#map').html([`
-                <div class="col-12 d-flex align-items-center my-3">
-                    <div class="section-divider left"></div>
-                        <b class="px-3 section-divider-title">Gate</b>
-                    <div class="section-divider right"></div>
-                </div>
-                <div class="d-flex justify-content-center mb-4">PRiSM塔發現條件：走完地圖「7sRefちほー4」</div>
-            `, gate.mapHTML].join(''));
+        renderGateHeader(gate);
+        renderGateMap('PRiSM塔發現條件：走完地圖「7sRefちほー4」', gate);
         $('#song-table').html(`
                 <div class="col-12 d-flex align-items-center my-3">
                     <div class="section-divider left"></div>
@@ -263,8 +135,7 @@ const showGateData = (data) => {
     }
     else if (data.type === 'gate9') {
         const gate = data.payload;
-        const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
-        $('#gate').html([headerImg, gate.gateImgHTML].join(''));
+        renderGateHeader(gate);
 
         $('#song-table').html(`
                 <div class="col-12 d-flex align-items-center my-3">
@@ -311,8 +182,7 @@ const showGateData = (data) => {
     }
     else if (data.type === 'gate10') {
         const gate = data.payload;
-        const headerImg = gate.headerImg ? `<div class="d-flex justify-content-center"><img src="${gate.headerImg}" alt="Header Image"></div>` : '';
-        $('#gate').html([headerImg, gate.gateImgHTML].join(''));
+        renderGateHeader(gate);
 
         $('#song-table').html(`
                 <div class="col-12 d-flex align-items-center my-3">
@@ -355,9 +225,9 @@ const createKeySongCard = (song, {
     isCompleted = null,
 } = {}) => {
     return `
-        <div class="square-song-card ${isCompleted === true ? 'completed' : ''} deg${Math.floor(Math.random() * 5)}" 
-                onclick="showSongDetail('${song.title}', '${song.type}')">
-            <img src=${song.image} class="square-song-image" alt="${song.title}">
+        <div class="square-song-card ${isCompleted === true ? 'completed' : ''} deg${Math.floor(Math.random() * 5)}"
+                ${songClickAttrs(song)}>
+            <img src="${song.image}" class="square-song-image" alt="${escapeHtml(song.title)}">
             <div class="song-overlay"></div>
             <div class="square-song-info-block">
                 <div class="song-content text-shadow-black square-song-title">${song.title}</div>
