@@ -209,15 +209,7 @@ $(document).on('show.bs.collapse hide.bs.collapse', '.collapse', function (event
 
 // 建立歌卡
 const createNamePlateSongCard = (song, type) => {
-    const isCompleted = {
-        '極': () => song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp,
-        '将': () => parseFloat(song.score) >= 100,
-        '神': () => song.ap || song.app,
-        '舞舞': () => song.fdx,
-        '覇者': () => parseFloat(song.score.replace('%', '')) >= 80
-    }[type]();
-
-    return createSquareSongCard(song, { isCompleted: isCompleted });
+    return createSquareSongCard(song, { isCompleted: isPlateCompleted(song, type) });
 }
 
 // 計算各難度的達成數量

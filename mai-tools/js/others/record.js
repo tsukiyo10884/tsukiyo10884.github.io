@@ -1,11 +1,12 @@
 
-const showRatingChart = async (id=null) => {
+const showRatingChart = async () => {
     const filteredData = recordData.filter((item, index, arr) => index === recordData.length - 1 || (arr[index + 1] != null && item.rating !== arr[index + 1].rating));
     const labels = filteredData.map(e => e.date.toLocaleString());
     const ratings = filteredData.map(e => e.rating);
     const pointColors = ratings.map((_, i) => i === 0 ? 'white' : '#0b4670');
     const ctx = document.getElementById('rating-chart').getContext('2d');
 
+    Chart.defaults.color = '#203844';
     new Chart(ctx, {
         type: 'line',
         data: {
@@ -56,9 +57,7 @@ const showRatingChart = async (id=null) => {
                     display: false
                 },
                 datalabels: {
-                    formatter: (value, ctx) => {
-                        return value.toLocaleString();
-                    },
+                    formatter: (value) => value.toLocaleString(),
                     color: (ctx) => ctx.dataIndex === 0 ? 'red' : '#0b4670',
                     align: (ctx) => ctx.dataIndex === 0 ? 'right' : 'bottom',
                     offset: 2,
@@ -82,9 +81,12 @@ const showRatingChart = async (id=null) => {
         },
         plugins: [ChartDataLabels]
     });
-    Chart.defaults.color = '#203844';
     ctx.canvas.style.backgroundColor = '#ffffff';
 }
+
+// 定數(尚未有定數的曲子是'?'開頭，原樣顯示)
+const formatRecordLevel = (internalLevel) =>
+    internalLevel.toString().includes('?') ? internalLevel : Number.parseFloat(internalLevel).toFixed(1);
 
 // 歌曲詳細資料
 const showSongRecord = () => {
@@ -138,7 +140,7 @@ const showSongRecord = () => {
         $("#song-table").append(`
             <tr class="tr-${song.difficulty} toggle-row text-white" data-id="${index}" onclick="toggleRecordDetails(${index})">
                 <td><img src="${song.image}" width="30"></td>
-                <td><span class="text-drop-shadow">${song.internalLevel.toString().includes('?') ? song.internalLevel : Number.parseFloat(song.internalLevel).toFixed(1)}</span></td>
+                <td><span class="text-drop-shadow">${formatRecordLevel(song.internalLevel)}</span></td>
                 <td class="text-start"><span class="text-drop-shadow"><span class="song-tag">${(song.difficulty == "utage" ? song.title.substring(0, 3) : "[" + song.type.toUpperCase() + "]")}</span> ${song.difficulty == "utage" ? song.title.substring(3, song.title.length) : song.title}</span></td>
                 <td class="text-end"><span class="text-drop-shadow">${song.score_new_record ? ' <span class="new-record">NEW!</span>' : ''}${song.score}</span></td>
                 <td class="text-end"><span class="text-drop-shadow">${song.dx_score_new_record ? '<span class="new-record">NEW!</span>' : ''}${song.dx_score}</span></td>
@@ -171,7 +173,7 @@ const renderRecordDetails = (song) => {
                 <img src="${song.image}" alt="${song.title}" width="120">
                 <div>
                     <div><strong>${song.difficulty == "utage" ? song.title.substring(3, song.title.length) : song.title}</strong></div>
-                    <div>${song.internalLevel.toString().includes('?') ? song.internalLevel : Number.parseFloat(song.internalLevel).toFixed(1)} | ${song.difficulty == "utage" ? song.title.substring(1, 2) : song.type.toUpperCase()}</div>
+                    <div>${formatRecordLevel(song.internalLevel)} | ${song.difficulty == "utage" ? song.title.substring(1, 2) : song.type.toUpperCase()}</div>
                 </div>
             </div>
 
@@ -238,10 +240,11 @@ const createDateButtons = (dates) => {
     const $dateButtonGroup = $('#date-button-group');
     $dateButtonGroup.empty();
     $dateButtonGroup.append('<span class="me-2 align-self-center">遊玩日期：</span>');
-    dates.forEach(date => {
+    dates.forEach((date, i) => {
+        const id = `date-filter-${i}`;
         const $button = $(`
-            <input type="checkbox" name="date-filter" value="${date}" class="ms-2" onclick="showSongRecord()" checked>
-            <label for="${date}">${date}</label>`);
+            <input type="checkbox" id="${id}" name="date-filter" value="${date}" class="ms-2" onclick="showSongRecord()" checked>
+            <label for="${id}">${date}</label>`);
         $dateButtonGroup.append($button);
     });
 };

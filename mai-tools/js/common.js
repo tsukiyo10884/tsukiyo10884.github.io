@@ -1,8 +1,3 @@
-// 測試用
-const showTest = () => {
-    $('.test').removeClass('d-none');
-}
-
 // 成就對應門檻
 const SCORE_THRESHOLDS = [
     { name: 'clear', score: 80.00 },
@@ -81,95 +76,38 @@ const initUserInfo = () => {
     $('#div-user-class-rank-text span').text(classRankText);
 }
 
+// 段位名稱(初段~十段)
+const DAN_NAMES = ['初段', '二段', '三段', '四段', '五段', '六段', '七段', '八段', '九段', '十段'];
+
 // 段位的圖片編號對應段位名稱
-const getProfileCourseText = (courseRankText) => {
-    switch (courseRankText) {
-        case "00": return "初心者";
-        case "01": return "初段";
-        case "02": return "二段";
-        case "03": return "三段";
-        case "04": return "四段";
-        case "05": return "五段";
-        case "06": return "六段";
-        case "07": return "七段";
-        case "08": return "八段";
-        case "09": return "九段";
-        case "10": return "十段";
-        case "12": return "真初段";
-        case "13": return "真二段";
-        case "14": return "真三段";
-        case "15": return "真四段";
-        case "16": return "真五段";
-        case "17": return "真六段";
-        case "18": return "真七段";
-        case "19": return "真八段";
-        case "20": return "真九段";
-        case "21": return "真十段";
-        case "22": return "真皆伝";
-        case "23": return "裏皆伝";
-    }
-}
+const PROFILE_COURSE_TEXT = {
+    '00': '初心者',
+    ...Object.fromEntries(DAN_NAMES.map((name, i) => [String(i + 1).padStart(2, '0'), name])),
+    ...Object.fromEntries(DAN_NAMES.map((name, i) => [String(i + 12), `真${name}`])),
+    '22': '真皆伝',
+    '23': '裏皆伝'
+};
+const getProfileCourseText = (courseRankText) => PROFILE_COURSE_TEXT[courseRankText];
 
-// class的圖片編號對應class名稱
-const getProfileClassText = (classRankText) => {
-    switch (classRankText) {
-        case "00": return "B5";
-        case "01": return "B4";
-        case "02": return "B3";
-        case "03": return "B2";
-        case "04": return "B1";
-        case "05": return "A5";
-        case "06": return "A4";
-        case "07": return "A3";
-        case "08": return "A2";
-        case "09": return "A1";
-        case "10": return "S5";
-        case "11": return "S4";
-        case "12": return "S3";
-        case "13": return "S2";
-        case "14": return "S1";
-        case "15": return "SS5";
-        case "16": return "SS4";
-        case "17": return "SS3";
-        case "18": return "SS2";
-        case "19": return "SS1";
-        case "20": return "SSS5";
-        case "21": return "SSS4";
-        case "22": return "SSS3";
-        case "23": return "SSS2";
-        case "24": return "SSS1";
-        case "25": return "LEGEND";
-    }
-}
-
+// class的圖片編號(依序00~25)對應class名稱
+const PROFILE_CLASS_TEXT = Object.fromEntries([
+    'B5', 'B4', 'B3', 'B2', 'B1',
+    'A5', 'A4', 'A3', 'A2', 'A1',
+    'S5', 'S4', 'S3', 'S2', 'S1',
+    'SS5', 'SS4', 'SS3', 'SS2', 'SS1',
+    'SSS5', 'SSS4', 'SSS3', 'SSS2', 'SSS1',
+    'LEGEND'
+].map((name, i) => [String(i).padStart(2, '0'), name]));
+const getProfileClassText = (classRankText) => PROFILE_CLASS_TEXT[classRankText];
 
 // 段位認定的段位圖片編號對應段位名稱
-const getRecordCourseText = (courseRankText) => {
-    switch (courseRankText) {
-        case "1001": return "初段";
-        case "1002": return "二段";
-        case "1003": return "三段";
-        case "1004": return "四段";
-        case "1005": return "五段";
-        case "1006": return "六段";
-        case "1007": return "七段";
-        case "1008": return "八段";
-        case "1009": return "九段";
-        case "1010": return "十段";
-        case "1101": return "真初段";
-        case "1102": return "真二段";
-        case "1103": return "真三段";
-        case "1104": return "真四段";
-        case "1105": return "真五段";
-        case "1106": return "真六段";
-        case "1107": return "真七段";
-        case "1108": return "真八段";
-        case "1109": return "真九段";
-        case "1110": return "真十段";
-        case "1121": return "真皆伝";
-        case "1122": return "裏皆伝";
-    }
-}
+const RECORD_COURSE_TEXT = {
+    ...Object.fromEntries(DAN_NAMES.map((name, i) => [String(1001 + i), name])),
+    ...Object.fromEntries(DAN_NAMES.map((name, i) => [String(1101 + i), `真${name}`])),
+    '1121': '真皆伝',
+    '1122': '裏皆伝'
+};
+const getRecordCourseText = (courseRankText) => RECORD_COURSE_TEXT[courseRankText];
 
 // 顯示對應功能
 const showTable = async (mode) => {
@@ -223,41 +161,23 @@ const bindCompletionEventListeners = () => {
 
 // 重新處理現在的資料
 const handleFilterChange = () => {
-    const now = $('#now-title').text().trim();
-    const mode = now.split('|')[0];
+    const [mode, ...args] = $('#now-title').text().trim().split('|');
     if (mode === 'plate') {
-        const plateName = now.split('|')[1];
-        const type = now.split('|')[2];
-        const versionName = now.split('|')[3];
+        const [plateName, type, versionName] = args;
         showPlateProgress(versionName, plateName === '覇' ? '覇者' : type, plateName === '覇' ? '' : plateName);
     } else if (mode === 'level') {
-        $('#level-start').val(now.split('|')[1]);
-        $('#level-end').val(now.split('|')[2]);
         showLevelListByRange();
     } else if (mode === 'suggestion') {
-        const displayLevel = now.split('|')[1];
-        const versionTitle = now.split('|')[2];
-        let isNewVersion = null;
-        let gainChart = null;
-
-        if (displayLevel === 'all') {
-            if (versionTitle !== '不分新舊') {
-                isNewVersion = versionTitle === '新曲';
-            }
-        }
-        if (versionTitle !== '不分新舊') {
-            isNewVersion = versionTitle === '新曲';
-            gainChart = findMatchingSuggestion(displayLevel, isNewVersion);
-        } else {
-            gainChart = findMatchingSuggestion(displayLevel, null);
-        }
+        const [displayLevel, versionTitle] = args;
+        const isNewVersion = versionTitle === '不分新舊' ? null : versionTitle === '新曲';
+        const gainChart = findMatchingSuggestion(displayLevel, isNewVersion);
 
         const $songGrid = createSuggestionSongCard(gainChart, isNewVersion);
         $('#song-table').find('.square-song-grid').replaceWith($songGrid);
     } else if (mode === 'rating') {
         initRatingList();
     } else if (mode === 'course') {
-        showCourseProgress(now.split('|')[1]);
+        showCourseProgress(args[0]);
     }
 };
 
@@ -276,6 +196,18 @@ const getTargetVersions = () => {
     return versionOrder.slice(-2);
 };
 
+// 歌曲是否達成該名牌條件
+const isPlateCompleted = (song, plate) => {
+    switch (plate) {
+        case '極': return !!(song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp);
+        case '将': return parseFloat(song.score) >= 100;
+        case '神': return !!(song.ap || song.app);
+        case '舞舞': return !!song.fdx;
+        case '覇者': return parseFloat(song.score.replace('%', '')) >= 80;
+        default: return false;
+    }
+};
+
 // 過濾歌曲
 const songFilter = (songs, {
     isNewVersion = null,
@@ -289,44 +221,24 @@ const songFilter = (songs, {
     plate = null
 } = {}) => {
     let result = songs;
+    // 日版與國際版的版本欄位不同
+    const versionField = $('#version-switch').is(':checked') ? 'versionJapan' : 'versionInternational';
 
-    if (isNewVersion !== null && $('#version-switch').is(':checked')) {
+    if (isNewVersion !== null) {
         const targetVersions = getTargetVersions();
-        result = result.filter(x => targetVersions.includes(x.versionJapan) === isNewVersion);
-    } else if (isNewVersion !== null) {
-        const targetVersions = getTargetVersions();
-        result = result.filter(x => targetVersions.includes(x.versionInternational) === isNewVersion);
+        result = result.filter(x => targetVersions.includes(x[versionField]) === isNewVersion);
     }
     if (plate !== null) {
-        result = result.filter(song => {
-            switch (plate) {
-                case '極': return song.fc || song.fcp || song.ap || song.app || song.fs || song.fsp || song.fdx || song.fdxp;
-                case '将': return parseFloat(song.score) > 100;
-                case '神': return song.ap || song.app;
-                case '舞舞': return song.fdx;
-                case '覇者': return parseFloat(song.score.replace('%', '')) >= 80;
-                default: return false;
-            }
-        });
+        result = result.filter(song => isPlateCompleted(song, plate));
     }
     if (minLevel !== null && maxLevel !== null) {
-        result = result.filter(song => {
-            return song.internalLevel >= minLevel && song.internalLevel <= maxLevel;
-        });
+        result = result.filter(song => song.internalLevel >= minLevel && song.internalLevel <= maxLevel);
     }
-    if (version !== null && $('#version-switch').is(':checked')) {
-        result = result.filter(x => x.versionJapan === version);
-    } else if (version !== null) {
-        result = result.filter(x => x.versionInternational === version);
+    if (version !== null) {
+        result = result.filter(x => x[versionField] === version);
     }
 
-    const filters = {
-        type,
-        title,
-        difficulty,
-        internalLevel
-    };
-
+    const filters = { type, title, difficulty, internalLevel };
     for (const [key, value] of Object.entries(filters)) {
         if (value !== null) {
             result = result.filter(x => x[key] === value);
@@ -336,9 +248,23 @@ const songFilter = (songs, {
     return result;
 };
 
+// 逸出HTML屬性中的特殊字元
+const escapeHtml = (text) => String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+// 歌卡共用：難度class、定數文字、點擊跳轉(曲名放在data屬性，避免含單引號時破壞onclick)
+const getDifficultyClass = (difficulty) => difficulty.replace(" ", "-").toLowerCase();
+const formatSongLevel = (internalLevel) => internalLevel ? Number.parseFloat(internalLevel).toFixed(1) : '';
+const songClickAttrs = (song) =>
+    `onclick="showSongDetail(this.dataset.title, this.dataset.type)" data-title="${escapeHtml(song.title)}" data-type="${escapeHtml(song.type)}"`;
+
 // 建立長形歌卡
 function createSongCard(song) {
-    const diffClass = song.difficulty.replace(" ", "-").toLowerCase();
+    const diffClass = getDifficultyClass(song.difficulty);
     const { title, image, internalLevel, type, score, rating } = song;
 
     if (rating === 0) {
@@ -348,12 +274,12 @@ function createSongCard(song) {
     const deg = Math.floor(Math.random() * 5)
 
     return `
-    <div class="song-card difficulty-${diffClass} deg${deg}" onclick="showSongDetail('${song.title}', '${song.type}')">
-        <img src="${image}" class="song-image" alt="${title}" />
+    <div class="song-card difficulty-${diffClass} deg${deg}" ${songClickAttrs(song)}>
+        <img src="${image}" class="song-image" alt="${escapeHtml(title)}" />
         <div class="song-overlay"></div>
         <div class="song-info-block">
             <div class="rating-block-song-title song-content text-shadow-black">${title}</div>
-            <div class="rating-block-inner-level song-content text-shadow-black">${internalLevel ? Number.parseFloat(internalLevel).toFixed(1) : ''} | ${type.toUpperCase()}</div>
+            <div class="rating-block-inner-level song-content text-shadow-black">${formatSongLevel(internalLevel)} | ${type.toUpperCase()}</div>
             <div class="rating-block-score song-content text-shadow-black">${score}</div>
             ${rating !== undefined ? `<div class="rating-block-rating song-content text-shadow-black deg${deg}">${rating}</div>` : ''}
         </div>
@@ -380,13 +306,13 @@ const createSquareSongCard = (song, {
     }
 
     return `
-        <div class="square-song-card difficulty-${song.difficulty.replace(" ", "-").toLowerCase()} ${isCompleted === true ? 'completed' : ''} deg${Math.floor(Math.random() * 5)}" 
-                onclick="showSongDetail('${song.title}', '${song.type}')">
-            <img src=${song.image} class="square-song-image" alt="${song.title}">
+        <div class="square-song-card difficulty-${getDifficultyClass(song.difficulty)} ${isCompleted === true ? 'completed' : ''} deg${Math.floor(Math.random() * 5)}" 
+                ${songClickAttrs(song)}>
+            <img src="${song.image}" class="square-song-image" alt="${escapeHtml(song.title)}">
             <div class="song-overlay"></div>
             <div class="square-song-info-block">
                 <div class="song-content text-shadow-black square-song-title">${song.title}</div>
-                <div class="song-content text-shadow-black square-song-inner-level">${song.internalLevel ? Number.parseFloat(song.internalLevel).toFixed(1) : ''} | ${song.type.toUpperCase()}</div>
+                <div class="song-content text-shadow-black square-song-inner-level">${formatSongLevel(song.internalLevel)} | ${song.type.toUpperCase()}</div>
                 <div class="song-content text-shadow-black square-song-score">${song.score}</div>
                 ${isCompleted === true ? '<div class="completion-check"><b>✓</b></div>' : ''}
                 ${isPlayed !== null ? `<div class="rating-gain-info text-shadow-black" >${song.targetRating ? `${song.targetRating}(${song.ratingGain})` : ''}</div>` : ''}
