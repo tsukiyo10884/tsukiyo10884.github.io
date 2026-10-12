@@ -199,15 +199,13 @@ const showPlateProgress = async (versionName, type, plateName) => {
     $('#now-title').text(`plate|${plateName}|${type}|${versionName}`);
     $('#song-table').empty().append($title, $songGrid);
 
-    $('.collapse').on('show.bs.collapse', function () {
-        const id = $(this).attr('id');
-        $(`.collapse-icon[data-target="${id}"]`).text('－');
-    });
-    $('.collapse').on('hide.bs.collapse', function () {
-        const id = $(this).attr('id');
-        $(`.collapse-icon[data-target="${id}"]`).text('＋');
-    });
 }
+
+// 展開/收合時切換 ＋/－ 圖示(事件委派，只需綁定一次)
+$(document).on('show.bs.collapse hide.bs.collapse', '.collapse', function (event) {
+    const id = $(this).attr('id');
+    $(`.collapse-icon[data-target="${id}"]`).text(event.type === 'show' ? '－' : '＋');
+});
 
 // 建立歌卡
 const createNamePlateSongCard = (song, type) => {

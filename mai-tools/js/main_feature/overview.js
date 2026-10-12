@@ -45,14 +45,15 @@ const showRatingTrendChart = async () => {
     const pointColors = ratings.map((_, i) => i === 0 ? 'white' : '#0b4670');
     const ctx = document.getElementById('rating-chart').getContext('2d');
 
+    Chart.defaults.color = '#203844';
     new Chart(ctx, {
         type: 'line',
         data: {
             labels: filteredData.map(e => formatDate(new Date(e.record_date), 'yyyy/MM/dd')),
             datasets: [{
                 label: 'Rating',
-                data: filteredData
-                , parsing: {
+                data: filteredData,
+                parsing: {
                     xAxisKey: 'record_date',
                     yAxisKey: 'rating'
                 },
@@ -107,18 +108,10 @@ const showRatingTrendChart = async () => {
                         size: 12
                     },
                     formatter: function (value, context) {
-                        const index = context.dataIndex;
+                        // 資料越多，標籤顯示的間隔越大(<=20筆全顯示)
                         const total = context.dataset.data.length;
-                        const ratingValue = value.rating;
-
-                        if (total <= 10) return ratingValue;
-
-                        if (total > 50) return index % 5 === 0 ? ratingValue : null;
-                        if (total > 40) return index % 4 === 0 ? ratingValue : null;
-                        if (total > 30) return index % 3 === 0 ? ratingValue : null;
-                        if (total > 20) return index % 2 === 0 ? ratingValue : null;
-
-                        return ratingValue;
+                        const step = total > 50 ? 5 : total > 40 ? 4 : total > 30 ? 3 : total > 20 ? 2 : 1;
+                        return context.dataIndex % step === 0 ? value.rating : null;
                     }
                 },
                 annotation: {
@@ -152,7 +145,6 @@ const showRatingTrendChart = async () => {
         },
         plugins: [ChartDataLabels]
     });
-    Chart.defaults.color = '#203844';
     ctx.canvas.style.backgroundColor = '#ffffff';
 };
 
@@ -164,18 +156,15 @@ const showCircleContributionChart = async () => {
         $('#div-circle-chart').html('<p class="text-center my-4 text-white">無Circle資料</p>');
         return;
     }
+    const members = [...circleData.members].sort((a, b) => parseInt(b.pt) - parseInt(a.pt));
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: circleData.members.sort(function (a, b) {
-                return parseInt(b.pt) - parseInt(a.pt)
-            }).map(m => m.name),
+            labels: members.map(m => m.name),
             datasets: [{
                 label: 'PT',
-                data: circleData.members.sort(function (a, b) {
-                    return parseInt(b.pt) - parseInt(a.pt)
-                }).map(m => m.pt),
-                backgroundColor: circleData.members.map(m =>
+                data: members.map(m => m.pt),
+                backgroundColor: members.map(m =>
                     m.name === generalData.userInfo.name ? '#ff42b4' : '#ffc7f0'
                 ),
                 datalabels: {
