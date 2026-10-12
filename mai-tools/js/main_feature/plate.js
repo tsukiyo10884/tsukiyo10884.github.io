@@ -1,3 +1,23 @@
+// 難度顏色
+const DIFFICULTY_COLORS = {
+    basic: '#81d955',
+    advanced: '#f8b709',
+    expert: '#ff818d',
+    master: '#c346e7',
+    remaster: '#fff'
+};
+
+// 難度標籤的inline style(白色的remaster需要描邊)
+const getDifficultyLabelStyle = (diff) => {
+    const outline = diff === 'remaster'
+        ? 'text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;'
+        : '';
+    return `color:${DIFFICULTY_COLORS[diff]};${outline}`;
+}
+
+// 名牌種類(依顯示順序)
+const PLATE_TYPES = ['極', '将', '神', '舞舞'];
+
 const initPlateList = async () => {
     $('#song-table').html(showVersionButton());
 }
@@ -29,33 +49,17 @@ const showVersionButton = () => {
 
 // 顯示名牌板按鈕
 const showPlateButton = async (versionName, plateName) => {
-    const buttons = [
-        `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '極', '${plateName}')">${plateName}極</button></div>`,
-        versionName === 'maimai ~ maimai PLUS'
+    const isFirstVersion = versionName === 'maimai ~ maimai PLUS';
+    const buttons = PLATE_TYPES.map(type =>
+        isFirstVersion && type === '将'
             ? `<div class="col"><button class="w-100" disabled>不存在</button></div>`
-            : `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '将', '${plateName}')">${plateName}将</button></div>`,
-        `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '神', '${plateName}')">${plateName}神</button></div>`,
-        `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '舞舞', '${plateName}')">${plateName}舞舞</button></div>`
-    ];
-    const difficultyCounts1 = await getDifficultyCounts(null, versionName, { plate: '極' });
-    const difficultyCounts2 = await getDifficultyCounts(null, versionName, { plate: '将' });
-    const difficultyCounts3 = await getDifficultyCounts(null, versionName, { plate: '神' });
-    const difficultyCounts4 = await getDifficultyCounts(null, versionName, { plate: '舞舞' });
+            : `<div class="col"><button class="w-100" onclick="showPlateProgress('${versionName}', '${type}', '${plateName}')">${plateName}${type}</button></div>`
+    );
 
-    const allCounts = [
-        difficultyCounts1,
-        difficultyCounts2,
-        difficultyCounts3,
-        difficultyCounts4
-    ];
-
-    const colors = {
-        basic: '#81d955',
-        advanced: '#f8b709',
-        expert: '#ff818d',
-        master: '#c346e7',
-        remaster: '#fff'
-    };
+    const songs = await getPlateSongs(versionName);
+    const allCounts = await Promise.all(
+        PLATE_TYPES.map(type => getDifficultyCounts(songs, versionName, { plate: type }))
+    );
 
     const summary = `
         <div class="pt-2"> 
@@ -64,19 +68,15 @@ const showPlateButton = async (versionName, plateName) => {
                     <thead>
                         <tr>
                             <th></th>
-                            <th colspan=3>${plateName}極</th>
-                            <th colspan=3>${versionName === 'maimai ~ maimai PLUS' ? `-` : `${plateName}将`}</th>
-                            <th colspan=3>${plateName}神</th>
-                            <th colspan=3>${plateName}舞舞</th>
+                            ${PLATE_TYPES.map(type => `<th colspan=3>${isFirstVersion && type === '将' ? '-' : `${plateName}${type}`}</th>`).join('')}
                         </tr>
                     </thead>
 
                     <tbody>
                         ${difficulties.map(diff => {
                             if (diff === 'remaster' && versionName !== 'maimai ~ FiNALE') return '';
-                            const isRemaster = diff === 'remaster' ? `text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;` : ``;
                             return `<tr>
-                                <td class="text-shadow-black difficulty-label" style="color:${colors[diff]};${isRemaster}">${diff.toUpperCase().slice(0, 3)}</td>
+                                <td class="text-shadow-black difficulty-label" style="${getDifficultyLabelStyle(diff)}">${diff.toUpperCase().slice(0, 3)}</td>
                                 ${allCounts.map(counts => {
                                 const c = counts[diff];
                                 return `${c ? `<td class="ps-2">${c.completed}</td><td>/</td><td>${c.total}</td>` : '-'}`;
@@ -89,7 +89,7 @@ const showPlateButton = async (versionName, plateName) => {
         </div>
     `;
     let tip = '';
-    if (versionName === 'maimai ~ maimai PLUS') {
+    if (isFirstVersion) {
         tip = `<div class="col-9 text-center">※初代100%就AP，因此沒有真将</div>`;
     }
     $('#song-table').html(`${summary}<hr/>${tip}<div class="row">${buttons.join('')}</div>`);
@@ -118,17 +118,9 @@ const showPlateProgress = async (versionName, type, plateName) => {
             return counts.total > 0;
         })
         .map(([diff, counts]) => {
-            const colors = {
-                basic: '#81d955',
-                advanced: '#f8b709',
-                expert: '#ff818d',
-                master: '#c346e7',
-                remaster: '#fff'
-            };
             const percentage = (counts.completed / counts.total * 100).toFixed(2);
-            const isRemaster = diff === 'remaster' ? `text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;` : ``;
             return `<tr>
-                <td class="text-shadow-black" style="color:${colors[diff]};${isRemaster}">${diff.toUpperCase().slice(0, 3)}</td>
+                <td class="text-shadow-black" style="${getDifficultyLabelStyle(diff)}">${diff.toUpperCase().slice(0, 3)}</td>
                 <td class="ps-2">${String(counts.completed).padStart(3, " ")}</td>
                 <td>/</td>
                 <td>${String(counts.total).padStart(3, " ")}</td>
@@ -261,17 +253,27 @@ const getDifficultyCounts = async (songs, versionName, filter = null) => {
     return counts;
 }
 
+// 刪除曲清單(依地區快取，避免重複下載)
+const removedSongCache = {};
+const getRemovedSongList = (region) => {
+    if (!removedSongCache[region]) {
+        removedSongCache[region] = fetch(`./json/removed_song_${region}.json`)
+            .then(res => res.json())
+            .catch(err => {
+                delete removedSongCache[region];
+                throw err;
+            });
+    }
+    return removedSongCache[region];
+}
+
 // 取得該版本的歌曲
 const getPlateSongs = async (versionName) => {
     let songs = generalData.songs.filter(song => song.title !== '全世界共通リズム感テスト');
     const today = new Date();
 
-    let removeList = [];
-    if ($('#version-switch').is(':checked')) {
-        removeList = await fetch('./json/removed_song_jp.json').then(res => res.json());
-    } else {
-        removeList = await fetch('./json/removed_song_intl.json').then(res => res.json());
-    }
+    const region = $('#version-switch').is(':checked') ? 'jp' : 'intl';
+    const removeList = await getRemovedSongList(region);
     removeList.forEach(entry => {
         if (today > new Date(entry.removeDate)) {
             const removeTitles = entry.removeSongs.map(s => s.title);

@@ -147,128 +147,95 @@ const showLevelDetails = (gainChart, isNewVersion) => {
     }
 }
 
-// 建立成就項目(S,SS那些)按鈕
-const createAchivementButtonsSuggestion = () => {
-    const $radioContainer = $('<div>').addClass('row g-4');
-    const $radioCol1 = $('<div>').addClass('col-auto');
-    const $radioCol2 = $('<div>').addClass('col-auto');
+// 建立單一成就項目(S,SS那些)的radio
+const createThresholdRadio = (name) => {
+    const id = `threshold-${name}`;
+    const $input = $('<input>')
+        .addClass('form-check-input')
+        .attr({ type: 'radio', name: 'rating-threshold', id, value: name })
+        .prop('checked', selectedRatingThreshold === name);
+    const $label = $('<label>').addClass('form-check-label').attr('for', id).text(name);
+    return $('<div>').addClass('form-check').append($input, $label);
+}
 
+// 建立成就項目(S,SS那些)按鈕，交錯分配到左右兩欄
+const createAchivementButtonsSuggestion = () => {
     if (selectedRatingThreshold === null) {
         selectedRatingThreshold = 'SSS+';
     }
 
-    for (let i = 1; i < SCORE_THRESHOLDS.length; i += 2) {
-        const $radio1 = $('<div>').addClass('form-check');
-        const $input1 = $('<input>')
-            .addClass('form-check-input')
-            .attr('type', 'radio')
-            .attr('name', 'rating-threshold')
-            .attr('id', `threshold-${SCORE_THRESHOLDS[i].name}`)
-            .attr('value', SCORE_THRESHOLDS[i].name)
-            .prop('checked', selectedRatingThreshold === SCORE_THRESHOLDS[i].name);
-        const $label1 = $('<label>')
-            .addClass('form-check-label')
-            .attr('for', `threshold-${SCORE_THRESHOLDS[i].name}`)
-            .text(SCORE_THRESHOLDS[i].name);
-        $radio1.append($input1, $label1);
-        $radioCol1.append($radio1);
+    const $cols = [$('<div>').addClass('col-auto'), $('<div>').addClass('col-auto')];
+    SCORE_THRESHOLDS.slice(1).forEach(({ name }, i) => {
+        $cols[i % 2].append(createThresholdRadio(name));
+    });
 
-        if (i + 1 < SCORE_THRESHOLDS.length) {
-            const $radio2 = $('<div>').addClass('form-check');
-            const $input2 = $('<input>')
-                .addClass('form-check-input')
-                .attr('type', 'radio')
-                .attr('name', 'rating-threshold')
-                .attr('id', `threshold-${SCORE_THRESHOLDS[i + 1].name}`)
-                .attr('value', SCORE_THRESHOLDS[i + 1].name)
-                .prop('checked', selectedRatingThreshold === SCORE_THRESHOLDS[i + 1].name);
-            const $label2 = $('<label>')
-                .addClass('form-check-label')
-                .attr('for', `threshold-${SCORE_THRESHOLDS[i + 1].name}`)
-                .text(SCORE_THRESHOLDS[i + 1].name);
-            $radio2.append($input2, $label2);
-            $radioCol2.append($radio2);
-        }
-    }
-
-    $radioContainer.append($radioCol1, $radioCol2);
+    const $radioContainer = $('<div>').addClass('row g-4').append($cols[0], $cols[1]);
     $('#stat').empty().append($('<div id="suggestion-stat" class="d-flex align-items-center h-100">').append($radioContainer));
+}
+
+// 取得要顯示的候選曲(gainChart為null時代表所有等級)
+const getSuggestionSongs = (gainChart, isNewVersion) => {
+    const { minLevel, maxLevel } = gainChart == null
+        ? {
+            minLevel: Math.min(...gainChartList.map(s => s.level)),
+            maxLevel: Math.max(...gainChartList.map(s => s.level))
+        }
+        : calculateLevelRange(gainChart.level);
+
+    const filter = { minLevel, maxLevel };
+    if (isNewVersion != null) filter.isNewVersion = isNewVersion;
+    return songFilter(generalData.songs, filter);
 }
 
 // 建立建議歌卡
 const createSuggestionSongCard = (gainChart, isNewVersion) => {
-    let songs = []
-    if (gainChart === null || gainChart === undefined) {
-        const minLevel = Math.min(...gainChartList.map(s => s.level));
-        const maxLevel = Math.max(...gainChartList.map(s => s.level));
-        if (isNewVersion === null || isNewVersion === undefined) {
-            songs = songFilter(generalData.songs, { minLevel: minLevel, maxLevel: maxLevel });
-        } else {
-            songs = songFilter(generalData.songs, { isNewVersion: isNewVersion, minLevel: minLevel, maxLevel: maxLevel });
-        }
-    } else {
-        const { minLevel, maxLevel } = calculateLevelRange(gainChart.level);
-
-        if (isNewVersion == null) {
-            songs = songFilter(generalData.songs, { minLevel: minLevel, maxLevel: maxLevel });
-        } else {
-            songs = songFilter(generalData.songs, { isNewVersion: isNewVersion, minLevel: minLevel, maxLevel: maxLevel });
-        }
-    }
+    const songs = getSuggestionSongs(gainChart, isNewVersion);
+    const selectedThreshold = $('input[name="rating-threshold"]:checked').val();
+    const { rating_new, rating_others } = generalData.ratingSongList;
+    const allRatingSongs = [...rating_new, ...rating_others];
 
     const groupedSongs = new Map();
     songs
         .sort((a, b) => b.internalLevel - a.internalLevel)
         .forEach(song => {
             const groupKey = formatLevel(song.internalLevel);
-            if (!groupedSongs[groupKey]) {
-                groupedSongs[groupKey] = [];
-            }
             if (!groupedSongs.has(groupKey)) groupedSongs.set(groupKey, []);
             groupedSongs.get(groupKey).push(song);
         });
 
-    const songCards = Array.from(groupedSongs)
-        .map(([level, songList]) => {
+    // 單首歌的候選卡片(不需要顯示時回傳null)
+    const createCandidateCard = (song) => {
+        const chart = gainChartList.find(s => s.level === song.internalLevel && s.isNewVersion === (song.versionInternational === currentVersion));
+        const rankGain = chart?.upgrades.find(upg => upg.rank === selectedThreshold);
+        if (!rankGain) return null;
 
-            const header = `
+        const targetRating = rankGain.rating;
+        let gain = rankGain.gain;
+
+        // 如果已經在R表上的歌就要跟現有分數比
+        const [existingSong] = songFilter(allRatingSongs, { internalLevel: song.internalLevel, title: song.title });
+        if (existingSong) {
+            gain = '+' + (targetRating - existingSong.rating);
+        }
+
+        song.targetRating = targetRating;
+        song.ratingGain = gain;
+        if (gain === '+0' || calculateSongRating(song) >= targetRating) return null;
+
+        return createSquareSongCard(song, { isPlayed: song.score !== '0.0000%' });
+    };
+
+    const songCards = Array.from(groupedSongs).map(([level, songList]) => {
+        const cards = songList.map(createCandidateCard).filter(card => card !== null).join('');
+        if (cards === '') return '';
+
+        return `
             <div class="col-12 d-flex align-items-center my-3 p-0">
                 <div class="section-divider left"></div>
                 <b class="px-3 section-divider-title">${level}</b>
                 <div class="section-divider right"></div>
-            </div>`;
-
-            const cards = songList.map(song => {
-                const currentRating = calculateSongRating(song);
-
-                const selectedThreshold = $('input[name="rating-threshold"]:checked').val();
-                const gainChart = gainChartList.find(s => s.level === song.internalLevel && s.isNewVersion === (song.versionInternational === currentVersion));
-                if (!gainChart) return null;
-                const rankGain = gainChart.upgrades.find(upg => upg.rank === selectedThreshold);
-                if (!rankGain) return null;
-
-                const targetRating = rankGain.rating;
-                let gain = rankGain.gain;
-                
-                // 如果已經在R表上的歌就要跟現有分數比
-                const allRatingSongs = [...generalData.ratingSongList.rating_new, ...generalData.ratingSongList.rating_others];
-                if (songFilter(allRatingSongs, { internalLevel: song.internalLevel, title: song.title }).length > 0) {
-                    const existingSong = songFilter(allRatingSongs, { internalLevel: song.internalLevel, title: song.title })[0];
-                    gain = '+' + (targetRating - existingSong.rating);
-                }
-
-                song.targetRating = targetRating;
-                song.ratingGain = gain;
-                if (gain === '+0' || currentRating >= targetRating) return null;
-
-                return createSquareSongCard(song, { isPlayed: song.score !== '0.0000%' });
-            }).filter(card => card !== null).join('');
-
-            if (cards === '') return '';
-
-            return header + cards;
-        }).join('');
-
+            </div>${cards}`;
+    }).join('');
 
     if (!songCards) {
         return $('<div>').addClass('square-song-grid col-12 row ms-0 text-center').html('<div class="col-12 py-5">無</div>');
