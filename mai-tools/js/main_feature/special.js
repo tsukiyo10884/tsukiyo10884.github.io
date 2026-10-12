@@ -1,5 +1,4 @@
 let clickCount = 0;
-let clearCount = 0;
 $(document).ready(function () {
     $('.user-info').on('click', function () {
         clickCount++;
@@ -10,57 +9,45 @@ $(document).ready(function () {
     });
 });
 
+// 建立專屬頁面的圖示按鈕
+const createSpecialIconButton = (iconName, title, mode) => {
+    return $('<button>')
+        .html(`<img src="./img/special/${iconName}_icon.webp" alt="${title}" style="height: 50px;">`)
+        .css({ padding: '0px' })
+        .attr('data-bs-toggle', 'tooltip')
+        .attr('data-bs-placement', 'bottom')
+        .attr('title', title)
+        .on('click', () => showTable(mode));
+}
+
 const createSpecialButtons = () => {
-    const $col1 = $('<div class="special col-1 align-content-center">');
-    const $col2 = $('<div class="special col-1 align-content-center">');
-    const $col3 = $('<div class="special col-1 align-content-center">');
-
-    const $button1 = $('<button>')
-        .html('<img src="./img/special/axuan_icon.webp" alt="阿瑄專屬" style="height: 50px;">')
-        .css({
-            'padding': '0px'
-        })
-        .attr('data-bs-toggle', 'tooltip')
-        .attr('data-bs-placement', 'bottom')
-        .attr('title', '阿瑄專屬')
-        .on('click', () => showTable('a_xuan'))
-
-
-    const $button2 = $('<button>')
-        .html('<img src="./img/special/ayo_icon.webp" alt="阿幽專屬" style="height: 50px;">')
-        .css({
-            'padding': '0px'
-        })
-        .attr('data-bs-toggle', 'tooltip')
-        .attr('data-bs-placement', 'bottom')
-        .attr('title', '阿幽專屬')
-        .on('click', () => showTable('a_yo'));
-
-    const $button3 = $('<button>')
+    const $clearButton = $('<button>')
         .text('清空')
         .addClass('f_12')
         .on('click', clear);
 
-    $col1.append($button1);
-    $col2.append($button2);
-    $col3.append($button3);
-    $('#info').append($col1, $col2, $col3);
+    const $buttons = [
+        createSpecialIconButton('axuan', '阿瑄專屬', 'a_xuan'),
+        createSpecialIconButton('ayo', '阿幽專屬', 'a_yo'),
+        $clearButton
+    ];
+    const $cols = $buttons.map($button =>
+        $('<div class="special col-1 align-content-center">').append($button)
+    );
+    $('#info').append($cols);
 }
+// 清空：場上還有蒼蠅時只清蒼蠅，沒有蒼蠅了才清掉專屬頁面與按鈕
 const clear = () => {
-    if (clearCount > 0) {
-        $('#stat').removeClass('axuan');
-        $('#stat').removeClass('ayo');
+    if ($('.fly').length > 0) {
         $('.fly').remove();
-        $('#axuan_profile').remove();
-        $('#ayo_profile').remove();
-        $('.special').remove();
-        $('.basic_block').show();
-        clearCount = 0;
-        clickCount = 0;
-    } else {
-        $('.fly').remove();
-        clearCount++;
+        return;
     }
+
+    $('#stat').removeClass('axuan ayo');
+    $('#axuan_profile, #ayo_profile').remove();
+    $('.special').remove();
+    $('.basic_block').show();
+    clickCount = 0;
 }
 
 // 顯示專屬頁面的大頭貼(name: 'ayo' | 'axuan')
@@ -86,17 +73,17 @@ const initForAyoList = () => {
 }
 
 const flys = () => {
+    // 每次點擊都新增3隻，只讓新增的開始移動(舊的已經在動了)
     for (let i = 0; i < 3; i++) {
         let $img = $('<img class="fly">').attr('src', `./img/special/ayo_mini.webp`);
         $('#result-container').append($img);
+        randomMove($img);
     }
 
-    $('.fly').each(function () {
-        randomMove($(this));
-    });
-
-    $('#result-container').on('click touchstart', '.fly', function () {
-        $(this).fadeOut(300, function () {
+    // 重複進入時避免累積多個事件
+    $('#result-container').off('click.fly touchstart.fly').on('click.fly touchstart.fly', '.fly', function () {
+        // 先停掉飛行動畫，否則淡出會排在飛行動畫後面而延遲
+        $(this).stop(true).fadeOut(300, function () {
             $(this).remove();
         });
     });

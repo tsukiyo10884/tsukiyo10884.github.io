@@ -129,7 +129,7 @@ const createLevelButton = (gainChart, displayLevel, isNewVersion) => {
 
 // 依等級顯示成就項目及歌卡
 const showLevelDetails = (gainChart, isNewVersion) => {
-    createAchivementButtonsSuggestion();
+    createAchievementButtonsSuggestion();
     bindRatingThresholdEventListeners();
 
     const isAll = gainChart === null;
@@ -159,7 +159,7 @@ const createThresholdRadio = (name) => {
 }
 
 // 建立成就項目(S,SS那些)按鈕，交錯分配到左右兩欄
-const createAchivementButtonsSuggestion = () => {
+const createAchievementButtonsSuggestion = () => {
     if (selectedRatingThreshold === null) {
         selectedRatingThreshold = 'SSS+';
     }

@@ -5,18 +5,20 @@ const getCourseFilePath = () => {
 };
 
 const initCourseList = async () => {
-    const maxCourse = Math.max(
-        ...generalData.course.flatMap(c =>
-            c.courseRecord
-                .filter(d => d.isClear === true)
-                .map(d => parseInt(d.courseName, 10))
-        )
-    ).toString().padStart(4, "0");
+    const clearedCourses = generalData.course.flatMap(c =>
+        c.courseRecord
+            .filter(d => d.isClear === true)
+            .map(d => parseInt(d.courseName, 10))
+            .filter(n => !isNaN(n))
+    );
+    const maxCourseText = clearedCourses.length > 0
+        ? getRecordCourseText(Math.max(...clearedCourses).toString().padStart(4, "0"))
+        : undefined;
 
     $('#stat').html(`
         <div id="course-info" class="d-flex align-items-center">
             <div>
-                <p>目前最高合格段位: ${getRecordCourseText(maxCourse)===undefined ? '尚無挑戰紀錄' : getRecordCourseText(maxCourse)}</p>
+                <p>目前最高合格段位: ${maxCourseText ?? '尚無挑戰紀錄'}</p>
                 <p class="f_12">※十段合格後才能挑戰真段位認定<br/>　真皆伝合格後才能挑戰裏皆伝<br/>　(雙人遊玩時，一方可挑戰另一方就也可跳級挑戰)</p>
             </div>
         </div>
@@ -29,21 +31,14 @@ const initCourseList = async () => {
 
         if (!courseData) throw new Error("No Data");
 
-        setTimeout(() => {
-            let buttons = `<div class="row">`
-            courseData.forEach(courseType => {
-                const button = `<div class="col-3"><button class="w-100 course-button" onclick="showCourseProgress('${courseType.type}')">${courseType.type}</button></div>`;
-                buttons += button;
-            });
-            buttons += `</div>`;
-            $('#song-table').html(buttons);
-        }, 100);
+        const buttons = courseData.map(courseType =>
+            `<div class="col-3"><button class="w-100 course-button" onclick="showCourseProgress('${courseType.type}')">${courseType.type}</button></div>`
+        ).join('');
+        $('#song-table').html(`<div class="row">${buttons}</div>`);
     } catch (e) {
         $('#song-table').html(`<div class="col-12 py-5 text-center">無資料<br><small class="text-muted">${courseFilePath}</small><br><small class="text-muted">${e.message}</small></div>`);
     }
 }
-
-
 
 const showCourseProgress = async (type) => {
     const courseFilePath = getCourseFilePath();
@@ -73,7 +68,7 @@ const showCourseProgress = async (type) => {
                         </div>
                         <p class="mb-4">Life ${course.totalLives} | great -${course.lifeLossPerJudgement.great} / good -${course.lifeLossPerJudgement.good} / miss -${course.lifeLossPerJudgement.miss} | pass + ${course.lifeRecoveryPerSong}</p>
                     </div>
-                    <div id="course-song-card" class="row justify-content-center gap-3">
+                    <div class="course-song-card row justify-content-center gap-3">
                         ${course.songs.map((song, index) => {
                 let songData = generalData.songs.find(s => s.title === song.title && s.type === song.type && s.difficulty === song.difficulty);
                 if (!songData) {

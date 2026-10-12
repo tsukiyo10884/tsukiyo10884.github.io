@@ -1,5 +1,5 @@
 // 達成項目
-const ACHIVEMENT_GROUPS = [
+const ACHIEVEMENT_GROUPS = [
     ['clear', 'S', 'S+', 'SS', 'SS+', 'SSS', 'SSS+'],
     ['AP', 'AP+', 'FC', 'FC+', 'FS', 'FS+', 'FDX', 'FDX+']
 ];
@@ -10,7 +10,6 @@ const initLevelList = () => {
     const levels = topSongs.map(song => song.internalLevel);
     const maxLevel = Math.max(...levels) === 0 ? 10 : Math.max(...levels);
     const minLevel = maxLevel - 1;
-    const songs = songFilter(generalData.songs, { minLevel: minLevel, maxLevel: maxLevel });
 
     $('#stat').html(`
         <div id="level-stat" class="d-flex flex-column align-items-center justify-content-center pt-2" style="min-height: 100px;">
@@ -28,7 +27,7 @@ const initLevelList = () => {
                 <button id="btn-search" onclick="showLevelListByRange()">査詢</button>
             </div>
         </div>
-            ${createAchivementButtons('S')}
+            ${createAchievementButtons('S')}
         </div>
     `).show();
 
@@ -36,10 +35,7 @@ const initLevelList = () => {
         <div id="section-title" class="section-title text-shadow-black">
             <b>等級${minLevel} ~ ${maxLevel}進度</b>
         </div>
-        <div id="level-song-grid" class="square-song-grid col-12 row ms-0">
-            ${songs.sort((a, b) => b.internalLevel - a.internalLevel)
-            .map(song => createSquareSongCard(song, { isCompleted: isSongCompleted(song, $('input[name="achivement"]:checked').val()) })).join('')}
-        </div>
+        <div id="level-song-grid" class="square-song-grid col-12 row ms-0"></div>
     `);
 
     showLevelListByRange();
@@ -77,8 +73,6 @@ const updateStatistics = (songs) => {
 
 // 更新歌曲列表
 const updateSongGrid = (songs, minLevel, maxLevel) => {
-
-
     let groupedSongs = {};
     songs.forEach(song => {
         const key = formatLevel(song.internalLevel);
@@ -97,7 +91,7 @@ const updateSongGrid = (songs, minLevel, maxLevel) => {
         </div>`;
 
         const cards = songList
-            .map(song => createSquareSongCard(song, { isCompleted: isSongCompleted(song, $('input[name="achivement"]:checked').val()) }))
+            .map(song => createSquareSongCard(song, { isCompleted: isSongCompleted(song, $('input[name="achievement"]:checked').val()) }))
             .filter(card => card !== null)
             .join('');
 
@@ -113,7 +107,7 @@ const updateSongGrid = (songs, minLevel, maxLevel) => {
 
 // 計算達成條件的歌曲數量
 const filteredSongsCount = (songs) => {
-    const filterType = $('input[name="achivement"]:checked').val();
+    const filterType = $('input[name="achievement"]:checked').val();
     return songs.filter(song => isSongCompleted(song, filterType)).length;
 }
 
@@ -139,11 +133,11 @@ const isSongCompleted = (song, filterType) => {
 }
 
 // 建立成就按鈕
-const createAchivementButtons = (defaultType) => {
-    let html = ACHIVEMENT_GROUPS.map(group => `
+const createAchievementButtons = (defaultType) => {
+    let html = ACHIEVEMENT_GROUPS.map(group => `
         <div class="mb-2 btn-group" role="group">
             ${group.map(value => `
-                <input type="radio" class="form-check-input ms-2" name="achivement" id="radio-${value}" 
+                <input type="radio" class="form-check-input ms-2" name="achievement" id="radio-${value}" 
                     value="${value}" autocomplete="off" ${value === defaultType ? 'checked' : ''}>
                 <label class="form-check-label" for="radio-${value}">${value}</label>
             `).join('')}
@@ -156,6 +150,6 @@ const createAchivementButtons = (defaultType) => {
 
 // 監聽成就按鈕變更事件
 const bindLevelEventListeners = () => {
-    $('input[name="achivement"]').off('change');
-    $('input[name="achivement"]').on('change', showLevelListByRange);
+    $('input[name="achievement"]').off('change');
+    $('input[name="achievement"]').on('change', showLevelListByRange);
 }

@@ -508,19 +508,19 @@ div[class*="difficulty-"]::after {
     color: #4d4d4d;
 }
 
-#course-song-card .song-card {
+.course-song-card .song-card {
     padding-left: calc(var(--bs-gutter-x) * .5);
     width: 420px !important;
 }
 
-#course-song-card .rating-block-inner-level,
-#course-song-card .rating-block-score {
+.course-song-card .rating-block-inner-level,
+.course-song-card .rating-block-score {
     font-size: 14px;
     line-height: 16px;
     opacity: 0.85;
 }
 
-#course-song-card .rating-block-song-title {
+.course-song-card .rating-block-song-title {
     font-size: 16px;
     line-height: 1.5;
     max-width: 340px;
