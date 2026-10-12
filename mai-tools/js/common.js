@@ -190,7 +190,6 @@ const showTable = async (mode) => {
 
     $('#div-completion-filters').toggleClass('d-none', !['plate', 'level'].includes(mode));
     $('#div-play-filters').toggleClass('d-none', !['suggestion', 'a_xuan'].includes(mode));
-    $('#div-download-image').toggleClass('d-none', !['rating'].includes(mode));
 
     const handler = tableHandlers[mode];
     handler ? await handler() : $('#song-table').empty();
@@ -521,71 +520,6 @@ const createCreditSection = () => {
 $(document).ready(function () {
     $('.extra-credits').html(createCreditSection());
 });
-
-// 下載圖片功能
-const downloadResultImage = () => {
-    showLoading();
-
-    setTimeout(() => {
-        captureAndDownload();
-    }, 100);
-
-}
-const captureAndDownload = () => {
-    let resultContainer = $('#result-container');
-
-    switch (cssFiles.indexOf($('#theme').attr('href'))) {
-        case 0: // translucent
-            document.documentElement.style.setProperty('--card-shadow', 'none');
-            resultContainer.css('background-color', '#f0f7ff');
-            resultContainer.append(`
-                <div id="temp-decos">
-                    <div class="deco"></div>
-                    <div class="deco"></div>
-                    <div class="deco"></div>
-                    <div class="deco"></div>
-                    <div class="deco"></div>
-                </div>
-            `);
-            $('#temp-decos .deco').css('top', resultContainer.height() - 50);
-            $('#temp-decos').css('height', resultContainer.outerHeight());
-            break;
-        case 1: // modern
-            resultContainer.css('background-color', '#232228');
-            break;
-        case 2: // cute_pink
-            resultContainer.css('background-color', '#ffe4ec');
-            break;
-        case 3: // cute_blue
-            resultContainer.css('background-color', '#e4f2ff');
-            break;
-        case 4: // fabric_board
-            resultContainer.css('background', 'url(img/fabric_board.jpg)');
-            resultContainer.css('background-repeat', 'repeat');
-            resultContainer.css('background-size', '300px');
-            break;
-        default:
-            resultContainer.css('background-color', '#51bcf3');
-
-    }
-    const node = document.getElementById('result-container');
-
-    htmlToImage.toPng(node, { includeQueryParams: true })
-        .then((dataUrl) => {
-            const newTab = window.open();
-            newTab.document.body.innerHTML = `<img src="${dataUrl}" style="width: 100%;">`;
-        })
-        .catch((error) => {
-            console.error(error);
-            alert('圖片生成失敗，請稍後再試');
-        })
-        .finally(() => {
-            resultContainer.css('background', '');
-            document.documentElement.style.setProperty('--card-shadow', '0 4px 30px rgba(0, 0, 0, 0.1)');
-            resultContainer.find('#temp-decos').remove();
-            hideLoading();
-        });
-};
 
 // Loading畫面
 const showLoading = () => {
