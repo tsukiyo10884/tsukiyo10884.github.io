@@ -37,8 +37,53 @@
         const text = await res.text();
         return new DOMParser().parseFromString(text, "text/html");
     }
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     const detailData = await fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
         .then(res => res.json());
+
+    // 譜面資料(定數、封面、日版版本)
+    const getSheetInfo = (title, type, difficulty) => {
+        const songEntry = detailData.songs.find(s => s.songId === title);
+        const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulty);
+        const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
+        return {
+            internalLevel: typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null,
+            image: `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`,
+            versionJapan: sheet?.version
+        };
+    };
+
+    // 歌曲圖示對應的達成狀態
+    const CLEAR_FLAGS = ['sync', 'ap', 'app', 'fs', 'fsp', 'fc', 'fcp', 'fdx', 'fdxp'];
+    const parseClearFlags = (iconSrcList) => Object.fromEntries(
+        CLEAR_FLAGS.map(flag => [flag, iconSrcList.some(src => src.includes(`music_icon_${flag}`))])
+    );
+
+    // 歌曲類型(DX/標準)
+    const getSongType = (block, iconSelector) =>
+        block.querySelector(iconSelector)?.src.includes('music_dx.png') ? 'dx' : 'std';
+
+    // 單曲遊玩紀錄中的note統計(tap/hold/slide/touch/break)
+    const NOTE_TYPES = ['tap', 'hold', 'slide', 'touch', 'break'];
+    const parseNotes = (doc) => Object.fromEntries(NOTE_TYPES.map((name, i) => {
+        const cells = doc.querySelectorAll(`tr:nth-of-type(${i + 2}) td`);
+        return [name, {
+            critical_perfect: cells[0].textContent.trim(),
+            perfect: cells[1].textContent.trim(),
+            great: cells[2].textContent.trim(),
+            good: cells[3].textContent.trim(),
+            miss: cells[4].textContent.trim()
+        }];
+    }));
+
+    // 萬花筒之門的鑰匙圖片
+    const fetchGateKey = async (domain, no) => {
+        const gateDoc = await fetchHTML(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=${no}`);
+        return {
+            gateImg: gateDoc.querySelectorAll('.ks_block img')[1]?.src,
+            gateAcvImgHTML: gateDoc.querySelector('.ks_acv_img')?.outerHTML
+        };
+    };
 
     const getUserData = async (domain, idx) => {
         const userInfo = {};
@@ -71,12 +116,7 @@
     };
 
     const getGateUnlockProgress = async (domain, no, map) => {
-        const gate = {};
-
-        const gateData = await fetchGateStatus(domain, no, map);
-        gate.headerImg = gateData.headerImg;
-        gate.gateImgHTML = gateData.gateImgHTML;
-        gate.mapHTML = gateData.mapHTML;
+        const gate = await fetchGateStatus(domain, no, map);
 
         const gateSongData = await fetch(`${siteOrigin}/mai-tools/json/gate.json`).then(res => res.json());
         const gateSongs = gateSongData['gate' + no];
@@ -84,17 +124,13 @@
         const promises = gateSongs.map((song, i) => limit(async () => {
             const idx = domain == 'jp' ? song.idxJp : song.idxIntl;
             const songDoc = await fetchHTML(domain + '/maimai-mobile/record/musicDetail/?idx=' + idx);
-            const songLastPlayedDate_remaster = songDoc.querySelector('#remaster td:nth-of-type(2)')?.textContent.trim();
-            const songLastPlayedDate_master = songDoc.querySelector('#master td:nth-of-type(2)')?.textContent.trim();
-            const songLastPlayedDate_expert = songDoc.querySelector('#expert td:nth-of-type(2)')?.textContent.trim();
-            const songLastPlayedDate_advanced = songDoc.querySelector('#advanced td:nth-of-type(2)')?.textContent.trim();
-            const songLastPlayedDate_basic = songDoc.querySelector('#basic td:nth-of-type(2)')?.textContent.trim();
-            const songLastPlayedDate = [songLastPlayedDate_remaster, songLastPlayedDate_master, songLastPlayedDate_expert, songLastPlayedDate_advanced, songLastPlayedDate_basic]
+            const songLastPlayedDate = ['remaster', 'master', 'expert', 'advanced', 'basic']
+                .map(diff => songDoc.querySelector(`#${diff} td:nth-of-type(2)`)?.textContent.trim())
                 .filter(date => date && date !== '―')
                 .map(date => new Date(date))
                 .sort((a, b) => b - a)[0]?.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' }) || '0000-00-00';
 
-            await new Promise(resolve => setTimeout(resolve, i * 100));
+            await sleep(i * 100);
             return { title: song.title, songLastPlayedDate, type: song.type };
         }));
 
@@ -103,12 +139,7 @@
     }
 
     const getGateRequirements = async (domain, no, map) => {
-        const gate = {};
-
-        const gateData = await fetchGateStatus(domain, no, map);
-        gate.headerImg = gateData.headerImg;
-        gate.gateImgHTML = gateData.gateImgHTML;
-        gate.mapHTML = gateData.mapHTML;
+        const gate = await fetchGateStatus(domain, no, map);
 
         const gateSongData = await fetch(`${siteOrigin}/mai-tools/json/gate.json`)
             .then(res => res.json());
@@ -124,8 +155,7 @@
 
         const MapDoc = await fetchHTML(`${domain}/maimai-mobile/map/`);
         const blocks = Array.from(MapDoc.querySelectorAll('.m_10.m_t_0.f_0'));
-        const MapHTML = blocks.find(b => b.textContent.includes(map))?.outerHTML;
-        const mapHTML = MapHTML;
+        const mapHTML = blocks.find(b => b.textContent.includes(map))?.outerHTML;
 
         return { headerImg, gateImgHTML, mapHTML };
     }
@@ -142,74 +172,40 @@
 
     let childWin = null;
 
+    // 開啟主頁面，日版要告知對方切換成日版
+    const openIndexPage = () => {
+        childWin = window.open(`${siteOrigin}/mai-tools/index.html`);
+        setTimeout(() => {
+            if (url.origin === "https://maimaidx.jp") {
+                childWin.postMessage({ type: "jp", payload: true }, siteOrigin);
+            }
+        }, 500);
+    };
+
+    // 有提供資料的萬花筒之門
+    const GATE_NUMBERS = ['1', '2', '3', '4', '5', '6', '7', '9', '10'];
+
     switch (url.pathname) {
         // 自己資訊
         case "/maimai-mobile/home/": {
             type = 'main'
-            childWin = window.open(`${siteOrigin}/mai-tools/index.html`);
-            setTimeout(() => {
-                if (url.origin === "https://maimaidx.jp") {
-                    childWin.postMessage({ type: "jp", payload: true }, siteOrigin);
-                }
-            }, 500);
+            openIndexPage();
             break;
         }
         // 好友資訊
         case "/maimai-mobile/friend/friendDetail/": {
             idx = url.searchParams.get("idx");
-            childWin = window.open(`${siteOrigin}/mai-tools/index.html`);
             type = "friend";
-            setTimeout(() => {
-                if (url.origin === "https://maimaidx.jp") {
-                    childWin.postMessage({ type: "jp", payload: true }, siteOrigin);
-                }
-            }, 500);
+            openIndexPage();
             break;
         }
         // 萬花筒區域
         case "/maimai-mobile/map/kaleidxScopeDetail/": {
             if (url.search != null) {
                 childWin = window.open(`${siteOrigin}/mai-tools/gate.html`);
-                if (url.origin === "https://maimaidx.jp") {
-                    gate.domain = 'jp';
-                }
-                switch (url.search) {
-                    // 青門
-                    case "?gate=1":
-                        type = "gate1";
-                        break;
-                    // 白門
-                    case "?gate=2":
-                        type = "gate2";
-                        break;
-                    // 紫門
-                    case "?gate=3":
-                        type = "gate3";
-                        break;
-                    // 黑門
-                    case "?gate=4":
-                        type = "gate4";
-                        break;
-                    // 黃門
-                    case "?gate=5":
-                        type = "gate5";
-                        break;
-                    // 紅門
-                    case "?gate=6":
-                        type = "gate6";
-                        break;
-                    // 塔
-                    case "?gate=7":
-                        type = "gate7";
-                        break;
-                    // 希望之門
-                    case "?gate=9":
-                        type = "gate9";
-                        break;
-                    // 萬花筒
-                    case "?gate=10":
-                        type = "gate10";
-                        break;
+                const gateNo = url.searchParams.get("gate");
+                if (GATE_NUMBERS.includes(gateNo)) {
+                    type = "gate" + gateNo;
                 }
             }
             break;
@@ -257,6 +253,23 @@
             const songVersionData = await fetch(`${siteOrigin}/mai-tools/json/song_version_intl.json`).then(res => res.json());
             const versionData = await fetch(`${siteOrigin}/mai-tools/json/version.json`).then(res => res.json());
 
+            // 國際版版本名稱(找不到時視為最新版本；normalize時轉換成站上顯示的名稱)
+            const getVersionInternational = (title, type, normalize) => {
+                let version = songVersionData[title + "__" + type];
+                if (version === undefined) {
+                    version = versionData[versionData.length - 1].versionName;
+                }
+                if (normalize) {
+                    if (version.includes('でらっくす')) {
+                        version = version.replace('maimaiでらっくす', 'でらっくす');
+                    }
+                    if (version.includes('Splash')) {
+                        version = version.replace('Splash', 'スプラッシュ');
+                    }
+                }
+                return version;
+            };
+
             let userInfo = {};
             const songs = [];
             let exportData = {};
@@ -278,7 +291,7 @@
                     const blocks = doc.querySelectorAll('div.w_450.m_15.p_r.f_0');
 
                     blocks.forEach(block => {
-                        const type = block.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
+                        const type = getSongType(block, '.music_kind_icon');
                         let title = block.querySelector('.music_name_block')?.textContent || "　";
                         if (title === "Bad Apple!! feat nomico") {
                             title = "Bad Apple!! feat.nomico";
@@ -288,37 +301,11 @@
                             block.querySelector('.music_score_block.w_112')?.textContent.trim().replace('%', '') || "0"
                         ).toFixed(4) + "%";
 
-                        const songEntry = detailData.songs.find(s => s.songId === title);
-                        const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulties[i]);
-
-                        const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
-                        const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
-                        const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
-
-                        let versionInternational = songVersionData[title + "__" + type];
-                        if (versionInternational === undefined) {
-                            versionInternational = versionData[versionData.length - 1].versionName;
-                        }
-                        if (versionInternational.includes('でらっくす')) {
-                            versionInternational = versionInternational.replace('maimaiでらっくす', 'でらっくす');
-                        }
-                        if (versionInternational.includes('Splash')) {
-                            versionInternational = versionInternational.replace('Splash', 'スプラッシュ');
-                        }
-                        const versionJapan = sheet?.version;
+                        const { internalLevel, image, versionJapan } = getSheetInfo(title, type, difficulties[i]);
+                        const versionInternational = getVersionInternational(title, type, true);
 
                         const iconSrcList = Array.from(block.querySelectorAll('.h_30.f_r')).map(el => el.src);
-                        const flags = {
-                            sync: iconSrcList.some(src => src.includes('music_icon_sync')),
-                            ap: iconSrcList.some(src => src.includes('music_icon_ap')),
-                            app: iconSrcList.some(src => src.includes('music_icon_app')),
-                            fs: iconSrcList.some(src => src.includes('music_icon_fs')),
-                            fsp: iconSrcList.some(src => src.includes('music_icon_fsp')),
-                            fc: iconSrcList.some(src => src.includes('music_icon_fc')),
-                            fcp: iconSrcList.some(src => src.includes('music_icon_fcp')),
-                            fdx: iconSrcList.some(src => src.includes('music_icon_fdx')),
-                            fdxp: iconSrcList.some(src => src.includes('music_icon_fdxp')),
-                        };
+                        const flags = parseClearFlags(iconSrcList);
 
                         songs.push({
                             type, title, score, difficulty: difficulties[i], versionInternational, versionJapan,
@@ -338,7 +325,7 @@
                         .replace('music_', '')
                         .replace('_score_back', '');
 
-                    const type = ratingblock.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
+                    const type = getSongType(ratingblock, '.music_kind_icon');
                     let title = ratingblock.querySelector('.music_name_block')?.textContent || "　";
                     if (title === "Bad Apple!! feat nomico") {
                         title = "Bad Apple!! feat.nomico";
@@ -347,16 +334,9 @@
                         ratingblock.querySelector('.music_score_block.w_150')?.textContent.trim().replace('%', '') || "0"
                     ).toFixed(4) + "%";
                     if (songs.findIndex(s => s.title === title && s.type === type && s.difficulty === difficulty) === -1) {
-                        const songEntry = detailData.songs.find(s => s.songId === title);
-                        const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulty);
-                        const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
-                        const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
-                        const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
-                        let versionInternational = songVersionData[title + "__" + type];
-                        if (versionInternational === undefined) {
-                            versionInternational = versionData[versionData.length - 1].versionName;
-                        }
-                        const versionJapan = sheet?.version;
+                        const { internalLevel, image, versionJapan } = getSheetInfo(title, type, difficulty);
+                        // R值表中才有的歌，不做版本名稱轉換(維持原行為)
+                        const versionInternational = getVersionInternational(title, type, false);
 
                         songs.push({
                             type, title, score, difficulty, versionInternational, versionJapan,
@@ -448,45 +428,19 @@
                     const blocks = doc.querySelectorAll('div.w_450.m_15.p_3.f_0');
 
                     blocks.forEach(block => {
-                        const type = block.querySelector('.music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
+                        const type = getSongType(block, '.music_kind_icon');
                         const title = block.querySelector('.music_name_block')?.textContent.trim() || "";
 
                         const el = block.querySelectorAll('.p_r.w_120.f_b')[1];
                         const text = el?.textContent.trim();
                         const score = parseFloat(text && text !== '― %' ? text.replace('%', '') : '0').toFixed(4) + "%";
 
-                        const songEntry = detailData.songs.find(s => s.songId === title);
-                        const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulties[i]);
-
-                        const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
-                        const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? null;
-                        const image = `https://dp4p6x0xfi5o9.cloudfront.net/maimai/img/cover/${songEntry?.imageName}`;
-
-                        let versionInternational = songVersionData[title + "__" + type];
-                        if (versionInternational === undefined) {
-                            versionInternational = versionData[versionData.length - 1].versionName;
-                        }
-                        if (versionInternational.includes('でらっくす')) {
-                            versionInternational = versionInternational.replace('maimaiでらっくす', 'でらっくす');
-                        }
-                        if (versionInternational.includes('Splash')) {
-                            versionInternational = versionInternational.replace('Splash', 'スプラッシュ');
-                        }
-                        const versionJapan = sheet?.version;
+                        const { internalLevel, image, versionJapan } = getSheetInfo(title, type, difficulties[i]);
+                        const versionInternational = getVersionInternational(title, type, true);
 
                         const tdIcon = block.querySelector('.t_r.f_0');
                         const iconSrcList = Array.from(tdIcon?.querySelectorAll('img') || []).map(el => el.src);
-                        const flags = {
-                            sync: iconSrcList.some(src => src.includes('music_icon_sync')),
-                            ap: iconSrcList.some(src => src.includes('music_icon_ap')),
-                            app: iconSrcList.some(src => src.includes('music_icon_app')),
-                            fs: iconSrcList.some(src => src.includes('music_icon_fs')),
-                            fsp: iconSrcList.some(src => src.includes('music_icon_fsp')),
-                            fc: iconSrcList.some(src => src.includes('music_icon_fc')),
-                            fcp: iconSrcList.some(src => src.includes('music_icon_fcp')),
-                            fdx: iconSrcList.some(src => src.includes('music_icon_fdx')),
-                            fdxp: iconSrcList.some(src => src.includes('music_icon_fdxp')),
-                        };
+                        const flags = parseClearFlags(iconSrcList);
 
                         songs.push({
                             type, title, score, difficulty: difficulties[i], versionInternational, versionJapan,
@@ -515,7 +469,7 @@
                             record_date: recordDoc.querySelectorAll('.sub_title .v_b')[1]?.textContent.trim(),
                             rating: recordDoc.querySelectorAll('.rating_block')[1]?.textContent.trim() ?? recordDoc.querySelectorAll('.rating_block')[0]?.textContent.trim()
                         };
-                        await new Promise(resolve => setTimeout(resolve, i * 100));
+                        await sleep(i * 100);
                         return data;
                     })));
                     const uniqeRating = new Map();
@@ -538,6 +492,7 @@
             childWin.postMessage({ type: "init", payload: null }, siteOrigin);
         }, 500);
         const no = parseInt(type.replace('gate', ''), 10);
+        const isJp = url.origin === "https://maimaidx.jp";
         switch (no) {
             // 青門
             case 1:
@@ -565,46 +520,31 @@
                 break;
             // 塔
             case 7: {
-                const gateData = await fetchGateStatus(domain, 7, '7sRefちほー4');
-                gate.headerImg = gateData.headerImg;
-                gate.gateImgHTML = gateData.gateImgHTML;
-                gate.mapHTML = gateData.mapHTML;
-
-                gate.key = [];
+                gate = await fetchGateStatus(domain, 7, '7sRefちほー4');
 
                 const keys = [1, 2, 3, 4, 5, 6];
-                gate.key = await Promise.all(keys.map(async (i) => {
-                    const gateDoc = await fetchHTML(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=${i}`);
-                    return {
-                        gateImg: gateDoc.querySelectorAll('.ks_block img')[1]?.src,
-                        gateAcvImgHTML: gateDoc.querySelector('.ks_acv_img')?.outerHTML
-                    };
-                }));
+                gate.key = await Promise.all(keys.map(i => fetchGateKey(domain, i)));
                 break;
             }
 
             // 希望之門
             case 9: {
-                const gateData = await fetchGateStatus(domain, 9, null);
-                gate.headerImg = gateData.headerImg;
-                gate.gateImgHTML = gateData.gateImgHTML;
+                const { headerImg, gateImgHTML } = await fetchGateStatus(domain, 9, null);
+                gate = { headerImg, gateImgHTML };
                 break;
             }
 
             // 萬花筒
             case 10: {
-                const gateData = await fetchGateStatus(domain, 10, null);
-                gate.headerImg = gateData.headerImg;
-                gate.gateImgHTML = gateData.gateImgHTML;
-                gate.key = {};
-
-                const gateRes = await fetch(`${domain}/maimai-mobile/map/kaleidxScopeDetail/?gate=7`, { credentials: 'include' });
-                const gateText = await gateRes.text();
-                const gateDoc = new DOMParser().parseFromString(gateText, 'text/html');
-                gate.key.gateImg = gateDoc.querySelectorAll('.ks_block img')[1]?.src,
-                    gate.key.gateAcvImgHTML = gateDoc.querySelector('.ks_acv_img')?.outerHTML;
+                const { headerImg, gateImgHTML } = await fetchGateStatus(domain, 10, null);
+                gate = { headerImg, gateImgHTML };
+                gate.key = await fetchGateKey(domain, 7);
                 break;
             }
+        }
+        // 日版要用日版的開放日期判斷，帶給接收頁面
+        if (isJp) {
+            gate.domain = 'jp';
         }
         setTimeout(() => {
             childWin.postMessage({ type: "gate" + no, payload: gate }, siteOrigin);
@@ -622,12 +562,10 @@
 
             const title = recordDoc.querySelector('.basic_block').childNodes[2].textContent.trim();
             const difficulty = recordDoc.querySelector('.playlog_diff').src.replace('https://maimaidx-eng.com/maimai-mobile/img/diff_', '').replace('.png', '');
-            const type = recordDoc.querySelector('.playlog_music_kind_icon')?.src.includes('music_dx.png') ? 'dx' : 'std';
+            const type = getSongType(recordDoc, '.playlog_music_kind_icon');
 
-            const songEntry = detailData.songs.find(s => s.songId === title);
-            const sheet = songEntry?.sheets.find(s => s.type === type && s.difficulty === difficulty);
-            const internalLevelRaw = sheet?.internalLevel ?? sheet?.internalLevelValue;
-            const internalLevel = typeof internalLevelRaw === 'string' ? parseFloat(internalLevelRaw) : internalLevelRaw ?? recordDoc.querySelector('.music_lv_back').textContent.trim();
+            const sheetInfo = getSheetInfo(title, type, difficulty);
+            const internalLevel = sheetInfo.internalLevel ?? recordDoc.querySelector('.music_lv_back').textContent.trim();
 
             const data = {
                 no: i + 1,
@@ -649,47 +587,11 @@
                 achive_2: recordDoc.querySelectorAll('.h_35.m_5.f_l')[1].src,
                 rating: recordDoc.querySelectorAll('.rating_block')[1]?.textContent.trim() ?? recordDoc.querySelectorAll('.rating_block')[0]?.textContent.trim(),
                 rating_plus: recordDoc.querySelector('.t_r.f_0 span').textContent.trim(),
-                notes: {
-                    tap: {
-                        critical_perfect: recordDoc.querySelectorAll('tr:nth-of-type(2) td')[0].textContent.trim(),
-                        perfect: recordDoc.querySelectorAll('tr:nth-of-type(2) td')[1].textContent.trim(),
-                        great: recordDoc.querySelectorAll('tr:nth-of-type(2) td')[2].textContent.trim(),
-                        good: recordDoc.querySelectorAll('tr:nth-of-type(2) td')[3].textContent.trim(),
-                        miss: recordDoc.querySelectorAll('tr:nth-of-type(2) td')[4].textContent.trim()
-                    },
-                    hold: {
-                        critical_perfect: recordDoc.querySelectorAll('tr:nth-of-type(3) td')[0].textContent.trim(),
-                        perfect: recordDoc.querySelectorAll('tr:nth-of-type(3) td')[1].textContent.trim(),
-                        great: recordDoc.querySelectorAll('tr:nth-of-type(3) td')[2].textContent.trim(),
-                        good: recordDoc.querySelectorAll('tr:nth-of-type(3) td')[3].textContent.trim(),
-                        miss: recordDoc.querySelectorAll('tr:nth-of-type(3) td')[4].textContent.trim()
-                    },
-                    slide: {
-                        critical_perfect: recordDoc.querySelectorAll('tr:nth-of-type(4) td')[0].textContent.trim(),
-                        perfect: recordDoc.querySelectorAll('tr:nth-of-type(4) td')[1].textContent.trim(),
-                        great: recordDoc.querySelectorAll('tr:nth-of-type(4) td')[2].textContent.trim(),
-                        good: recordDoc.querySelectorAll('tr:nth-of-type(4) td')[3].textContent.trim(),
-                        miss: recordDoc.querySelectorAll('tr:nth-of-type(4) td')[4].textContent.trim()
-                    },
-                    touch: {
-                        critical_perfect: recordDoc.querySelectorAll('tr:nth-of-type(5) td')[0].textContent.trim(),
-                        perfect: recordDoc.querySelectorAll('tr:nth-of-type(5) td')[1].textContent.trim(),
-                        great: recordDoc.querySelectorAll('tr:nth-of-type(5) td')[2].textContent.trim(),
-                        good: recordDoc.querySelectorAll('tr:nth-of-type(5) td')[3].textContent.trim(),
-                        miss: recordDoc.querySelectorAll('tr:nth-of-type(5) td')[4].textContent.trim()
-                    },
-                    break: {
-                        critical_perfect: recordDoc.querySelectorAll('tr:nth-of-type(6) td')[0].textContent.trim(),
-                        perfect: recordDoc.querySelectorAll('tr:nth-of-type(6) td')[1].textContent.trim(),
-                        great: recordDoc.querySelectorAll('tr:nth-of-type(6) td')[2].textContent.trim(),
-                        good: recordDoc.querySelectorAll('tr:nth-of-type(6) td')[3].textContent.trim(),
-                        miss: recordDoc.querySelectorAll('tr:nth-of-type(6) td')[4].textContent.trim()
-                    }
-                },
+                notes: parseNotes(recordDoc),
                 max_combo: recordDoc.querySelectorAll('.col2 .white')[0].textContent.trim(),
                 max_sync: recordDoc.querySelectorAll('.col2 .white')[1].textContent.trim()
             };
-            await new Promise(resolve => setTimeout(resolve, i * 100));
+            await sleep(i * 100);
             return data;
         })));
 
@@ -701,9 +603,7 @@
             childWin.postMessage({ type: "init", payload: null }, siteOrigin);
         }, 1000);
 
-        const playerDataRes = await fetch(`${domain}/maimai-mobile/playerData/`, { credentials: 'include' });
-        const playerDataText = await playerDataRes.text();
-        const playerDataDoc = new DOMParser().parseFromString(playerDataText, 'text/html');
+        const playerDataDoc = await fetchHTML(`${domain}/maimai-mobile/playerData/`);
 
         const classData = {
             html: playerDataDoc.querySelector('.town_block').outerHTML,
