@@ -77,15 +77,16 @@ const countRequiredPlay = (ccls, currentCP, tcls) => {
         normalBattles = 0;
     }
 
+    const rows = Object.keys(allBattles).map((name, index) => {
+        const cls = classes.find(c => c.name === name);
+        // 第一列從目前的CP開始，之後從上一階打贏BOSS的點數開始
+        const startCP = index === 0 ? `${currentCP}分(目前)` : `${classes[cls.id - 1].win.boss}分`;
+        return `<tr class="color_${cls.class}"><td>${name}</td><td>${allBattles[name].normal}場</td><td>${startCP}</td><td>${cls.reqCP}分</td><td>+${cls.win.up}分</td><td>+${cls.win.same}分</td><td>+${cls.win.down}分</td><td>-${cls.lose.up}分</td><td>-${cls.lose.same}分</td><td>-${cls.lose.down}分</td></tr>`;
+    });
+
     let result = '<table class="text-center">';
     result += '<tr><th>階級</th><th>所需最短場數</th><th>起始CP</th><th>總需CP</th><th>打贏上位</th><th>打贏同位</th><th>打贏下位</th><th>打輸上位</th><th>打輸同位</th><th>打輸下位</th></tr>';
-    Object.keys(allBattles).forEach((element, index) => {
-        if (index === 0) {
-            result += `<tr class="color_${classes.find(c => c.name === element).class}"><td>${element}</td><td>${allBattles[element].normal}場</td><td>${currentCP}分(目前)</td><td>${classes.find(c => c.name === element).reqCP}分</td><td>+${classes.find(c => c.name === element).win.up}分</td><td>+${classes.find(c => c.name === element).win.same}分</td><td>+${classes.find(c => c.name === element).win.down}分</td><td>-${classes.find(c => c.name === element).lose.up}分</td><td>-${classes.find(c => c.name === element).lose.same}分</td><td>-${classes.find(c => c.name === element).lose.down}分</td></tr>`;
-        } else {
-            result += `<tr class="color_${classes.find(c => c.name === element).class}"><td>${element}</td><td>${allBattles[element].normal}場</td><td>${classes[classes.find(c => c.name === element).id - 1].win.boss}分</td><td>${classes.find(c => c.name === element).reqCP}分</td><td>+${classes.find(c => c.name === element).win.up}分</td><td>+${classes.find(c => c.name === element).win.same}分</td><td>+${classes.find(c => c.name === element).win.down}分</td><td>-${classes.find(c => c.name === element).lose.up}分</td><td>-${classes.find(c => c.name === element).lose.same}分</td><td>-${classes.find(c => c.name === element).lose.down}分</td></tr>`;
-        }
-    });
+    result += rows.join('');
     result += `<tr class="color_result"><td colspan="10"><b>＞到達目標階級${tcls}為止總共需打贏${totalNormalBattles}場上位，並打贏${totalBossBattles}場BOSS戰＜<br/></b></td></tr>`;
     result += '</table><p>※B階級不用打Boss戰</p>';
     $('#requiredBattles').html(result);
