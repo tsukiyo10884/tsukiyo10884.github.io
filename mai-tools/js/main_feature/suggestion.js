@@ -3,11 +3,16 @@ let selectedRatingThreshold = null;
 let groupedNewSongs = {};
 let groupedOldSongs = {};
 
-// 初始化候選曲列表
-async function initSuggestionList() {
+// 重新計算候選曲資料(能加分的等級及其分組)
+const refreshSuggestionData = () => {
     gainChartList = rangeCanGainRating(generalData.songs, getTop50Songs());
     groupedNewSongs = groupSongs(true);
     groupedOldSongs = groupSongs(false);
+}
+
+// 初始化候選曲列表
+async function initSuggestionList() {
+    refreshSuggestionData();
     const $newSongsSection = createButtonSection('new songs');
     const $oldSongsSection = createButtonSection('others');
 
@@ -34,10 +39,7 @@ const rangeCanGainRating = (allSongs, top50Songs) => {
 // 等級分組(.0~.6為一組，.6~.9為另一組)
 const groupSongs = (isNewVersion) => {
     return gainChartList.filter(s => s.isNewVersion === isNewVersion).reduce((acc, song) => {
-        const level = song.level;
-        const baseLevel = Math.floor(level);
-        const decimal = level - baseLevel;
-        const groupKey = decimal < 0.6 ? baseLevel : `${baseLevel}+`;
+        const groupKey = getLevelGroupKey(song.level);
 
         if (!acc[groupKey]) {
             acc[groupKey] = [];
@@ -130,45 +132,15 @@ const showLevelDetails = (gainChart, isNewVersion) => {
     createAchivementButtonsSuggestion();
     bindRatingThresholdEventListeners();
 
-    if (gainChart === null) {
-        const $songGrid = createSuggestionSongCard(gainChart, isNewVersion);
-        const displayLevel = 'all';
-        let versionTitle = "";
-        switch (isNewVersion) {
-            case null:
-                versionTitle = "不分新舊";
-                break;
-            case true:
-                versionTitle = "新曲";
-                break;
-            case false:
-                versionTitle = "舊曲";
-                break;
-        }
-        const $title = $(`<div>`).addClass('section-title text-shadow-black').text(`所有等級候選曲(${versionTitle})`);
-        $('#now-title').text(`suggestion|${displayLevel}|${versionTitle}`);
-        $('#song-table').empty().append($title, $songGrid);
-    } else {
-        const $songGrid = createSuggestionSongCard(gainChart, isNewVersion);
-        const baseLevel = Math.floor(gainChart.level);
-        const decimal = gainChart.level - baseLevel;
-        const displayLevel = decimal < 0.6 ? baseLevel : `${baseLevel}+`;
-        let versionTitle = "";
-        switch (isNewVersion) {
-            case null:
-                versionTitle = "不分新舊";
-                break;
-            case true:
-                versionTitle = "新曲";
-                break;
-            case false:
-                versionTitle = "舊曲";
-                break;
-        }
-        const $title = $(`<div>`).addClass('section-title text-shadow-black').text(`等級${displayLevel}候選曲(${versionTitle})`);
-        $('#now-title').text(`suggestion|${displayLevel}|${versionTitle}`);
-        $('#song-table').empty().append($title, $songGrid);
-    }
+    const isAll = gainChart === null;
+    const displayLevel = isAll ? 'all' : getLevelGroupKey(gainChart.level);
+    const versionTitle = getVersionTitle(isNewVersion);
+    const titleText = isAll ? `所有等級候選曲(${versionTitle})` : `等級${displayLevel}候選曲(${versionTitle})`;
+
+    const $songGrid = createSuggestionSongCard(gainChart, isNewVersion);
+    const $title = $('<div>').addClass('section-title text-shadow-black').text(titleText);
+    $('#now-title').text(`suggestion|${displayLevel}|${versionTitle}`);
+    $('#song-table').empty().append($title, $songGrid);
 
     if (selectedRatingThreshold) {
         handleFilterChange();
@@ -316,18 +288,8 @@ const bindRatingThresholdEventListeners = () => {
 
 // 查找符合條件的建議項目
 const findMatchingSuggestion = (displayLevel, isNewVersion) => {
-    if (isNewVersion === null) {
-        return gainChartList.find(s => {
-            const baseLevel = Math.floor(s.level);
-            const decimal = s.level - baseLevel;
-            const groupKey = decimal < 0.6 ? baseLevel.toString() : `${baseLevel}+`;
-            return groupKey === displayLevel;
-        });
-    }
-    return gainChartList.find(s => {
-        const baseLevel = Math.floor(s.level);
-        const decimal = s.level - baseLevel;
-        const groupKey = decimal < 0.6 ? baseLevel.toString() : `${baseLevel}+`;
-        return groupKey === displayLevel && s.isNewVersion === isNewVersion;
-    });
+    return gainChartList.find(s =>
+        getLevelGroupKey(s.level) === displayLevel &&
+        (isNewVersion === null || s.isNewVersion === isNewVersion)
+    );
 }

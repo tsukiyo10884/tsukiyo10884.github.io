@@ -411,13 +411,32 @@ const formatLevel = (level) => {
     return str.includes('.') ? str : `${str}.0`;
 };
 
+// 小數部分(.0~.5為一組，.6~.9為另一組)，先四捨五入避免 12.6 - 12 = 0.5999... 的浮點誤差
+const splitLevel = (level) => {
+    const baseLevel = Math.floor(level);
+    const decimal = Math.round((level - baseLevel) * 10) / 10;
+    return { baseLevel, isPlus: decimal >= 0.6 };
+};
+
+// 等級分組名稱(12.0~12.5 => "12"，12.6~12.9 => "12+")
+const getLevelGroupKey = (level) => {
+    const { baseLevel, isPlus } = splitLevel(level);
+    return isPlus ? `${baseLevel}+` : `${baseLevel}`;
+};
+
 // 計算等級範圍
 const calculateLevelRange = (level) => {
-    const baseLevel = Math.floor(level);
-    const decimal = level - baseLevel;
-    const minLevel = decimal < 0.6 ? baseLevel : baseLevel + 0.6;
-    const maxLevel = decimal < 0.6 ? baseLevel + 0.5 : baseLevel + 0.9;
+    const { baseLevel, isPlus } = splitLevel(level);
+    const minLevel = isPlus ? baseLevel + 0.6 : baseLevel;
+    const maxLevel = isPlus ? baseLevel + 0.9 : baseLevel + 0.5;
     return { minLevel, maxLevel };
+};
+
+// 候選曲的新舊曲標題(isNewVersion: true/false/null)
+const getVersionTitle = (isNewVersion) => {
+    if (isNewVersion === true) return '新曲';
+    if (isNewVersion === false) return '舊曲';
+    return '不分新舊';
 };
 
 // 初始化調色盤(切換style)

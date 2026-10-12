@@ -59,7 +59,7 @@ const showCourseProgress = async (type) => {
                 currentCourse = playedCourse.courseRecord.find(c => getRecordCourseText(c.courseName) === course.courseName);
             }
             courseContent += `
-                <div class="course-block ${currentCourse == null ? 'mb-5' : null} p_0">
+                <div class="course-block ${currentCourse == null ? 'mb-5' : ''} p_0">
                     <div class="course-info text-center mb-3">
                         <div class="col-12 d-flex align-items-center">
                             <div class="section-divider left"></div>

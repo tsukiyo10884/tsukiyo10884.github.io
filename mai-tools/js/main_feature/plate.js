@@ -164,10 +164,7 @@ const showPlateProgress = async (versionName, type, plateName) => {
         songs
             .sort((a, b) => b.internalLevel - a.internalLevel)
             .forEach(song => {
-                const level = song.internalLevel;
-                const baseLevel = Math.floor(level);
-                const decimal = Math.round((level - baseLevel) * 10) / 10;
-                const groupKey = decimal < 0.6 ? baseLevel.toString() : `${baseLevel}+`;
+                const groupKey = getLevelGroupKey(song.internalLevel);
                 if (!groupedSongs.has(groupKey)) groupedSongs.set(groupKey, []);
                 groupedSongs.get(groupKey).push(song);
             });

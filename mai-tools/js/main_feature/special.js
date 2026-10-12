@@ -63,22 +63,26 @@ const clear = () => {
     }
 }
 
-//阿幽
-const initForAyoList = () => {
-    $('#stat').removeClass('axuan');
-    $('#stat').addClass('ayo');
-    flys();
+// 顯示專屬頁面的大頭貼(name: 'ayo' | 'axuan')
+const showSpecialProfile = (name) => {
+    const other = name === 'ayo' ? 'axuan' : 'ayo';
+    $('#stat').removeClass(other).addClass(name);
     $('.basic_block').hide();
-    $('#axuan_profile')?.remove();
-    $('#ayo_profile')?.remove();
-    const $profile = $('<img id="ayo_profile">')
-        .attr('src', './img/special/ayo_profile.webp')
+    $('#axuan_profile, #ayo_profile').remove();
+    const $profile = $(`<img id="${name}_profile">`)
+        .attr('src', `./img/special/${name}_profile.webp`)
         .attr('style', 'position: relative;z-index:99;width: 422px;')
         .on('click', function () {
             $('.basic_block').show();
             $profile.remove();
         });
     $('#user-info').append($profile);
+}
+
+//阿幽
+const initForAyoList = () => {
+    flys();
+    showSpecialProfile('ayo');
 }
 
 const flys = () => {
@@ -109,23 +113,9 @@ const randomMove = ($el) => {
 
 //阿瑄
 const initForAXuanList = () => {
-    gainChartList = rangeCanGainRating(generalData.songs, getTop50Songs());
-    groupedNewSongs = groupSongs(true);
-    groupedOldSongs = groupSongs(false);
+    refreshSuggestionData();
     const $allSongsSection = createButtonSection('all songs');
     $('#song-table').empty().append($allSongsSection);
 
-    $('#stat').removeClass('ayo');
-    $('#stat').addClass('axuan');
-    $('.basic_block').hide();
-    $('#axuan_profile')?.remove();
-    $('#ayo_profile')?.remove();
-    const $profile = $('<img id="axuan_profile">')
-        .attr('src', './img/special/axuan_profile.webp')
-        .attr('style', 'position: relative;z-index:99;width: 422px;')
-        .on('click', function () {
-            $('.basic_block').show();
-            $profile.remove();
-        });
-    $('#user-info').append($profile);
+    showSpecialProfile('axuan');
 }
