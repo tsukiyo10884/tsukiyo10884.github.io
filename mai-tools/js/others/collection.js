@@ -6,6 +6,7 @@ const showCollection = (data) => {
     $('#rating-base').attr('src', data.ratingBase);
     $('#course').attr('src', data.courseRank);
     $('#class').attr('src', data.classRank);
+    applyDispRate(data.dispRate);
     $('#user-trophy').text(data.trophy);
     $('#user-trophy-block').attr('class', data.trophyBlock + ' trophy_block p_3 t_c f_0');
     $('#nameplate').attr('src', data.nameplate);
@@ -79,6 +80,27 @@ const showCollection = (data) => {
     }
 
 
+}
+
+// maimai-net 的 dispRate 選項 -> 要顯示的項目 (rating=R值, course=段位, class=Class)
+const DISP_RATE_MAP = {
+    0: ['rating', 'course', 'class'],
+    1: ['rating', 'course'],
+    2: ['rating', 'class'],
+    3: ['course', 'class'],
+    4: ['rating'],
+    5: ['course'],
+    6: ['class'],
+    7: []
+};
+
+const applyDispRate = (dispRate) => {
+    const visible = DISP_RATE_MAP[dispRate];
+    if (!visible) return;
+    ['rating', 'course', 'class'].forEach((id) => {
+        $('#btn-' + id).prop('checked', visible.includes(id));
+        toggleDisplay(id);
+    });
 }
 
 const toggleDisplay = (id) => {

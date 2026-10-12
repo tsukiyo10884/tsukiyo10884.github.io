@@ -744,11 +744,15 @@
         const homeDoc = await fetchHTML(`${domain}/maimai-mobile/home`, { credentials: 'include' });
         const name = homeDoc.querySelector('.name_block.f_l.f_16').textContent;
         const rating = homeDoc.querySelector('.rating_block')?.textContent;
-        const ratingBase = homeDoc.querySelector('.h_30.f_r').src;
+        const ratingBase = homeDoc.querySelector('.h_30.f_r')?.src;
         const courseRank = homeDoc.querySelector('.h_35.f_l')?.src;
         const classRank = homeDoc.querySelector('.p_l_10.h_35.f_l')?.src;
         const trophyBlock = homeDoc.querySelector('.trophy_block.p_3.t_c.f_0').className;
         const trophy = homeDoc.querySelector('.trophy_inner_block.f_13').textContent;
+
+        // 玩家在maimai-net設定的顯示項目(R值/段位/Class)
+        const optionDoc = await fetchHTML(`${domain}/maimai-mobile/home/userOption/updateUserOption/`, { credentials: 'include' });
+        const dispRate = optionDoc.querySelector('select[name=dispRate]')?.value ?? null;
 
         const circleDoc = await fetchHTML(`${domain}/maimai-mobile/circle/`, { credentials: 'include' });
         const circleName = circleDoc.querySelector('.circle_profile_circle_name span')?.textContent.trim() || '';
@@ -768,6 +772,7 @@
             ratingBase,
             courseRank,
             classRank,
+            dispRate,
             circleName,
             circleImg
         }
