@@ -66,20 +66,21 @@
         });
     };
     let detailData = null;
+    // 整合頁面可能很快就傳資料來，要等譜面資料載入完才能顯示
+    const detailDataReady = fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
+        .then(res => res.json())
+        .then(json => { detailData = json; });
     // 接到message事件(從maimai-net收到資料)
-    $(window).on('message', (event) => {
+    $(window).on('message', async (event) => {
         $('.test').hide();
         const data = event.originalEvent.data;
         if (data.type === 'init') {
             $('#msg').text('連線中，請勿關閉maimai-net...');
         }
         else if (data.type.includes('gate')) {
+            await detailDataReady;
             showGateData(data);
         }
-    });
-    $(window).on('load', async () => {
-        detailData = await fetch('https://dp4p6x0xfi5o9.cloudfront.net/maimai/data.json')
-            .then(res => res.json());
     });
 </script>
 <style>

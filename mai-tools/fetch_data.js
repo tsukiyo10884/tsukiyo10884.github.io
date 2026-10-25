@@ -1,5 +1,6 @@
 (async () => {
-    const siteOrigin = new URL(document.currentScript.src).origin;
+    const scriptSrc = new URL(document.currentScript.src);
+    const siteOrigin = scriptSrc.origin;
 
     const pLimit = (concurrency) => {
         const queue = [];
@@ -161,338 +162,266 @@
     }
 
     //////////////////////////////////////////////////////////////////////// start ////////////////////////////////////////////////////////////////////////
-    let idx = '';
     const difficulties = ["basic", "advanced", "expert", "master", "remaster"];
     const url = new URL(window.location.href);
-    let domain = '';
-    let type = '';
-    let gate = {};
-
-    domain = url.origin;
-
-    let childWin = null;
-
-    // 開啟主頁面，日版要告知對方切換成日版
-    const openIndexPage = () => {
-        childWin = window.open(`${siteOrigin}/mai-tools/index.html`);
-        setTimeout(() => {
-            if (url.origin === "https://maimaidx.jp") {
-                childWin.postMessage({ type: "jp", payload: true }, siteOrigin);
-            }
-        }, 500);
-    };
+    const domain = url.origin;
+    const isJp = domain === "https://maimaidx.jp";
 
     // 有提供資料的萬花筒之門
     const GATE_NUMBERS = ['1', '2', '3', '4', '5', '6', '7', '9', '10'];
 
-    switch (url.pathname) {
+    // 傳資料給整合頁面(app.html)的指定分頁；好友頁面仍是獨立的index.html，不加target
+    const plainWins = new Set();
+    const send = (win, view, msg) => {
+        win.postMessage(plainWins.has(win) ? msg : { ...msg, target: view }, siteOrigin);
+    };
+    const sendStatus = (win, text) => win.postMessage({ type: 'status', payload: text }, siteOrigin);
+
+    // 自己/好友的成績。idx為空字串代表自己
+    const loadMain = async (win, idx) => {
+        send(win, 'index', { type: 'init', payload: scriptSrc.searchParams.get('css') });
+        if (isJp) send(win, 'index', { type: 'jp', payload: true });
+        const songVersionData = await fetch(`${siteOrigin}/mai-tools/json/song_version_intl.json`).then(res => res.json());
+        const versionData = await fetch(`${siteOrigin}/mai-tools/json/version.json`).then(res => res.json());
+
+        // 國際版版本名稱(找不到時視為最新版本；normalize時轉換成站上顯示的名稱)
+        const getVersionInternational = (title, type, normalize) => {
+            let version = songVersionData[title + "__" + type];
+            if (version === undefined) {
+                version = versionData[versionData.length - 1].versionName;
+            }
+            if (normalize) {
+                if (version.includes('でらっくす')) {
+                    version = version.replace('maimaiでらっくす', 'でらっくす');
+                }
+                if (version.includes('Splash')) {
+                    version = version.replace('Splash', 'スプラッシュ');
+                }
+            }
+            return version;
+        };
+
+        let userInfo = {};
+        const songs = [];
+        let exportData = {};
+
         // 自己資訊
-        case "/maimai-mobile/home/": {
-            type = 'main'
-            openIndexPage();
-            break;
-        }
-        // 好友資訊
-        case "/maimai-mobile/friend/friendDetail/": {
-            idx = url.searchParams.get("idx");
-            type = "friend";
-            openIndexPage();
-            break;
-        }
-        // 萬花筒區域
-        case "/maimai-mobile/map/kaleidxScopeDetail/": {
-            if (url.search != null) {
-                childWin = window.open(`${siteOrigin}/mai-tools/gate.html`);
-                const gateNo = url.searchParams.get("gate");
-                if (GATE_NUMBERS.includes(gateNo)) {
-                    type = "gate" + gateNo;
-                }
+        if (idx === '') {
+            userInfo = await getUserData(domain, null);
+
+            if (userInfo.name === "†Ａｙｏｏｏω†") {
+                send(win, 'index', { type: "special", payload: 'ayo' });
+            } else if (userInfo.name === "ＸＵ☆Ａ　") {
+                send(win, 'index', { type: "special", payload: 'axun' });
             }
-            break;
-        }
-        // 最近遊玩記錄
-        case "/maimai-mobile/record/": {
-            childWin = window.open(`${siteOrigin}/mai-tools/record.html`);
-            type = "record";
-            break;
-        }
-        // 玩家資訊
-        case "/maimai-mobile/playerData/": {
-            childWin = window.open(`${siteOrigin}/mai-tools/player_data.html`);
-            type = "playerData";
-            break;
-        }
-        // 收藏品
-        case "/maimai-mobile/collection/":
-        case "/maimai-mobile/collection/nameplate/":
-        case "/maimai-mobile/collection/frame/":
-        case "/maimai-mobile/collection/trophy/":
-        case "/maimai-mobile/collection/character/":
-        case "/maimai-mobile/collection/editCharacter/":
-        case "/maimai-mobile/collection/partner/":
-            {
-                childWin = window.open(`${siteOrigin}/mai-tools/collection.html`);
-                type = "collection";
-                break;
-            }
-    }
 
-    if (type == 'main' || type == 'friend') {
-        const script = document.currentScript;
-        setTimeout(() => {
-            if (script != null) {
-                const srcUrl = new URL(script.src);
-                const css = srcUrl.searchParams.get('css');
-                childWin.postMessage({ type: 'init', payload: css }, siteOrigin);
-            } else {
-                childWin.postMessage({ type: 'init', payload: null }, siteOrigin);
-            }
-        }, 1000);
+            // 歌曲資訊
+            for (let i = 0; i < difficulties.length; i++) {
+                send(win, 'index', { type: "difficulty", payload: difficulties[i] });
+                const doc = await fetchHTML(`${domain}/maimai-mobile/record/musicGenre/search/?genre=99&diff=${i}`);
+                const blocks = doc.querySelectorAll('div.w_450.m_15.p_r.f_0');
 
-        setTimeout(async () => {
-            const songVersionData = await fetch(`${siteOrigin}/mai-tools/json/song_version_intl.json`).then(res => res.json());
-            const versionData = await fetch(`${siteOrigin}/mai-tools/json/version.json`).then(res => res.json());
-
-            // 國際版版本名稱(找不到時視為最新版本；normalize時轉換成站上顯示的名稱)
-            const getVersionInternational = (title, type, normalize) => {
-                let version = songVersionData[title + "__" + type];
-                if (version === undefined) {
-                    version = versionData[versionData.length - 1].versionName;
-                }
-                if (normalize) {
-                    if (version.includes('でらっくす')) {
-                        version = version.replace('maimaiでらっくす', 'でらっくす');
-                    }
-                    if (version.includes('Splash')) {
-                        version = version.replace('Splash', 'スプラッシュ');
-                    }
-                }
-                return version;
-            };
-
-            let userInfo = {};
-            const songs = [];
-            let exportData = {};
-
-            // 自己資訊
-            if (idx === '') {
-                userInfo = await getUserData(domain, null);
-
-                if (userInfo.name === "†Ａｙｏｏｏω†") {
-                    childWin.postMessage({ type: "special", payload: 'ayo' }, siteOrigin);
-                } else if (userInfo.name === "ＸＵ☆Ａ　") {
-                    childWin.postMessage({ type: "special", payload: 'axun' }, siteOrigin);
-                }
-
-                // 歌曲資訊
-                for (let i = 0; i < difficulties.length; i++) {
-                    childWin.postMessage({ type: "difficulty", payload: difficulties[i] }, siteOrigin);
-                    const doc = await fetchHTML(`${domain}/maimai-mobile/record/musicGenre/search/?genre=99&diff=${i}`);
-                    const blocks = doc.querySelectorAll('div.w_450.m_15.p_r.f_0');
-
-                    blocks.forEach(block => {
-                        const type = getSongType(block, '.music_kind_icon');
-                        let title = block.querySelector('.music_name_block')?.textContent || "　";
-                        if (title === "Bad Apple!! feat nomico") {
-                            title = "Bad Apple!! feat.nomico";
-                        }
-
-                        const score = parseFloat(
-                            block.querySelector('.music_score_block.w_112')?.textContent.trim().replace('%', '') || "0"
-                        ).toFixed(4) + "%";
-
-                        const { internalLevel, image, versionJapan } = getSheetInfo(title, type, difficulties[i]);
-                        const versionInternational = getVersionInternational(title, type, true);
-
-                        const iconSrcList = Array.from(block.querySelectorAll('.h_30.f_r')).map(el => el.src);
-                        const flags = parseClearFlags(iconSrcList);
-
-                        songs.push({
-                            type, title, score, difficulty: difficulties[i], versionInternational, versionJapan,
-                            internalLevel, image, ...flags
-                        });
-                    });
-                }
-
-                //R值表
-                const ratingDoc = await fetchHTML(`${domain}/maimai-mobile/home/ratingTargetMusic/`);
-                const ratingBlocks = ratingDoc.querySelectorAll(".pointer.w_450.m_15.p_3.f_0");
-                ratingBlocks.forEach(ratingblock => {
-                    const cls = [...ratingblock.classList].find(c =>
-                        c.startsWith('music_') && c.endsWith('_score_back')
-                    );
-                    let difficulty = cls
-                        .replace('music_', '')
-                        .replace('_score_back', '');
-
-                    const type = getSongType(ratingblock, '.music_kind_icon');
-                    let title = ratingblock.querySelector('.music_name_block')?.textContent || "　";
+                blocks.forEach(block => {
+                    const type = getSongType(block, '.music_kind_icon');
+                    let title = block.querySelector('.music_name_block')?.textContent || "　";
                     if (title === "Bad Apple!! feat nomico") {
                         title = "Bad Apple!! feat.nomico";
                     }
+
                     const score = parseFloat(
-                        ratingblock.querySelector('.music_score_block.w_150')?.textContent.trim().replace('%', '') || "0"
+                        block.querySelector('.music_score_block.w_112')?.textContent.trim().replace('%', '') || "0"
                     ).toFixed(4) + "%";
-                    if (songs.findIndex(s => s.title === title && s.type === type && s.difficulty === difficulty) === -1) {
-                        const { internalLevel, image, versionJapan } = getSheetInfo(title, type, difficulty);
-                        // R值表中才有的歌，不做版本名稱轉換(維持原行為)
-                        const versionInternational = getVersionInternational(title, type, false);
 
-                        songs.push({
-                            type, title, score, difficulty, versionInternational, versionJapan,
-                            internalLevel, image
-                        });
-                    }
+                    const { internalLevel, image, versionJapan } = getSheetInfo(title, type, difficulties[i]);
+                    const versionInternational = getVersionInternational(title, type, true);
+
+                    const iconSrcList = Array.from(block.querySelectorAll('.h_30.f_r')).map(el => el.src);
+                    const flags = parseClearFlags(iconSrcList);
+
+                    songs.push({
+                        type, title, score, difficulty: difficulties[i], versionInternational, versionJapan,
+                        internalLevel, image, ...flags
+                    });
                 });
-
-                // 段位資料
-                childWin.postMessage({ type: "course", payload: null }, siteOrigin);
-                const courseDoc = await fetchHTML(`${domain}/maimai-mobile/record/course/`);
-                const courseBlocks = courseDoc.querySelectorAll("div.w_480.f_0");
-
-                const course = [];
-
-                for (const courseBlock of courseBlocks) {
-                    let type = "";
-                    const headerImg = courseBlock.querySelector("img.w_480");
-                    if (headerImg) {
-                        const src = headerImg.src;
-                        if (src.includes("2Bakl72Qo")) type = "真段位認定";
-                        else if (src.includes("1C6ZZPuoj")) type = "段位認定";
-                        else if (src.includes("3uT2WsrBT")) type = "Random段位認定";
-                    }
-
-                    const courses = [];
-                    const items = courseBlock.querySelectorAll("div.p_r.p_5");
-                    for (const item of items) {
-                        const idx = item.querySelector("input[name=idx]")?.value;
-                        if (!idx) continue;
-                        const detailDoc = await fetchHTML(`${domain}/maimai-mobile/record/courseDetail/?idx=${idx}`);
-
-                        const clearImg = detailDoc.querySelector("img.course_clear")?.src || "";
-                        const isClear = clearImg.includes("icon_course_clear.png");
-
-                        const courseName = detailDoc.querySelector("img.course_img.h_55")?.src.match(/course_(\d{4})/)[1];
-                        const remainLife = detailDoc.querySelector(".course_life_txt.f_13.t_c")?.textContent.trim() || "";
-                        const totalScore = detailDoc.querySelector(".course_achievement_txt.t_r")?.textContent.replace(/\s+/g, "") || "";
-
-                        const songs = [];
-                        detailDoc.querySelectorAll(".coursemusic_container.w_430.p_r.f_0").forEach(song => {
-                            const score = song.querySelector(".music_score_block.w_84")?.textContent.trim() || "";
-                            const lifeRaw = song.querySelector(".coursemusic_life_txt.f_12")?.textContent.trim() || "";
-                            const life = lifeRaw.split("/")[1] + "->" + lifeRaw.split("/")[0] + '(-' + (lifeRaw.split("/")[1] - lifeRaw.split("/")[0]) + ')';
-                            songs.push({ score, life });
-                        });
-
-                        courses.push({ courseName, remainLife, totalScore, isClear, songs });
-                    }
-
-                    course.push({ type, courseRecord: courses });
-                }
-
-                // Circle資料
-                childWin.postMessage({ type: "circle", payload: null }, siteOrigin);
-                const circleDoc = await fetchHTML(`${domain}/maimai-mobile/circle/`);
-                const circleName = circleDoc.querySelector(".circle_profile_circle_name span")?.textContent.trim() || "";
-                const circlePt = circleDoc.querySelectorAll(".circle_totalpoint_point.f_29.f_b span")[0]?.textContent.trim() || "";
-                const circleRank = circleDoc.querySelectorAll(".circle_pointranking_point.f_29.f_b span")[1]?.textContent.trim() || "";
-
-                const circleRankingDoc = await fetchHTML(`${domain}/maimai-mobile/circle/circleRanking/`);
-                const rankingPeriod = circleRankingDoc.querySelector(".circle_ranking_season_bottom_txt")?.textContent.trim() || "";
-
-                const circleMemberDoc = await fetchHTML(`${domain}/maimai-mobile/circle/circleMember/`);
-
-                const members = [];
-                circleMemberDoc.querySelectorAll(".basic_block").forEach(member => {
-                    const name = member.querySelector(".name_block.f_l.f_16")?.textContent.trim() || "";    
-                    const pt = member.querySelector(".p_t_10.p_r_10.t_r")?.textContent.replace("PT", "").trim() || "";
-                    members.push({ name, pt });
-                });
-
-                const circle = { circleName, circlePt, circleRank, rankingPeriod, members: members.slice(1) };
-
-                exportData = {
-                    userInfo,
-                    songs,
-                    course,
-                    circle
-                };
             }
-            // 好友資訊
-            else {
-                userInfo = await getUserData(domain, idx);
 
-                for (let i = 0; i < difficulties.length; i++) {
-                    childWin.postMessage({ type: "difficulty", payload: difficulties[i] }, siteOrigin);
-                    const doc = await fetchHTML(`${domain}/maimai-mobile/friend/friendGenreVs/battleStart/?genre=99&diff=${i}&idx=${idx}`);
-                    const blocks = doc.querySelectorAll('div.w_450.m_15.p_3.f_0');
+            //R值表
+            const ratingDoc = await fetchHTML(`${domain}/maimai-mobile/home/ratingTargetMusic/`);
+            const ratingBlocks = ratingDoc.querySelectorAll(".pointer.w_450.m_15.p_3.f_0");
+            ratingBlocks.forEach(ratingblock => {
+                const cls = [...ratingblock.classList].find(c =>
+                    c.startsWith('music_') && c.endsWith('_score_back')
+                );
+                let difficulty = cls
+                    .replace('music_', '')
+                    .replace('_score_back', '');
 
-                    blocks.forEach(block => {
-                        const type = getSongType(block, '.music_kind_icon');
-                        const title = block.querySelector('.music_name_block')?.textContent.trim() || "";
+                const type = getSongType(ratingblock, '.music_kind_icon');
+                let title = ratingblock.querySelector('.music_name_block')?.textContent || "　";
+                if (title === "Bad Apple!! feat nomico") {
+                    title = "Bad Apple!! feat.nomico";
+                }
+                const score = parseFloat(
+                    ratingblock.querySelector('.music_score_block.w_150')?.textContent.trim().replace('%', '') || "0"
+                ).toFixed(4) + "%";
+                if (songs.findIndex(s => s.title === title && s.type === type && s.difficulty === difficulty) === -1) {
+                    const { internalLevel, image, versionJapan } = getSheetInfo(title, type, difficulty);
+                    // R值表中才有的歌，不做版本名稱轉換(維持原行為)
+                    const versionInternational = getVersionInternational(title, type, false);
 
-                        const el = block.querySelectorAll('.p_r.w_120.f_b')[1];
-                        const text = el?.textContent.trim();
-                        const score = parseFloat(text && text !== '― %' ? text.replace('%', '') : '0').toFixed(4) + "%";
-
-                        const { internalLevel, image, versionJapan } = getSheetInfo(title, type, difficulties[i]);
-                        const versionInternational = getVersionInternational(title, type, true);
-
-                        const tdIcon = block.querySelector('.t_r.f_0');
-                        const iconSrcList = Array.from(tdIcon?.querySelectorAll('img') || []).map(el => el.src);
-                        const flags = parseClearFlags(iconSrcList);
-
-                        songs.push({
-                            type, title, score, difficulty: difficulties[i], versionInternational, versionJapan,
-                            internalLevel, image, ...flags
-                        });
+                    songs.push({
+                        type, title, score, difficulty, versionInternational, versionJapan,
+                        internalLevel, image
                     });
                 }
+            });
 
-                exportData = {
-                    userInfo,
-                    songs
-                };
+            // 段位資料
+            send(win, 'index', { type: "course", payload: null });
+            const courseDoc = await fetchHTML(`${domain}/maimai-mobile/record/course/`);
+            const courseBlocks = courseDoc.querySelectorAll("div.w_480.f_0");
+
+            const course = [];
+
+            for (const courseBlock of courseBlocks) {
+                let type = "";
+                const headerImg = courseBlock.querySelector("img.w_480");
+                if (headerImg) {
+                    const src = headerImg.src;
+                    if (src.includes("2Bakl72Qo")) type = "真段位認定";
+                    else if (src.includes("1C6ZZPuoj")) type = "段位認定";
+                    else if (src.includes("3uT2WsrBT")) type = "Random段位認定";
+                }
+
+                const courses = [];
+                const items = courseBlock.querySelectorAll("div.p_r.p_5");
+                for (const item of items) {
+                    const idx = item.querySelector("input[name=idx]")?.value;
+                    if (!idx) continue;
+                    const detailDoc = await fetchHTML(`${domain}/maimai-mobile/record/courseDetail/?idx=${idx}`);
+
+                    const clearImg = detailDoc.querySelector("img.course_clear")?.src || "";
+                    const isClear = clearImg.includes("icon_course_clear.png");
+
+                    const courseName = detailDoc.querySelector("img.course_img.h_55")?.src.match(/course_(\d{4})/)[1];
+                    const remainLife = detailDoc.querySelector(".course_life_txt.f_13.t_c")?.textContent.trim() || "";
+                    const totalScore = detailDoc.querySelector(".course_achievement_txt.t_r")?.textContent.replace(/\s+/g, "") || "";
+
+                    const songs = [];
+                    detailDoc.querySelectorAll(".coursemusic_container.w_430.p_r.f_0").forEach(song => {
+                        const score = song.querySelector(".music_score_block.w_84")?.textContent.trim() || "";
+                        const lifeRaw = song.querySelector(".coursemusic_life_txt.f_12")?.textContent.trim() || "";
+                        const life = lifeRaw.split("/")[1] + "->" + lifeRaw.split("/")[0] + '(-' + (lifeRaw.split("/")[1] - lifeRaw.split("/")[0]) + ')';
+                        songs.push({ score, life });
+                    });
+
+                    courses.push({ courseName, remainLife, totalScore, isClear, songs });
+                }
+
+                course.push({ type, courseRecord: courses });
             }
 
-            setTimeout(async () => {
-                if (idx === '') {
-                    childWin.postMessage({ type: "result", payload: exportData }, siteOrigin);
+            // Circle資料
+            send(win, 'index', { type: "circle", payload: null });
+            const circleDoc = await fetchHTML(`${domain}/maimai-mobile/circle/`);
+            const circleName = circleDoc.querySelector(".circle_profile_circle_name span")?.textContent.trim() || "";
+            const circlePt = circleDoc.querySelectorAll(".circle_totalpoint_point.f_29.f_b span")[0]?.textContent.trim() || "";
+            const circleRank = circleDoc.querySelectorAll(".circle_pointranking_point.f_29.f_b span")[1]?.textContent.trim() || "";
 
-                    // 取得歷史R值
-                    const recordListDoc = await fetchHTML(`${domain}/maimai-mobile/record/`);
-                    const idxs = [...recordListDoc.querySelectorAll('input[name="idx"]')].map(el => el.value);
-                    let ratingHistory = await Promise.all(idxs.map((idx, i) => limit(async () => {
-                        const recordDoc = await fetchHTML(`${domain}/maimai-mobile/record/playlogDetail/?idx=${idx}`);
+            const circleRankingDoc = await fetchHTML(`${domain}/maimai-mobile/circle/circleRanking/`);
+            const rankingPeriod = circleRankingDoc.querySelector(".circle_ranking_season_bottom_txt")?.textContent.trim() || "";
 
-                        const data = {
-                            record_date: recordDoc.querySelectorAll('.sub_title .v_b')[1]?.textContent.trim(),
-                            rating: recordDoc.querySelectorAll('.rating_block')[1]?.textContent.trim() ?? recordDoc.querySelectorAll('.rating_block')[0]?.textContent.trim()
-                        };
-                        await sleep(i * 100);
-                        return data;
-                    })));
-                    const uniqeRating = new Map();
-                    ratingHistory.toReversed().forEach(item => {
-                        if (!uniqeRating.has(item.rating)) {
-                            uniqeRating.set(item.rating, item);
-                        }
-                    })
-                    ratingHistory = Array.from(uniqeRating.values());
-                    childWin.postMessage({ type: "ratingHistory", payload: ratingHistory }, siteOrigin);
+            const circleMemberDoc = await fetchHTML(`${domain}/maimai-mobile/circle/circleMember/`);
 
-                } else {
-                    childWin.postMessage({ type: "result-friend", payload: exportData }, siteOrigin);
-                }
-            }, 500);
-        }, 1500);
-    }
-    else if (type.includes('gate')) {
-        setTimeout(() => {
-            childWin.postMessage({ type: "init", payload: null }, siteOrigin);
+            const members = [];
+            circleMemberDoc.querySelectorAll(".basic_block").forEach(member => {
+                const name = member.querySelector(".name_block.f_l.f_16")?.textContent.trim() || "";    
+                const pt = member.querySelector(".p_t_10.p_r_10.t_r")?.textContent.replace("PT", "").trim() || "";
+                members.push({ name, pt });
+            });
+
+            const circle = { circleName, circlePt, circleRank, rankingPeriod, members: members.slice(1) };
+
+            exportData = {
+                userInfo,
+                songs,
+                course,
+                circle
+            };
+        }
+        // 好友資訊
+        else {
+            userInfo = await getUserData(domain, idx);
+
+            for (let i = 0; i < difficulties.length; i++) {
+                send(win, 'index', { type: "difficulty", payload: difficulties[i] });
+                const doc = await fetchHTML(`${domain}/maimai-mobile/friend/friendGenreVs/battleStart/?genre=99&diff=${i}&idx=${idx}`);
+                const blocks = doc.querySelectorAll('div.w_450.m_15.p_3.f_0');
+
+                blocks.forEach(block => {
+                    const type = getSongType(block, '.music_kind_icon');
+                    const title = block.querySelector('.music_name_block')?.textContent.trim() || "";
+
+                    const el = block.querySelectorAll('.p_r.w_120.f_b')[1];
+                    const text = el?.textContent.trim();
+                    const score = parseFloat(text && text !== '― %' ? text.replace('%', '') : '0').toFixed(4) + "%";
+
+                    const { internalLevel, image, versionJapan } = getSheetInfo(title, type, difficulties[i]);
+                    const versionInternational = getVersionInternational(title, type, true);
+
+                    const tdIcon = block.querySelector('.t_r.f_0');
+                    const iconSrcList = Array.from(tdIcon?.querySelectorAll('img') || []).map(el => el.src);
+                    const flags = parseClearFlags(iconSrcList);
+
+                    songs.push({
+                        type, title, score, difficulty: difficulties[i], versionInternational, versionJapan,
+                        internalLevel, image, ...flags
+                    });
+                });
+            }
+
+            exportData = {
+                userInfo,
+                songs
+            };
+        }
+
+        setTimeout(async () => {
+            if (idx === '') {
+                send(win, 'index', { type: "result", payload: exportData });
+
+                // 取得歷史R值
+                const recordListDoc = await fetchHTML(`${domain}/maimai-mobile/record/`);
+                const idxs = [...recordListDoc.querySelectorAll('input[name="idx"]')].map(el => el.value);
+                let ratingHistory = await Promise.all(idxs.map((idx, i) => limit(async () => {
+                    const recordDoc = await fetchHTML(`${domain}/maimai-mobile/record/playlogDetail/?idx=${idx}`);
+
+                    const data = {
+                        record_date: recordDoc.querySelectorAll('.sub_title .v_b')[1]?.textContent.trim(),
+                        rating: recordDoc.querySelectorAll('.rating_block')[1]?.textContent.trim() ?? recordDoc.querySelectorAll('.rating_block')[0]?.textContent.trim()
+                    };
+                    await sleep(i * 100);
+                    return data;
+                })));
+                const uniqeRating = new Map();
+                ratingHistory.toReversed().forEach(item => {
+                    if (!uniqeRating.has(item.rating)) {
+                        uniqeRating.set(item.rating, item);
+                    }
+                })
+                ratingHistory = Array.from(uniqeRating.values());
+                send(win, 'index', { type: "ratingHistory", payload: ratingHistory });
+
+            } else {
+                send(win, 'index', { type: "result-friend", payload: exportData });
+            }
         }, 500);
-        const no = parseInt(type.replace('gate', ''), 10);
-        const isJp = url.origin === "https://maimaidx.jp";
+    };
+
+    const loadGate = async (win, no) => {
+        no = parseInt(no, 10);
+        let gate = {};
+        send(win, 'gate', { type: "init", payload: null });
         switch (no) {
             // 青門
             case 1:
@@ -546,17 +475,14 @@
         if (isJp) {
             gate.domain = 'jp';
         }
-        setTimeout(() => {
-            childWin.postMessage({ type: "gate" + no, payload: gate }, siteOrigin);
-        }, 500);
-    }
-    // 最近遊玩紀錄
-    else if (type === "record") {
-        setTimeout(() => {
-            childWin.postMessage({ type: "init", payload: null }, siteOrigin);
-        }, 1000);
+        send(win, 'gate', { type: "gate" + no, payload: gate });
+    };
 
-        const idxs = [...document.querySelectorAll('input[name="idx"]')].map(el => el.value);
+    // 最近遊玩紀錄
+    const loadRecord = async (win) => {
+        send(win, 'record', { type: "init", payload: null });
+        const recordListDoc = await fetchHTML(`${domain}/maimai-mobile/record/`);
+        const idxs = [...recordListDoc.querySelectorAll('input[name="idx"]')].map(el => el.value);
         const result = await Promise.all(idxs.map((idx, i) => limit(async () => {
             const recordDoc = await fetchHTML(`${domain}/maimai-mobile/record/playlogDetail/?idx=${idx}`);
 
@@ -595,16 +521,13 @@
             return data;
         })));
 
-        childWin.postMessage({ type: "record", payload: result }, siteOrigin);
-    }
+        send(win, 'record', { type: "record", payload: result });
+    };
+
     // 計算class
-    else if (type === "playerData") {
-        setTimeout(() => {
-            childWin.postMessage({ type: "init", payload: null }, siteOrigin);
-        }, 1000);
-
+    const loadPlayerData = async (win) => {
+        send(win, 'playerData', { type: "init", payload: null });
         const playerDataDoc = await fetchHTML(`${domain}/maimai-mobile/playerData/`);
-
         const classData = {
             html: playerDataDoc.querySelector('.town_block').outerHTML,
             img: playerDataDoc.querySelector(".w_160.p_15.m_r_10").src,
@@ -613,11 +536,13 @@
         }
 
         setTimeout(() => {
-            childWin.postMessage({ type: "playerData", payload: classData }, siteOrigin);
+            send(win, 'playerData', { type: "playerData", payload: classData });
         }, 1500);
-    }
+    };
+
     // 收藏品排列模擬
-    else if (type === "collection") {
+    const loadCollection = async (win) => {
+        send(win, 'collection', { type: "init", payload: null });
         const iconDoc = await fetchHTML(`${domain}/maimai-mobile/collection/`, { credentials: 'include' });
         const icon = iconDoc.querySelector('.w_80.m_r_10.f_l').src;
 
@@ -679,7 +604,71 @@
 
         console.log(collections);
         setTimeout(() => {
-            childWin.postMessage({ type: "collection", payload: collections }, siteOrigin);
+            send(win, 'collection', { type: "collection", payload: collections });
         }, 1000);
+    };
+
+    const LOADERS = {
+        record: loadRecord,
+        playerData: loadPlayerData,
+        collection: loadCollection,
+        gate: loadGate
+    };
+
+    // 依目前所在的maimai-net頁面決定整合頁面一開始顯示哪個分頁
+    const getStartView = () => {
+        switch (url.pathname) {
+            case "/maimai-mobile/map/kaleidxScopeDetail/": {
+                const gateNo = url.searchParams.get("gate");
+                return GATE_NUMBERS.includes(gateNo) ? `view=gate&gate=${gateNo}` : 'view=gate';
+            }
+            case "/maimai-mobile/record/": return 'view=record';
+            case "/maimai-mobile/playerData/": return 'view=playerData';
+            case "/maimai-mobile/collection/":
+            case "/maimai-mobile/collection/nameplate/":
+            case "/maimai-mobile/collection/frame/":
+            case "/maimai-mobile/collection/trophy/":
+            case "/maimai-mobile/collection/character/":
+            case "/maimai-mobile/collection/editCharacter/":
+            case "/maimai-mobile/collection/partner/": return 'view=collection';
+            default: return '';
+        }
+    };
+
+    // 好友資料：維持開啟獨立的index.html
+    if (url.pathname === "/maimai-mobile/friend/friendDetail/") {
+        const win = window.open(`${siteOrigin}/mai-tools/index.html`);
+        plainWins.add(win);
+        await sleep(500);
+        if (isJp) win.postMessage({ type: "jp", payload: true }, siteOrigin);
+        await sleep(500);
+        await loadMain(win, url.searchParams.get("idx"));
+        return;
     }
+
+    // 其餘頁面：開啟整合頁面，之後由整合頁面向這個分頁要資料(所以這個分頁要保持開著)
+    if (window.__maiToolsHandler) {
+        window.removeEventListener('message', window.__maiToolsHandler);
+    }
+    window.__maiToolsHandler = async (event) => {
+        if (event.origin !== siteOrigin) return;
+        const msg = event.data;
+        if (!msg || typeof msg !== 'object') return;
+        const win = event.source;
+        try {
+            if (msg.type === 'shell-ready') {
+                await loadMain(win, '');
+            } else if (msg.type === 'request' && LOADERS[msg.view]) {
+                sendStatus(win, '取得資料中，請勿關閉maimai-net...');
+                await LOADERS[msg.view](win, msg.no);
+                sendStatus(win, '');
+            }
+        } catch (err) {
+            console.error(err);
+            sendStatus(win, '取得資料失敗，請回maimai-net重整後再試一次');
+        }
+    };
+    window.addEventListener('message', window.__maiToolsHandler);
+
+    window.open(`${siteOrigin}/mai-tools/app.html?${getStartView()}`);
 })();

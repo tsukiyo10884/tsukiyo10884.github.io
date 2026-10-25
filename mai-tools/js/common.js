@@ -566,3 +566,12 @@ const formatDate = (inputDate, format) => {
 
     return format.replace(/yyyy|MM|dd|HH|hh|mm|ss|tt/g, (match) => parts[match]);
 }
+
+// 整合頁面(app.html)切換主題時同步；調色盤改由外殼控制
+$(window).on('message', (event) => {
+    const data = event.originalEvent.data;
+    if (data && data.type === 'theme' && cssFiles.includes(data.payload)) {
+        $('#theme').attr('href', data.payload);
+        $('#palette').hide();
+    }
+});

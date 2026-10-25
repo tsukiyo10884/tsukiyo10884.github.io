@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=915">
+    <link rel="icon" href="img/favicon.ico">
+    <title>maimai小工具</title>
+    <link rel="stylesheet" href="css/base_variables.css" />
+    <link id="theme" rel="stylesheet" href="css/default.css" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* 按鈕、字型、背景都沿用目前主題，這裡只調整排列 */
+        #nav {
+            align-items: center;
+            display: flex;
+            flex-shrink: 0;
+            justify-content: center;
+            padding: 6px 12px 2px;
+        }
+
+        #nav-inner {
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            width: 915px;
+        }
+
+        #nav button {
+            font-size: 15px;
+            margin: 6px 8px 6px 0;
+            padding: 8px 18px;
+        }
+
+        #nav button.active {
+            background-color: #fff;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+            cursor: default;
+            transform: none;
+        }
+
+        #gate-select {
+            background-color: #ffffffcc;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            color: #333;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: bold;
+            margin: 6px 8px 6px 0;
+            padding: 8px 12px;
+        }
+
+        #gate-select[hidden] {
+            display: none;
+        }
+
+        #nav .spacer {
+            flex: 1;
+        }
+
+        #status {
+            font-size: 13px;
+            margin-right: 12px;
+        }
+
+        #palette {
+            cursor: pointer;
+            height: 30px;
+        }
+
+        #views {
+            flex: 1;
+            position: relative;
+        }
+
+        #views iframe {
+            background: transparent;
+            border: none;
+            display: none;
+            height: 100%;
+            inset: 0;
+            position: absolute;
+            width: 100%;
+        }
+
+        #views iframe.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav">
+    <div id="nav-inner">
+        <button data-view="index">成績分析</button>
+        <button data-view="record">最近遊玩</button>
+        <button data-view="playerData">Class計算</button>
+        <button data-view="collection">收藏品</button>
+        <button data-view="gate">萬花筒區域</button>
+        <select id="gate-select" hidden>
+            <option value="1">青門</option>
+            <option value="2">白門</option>
+            <option value="3">紫門</option>
+            <option value="4">黑門</option>
+            <option value="5">黃門</option>
+            <option value="6">紅門</option>
+            <option value="7">塔</option>
+            <option value="9">希望之門</option>
+            <option value="10">萬花筒</option>
+        </select>
+        <span class="spacer"></span>
+        <span id="status"></span>
+        <img id="palette" src="img/palette.svg" title="切換主題">
+    </div>
+    </div>
+    <div id="views"></div>
+
+    <script>
+        // 各分頁對應的既有頁面，以及從maimai-net送來的訊息要轉給誰
+        const VIEWS = {
+            index: { src: 'index.html' },
+            record: { src: 'record.html' },
+            playerData: { src: 'player_data.html' },
+            collection: { src: 'collection.html' },
+            gate: { src: 'gate.html' }
+        };
+
+        const siteOrigin = location.origin;
+        const THEMES = ['default', 'translucent', 'modern', 'cute_pink', 'cute_blue', 'fabric_board'];
+        let theme = 'default';
+        try { theme = localStorage.getItem('mai-theme') || 'default'; } catch (e) { }
+        const frames = {};      // view -> { el, loaded, queue }
+        const requested = {};   // 已向maimai-net要求過的資料(view 或 gate+no)
+        const gateCache = {};   // 萬花筒各門收到的資料，切換時直接重播
+        // 書籤腳本所在的maimai-net分頁(也允許被嵌在其他頁面內，方便測試)
+        const opener_ = window.opener || (window.parent !== window ? window.parent : null);
+        const statusEl = document.getElementById('status');
+        const gateSelect = document.getElementById('gate-select');
+
+        const getFrame = (view) => {
+            if (frames[view]) return frames[view];
+            const el = document.createElement('iframe');
+            const f = { el, loaded: false, queue: [] };
+            el.addEventListener('load', () => {
+                f.loaded = true;
+                el.contentWindow.postMessage({ type: 'theme', payload: `css/${theme}.css` }, siteOrigin);
+                f.queue.splice(0).forEach(msg => el.contentWindow.postMessage(msg, siteOrigin));
+            });
+            el.src = VIEWS[view].src;
+            document.getElementById('views').appendChild(el);
+            frames[view] = f;
+            return f;
+        };
+
+        // 傳訊息給指定分頁，頁面還沒載入完就先排隊
+        const sendToView = (view, msg) => {
+            const f = getFrame(view);
+            if (f.loaded) f.el.contentWindow.postMessage(msg, siteOrigin);
+            else f.queue.push(msg);
+        };
+
+        const requestFromMaimaiNet = (key, msg) => {
+            if (requested[key] || !opener_) return;
+            requested[key] = true;
+            opener_.postMessage(msg, '*');
+        };
+
+        // 切換主題：外殼和所有分頁一起換
+        const applyTheme = (name) => {
+            if (!THEMES.includes(name)) return;
+            theme = name;
+            document.getElementById('theme').href = `css/${name}.css`;
+            document.getElementById('palette').title = name;
+            Object.values(frames).forEach(f => f.loaded && f.el.contentWindow.postMessage({ type: 'theme', payload: `css/${name}.css` }, siteOrigin));
+            try { localStorage.setItem('mai-theme', name); } catch (e) { }
+        };
+        document.getElementById('palette').addEventListener('click', () => {
+            applyTheme(THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length]);
+        });
+        applyTheme(theme);
+
+        const showView = (view) => {
+            document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+            Object.entries(frames).forEach(([v, f]) => f.el.classList.toggle('active', v === view));
+            getFrame(view).el.classList.add('active');
+            gateSelect.hidden = view !== 'gate';
+            sessionStorage.setItem('mai-view', view);
+
+            if (view === 'gate') {
+                const no = gateSelect.value;
+                if (gateCache[no]) sendToView('gate', gateCache[no]);
+                else requestFromMaimaiNet('gate' + no, { type: 'request', view: 'gate', no });
+            } else if (view !== 'index') {
+                requestFromMaimaiNet(view, { type: 'request', view });
+            }
+        };
+
+        document.getElementById('nav').addEventListener('click', (e) => {
+            const btn = e.target.closest('button[data-view]');
+            if (btn) showView(btn.dataset.view);
+        });
+        gateSelect.addEventListener('change', () => showView('gate'));
+
+        // 從maimai-net(書籤腳本)收到資料，依target轉給對應分頁
+        window.addEventListener('message', (event) => {
+            if (event.source !== opener_) return;
+            const msg = event.data;
+            if (!msg || typeof msg !== 'object') return;
+            if (msg.type === 'status') {
+                statusEl.textContent = msg.payload || '';
+                return;
+            }
+            if (msg.target && VIEWS[msg.target]) {
+                const { target, ...rest } = msg;
+                if (target === 'index' && rest.type === 'init' && typeof rest.payload === 'string') applyTheme(rest.payload);
+                if (target === 'gate' && /^gate\d+$/.test(rest.type)) gateCache[rest.type.slice(4)] = rest;
+                sendToView(target, rest);
+            }
+        });
+
+        // 書籤腳本指定的起始分頁，其次是上次停留的分頁
+        const params = new URLSearchParams(location.search);
+        const startView = params.get('view') || sessionStorage.getItem('mai-view') || 'index';
+        if (params.get('gate')) gateSelect.value = params.get('gate');
+        showView(VIEWS[startView] ? startView : 'index');
+
+        // 通知書籤腳本可以開始送資料了
+        if (opener_) {
+            opener_.postMessage({ type: 'shell-ready', view: startView }, '*');
+        } else {
+            statusEl.textContent = '未連線到maimai-net，請從書籤開啟，或在「成績分析」匯入資料';
+        }
+    </script>
+</body>
+
+</html>
