@@ -100,6 +100,8 @@ const showKeySongGate = (data, config) => {
 };
 
 const showGateData = (data) => {
+    // 整合頁面會連續切換不同的門，先清掉上一個門的內容
+    $('#map, #song-table').empty();
     const keySongGate = KEY_SONG_GATES[data.type];
     if (keySongGate) {
         showKeySongGate(data, keySongGate);
